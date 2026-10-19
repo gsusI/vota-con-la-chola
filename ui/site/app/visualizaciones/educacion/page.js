@@ -1,0 +1,618 @@
+import { readPublicJson } from "../../static-snapshot.mjs";
+import { StaticRouteHero } from "../../static-route-components";
+import TimeSeriesChart from "../components/TimeSeriesChart";
+import Figure from "../components/Figure";
+import SparseLineChart from "./SparseLineChart";
+import EduTable from "./EduTable";
+import { fmt } from "./formatEdu.mjs";
+
+export const metadata = {
+  title: "Gasto, resultados y abandono: la educación en España | Vota Con La Chola",
+  description:
+    "Gasto público real por alumno, PISA, abandono escolar, repetición, sobrecualificación y un siglo de alfabetización en España, frente a la OCDE, la UE y países similares, con fuentes oficiales y datos descargables.",
+};
+
+const C = {
+  blue: "#2a78d6",
+  orange: "#eb6834",
+  aqua: "#1baf7a",
+  yellow: "#eda100",
+  ref: "#52514e",
+  peer: "#b4b2a9",
+};
+
+const NAMES = {
+  ESP: "España",
+  ES: "España",
+  OECD: "Media OCDE",
+  EU25: "Media UE (países de la OCDE)",
+  EU27_2020: "UE-27",
+  DEU: "Alemania",
+  DE: "Alemania",
+  FRA: "Francia",
+  FR: "Francia",
+  ITA: "Italia",
+  IT: "Italia",
+  PRT: "Portugal",
+  PT: "Portugal",
+};
+
+const num = (value, digits = 1) =>
+  Number(value).toLocaleString("es-ES", { minimumFractionDigits: digits, maximumFractionDigits: digits });
+
+function retrieved(source) {
+  return source?.retrieved_at ? ` (consultado ${String(source.retrieved_at).slice(0, 10)})` : "";
+}
+
+// Spain first and emphasised, the reference average in dark gray, peers in light gray.
+function comparison(seriesByArea, areas, refs = []) {
+  return areas
+    .filter((area) => seriesByArea[area]?.length)
+    .map((area) => {
+      const isSpain = area === "ESP" || area === "ES";
+      return {
+        id: area,
+        label: NAMES[area] || area,
+        color: isSpain ? C.blue : refs.includes(area) ? C.ref : C.peer,
+        emphasis: isSpain,
+        points: seriesByArea[area],
+      };
+    })
+    .reverse();
+}
+
+export default function EducacionPage() {
+  const data = readPublicJson("visualizaciones/data/educacion.json", null);
+  if (!data) throw new Error("Missing visualizaciones/data/educacion.json");
+  const h = data.headline;
+  const src = data.sources;
+  const downloads = "/visualizaciones/data/educacion.csv";
+  const S = {
+    oecd: { label: `OCDE, Education at a Glance (réplica DBnomics)${retrieved(src.oecd_eag_finance)}`, href: src.oecd_eag_finance.page },
+    mefp: { label: `Ministerio de Educación, Estadística del Gasto Público en Educación y de Alumnado${retrieved(src.mefp_educabase)}`, href: src.mefp_educabase.page },
+    eurostat: (dataset) => ({
+      label: `Eurostat, ${dataset}${retrieved(src.eurostat_sdmx)}`,
+      href: `https://ec.europa.eu/eurostat/databrowser/view/${dataset}/default/table`,
+    }),
+    wb: { label: `Banco Mundial, EdStats (PISA 2000-2018)${retrieved(src.worldbank_edstats)}`, href: src.worldbank_edstats.page },
+    pisa2022: { label: "INEE, PISA 2022. Informe español (2023)", href: src.vclc_education_curated.documents.inee_pisa2022_informe_espanol.landing_page },
+    pisaNote: { label: "OCDE, PISA 2022, nota de país: España (copia del INEE)", href: src.vclc_education_curated.documents.oecd_pisa2022_country_note_es.url },
+    owid: { label: `Our World in Data${retrieved(src.owid_grapher)}`, href: src.owid_grapher.page },
+  };
+
+  // 1. Spending ----------------------------------------------------------------------------------
+  const sp = data.spending;
+  const realPerStudent = [
+    {
+      id: "real",
+      label: `Gasto público por alumno no universitario (euros de ${h.real_per_student_base_year})`,
+      shortLabel: String(h.real_per_student_last.year),
+      color: C.blue,
+      points: sp.real_per_nonuni_student_eur,
+    },
+  ];
+  const eagSpain = [
+    { id: "ESP", label: "España", color: C.blue, emphasis: true, points: sp.eag_school_usd_ppp_2020.ESP },
+    { id: "OECD", label: "Media OCDE", color: C.ref, points: sp.eag_school_usd_ppp_2020.OECD },
+  ];
+  const eagMax = Math.max(...Object.values(sp.eag_school_usd_ppp_2020).flat().map((p) => p.value));
+  const eagPanels = ["OECD", "EU25", "DEU", "FRA", "ITA", "PRT"];
+  const cofog = comparison(sp.cofog_pct_gdp, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
+  const pps = comparison(sp.pps_per_student, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
+  const cofogLast = sp.cofog_pct_gdp.ES.at(-1);
+  const cofogEuLast = sp.cofog_pct_gdp.EU27_2020.at(-1);
+  const realChange = (h.real_per_student_last.value / h.real_per_student_2000.value - 1) * 100;
+
+  // 2. PISA --------------------------------------------------------------------------------------
+  const pisaDomains = [
+    { key: "math", label: "Matemáticas", first: data.pisa.first_comparable.math },
+    { key: "reading", label: "Lectura", first: data.pisa.first_comparable.reading },
+    { key: "science", label: "Ciencias", first: data.pisa.first_comparable.science },
+  ];
+  const pisaSeries = (domain) =>
+    ["PRT", "ITA", "FRA", "DEU", "OECD", "ESP"]
+      .filter((area) => data.pisa[domain][area]?.length)
+      .map((area) => ({
+        id: area,
+        label: NAMES[area],
+        color: area === "ESP" ? C.blue : area === "OECD" ? C.ref : C.peer,
+        emphasis: area === "ESP",
+        noEndLabel: !["ESP", "OECD"].includes(area),
+        points: data.pisa[domain][area].map((p) => ({ ...p, hollow: !p.comparable })),
+      }));
+  const mathDrops = ["ESP", "DEU", "FRA", "ITA", "PRT"].map((area) => {
+    const rows = Object.fromEntries(data.pisa.math[area].map((p) => [p.year, p.value]));
+    return { area, from: rows[2003], to: rows[2022], delta: rows[2022] - rows[2003] };
+  });
+  const esMath = mathDrops.find((row) => row.area === "ESP");
+  const biggerDrops = mathDrops.filter((row) => row.area !== "ESP" && row.delta < esMath.delta).map((row) => NAMES[row.area]);
+  const pisaTable = pisaDomains.flatMap((domain) =>
+    ["ESP", "OECD", "DEU", "FRA", "ITA", "PRT"].map((area) => ({
+      id: `${domain.key}-${area}`,
+      label: `${domain.label} · ${NAMES[area]}`,
+      points: data.pisa[domain.key][area].map((p) => ({ ...p, hollow: !p.comparable })),
+    })),
+  );
+
+  // 3. Early leavers -----------------------------------------------------------------------------
+  const el = data.early_leavers;
+  const leavers = comparison(el.series, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
+  // Consecutive break years share one label; labels closer than seven years alternate between two rows.
+  const breakRows = (years) =>
+    years.reduce((notes, year) => {
+      const last = notes.at(-1);
+      if (last && year - last.to <= 1) {
+        return [...notes.slice(0, -1), { ...last, to: year, label: `Rupturas ${last.year}-${String(year).slice(2)}` }];
+      }
+      const row = last && year - last.year < 7 ? 1 - last.row : 0;
+      return [...notes, { year, to: year, label: `Ruptura ${year}`, row }];
+    }, []);
+  const breakNotes = breakRows(el.breaks.filter((year) => year >= 2002));
+  const regionMax = Math.max(...el.regions.map((row) => row.first || row.last));
+
+  // 4. Repetition ----------------------------------------------------------------------------------
+  const behind = [
+    {
+      id: "behind",
+      label: "Alumnado de 15 años que no está en 4.º de ESO (retrasado al menos un curso)",
+      shortLabel: "España",
+      color: C.blue,
+      points: data.repetition.behind_at_15,
+    },
+  ];
+  const rep = data.repetition.pisa_2022;
+
+  // 5. Over-qualification -------------------------------------------------------------------------
+  const overq = comparison(data.overqualification, ["ES", "EU27_2020", "DE", "FR", "IT", "PT"], ["EU27_2020"]);
+
+  // 6. Long run ------------------------------------------------------------------------------------
+  const literacy = ["DEU", "FRA", "ITA", "PRT", "ESP"]
+    .filter((area) => data.long_run.literacy[area]?.length)
+    .map((area) => {
+      let broke = false;
+      return {
+        id: area,
+        label: NAMES[area],
+        color: area === "ESP" ? C.blue : C.peer,
+        emphasis: area === "ESP",
+        points: data.long_run.literacy[area].map((p) => {
+          // UNESCO census compilations end in 1950; later values come from the UNESCO Institute for Statistics (15+).
+          const breakBefore = !broke && p.year > 1960;
+          if (breakBefore) broke = true;
+          return { ...p, breakBefore };
+        }),
+      };
+    });
+  const schooling = ["DEU", "FRA", "ITA", "PRT", "ESP"].map((area) => ({
+    id: area,
+    label: NAMES[area],
+    color: area === "ESP" ? C.blue : C.peer,
+    emphasis: area === "ESP",
+    points: data.long_run.schooling[area].filter((p) => p.year >= 1870),
+  }));
+
+  const sch = (area, year) => data.long_run.schooling[area].find((p) => p.year === year)?.value;
+  const behindIn1900 = ["FRA", "ITA", "PRT"].filter((area) => sch(area, 1900) < sch("ESP", 1900)).map((area) => NAMES[area]);
+  const aheadIn1950 = ["DEU", "FRA", "ITA"].filter((area) => sch(area, 1950) > sch("ESP", 1950)).map((area) => NAMES[area]);
+  const list = (items) => (items.length > 1 ? `${items.slice(0, -1).join(", ")} y ${items.at(-1)}` : items[0] || "");
+  const mathRisers = mathDrops.filter((row) => row.delta > 0).map((row) => NAMES[row.area]);
+
+  return (
+    <main className="shell vizArticle">
+      <StaticRouteHero
+        eyebrow="Visualizaciones · datos públicos"
+        title="Educación en España: más gasto, resultados estancados y mucho menos abandono"
+        summary="Cuánto gasta el Estado por alumno, qué dicen PISA, el abandono escolar, la repetición y la sobrecualificación, y el siglo que llevó a casi toda la población a leer. Cada gráfico enlaza su fuente oficial, compara con la OCDE, la UE y países similares, y trae sus datos en tabla."
+        actions={[
+          { href: downloads, label: "Descargar datos (CSV)" },
+          { href: "/visualizaciones/data/educacion.json", label: "JSON con procedencia" },
+          { href: "#metodo", label: "Método y fuentes" },
+        ]}
+      />
+
+      <section className="vizStats" aria-label="Cifras clave">
+        <div className="card vizStat">
+          <span className="vizStat__label">Gasto público real por alumno (Primaria a Bachillerato y FP, OCDE)</span>
+          <span className="vizStat__value">+{num(h.spending_school_change_2000_pct, 0)} %</span>
+          <span className="vizStat__note">
+            {fmt(h.spending_school_2000, "usd")} en 2000 → {fmt(h.spending_school_last, "usd")} en {h.spending_school_last_year} (dólares PPA de 2020);
+            máximo en {h.spending_school_peak.year}
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">PISA matemáticas</span>
+          <span className="vizStat__value">{h.math_2022}</span>
+          <span className="vizStat__note">
+            {h.math_2003} en 2003; media OCDE en 2022: {data.pisa.math.OECD.at(-1).value}
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">Abandono temprano (18-24 años)</span>
+          <span className="vizStat__value">{num(h.leavers_last)} %</span>
+          <span className="vizStat__note">
+            {num(h.leavers_2008)} % en 2008; UE-27: {num(h.leavers_eu_last)} % en {h.leavers_last_year}
+          </span>
+        </div>
+        <div className="card vizStat">
+          <span className="vizStat__label">Titulados superiores en empleos que no lo requieren</span>
+          <span className="vizStat__value">{num(h.overq_es)} %</span>
+          <span className="vizStat__note">
+            UE-27: {num(h.overq_eu)} % ({h.overq_year})
+          </span>
+        </div>
+      </section>
+
+      <section className="card vizProse" id="hipotesis" aria-labelledby="hipotesis-title">
+        <h2 id="hipotesis-title">La hipótesis, contrastada</h2>
+        <p>
+          <strong>Hipótesis:</strong> desde 2000 el gasto público real por alumno ha subido mucho y los resultados de PISA se han quedado igual o han
+          bajado. <strong>Resultado: se cumple a medias.</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>A favor.</strong> El gasto real por alumno es un {num(h.spending_school_change_2000_pct, 0)} % mayor que en 2000 (OCDE) y un{" "}
+            {num(realChange, 0)} % mayor según el Ministerio, mientras PISA matemáticas pasa de {h.math_2003} (2003) a {h.math_2022} (2022), lectura de{" "}
+            {h.reading_2000} (2000) a {h.reading_2022} y ciencias de {h.science_2006} (2006) a {h.science_2022}.
+          </li>
+          <li>
+            <strong>En contra.</strong> El gasto no subió de forma continua: tocó máximo en {h.spending_school_peak.year}, cayó un{" "}
+            {num((1 - h.spending_school_trough.value / h.spending_school_peak.value) * 100, 0)} % hasta {h.spending_school_trough.year} y en{" "}
+            {h.spending_school_last_year} seguía por debajo de aquel máximo. Además, España gasta por alumno el {h.spending_school_vs_oecd_pct} % de la
+            media OCDE (el {h.spending_school_vs_oecd_2005_pct} % en 2005), y la OCDE, que aumentó su gasto un {h.oecd_school_change_2005_pct} % desde 2005,
+            también vio caer sus resultados. En matemáticas, {list(biggerDrops)} perdieron más puntos que España desde 2003.
+          </li>
+          <li>
+            <strong>Lo que sí mejoró, y mucho.</strong> El abandono escolar temprano cayó del {num(h.leavers_2008)} % (2008) al {num(h.leavers_last)} % (
+            {h.leavers_last_year}), y el alumnado de 15 años retrasado de curso bajó del {num(h.behind_peak.value)} % ({h.behind_peak.course}) al{" "}
+            {num(h.behind_last.value)} % ({h.behind_last.course}). Retener en el sistema a alumnos que antes lo dejaban también pesa sobre la media de PISA.
+          </li>
+          <li>
+            <strong>Lo que estos datos no pueden decir.</strong> Ninguna de estas series mide causalidad: no separan el efecto del gasto del de la
+            composición del alumnado (inmigración, retención de quienes antes abandonaban), los cambios de ley educativa o la pandemia.
+          </li>
+        </ul>
+      </section>
+
+      <Figure
+        id="gasto"
+        title={`El gasto público real por alumno es un ${num(h.spending_school_change_2000_pct, 0)} % mayor que en 2000, pero todo el aumento llegó antes de ${h.spending_school_peak.year}`}
+        dek={`OCDE: ${fmt(h.spending_school_peak.value, "usd")} por alumno en ${h.spending_school_peak.year}, ${fmt(h.spending_school_trough.value, "usd")} en ${h.spending_school_trough.year} tras los recortes y ${fmt(h.spending_school_last, "usd")} en ${h.spending_school_last_year} (dólares PPA constantes de 2020). La serie anual del Ministerio, hasta ${h.real_per_student_last.year}, muestra el mismo perfil y recupera el máximo de ${h.real_per_student_peak.year} solo en ${h.real_per_student_last.year}.`}
+        legend={eagSpain}
+        sources={[S.oecd, S.mefp, S.eurostat("nama_10_gdp")]}
+        notes={[
+          "OCDE: gasto con origen público en centros educativos, de Primaria a postsecundaria no terciaria (las etapas que mide PISA), por alumno equivalente a tiempo completo; precios constantes (deflactor del PIB) y PPA de 2020. La OCDE publica años sueltos antes de 2008 y la serie pasó de la clasificación ISCED 1997 a ISCED 2011 en 2012; la OCDE la presenta como continua.",
+          `Ministerio: ${sp.formula_real_per_student}. Incluye Infantil, FP y Educación Especial; excluye becas y universidad.`,
+        ]}
+        table={
+          <EduTable
+            unit="usd"
+            series={[
+              ...eagSpain.map((s) => ({ ...s, label: `${s.label} (OCDE, $ PPA 2020)` })),
+              { id: "real", label: `España, Ministerio (€ de ${h.real_per_student_base_year})`, points: sp.real_per_nonuni_student_eur },
+            ]}
+          />
+        }
+      >
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">
+              OCDE · dólares PPA constantes de 2020 por alumno
+              <span>
+                España: {fmt(h.spending_school_2000, "usd")} (2000) → {fmt(h.spending_school_last, "usd")} ({h.spending_school_last_year})
+              </span>
+            </h3>
+            <SparseLineChart series={eagSpain} unit="usd" yMax={eagMax} height={260} xMin={1995} ariaLabel="Gasto público real por alumno, España y media OCDE" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Ministerio · euros de {h.real_per_student_base_year} por alumno no universitario
+              <span>
+                {fmt(h.real_per_student_2000.value, "eur")} (2000) → {fmt(h.real_per_student_last.value, "eur")} ({h.real_per_student_last.year})
+              </span>
+            </h3>
+            <TimeSeriesChart
+              series={realPerStudent}
+              unit="eur"
+              height={260}
+              bands={[{ from: 2010, to: 2014, label: "Recortes" }]}
+              ariaLabel="Gasto público real por alumno no universitario según el Ministerio"
+            />
+          </div>
+        </div>
+      </Figure>
+
+      <Figure
+        id="gasto-comparado"
+        title={`España gasta por alumno el ${h.spending_school_vs_oecd_pct} % de la media OCDE; en 2005 gastaba el ${h.spending_school_vs_oecd_2005_pct} %`}
+        dek={`Con Eurostat, en ${h.pps_last_year} el gasto público por alumno fue de ${fmt(h.pps_es, "count")} PPS en España frente a ${fmt(h.pps_eu, "count")} en la UE-27 (${num((h.pps_es / h.pps_eu) * 100, 0)} %). En proporción a la economía, las administraciones gastaron en educación el ${num(cofogLast.value)} % del PIB en ${cofogLast.year}, frente al ${num(cofogEuLast.value)} % de la UE.`}
+        legend={[
+          { id: "ESP", label: "España", color: C.blue },
+          { id: "ref", label: "Media de comparación", color: C.ref },
+          { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
+        ]}
+        sources={[S.oecd, S.eurostat("educ_uoe_fine09"), S.eurostat("gov_10a_exp")]}
+        notes={[
+          "Los paneles de la OCDE comparten escala. PPS: estándar de poder adquisitivo de Eurostat (euros corregidos por precios relativos), de Infantil 2.º ciclo a universidad. % del PIB: clasificación COFOG 09 de contabilidad nacional, que incluye también gasto no imputable a alumnos.",
+        ]}
+        table={
+          <>
+            <EduTable unit="usd" caption="Ver gasto por alumno de la OCDE en tabla" series={comparison(sp.eag_school_usd_ppp_2020, ["ESP", ...eagPanels], ["OECD", "EU25"]).reverse()} />
+            <EduTable unit="count" digits={0} caption="Ver gasto por alumno en PPS (Eurostat) en tabla" series={[...pps].reverse()} />
+            <EduTable caption="Ver gasto en educación en % del PIB en tabla" series={[...cofog].reverse()} />
+          </>
+        }
+      >
+        <div className="vizMultiples">
+          {eagPanels.map((area) => (
+            <div key={area}>
+              <h3 className="vizPanelTitle">
+                España frente a {NAMES[area]}
+                <span>
+                  {NAMES[area]} en {sp.eag_school_usd_ppp_2020[area].at(-1).year}: {fmt(sp.eag_school_usd_ppp_2020[area].at(-1).value, "usd")}
+                </span>
+              </h3>
+              <SparseLineChart
+                series={[
+                  { id: area, label: NAMES[area], shortLabel: area === "EU25" ? "UE" : NAMES[area], color: C.ref, points: sp.eag_school_usd_ppp_2020[area] },
+                  { id: "ESP", label: "España", color: C.blue, emphasis: true, points: sp.eag_school_usd_ppp_2020.ESP },
+                ]}
+                unit="usd"
+                xMin={1995}
+                xMax={h.spending_school_last_year}
+                yMax={eagMax}
+                height={200}
+                ariaLabel={`Gasto real por alumno, España frente a ${NAMES[area]}`}
+              />
+            </div>
+          ))}
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto público por alumno, PPS (Eurostat)
+              <span>Infantil 2.º ciclo a universidad</span>
+            </h3>
+            <TimeSeriesChart series={pps} unit="count" height={220} ariaLabel="Gasto público por alumno en PPS, España y UE" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Gasto de las administraciones en educación, % del PIB
+              <span>COFOG 09 (Eurostat)</span>
+            </h3>
+            <TimeSeriesChart series={cofog} height={220} ariaLabel="Gasto público en educación en porcentaje del PIB" />
+          </div>
+        </div>
+      </Figure>
+
+      <Figure
+        id="pisa"
+        title={`En matemáticas, España pasa de ${esMath.from} a ${esMath.to} puntos PISA desde 2003; ${list(biggerDrops)} cayeron más`}
+        dek={`${mathRisers.length ? `${list(mathRisers)}, que partían por debajo, subieron y hoy están a la par. ` : ""}En 2022 España obtuvo ${h.math_2022} en matemáticas (media OCDE ${data.pisa.math.OECD.at(-1).value}), ${h.reading_2022} en lectura (${data.pisa.reading.OECD.at(-1).value}) y ${h.science_2022} en ciencias (${data.pisa.science.OECD.at(-1).value}): en las tres, sin diferencia significativa con la media. El eje empieza en cero; las caídas son de pocas decenas de puntos en una escala centrada en 500.`}
+        legend={[
+          { id: "ESP", label: "España", color: C.blue },
+          { id: "OECD", label: "Media OCDE (solo 2018 y 2022 con fuente abierta)", color: C.ref },
+          { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
+        ]}
+        sources={[S.wb, S.pisa2022]}
+        notes={[
+          "Puntos huecos: ciclos no comparables con los siguientes. La OCDE solo considera comparables las tendencias de lectura desde 2000, matemáticas desde 2003 y ciencias desde 2006.",
+          "2022: primer ciclo tras la COVID-19 (cierres de centros en 2020) y aplazado un año; la OCDE advierte de que parte de la caída general puede deberse a la pandemia. España no tiene dato de lectura en 2018: la OCDE no lo publicó por respuestas anómalas.",
+          "La media OCDE de 2000 a 2015 no se publica en ninguna API abierta y oecd.org bloquea la descarga por script; los valores de 2022 de lectura y ciencias de Alemania, Francia, Italia y Portugal solo aparecen en figuras del informe y no se incluyen.",
+        ]}
+        table={<EduTable unit="score" caption="Ver todas las puntuaciones en tabla" series={pisaTable} />}
+      >
+        <div className="vizMultiples">
+          {pisaDomains.map((domain) => {
+            const es = data.pisa[domain.key].ESP;
+            return (
+              <div key={domain.key}>
+                <h3 className="vizPanelTitle">
+                  {domain.label}
+                  <span>
+                    España: {es.find((p) => p.year === domain.first)?.value} ({domain.first}) → {es.at(-1).value} ({es.at(-1).year})
+                  </span>
+                </h3>
+                <SparseLineChart
+                  series={pisaSeries(domain.key)}
+                  unit="score"
+                  xMin={2000}
+                  xMax={2022}
+                  yMax={600}
+                  height={240}
+                  ariaLabel={`PISA ${domain.label}, España, media OCDE y países comparables`}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </Figure>
+
+      <Figure
+        id="abandono"
+        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % en 2008 al ${num(h.leavers_last)} % en ${h.leavers_last_year}`}
+        dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal.`}
+        legend={leavers.slice().reverse()}
+        sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16")]}
+        notes={[
+          `Líneas verticales: rupturas de serie que Eurostat marca con «b» en España o la UE (${el.breaks.join(", ")}), por cambios en la Encuesta de Población Activa; desde 2021 los datos de España llevan además la marca «d» (definición distinta). No se ajustan: la serie se muestra tal cual con sus marcas.`,
+          "Es una encuesta: las cifras regionales tienen más error muestral, sobre todo en Ceuta, Melilla y La Rioja.",
+        ]}
+        table={<EduTable caption="Ver los datos en tabla (con marcas de Eurostat)" series={leavers.slice().reverse()} />}
+      >
+        <TimeSeriesChart
+          series={leavers}
+          xMin={1992}
+          xMax={h.leavers_last_year}
+          annotations={breakNotes}
+          ariaLabel="Abandono temprano de la educación, España, UE y países comparables"
+        />
+        <h3 className="vizPanelTitle">
+          Por comunidad autónoma: {el.regions_first_year} → {el.regions_last_year}
+          <span>
+            De {num(el.regions[0].last)} % ({el.regions[0].name}) a {num(el.regions.at(-1).last)} % ({el.regions.at(-1).name}) en {el.regions_last_year}
+          </span>
+        </h3>
+        <ul className="vizBars" aria-label={`Abandono temprano por comunidad autónoma en ${el.regions_last_year}`}>
+          {el.regions.map((row) => (
+            <li key={row.geo}>
+              <span>{row.name}</span>
+              <span className="vizBars__track">
+                <span className="vizBars__bar" style={{ width: `${(row.last / regionMax) * 100}%` }} />
+                <span className="vizBars__value">
+                  {num(row.last)} %{row.first != null ? <span style={{ color: "var(--viz-muted)", fontWeight: 400 }}> ({el.regions_first_year}: {num(row.first)} %)</span> : null}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Figure>
+
+      <Figure
+        id="repeticion"
+        title={`A los 15 años, el ${num(h.behind_last.value)} % del alumnado va retrasado de curso; en ${h.behind_peak.course} era el ${num(h.behind_peak.value)} %`}
+        dek={`España sigue entre los países de la OCDE donde más se repite: en PISA 2022, el ${rep.ESP} % del alumnado de 15 años dijo haber repetido al menos una vez, frente al ${rep.OECD} % de media OCDE.`}
+        sources={[S.mefp, S.pisaNote]}
+        notes={[
+          "Serie anual: 100 menos la tasa de idoneidad a los 15 años del Ministerio (alumnado matriculado en el curso que le corresponde por edad). Se dibuja en el año en que termina cada curso.",
+          `La caída de ${num(h.behind_2020)} % (curso 2019-20) a ${num(h.behind_2021)} % (2020-21) refleja la promoción de final del curso 2019-20, flexibilizada por la COVID-19 (Orden EFP/365/2020); después, la LOMLOE (Ley Orgánica 3/2020) y el Real Decreto 984/2021 restringieron la repetición.`,
+          "La repetición declarada en PISA de ciclos anteriores solo está en tablas de oecd.org, que bloquea la descarga por script.",
+        ]}
+        table={<EduTable caption="Ver los datos en tabla" series={behind} rowLabel="Año (fin de curso)" />}
+      >
+        <TimeSeriesChart
+          series={behind}
+          yMax={50}
+          annotations={[{ year: 2021, label: "COVID-19: promoción flexible", keepOnMobile: true }]}
+          ariaLabel="Alumnado de 15 años retrasado de curso en España"
+        />
+        <h3 className="vizPanelTitle">
+          Alumnado de 15 años que dice haber repetido al menos una vez (PISA 2022)
+          <span>Nota de país de la OCDE</span>
+        </h3>
+        <ul className="vizBars" aria-label="Repetición declarada en PISA 2022">
+          {[
+            ["España", rep.ESP, C.blue],
+            ["Media OCDE", rep.OECD, C.ref],
+          ].map(([label, value, color]) => (
+            <li key={label}>
+              <span>{label}</span>
+              <span className="vizBars__track">
+                <span className="vizBars__bar" style={{ width: `${(value / 50) * 100}%`, background: color }} />
+                <span className="vizBars__value">{value} %</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Figure>
+
+      <Figure
+        id="sobrecualificacion"
+        title={`El ${num(h.overq_es)} % de los titulados superiores con empleo trabaja en un puesto que no exige su título; en la UE, el ${num(h.overq_eu)} %`}
+        dek="Tasa de sobrecualificación: ocupados de 20 a 64 años con estudios superiores que trabajan en ocupaciones de cualificación media o baja. España tiene la más alta de los países comparados en toda la serie."
+        legend={overq.slice().reverse()}
+        sources={[S.eurostat("lfsa_eoqgan")]}
+        notes={[
+          "Mide el encaje entre título y ocupación según la clasificación ISCO, no la calidad del título ni el salario. Puede reflejar tanto exceso de titulados como un tejido productivo con pocos puestos cualificados.",
+          ...(data.overqualification_breaks_es?.length
+            ? [`Líneas verticales: rupturas de serie de la Encuesta de Población Activa que Eurostat marca con «b» para España (${data.overqualification_breaks_es.join(", ")}); no se ajustan.`]
+            : []),
+        ]}
+        table={<EduTable caption="Ver los datos en tabla" series={overq.slice().reverse()} />}
+      >
+        <TimeSeriesChart
+          series={overq}
+          annotations={breakRows(data.overqualification_breaks_es || [])}
+          ariaLabel="Tasa de sobrecualificación, España, UE y países comparables"
+        />
+      </Figure>
+
+      <Figure
+        id="largo-plazo"
+        title={`En 1900 sabía leer el ${num(h.literacy_1900, 0)} % de la población; en ${h.literacy_last.year}, el ${num(h.literacy_last.value)} %`}
+        dek={`Los años medios de escolarización de la población de 15 a 64 años pasaron de ${num(h.schooling_first.value)} en ${h.schooling_first.year} a ${num(h.schooling_last.value)} en ${h.schooling_last.year}. En 1900 España iba por delante de ${list(behindIn1900)}; se estancó hasta 1950, cuando ${list(aheadIn1950)} ya la habían adelantado, y el gran salto llegó a partir de los años 60.`}
+        legend={[
+          { id: "ESP", label: "España", color: C.blue },
+          { id: "peer", label: "Alemania, Francia, Italia, Portugal", color: C.peer },
+        ]}
+        sources={[S.owid]}
+        notes={[
+          "Alfabetización: hasta 1950, censos recopilados por la UNESCO (1953, 1957), en general población de 10 o más años; después, Instituto de Estadística de la UNESCO, 15 o más años. Hay una ruptura entre 1950 y la siguiente observación: las líneas se cortan y no se empalman.",
+          "Años de escolarización: Lee y Lee (2016) hasta 2010; 2015 y 2020 son proyecciones de Barro y Lee (2015). Son estimaciones reconstruidas a partir de censos, con más incertidumbre cuanto más atrás.",
+        ]}
+        table={
+          <>
+            <EduTable caption="Ver alfabetización en tabla" series={literacy.slice().reverse()} />
+            <EduTable unit="years" caption="Ver años de escolarización en tabla" series={schooling.slice().reverse()} />
+          </>
+        }
+      >
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">
+              Población alfabetizada (%)
+              <span>España: {num(h.literacy_1900)} % (1900) → {num(h.literacy_last.value)} % ({h.literacy_last.year})</span>
+            </h3>
+            <SparseLineChart series={literacy} unit="pct" digits={1} xMin={1895} yMax={100} height={260} ariaLabel="Tasa de alfabetización desde 1900" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">
+              Años medios de escolarización (15-64 años)
+              <span>
+                España: {num(h.schooling_first.value)} ({h.schooling_first.year}) → {num(h.schooling_last.value)} ({h.schooling_last.year})
+              </span>
+            </h3>
+            <SparseLineChart series={schooling} unit="years" xMin={1870} height={260} ariaLabel="Años medios de escolarización desde 1870" />
+          </div>
+        </div>
+      </Figure>
+
+      <section className="card vizProse" id="metodo" aria-labelledby="metodo-title">
+        <h2 id="metodo-title">Método y fuentes</h2>
+        <ul>
+          <li>
+            <strong>Denominador.</strong> El gasto se mide por alumno y a precios constantes (deflactor del PIB), y se contrasta en paridad de poder
+            adquisitivo y en % del PIB. Los totales nominales solo están en los datos descargables.
+          </li>
+          <li>
+            <strong>Comparación.</strong> Cada cifra de España se compara con la media de la OCDE o de la UE y con Alemania, Francia, Italia y Portugal antes
+            de calificarla de alta o baja.
+          </li>
+          <li>
+            <strong>Ejes y rupturas.</strong> Todos los ejes empiezan en cero, no hay ejes dobles y los paneles de un mismo gráfico comparten escala. Las
+            rupturas de serie se marcan (Eurostat), los ciclos PISA no comparables se dibujan huecos y las fuentes de alfabetización no se empalman.
+          </li>
+          <li>
+            <strong>Hipótesis.</strong> La página parte de una hipótesis (más gasto, mismos resultados) y publica también lo que la contradice: la caída
+            del gasto tras 2009, el menor gasto relativo a la OCDE, la caída aún mayor de PISA en países que gastan más y la mejora del abandono escolar.
+          </li>
+          <li>
+            <strong>Lo que no se puede concluir.</strong> Correlación no es causalidad. PISA mide a los alumnos de 15 años escolarizados: si el sistema
+            retiene a quienes antes abandonaban o repetían, la media puede bajar aunque mejore el sistema. El gasto público no incluye lo que pagan
+            las familias.
+          </li>
+          <li>
+            <strong>Reproducible y reutilizable.</strong> <code>just education-refresh</code> descarga cada fuente, guarda el original y lo carga en SQLite
+            con el contrato de indicadores del proyecto: cada publicación oficial es una versión nueva, cada valor se compara con la anterior y apunta a
+            su celda en el fichero original con su SHA-256. Los valores de PISA 2022 sin API llevan documento, página PDF y cita literal, comprobada contra
+            el PDF guardado. Desde ahí se generan los <a href={downloads}>datos publicados</a>.
+          </li>
+          <li>
+            <strong>Bloqueos.</strong> oecd.org responde con un desafío de Cloudflare a la descarga por script; se usa la réplica DBnomics de la OCDE y la
+            copia del INEE de la nota de país.
+          </li>
+        </ul>
+        <p>
+          Fuentes:{" "}
+          {Object.values(src).map((s, index) => (
+            <span key={s.page}>
+              {index ? "; " : ""}
+              <a href={s.page} rel="noopener noreferrer" target="_blank">
+                {s.label}
+              </a>
+              {s.retrieved_at ? ` (consultado ${String(s.retrieved_at).slice(0, 10)})` : ""}
+            </span>
+          ))}
+          .
+        </p>
+      </section>
+    </main>
+  );
+}

@@ -1,0 +1,50 @@
+{
+  "description": "PISA values that no scriptable API publishes, each one cited to the official document, PDF page and literal quote. PISA 2000-2018 scores come from the World Bank EdStats API (LO.PISA.*), loaded separately.",
+  "documents": {
+    "inee_pisa2022_informe_espanol": {
+      "title": "PISA 2022. Programa para la Evaluación Internacional de los Estudiantes. Informe español (INEE, Ministerio de Educación, FP y Deportes, 2023)",
+      "url": "https://www.libreria.educacion.gob.es/ebook/184935/free_download/",
+      "landing_page": "https://www.libreria.educacion.gob.es/libro/pisa-2022-programa-para-la-evaluacion-internacional-de-los-estudiantes-informe-espanol_183950/",
+      "sha256": "448db6ee19dc88a3a086b764c74749bc03c1ef5d517b6b70ad4b6833b05ff5c0",
+      "retrieved_at": "2026-10-19"
+    },
+    "oecd_pisa2022_country_note_es": {
+      "title": "OCDE, PISA 2022 Results (Volumes I and II) - Country Notes: España (edición en español, publicada por el INEE)",
+      "url": "https://www.educacionfpydeportes.gob.es/dam/jcr:c2f169ef-a2f9-4027-8540-7fe5ac0fde51/country-note-pisa-2022-esp-esp-final-2.pdf",
+      "landing_page": "https://www.educacionfpydeportes.gob.es/inee/evaluaciones-internacionales/pisa/pisa-2022/pisa-2022-informes-es.html",
+      "sha256": "5077fa4bf8fbe6258d47e5b63442fb3a5fca805e579fe5ff3ab45c18509dd85a",
+      "retrieved_at": "2026-10-19",
+      "note": "La versión de oecd.org responde HTTP 403 con cf-mitigated: challenge a la descarga por script; se usa la copia oficial del Ministerio."
+    }
+  },
+  "series": {
+    "pisa_math_mean": [
+      {"area": "ESP", "year": 2022, "value": 473, "document": "inee_pisa2022_informe_espanol", "pdf_page": 35, "locator": "Capítulo 2, apartado sobre la Figura 2.1.a", "quote": "El rendimiento medio de España (473) no presenta diferencias estadísticamente significativas ni con el Promedio OCDE (472) ni con el Total UE (474)"},
+      {"area": "OECD", "year": 2022, "value": 472, "document": "inee_pisa2022_informe_espanol", "pdf_page": 35, "locator": "Capítulo 2, apartado sobre la Figura 2.1.a", "quote": "ni con el Promedio OCDE (472)"},
+      {"area": "EU", "year": 2022, "value": 474, "document": "inee_pisa2022_informe_espanol", "pdf_page": 35, "locator": "Capítulo 2, apartado sobre la Figura 2.1.a", "quote": "ni con el Total UE (474)"},
+      {"area": "DEU", "year": 2022, "value": 475, "document": "inee_pisa2022_informe_espanol", "pdf_page": 33, "locator": "Cuadro 2.1 (comparaciones múltiples, matemáticas)", "quote": "Alemania (475)"},
+      {"area": "FRA", "year": 2022, "value": 474, "document": "inee_pisa2022_informe_espanol", "pdf_page": 33, "locator": "Cuadro 2.1 (comparaciones múltiples, matemáticas)", "quote": "Francia (474)"},
+      {"area": "PRT", "year": 2022, "value": 472, "document": "inee_pisa2022_informe_espanol", "pdf_page": 33, "locator": "Cuadro 2.1 (comparaciones múltiples, matemáticas)", "quote": "Portugal (472)"},
+      {"area": "ITA", "year": 2022, "value": 471, "document": "inee_pisa2022_informe_espanol", "pdf_page": 33, "locator": "Cuadro 2.1 (comparaciones múltiples, matemáticas)", "quote": "Italia (471)"}
+    ],
+    "pisa_reading_mean": [
+      {"area": "ESP", "year": 2022, "value": 474, "document": "inee_pisa2022_informe_espanol", "pdf_page": 68, "locator": "Capítulo 2, apartado sobre la Figura 2.20.a", "quote": "El rendimiento medio estimado de España (474) no difiere significativamente del Promedio OCDE (476) ni del Total UE (475)"},
+      {"area": "OECD", "year": 2022, "value": 476, "document": "inee_pisa2022_informe_espanol", "pdf_page": 68, "locator": "Capítulo 2, apartado sobre la Figura 2.20.a", "quote": "del Promedio OCDE (476)"},
+      {"area": "EU", "year": 2022, "value": 475, "document": "inee_pisa2022_informe_espanol", "pdf_page": 68, "locator": "Capítulo 2, apartado sobre la Figura 2.20.a", "quote": "ni del Total UE (475)"}
+    ],
+    "pisa_science_mean": [
+      {"area": "ESP", "year": 2022, "value": 485, "document": "inee_pisa2022_informe_espanol", "pdf_page": 70, "locator": "Capítulo 2, apartado sobre la Figura 2.21.a", "quote": "El rendimiento de España (485) no presenta diferencias estadísticamente significativas con el Promedio OCDE (485)"},
+      {"area": "OECD", "year": 2022, "value": 485, "document": "inee_pisa2022_informe_espanol", "pdf_page": 70, "locator": "Capítulo 2, apartado sobre la Figura 2.21.a", "quote": "con el Promedio OCDE (485)"},
+      {"area": "EU", "year": 2022, "value": 484, "document": "inee_pisa2022_informe_espanol", "pdf_page": 70, "locator": "Capítulo 2, apartado sobre la Figura 2.21.a", "quote": "el Total UE (484)"}
+    ],
+    "pisa_repeated_grade_pct": [
+      {"area": "ESP", "year": 2022, "value": 22, "document": "oecd_pisa2022_country_note_es", "pdf_page": 10, "locator": "Apartado sobre trayectoria escolar", "quote": "Un 22 % del alumnado en España dijo que había repetido curso al menos una vez"},
+      {"area": "OECD", "year": 2022, "value": 9, "document": "oecd_pisa2022_country_note_es", "pdf_page": 10, "locator": "Apartado sobre trayectoria escolar", "quote": "(promedio OCDE: 9 %)"}
+    ]
+  },
+  "gaps": [
+    "Medias OCDE de PISA 2000-2015: no hay API abierta; oecd.org bloquea la descarga por script (Cloudflare) y el Banco Mundial solo publica la media OCDE de 2018.",
+    "PISA 2022 de lectura y ciencias para Alemania, Francia, Italia y Portugal: el informe español solo los da en figuras (imagen), sin texto verificable.",
+    "Repetición de curso en PISA antes de 2022: solo en tablas de oecd.org (bloqueadas); se usa la tasa de idoneidad administrativa del Ministerio como serie anual."
+  ]
+}
