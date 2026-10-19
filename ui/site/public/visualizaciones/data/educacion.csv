@@ -1355,6 +1355,8 @@ mefp_educabase,gasto_consejeria_por_alumno_no_universitario_eur,ES-CCAA:Andaluc�
 vclc_education_curated,pisa_math,ES-CCAA:Andalucía,2022,457.0
 mefp_educabase,gasto_consejeria_por_alumno_no_universitario_eur,ES-CCAA:Canarias,2022,5359.0
 vclc_education_curated,pisa_math,ES-CCAA:Canarias,2022,447.0
+vclc_education_curated,pisa_brecha_isec_matematicas,ES-CCAA:Cantabria,2022,59.0
+vclc_education_curated,pisa_brecha_isec_matematicas,ES-CCAA:Cataluña,2022,96.0
 vclc_education_curated,pisa_brecha_isec_matematicas,ESP,2022,86.0
 vclc_education_curated,pisa_brecha_isec_matematicas,OECD,2022,93.0
 vclc_education_curated,pisa_varianza_isec_pct,ESP,2022,14.0
@@ -4423,6 +4425,263 @@ mefp_educabase,abandono_temprano_madre_No consta,ES,2022,28.7
 mefp_educabase,abandono_temprano_madre_No consta,ES,2023,28.9
 mefp_educabase,abandono_temprano_madre_No consta,ES,2024,27.2
 mefp_educabase,abandono_temprano_madre_No consta,ES,2025,28.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2002,45.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2003,41.1
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2004,38.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2005,31.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2006,28.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2007,25.5
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2008,24.9
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2009,23.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2010,21.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2011,20.1
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2012,18.4
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2013,16.3
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2014,13.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2015,11.9
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2016,10.4
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2017,9.6
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2018,8.7
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2019,7.7
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2020,6.9
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2021,7.5
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2022,7.5
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2023,7.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2024,6.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Primaria e inferior,ES,2025,7.1
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2002,20.7
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2003,23.4
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2004,24.0
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2005,24.9
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2006,25.9
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2007,26.4
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2008,26.9
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2009,27.3
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2010,28.8
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2011,28.7
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2012,29.2
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2013,30.1
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2014,32.0
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2015,31.6
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2016,30.5
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2017,30.3
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2018,29.4
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2019,28.8
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2020,27.9
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2021,27.7
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2022,27.2
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2023,25.3
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2024,25.2
+mefp_educabase,poblacion_18_24_pct_madre_1ª etapa E. Secundaria,ES,2025,23.7
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2002,11.1
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2003,11.6
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2004,12.4
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2005,14.8
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2006,16.0
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2007,16.0
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2008,16.4
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2009,16.3
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2010,17.7
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2011,18.5
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2012,19.2
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2013,19.8
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2014,19.4
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2015,19.9
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2016,21.4
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2017,21.3
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2018,21.7
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2019,21.0
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2020,21.8
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2021,21.2
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2022,20.5
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2023,21.1
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2024,20.6
+mefp_educabase,poblacion_18_24_pct_madre_2ª etapa E. Secundaria,ES,2025,20.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2002,9.2
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2003,9.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2004,10.9
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2005,11.6
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2006,12.3
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2007,13.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2008,13.3
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2009,14.5
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2010,15.2
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2011,16.9
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2012,17.7
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2013,18.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2014,21.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2015,22.1
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2016,23.6
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2017,25.3
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2018,25.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2019,28.2
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2020,30.3
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2021,32.2
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2022,32.8
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2023,34.0
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2024,35.5
+mefp_educabase,poblacion_18_24_pct_madre_E. Superior,ES,2025,35.7
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2002,13.2
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2003,14.0
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2004,14.7
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2005,16.9
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2006,17.8
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2007,19.1
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2008,18.5
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2009,18.2
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2010,17.2
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2011,15.8
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2012,15.5
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2013,14.9
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2014,14.5
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2015,14.6
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2016,14.1
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2017,13.5
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2018,14.3
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2019,14.4
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2020,13.1
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2021,11.3
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2022,12.1
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2023,11.9
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2024,12.0
+mefp_educabase,poblacion_18_24_pct_madre_No consta,ES,2025,12.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2004,30.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2005,28.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2006,28.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2007,28.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2008,28.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2009,27.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2010,25.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2011,23.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2012,21.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2013,20.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2014,18.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2015,17.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2016,16.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2017,15.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2018,14.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2019,14.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2020,13.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2021,11.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2022,10.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2023,10.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2024,10.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,ES,2025,9.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2004,47.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2005,46.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2006,43.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2007,44.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2008,45.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2009,45.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2010,43.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2011,41.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2012,40.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2013,38.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2014,37.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2015,33.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2016,32.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2017,31.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2018,32.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2019,31.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2020,29.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2021,22.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2022,27.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2023,28.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2024,25.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,ES,2025,27.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2004,14.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2005,14.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2006,14.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2007,13.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2008,12.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2009,12.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2010,12.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2011,11.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2012,11.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2013,10.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2014,10.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2015,10.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2016,9.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2017,9.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2018,9.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2019,8.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2020,8.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2021,8.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2022,8.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2023,8.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2024,8.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_NAT,EU27_2020,2025,7.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2004,27.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2005,30.1
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2006,29.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2007,28.6
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2008,29.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2009,29.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2010,29.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2011,28.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2012,27.2
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2013,24.7
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2014,22.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2015,22.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2016,22.4
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2017,21.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2018,22.8
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2019,22.0
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2020,22.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2021,21.5
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2022,21.9
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2023,21.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2024,20.3
+eurostat_sdmx,abandono_temprano_18_24_pct_nacimiento_FOR,EU27_2020,2025,20.5
+eurostat_sdmx,nivel_estudios_Y25-34_ED0-2,ES,2025,24.5
+eurostat_sdmx,nivel_estudios_Y25-34_ED3_4,ES,2025,23.0
+eurostat_sdmx,nivel_estudios_Y25-34_ED5-8,ES,2025,52.5
+eurostat_sdmx,nivel_estudios_Y25-34_ED0-2,EU27_2020,2025,13.5
+eurostat_sdmx,nivel_estudios_Y25-34_ED3_4,EU27_2020,2025,41.7
+eurostat_sdmx,nivel_estudios_Y25-34_ED5-8,EU27_2020,2025,44.8
+eurostat_sdmx,nivel_estudios_Y35-44_ED0-2,ES,2025,32.5
+eurostat_sdmx,nivel_estudios_Y35-44_ED3_4,ES,2025,22.7
+eurostat_sdmx,nivel_estudios_Y35-44_ED5-8,ES,2025,44.7
+eurostat_sdmx,nivel_estudios_Y35-44_ED0-2,EU27_2020,2025,16.0
+eurostat_sdmx,nivel_estudios_Y35-44_ED3_4,EU27_2020,2025,41.2
+eurostat_sdmx,nivel_estudios_Y35-44_ED5-8,EU27_2020,2025,42.8
+eurostat_sdmx,nivel_estudios_Y45-54_ED0-2,ES,2025,35.3
+eurostat_sdmx,nivel_estudios_Y45-54_ED3_4,ES,2025,22.5
+eurostat_sdmx,nivel_estudios_Y45-54_ED5-8,ES,2025,42.2
+eurostat_sdmx,nivel_estudios_Y45-54_ED0-2,EU27_2020,2025,19.8
+eurostat_sdmx,nivel_estudios_Y45-54_ED3_4,EU27_2020,2025,45.1
+eurostat_sdmx,nivel_estudios_Y45-54_ED5-8,EU27_2020,2025,35.1
+eurostat_sdmx,nivel_estudios_Y55-64_ED0-2,ES,2025,43.6
+eurostat_sdmx,nivel_estudios_Y55-64_ED3_4,ES,2025,23.8
+eurostat_sdmx,nivel_estudios_Y55-64_ED5-8,ES,2025,32.6
+eurostat_sdmx,nivel_estudios_Y55-64_ED0-2,EU27_2020,2025,24.9
+eurostat_sdmx,nivel_estudios_Y55-64_ED3_4,EU27_2020,2025,48.5
+eurostat_sdmx,nivel_estudios_Y55-64_ED5-8,EU27_2020,2025,26.5
+vclc_education_curated,pisa_brecha_matematicas_escs_raw,ESP,2022,86.0
+vclc_education_curated,pisa_brecha_matematicas_escs_oecd,OECD,2022,93.0
+vclc_education_curated+worldbank_edstats,pisa_brecha_matematicas_regions_raw,ESP,2022,52.0
+vclc_education_curated,pisa_brecha_matematicas_private_raw,ESP,2022,35.0
+vclc_education_curated,pisa_brecha_matematicas_private_adjusted,ESP,2022,19.0
+vclc_education_curated,pisa_brecha_matematicas_private_adjusted_school,ESP,2022,5.0
+vclc_education_curated,pisa_brecha_matematicas_private_oecd,OECD,2022,27.0
+vclc_education_curated,pisa_brecha_matematicas_immigrant_raw,ESP,2022,33.0
+vclc_education_curated,pisa_brecha_matematicas_immigrant_adjusted,ESP,2022,7.0
+vclc_education_curated,pisa_brecha_matematicas_gender_raw,ESP,2022,10.0
+vclc_education_curated,pisa_brecha_matematicas_gender_oecd,OECD,2022,9.0
+vclc_education_curated+worldbank_edstats,pisa_brecha_matematicas_change_raw,ESP,2022,12.0
+vclc_education_curated+worldbank_edstats,pisa_brecha_matematicas_oecd_raw,ESP,2022,1.0
+vclc_education_curated,pisa_matematicas_centros_publicos,ES-CCAA:Andalucía,2022,448.0
+vclc_education_curated,pisa_matematicas_centros_publicos,"ES-CCAA:Asturias, Principado de",2022,482.0
+vclc_education_curated,pisa_matematicas_centros_publicos,ES-CCAA:Canarias,2022,439.0
+vclc_education_curated,pisa_matematicas_centros_publicos,ES-CCAA:Castilla y León,2022,491.0
+vclc_education_curated,pisa_matematicas_centros_publicos,"ES-CCAA:Madrid, Comunidad de",2022,476.0
+vclc_education_curated,pisa_matematicas_centros_publicos,ESP,2022,462.0
+vclc_education_curated,pisa_matematicas_centros_privados,ES-CCAA:Andalucía,2022,483.0
+vclc_education_curated,pisa_matematicas_centros_privados,"ES-CCAA:Asturias, Principado de",2022,523.0
+vclc_education_curated,pisa_matematicas_centros_privados,ES-CCAA:Canarias,2022,476.0
+vclc_education_curated,pisa_matematicas_centros_privados,ES-CCAA:Castilla y León,2022,516.0
+vclc_education_curated,pisa_matematicas_centros_privados,"ES-CCAA:Madrid, Comunidad de",2022,512.0
+vclc_education_curated,pisa_matematicas_centros_privados,ESP,2022,497.0
 ine_epf,gasto_hogar_educacion_eur_ingresos_De 500 a 999 euros,ES,2025,33.0
 ine_epf,gasto_hogar_educacion_eur_ingresos_De 1.000 a 1.499 euros,ES,2025,100.0
 ine_epf,gasto_hogar_educacion_eur_ingresos_De 1.500 a 1.999 euros,ES,2025,160.0

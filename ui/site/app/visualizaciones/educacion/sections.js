@@ -448,6 +448,30 @@ export function VocationalFigure({ data, sources }) {
 }
 
 // --------------------------------------------------------------------------------------------- attainment
+const AGE_LABEL = { "Y25-34": "25-34 años", "Y35-44": "35-44 años", "Y45-54": "45-54 años", "Y55-64": "55-64 años" };
+
+function StackRow({ label, bold, levels, value }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "minmax(80px, 150px) 1fr", gap: 10, alignItems: "center", fontSize: "0.84rem" }}>
+      <span style={{ fontWeight: bold ? 700 : 400 }}>{label}</span>
+      <span style={{ display: "flex", height: 20, borderRadius: 4, overflow: "hidden" }}>
+        {levels.map(([level, levelLabel, color]) => {
+          const v = value(level);
+          return (
+            <span
+              key={level}
+              title={`${levelLabel}: ${num(v)} %`}
+              style={{ width: `${v}%`, background: color, color: "#fff", fontSize: "0.72rem", display: "flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", overflow: "hidden" }}
+            >
+              {v >= 8 ? `${num(v, 0)} %` : ""}
+            </span>
+          );
+        })}
+      </span>
+    </div>
+  );
+}
+
 export function AttainmentFigure({ data, sources, overq }) {
   const a = data.attainment_25_34;
   const areas = ["ES", "EU27_2020", "DE", "FR", "IT", "PT"];
@@ -458,6 +482,8 @@ export function AttainmentFigure({ data, sources, overq }) {
     ["ED3_4", "Bachillerato o FP media", C.yellow],
     ["ED5-8", "Estudios superiores", C.blue],
   ];
+  const gen = data.attainment_by_age;
+  const genRow = (age) => gen.rows.find((row) => row.age === age);
   return (
     <Figure
       id="titulacion"
@@ -466,7 +492,7 @@ export function AttainmentFigure({ data, sources, overq }) {
       legend={levels.map(([id, label, color]) => ({ id, label, color }))}
       legendKind="bar"
       sources={sources}
-      notes={["Encuesta de Población Activa de cada país. Los tres niveles suman 100 % (con decimales de redondeo).", "No hemos encontrado en Eurostat la sobrecualificación por rama de estudios, solo por sector de actividad (lfsa_eoqgan2); queda pendiente."]}
+      notes={["Encuesta de Población Activa de cada país. Los tres niveles suman 100 % (con decimales de redondeo).", "Por generación: Eurostat edat_lfse_03 por grupo de edad. Cada grupo es una generación distinta en el mismo año, no la misma persona a lo largo del tiempo; los mayores estudiaron con otro sistema educativo y con otras oportunidades.", "No hemos encontrado en Eurostat la sobrecualificación por rama de estudios, solo por sector de actividad (lfsa_eoqgan2); queda pendiente."]}
       table={
         <EduTable
           caption="Ver los datos en tabla"
@@ -481,25 +507,33 @@ export function AttainmentFigure({ data, sources, overq }) {
       />
       <div style={{ display: "grid", gap: 8 }}>
         {areas.map((geo) => (
-          <div key={geo} style={{ display: "grid", gridTemplateColumns: "minmax(80px, 120px) 1fr", gap: 10, alignItems: "center", fontSize: "0.84rem" }}>
-            <span style={{ fontWeight: geo === "ES" ? 700 : 400 }}>{NAMES[geo]}</span>
-            <span style={{ display: "flex", height: 20, borderRadius: 4, overflow: "hidden" }}>
-              {levels.map(([level, label, color]) => {
-                const value = last(level, geo)?.value || 0;
-                return (
-                  <span
-                    key={level}
-                    title={`${label}: ${num(value)} %`}
-                    style={{ width: `${value}%`, background: color, color: "#fff", fontSize: "0.72rem", display: "flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", overflow: "hidden" }}
-                  >
-                    {value >= 8 ? `${num(value, 0)} %` : ""}
-                  </span>
-                );
-              })}
-            </span>
-          </div>
+          <StackRow key={geo} label={NAMES[geo]} bold={geo === "ES"} levels={levels} value={(level) => last(level, geo)?.value || 0} />
         ))}
       </div>
+      {gen ? (
+        <>
+          <h3 className="vizPanelTitle">
+            Por generación, {gen.year}
+            <span>
+              Como mucho ESO: {num(genRow("Y25-34").ES["ED0-2"])} % de 25 a 34 años y {num(genRow("Y55-64").ES["ED0-2"])} % de 55 a 64 (UE-27:{" "}
+              {num(genRow("Y25-34").EU27_2020["ED0-2"])} % y {num(genRow("Y55-64").EU27_2020["ED0-2"])} %)
+            </span>
+          </h3>
+          <div style={{ display: "grid", gap: 8 }}>
+            {gen.rows.flatMap((row) =>
+              ["ES", "EU27_2020"].map((geo) => (
+                <StackRow
+                  key={`${row.age}-${geo}`}
+                  label={`${AGE_LABEL[row.age] || row.age} · ${geo === "ES" ? "España" : "UE-27"}`}
+                  bold={geo === "ES"}
+                  levels={levels}
+                  value={(level) => row[geo][level] || 0}
+                />
+              )),
+            )}
+          </div>
+        </>
+      ) : null}
     </Figure>
   );
 }

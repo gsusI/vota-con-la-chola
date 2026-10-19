@@ -477,6 +477,12 @@ def mefp_source(table: str, path: str, file: str, **kwargs: Any) -> tuple[str, s
     return (f"mefp_{table}.px", f"{EDUCABASE}{path}/l0/{file}?nocab=1", parse_mefp(table, path, file, **kwargs))
 
 
+def mefp_multi_source(table: str, path: str, file: str, *variants: dict[str, Any]) -> tuple[str, str, Callable[[Raw], Iterable[Batch]]]:
+    """Several indicators from one PC-Axis file (one download, one raw cache entry)."""
+    parsers = [parse_mefp(table, path, file, **kwargs) for kwargs in variants]
+    return (f"mefp_{table}.px", f"{EDUCABASE}{path}/l0/{file}?nocab=1", lambda raw: (b for parse in parsers for b in parse(raw)))
+
+
 GASTO = "/economicas/gasto/series"
 MEFP_SOURCES = [
     mefp_source(
@@ -520,13 +526,24 @@ MEFP_SOURCES = [
         keep=lambda c: c["Titularidad del centro"] == "TODOS LOS CENTROS",
         period_var="periodo", region_var="Comunidad autónoma", school=True,
     ),
-    mefp_source(
-        "aban_1_08", "/laborales/epa/aban", "aban_1_08.px", indicator_code="abandono_por_formacion_madre",
-        label="Abandono temprano de la educación-formación por nivel de formación de la madre (%)", unit_code="PC",
-        definition_text="Población de 18 a 24 años que abandona prematuramente los estudios, según el nivel de formación de la "
-        "madre (explotación de la EPA del Ministerio).",
-        keep=lambda c: c["Tipo de indicador"].startswith("Tasa de abandono") and c["Sexo"] == "AMBOS SEXOS",
-        period_var="periodo", region_var=None, school=False,
+    mefp_multi_source(
+        "aban_1_08", "/laborales/epa/aban", "aban_1_08.px",
+        dict(
+            indicator_code="abandono_por_formacion_madre",
+            label="Abandono temprano de la educación-formación por nivel de formación de la madre (%)", unit_code="PC",
+            definition_text="Población de 18 a 24 años que abandona prematuramente los estudios, según el nivel de formación de la "
+            "madre (explotación de la EPA del Ministerio).",
+            keep=lambda c: c["Tipo de indicador"].startswith("Tasa de abandono") and c["Sexo"] == "AMBOS SEXOS",
+            period_var="periodo", region_var=None, school=False,
+        ),
+        dict(
+            indicator_code="abandono_peso_formacion_madre",
+            label="Jóvenes con abandono temprano según el nivel de formación de la madre (distribución, %)", unit_code="PC_LEAVERS",
+            definition_text="Distribución porcentual de los jóvenes de 18 a 24 años con abandono temprano según el nivel de "
+            "formación de la madre (columna «Peso del nivel de la madre»; suma 100 sobre el total de jóvenes que abandonan).",
+            keep=lambda c: c["Tipo de indicador"].startswith("Peso del nivel") and c["Sexo"] == "AMBOS SEXOS",
+            period_var="periodo", region_var=None, school=False,
+        ),
     ),
     mefp_source(
         "idoneidad_05", "/no-universitaria/alumnado/matriculado/series/gen-idoneidad", "idoneidad_05.px",
@@ -679,6 +696,28 @@ EUROSTAT_SOURCES = [
             "edat_lfse_03", "attainment_25_34", "PC", "% de la población de 25 a 34 años",
             "Nivel de estudios alcanzado, población de 25 a 34 años",
             "Población de 25 a 34 años por nivel máximo de estudios terminado (ISCED 2011). Encuesta de Población Activa.",
+        ),
+    ),
+    (
+        "eurostat_edat_lfse_03_by_age.json",
+        eurostat_url("edat_lfse_03", {"sex": "T", "age": ["Y25-34", "Y35-44", "Y45-54", "Y55-64"], "unit": "PC",
+                                      "isced11": ["ED0-2", "ED3_4", "ED5-8"], "geo": ["ES", "EU27_2020"]}),
+        parse_eurostat(
+            "edat_lfse_03", "attainment_by_age", "PC", "% de la población de cada grupo de edad",
+            "Nivel de estudios alcanzado por grupo de edad (25-34, 35-44, 45-54 y 55-64 años)",
+            "Población de cada grupo de edad por nivel máximo de estudios terminado (ISCED 2011). Encuesta de Población "
+            "Activa. Cada grupo de edad es una generación distinta, no la misma persona a lo largo del tiempo.",
+        ),
+    ),
+    (
+        "eurostat_edat_lfse_02.json",
+        eurostat_url("edat_lfse_02", {"sex": "T", "wstatus": "POP", "age": "Y18-24", "unit": "PC",
+                                      "c_birth": ["NAT", "FOR"], "geo": ["ES", "EU27_2020"]}),
+        parse_eurostat(
+            "edat_lfse_02", "early_leavers_18_24.by_birth", "PC", "% de la población de 18 a 24 años",
+            "Abandono temprano de la educación y la formación (18-24 años) por país de nacimiento",
+            "Mismo indicador que edat_lfse_14, separado entre nacidos en el país (NAT) y nacidos en el extranjero (FOR). "
+            "Encuesta de Población Activa; las banderas 'b' marcan rupturas de serie y 'u' baja fiabilidad.",
         ),
     ),
     (
@@ -1017,6 +1056,14 @@ CURATED_LABELS = {
     "piaac_literacy_tertiary": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos con estudios superiores"),
     "piaac_literacy_below_upper_secondary": ("PIAAC_SCORE", "Puntos PIAAC", "PIAAC 2023: comprensión lectora de adultos sin secundaria superior"),
     "pisa_disadvantaged_immigrant_pct": ("PC", "% del alumnado inmigrante", "PISA: alumnado inmigrante socioeconómicamente desaventajado"),
+    "pisa_private_gap_math": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en matemáticas entre centros privados (concertados y privados) y públicos"),
+    "pisa_private_gap_math_escs_adjusted": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia privados-públicos en matemáticas tras descontar el ISEC del alumno"),
+    "pisa_private_gap_math_escs_school_adjusted": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia privados-públicos en matemáticas tras descontar el ISEC del alumno y del centro"),
+    "pisa_public_school_share_pct": ("PC", "% del alumnado de 15 años", "PISA: alumnado matriculado en centros públicos"),
+    "pisa_gender_gap_math": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en matemáticas entre chicos y chicas (a favor de los chicos)"),
+    "pisa_math_public_mean": ("PISA_SCORE", "Puntos PISA", "PISA: puntuación media en matemáticas del alumnado de centros públicos"),
+    "pisa_math_private_mean": ("PISA_SCORE", "Puntos PISA", "PISA: puntuación media en matemáticas del alumnado de centros privados (concertados y privados)"),
+    "pisa_gender_gap_reading": ("PISA_SCORE", "Puntos PISA", "PISA: diferencia en lectura entre chicas y chicos (a favor de las chicas)"),
 }
 
 

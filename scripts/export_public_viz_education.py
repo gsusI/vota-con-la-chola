@@ -142,6 +142,50 @@ def change(series: list[dict], first: int, last: int) -> float | None:
     return None
 
 
+MOTHER_LEVELS = ["E. Primaria e inferior", "1ª etapa E. Secundaria", "2ª etapa E. Secundaria", "E. Superior", "No consta"]
+
+
+def mother_decomposition(rates: dict[str, dict[int, float]], weights: dict[str, dict[int, float]]) -> dict:
+    """Early leaving by mother's education: rate per group, each group's share of all 18-24 year-olds, and a
+    within-group / composition split of the change in the total rate.
+
+    The Ministerio publishes the rate of each group and the distribution of early leavers by group («peso»), not the
+    distribution of the population. Bayes gives it exactly: share_g = peso_g × total rate / rate_g (shares add up to 100).
+    Shift-share with average weights: Δtotal = Σ mean(share) × Δrate (within) + Σ Δshare × mean(rate) (composition).
+    """
+    total = rates["TOTAL"]
+    years = sorted(y for y in total if all(y in rates.get(g, {}) and y in weights.get(g, {}) and rates[g][y] for g in MOTHER_LEVELS))
+    share = {g: {y: weights[g][y] * total[y] / rates[g][y] for y in years} for g in MOTHER_LEVELS}
+
+    def split(first: int, last: int) -> dict:
+        within = {g: (share[g][first] + share[g][last]) / 2 / 100 * (rates[g][last] - rates[g][first]) for g in MOTHER_LEVELS}
+        mix = {g: (share[g][last] - share[g][first]) / 100 * (rates[g][first] + rates[g][last]) / 2 for g in MOTHER_LEVELS}
+        return {
+            "from": first, "to": last, "total_change": r(total[last] - total[first]),
+            "within": r(sum(within.values())), "composition": r(sum(mix.values())),
+            "within_known_mother": r(sum(v for g, v in within.items() if g != "No consta")),
+        }
+
+    last = years[-1]
+    return {
+        "levels": MOTHER_LEVELS,
+        "first_year": years[0], "last_year": last,
+        "rows": [
+            {"level": g, "rate_first": r(rates[g][years[0]]), "rate_last": r(rates[g][last]),
+             "share_first": r(share[g][years[0]]), "share_last": r(share[g][last])}
+            for g in MOTHER_LEVELS
+        ],
+        "total": {"first": r(total[years[0]]), "last": r(total[last])},
+        "share_check": r(sum(share[g][last] for g in MOTHER_LEVELS)),
+        "shares": {g: points(share[g]) for g in MOTHER_LEVELS},
+        "decomposition": [split(first, last) for first in (years[0], 2008, 2014) if first in total and first < last],
+        "formula": "Peso de cada grupo en la población de 18 a 24 años = peso del grupo entre quienes abandonan × tasa total "
+        "÷ tasa del grupo (teorema de Bayes sobre las dos columnas de la tabla aban_1_08). Cambio total = Σ peso medio × "
+        "cambio de la tasa del grupo (dentro de los grupos) + Σ cambio del peso × tasa media (composición). «No consta»: "
+        "la EPA solo registra los estudios de la madre si vive en el mismo hogar.",
+    }
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     total = {"Cobertura económica": "Incluídos capitulos financieros", "Tipo de administración": "TOTAL"}
@@ -379,6 +423,41 @@ def build(conn: sqlite3.Connection) -> dict:
         "isec": isec,
     }
 
+    # 11b. Where the difference is: PISA maths gaps 2022, raw and at equal ISEC, on one scale --------------
+    def quoted(code: str, area: str = "ESP") -> float | None:
+        return curated(code, "PISA_SCORE").get(area, {}).get(2022)
+    oecd_math = {p["year"]: p["value"] for p in pisa["math"]["OECD"]}
+    math_regions = [row for row in regions_pisa if row["math"] is not None]
+    best_region = max(math_regions, key=lambda row: row["math"])
+    worst_region = min(math_regions, key=lambda row: row["math"])
+    escs_regions = {geo.split(":", 1)[1]: years[2022] for geo, years in escs_gap.items() if geo.startswith("ES-CCAA:")}
+    gaps = {
+        "year": 2022,
+        "rows": [
+            {"id": "escs", "raw": quoted("pisa_escs_gap_math"), "oecd": quoted("pisa_escs_gap_math", "OECD"),
+             "regions_min": min(escs_regions.items(), key=lambda kv: kv[1]) if escs_regions else None,
+             "regions_max": max(escs_regions.items(), key=lambda kv: kv[1]) if escs_regions else None},
+            {"id": "regions", "raw": best_region["math"] - worst_region["math"], "best": best_region["region"],
+             "best_value": best_region["math"], "worst": worst_region["region"], "worst_value": worst_region["math"],
+             "r2_isec": story["r2_isec_regions"], "r2_spending": story["r2_spending_regions"]},
+            {"id": "private", "raw": quoted("pisa_private_gap_math"), "adjusted": quoted("pisa_private_gap_math_escs_adjusted"),
+             "adjusted_school": quoted("pisa_private_gap_math_escs_school_adjusted"), "oecd": quoted("pisa_private_gap_math", "OECD"),
+             "public_share": curated("pisa_public_school_share_pct").get("ESP", {}).get(2022)},
+            {"id": "immigrant", "raw": immigrant_gap, "adjusted": immigrant_gap_adj, "share": immigrant_share["ESP"][2022]},
+            {"id": "gender", "raw": quoted("pisa_gender_gap_math"), "oecd": quoted("pisa_gender_gap_math", "OECD"),
+             "reading": quoted("pisa_gender_gap_reading")},
+            {"id": "change", "raw": r(abs(es_math[2022] - es_math[2003]), 0), "from": 2003, "first": es_math[2003], "last": es_math[2022]},
+            {"id": "oecd", "raw": r(abs(es_math[2022] - oecd_math[2022]), 0), "spain": es_math[2022], "oecd_value": oecd_math[2022]},
+        ],
+        "cases": [
+            {"region": region.split(":", 1)[1] if ":" in region else "España", "school": school, "value": years[2022]}
+            for school, code in (("public", "pisa_math_public_mean"), ("private", "pisa_math_private_mean"))
+            for region, years in sorted(curated(code, "PISA_SCORE").items())
+        ],
+        "notes": "Brechas en puntos de PISA matemáticas 2022. «Ajustada»: diferencia que queda al comparar alumnado con el mismo "
+        "índice socioeconómico (ISEC), según el INEE y la OCDE; no es un efecto causal. Comunidades: sin Ceuta ni Melilla.",
+    }
+
     # 12. Capacity lens: what families pay ------------------------------------------------------------
     by_source = store.by_dimension("eurostat_sdmx", "education_expenditure_by_source", "MIO_EUR", "sector")
     by_source_tertiary = store.by_dimension("eurostat_sdmx", "education_expenditure_by_source", "MIO_EUR", "sector", {"isced11": "ED5-8"})
@@ -468,6 +547,27 @@ def build(conn: sqlite3.Connection) -> dict:
                      for geo, rows in store.series("vclc_education_curated", "pisa_isec_mean", "ISEC").items() if not geo.startswith("ES-CCAA:")}
     mother = store.by_dimension("mefp_educabase", "abandono_por_formacion_madre", "PC", "Nivel de formación de la madre")
     leavers_by_mother = {level: points(years) for (_geo, level), years in mother.items() if level}
+    leavers_mother = mother_decomposition(
+        {level: years for (_geo, level), years in mother.items() if level},
+        {level: years for (_geo, level), years in store.by_dimension(
+            "mefp_educabase", "abandono_peso_formacion_madre", "PC_LEAVERS", "Nivel de formación de la madre").items() if level},
+    )
+    birth = store.by_dimension("eurostat_sdmx", "early_leavers_18_24.by_birth", "PC", "c_birth")
+    leavers_by_birth = {
+        geo: {cb: [{"year": y, "value": r(v)} for y, v in sorted(birth.get((geo, cb), {}).items())] for cb in ("NAT", "FOR")}
+        for geo in ("ES", "EU27_2020")
+    }
+    by_age = {level: store.by_dimension("eurostat_sdmx", "attainment_by_age", "PC", "age", {"isced11": level})
+              for level in ("ED0-2", "ED3_4", "ED5-8")}
+    age_year = max(max(years) for years in by_age["ED0-2"].values() if years)
+    attainment_by_age = {
+        "year": age_year,
+        "rows": [
+            {"age": age, **{geo: {level: r(by_age[level].get((geo, age), {}).get(age_year)) for level in ("ED0-2", "ED3_4", "ED5-8")}
+                            for geo in ("ES", "EU27_2020")}}
+            for age in ("Y25-34", "Y35-44", "Y45-54", "Y55-64")
+        ],
+    }
     epf_inc = store.by_dimension("ine_epf", "epf_education_by_income_band", "EPF_MIXED", "nombre")
     income_bands = []
     for (_geo, name), years in epf_inc.items():
@@ -576,6 +676,9 @@ def build(conn: sqlite3.Connection) -> dict:
             "leavers_2000": es_leavers.get(2000), "leavers_first": {"year": min(es_leavers), "value": es_leavers[min(es_leavers)]},
             "leavers_eu_2008": eu_leavers.get(2008), "leavers_eu_last": eu_leavers.get(last_leavers),
             "leavers_breaks": breaks,
+            "leavers_mother_low": leavers_mother["rows"][0]["rate_last"],
+            "leavers_mother_high": leavers_mother["rows"][3]["rate_last"],
+            "leavers_mother_year": leavers_mother["last_year"],
             "behind_first": behind[0], "behind_peak": max(behind, key=lambda p: p["value"]), "behind_last": behind[-1],
             "behind_2020": behind_by_year.get(2020), "behind_2021": behind_by_year.get(2021),
             "repetition_pisa_2022": repetition_pisa,
@@ -615,7 +718,10 @@ def build(conn: sqlite3.Connection) -> dict:
         "story": story,
         "base_year": {"pisa": pisa_bases},
         "composition": {"isec_by_cycle": isec_by_cycle},
-        "distribution": {"leavers_by_mother": leavers_by_mother, "epf_income_bands": income_bands},
+        "distribution": {"leavers_by_mother": leavers_by_mother, "leavers_mother": leavers_mother,
+                         "leavers_by_birth": leavers_by_birth, "epf_income_bands": income_bands},
+        "gaps": gaps,
+        "attainment_by_age": attainment_by_age,
         "territory": {"leavers_year": last_region_year, "rows_with_leavers": len(with_leavers)},
         "capacity": capacity,
         "outcomes": outcomes,
@@ -701,6 +807,23 @@ def write_csv(data: dict, path: Path) -> None:
             rows.extend(("oecd_eag_finance", f"ingresos_relativos_secundaria_superior_100_{level}", area, p["year"], p["value"]) for p in pts)
     for level, pts in data["distribution"]["leavers_by_mother"].items():
         rows.extend(("mefp_educabase", f"abandono_temprano_madre_{level}", "ES", p["year"], p["value"]) for p in pts)
+    for level, pts in data["distribution"]["leavers_mother"]["shares"].items():
+        rows.extend(("mefp_educabase", f"poblacion_18_24_pct_madre_{level}", "ES", p["year"], p["value"]) for p in pts)
+    for geo, groups in data["distribution"]["leavers_by_birth"].items():
+        for cb, pts in groups.items():
+            rows.extend(("eurostat_sdmx", f"abandono_temprano_18_24_pct_nacimiento_{cb}", geo, p["year"], p["value"]) for p in pts)
+    age_year = data["attainment_by_age"]["year"]
+    for row in data["attainment_by_age"]["rows"]:
+        for geo in ("ES", "EU27_2020"):
+            rows.extend(("eurostat_sdmx", f"nivel_estudios_{row['age']}_{level}", geo, age_year, v) for level, v in row[geo].items())
+    for gap in data["gaps"]["rows"]:
+        for key in ("raw", "adjusted", "adjusted_school", "oecd"):
+            if gap.get(key) is not None:
+                rows.append(("vclc_education_curated" if gap["id"] not in ("regions", "change", "oecd") else "vclc_education_curated+worldbank_edstats",
+                             f"pisa_brecha_matematicas_{gap['id']}_{key}", "ESP" if key != "oecd" else "OECD", data["gaps"]["year"], gap[key]))
+    for case in data["gaps"]["cases"]:
+        area = "ESP" if case["region"] == "España" else f"ES-CCAA:{case['region']}"
+        rows.append(("vclc_education_curated", f"pisa_matematicas_centros_{'publicos' if case['school'] == 'public' else 'privados'}", area, data["gaps"]["year"], case["value"]))
     for band in data["distribution"]["epf_income_bands"]:
         rows.append(("ine_epf", f"gasto_hogar_educacion_eur_ingresos_{band['band']}", "ES", band["year"], band["per_household"]))
     for geo, pts in data["composition"]["isec_by_cycle"].items():

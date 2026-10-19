@@ -5,6 +5,8 @@ import Figure from "../components/Figure";
 import SparseLineChart from "./SparseLineChart";
 import EduTable from "./EduTable";
 import { StoryFigure } from "./StoryScatter";
+import { GapsFigure } from "./GapsFigure";
+import { BirthBars, DecompositionBars, MotherDumbbell, leaversComposition } from "./LeaversSegments";
 import { fmt } from "./formatEdu.mjs";
 import { AdultSkillsFigure, AttainmentFigure, C, EquityFigure, Explain, FamiliesFigure, Glossary, LabourReturnFigure, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
 
@@ -144,8 +146,15 @@ export default function EducacionPage() {
   ];
   const mother = data.distribution.leavers_by_mother;
   const motherSeries = motherLevels.filter(([key]) => mother[key]).map(([key, label, color]) => ({ id: key, label, color, points: mother[key] }));
-  const motherYear = mother["E. Superior"]?.at(-1)?.year;
-  const motherLast = (key) => num(mother[key]?.at(-1)?.value ?? 0);
+  const lm = data.distribution.leavers_mother;
+  const lmFrom = (year) => lm.decomposition.find((d) => d.from === year);
+  const lmShare = leaversComposition(lm);
+  const lmRow = (level) => lm.rows.find((row) => row.level === level);
+  const motherLow = lmRow("E. Primaria e inferior");
+  const motherHigh = lmRow("E. Superior");
+  const birth = data.distribution.leavers_by_birth;
+  const bornAbroad = birth.ES.FOR.at(-1);
+  const bornHere = birth.ES.NAT.at(-1);
 
   // 4. Repetition ----------------------------------------------------------------------------------
   const behind = [
@@ -244,7 +253,8 @@ export default function EducacionPage() {
           <span className="vizStat__label">Abandono temprano (18-24 años)</span>
           <span className="vizStat__value">{num(h.leavers_last)} %</span>
           <span className="vizStat__note">
-            {num(h.leavers_2008)} % en 2008; UE-27: {num(h.leavers_eu_last)} % en {h.leavers_last_year}
+            {num(h.leavers_mother_high)} % con madre universitaria; {num(h.leavers_mother_low)} % con madre con Primaria o menos ({h.leavers_mother_year}).
+            UE-27: {num(h.leavers_eu_last)} %
           </span>
         </div>
         <div className="card vizStat">
@@ -270,13 +280,17 @@ export default function EducacionPage() {
             OCDE cayó más, de {h.oecd_math_2003} a {data.pisa.math.OECD.at(-1).value}. <a href="#pisa">Ver PISA</a>
           </li>
           <li>
-            <strong>Mucho menos abandono y repetición.</strong> El abandono temprano bajó del {num(h.leavers_2000)} % de 2000 (y del{" "}
-            {num(h.leavers_2008)} % del pico de 2008) al {num(h.leavers_last)} % y el
-            alumnado de 15 años retrasado de curso, del {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
+            <strong>Menos abandono, en buena parte porque las madres tienen más estudios.</strong> El abandono temprano bajó del{" "}
+            {num(h.leavers_2008)} % de 2008 al {num(h.leavers_last)} %, pero va del {num(motherHigh.rate_last)} % de los jóvenes con madre universitaria al{" "}
+            {num(motherLow.rate_last)} % de los que tienen madre con Primaria o menos, y entre el {num(lmShare.min, 0)} % y el {num(lmShare.max, 0)} % de
+            la bajada (según el año de partida) se debe a que hoy hay muchas más madres con estudios. La repetición a los 15 años bajó del{" "}
+            {num(h.behind_peak.value)} % al {num(h.behind_last.value)} %. <a href="#abandono">Ver abandono</a>
           </li>
           <li>
-            <strong>Las diferencias están dentro.</strong> Entre comunidades hay {regionSpread} puntos de PISA, más que entre España y los países
-            comparados, y apenas se relacionan con lo que gasta cada una (correlación {num(data.regions_pisa.pearson, 2)}). <a href="#regiones">Ver comunidades</a>
+            <strong>Las diferencias están dentro.</strong> El origen familiar separa {data.equity.escs_gap.ESP[2022]} puntos de PISA entre el cuarto de alumnos
+            más favorecido y el menos; entre comunidades hay {regionSpread}, más que entre España y los países comparados, y apenas se relacionan con lo
+            que gasta cada una (correlación {num(data.regions_pisa.pearson, 2)}). La concertada saca {data.gaps.rows.find((r) => r.id === "private").raw} puntos
+            más que la pública, pero {data.gaps.rows.find((r) => r.id === "private").adjusted_school} a igual origen social. <a href="#donde-diferencia">Ver dónde está la diferencia</a>
           </li>
           <li>
             <strong>Un reloj de arena.</strong> El {num(attain("ED5-8"), 0)} % de los jóvenes de 25 a 34 años tiene estudios superiores y el{" "}
@@ -305,6 +319,8 @@ export default function EducacionPage() {
           gapOld: data.outcomes.piaac_gap_old,
         }}
       />
+
+      <GapsFigure data={data} sources={[S.pisa2022, S.pisaNote]} />
 
       <Figure
         id="gasto"
@@ -511,14 +527,16 @@ export default function EducacionPage() {
 
       <Figure
         id="abandono"
-        title={`El abandono escolar temprano bajó del ${num(h.leavers_first.value)} % en ${h.leavers_first.year} y del ${num(h.leavers_2000)} % en 2000 al ${num(h.leavers_last)} % en ${h.leavers_last_year}; el máximo reciente fue el ${num(h.leavers_2008)} % de 2008`}
-        dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal.`}
+        title={`El abandono escolar temprano bajó del ${num(h.leavers_2008)} % de 2008 al ${num(h.leavers_last)} % en ${h.leavers_last_year}, pero va del ${num(motherHigh.rate_last)} % con madre universitaria al ${num(motherLow.rate_last)} % con madre con Primaria, y entre el ${num(lmShare.min, 0)} % y el ${num(lmShare.max, 0)} % de la bajada, según el año de partida, viene de que hoy hay más madres con estudios`}
+        dek={`Jóvenes de 18 a 24 años que como mucho terminaron la ESO y no siguen estudiando. La distancia con la UE-27 pasó de ${num(h.leavers_2008 - h.leavers_eu_2008)} puntos a ${num(h.leavers_last - h.leavers_eu_last)}; España sigue por encima de la media europea (${num(h.leavers_eu_last)} %) y de Alemania, Francia, Italia y Portugal. La media junta realidades muy distintas: según los estudios de la madre, de ${num(motherHigh.rate_last)} % a ${num(motherLow.rate_last)} %; según dónde nació el joven, ${num(bornHere.value)} % y ${num(bornAbroad.value)} %; según la comunidad, de ${num(el.regions[0].last)} % a ${num(el.regions.at(-1).last)} %.`}
         legend={leavers.slice().reverse()}
-        sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.mefpEpa]}
+        sources={[S.eurostat("edat_lfse_14"), S.eurostat("edat_lfse_16"), S.eurostat("edat_lfse_02"), S.mefpEpa]}
         notes={[
           `Líneas verticales «b»: rupturas de serie que Eurostat marca con «b» en España o la UE (${el.breaks.join(", ")}), por cambios en la Encuesta de Población Activa; desde 2021 los datos de España llevan además la marca «d» (definición distinta). No se ajustan: la serie se muestra tal cual con sus marcas.`,
           "Es una encuesta: las cifras regionales tienen más error muestral, sobre todo en Ceuta, Melilla y La Rioja.",
-          "Estudios de la madre: explotación de la EPA del Ministerio de Educación (tabla aban_1_08), jóvenes de 18 a 24 años; el grupo «no consta» se omite en el gráfico y está en los datos descargables.",
+          `Estudios de la madre: explotación de la EPA del Ministerio de Educación (tabla aban_1_08), jóvenes de 18 a 24 años, ${lm.first_year}-${lm.last_year}, con ruptura de serie en 2005. La tabla da la tasa de cada grupo y cómo se reparten entre los grupos los jóvenes que abandonan; el peso de cada grupo en toda la población sale de las dos columnas (${lm.formula}) y suma ${num(lm.share_check, 0)} %. Con muestras pequeñas, el Ministerio pide tomar las cifras con precaución.`,
+          `Composición frente a mejora dentro de cada grupo, según el año de partida: ${lm.decomposition.map((d) => `desde ${d.from}, ${num(d.total_change)} puntos = ${num(d.composition)} por composición + ${num(d.within)} dentro de los grupos (${num(d.within_known_mother)} sin contar «sin dato de la madre»)`).join("; ")}. Es aritmética descriptiva, no una causa: que haya más madres con estudios no dice qué parte de su efecto es la escuela y qué parte la casa.`,
+          "País de nacimiento: Eurostat edat_lfse_02, nacidos en el país y en el extranjero; las cifras de nacidos fuera tienen más error muestral.",
         ]}
         table={<EduTable caption="Ver los datos en tabla (con marcas de Eurostat)" series={leavers.slice().reverse()} />}
       >
@@ -535,13 +553,30 @@ export default function EducacionPage() {
           ariaLabel="Abandono temprano de la educación, España, UE y países comparables"
         />
         <h3 className="vizPanelTitle">
-          Abandono temprano según los estudios de la madre (%)
+          Según los estudios de la madre: {lm.first_year} (círculo hueco) → {lm.last_year}
           <span>
-            {motherLast("E. Primaria e inferior")} % si la madre tiene como mucho Primaria; {motherLast("E. Superior")} % si tiene estudios superiores (
-            {motherYear})
+            Dentro de cada grupo con estudios de la madre conocidos, el abandono bajó entre {num(Math.min(...lm.rows.slice(0, 4).map((row) => row.rate_first - row.rate_last)))} y{" "}
+            {num(Math.max(...lm.rows.slice(0, 4).map((row) => row.rate_first - row.rate_last)))} puntos; en el total, {num(lm.total.first - lm.total.last)}. La
+            diferencia es que los jóvenes con madre de Primaria pasaron del {num(motherLow.share_first, 0)} % al {num(motherLow.share_last, 0)} %
           </span>
         </h3>
-        <TimeSeriesChart series={motherSeries} height={240} ariaLabel="Abandono temprano según el nivel de estudios de la madre" />
+        <MotherDumbbell lm={lm} />
+        <EduTable caption="Ver el abandono por estudios de la madre en tabla" series={motherSeries} />
+        <h3 className="vizPanelTitle">
+          Cuánto de la bajada es composición y cuánto mejora dentro de cada grupo
+          <span>
+            Puntos de abandono; amarillo: porque cambió quién tiene 18-24 años (más madres con estudios); azul: porque bajó el abandono dentro de cada
+            grupo. Desde {lmFrom(2008) ? 2008 : lm.first_year} no se cruza la ruptura de 2005
+          </span>
+        </h3>
+        <DecompositionBars lm={lm} />
+        <h3 className="vizPanelTitle">
+          Según dónde nació el joven
+          <span>
+            {num(bornAbroad.value)} % entre los nacidos en el extranjero y {num(bornHere.value)} % entre los nacidos en España ({bornAbroad.year})
+          </span>
+        </h3>
+        <BirthBars birth={birth} />
         <h3 className="vizPanelTitle">
           Por comunidad autónoma: {el.regions_first_year} → {el.regions_last_year}
           <span>
@@ -716,7 +751,10 @@ export default function EducacionPage() {
             puntos que España.
           </li>
           <li>
-            <strong>Lo que sí mejoró.</strong> El abandono temprano cayó del {num(h.leavers_2000)} % de 2000 al {num(h.leavers_last)} % y la repetición a los 15
+            <strong>Lo que sí mejoró, y por qué.</strong> El abandono temprano cayó del {num(h.leavers_2000)} % de 2000 al {num(h.leavers_last)} %, pero dentro
+            de cada grupo de estudios de la madre bajó mucho menos: entre el {num(lmShare.min, 0)} % y el {num(lmShare.max, 0)} % de la bajada, según el año de
+            partida, se debe a que hoy hay más madres con estudios (los jóvenes con madre de Primaria o menos pasaron del {num(motherLow.share_first, 0)} % al{" "}
+            {num(motherLow.share_last, 0)} %). La repetición a los 15
             años, del {num(h.behind_first.value)} % de {h.behind_first.course} (máximo: {num(h.behind_peak.value)} %) al {num(h.behind_last.value)} %. Como la escolarización es obligatoria hasta los 16 años, esa mejora
             apenas cambia quién hace PISA a los 15: cambia en qué curso están (menos repetidores) y cuántos siguen estudiando después.
           </li>

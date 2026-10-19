@@ -141,6 +141,52 @@ class IngestEducationTest(unittest.TestCase):
         self.assertEqual(len(series), 1)
         self.assertEqual(series[0]["dimensions"]["ATTAINMENT_LEV"], "ISCED11A_5T8")
 
+    def test_mother_table_yields_rate_and_weight_from_one_file(self) -> None:
+        px = """STUB="Tipo de indicador","Sexo","Nivel de formación de la madre";
+HEADING="periodo";
+VALUES("Tipo de indicador")="Tasa de abandono (2)","Peso del nivel de la madre (3)";
+VALUES("Sexo")="AMBOS SEXOS";
+VALUES("Nivel de formación de la madre")="TOTAL","E. Superior";
+VALUES("periodo")="2025";
+UNITS="Porcentajes";
+DATA=12.8
+2.4
+100
+6.6;
+""".encode("iso-8859-15")
+        name, _url, parse = next(s for s in ingest.MEFP_SOURCES if s[0] == "mefp_aban_1_08.px")
+        batches = list(parse(ingest.Raw(name, "https://example.org", px, "2026-10-19T00:00:00+00:00")))
+        codes = {definition["indicator_code"]: {s["dimensions"]["Nivel de formación de la madre"]: s["observations"][0]["value"] for s in series}
+                 for definition, series in batches}
+        self.assertEqual(codes, {"abandono_por_formacion_madre": {"TOTAL": 12.8, "E. Superior": 2.4},
+                                 "abandono_peso_formacion_madre": {"TOTAL": 100.0, "E. Superior": 6.6}})
+
+    def test_mother_decomposition_recovers_population_shares_and_splits_the_change(self) -> None:
+        from scripts.export_public_viz_education import MOTHER_LEVELS, mother_decomposition
+        # Population shares 50/50 -> 20/80 across two groups (others empty but non-zero to keep the identity defined).
+        pop = {2002: [0.50, 0.0, 0.0, 0.50, 0.0], 2025: [0.20, 0.0, 0.0, 0.80, 0.0]}
+        rate = {2002: [40.0, 1.0, 1.0, 10.0, 1.0], 2025: [30.0, 1.0, 1.0, 5.0, 1.0]}
+        rates: dict = {g: {} for g in MOTHER_LEVELS} | {"TOTAL": {}}
+        weights: dict = {g: {} for g in MOTHER_LEVELS}
+        for year in pop:
+            eps = 1e-6
+            shares = [s or eps for s in pop[year]]
+            total = sum(s * r for s, r in zip(shares, rate[year])) / sum(shares)
+            rates["TOTAL"][year] = total
+            for g, s, r in zip(MOTHER_LEVELS, shares, rate[year]):
+                rates[g][year] = r
+                weights[g][year] = s * r / sum(shares) / total * 100
+        out = mother_decomposition(rates, weights)
+        self.assertEqual(out["share_check"], 100.0)
+        self.assertEqual(out["rows"][0]["share_first"], 50.0)
+        self.assertEqual(out["rows"][3]["share_last"], 80.0)
+        split = out["decomposition"][0]
+        self.assertEqual((split["from"], split["to"]), (2002, 2025))
+        self.assertAlmostEqual(split["within"] + split["composition"], split["total_change"], delta=0.11)
+        # within: 0.35 × (−10) + 0.65 × (−5) = −6.75; composition: −0.30 × 35 + 0.30 × 7.5 = −8.25
+        self.assertAlmostEqual(split["within"], -6.75, delta=0.06)
+        self.assertAlmostEqual(split["composition"], -8.25, delta=0.06)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -534,6 +534,24 @@
         "pdf_page": 5,
         "locator": "Apartado sobre el índice socioeconómico (ISEC)",
         "quote": "media entre los dos grupos (93 puntos)"
+      },
+      {
+        "area": "ES-CCAA:Cantabria",
+        "year": 2022,
+        "value": 59,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 124,
+        "locator": "Capítulo 3, apartado 3.5.1.3 (Figura 3.7.b)",
+        "quote": "es Cantabria con apenas 59 puntos de brecha"
+      },
+      {
+        "area": "ES-CCAA:Cataluña",
+        "year": 2022,
+        "value": 96,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 124,
+        "locator": "Capítulo 3, apartado 3.5.1.3 (Figura 3.7.b)",
+        "quote": "exceptuando Cataluña (96)"
       }
     ],
     "pisa_escs_variance_pct": [
@@ -1225,12 +1243,209 @@
         "locator": "Capítulo 2, nivel educativo",
         "quote": "no completaron esa educación secundaria superior (207)"
       }
+    ],
+    "pisa_private_gap_math": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 35,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 110,
+        "locator": "Capítulo 3, apartado 3.4 (Figura 3.4.a)",
+        "quote": "En España el alumnado de centros privados obtiene 35 puntos más que el de centros públicos"
+      },
+      {
+        "area": "OECD",
+        "year": 2022,
+        "value": 27,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 109,
+        "locator": "Capítulo 3, apartado 3.4 (Figura 3.4.a)",
+        "quote": "La diferencia de rendimiento en matemáticas alcanza 27 puntos para el Promedio de la OCDE"
+      }
+    ],
+    "pisa_private_gap_math_escs_adjusted": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 19,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, apartado 3.4 (Figura 3.4.b1, descontando el ISEC del alumno)",
+        "quote": "se mantiene significativa en España (19 puntos)"
+      }
+    ],
+    "pisa_private_gap_math_escs_school_adjusted": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 5,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 116,
+        "locator": "Capítulo 3, apartado 3.4 (Figura 3.4.b1, descontando el ISEC del alumno y del centro)",
+        "quote": "En el caso de España (5 puntos)"
+      }
+    ],
+    "pisa_public_school_share_pct": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 69,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 109,
+        "locator": "Capítulo 3, apartado 3.4 (Figura 3.4.a)",
+        "quote": "15 y 16 puntos porcentuales más que en España (69 %)"
+      }
+    ],
+    "pisa_gender_gap_math": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 10,
+        "document": "oecd_pisa2022_country_note_es",
+        "pdf_page": 6,
+        "locator": "Apartado sobre diferencias de género en el rendimiento",
+        "quote": "Los chicos consiguieron mejor puntuación que las chicas en matemáticas con una diferencia de 10 puntos"
+      },
+      {
+        "area": "OECD",
+        "year": 2022,
+        "value": 9,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 95,
+        "locator": "Capítulo 3, apartado 3.1 (Figura 3.1.a)",
+        "quote": "alcanza 9 puntos en el promedio de los países de la OCDE"
+      }
+    ],
+    "pisa_gender_gap_reading": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 25,
+        "document": "oecd_pisa2022_country_note_es",
+        "pdf_page": 6,
+        "locator": "Apartado sobre diferencias de género en el rendimiento",
+        "quote": "las chicas obtuvieron mejores resultados que los chicos en lectura con una diferencia de 25 puntos en España"
+      }
+    ],
+    "pisa_math_public_mean": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 462,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 112,
+        "locator": "Capítulo 3, Tabla 3.3.a (matemáticas, público)",
+        "quote": "España 462 497 464 496 474 506"
+      },
+      {
+        "area": "ES-CCAA:Andalucía",
+        "year": 2022,
+        "value": 448,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, público)",
+        "quote": "Andalucía 448 483 453 486 465 496"
+      },
+      {
+        "area": "ES-CCAA:Asturias, Principado de",
+        "year": 2022,
+        "value": 482,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, público)",
+        "quote": "Asturias, P. de 482 523 485 523 492 528"
+      },
+      {
+        "area": "ES-CCAA:Canarias",
+        "year": 2022,
+        "value": 439,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, público)",
+        "quote": "Canarias 439 476 453 497 464 501"
+      },
+      {
+        "area": "ES-CCAA:Castilla y León",
+        "year": 2022,
+        "value": 491,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, público)",
+        "quote": "Castilla y León 491 516 491 512 499 521"
+      },
+      {
+        "area": "ES-CCAA:Madrid, Comunidad de",
+        "year": 2022,
+        "value": 476,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, público)",
+        "quote": "Madrid, C. de 476 512 483 510 488 517"
+      }
+    ],
+    "pisa_math_private_mean": [
+      {
+        "area": "ESP",
+        "year": 2022,
+        "value": 497,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 112,
+        "locator": "Capítulo 3, Tabla 3.3.a (matemáticas, privado: concertados y privados)",
+        "quote": "España 462 497 464 496 474 506"
+      },
+      {
+        "area": "ES-CCAA:Andalucía",
+        "year": 2022,
+        "value": 483,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, privado: concertados y privados)",
+        "quote": "Andalucía 448 483 453 486 465 496"
+      },
+      {
+        "area": "ES-CCAA:Asturias, Principado de",
+        "year": 2022,
+        "value": 523,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, privado: concertados y privados)",
+        "quote": "Asturias, P. de 482 523 485 523 492 528"
+      },
+      {
+        "area": "ES-CCAA:Canarias",
+        "year": 2022,
+        "value": 476,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, privado: concertados y privados)",
+        "quote": "Canarias 439 476 453 497 464 501"
+      },
+      {
+        "area": "ES-CCAA:Castilla y León",
+        "year": 2022,
+        "value": 516,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, privado: concertados y privados)",
+        "quote": "Castilla y León 491 516 491 512 499 521"
+      },
+      {
+        "area": "ES-CCAA:Madrid, Comunidad de",
+        "year": 2022,
+        "value": 512,
+        "document": "inee_pisa2022_informe_espanol",
+        "pdf_page": 115,
+        "locator": "Capítulo 3, Tabla 3.3.b (matemáticas, privado: concertados y privados)",
+        "quote": "Madrid, C. de 476 512 483 510 488 517"
+      }
     ]
   },
   "gaps": [
     "Medias OCDE de PISA 2000 y 2009, y de matemáticas 2006: los informes españoles solo las muestran en figuras (imagen), sin texto verificable; oecd.org bloquea la descarga por script.",
     "PISA 2022 de lectura y ciencias para Alemania, Francia, Italia y Portugal: el informe español solo los da en figuras (imagen).",
-    "Repetición declarada en PISA: media OCDE solo de 2018 y 2022 con cita literal; el informe de 2012 da un porcentaje de alumnos en el curso que les corresponde, que no es la misma medida."
+    "Repetición declarada en PISA: media OCDE solo de 2018 y 2022 con cita literal; el informe de 2012 da un porcentaje de alumnos en el curso que les corresponde, que no es la misma medida.",
+    "Puntuaciones de PISA 2022 por cuarto del ISEC (cuarto inferior y superior) de España y de cada comunidad: el informe español solo las da en figuras (imagen, Figuras 3.7.a y 3.7.b) y oecd.org bloquea la descarga por script; se publica la brecha entre cuartos, no los niveles."
   ],
   "note_oecd_average": "Promedio OCDE tal como lo publica cada ciclo: media simple de los países miembros que participan ese año (30 en 2003 y 34 en 2012 según el Cuadro 5.1 del informe español de PISA 2012; 37 en 2022 según la nota de prensa del Ministerio). Los promedios de tendencia de la OCDE (solo países con datos en todos los ciclos) difieren unos puntos."
 }
