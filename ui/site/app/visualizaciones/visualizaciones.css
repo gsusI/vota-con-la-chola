@@ -602,13 +602,28 @@
 
 .tsChart__tooltipRow {
   display: grid;
-  grid-template-columns: 14px auto 1fr;
+  grid-template-columns: 14px minmax(4.5em, max-content) 1fr;
   gap: 6px;
   align-items: baseline;
 }
 
 .tsChart__tooltipRow strong {
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Explicit columns: a row without a colour key (e.g. a total) keeps its value out of the 14px key column. */
+.tsChart__tooltipRow > .tsChart__key {
+  grid-column: 1;
+}
+
+.tsChart__tooltipRow > strong {
+  grid-column: 2;
+}
+
+.tsChart__tooltipRow > .tsChart__tooltipLabel {
+  grid-column: 3;
+  min-width: 0;
 }
 
 .tsChart__tooltipLabel {
