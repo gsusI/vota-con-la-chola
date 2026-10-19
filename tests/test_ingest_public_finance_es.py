@@ -108,6 +108,43 @@ class IngestPublicFinanceTest(unittest.TestCase):
         series = {s["geo_code"]: [(o["period"], o["value"]) for o in s["observations"]] for s in batches[0][1]}
         self.assertEqual(series, {"ESP": [("2022", 0.32)], "DEU": [("2022", 0.31)]})  # "NA" cells skipped
 
+    def test_segment_series_are_declared(self) -> None:
+        # «Cinco hogares» and the age split need these EU-SILC/ICW cuts; TOTAL age stays in ilc_di03_nac (one indicator).
+        names = {spec["name"]: spec for spec in ingest.EUROSTAT_DATASETS}
+        self.assertNotIn("TOTAL", names["ilc_di03_age_nac"]["filters"]["age"])
+        self.assertIn("Y_GE65", names["ilc_di03_age_nac"]["filters"]["age"])
+        self.assertIn("A1_LT65", names["ilc_mded02"]["filters"]["hhcomp"])
+        self.assertEqual(names["ilc_mded03_rent"]["filters"]["tenure"], "RENT")
+        self.assertIn("A1_GE65", names["ilc_mded03_own"]["filters"]["hhcomp"])
+        self.assertEqual(names["icw_tax_03"]["filters"]["quant_inc"][-1], "QU5")
+
+    def test_taxing_wages_households_parser(self) -> None:
+        raw = ingest.Raw.__new__(ingest.Raw)
+        doc = lambda m, hh, inc, sp, unit, v: {  # noqa: E731
+            "series_code": f"ESP.{m}.{hh}.{inc}.{sp}.{unit}", "period": ["2024"], "value": [v],
+            "dimensions": {"REF_AREA": "ESP", "MEASURE": m, "HOUSEHOLD_TYPE": hh, "INCOME_PRINCIPAL": inc,
+                           "INCOME_SPOUSE": sp, "UNIT_MEASURE": unit}}
+        raw.data = {"series": {"docs": [
+            doc("NPATR", "S_C2", "AW67", "_Z", "PT_WG_EARN_G", 5.8),
+            doc("NPATR", "S_C2", "AW67", "_Z", "XDC", 1.0),  # wrong unit for the measure: dropped
+            doc("AV_TW", "S_C0", "AW100", "_Z", "PT_COS_LB", 41.1),  # single earner's wedge stays in parse_oecd_tw
+            doc("AV_TW", "C_C2", "AW100", "NOEARN_UNEMP", "PT_COS_LB", 36.3),
+            doc("GEBT", "C_C2", "AW100", "AW67", "XDC", 52558.0),
+        ]}}
+        batches = {d["indicator_code"]: (d, s) for d, s in ingest.parse_oecd_tw_households(raw)}
+        self.assertEqual(sorted(batches), ["AV_TW.C_C2.AW100.NOEARN_UNEMP", "GEBT.C_C2.AW100.AW67", "NPATR.S_C2.AW67._Z"])
+        self.assertEqual(batches["NPATR.S_C2.AW67._Z"][0]["unit_code"], "PT_WG_EARN_G")
+        self.assertIn("pareja no trabaja", batches["AV_TW.C_C2.AW100.NOEARN_UNEMP"][0]["label"])
+        self.assertEqual(batches["GEBT.C_C2.AW100.AW67"][1][0]["observations"][0]["value"], 52558.0)
+
+    def test_case_interpolation(self) -> None:
+        from scripts import export_public_viz_fiscal as export
+
+        schedule = [(0.67, 18.5), (1.0, 23.1), (1.67, 29.3)]
+        self.assertAlmostEqual(export.interp(schedule, 1.0), 23.1)
+        self.assertAlmostEqual(export.interp(schedule, 0.835), (18.5 + 23.1) / 2)
+        self.assertAlmostEqual(export.interp(schedule, 0.5), 18.5 - 0.17 / 0.33 * 4.6)  # extrapolates the first segment
+
     def test_lineage_relation_mapping(self) -> None:
         self.assertEqual(ingest.relation_type("SE DEROGA"), "deroga")
         self.assertEqual(ingest.relation_type("SE AÑADE"), "modifica")

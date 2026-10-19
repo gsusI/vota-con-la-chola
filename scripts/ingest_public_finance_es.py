@@ -547,6 +547,59 @@ def parse_oecd_tw(raw: Raw) -> Iterable[Batch]:
         }, series
 
 
+# Household types for the page's typical cases («Cinco hogares»): what each pays and keeps, not only the single earner.
+TW_HOUSEHOLDS = {"S_C0": "soltero sin hijos", "S_C2": "una persona sola con dos hijos", "C_C2": "pareja con dos hijos"}
+TW_SPOUSE = {"_Z": "", "AW67": " y su pareja el 67 %", "AW100": " y su pareja el 100 %", "NOEARN_UNEMP": " y su pareja no trabaja"}
+TW_MEASURES = {
+    # measure: (unit, unit label, label, definition)
+    "NPATR": ("PT_WG_EARN_G", "% del salario bruto", "Tipo medio neto personal",
+              "Impuesto sobre la renta y cotizaciones del trabajador menos prestaciones en efectivo, en % del salario bruto del hogar."),
+    "AV_TW": ("PT_COS_LB", "% del coste laboral", "Cuña fiscal media",
+              "Impuesto sobre la renta y cotizaciones del trabajador y de la empresa, menos prestaciones en efectivo, en % del coste laboral."),
+    "AV_R_EMPEE_SSC": ("PT_WG_EARN_G", "% del salario bruto", "Cotización media del trabajador",
+                       "Cotizaciones sociales a cargo del trabajador en % del salario bruto."),
+    "GEBT": ("XDC", "Euros al año", "Salario bruto del hogar",
+             "Salario bruto anual del hogar supuesto por la OCDE (múltiplos del salario medio de la industria y los servicios)."),
+}
+
+
+def tw_households_url() -> str:
+    dims = {"REF_AREA": ["ESP", "DEU", "FRA", "ITA", "PRT"], "MEASURE": list(TW_MEASURES), "HOUSEHOLD_TYPE": list(TW_HOUSEHOLDS)}
+    return f"https://api.db.nomics.world/v22/series/OECD/{TW_DATASET}?" + urllib.parse.urlencode(
+        {"dimensions": json.dumps(dims, separators=(",", ":")), "observations": 1, "limit": 1000}
+    )
+
+
+def parse_oecd_tw_households(raw: Raw) -> Iterable[Batch]:
+    """One indicator per measure x household x earnings level; the single earner's wedge stays in parse_oecd_tw."""
+    grouped: dict[tuple[str, str, str, str], list[dict[str, Any]]] = {}
+    for doc_index, doc in enumerate(raw.data["series"]["docs"]):
+        dims = doc["dimensions"]
+        measure, hh = dims.get("MEASURE"), dims.get("HOUSEHOLD_TYPE")
+        level, spouse = dims.get("INCOME_PRINCIPAL"), dims.get("INCOME_SPOUSE", "_Z")
+        if measure not in TW_MEASURES or hh not in TW_HOUSEHOLDS or level not in TW_LEVELS or spouse not in TW_SPOUSE:
+            continue
+        if dims.get("UNIT_MEASURE") != TW_MEASURES[measure][0] or (measure == "AV_TW" and hh == "S_C0"):
+            continue
+        obs = [
+            {"period": period, "value": value, "pointer": pointer("series", "docs", doc_index, "value", i), "cell_index": i}
+            for i, (period, value) in enumerate(zip(doc["period"], doc["value"]))
+            if isinstance(value, (int, float))
+        ]
+        grouped.setdefault((measure, hh, level, spouse), []).append(
+            area_series(f"{TW_DATASET}|{doc['series_code']}", dims["REF_AREA"], dims, obs))
+    for (measure, hh, level, spouse), series in sorted(grouped.items()):
+        unit, unit_label, label, definition = TW_MEASURES[measure]
+        yield {
+            "source_id": "oecd_taxing_wages", "dataset_code": TW_DATASET, "indicator_code": f"{measure}.{hh}.{level}.{spouse}",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit, "unit_label": unit_label,
+            "label": f"{label}, {TW_HOUSEHOLDS[hh]}, quien más gana cobra el {TW_LEVELS[level]} del salario medio{TW_SPOUSE[spouse]}",
+            "definition": f"OCDE Taxing Wages: {definition} Leído de la réplica DBnomics (oecd.org bloquea scripts).",
+            "methodology_url": "https://www.oecd.org/en/publications/taxing-wages_20725124.html",
+            "source_url": f"https://db.nomics.world/OECD/{TW_DATASET}",
+        }, series
+
+
 PIT_DATASET = "DSD_TAX_PIT@DF_PIT_TOP_EARN_THRESH"
 PIT_MEASURES = {
     "TS_PIT": ("PT_WG_EARN_G", "% del salario bruto", "Tipo marginal máximo legal del impuesto sobre la renta (todas las administraciones)"),
@@ -659,6 +712,57 @@ EUROSTAT_DATASETS: list[dict[str, Any]] = [
         "unit_code": "NAC", "unit_label": "Moneda nacional (euros)",
         "label": "Renta neta equivalente de los hogares (EU-SILC), {label}, en moneda nacional",
         "definition": "Como la serie en PPS, en euros corrientes; sirve para calcular su cambio real con el IPCA.",
+    },
+    {
+        # TOTAL comes from ilc_di03_nac (same indicator); here only the age bands, in the source's own bands.
+        "name": "ilc_di03_age_nac", "dataset": "ilc_di03",
+        "filters": {"unit": "NAC", "sex": "T", "statinfo": "MED_EI", "age": ["Y16-24", "Y25-49", "Y50-64", "Y_GE65"]},
+        "unit_code": "NAC", "unit_label": "Moneda nacional (euros)",
+        "label": "Renta mediana equivalente de los hogares (EU-SILC) por edad: {label}",
+        "definition": "Mediana de la renta disponible neta equivalente (escala OCDE modificada) de las personas de cada edad; "
+        "la renta es la del año anterior a la encuesta. Eurostat marca ruptura de serie en España en 2004 y 2008.",
+    },
+    {
+        "name": "ilc_mded02", "dataset": "ilc_mded02", "filters": {"unit": "PC", "rskpovth": "TOTAL", "hhcomp": ["TOTAL", "A1_LT65"]},
+        "unit_code": "PC", "unit_label": "% de la renta disponible del hogar",
+        "label": "Peso del alquiler en la renta disponible de los hogares que alquilan (EU-SILC): {label}",
+        "definition": "Alquiler de la vivienda que ocupan en % de la renta disponible del hogar, hogares que pagan alquiler.",
+    },
+    {
+        "name": "ilc_mded03_rent", "dataset": "ilc_mded03",
+        "filters": {"unit": "PPS", "tenure": "RENT", "rskpovth": "TOTAL", "hhcomp": ["TOTAL", "A1_DCH"]},
+        "unit_code": "PPS", "unit_label": "PPS al mes",
+        "label": "Gastos de vivienda de los hogares que alquilan, al mes (EU-SILC): {label}",
+        "definition": "Gastos totales de vivienda al mes (alquiler, suministros, comunidad, reparaciones, seguros e impuestos, "
+        "netos de ayudas) en estándar de poder adquisitivo, hogares en alquiler (de mercado o reducido).",
+    },
+    {
+        "name": "ilc_mded03_own", "dataset": "ilc_mded03",
+        "filters": {"unit": "PPS", "tenure": "OWN", "rskpovth": "TOTAL", "hhcomp": ["TOTAL", "A1_LT65", "A1_GE65"]},
+        "unit_code": "PPS", "unit_label": "PPS al mes",
+        "label": "Gastos de vivienda de los hogares propietarios, al mes (EU-SILC): {label}",
+        "definition": "Gastos totales de vivienda al mes (intereses de la hipoteca, suministros, comunidad, reparaciones, seguros e "
+        "impuestos, netos de ayudas) en estándar de poder adquisitivo, hogares propietarios con y sin hipoteca.",
+    },
+    {
+        "name": "prc_ppp_ind_a01", "dataset": "prc_ppp_ind", "filters": {"na_item": "PPP_EU27_2020", "ppp_cat": "A01"},
+        "unit_code": "EUR_PER_PPS", "unit_label": "Euros por PPS",
+        "label": "Paridad de poder adquisitivo, consumo individual efectivo",
+        "definition": "Moneda nacional por estándar de poder adquisitivo (UE-27) para el consumo individual efectivo: la que "
+        "pasa a euros las magnitudes de los hogares publicadas en PPS.",
+    },
+    {
+        "name": "icw_tax_02", "dataset": "icw_tax_02", "filters": {"unit": "PC", "quantile": "MED", "hhcomp": ["TOTAL", "A1", "A1_DCH", "A2_DCH"]},
+        "unit_code": "PC", "unit_label": "% de la renta bruta del hogar",
+        "label": "IVA pagado por los hogares en % de su renta bruta, mediana (estadística experimental): {label}",
+        "definition": "Estadística experimental de Eurostat (renta, consumo y riqueza): IVA estimado a partir del gasto de la "
+        "Encuesta de Presupuestos Familiares emparejado con la EU-SILC, en % de la renta bruta. Solo 2010, 2015 y 2020.",
+    },
+    {
+        "name": "icw_tax_03", "dataset": "icw_tax_03", "filters": {"unit": "PC", "quantile": "MED", "quant_inc": ["TOTAL", "QU1", "QU2", "QU3", "QU4", "QU5"]},
+        "unit_code": "PC", "unit_label": "% de la renta bruta del hogar",
+        "label": "IVA pagado por los hogares en % de su renta bruta, mediana por quintil de renta (estadística experimental): {label}",
+        "definition": "Como icw_tax_02, por quintil de renta disponible equivalente.",
     },
     {
         "name": "ilc_mded01", "dataset": "ilc_mded01", "filters": {"unit": "PC", "hhcomp": "TOTAL", "rskpovth": ["TOTAL", "B_60"]},
@@ -810,6 +914,7 @@ API_SOURCES: list[tuple[str, str, Callable[[Raw], Iterable[Batch]]]] = [
     ("oecd_revenue_statistics_dbnomics.json", oecd_url(), parse_oecd),
     ("oecd_income_distribution_dbnomics.json", idd_url(), parse_oecd_idd),
     ("oecd_taxing_wages_dbnomics.json", tw_url(), parse_oecd_tw),
+    ("oecd_taxing_wages_households_dbnomics.json", tw_households_url(), parse_oecd_tw_households),
     ("oecd_pit_top_rates_dbnomics.json", pit_url(), parse_oecd_pit),
     *[
         (f"eurostat_{spec['name']}.json", eurostat_url(spec["dataset"], spec["filters"]), parse_eurostat_dataset(spec))

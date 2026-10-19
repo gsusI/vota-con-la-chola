@@ -53,7 +53,9 @@ export function SpendingSectionIntro() {
   );
 }
 
-export function WhereItGoesFigure({ spending, results }) {
+export function WhereItGoesFigure({ spending, results, distribution }) {
+  const redisAll = distribution?.redistribution?._T?.find((row) => row.area === "ESP");
+  const redisWork = distribution?.redistribution?.Y18T65?.find((row) => row.area === "ESP");
   const { year } = spending;
   const rows = spending.areas.map((row) => ({ ...row, label: EU_LABELS[row.area] })).sort((a, b) => b.total - a.total);
   const es = rows.find((row) => row.area === "ES");
@@ -172,6 +174,11 @@ export function WhereItGoesFigure({ spending, results }) {
             : ""}
           {pc07 && pc13 ? <a href="#descomposicion">detalle</a> : null}
           {pc07 && pc13 ? ")." : ""}
+          {redisAll && redisWork
+            ? ` Y buena parte de lo que se redistribuye va de unas edades a otras: las transferencias (pensiones incluidas) bajan la desigualdad de la renta ${nf(redisAll.by_transfers)} puntos de Gini en toda la población y ${nf(redisWork.by_transfers)} entre los de 18 a 65 años (OCDE, ${redisAll.year}; `
+            : ""}
+          {redisAll && redisWork ? <a href="#quien-carga">quién lo carga</a> : null}
+          {redisAll && redisWork ? ")." : ""}
         </li>
         <li>
           <strong>«Pagamos más y los servicios están peor»</strong>

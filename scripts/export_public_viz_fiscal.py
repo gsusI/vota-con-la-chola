@@ -597,6 +597,214 @@ def service_results() -> dict | None:
     return {"indicators": indicators, "spain_over_time": spain_over_time, "provenance": provenance}
 
 
+# Typical cases and age split (docs/etl/sprints/VIZ-SEGMENTOS-20261019/README.md, §2–§3). Age bands are the source's own.
+AGE_BANDS = [("TOTAL", "Todas las edades"), ("Y16-24", "16 a 24"), ("Y25-49", "25 a 49"), ("Y50-64", "50 a 64"), ("Y_GE65", "65 y más")]
+AGE_BASES = [2007, 2013, 2019]  # income years (survey year - 1), same starting years as the «bolsillo» figure
+MADRID_CITY = "28079"
+
+
+def sibling(key: str) -> tuple[dict, dict]:
+    """A sibling page's published JSON with its provenance (sha256 of the exact bytes read)."""
+    page, label = SIBLINGS[key]
+    payload = (SIBLING_DIR / f"{key}.json").read_bytes()
+    data = json.loads(payload)
+    return data, {"page": page, "label": label, "file": f"/visualizaciones/data/{key}.json",
+                  "sha256": hashlib.sha256(payload).hexdigest(), "generated_at": data.get("generated_at")}
+
+
+def interp(points_: list[tuple[float, float]], x: float) -> float:
+    """Linear interpolation (and extrapolation from the nearest segment) through sorted (x, y) points."""
+    pts = sorted(points_)
+    i = 1
+    while i < len(pts) - 1 and x > pts[i][0]:
+        i += 1
+    (x0, y0), (x1, y1) = pts[i - 1], pts[i]
+    return y0 + (x - x0) / (x1 - x0) * (y1 - y0)
+
+
+def segments(store: Store, pension_per_pensioner: float, pension_year: int) -> dict | None:
+    """Income by age (EU-SILC, real), housing split and five typical households (taxes, housing, what is left)."""
+    try:
+        housing, housing_prov = sibling("vivienda")
+    except FileNotFoundError:
+        return None
+    hs = housing.get("segments") or {}
+    conn = store.conn
+
+    # ---- income by age: median equivalised disposable income, real euros of the last income year (HICP)
+    def silc(code: str) -> dict[str, dict[int, tuple[float, str | None]]]:
+        dataset = "ilc_di03"
+        store.series("eurostat_sdmx", code, "NAC", dataset)  # provenance
+        out: dict[str, dict[int, tuple[float, str | None]]] = defaultdict(dict)
+        for geo, period, value, status in conn.execute(
+            """
+            SELECT s.geography_code, o.period_label, o.value_decimal, o.source_status_code
+            FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+            JOIN indicator_series_versions s ON s.indicator_release_id = r.indicator_release_id
+            JOIN indicator_observation_versions o ON o.indicator_series_version_id = s.indicator_series_version_id
+            WHERE d.source_id = 'eurostat_sdmx' AND d.dataset_code = ? AND d.indicator_code = ? AND d.unit_code = 'NAC'
+              AND o.revision_state != 'deleted' AND o.value_decimal IS NOT NULL
+              AND r.indicator_release_id = (SELECT r2.indicator_release_id FROM indicator_releases r2
+                WHERE r2.indicator_id = d.indicator_id ORDER BY r2.source_snapshot_date DESC, r2.created_at DESC LIMIT 1)
+            """,
+            (dataset, code),
+        ):
+            out[geo][int(period)] = (float(value), status)
+        return out
+
+    hicp = {g: {int(p["period"]): p["value"] for p in rows} for g, rows in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").items()}
+    by_age = {age: silc(f"{age}.T.MED_EI") for age, _ in AGE_BANDS}
+    es_last = max(by_age["TOTAL"]["ES"])
+    breaks = sorted({y for age in by_age for y, (_v, st) in by_age[age]["ES"].items() if st == "b"})
+    first_survey = max([y for y in breaks if y <= es_last] or [min(by_age["TOTAL"]["ES"])])  # never cross a flagged break
+    price_year = es_last - 1
+
+    def age_rows(geo: str) -> list[dict]:
+        rows = []
+        geo_last = max(by_age["TOTAL"].get(geo, {}) or [0])
+        geo_price = geo_last - 1
+        for age, label in AGE_BANDS:
+            series = by_age[age].get(geo, {})
+            if geo_last not in series or geo_price not in hicp.get(geo, {}):
+                continue
+            # Each country starts after its own last flagged break (no change is computed across a break).
+            geo_breaks = [y for a in by_age for y, (_v, st) in by_age[a].get(geo, {}).items() if st == "b" and y <= geo_last]
+            geo_first = max(geo_breaks or [min(series)])
+            real = {s - 1: v * hicp[geo][geo_price] / hicp[geo][s - 1] for s, (v, _st) in series.items()
+                    if s >= geo_first and s - 1 in hicp.get(geo, {})}
+            last = real[geo_price]
+            rows.append({
+                "age": age, "label": label, "survey_year": geo_last, "first_survey": geo_first, "income_year": geo_price, "nominal_last": r(series[geo_last][0], 0),
+                "real": {str(y): r(v, 0) for y, v in sorted(real.items()) if y in AGE_BASES or y == geo_price},
+                "change": {str(b): r((last / real[b] - 1) * 100, 1) if b in real else None for b in AGE_BASES},
+                "vs_total_first": None,
+            })
+        total = next((row for row in rows if row["age"] == "TOTAL"), None)
+        for row in rows:
+            first = str(min(AGE_BASES))
+            if total and row["real"].get(first) and total["real"].get(first):
+                row["vs_total_first"] = r(row["real"][first] / total["real"][first] * 100, 0)
+                row["vs_total_last"] = r(row["real"][str(row["income_year"])] / total["real"][str(row["income_year"])] * 100, 0)
+        return rows
+
+    income_by_age = {
+        "survey_year": es_last, "income_year": price_year, "first_survey": first_survey, "breaks_es": breaks,
+        "bases": AGE_BASES, "price_year": price_year,
+        "areas": {geo: age_rows(geo) for geo in ("ES", "DE", "FR", "IT", "PT")},
+    }
+
+    # ---- housing split (own DB + the housing page's published figures)
+    def latest(code: str, unit: str, dataset: str, geo: str = "ES") -> tuple[int, float]:
+        rows = store.series("eurostat_sdmx", code, unit, dataset).get(geo, [])
+        return int(rows[-1]["period"]), rows[-1]["value"]
+
+    y_mean, mean_share = latest("TOTAL.TOTAL", "PC", "ilc_mded01")
+    y_rent, rent_share = latest("TOTAL.TOTAL", "PC", "ilc_mded02")
+    _y, rent_share_single = latest("A1_LT65.TOTAL", "PC", "ilc_mded02")
+    tenure = {row["key"]: row for row in hs.get("tenure", [])}
+    age_tenure = {row["age"]: row["shares"] for row in (hs.get("age_tenure") or {}).get("rows", [])}
+    housing_split = {
+        "year": y_mean, "cost_share_mean": r(mean_share, 1), "cost_share_median": hs.get("cost_share_median"),
+        "rent_share_renters": r(rent_share, 1), "rent_share_single_lt65": r(rent_share_single, 1), "rent_year": y_rent,
+        "overburden": {k: tenure[k]["overburden_pct"] for k in ("OWN_NL", "OWN_L", "RENT_MKT", "RENT_FR") if k in tenure},
+        "population": {k: tenure[k]["pop_pct"] for k in ("OWN_NL", "OWN_L", "RENT_MKT", "RENT_FR") if k in tenure},
+        "young_rent_mkt": (age_tenure.get("16–29") or {}).get("RENT_MKT"), "young_own_nl": (age_tenure.get("16–29") or {}).get("OWN_NL"),
+        "old_own_nl": (age_tenure.get("65+") or {}).get("OWN_NL"), "old_rent_mkt": (age_tenure.get("65+") or {}).get("RENT_MKT"),
+        "at_home_25_34": ((hs.get("at_home") or {}).get("Y25-34") or {}).get("ES"),
+    }
+
+    # ---- five households: OECD Taxing Wages (same year as the rents), EU-SILC housing costs, Eurostat VAT experimental
+    def tw(measure: str, hh: str, level: str, spouse: str, unit: str, geo: str = "ESP") -> dict[int, float]:
+        return store.annual("oecd_taxing_wages", f"{measure}.{hh}.{level}.{spouse}", unit, geo)
+
+    madrid = next((row for row in hs.get("cities", []) if row.get("code") == MADRID_CITY), None)
+    pay = (housing.get("capacity") or {}).get("pay") or {}
+    if not madrid or not pay.get("gross_young") or not hs.get("young_net_es"):
+        return {"income_by_age": income_by_age, "housing": housing_split, "provenance": {"vivienda": housing_prov}}
+    year = min(madrid["year"], max(tw("GEBT", "S_C0", "AW100", "_Z", "XDC")))
+    aw = tw("GEBT", "S_C0", "AW100", "_Z", "XDC")[year]
+    single = {
+        key: [(m, store.annual("oecd_taxing_wages", f"{measure}.S_C0.{lvl}" + ("" if measure == "AV_TW" else "._Z"), unit, "ESP")[year])
+              for lvl, m in (("AW67", 0.67), ("AW100", 1.0), ("AW167", 1.67))]
+        for key, (measure, unit) in {"npatr": ("NPATR", "PT_WG_EARN_G"), "wedge": ("AV_TW", "PT_COS_LB"),
+                                      "ssc": ("AV_R_EMPEE_SSC", "PT_WG_EARN_G")}.items()
+    }
+    ppp_year, ppp = max((int(p["period"]), p["value"]) for p in store.series("eurostat_sdmx", "PPP_EU27_2020.A01", "EUR_PER_PPS").get("ES", []))
+    cost = {}
+    for code in ("A1_DCH.TOTAL.RENT", "A1_GE65.TOTAL.OWN", "A1_LT65.TOTAL.OWN"):
+        cy, pps = latest(code, "PPS", "ilc_mded03")
+        cost[code] = (cy, pps)
+    vat = {}
+    for hh in ("TOTAL", "A1", "A1_DCH", "A2_DCH"):
+        vat[hh] = latest(f"{hh}.MED", "PC", "icw_tax_02")
+    vat_q = {q: latest(f"{q}.MED", "PC", "icw_tax_03") for q in ("TOTAL", "QU1", "QU2", "QU3", "QU4", "QU5")}
+    vat_year = vat["TOTAL"][0]
+    nat_income = by_age["TOTAL"]["ES"][es_last][0]
+    median_share = hs.get("cost_share_median")
+
+    def household(key: str, gross: float, npatr: float, wedge: float | None, housing_year: float, uc: float, vat_hh: str,
+                  ssc: float | None = None, **extra) -> dict:
+        direct = gross * (npatr - (ssc or 0)) / 100 if ssc is not None else gross * npatr / 100
+        net = gross - direct
+        employer = net / (1 - wedge / 100) - gross if wedge is not None else None
+        left = net - housing_year
+        return {
+            "key": key, "gross": r(gross, 0), "direct_taxes": r(direct, 0), "direct_rate_pct": r(direct / gross * 100, 1),
+            "employer_ssc": r(employer, 0), "net": r(net, 0), "housing": r(housing_year, 0),
+            "housing_share_pct": r(housing_year / net * 100, 1), "left": r(left, 0), "uc": uc, "left_per_uc": r(left / uc, 0),
+            "vat": r(gross * vat[vat_hh][1] / 100, 0), "vat_share_pct": r(vat[vat_hh][1], 1), "vat_household": vat_hh,
+            "vs_median_pct": r(left / uc / (nat_income * (1 - median_share / 100)) * 100, 0) if median_share else None, **extra,
+        }
+
+    young_factor = madrid["young_net"] / hs["young_net_es"]["value"]
+    gross_young = next(p["value"] for p in pay["gross_young"] if p["year"] == madrid["young_net_year"])
+    g1 = gross_young * young_factor
+    m1 = g1 / aw
+    pension = pension_per_pensioner
+    m4 = pension / aw
+    cases = [
+        household("p1_young_renter_madrid", g1, interp(single["npatr"], m1), interp(single["wedge"], m1), madrid["rent_month"] * 12, 1.0, "A1",
+                  aw_multiple=r(m1, 2), rent_month=madrid["rent_month"], rent_year=madrid["year"], pay_year=madrid["young_net_year"],
+                  madrid_wage_factor=r(young_factor, 3)),
+        household("p2_family_renter_metro", tw("GEBT", "C_C2", "AW100", "AW67", "XDC")[year], tw("NPATR", "C_C2", "AW100", "AW67", "PT_WG_EARN_G")[year],
+                  tw("AV_TW", "C_C2", "AW100", "AW67", "PT_COS_LB")[year], madrid["rest_rent_month"] * 12, 2.1, "A2_DCH",
+                  rent_month=madrid["rest_rent_month"], rent_year=madrid["year"]),
+        household("c_single_parent_renter", tw("GEBT", "S_C2", "AW67", "_Z", "XDC")[year], tw("NPATR", "S_C2", "AW67", "_Z", "PT_WG_EARN_G")[year],
+                  tw("AV_TW", "S_C2", "AW67", "_Z", "PT_COS_LB")[year], cost["A1_DCH.TOTAL.RENT"][1] * ppp * 12, 1.6, "A1_DCH",
+                  cost_month=r(cost["A1_DCH.TOTAL.RENT"][1] * ppp, 0), cost_year=cost["A1_DCH.TOTAL.RENT"][0]),
+        household("p4_retired_owner_interior", pension, interp(single["npatr"], m4), None, cost["A1_GE65.TOTAL.OWN"][1] * ppp * 12, 1.0, "A1",
+                  ssc=interp(single["ssc"], m4), aw_multiple=r(m4, 2), pension_year=pension_year,
+                  cost_month=r(cost["A1_GE65.TOTAL.OWN"][1] * ppp, 0), cost_year=cost["A1_GE65.TOTAL.OWN"][0]),
+        household("p5_professional_madrid", tw("GEBT", "S_C0", "AW167", "_Z", "XDC")[year], tw("NPATR", "S_C0", "AW167", "_Z", "PT_WG_EARN_G")[year],
+                  store.annual("oecd_taxing_wages", "AV_TW.S_C0.AW167", "PT_COS_LB", "ESP")[year], cost["A1_LT65.TOTAL.OWN"][1] * ppp * 12, 1.0, "A1",
+                  cost_month=r(cost["A1_LT65.TOTAL.OWN"][1] * ppp, 0), cost_year=cost["A1_LT65.TOTAL.OWN"][0]),
+    ]
+    # Family relief against the peers: single at the average wage vs one-earner couple with two children; lone parent's net rate.
+    peers = []
+    for area in ("ESP", "DEU", "FRA", "ITA", "PRT"):
+        single_w = store.annual("oecd_taxing_wages", "AV_TW.S_C0.AW100", "PT_COS_LB", area).get(year)
+        couple_w = tw("AV_TW", "C_C2", "AW100", "NOEARN_UNEMP", "PT_COS_LB", area).get(year)
+        lone = tw("NPATR", "S_C2", "AW67", "_Z", "PT_WG_EARN_G", area).get(year)
+        single67 = tw("NPATR", "S_C0", "AW67", "_Z", "PT_WG_EARN_G", area).get(year)
+        peers.append({"area": area, "single_aw100_wedge": r(single_w, 1), "couple2_one_earner_wedge": r(couple_w, 1),
+                      "relief_pts": r(single_w - couple_w, 1) if single_w is not None and couple_w is not None else None,
+                      "single_parent_aw67_net_rate": r(lone, 1), "single_aw67_net_rate": r(single67, 1)})
+    return {
+        "income_by_age": income_by_age,
+        "housing": housing_split,
+        "cases": {
+            "year": year, "average_wage": r(aw, 0), "median_wage": next((r(p["value"], 0) for p in pay.get("gross_median", []) if p["year"] == year), None),
+            "single_aw100_wedge": r(store.annual("oecd_taxing_wages", "AV_TW.S_C0.AW100", "PT_COS_LB", "ESP")[year], 1), "ppp_year": ppp_year, "eur_per_pps": r(ppp, 4), "vat_year": vat_year,
+            "national": {"income_per_uc": r(nat_income, 0), "survey_year": es_last, "median_housing_share_pct": median_share,
+                         "after_housing_per_uc": r(nat_income * (1 - median_share / 100), 0) if median_share else None},
+            "rows": cases,
+            "vat_by_quintile": {q: r(v, 1) for q, (_y, v) in vat_q.items()},
+            "family_relief": peers,
+        },
+        "provenance": {"vivienda": housing_prov},
+    }
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     imf = store.annual("imf_fpp", "rev", "PT_GDP", "ESP")
@@ -656,6 +864,9 @@ def build(conn: sqlite3.Connection) -> dict:
     distribution_block = distribution(store)
     territory_block = territory(store, distribution_block)
     results = service_results()
+    pc = spending_block.get("pension_composition") or {}
+    pc_es = next((row for row in pc.get("areas", []) if row["area"] == "ES"), None)
+    segments_block = segments(store, pc_es["per_pensioner_eur"], pc["year"]) if pc_es else None
 
     sources = {}
     for source_id, releases in store.provenance.items():
@@ -701,6 +912,7 @@ def build(conn: sqlite3.Connection) -> dict:
         "spending": spending_block,
         "service_results": results,
         "distribution": distribution_block,
+        "segments": segments_block,
         "territory": territory_block,
         "statutory_rates": rates,
         "complexity": comp,
@@ -747,6 +959,19 @@ def write_csv(data: dict, path: Path) -> None:
                 rows.append(("hacienda_ccaa", key, row["code"], data["territory"]["years"].get(key), row[key]))
     for b in (data.get("distribution") or {}).get("irpf", {}).get("brackets", []):
         rows.append(("aeat_irpf_stats", f"irpf_tipo_efectivo_{b['label']}", "ESP", data["distribution"]["irpf"]["tax_year"], b["effective_rate_pct"]))
+    seg = data.get("segments") or {}
+    age = seg.get("income_by_age") or {}
+    for geo, age_rows_ in (age.get("areas") or {}).items():
+        for row in age_rows_:
+            rows.extend(("eurostat_sdmx", f"renta_mediana_real_eur_{age['price_year']}_{row['age']}", geo, int(y), v) for y, v in row["real"].items())
+    for key, value in (seg.get("housing") or {}).items():
+        if isinstance(value, (int, float)) and key != "year":
+            rows.append(("eurostat_sdmx+visualizaciones/vivienda", f"vivienda_{key}", "ES", seg["housing"]["year"], value))
+    cases = seg.get("cases") or {}
+    for case in cases.get("rows", []):
+        for field in ("gross", "direct_taxes", "employer_ssc", "net", "housing", "left", "left_per_uc", "vat"):
+            if case.get(field) is not None:
+                rows.append(("caso_tipo_ilustrativo", f"{case['key']}_{field}_eur", "ES", cases["year"], case[field]))
     for ind in (data.get("service_results") or {}).get("indicators", []):
         rows.extend((f"visualizaciones/{ind['page']}", ind["key"], g, v["year"], v["value"]) for g, v in ind["values"].items())
     for key, changes in (data.get("statutory_rates") or {}).get("series", {}).items():
@@ -777,6 +1002,11 @@ def main() -> int:
     data = build(conn)
     conn.close()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
+    # Same inputs, same file: keep the previous timestamp when nothing else changed (offline reruns are byte-identical).
+    if OUT_JSON.exists():
+        previous = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        if {**previous, "generated_at": None} == {**data, "generated_at": None}:
+            data["generated_at"] = previous["generated_at"]
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     write_csv(data, OUT_CSV)
     h = data["headline"]

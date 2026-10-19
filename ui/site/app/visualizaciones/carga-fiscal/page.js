@@ -8,6 +8,7 @@ import ConsolidatedBars from "./ConsolidatedBars";
 import DistributionFigure from "./Distribution";
 import TerritoryFigure from "./Territory";
 import { SqueezeFigure, SqueezeIndexFigure, SurveyFigure } from "./Squeeze";
+import HouseholdsFigure from "./Households";
 import { SpendingSectionIntro, WhereItGoesFigure, DecompositionFigure, LongRunSpendingFigure } from "./WhereItGoes";
 
 export const metadata = {
@@ -56,6 +57,12 @@ export default function CargaFiscalPage() {
   const src = data.sources;
   const oecdSource = { label: "OCDE, Revenue Statistics", href: src.oecd_revenue_statistics.page };
   const imfSource = { label: "FMI, Public Finances in Modern History", href: src.imf_fpp.page };
+  const eurostatTable = (code) => ({ label: `Eurostat, ${code}`, href: `https://ec.europa.eu/eurostat/databrowser/view/${code}/default/table` });
+  const householdSources = [
+    { label: "OCDE, Taxing Wages (réplica DBnomics)", href: src.oecd_taxing_wages?.page },
+    ...["ilc_di03", "ilc_mded03", "icw_tax_02", "icw_tax_03", "prc_ppp_ind", "spr_pns_ben", "gov_10a_exp"].map(eurostatTable),
+    { label: "Visualizaciones · Vivienda (alquiler SERPAVI 2024 y salario de 25 a 34 años, con su sha256 en el JSON)", href: "/visualizaciones/vivienda/" },
+  ];
   const downloads = "/visualizaciones/data/carga-fiscal.csv";
 
   // 1. Long run
@@ -155,6 +162,13 @@ export default function CargaFiscalPage() {
   const sqEs = data.squeeze?.areas.find((row) => row.area === "ES");
   const sqEu = data.squeeze?.areas.find((row) => row.area === "EU27_2020");
   const spEs = data.spending?.areas.find((row) => row.area === "ES");
+  const ages = data.segments?.income_by_age;
+  const ageBase = ages ? String(ages.bases[0]) : null;
+  const ageOf = (code) => ages?.areas?.ES?.find((row) => row.age === code);
+  const ageOld = ageOf("Y_GE65");
+  const ageMid = ageOf("Y25-49");
+  const ageAll = ageOf("TOTAL");
+  const signedNum = (v) => `${v >= 0 ? "+" : "−"}${num(Math.abs(v))}`;
   const peerMax = Math.max(...peerOrder.flatMap((area) => data.peers_pct_gdp[area].map((p) => p.value)));
 
   return (
@@ -192,7 +206,18 @@ export default function CargaFiscalPage() {
           <span className="vizStat__value">{num(h.first_value_imf)} %</span>
           <span className="vizStat__note">del PIB; sin cotizaciones sociales ni haciendas locales (serie FMI)</span>
         </div>
-        {sqEs ? (
+        {ageOld && ageMid ? (
+          <div className="card vizStat">
+            <span className="vizStat__label">Renta mediana real desde {ageBase}, por edad</span>
+            <span className="vizStat__value">
+              {signedNum(ageOld.change[ageBase])} % / {signedNum(ageMid.change[ageBase])} %
+            </span>
+            <span className="vizStat__note">
+              65 y más frente a 25 a 49 años (todas las edades: {signedNum(ageAll.change[ageBase])} %)
+              {sqEs?.by_base?.[ageBase] ? `; recaudación real por habitante en el mismo periodo, ${signedNum(sqEs.by_base[ageBase].tax)} %` : ""}
+            </span>
+          </div>
+        ) : sqEs ? (
           <div className="card vizStat">
             <span className="vizStat__label">Desde {data.squeeze.base_year}, por habitante y descontada la inflación</span>
             <span className="vizStat__value">+{num(sqEs.real_tax_change_pct)} %</span>
@@ -224,8 +249,11 @@ export default function CargaFiscalPage() {
         ) : null}
       </section>
 
-      {data.squeeze ? <SqueezeFigure squeeze={data.squeeze} distribution={data.distribution} territory={data.territory} /> : null}
-      {data.squeeze?.survey ? <SurveyFigure squeeze={data.squeeze} /> : null}
+      {data.squeeze ? (
+        <SqueezeFigure squeeze={data.squeeze} distribution={data.distribution} territory={data.territory} segments={data.segments} />
+      ) : null}
+      {data.segments?.cases ? <HouseholdsFigure segments={data.segments} sources={householdSources} /> : null}
+      {data.squeeze?.survey ? <SurveyFigure squeeze={data.squeeze} segments={data.segments} /> : null}
 
       {esRow ? (
         <Figure
@@ -455,7 +483,7 @@ export default function CargaFiscalPage() {
       {data.spending ? (
         <>
           <SpendingSectionIntro />
-          <WhereItGoesFigure spending={data.spending} results={data.service_results} />
+          <WhereItGoesFigure spending={data.spending} results={data.service_results} distribution={data.distribution} />
           <DecompositionFigure spending={data.spending} />
           <LongRunSpendingFigure spending={data.spending} imfSource={imfSource} />
         </>
@@ -489,6 +517,12 @@ export default function CargaFiscalPage() {
             de los datos publicados por las páginas de <a href="/visualizaciones/sanidad/">sanidad</a>,{" "}
             <a href="/visualizaciones/educacion/">educación</a> y <a href="/visualizaciones/vivienda/">vivienda</a>, con la huella SHA-256 del fichero
             leído en el JSON de esta página.
+          </li>
+          <li>
+            <strong>Grupos en vez de la media.</strong> La renta se parte por edad con las bandas de la propia fuente (Eurostat: 16–24, 25–49, 50–64, 65 y
+            más) y sin cruzar rupturas de serie. Los cinco hogares tipo son los mismos que en las demás visualizaciones (misma edad, tenencia y lugar);
+            se calculan con los tipos de la OCDE, los gastos de vivienda de la encuesta de condiciones de vida y el alquiler SERPAVI publicado por{" "}
+            <a href="/visualizaciones/vivienda/">vivienda</a> (con su SHA-256 en el JSON), y se marcan como ilustrativos.
           </li>
           <li>
             <strong>Incidencia.</strong> Se clasifica por quién ingresa legalmente cada tributo, no por quién lo soporta económicamente.
