@@ -147,6 +147,11 @@ What we take from those references (the checklist; name the references and copy 
 - Every number reproducible from the DB (indicator contract with raw payload + sha256), with a table view and
   downloadable CSV/JSON.
 - Titles state the finding with its number; copy and posts use only figures checked against the published data.
+- Capacity lens: money that people pay or earn is compared with what households actually have (net, not gross;
+  disposable income; purchasing-power standards between countries; what is left after housing and essentials),
+  never only as a share of GDP or a gross salary.
+- Money in vs results out: public revenue or spending is always crossed with what it buys (service outcomes, access,
+  coverage) and with where it goes, and outcomes with what they cost; one without the other invites a convenient story.
 - "El dato mata el relato": every visualization has one consolidated figure, placed near the top, that combines
   enough dimensions (e.g. levels and change, composition and peers, two variables over time) that no competing
   narrative can cherry-pick it. Many single charts can each be used to support opposite stories; this one puts the
