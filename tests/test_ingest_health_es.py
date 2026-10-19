@@ -189,6 +189,26 @@ class IngestHealthTest(unittest.TestCase):
             for year, value in total.items():
                 self.assertLessEqual(abs(sum(r["values"][year] for r in parts) - value), 5, (section, year))
 
+    def test_age_profile_is_cited_and_complete(self) -> None:
+        data = json.loads((ingest.MANUAL_DIR / "perfil_gasto_edad.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(data["rows"]), 17)
+        self.assertEqual(data["rows"][-1]["age"], "80 y más")
+        for row in data["rows"]:
+            self.assertIn(str(row["euros_1998"]["2008"]), row["quote"].replace(".", ""))
+        self.assertRegex(data["source"]["sha256"], r"^[0-9a-f]{64}$")
+
+    def test_published_age_adjustment_base_years_and_distribution(self) -> None:
+        data = json.loads((Path(__file__).resolve().parents[1] / "ui/site/public/visualizaciones/data/sanidad.json").read_text(encoding="utf-8"))
+        adj = data["age_adjusted"]
+        self.assertTrue(80 < adj["spain_need"] < 120)
+        self.assertAlmostEqual(adj["spain_adjusted"], adj["spain_raw"] * 100 / adj["spain_need"], delta=0.2)
+        growth = data["base_years"]["growth"]
+        self.assertEqual(set(growth), {str(data["base_years"]["first"]), "2009", "2013"})
+        older = data["waits_per_older"]["surgery"]
+        self.assertLess(older["change_per65"], older["change_rate"])  # the over-65 population grew
+        self.assertGreaterEqual(len(data["distribution"]["medical"]["rows"]), 5)
+        self.assertTrue(all("spend_adjusted" in row for row in data["regions"]["rows"] if row["spend"] is not None))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -388,6 +388,41 @@ export default function SanidadPage() {
   const specDe = pay.pay.EMPLSPMP.find((x) => x.code === "DEU");
   const abroad = pay.doctors_abroad;
 
+  // 15. Base years, age adjustment, ageing-normalised waits and distribution
+  const bases = data.base_years;
+  const g02 = bases.growth[String(bases.first)];
+  const g09 = bases.growth["2009"];
+  const g13 = bases.growth["2013"];
+  const cut = (k) => ((1 + g09[k] / 100) / (1 + g13[k] / 100) - 1) * 100;
+  const indexSeries = [
+    { id: "hosp", label: "Hospitales y especializada", shortLabel: "Hospital", color: C.blue, emphasis: true, points: bases.index.hosp },
+    { id: "prim", label: "Atención primaria", shortLabel: "Primaria", color: C.orange, emphasis: true, points: bases.index.prim },
+    { id: "farm", label: "Farmacia (recetas)", shortLabel: "Farmacia", color: C.aqua, points: bases.index.farm },
+    { id: "total", label: "Total", shortLabel: "Total", color: C.ref, points: bases.index.total },
+  ];
+  const adj = data.age_adjusted;
+  const ppsRatioAdj = (ppsRatio * 100) / adj.spain_need;
+  const older = data.waits_per_older;
+  const dist = data.distribution;
+  const medDist = dist.medical;
+  const medEs = medDist.rows.find((row) => row.code === "ES");
+  const medEu = medDist.rows.find((row) => row.code === "EU27_2020");
+  const epfShare = dist.epf.PC_BUDGET;
+  const epfPer = dist.epf.EUR_PER;
+  const epfYear = epfShare["Quintil 1"].at(-1).year;
+  const epfRows = ["Quintil 1", "Quintil 2", "Quintil 3", "Quintil 4", "Quintil 5"].map((q) => ({
+    code: q, name: q.replace("Quintil", "Quintil de renta"), value: at(epfShare[q], epfYear),
+  }));
+  const leEdu = dist.life_expectancy_education["30 años"];
+  const leEduYear = leEdu.superior.at(-1).year;
+  const eduLabels = { primaria: "Primaria o menos", secundaria_1: "Secundaria (1.ª etapa)", secundaria_2: "Bachillerato o FP media", superior: "Estudios superiores" };
+  const leEduRows = Object.keys(eduLabels).map((k) => ({ code: k, name: eduLabels[k], value: at(leEdu[k], leEduYear) }));
+  const eduGapEs = at(leEdu.superior, leEduYear) - at(leEdu.primaria, leEduYear);
+  const eduGapRows = [
+    { code: "ES", name: `España (${leEduYear}, INE)`, value: Math.round(eduGapEs * 10) / 10 },
+    ...dist.education_gap_peers.map((x) => ({ code: x.code, name: `${x.name} (${x.year})`, value: x.gap })),
+  ].sort((a, b) => b.value - a.value);
+
   // 13. «El dato mata el relato»
   const story = data.data_vs_story;
 
@@ -422,10 +457,10 @@ export default function SanidadPage() {
             <strong>Se vive mucho y con salud.</strong> {num(leH.es)} años de esperanza de vida en {leH.year} ({num(leH.eu27)} en la UE), puesto {leH.world_rank.position} de {leH.world_rank.of} en el mundo, y {num(hlyEs)} años de vida saludable frente a {num(hlyEu)} en la UE. La mortalidad que una buena atención sanitaria puede evitar es de {num(trtEs, 0)} muertes por 100.000 habitantes frente a {num(trtEu, 0)} en la UE.
           </li>
           <li>
-            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE).
+            <strong>Con menos gasto público que la media, no con un gasto medio.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; por habitante, un {num(ppsRatio, 0)} % de la media europea, y un {num(ppsRatioAdj, 0)} % si se descuenta que la población española es algo más joven. Los hogares pagan de su bolsillo el {num(oopEs)} % del gasto ({num(oopEu)} % en la UE).
           </li>
           <li>
-            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Desde 2009 el gasto real en hospitales sube un {num(growth["Servicios hospitalarios y especializados"], 0)} % y el de atención primaria un {num(growth["Servicios primarios de salud"], 0)} %. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
+            <strong>Cada vez más gente espera.</strong> Desde {sinceLabel}, los pacientes en lista para operarse por 1.000 habitantes suben un {num(surgeryRateChange, 0)} % y los que esperan al especialista un {num(consultRateChange, 0)} %. Por persona de 65 años o más, la lista quirúrgica crece un {num(older.surgery.change_per65, 0)} %: el envejecimiento explica una parte, no todo. Desde {bases.first} el gasto real en hospitales sube un {num(g02.hosp, 0)} % y el de atención primaria un {num(g02.prim, 0)} %; los recortes de 2010–2013 la golpearon el doble. Siete de cada diez pacientes no consiguen cita con su médico de familia para el mismo día o el siguiente ({num(noSlotLast.value, 0)} % por falta de hueco, {pcLast.year}).
           </li>
           <li>
             <strong>La espera media general para operarse no sube, pero la de las operaciones más comunes sí.</strong> La media de toda la lista pasa de {num(wH.surgery_days[0], 0)} a {num(wH.surgery_days[1], 0)} días; la de los procesos más frecuentes (cataratas, prótesis, hernias…) de {num(wH.selected_days[0], 0)} a {num(wH.selected_days[1], 0)} días (+{num(selectedChange, 0)} %).
@@ -435,7 +470,7 @@ export default function SanidadPage() {
           </li>
         </ol>
         <p>
-          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#lo-que-paga-el-paciente">lo que paga el paciente</a> · <a href="#a-donde-va-el-dinero">a dónde va el dinero</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#sueldos-y-emigracion">sueldos y emigración</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
+          Índice: <a href="#el-dato-mata-el-relato">el dato frente al relato</a> · <a href="#esperanza-de-vida">esperanza de vida</a> · <a href="#salud-y-mortalidad">vida saludable y mortalidad evitable</a> · <a href="#envejecimiento">envejecimiento</a> · <a href="#gasto-pib">gasto</a> · <a href="#pago-directo">bolsillo y seguros</a> · <a href="#lo-que-paga-el-paciente">lo que paga el paciente</a> · <a href="#desigualdad">desigualdad</a> · <a href="#a-donde-va-el-dinero">a dónde va el dinero</a> · <a href="#listas-quirurgicas">listas de espera</a> · <a href="#operaciones">operaciones concretas</a> · <a href="#consultas">especialista</a> · <a href="#atencion-primaria">médico de familia</a> · <a href="#percepcion">opinión</a> · <a href="#medicos">médicos</a> · <a href="#enfermeras">enfermeras</a> · <a href="#sueldos-y-emigracion">sueldos y emigración</a> · <a href="#comunidades">comunidades</a> · <a href="#conclusion">conclusión</a> · <a href="#glosario">glosario</a>
         </p>
       </section>
 
@@ -451,7 +486,7 @@ export default function SanidadPage() {
           <span className="vizStat__label">Gasto sanitario público por habitante ({spH.year})</span>
           <span className="vizStat__value">{num(ppsRatio, 0)} %</span>
           <span className="vizStat__note">
-            de la media de la UE en poder de compra ({formatHealth(spH.pps_es, "count")} frente a {formatHealth(spH.pps_eu27, "count")} PPS); {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} %
+            ({num(ppsRatioAdj, 0)} % ajustado por edad) de la media de la UE en poder de compra ({formatHealth(spH.pps_es, "count")} frente a {formatHealth(spH.pps_eu27, "count")} PPS); {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} %
           </span>
         </div>
         <div className="card vizStat">
@@ -472,12 +507,12 @@ export default function SanidadPage() {
 
       <Figure
         id="el-dato-mata-el-relato"
-        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
+        title={`España logra la mortalidad tratable de los países que más gastan (${num(story.countries.spain.y, 0)} muertes por 100.000) con un ${num(100 - story.countries.spain.x, 0)} % menos de gasto público por habitante que la media de la UE, ya descontada la edad de su población; dentro de España, el gasto real subió en las ${story.regions.n} comunidades entre ${story.regions.from} y ${story.regions.to} y aun así la espera para las operaciones más comunes creció en ${story.regions.days_up}`}
         dek={`Dos gráficos que se leen juntos. Arriba, los ${story.countries.rows.length} países de la UE: cuanto más gasta un país, menos muertes evitables por atención sanitaria tiene (correlación de rangos ${num(story.countries.rho, 2)}), y España queda muy por debajo de esa pauta: ningún país que gaste menos tiene menos mortalidad tratable, y solo ${story.countries.lower_mortality.length} la tienen menor, todos gastando por encima de la media. Abajo, las comunidades: el gasto real por habitante pasó de ${formatHealth(story.regions.total.x0, "eur")} a ${formatHealth(story.regions.total.x, "eur")} (euros de 2020), y la espera de los procesos seleccionados subió en ${story.regions.days_up} de ${story.regions.n} y los pacientes en lista por habitante en ${story.regions.rate_up}.`}
         sources={[S.eurostat, S.egsp, S.sisle, S.oecd]}
         notes={[
-          `Países: gasto público y obligatorio (HF1) en estándar de poder de compra por habitante, como índice UE-27 = 100 en cada año para que la inflación no desplace los puntos; mortalidad tratable estandarizada por edad. Trayectorias ${story.countries.first} → ${story.countries.last} para España, Alemania, Francia, Italia, Portugal y la media UE (cuadrado).`,
-          `Comunidades: gasto sanitario público consolidado del sector CCAA (EGSP), deflactado a euros de 2020 con el índice de precios que la OCDE aplica al gasto sanitario español (${story.regions.from}: ${num(story.regions.deflator[story.regions.from], 3)}; ${story.regions.to}: ${num(story.regions.deflator[story.regions.to], 3)}). Espera media de los procesos seleccionados del SISLE en diciembre de cada año; tamaño del círculo = pacientes en esa lista por 1.000 habitantes. Ceuta y Melilla no tienen gasto en la EGSP. ${story.regions.from} es el primer año comparable tras la ruptura de Andalucía.`,
+          `Países: gasto público y obligatorio (HF1) en estándar de poder de compra por habitante, como índice UE-27 = 100 en cada año para que la inflación no desplace los puntos, y ajustado por la estructura de edades de cada país con el perfil de coste por edad español (España pasa de ${num(story.countries.spain.x_raw)} a ${num(story.countries.spain.x)}); mortalidad tratable estandarizada por edad. Trayectorias ${story.countries.first} → ${story.countries.last} para España, Alemania, Francia, Italia, Portugal y la media UE (cuadrado).`,
+          `Comunidades: gasto sanitario público consolidado del sector CCAA (EGSP), deflactado a euros de 2020 con el índice de precios que la OCDE aplica al gasto sanitario español (${story.regions.from}: ${num(story.regions.deflator[story.regions.from], 3)}; ${story.regions.to}: ${num(story.regions.deflator[story.regions.to], 3)}). Espera media de los procesos seleccionados del SISLE en diciembre de cada año; tamaño del círculo = pacientes en esa lista por 1.000 habitantes. Ajustado por la estructura de edades de cada comunidad (a la de España) con el mismo perfil de coste por edad. Ceuta y Melilla no tienen gasto en la EGSP. ${story.regions.from} es el primer año comparable tras la ruptura de Andalucía.`,
           `Correlación de rangos entre gasto y espera en ${story.regions.to}: ${num(story.regions.rho_level, 2)}; entre la subida del gasto y la subida de la espera: ${num(story.regions.rho_change, 2)} (las comunidades que más subieron el gasto no redujeron más la espera).`,
         ]}
         table={
@@ -515,24 +550,24 @@ export default function SanidadPage() {
         </ul>
         <h3 className="vizPanelTitle">
           1. Países de la UE: gasto público por habitante frente a mortalidad tratable, {story.countries.first} → {story.countries.last}
-          <span>Gasto en índice UE-27 = 100 (poder de compra); muertes por 100.000, estandarizadas por edad</span>
+          <span>Gasto en índice UE-27 = 100 (poder de compra), ajustado por edad; muertes por 100.000, estandarizadas por edad</span>
         </h3>
         <ConnectedScatter
           points={story.countries.rows}
           reference={{ ...story.countries.eu, label: "Media UE = 100" }}
-          xLabel="Gasto sanitario público por habitante (UE-27 = 100)"
+          xLabel="Gasto sanitario público por habitante ajustado por edad (UE-27 = 100)"
           yLabel="Mortalidad tratable por 100.000"
           emphasis={["DE", "FR", "IT", "PT"]}
           highlight={["ES"]}
           ariaLabel="Países de la UE: gasto sanitario público por habitante frente a mortalidad tratable, con la trayectoria de España y sus vecinos"
         />
         <h3 className="vizPanelTitle">
-          2. Comunidades autónomas: gasto real por habitante frente a días de espera, {story.regions.from} → {story.regions.to}
+          2. Comunidades autónomas: gasto real por habitante (ajustado por edad) frente a días de espera, {story.regions.from} → {story.regions.to}
           <span>Euros de 2020; días de espera media de los procesos quirúrgicos seleccionados en diciembre</span>
         </h3>
         <ConnectedScatter
           points={story.regions.rows.map((row) => ({ ...row, short: short(row.name) }))}
-          xLabel="Gasto sanitario público por habitante, euros de 2020"
+          xLabel="Gasto sanitario público por habitante ajustado por edad, euros de 2020"
           yLabel="Días de espera, procesos seleccionados"
           xUnit="eur"
           highlight={["13", "09"]}
@@ -782,11 +817,12 @@ export default function SanidadPage() {
 
       <Figure
         id="gasto-por-habitante"
-        title={`Por habitante y a precios constantes, el gasto sanitario público de España es un ${num(ppsRatio, 0)} % de la media de la UE`}
+        title={`Por habitante y a precios constantes, el gasto sanitario público de España es un ${num(ppsRatio, 0)} % de la media de la UE; descontando que su población es algo más joven, un ${num(ppsRatioAdj, 0)} %: la edad explica muy poco de la diferencia`}
         dek={`En euros de 2020 y paridad de poder de compra (para comparar países), España gasta ${formatHealth(sp.per_person_ppp_public.ESP.at(-1).value, "eur")} por habitante frente a ${formatHealth(sp.per_person_ppp_public_oecd_mean.at(-1).value, "eur")} de media en la OCDE (puesto ${sp.oecd_rank_per_person.position} de ${sp.oecd_rank_per_person.of}). Dentro de España, el gasto real por habitante cayó de ${formatHealth(peak2009, "eur")} en 2009 a ${formatHealth(low2013, "eur")} en 2013 (${num(pctChange(peak2009, low2013), 0)} %) y no recuperó el nivel de 2009 hasta ${recoveredYear ?? "después"}.`}
         legend={ppp}
         sources={[S.oecd, S.eurostat]}
         notes={[
+          `Ajuste por edad: gasto que tendría España con la estructura de edades de la UE, usando el coste relativo por edad del sistema español (${adj.profile_note}). La población española «necesita» un ${num(100 - adj.spain_need, 0)} % menos que la europea por su edad (${adj.year}); el índice pasa de ${num(adj.spain_raw)} a ${num(adj.spain_adjusted)} (UE = 100). La Comisión Europea publica sus perfiles de coste por edad solo en gráfico.`,
           `Ratio UE: Eurostat, estándar de poder de compra (PPS) por habitante, ${spH.year}: ${formatHealth(spH.pps_es, "count")} en España frente a ${formatHealth(spH.pps_eu27, "count")} en la UE-27.`,
           "Precios constantes de 2020 y paridad de poder adquisitivo en euros, tal como los publica la OCDE. La media OCDE es simple, de los miembros con dato cada año (al menos 34 de 38).",
         ]}
@@ -924,13 +960,64 @@ export default function SanidadPage() {
       </Figure>
 
       <Figure
+        id="desigualdad"
+        title={`En España la renuncia a atención médica apenas depende de la renta (${num(medEs.poor)} % del 20 % más pobre frente a ${num(medEs.rich)} % del más rico; en la UE, ${num(medEu.poor)} % frente a ${num(medEu.rich)} %) y la esperanza de vida a los 30 años solo varía ${num(eduGapEs)} años según los estudios: la brecha está en el dentista`}
+        dek={`La sanidad pública reparte bastante por igual lo que cubre. La desigualdad aparece en lo que no cubre: el dentista (arriba) y el gasto de bolsillo, que los hogares más ricos pueden permitirse más (el ${num(at(epfShare["Quintil 5"], epfYear))} % de su presupuesto frente al ${num(at(epfShare["Quintil 1"], epfYear))} % del quintil más pobre, que gasta ${formatHealth(at(epfPer["Quintil 1"], epfYear), "eur")} por persona al año frente a ${formatHealth(at(epfPer["Quintil 5"], epfYear), "eur")}).`}
+        sources={[S.eurostat, S.ine]}
+        notes={[
+          "Necesidad médica no atendida por coste, distancia o lista de espera (EU-SILC), mayores de 16 años, por quintil de ingresos equivalentes.",
+          `Gasto de los hogares en sanidad: INE, Encuesta de Presupuestos Familiares ${epfYear}, grupo 06 (medicamentos, gafas, dentista, consultas privadas); no incluye las primas de seguros.`,
+          "Esperanza de vida por estudios: INE (tabla 37663) para España; Eurostat para el resto, que no publica España y solo llega a 2016–2017 en la mayoría de países. Las diferencias de años y de fuente impiden un ranking estricto.",
+          "Seguro privado por renta: no hay una serie oficial descargable por quintil; queda pendiente.",
+        ]}
+        table={
+          <HealthTable
+            periodLabel="Grupo"
+            keyOf={(p) => p.key}
+            labelOf={(k) => k}
+            series={[
+              { id: "q1", label: "20 % más pobre: renuncia médica, %", points: medDist.rows.map((x) => ({ key: x.name, value: x.poor })) },
+              { id: "q5", label: "20 % más rico: renuncia médica, %", points: medDist.rows.map((x) => ({ key: x.name, value: x.rich })) },
+              { id: "gap", label: "Años más de vida a los 30 con estudios superiores frente a primaria", unit: "years", points: eduGapRows.map((x) => ({ key: x.name, value: x.value })) },
+              { id: "epf", label: `Sanidad, % del gasto del hogar (${epfYear})`, unit: "pct", points: epfRows.map((x) => ({ key: x.name, value: x.value })) },
+            ]}
+          />
+        }
+      >
+        <Explain
+          shows="Si el acceso a la sanidad y sus resultados dependen de la renta o de los estudios: renuncia a atención por quintil de ingresos, gasto de bolsillo por quintil y esperanza de vida por nivel de estudios."
+          read="En las mancuernas, cuanto más separados los dos puntos, más desigual. En las barras de estudios, cuanto más larga la barra de la brecha, más años de vida separan a quien tiene estudios superiores de quien no."
+          not="Renta y estudios van juntos con hábitos, trabajo y vivienda: la brecha de esperanza de vida no es solo sanitaria. La renuncia declarada no mide la atención de peor calidad ni la que llega tarde."
+        />
+        <h3 className="vizPanelTitle">
+          Renuncian a atención médica por coste, distancia o lista de espera, {medDist.year}
+          <span>% del quintil de ingresos más bajo (naranja) y más alto (verde)</span>
+        </h3>
+        <Dumbbell rows={medDist.rows} leftKey="poor" rightKey="rich" leftLabel="20 % con menos ingresos" rightLabel="20 % con más ingresos" highlight={["ES"]} ariaLabel="Necesidad médica no atendida por quintil de ingresos" />
+        <div className="vizMultiples">
+          <div>
+            <h3 className="vizPanelTitle">Esperanza de vida a los 30 años por estudios<span>España, {leEduYear}; años que quedan por vivir</span></h3>
+            <Bars rows={leEduRows} unit="years" digits={1} label="Esperanza de vida a los 30 años por nivel de estudios" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">Brecha por estudios: superiores frente a primaria<span>Años de esperanza de vida a los 30</span></h3>
+            <Bars rows={eduGapRows} unit="years" digits={1} highlight="ES" label="Brecha de esperanza de vida por estudios" />
+          </div>
+          <div>
+            <h3 className="vizPanelTitle">Gasto de bolsillo en sanidad por quintil<span>% del gasto total del hogar, {epfYear}</span></h3>
+            <Bars rows={epfRows} unit="pct" digits={1} label="Gasto en sanidad por quintil de renta" />
+          </div>
+        </div>
+      </Figure>
+
+      <Figure
         id="a-donde-va-el-dinero"
-        title={`El dinero público de la sanidad se ha ido al hospital: desde 2009 el gasto real en hospitales sube un ${num(growth["Servicios hospitalarios y especializados"], 0)} % y el de atención primaria solo un ${num(growth["Servicios primarios de salud"], 0)} %; los hospitales se llevan el ${num(provEs.HP1, 0)} % del gasto público, como en Italia y Portugal y frente al ${num(provEu.HP1, 0)} % en la UE`}
-        dek={`Según la Estadística de Gasto Sanitario Público, los hospitales y la atención especializada pasan del ${num(fFirst("Servicios hospitalarios y especializados"))} % del gasto en 2002 al ${num(fLast("Servicios hospitalarios y especializados"))} % en ${money.last}; la atención primaria, del ${num(fFirst("Servicios primarios de salud"))} % al ${num(fLast("Servicios primarios de salud"))} %; la farmacia de receta, del ${num(fFirst("Farmacia"))} % al ${num(fLast("Farmacia"))} %. Es la otra cara de las esperas del médico de familia: el ${num(quickLast.value, 0)} % consigue cita en el día o al siguiente con un presupuesto de primaria que en términos reales apenas crece. El ${num(staffShare, 0)} % del gasto (antes de consolidar) son sueldos del personal y el ${num(conciertos, 0)} %, conciertos con centros privados.`}
+        title={`Desde ${bases.first} el gasto real en hospitales casi se duplica (+${num(g02.hosp, 0)} %) y el de atención primaria crece un ${num(g02.prim, 0)} %; los recortes de 2010–2013 redujeron la primaria el doble (${num(cut("prim"), 0)} % frente a ${num(cut("hosp"), 0)} %) y desde 2013 ambos crecen parecido (+${num(g13.hosp, 0)} % y +${num(g13.prim, 0)} %)`}
+        dek={`Según la Estadística de Gasto Sanitario Público, los hospitales y la atención especializada pasan del ${num(fFirst("Servicios hospitalarios y especializados"))} % del gasto en 2002 al ${num(fLast("Servicios hospitalarios y especializados"))} % en ${money.last}; la atención primaria, del ${num(fFirst("Servicios primarios de salud"))} % al ${num(fLast("Servicios primarios de salud"))} %; la farmacia de receta, del ${num(fFirst("Farmacia"))} % al ${num(fLast("Farmacia"))} %. El año de partida cambia la historia: desde 2009, el pico previo a los recortes, el hospital sube un ${num(g09.hosp, 0)} % y la primaria solo un ${num(g09.prim, 0)} %; desde 2013, el fondo de los recortes, un ${num(g13.hosp, 0)} % y un ${num(g13.prim, 0)} %. Los hospitales se llevan el ${num(provEs.HP1, 0)} % del gasto público, como en Italia y Portugal y frente al ${num(provEu.HP1, 0)} % en la UE; solo el ${num(quickLast.value, 0)} % consigue cita con su médico de familia en el día o al siguiente. El ${num(staffShare, 0)} % del gasto (antes de consolidar) son sueldos del personal y el ${num(conciertos, 0)} %, conciertos con centros privados.`}
         legend={funcSeries}
         sources={[S.egsp, S.eurostat, S.oecd]}
         notes={[
-          `Funciones: EGSP, total consolidado; ${money.last - 1} y ${money.last} son provisionales. Crecimiento real ${2009}–${money.last} deflactado con el índice de precios que la OCDE aplica al gasto sanitario español.`,
+          `Funciones: EGSP, total consolidado; ${money.last - 1} y ${money.last} son provisionales. Índice real ${bases.first} = 100, deflactado con el índice de precios que la OCDE aplica al gasto sanitario español.`,
           "Proveedores (comparación entre países): Eurostat, gasto público y obligatorio (HF1) por proveedor. «Hospitales» incluye las consultas externas de especialistas que en España se hacen en el hospital; «ambulatorios» incluye centros de salud, consultas médicas y dentistas. En países donde el especialista trabaja fuera del hospital (Alemania) la comparación exagera la diferencia.",
           "Sueldos y conciertos: clasificación económica de la EGSP sobre la suma de sectores.",
         ]}
@@ -959,13 +1046,20 @@ export default function SanidadPage() {
           </div>
           <div>
             <h3 className="vizPanelTitle">
-              Crecimiento real del gasto desde 2009
-              <span>% en euros constantes, 2009–{money.last}</span>
+              Gasto real por función, {bases.first} = 100
+              <span>Euros constantes; sin elegir un año de partida</span>
             </h3>
-            <Bars rows={growthRows.filter((row) => row.value >= 0)} unit="pct" digits={1} label="Crecimiento real del gasto por función" />
-            <p className="vizFigure__dek" style={{ marginTop: 6 }}>
-              Farmacia: {num(growth["Farmacia"])} %; cae sobre todo entre 2010 y 2013, con las rebajas de precios y el copago de 2012.
-            </p>
+            <HealthChart series={indexSeries} unit="ratio" digits={0} xMin={bases.first} xMax={money.last} height={250} bands={[{ from: 2010, to: 2013, label: "Recortes" }]} ariaLabel="Gasto sanitario público real por función, índice" />
+            <table style={{ width: "100%", fontSize: "0.82rem", marginTop: 6 }}>
+              <thead>
+                <tr><th scope="col" style={{ textAlign: "left" }}>Crecimiento real hasta {money.last}</th><th scope="col">desde {bases.first}</th><th scope="col">desde 2009</th><th scope="col">desde 2013</th></tr>
+              </thead>
+              <tbody>
+                {[["hosp", "Hospitales"], ["prim", "Primaria"], ["farm", "Farmacia"], ["total", "Total"]].map(([k, label]) => (
+                  <tr key={k}><td>{label}</td><td>{num(g02[k], 0)} %</td><td>{num(g09[k], 0)} %</td><td>{num(g13[k], 0)} %</td></tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
         <div className="vizMultiples">
@@ -1001,6 +1095,8 @@ export default function SanidadPage() {
         notes={[
           ...wait.breaks.surgery.map((b) => `Ruptura ${cutLabel(b.date)}: ${b.label}`),
           rectified ? `${cutLabel(rectified.date)}: ${rectified.rectified.label}` : null,
+          `Envejecimiento: por cada 1.000 personas de 65 años o más (que concentran las cataratas, las prótesis y la mayoría de las operaciones), los pacientes en lista pasan de ${num(older.surgery.from.per_1000_65)} a ${num(older.surgery.to.per_1000_65)} (+${num(older.surgery.change_per65, 0)} %, frente a +${num(older.surgery.change_rate, 0)} % por habitante): la población mayor creció del ${num(older.surgery.from.share65)} % al ${num(older.surgery.to.share65)} %, pero la lista creció más. En consultas: +${num(older.consultations.change_per65, 0)} % por persona mayor frente a +${num(older.consultations.change_rate, 0)} % por habitante.`,
+          "El tramo comparable empieza en diciembre de 2018 por la última ruptura de serie; no es una elección del año de partida.",
           "Lista de espera estructural (pacientes que pueden operarse y esperan por organización del sistema, RD 605/2003). Población de referencia: tarjeta sanitaria. Cada valor sale de la fila TOTAL del informe semestral; su página y fila están citadas en el fichero curado etl/data/manual/health/sisle_sns.json del repositorio.",
         ].filter(Boolean)}
         table={semesterTable([
@@ -1347,7 +1443,7 @@ export default function SanidadPage() {
       <Figure
         id="comunidades"
         title={`La espera media para las operaciones más comunes va de ${num(fastest.value, 0)} días en ${fastest.name} a ${num(slowest.value, 0)} en ${slowest.name}`}
-        dek={`Procesos quirúrgicos seleccionados (cataratas, prótesis de cadera, hernia, varices y otros del RD 605/2003), ${cutLabel(lastRegionCut)}; media del SNS: ${num(nationalSelected, 0)} días. Al lado, el gasto sanitario público por habitante de cada comunidad en ${regionsSpend.year}: en estos datos no hay relación entre gastar más por habitante y esperar menos (correlación de rangos: ${num(spendWaitRho, 2)}).`}
+        dek={`Procesos quirúrgicos seleccionados (cataratas, prótesis de cadera, hernia, varices y otros del RD 605/2003), ${cutLabel(lastRegionCut)}; media del SNS: ${num(nationalSelected, 0)} días. Al lado, el gasto sanitario público por habitante de cada comunidad en ${regionsSpend.year}: en estos datos no hay relación entre gastar más por habitante y esperar menos, tampoco con el gasto ajustado por la edad de cada comunidad (correlación de rangos: ${num(reg.rho_adj_spend_days, 2)}; sin ajustar, ${num(spendWaitRho, 2)}).`}
         sources={[S.sisle, S.egsp]}
         notes={[
           "Se usa la lista de procesos seleccionados porque es la que los informes resumen publican por comunidad, con el mismo formato desde 2017.",
@@ -1374,10 +1470,10 @@ export default function SanidadPage() {
           <div>
             <h3 className="vizPanelTitle">
               Gasto sanitario público por habitante
-              <span>Euros, {regionsSpend.year}; mismo orden que la espera</span>
+              <span>Euros, {regionsSpend.year}, ajustado por la edad de cada comunidad; mismo orden que la espera</span>
             </h3>
             <Bars
-              rows={regionDays.map((row) => ({ code: row.code, name: row.name, value: spendByCode.get(row.code) ?? null }))}
+              rows={regionDays.map((row) => ({ code: row.code, name: row.name, value: reg.rows.find((x) => x.code === row.code)?.spend_adjusted ?? null }))}
               unit="eur"
               label="Gasto sanitario público por habitante y comunidad"
             />
@@ -1385,13 +1481,13 @@ export default function SanidadPage() {
         </div>
         <h3 className="vizPanelTitle">
           Gastar más no acorta la espera ni alarga la vida: cada punto es una comunidad
-          <span>Correlación de rangos entre gasto por habitante y espera: {num(reg.rho_spend_days, 2)}; entre gasto y esperanza de vida: {num(reg.rho_spend_le, 2)} (0 = ninguna relación, 1 = relación perfecta)</span>
+          <span>Gasto ajustado por la edad de cada comunidad. Correlación de rangos con la espera: {num(reg.rho_adj_spend_days, 2)}; con la esperanza de vida: {num(reg.rho_adj_spend_le, 2)} (sin ajustar: {num(reg.rho_spend_days, 2)} y {num(reg.rho_spend_le, 2)}; 0 = ninguna relación, 1 = relación perfecta)</span>
         </h3>
         <div className="vizMultiples">
           <div>
             <Scatter
-              points={regComplete.map((row) => ({ code: row.code, name: row.name, short: short(row.name), x: row.spend, y: row.days }))}
-              xLabel={`Gasto sanitario público por habitante, ${reg.spend_year} (€)`}
+              points={regComplete.filter((row) => row.spend_adjusted).map((row) => ({ code: row.code, name: row.name, short: short(row.name), x: row.spend_adjusted, y: row.days }))}
+              xLabel={`Gasto sanitario público por habitante ajustado por edad, ${reg.spend_year} (€)`}
               yLabel="Días de espera, procesos seleccionados"
               xUnit="eur"
               yUnit="days"
@@ -1414,7 +1510,7 @@ export default function SanidadPage() {
           </div>
         </div>
         <p className="vizFigure__dek">
-          Por qué no hay relación: {madrid ? `${madrid.name} gasta ${formatHealth(madrid.spend, "eur")} por habitante, de los más bajos, y tiene la espera más corta (${num(madrid.days, 0)} días) y la mayor esperanza de vida (${num(madrid.life_expectancy)} años)` : ""}; {spendTop.name}, la que más gasta ({formatHealth(spendTop.spend, "eur")}), espera {num(spendTop.days, 0)} días. El gasto por habitante depende de la dispersión de la población (más centros por persona en zonas rurales), los salarios, la edad y cuánto gasto privado hay; la espera, de cómo se organiza cada servicio (quirófanos de tarde, conciertos con la privada, gestión de la lista) y de cómo cuenta cada comunidad. En {regionsUp} de {regionsWith2018} comunidades la espera de los procesos seleccionados es hoy mayor que en diciembre de 2018.
+          Por qué no hay relación: {madrid ? `${madrid.name} gasta ${formatHealth(madrid.spend, "eur")} por habitante, de los más bajos, y tiene la espera más corta (${num(madrid.days, 0)} días) y la mayor esperanza de vida (${num(madrid.life_expectancy)} años)` : ""}; {spendTop.name}, la que más gasta ({formatHealth(spendTop.spend, "eur")}), espera {num(spendTop.days, 0)} días. Ajustar por edad cambia poco el orden: Asturias, Castilla y León y Galicia, las más envejecidas, bajan; Murcia y Baleares, las más jóvenes, suben. El gasto por habitante depende además de la dispersión de la población (más centros por persona en zonas rurales), los salarios, la edad y cuánto gasto privado hay; la espera, de cómo se organiza cada servicio (quirófanos de tarde, conciertos con la privada, gestión de la lista) y de cómo cuenta cada comunidad. En {regionsUp} de {regionsWith2018} comunidades la espera de los procesos seleccionados es hoy mayor que en diciembre de 2018.
         </p>
         <details className="vizTable">
           <summary>Ver las comunidades lado a lado</summary>
@@ -1424,6 +1520,7 @@ export default function SanidadPage() {
                 <tr>
                   <th scope="col">Comunidad</th>
                   <th scope="col">Gasto por habitante {reg.spend_year}</th>
+                  <th scope="col">Ajustado por edad</th>
                   <th scope="col">Días de espera {cutLabel(reg.cut)}</th>
                   <th scope="col">Días dic 2018</th>
                   <th scope="col">Pacientes por 1.000 hab.</th>
@@ -1436,6 +1533,7 @@ export default function SanidadPage() {
                   <tr key={row.code}>
                     <td>{row.name}</td>
                     <td>{row.spend != null ? formatHealth(row.spend, "eur") : "sin dato"}</td>
+                    <td>{row.spend_adjusted != null ? formatHealth(row.spend_adjusted, "eur") : ""}</td>
                     <td>{formatHealth(row.days, "count")}</td>
                     <td>{row.days_2018 != null ? formatHealth(row.days_2018, "count") : ""}</td>
                     <td>{num(row.rate, 2)}</td>
@@ -1459,13 +1557,13 @@ export default function SanidadPage() {
             <strong>Resultados de salud: se cumple, y más allá de la esperanza de vida.</strong> {num(leH.es)} años ({leH.world_rank.position}.º de {leH.world_rank.of} en el mundo, {leH.oecd_rank.position}.º de {leH.oecd_rank.of} en la OCDE), {num(hlyEs)} años saludables frente a {num(hlyEu)} en la UE y una mortalidad tratable de {num(trtEs, 0)} por 100.000 frente a {num(trtEu, 0)}. La supervivencia al cáncer no destaca: en mama y pulmón queda algo por debajo de los vecinos.
           </li>
           <li>
-            <strong>Gasto «medio»: falla. Es bajo.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; un {num(ppsRatio, 0)} % del gasto público por habitante europeo; puesto {sp.oecd_rank_per_person.position} de {sp.oecd_rank_per_person.of} en la OCDE. Parte de la diferencia la pagan los hogares de su bolsillo ({num(oopEs)} % frente a {num(oopEu)} %) o con seguros privados duplicados.
+            <strong>Gasto «medio»: falla. Es bajo.</strong> {num(spH.pct_gdp_es)} % del PIB frente a {num(spH.pct_gdp_eu27)} % en la UE; un {num(ppsRatio, 0)} % del gasto público por habitante europeo ({num(ppsRatioAdj, 0)} % ajustado por edad); puesto {sp.oecd_rank_per_person.position} de {sp.oecd_rank_per_person.of} en la OCDE. Parte de la diferencia la pagan los hogares de su bolsillo ({num(oopEs)} % frente a {num(oopEu)} %) o con seguros privados duplicados.
           </li>
           <li>
             <strong>Acceso: se cumple en lo esencial, con un matiz.</strong> Crece mucho el número de personas esperando (+{num(surgeryRateChange, 0)} % en cirugía y +{num(consultRateChange, 0)} % en consultas por habitante desde {sinceLabel}), sube la espera para el especialista ({num(wH.consult_days[0], 0)} → {num(wH.consult_days[1], 0)} días) y la de las operaciones más comunes ({num(wH.selected_days[0], 0)} → {num(wH.selected_days[1], 0)} días), y siete de cada diez pacientes no encuentran cita inmediata con su médico de familia. El matiz: la espera media de <em>toda</em> la lista quirúrgica no sube ({num(wH.surgery_days[0], 0)} → {num(wH.surgery_days[1], 0)} días), porque la componen especialidades que se mueven en sentidos distintos.
           </li>
           <li>
-            <strong>Capacidad del paciente y destino del dinero.</strong> Medido contra lo que gastan los hogares, el bolsillo pesa más que en la UE ({num(oopShareEs)} % frente a {num(oopShareEu)} % del consumo) y el dentista excluye a los más pobres ({num(dentalEs.poor)} % frente a {num(dentalEs.rich)} % de los más ricos). El dinero ha ido al hospital ({num(provEs.HP1, 0)} % del gasto público frente al {num(provEu.HP1, 0)} % en la UE) mientras la atención primaria apenas creció en términos reales (+{num(growth["Servicios primarios de salud"], 0)} % desde 2009): encaja con la falta de citas del médico de familia.
+            <strong>Capacidad del paciente y destino del dinero.</strong> Medido contra lo que gastan los hogares, el bolsillo pesa más que en la UE ({num(oopShareEs)} % frente a {num(oopShareEu)} % del consumo) y el dentista excluye a los más pobres ({num(dentalEs.poor)} % frente a {num(dentalEs.rich)} % de los más ricos). El dinero ha ido al hospital ({num(provEs.HP1, 0)} % del gasto público frente al {num(provEu.HP1, 0)} % en la UE) y los recortes de 2010–2013 golpearon el doble a la atención primaria; desde {bases.first} el hospital crece +{num(g02.hosp, 0)} % y la primaria +{num(g02.prim, 0)} % en términos reales. Encaja con la falta de citas del médico de familia. La desigualdad por renta está en lo que la sanidad pública no cubre: la renuncia a atención médica apenas depende de la renta ({num(medEs.poor)} % frente a {num(medEs.rich)} %), la dental sí.
           </li>
           <li>
             <strong>Lo que no se puede afirmar.</strong> Que las esperas «llevan subiendo desde 2003»: la serie del Ministerio tiene tres rupturas (2012, 2016, 2018) y antes de 2018 no se pueden comparar cifras. Que gastar más acortaría las esperas: entre comunidades no hay relación entre gasto por habitante y espera (correlación {num(reg.rho_spend_days, 2)}).

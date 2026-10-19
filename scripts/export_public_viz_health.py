@@ -43,6 +43,7 @@ SOURCE_PAGES = {
     "minsan_sisle_sns": ("Ministerio de Sanidad · SISLE-SNS, informes semestrales de listas de espera", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm"),
     "minsan_egsp": ("Ministerio de Sanidad · Estadística de Gasto Sanitario Público 2002-2024", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/gastoSanitario2005/home.htm"),
     "minsan_barometro": ("Ministerio de Sanidad y CIS · Barómetro Sanitario", "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/barometro/home.htm"),
+    "funcas_perfil_gasto": ("Funcas · perfil de gasto sanitario público por edad (DT 673/2012, tabla 15)", "https://www.funcas.es/wp-content/uploads/Migracion/Publicaciones/PDF/1791.pdf"),
     "who_gho": ("OMS · Global Health Observatory, gasto catastrófico (ODS 3.8.2)", "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/proportion-of-population-with-household-expenditures-on-health-greater-than-10-of-total-household-expenditure-or-income-(sdg-3-8-2)-(-)"),
     "minsan_siap": ("Ministerio de Sanidad · Sistema de Información de Atención Primaria (SIAP), resumen 2023", "https://www.sanidad.gob.es/estadEstudios/estadisticas/docs/siap/Resumen_grafico_SIAP__Datos_2023.pdf"),
 }
@@ -632,6 +633,206 @@ def pay_and_migration(store: Store) -> dict:
                                            "doctors_in_spain": {"year": int(in_spain["period"]), "value": r(in_spain["value"], 0)}}}
 
 
+AGE_BANDS = ["Y_LT5", "Y5-9", "Y10-14", "Y15-19", "Y20-24", "Y25-29", "Y30-34", "Y35-39", "Y40-44", "Y45-49", "Y50-54",
+             "Y55-59", "Y60-64", "Y65-69", "Y70-74", "Y75-79", "Y_GE80"]
+NUTS2_TO_INE = {"ES11": "12", "ES12": "03", "ES13": "06", "ES21": "16", "ES22": "15", "ES23": "17", "ES24": "02", "ES30": "13",
+                "ES41": "07", "ES42": "08", "ES43": "11", "ES51": "09", "ES52": "10", "ES53": "04", "ES61": "01", "ES62": "14",
+                "ES63": "18", "ES64": "19", "ES70": "05"}
+
+
+def age_weights(store: Store) -> list[float]:
+    """Relative cost per person by age band (Funcas DT 673/2012, table 15, 2008), in the order of AGE_BANDS."""
+    store.series("funcas_perfil_gasto", "DT673_T15", "gasto_sanitario_publico_por_edad", "EUR1998_PER")  # provenance
+    profile = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.age'), o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.source_id = 'funcas_perfil_gasto' AND o.period_label = '2008' AND o.revision_state != 'deleted'
+        """
+    ).fetchall()
+    by_age = {age: float(v) for age, v in profile}
+    order = ["0a4", "5a9", "10a14", "15a19", "20a24", "25a29", "30a34", "35a39", "40a44", "45a49", "50a54", "55a59",
+             "60a64", "65a69", "70a74", "75a79", "80 y más"]
+    total = by_age["total"]
+    return [by_age[a] / total for a in order]
+
+
+def need_index(store: Store, dataset: str) -> dict[str, dict[int, float]]:
+    """Expected spending per person relative to Spain's 2008 average, given each place's age structure."""
+    weights = age_weights(store)
+    pops = {band: by_year(store.series("eurostat_sdmx", dataset, f"{band}.T.NR", "NR")) for band in AGE_BANDS}
+    out: dict[str, dict[int, float]] = defaultdict(dict)
+    geos = set.intersection(*(set(p) for p in pops.values()))
+    for g in geos:
+        years = set.intersection(*(set(pops[b][g]) for b in AGE_BANDS))
+        for y in years:
+            counts = [pops[b][g][y] for b in AGE_BANDS]
+            total = sum(counts)
+            if total:
+                out[g][y] = sum(c / total * w for c, w in zip(counts, weights))
+    return out
+
+
+def age_adjusted(store: Store, story: dict, spend: dict) -> dict:
+    need = need_index(store, "demo_pjangroup")
+    pps = by_year(store.series("eurostat_sdmx", "hlth_sha11_hf", "HF1.PPS_HAB", "PPS_HAB"))
+    eu = "EU27_2020"
+    last = story["countries"]["last"]
+    year = max(y for y in need["ES"] if y <= last and y in need[eu])
+    adjusted = {}
+    for row in story["countries"]["rows"]:
+        g = row["code"]
+        if g in need and year in need[g] and last in pps.get(g, {}):
+            factor = need[eu][year] / need[g][year]
+            adjusted[g] = {"raw": row["x"], "adjusted": r(row["x"] * factor, 1), "need": r(100 * need[g][year] / need[eu][year], 1)}
+    es = adjusted["ES"]
+    # Trails for the peers: adjust each end with its own year's age structure.
+    first = story["countries"]["first"]
+    y_first = min(y for y in need["ES"] if y >= first)
+    for row in story["countries"]["rows"]:
+        g = row["code"]
+        if g in adjusted:
+            row["x_raw"] = row["x"]
+            row["x"] = adjusted[g]["adjusted"]
+            if "x0" in row and y_first in need.get(g, {}):
+                row["x0"] = r(row["x0"] * need[eu][y_first] / need[g][y_first], 1)
+    adj_rows = [row for row in story["countries"]["rows"] if row["code"] in adjusted]
+    story["countries"]["adjusted"] = True
+    story["countries"]["rho"] = r(spearman([c["x"] for c in adj_rows], [c["y"] for c in adj_rows]))
+    story["countries"]["spain"] = next(c for c in story["countries"]["rows"] if c["code"] == "ES")
+    story["countries"]["cheaper_and_better"] = [c["name"] for c in adj_rows if c["x"] < story["countries"]["spain"]["x"] and c["y"] < story["countries"]["spain"]["y"]]
+    story["countries"]["lower_mortality"] = [c["name"] for c in adj_rows if c["y"] < story["countries"]["spain"]["y"]]
+    # Regions: real spending per person at Spain's age structure.
+    rneed = need_index(store, "demo_r_pjangroup")
+    ref = need["ES"]
+    for row in story["regions"]["rows"]:
+        nuts = next((k for k, v in NUTS2_TO_INE.items() if v == row["code"]), None)
+        for key, yr in (("x0", story["regions"]["from"]), ("x", story["regions"]["to"])):
+            y_pop = min((y for y in rneed.get(nuts, {}) if y >= yr), default=max(rneed.get(nuts, {0: 0})))
+            if nuts in rneed and y_pop in rneed[nuts] and y_pop in ref:
+                row[f"{key}_raw"] = row[key]
+                row[key] = r(row[key] * ref[y_pop] / rneed[nuts][y_pop], 0)
+    regions = story["regions"]["rows"]
+    story["regions"]["adjusted"] = True
+    story["regions"]["rho_level"] = r(spearman([x["x"] for x in regions], [x["y"] for x in regions]))
+    story["regions"]["rho_change"] = r(spearman([x["x"] / x["x0"] for x in regions], [x["y"] - x["y0"] for x in regions]))
+    story["regions"]["spend_up"] = sum(1 for x in regions if x["x"] > x["x0"])
+    return {
+        "year": year, "spain_raw": es["raw"], "spain_adjusted": es["adjusted"], "spain_need": es["need"],
+        "rows": sorted(({"code": g, "name": EU_NAMES.get(g, g), **v} for g, v in adjusted.items()), key=lambda x: -x["adjusted"]),
+        "profile_note": "Funcas DT 673/2012, tabla 15 (perfil español de 2008)",
+    }
+
+
+def regions_adjusted(store: Store, reg: dict, spend: dict) -> dict:
+    need = need_index(store, "demo_pjangroup")
+    rneed = need_index(store, "demo_r_pjangroup")
+    year = spend["regions_per_person"]["year"]
+    y_pop = min((y for y in need["ES"] if y >= year), default=max(need["ES"]))
+    for row in reg["rows"]:
+        nuts = next((k for k, v in NUTS2_TO_INE.items() if v == row["code"]), None)
+        if row["spend"] is not None and nuts in rneed and y_pop in rneed[nuts]:
+            row["spend_adjusted"] = r(row["spend"] * need["ES"][y_pop] / rneed[nuts][y_pop], 0)
+            row["need"] = r(100 * rneed[nuts][y_pop] / need["ES"][y_pop], 1)
+    complete = [row for row in reg["rows"] if row.get("spend_adjusted")]
+    reg["rho_adj_spend_days"] = r(spearman([x["spend_adjusted"] for x in complete], [x["days"] for x in complete]))
+    reg["rho_adj_spend_le"] = r(spearman([x["spend_adjusted"] for x in complete], [x["life_expectancy"] for x in complete]))
+    reg["pop_year"] = y_pop
+    return reg
+
+
+def base_years(store: Store, money: dict) -> dict:
+    func_rows = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.partida'), o.period_label, o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.source_id = 'minsan_egsp' AND d.dataset_code = 'EGSP.consolidado' AND d.indicator_code = 'clasificacion_funcional'
+          AND o.revision_state != 'deleted'
+        """).fetchall()
+    table: dict[str, dict[int, float]] = defaultdict(dict)
+    for label, year, value in func_rows:
+        table[label][int(year)] = float(value)
+    q = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.Q", "XDC_PS")["ESP"]}
+    v = {int(p["period"]): p["value"] for p in store.series("oecd_health_statistics", "DSD_SHA@DF_SHA", "EXP_HEALTH.HF1.V", "XDC_PS")["ESP"]}
+    labels = {"Servicios hospitalarios y especializados": "hosp", "Servicios primarios de salud": "prim", "Farmacia": "farm", "TOTAL CONSOLIDADO": "total"}
+    real = {key: {y: table[label][y] / (v[y] / q[y]) for y in table[label] if y in v and y in q} for label, key in labels.items()}
+    first = min(real["total"])
+    index = {key: [{"year": y, "value": r(100 * val / vals[first], 1)} for y, val in sorted(vals.items())] for key, vals in real.items()}
+    growth = {str(base): {key: r(100 * (vals[money["last"]] / vals[base] - 1), 1) for key, vals in real.items()} for base in (first, 2009, 2013)}
+    return {"first": first, "index": index, "growth": growth}
+
+
+def waits_per_older(store: Store, wait: dict) -> dict:
+    p65 = by_year(store.series("eurostat_sdmx", "demo_pjanind", "PC_Y65_MAX", "PC"))["ES"]
+
+    def per65(rows: list[dict], date: str) -> tuple[float, float, int]:
+        rate = next(p["value"] for p in rows if p["date"] == date)
+        year = int(date[:4]) + 1 if int(date[:4]) + 1 in p65 else int(date[:4])
+        return rate, r(rate / (p65[year] / 100), 1), year
+
+    out = {}
+    for key, rows in (("surgery", wait["surgery"]["rate_per_1000"]), ("consultations", wait["consultations"]["rate_per_1000"])):
+        a = per65(rows, "2018-12-31")
+        b = per65(rows, rows[-1]["date"])
+        out[key] = {"from": {"date": "2018-12-31", "rate": a[0], "per_1000_65": a[1], "share65_year": a[2], "share65": p65[a[2]]},
+                    "to": {"date": rows[-1]["date"], "rate": b[0], "per_1000_65": b[1], "share65_year": b[2], "share65": p65[b[2]]},
+                    "change_rate": r(100 * (b[0] / a[0] - 1), 1), "change_per65": r(100 * (b[1] / a[1] - 1), 1)}
+    return out
+
+
+def distribution(store: Store) -> dict:
+    def unmet(dataset: str, code: str) -> dict[str, list[dict]]:
+        return {g: annual_points(v, 1) for g, v in store.series("eurostat_sdmx", dataset, code, "PC").items()}
+    med_q1 = unmet("hlth_silc_08", "TXP_TFAR_WLIST.QU1.Y_GE16.T.PC")
+    med_q5 = unmet("hlth_silc_08", "TXP_TFAR_WLIST.QU5.Y_GE16.T.PC")
+    year = max(p["year"] for p in med_q1["ES"])
+    med_rows = sorted(({"code": g, "name": EU_NAMES.get(g, "Media UE-27"), "poor": at_year(med_q1[g], year), "rich": at_year(med_q5.get(g, []), year)}
+                       for g in med_q1 if at_year(med_q1[g], year) is not None), key=lambda x: -x["poor"])
+    epf = {}
+    for unit in ("EUR_PER", "PC_BUDGET"):
+        rows = store.conn.execute(
+            """
+            SELECT json_extract(s.dimensions_json, '$.quintil'), o.period_label, o.value_decimal
+            FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+            JOIN indicator_series_versions s USING (indicator_release_id)
+            JOIN indicator_observation_versions o USING (indicator_series_version_id)
+            WHERE d.dataset_code = 'EPF_75413' AND d.unit_code = ? AND o.revision_state != 'deleted'
+            """, (unit,)).fetchall()
+        table: dict[str, dict[int, float]] = defaultdict(dict)
+        for quint, year_, value in rows:
+            table[quint][int(year_)] = float(value)
+        epf[unit] = {k: [{"year": y, "value": r(v, 2)} for y, v in sorted(vals.items())] for k, vals in table.items()}
+    store.series("ine_wstempus", "EPF_75413", "gasto_sanidad_hogares_quintil", "EUR_PER")
+    edu_rows = store.conn.execute(
+        """
+        SELECT json_extract(s.dimensions_json, '$.age'), json_extract(s.dimensions_json, '$.education'), o.period_label, o.value_decimal
+        FROM indicator_definitions d JOIN indicator_releases r USING (indicator_id)
+        JOIN indicator_series_versions s USING (indicator_release_id)
+        JOIN indicator_observation_versions o USING (indicator_series_version_id)
+        WHERE d.dataset_code = 'TM_37663' AND o.revision_state != 'deleted'
+        """).fetchall()
+    store.series("ine_wstempus", "TM_37663", "esperanza_vida_nivel_educativo", "YR")
+    edu: dict[str, dict[str, list]] = defaultdict(lambda: defaultdict(list))
+    for age, level, year_, value in edu_rows:
+        edu[age][level].append({"year": int(year_), "value": r(float(value), 2)})
+    for age in edu:
+        for level in edu[age]:
+            edu[age][level].sort(key=lambda p: p["year"])
+    eu_edu = {}
+    for level in ("ED0-2", "ED5-8"):
+        for g, rows in store.series("eurostat_sdmx", "demo_mlexpecedu", f"{level}.Y30.T.YR", "YR").items():
+            eu_edu.setdefault(g, {})[level] = latest(rows)
+    peers_gap = sorted(({"code": g, "name": EU_NAMES.get(g, g), "year": v["ED5-8"]["year"], "gap": r(v["ED5-8"]["value"] - v["ED0-2"]["value"], 1)}
+                        for g, v in eu_edu.items() if "ED5-8" in v and "ED0-2" in v and v["ED5-8"] and v["ED0-2"] and g != "EU27_2020"),
+                       key=lambda x: -x["gap"])
+    return {"medical": {"year": year, "rows": med_rows}, "epf": epf,
+            "life_expectancy_education": {age: dict(levels) for age, levels in edu.items()}, "education_gap_peers": peers_gap}
+
+
 def build(conn: sqlite3.Connection) -> dict:
     store = Store(conn)
     le = life_expectancy(store)
@@ -650,6 +851,11 @@ def build(conn: sqlite3.Connection) -> dict:
     patient = patient_side(store)
     money = money_allocation(store)
     pay = pay_and_migration(store)
+    ageadj = age_adjusted(store, story, spend)
+    regions = regions_adjusted(store, regions, spend)
+    bases = base_years(store, money)
+    older = waits_per_older(store, wait)
+    dist = distribution(store)
     story["dental"] = {"year": patient["dental_cost"]["year"],
                        "rows": [row for row in patient["dental_cost"]["rows"] if row["code"] in ("ES", "DE", "FR", "IT", "PT", "EU27_2020")]}
 
@@ -708,6 +914,10 @@ def build(conn: sqlite3.Connection) -> dict:
         "patient": patient,
         "money": money,
         "pay": pay,
+        "age_adjusted": ageadj,
+        "base_years": bases,
+        "waits_per_older": older,
+        "distribution": dist,
         "sources": sources,
     }
 

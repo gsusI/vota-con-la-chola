@@ -86,6 +86,12 @@ LOCAL_SOURCES: dict[str, dict[str, str]] = {
         "default_url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/BarometroSanitario/home_BS.htm",
         "format": "xlsx",
     },
+    "funcas_perfil_gasto": {
+        "name": "Funcas - Distribución del gasto sanitario público por edad y sexo en España (DT 673/2012)",
+        "scope": "sanidad",
+        "default_url": "https://www.funcas.es/wp-content/uploads/Migracion/Publicaciones/PDF/1791.pdf",
+        "format": "pdf",
+    },
     "who_gho": {
         "name": "OMS - Global Health Observatory (API OData)",
         "scope": "sanidad",
@@ -1165,6 +1171,112 @@ def load_egsp_structure(conn: sqlite3.Connection, snapshot_date: str) -> dict[st
     return totals
 
 
+# 8. Age structure (for age standardisation) and distribution by income and education
+
+AGE_BANDS = ["Y_LT5", "Y5-9", "Y10-14", "Y15-19", "Y20-24", "Y25-29", "Y30-34", "Y35-39", "Y40-44", "Y45-49", "Y50-54",
+             "Y55-59", "Y60-64", "Y65-69", "Y70-74", "Y75-79", "Y_GE80"]
+ES_NUTS2 = ["ES11", "ES12", "ES13", "ES21", "ES22", "ES23", "ES24", "ES30", "ES41", "ES42", "ES43", "ES51", "ES52", "ES53",
+            "ES61", "ES62", "ES63", "ES64", "ES70"]
+POP_AGE_URL = eurostat_url("demo_pjangroup", {"sex": ["T"], "unit": ["NR"], "age": AGE_BANDS, "geo": [*EU27, "EU27_2020"],
+                                              "sinceTimePeriod": ["2014"]})
+REG_POP_AGE_URL = eurostat_url("demo_r_pjangroup", {"sex": ["T"], "unit": ["NR"], "age": AGE_BANDS, "geo": ES_NUTS2,
+                                                    "sinceTimePeriod": ["2018"]})
+LE_EDU_URL = eurostat_url("demo_mlexpecedu", {"sex": ["T"], "age": ["Y30"], "unit": ["YR"], "geo": [*EU27, "EU27_2020"]})
+INE_LE_EDU_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/37663?nult=12"
+INE_EPF_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/75413?nult=12"
+
+
+def parse_pop_age(dataset: str) -> Callable[[Raw], Iterable[Batch]]:
+    def parse(raw: Raw) -> Iterable[Batch]:
+        yield from eurostat_batches(
+            raw, dataset, ["age", "sex", "unit"], lambda c: f"Población a 1 de enero, grupo de edad {c['age']}",
+            {"NR": "Personas"}, "Población residente a 1 de enero por grupos quinquenales de edad.",
+        )
+    return parse
+
+
+def parse_le_edu(raw: Raw) -> Iterable[Batch]:
+    yield from eurostat_batches(
+        raw, "demo_mlexpecedu", ["isced11", "age", "sex", "unit"],
+        lambda c: f"Esperanza de vida a los 30 años, nivel educativo {c['isced11']}", {"YR": "Años"},
+        "Esperanza de vida por nivel educativo (CINE 2011). España no la notifica a Eurostat; se usa el INE.",
+    )
+
+
+def ine_rows(raw: Raw, keep: Callable[[list[str]], tuple[str, dict[str, str]] | None]) -> dict[str, list[dict[str, Any]]]:
+    out: dict[str, list[dict[str, Any]]] = {}
+    for si, s in enumerate(raw.data):
+        parts = [p.strip() for p in s["Nombre"].strip().rstrip(".").split(".")]
+        kept = keep(parts)
+        if not kept:
+            continue
+        key, dims = kept
+        obs = [{"period": str(row["Anyo"]), "value": row["Valor"], "pointer": pointer(si, "Data", i, "Valor"), "cell_index": i}
+               for i, row in enumerate(s["Data"]) if row.get("Valor") is not None and not row.get("Secreto")]
+        out[key] = {"dims": {**dims, "ine_cod": s["COD"], "ine_nombre": s["Nombre"]}, "obs": sorted(obs, key=lambda o: o["period"])}
+    return out
+
+
+EDU_LEVELS = {"Educación primaria e inferior": "primaria", "Primera etapa de Educación Secundaria y similar": "secundaria_1",
+              "Segunda etapa de Educación Secundaria y Educación Postsecundaria no Superior": "secundaria_2",
+              "Educación superior": "superior", "Total": "total"}
+
+
+def parse_ine_le_edu(raw: Raw) -> Iterable[Batch]:
+    def keep(parts: list[str]):
+        if len(parts) < 8 or parts[3] != "Total" or parts[4] not in ("30 años", "65 años") or parts[7] not in EDU_LEVELS:
+            return None
+        return f"{parts[4]}|{EDU_LEVELS[parts[7]]}", {"age": parts[4], "education": EDU_LEVELS[parts[7]]}
+    rows = ine_rows(raw, keep)
+    yield {
+        "source_id": "ine_wstempus", "dataset_code": "TM_37663", "indicator_code": "esperanza_vida_nivel_educativo",
+        "frequency_code": "A", "frequency_label": "Anual", "unit_code": "YR", "unit_label": "Años",
+        "label": "Esperanza de vida a los 30 y 65 años por nivel educativo, ambos sexos (INE)",
+        "methodology_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=37663", "source_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=37663",
+    }, [area_series(f"INE|37663|{k}", "ES", v["dims"], v["obs"], name="España", system="NUTS", level="country") for k, v in sorted(rows.items())]
+
+
+def parse_ine_epf(raw: Raw) -> Iterable[Batch]:
+    measures = {"Gasto medio por persona": ("EUR_PER", "Euros por persona"), "Distribución (porcentajes verticales)": ("PC_BUDGET", "% del gasto del hogar")}
+    for measure, (unit, unit_label) in measures.items():
+        def keep(parts: list[str], measure=measure):
+            if len(parts) < 3 or parts[0] != measure or parts[2] != "Sanidad":
+                return None
+            return parts[1], {"quintil": parts[1]}
+        rows = ine_rows(raw, keep)
+        yield {
+            "source_id": "ine_wstempus", "dataset_code": "EPF_75413", "indicator_code": "gasto_sanidad_hogares_quintil",
+            "frequency_code": "A", "frequency_label": "Anual", "unit_code": unit, "unit_label": unit_label,
+            "label": f"Gasto de los hogares en sanidad por quintil de renta ({unit_label.lower()}), Encuesta de Presupuestos Familiares",
+            "definition": "Grupo 06 de la ECOICOP (productos farmacéuticos, aparatos, consultas y servicios hospitalarios pagados por el hogar).",
+            "methodology_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=75413", "source_url": "https://www.ine.es/jaxiT3/Tabla.htm?t=75413",
+        }, [area_series(f"INE|75413|{unit}|{k}", "ES", v["dims"], v["obs"], name="España", system="NUTS", level="country")
+            for k, v in sorted(rows.items())]
+
+
+def load_age_profile(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, int]:
+    path = MANUAL_DIR / "perfil_gasto_edad.json"
+    payload = path.read_bytes()
+    data = json.loads(payload)
+    src = data["source"]
+    raw_path, _ = check_pdf(src["file"], "ageprofile", src["sha256"])
+    series = []
+    for index, row in enumerate([*data["rows"], {**data["total"], "age": "total"}]):
+        obs = [{"period": year, "value": value, "cell_index": index, "pointer": f"pdf:page={row['page']};row={row['quote']}",
+                "status_pointer": pointer("rows", index), "evidence_url": src["url"], "evidence_sha256": src["sha256"],
+                "evidence_raw_path": raw_path} for year, value in sorted(row["euros_1998"].items())]
+        series.append(area_series(f"perfil|{row['age']}", "ES", {"age": row["age"]}, obs, name="España", system="NUTS", level="country"))
+    definition = {
+        "source_id": "funcas_perfil_gasto", "dataset_code": "DT673_T15", "indicator_code": "gasto_sanitario_publico_por_edad",
+        "frequency_code": "A", "frequency_label": "1998, 2003 y 2008", "unit_code": "EUR1998_PER", "unit_label": "Euros de 1998 por persona",
+        "label": "Gasto sanitario público por persona y grupo de edad, España (perfil de coste por edad)",
+        "definition": src["name"] + ". " + src["note"], "extraction_method": "pdftotext_layout_row",
+        "methodology_url": src["page_url"], "source_url": src["page_url"],
+    }
+    return load_indicator(conn, definition, sha256_bytes(payload), len(payload), rel(path), src["page_url"], snapshot_date,
+                          {"retrieved_at": src["retrieved_at"]}, series)
+
+
 API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     ("eurostat_demo_mlexpec.json", LE_URL, "json", parse_life_expectancy),
     ("ine_idb_1414.json", INE_URL, "json", parse_ine),
@@ -1190,6 +1302,11 @@ API_SOURCES: list[tuple[str, str, str, Callable[..., Iterable[Batch]]]] = [
     *[(f"who_gho_{code}.json", who_url(code), "json", parse_who(code)) for code in WHO_INDICATORS],
     ("oecd_remuneration_dbnomics.json", OECD_REMUN_URL, "json", parse_remun),
     ("oecd_wfmi_esp_dbnomics.json", OECD_WFMI_URL, "json", parse_wfmi),
+    ("eurostat_demo_pjangroup.json", POP_AGE_URL, "json", parse_pop_age("demo_pjangroup")),
+    ("eurostat_demo_r_pjangroup_es.json", REG_POP_AGE_URL, "json", parse_pop_age("demo_r_pjangroup")),
+    ("eurostat_demo_mlexpecedu.json", LE_EDU_URL, "json", parse_le_edu),
+    ("ine_tm_37663.json", INE_LE_EDU_URL, "json", parse_ine_le_edu),
+    ("ine_epf_75413.json", INE_EPF_URL, "json", parse_ine_epf),
 ]
 
 
@@ -1368,6 +1485,7 @@ def main() -> int:
         report["barometro"] = load_barometro(conn, args.snapshot_date, args.offline)
         report["siap"] = load_siap(conn, args.snapshot_date)
         report["egsp_structure"] = load_egsp_structure(conn, args.snapshot_date)
+        report["age_profile"] = load_age_profile(conn, args.snapshot_date)
     fk = conn.execute("PRAGMA foreign_key_check").fetchall()
     if fk:
         raise SystemExit(f"foreign_key_check failed: {fk[:5]}")

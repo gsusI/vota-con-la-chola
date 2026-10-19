@@ -295,6 +295,45 @@ def egsp_structure() -> dict:
     raise SystemExit("egsp structure: page not found")
 
 
+AGE_PROFILE_PDF = REPO_ROOT / "etl/data/raw/health/ageprofile/funcas_dt673_2012.pdf"
+AGE_GROUPS = ["0a4", "5a9", "10a14", "15a19", "20a24", "25a29", "30a34", "35a39", "40a44", "45a49", "50a54", "55a59",
+              "60a64", "65a69", "70a74", "75a79", "80 y más"]
+
+
+def age_profile() -> dict:
+    """Public health spending per person by 5-year age group, Spain (Blanco, Urbanos y Thuissard, Funcas DT 673/2012,
+    appendix table 15, both sexes, constant 1998 euros). Used only as relative cost weights for age standardisation."""
+    meta = json.loads(AGE_PROFILE_PDF.with_name(AGE_PROFILE_PDF.name + ".meta.json").read_text(encoding="utf-8"))
+    pages = pages_of(AGE_PROFILE_PDF)
+    for number, page in enumerate(pages, start=1):
+        if "Tabla 15. Gasto sanitario total" not in page:
+            continue
+        rows = []
+        for line in page.splitlines():
+            label = next((g for g in AGE_GROUPS if re.match(rf"^\s*{re.escape(g)}\s+\d", line)), None)
+            if label:
+                values = re.findall(r"-?\d+(?:,\d+)?|\d{1,3}(?:\.\d{3})+", line[line.index(label) + len(label):])
+                rows.append({"age": label, "page": number, "quote": squash(line),
+                             "euros_1998": {"1998": int(values[0]), "2003": int(values[1]), "2008": int(values[2])}})
+            elif line.strip().startswith("Población Total"):
+                values = re.findall(r"\d+", line)
+                total = {"page": number, "quote": squash(line), "euros_1998": {"1998": int(values[0]), "2003": int(values[1]), "2008": int(values[2])}}
+        if len(rows) != len(AGE_GROUPS):
+            raise SystemExit(f"age profile: {len(rows)} rows")
+        return {
+            "source": {
+                "name": "Blanco Moreno, Urbanos Garrido y Thuissard Vasallo (2012), Distribución del gasto sanitario público por "
+                "edad y sexo en España: análisis de la década 1998-2008, Funcas, Documento de trabajo 673, apéndice, tabla 15",
+                "url": meta["url"], "retrieved_at": meta["retrieved_at"], "file": AGE_PROFILE_PDF.name,
+                "sha256": hashlib.sha256(AGE_PROFILE_PDF.read_bytes()).hexdigest(),
+                "page_url": "https://www.funcas.es/documentos_trabajo/distribucion-del-gasto-sanitario-publico-por-edad-y-sexo-en-espana-analisis-de-la-decada-1998-2008/",
+                "note": "Perfil español; la Comisión Europea (Ageing Report 2024, gráfico I.2.2) publica perfiles por edad solo como gráfico, sin datos.",
+            },
+            "rows": rows, "total": total,
+        }
+    raise SystemExit("age profile: table 15 not found")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", type=Path, default=OUT)
@@ -354,6 +393,10 @@ def main() -> int:
         structure = egsp_structure()
         (EGSP_OUT.parent / "egsp_estructura.json").write_text(json.dumps(structure, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         print(f"egsp structure: {len(structure['economica'])} economic, {len(structure['funcional'])} functional rows")
+    if AGE_PROFILE_PDF.exists():
+        profile = age_profile()
+        (EGSP_OUT.parent / "perfil_gasto_edad.json").write_text(json.dumps(profile, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        print(f"age profile: {len(profile['rows'])} groups")
     return 0
 
 
