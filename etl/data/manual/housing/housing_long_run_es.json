@@ -1,0 +1,243 @@
+{
+  "retrieved_at": "2026-10-19",
+  "census_tenure": [],
+  "young_ownership": [
+    {
+      "source_key": "bde_eff",
+      "wave": 2002,
+      "age_group": "<35",
+      "owner_pct": 68.3,
+      "all_ages_owner_pct": 81.9,
+      "source": "Banco de España, Boletín Económico noviembre 2004, \"Encuesta Financiera de las Familias (EFF): descripción, métodos y resultados preliminares\", cuadro 3",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/BoletinEconomico/04/Fich/be0411-art3.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2002_be0411-art3.pdf",
+      "raw_sha256": "f2768a62673b034a23b05db80b7ddee5c9a2117ab50283f8ccd3578859557d53",
+      "locator": "Cuadro 3 \"Tenencia de activos reales por parte de los hogares\", PDF p. 8 (printed p. 69)",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (81,9 / 68,3) in the EFF2005 article (Boletín Económico 12/2007, cuadro 3)."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2005,
+      "age_group": "<35",
+      "owner_pct": 62.1,
+      "all_ages_owner_pct": 81.3,
+      "source": "Banco de España, Boletín Económico diciembre 2007, \"Encuesta Financiera de las Familias (EFF) 2005: métodos, resultados y cambios entre 2002 y 2005\" (separata), cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/estadis/eff/Separata_EFF_2007.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2005_separata_eff_2007.pdf",
+      "raw_sha256": "383a927ed834efe54c3b4d1dcc4011572c91749ba9c9f404a7a743c036273cbf",
+      "locator": "Cuadro 3 (cont.) EFF 2005, PDF p. 15",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted in the EFF2008 article (Boletín Económico 12/2010, cuadro 3) as 81,3 / 62,0."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2008,
+      "age_group": "<35",
+      "owner_pct": 65.8,
+      "all_ages_owner_pct": 82.7,
+      "source": "Banco de España, Boletín Económico diciembre 2010, \"Encuesta Financiera de las Familias (EFF) 2008: métodos, resultados y cambios desde 2005\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/BoletinEconomico/10/Dic/Fich/art2.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2008_be1012-art2.pdf",
+      "raw_sha256": "228b689c688b5884cc92d3ad9304e58f376188ec813571390f0d2bd2866d71ca",
+      "locator": "Cuadro 3 (cont.) EFF2008, PDF p. 12 (printed p. 41)",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (82,7 / 65,8) in the EFF2011 article (Boletín Económico 01/2014, cuadro 3)."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2011,
+      "age_group": "<35",
+      "owner_pct": 69.8,
+      "all_ages_owner_pct": 83.1,
+      "source": "Banco de España, Boletín Económico enero 2014, \"Encuesta Financiera de las Familias (EFF) 2011: métodos, resultados y cambios desde 2008\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/BoletinEconomico/14/Ene/Fich/be1401-art2.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2011_be1401-art2.pdf",
+      "raw_sha256": "3a5ed4d8c8916b44871a0c3e7cea546cf1699fae99e70bdb2b90cb3f6b2349a6",
+      "locator": "Cuadro 3 (cont.) EFF2011, PDF p. 11 (printed p. 81)",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Revised in the EFF2014 article (Artículos Analíticos 1/2017, cuadro 3) to 82,6 (all) / 69,3 (<35); the revised figures are the ones comparable with 2014."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2014,
+      "age_group": "<35",
+      "owner_pct": 49.5,
+      "all_ages_owner_pct": 80.4,
+      "source": "Banco de España, Artículos Analíticos (Boletín Económico) 1/2017, \"Encuesta Financiera de las Familias (EFF) 2014: métodos, resultados y cambios desde 2011\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/ArticulosAnaliticos/2017/T1/fich/beaa1701-art2.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2014_beaa1701-art2.pdf",
+      "raw_sha256": "c75b52ddfda60a8f5fb6ef35796e282d9e187cd4c28854f3592c29da1063d9e1",
+      "locator": "Cuadro 3 (cont.) EFF2014, PDF p. 13",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (80,4 / 49,5) in the EFF2017 article (Boletín Económico 4/2019, cuadro 3). Large drop for <35 vs 2011 (69,3 revised)."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2017,
+      "age_group": "<35",
+      "owner_pct": 41.3,
+      "all_ages_owner_pct": 75.9,
+      "source": "Banco de España, Boletín Económico 4/2019, \"Encuesta Financiera de las Familias (EFF) 2017: métodos, resultados y cambios desde 2014\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/ArticulosAnaliticos/19/T4/descargar/Fich/be1904-art38.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2017_be1904-art38.pdf",
+      "raw_sha256": "36e3f315ad847b5f782363bbd4335f7430e30beb8f4b6d1db29d032fa4e1565b",
+      "locator": "Cuadro 3 (cont.) EFF2017, PDF p. 15 (printed p. 13)",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (75,9 / 41,3) in the EFF2020 article (Boletín Económico 3/2022, cuadro 3)."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2020,
+      "age_group": "<35",
+      "owner_pct": 36.1,
+      "all_ages_owner_pct": 73.9,
+      "source": "Banco de España, Boletín Económico 3/2022, \"Encuesta Financiera de las Familias (EFF) 2020: métodos, resultados y cambios desde 2017\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbde/SES/Secciones/Publicaciones/InformesBoletinesRevistas/ArticulosAnaliticos/22/T3/Fich/be2203-art21.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2020_be2203-art21.pdf",
+      "raw_sha256": "695a2cd92d41a07d58aaf193120627f4e7b8e26cfbb33c745fa18bbe80826764",
+      "locator": "Cuadro 3 (cont.) EFF2020, PDF p. 17",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (73,9 / 36,1) in Documento Ocasional 2413 (EFF2022), cuadro 3."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2022,
+      "age_group": "<35",
+      "owner_pct": 31.8,
+      "all_ages_owner_pct": 72.1,
+      "source": "Banco de España, Documento Ocasional 2413 (2024), \"Encuesta Financiera de las Familias (EFF) 2022: métodos, resultados y cambios desde 2020\", cuadro 3 (cont.)",
+      "source_url": "https://repositorio.bde.es/bitstream/123456789/36572/1/do2413.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2022_do2413.pdf",
+      "raw_sha256": "3d7c1277fb16262ca4be47456b3d0778333c938603d7c3b6179d0d628526eb2c",
+      "locator": "Cuadro 3 (cont.) EFF2022, PDF p. 24",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Reprinted unchanged (72,1 / 31,8) in Documento Ocasional 2610 (EFF2024), cuadro 3. Text: <35 fell 4,2 pp vs 2020."
+    },
+    {
+      "source_key": "bde_eff",
+      "wave": 2024,
+      "age_group": "<35",
+      "owner_pct": 36.7,
+      "all_ages_owner_pct": 70.6,
+      "source": "Banco de España, Documento Ocasional 2610 (2026), \"Encuesta Financiera de las Familias (EFF) 2024: métodos, resultados y cambios desde 2022\", cuadro 3 (cont.)",
+      "source_url": "https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/26/Fich/do2610.pdf",
+      "raw_file": "etl/data/raw/housing/manual/bde_eff2024_do2610.pdf",
+      "raw_sha256": "9340cb83b0db76a50e73bf198cd4a4e8daaa98e47bd1e117c295aeb1c9b00b57",
+      "locator": "Cuadro 3 (cont.) EFF2024, PDF p. 23 (printed p. 22)",
+      "confidence": "high",
+      "note": "Row 'Menor de 35 años' and 'TODOS LOS HOGARES', column 'Vivienda principal', panel 'Porcentaje de hogares que poseen el activo'. Age is that of the 'cabeza de familia' (EFF reference person). Value from the wave's own article. Newest wave (beyond the requested list). <35 rises 4,9 pp vs 2022 while all-ages keeps falling."
+    }
+  ],
+  "social_rental_stock": [
+    {
+      "country": "ESP",
+      "year": 2019,
+      "pct": 1.13,
+      "pct_raw": 1.1308203126523195,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "medium",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). Note 8: for Spain the figures may also contain other types of reduced-rent housing (e.g. employer-provided dwellings); note 4 (Figure PH4.2.1): Spain is based on responses to previous QuASH rounds. 290,000 social rental dwellings (Table PH4.2.A1, row \"Spain (8)\"); no ~2010 value given. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "DEU",
+      "year": 2021,
+      "pct": 2.56,
+      "pct_raw": 2.556640239761646,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "high",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). 1,101,506 dwellings (Table PH4.2.A1); 3.68% in 2011. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "FRA",
+      "year": 2018,
+      "pct": 14.01,
+      "pct_raw": 14.007707129094413,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "high",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). 5,089,000 dwellings (Table PH4.2.A1); 13.54% in 2012. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "ITA",
+      "year": 2022,
+      "pct": 2.4,
+      "pct_raw": 2.402509010822031,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "high",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). 850,000 dwellings (Table PH4.2.A1); 4.2% in 2010. Italy source: Federcasa and Tax Revenue Agency via Bank of Italy (July 2023). Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "PRT",
+      "year": 2021,
+      "pct": 1.06,
+      "pct_raw": 1.058791155508831,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "high",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). 63,217 dwellings (Table PH4.2.A1); 2.02% in 2011. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "OECD",
+      "year": null,
+      "pct": 7.07,
+      "pct_raw": 7.072980149567512,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "medium",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). Year column is \"-\": average of the countries shown, each at its own latest year (mostly 2016-2023). Not a single-year figure. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    },
+    {
+      "country": "EU",
+      "year": null,
+      "pct": 7.99,
+      "pct_raw": 7.990085845290703,
+      "source": "OECD Affordable Housing Database, indicator PH4.2 Social rental housing stock (OECD 2024, sheet last updated 2025-11-24)",
+      "source_url": "https://webfs.oecd.org/els-com/Affordable_Housing_Database/PH4-2-Social-rental-housing-stock.xlsx",
+      "raw_file": "etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock_webfs.xlsx",
+      "raw_sha256": "18ce27a92f3509b197fc3dbe378112f263536106b402b1c4b10ed993d0bcf724",
+      "locator": "Sheet 'Figure PH4.2.1', data columns M:O (country, % of total housing stock, year)",
+      "confidence": "medium",
+      "note": "Social rental dwellings as % of total dwelling stock (all dwellings, not only main residences). Year column is \"-\": average of the EU countries shown, each at its own latest year. Not a single-year figure. Identical values in the oecd.org copy (etl/data/raw/housing/manual/oecd_ahd_ph4-2_social_rental_housing_stock.xlsx, sha256 2287dc32cb558c3945bc2c72d6a42eed9cfc43669b8b0255f9a01965f459de2b, sheet last updated 2024-04-16, URL https://www.oecd.org/content/dam/oecd/en/data/datasets/affordable-housing-database/ph4-2-social-rental-housing-stock.xlsx)."
+    }
+  ],
+  "gaps": [
+    "census_tenure 1950 and 1960: not found in any digitized official INE publication. INEbase historia census collection (https://www.ine.es/inebaseweb/libros.do?tntp=71807) only digitizes the population volumes for 1950 (Tomos I-III) and 1960 (Avance, Tomo I, Tomo III provincial) — no 'Censo de edificios y viviendas 1950' or 'Censo de viviendas 1960' volume. Walked the Anuario Estadístico 1952-1958 and 1960-1966 trees (https://www.ine.es/inebaseweb/libros.do?tntp=25687): 'Edificación y vivienda' sections only hold building permits/completions, rents of new dwellings and state-protected housing; 'Clasificaciones del censo 1960' only population tables. No tenure table found.",
+    "census_tenure secondary figures (NOT verified against an INE file, do not publish as official): owner-occupied main dwellings ~46% (1950) and ~51-52% (1960), as commonly cited in the Spanish housing literature from the INE housing censuses; exact citation and table not verified in this pass.",
+    "young_ownership: EFF2011 own-article value (83,1 / 69,8) was later revised by Banco de España to 82,6 / 69,3 (EFF2014 article); the series mixes own-article values as requested — use the revised reprints if strict wave-to-wave comparability is needed.",
+    "social_rental_stock: OECD and EU averages have no single reference year (cross-country average of latest years); Spain is from an earlier QuASH round (2019) and may include employer-provided reduced-rent dwellings."
+  ],
+  "blocked_hosts": [
+    {
+      "host": "repositorio.bde.es (/discover search endpoint only)",
+      "evidence": "HTTP 200 with WAF page '<title>Request Rejected</title> The requested URL was rejected' for /discover?query=...; direct /bitstream/ PDF downloads work",
+      "checked_at": "2026-10-19"
+    },
+    {
+      "host": "www.ine.es/inebaseweb (treeNavigation.do)",
+      "evidence": "intermittent HTTP 500 under ~12 parallel requests; succeeded on retry (rate/capacity, not a block)",
+      "checked_at": "2026-10-19"
+    }
+  ]
+}

@@ -856,7 +856,13 @@ def load_curated(conn: sqlite3.Connection, snapshot_date: str) -> dict[str, Any]
                             series, meta))
         social: dict[str, list[dict[str, Any]]] = {}
         for i, row in enumerate(data.get("social_rental_stock", [])):
-            social.setdefault(row["country"], []).append(curated_obs(row, "pct", str(row["year"]), pointer("social_rental_stock", i, "pct"), i))
+            if row.get("year"):
+                obs = curated_obs(row, "pct", str(row["year"]), pointer("social_rental_stock", i, "pct"), i)
+            else:  # cross-country averages of each country's latest year: no single reference year
+                as_of = str(data.get("retrieved_at"))[:10]
+                obs = curated_obs(row, "pct", "latest", pointer("social_rental_stock", i, "pct"), i,
+                                  start=as_of, end=as_of, interval_kind="latest_available_by_country")
+            social.setdefault(row["country"], []).append(obs)
         if social:
             batches.append((long_path, curated_definition("social_rental_stock_pct", "housing_long_run_es",
                                                           "Parque de vivienda social en alquiler (% del total de viviendas)", "PC", "% de las viviendas"),

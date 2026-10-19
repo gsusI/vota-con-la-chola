@@ -25,6 +25,7 @@ const NAMES = {
   ES: "España",
   ESP: "España",
   EU27_2020: "Media UE-27",
+  EU: "Media UE",
   OECD: "OCDE",
   DE: "Alemania",
   DEU: "Alemania",
@@ -240,7 +241,7 @@ export default function ViviendaPage() {
         ]}
         notes={[
           "Salario INE: coste salarial total por trabajador y mes × 12 (ordinario, pagas extra y atrasos; antes de IRPF y cotizaciones del trabajador). 2000–2007 es la serie retrospectiva del INE y 2008 en adelante la actual: se dibujan como tramos separados.",
-          "Valor tasado: media de tasaciones hipotecarias, no precio escriturado; en los años de subida suele ir por detrás del mercado. Es una media nacional: en Madrid, Barcelona o la costa el piso típico cuesta bastante más.",
+          "Valor tasado: media de tasaciones hipotecarias, no precio escriturado; en los años de subida puede ir por detrás del mercado. Es una media nacional: en Madrid, Barcelona o la costa el piso típico cuesta bastante más.",
           `Año ${h.last_year}: media de los cuatro trimestres publicados. La serie de la OCDE termina en ${aff.years_oecd.at(-1).year}.`,
         ]}
         table={<HousingTable series={yearsSeries} unit="years" />}
@@ -293,7 +294,7 @@ export default function ViviendaPage() {
           source("bde_indicadores_vivienda", "Banco de España (iniciadas y visados del Ministerio; hogares de la EPA y de los censos del INE)"),
         ]}
         notes={[
-          "Hogares nuevos netos: variación de la media anual de hogares de la EPA (base 2021, desde 2002). La EPA se reponderó con el Censo 2021, de ahí el salto de 2021 (negativo) y 2022; la media entre censos (amarillo) no depende de ese ajuste.",
+          "Hogares nuevos netos: variación de la media anual de hogares de la EPA (serie base 2021, desde 2002). En 2021 la EPA cambió de cuestionario y de base de población; el descenso de 2021 y el salto de 2022 deben leerse con cautela. La media entre censos (amarillo) no depende de la EPA.",
           "Terminadas = libres (certificados de fin de obra, estimación del Ministerio) + protegidas (calificaciones definitivas). Incluyen segundas residencias y viviendas compradas por no residentes; los hogares nuevos son netos de los que desaparecen. Ni una ni otra serie mide demoliciones o cambios de uso.",
           "La media entre censos 2011–2021 es baja en parte porque el Censo 2011 (muestral) contó más hogares que la EPA reponderada.",
         ]}
@@ -315,7 +316,7 @@ export default function ViviendaPage() {
           title={`El excedente de viviendas de la burbuja, ${millions(balancePeak.value)} en ${balancePeak.year}, se ha reducido a ${thousands(balanceLast.value)} en ${balanceLast.year}`}
           dek={`Saldo acumulado desde ${sup.cumulative_balance[0].year}: viviendas terminadas menos hogares nuevos netos (EPA). Mientras sube, se construye más de lo que se forman hogares; cuando baja, al revés. Desde ${balancePeak.year} se ha consumido el ${num((1 - balanceLast.value / balancePeak.value) * 100, 0)} % del excedente.`}
           sources={[source("mivau_boletin", "Ministerio de Vivienda"), source("bde_indicadores_vivienda", "INE, EPA (vía Banco de España)")]}
-          notes={["Es un saldo nacional: no dice dónde están esas viviendas. Buena parte del excedente de 2003–2010 se construyó en la costa y en municipios con poca demanda de primera residencia, lejos de donde hoy se forman los hogares (ver el censo de viviendas vacías más abajo)."]}
+          notes={["Es un saldo nacional: no dice dónde están esas viviendas. Si el excedente de la burbuja está en la costa o en municipios con poca demanda, no sirve a los hogares que se forman en las ciudades; estos datos no tienen ese desglose (ver también el censo de viviendas vacías más abajo)."]}
           table={<HousingTable series={[{ id: "balance", label: "Saldo acumulado (viviendas)", points: sup.cumulative_balance }]} unit="count" />}
         >
           <HousingChart
@@ -332,7 +333,7 @@ export default function ViviendaPage() {
       <Figure
         id="contra"
         title={`En contra de la hipótesis: entre ${boom.from} y ${boom.to} se terminaron ${num(boom.ratio, 2)} viviendas por cada hogar nuevo y aun así el piso pasó de ${num(years2000)} a ${num(years2007)} años de salario`}
-        dek={`Durante la burbuja sobraban viviendas nuevas y los precios subieron más que nunca. Lo que cambió fue el crédito: el tipo de los préstamos para vivienda bajó del ${num(rateAt(1990), 1)} % en 1990 al ${num(rateAt(2005), 1)} % en 2005. La escasez de obra nueva no explica aquella subida; sí encaja con la de después de 2015, con tipos que volvieron a subir en 2023.`}
+        dek={`Durante la burbuja sobraban viviendas nuevas y los precios subieron más que nunca. Lo que sí cambió fue el crédito: el tipo de los préstamos para vivienda bajó del ${num(rateAt(1990), 1)} % en 1990 al ${num(rateAt(2005), 1)} % en 2005. La escasez de obra nueva no explica aquella subida; sí encaja con la de después de 2015, con tipos que volvieron a subir en 2023.`}
         legend={[
           { id: "years", label: "Años de salario (INE)", color: C.blue },
           { id: "rate", label: "Tipo de interés de los préstamos para vivienda (%)", color: C.orange },
@@ -451,9 +452,9 @@ export default function ViviendaPage() {
         />
       </Figure>
 
-      <YoungOwnershipFigure young={ten.young} />
+      <YoungOwnershipFigure young={ten.young} retrieved={day(src.vclc_housing_curated?.retrieved_at)} />
 
-      <TaxesFigure taxes={data.taxes} wageLast={h.wage_last} lastYear={h.last_year} />
+      <TaxesFigure taxes={data.taxes} wageLast={h.wage_last} lastYear={h.last_year} retrieved={day(src.vclc_housing_curated?.retrieved_at)} />
 
       <Figure
         id="gasto-publico"
@@ -465,11 +466,14 @@ export default function ViviendaPage() {
         ]}
         sources={[
           source("eurostat_sdmx", "Eurostat, gov_10a_exp (COFOG GF0601 + GF1006) y nama_10_gdp", "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table"),
-          ...(data.social_rental_stock.length ? [{ label: data.social_rental_stock[0].source, href: data.social_rental_stock[0].source_url }] : []),
+          ...(data.social_rental_stock.length ? [{ label: `OCDE, Affordable Housing Database PH4.2 (consultado ${day(src.vclc_housing_curated?.retrieved_at)})`, href: data.social_rental_stock[0].source_url }] : []),
         ]}
         notes={[
           "No incluye beneficios fiscales: la deducción por compra de vivienda habitual del IRPF (suprimida para compras desde 2013) era gasto público en forma de menor recaudación y no aparece en estas cifras.",
           "Tampoco incluye el suelo público cedido ni la vivienda de empresas públicas fuera del sector administraciones públicas.",
+          ...(data.social_rental_stock.length
+            ? ["Vivienda social en alquiler (OCDE): el año difiere por país; el dato de España procede de una ronda anterior del cuestionario y puede incluir viviendas de empresa a renta reducida; las medias OCDE y UE promedian el último dato de cada país."]
+            : []),
           `Italia 2021–2023: los créditos fiscales del «Superbonus» para rehabilitar viviendas se contabilizan como gasto en desarrollo de la vivienda (${num(at(spendPoints.IT, 2022), 2)} % del PIB en 2022 y ${num(at(spendPoints.IT, 2023), 2)} % en 2023) y elevan también la media de la UE; por eso se compara el último año y la media 2015–2019, y la serie completa está en la tabla.`,
         ]}
         table={

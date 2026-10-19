@@ -227,7 +227,7 @@ def build(conn: sqlite3.Connection) -> dict:
     social = []
     if s.optional("social_rental_stock_pct"):
         for row in s.curated_rows("social_rental_stock_pct"):
-            social.append({"country": row["geo"], "year": int(row["period"]), "value": r(row["value"], 1),
+            social.append({"country": row["geo"], "year": int(row["period"]) if row["period"].isdigit() else None, "value": r(row["value"], 1),
                            "source": row["row"].get("source"), "source_url": row["url"], "note": row["row"].get("note"),
                            "confidence": row["row"].get("confidence")})
 
@@ -410,7 +410,7 @@ def write_csv(data: dict, path: Path) -> None:
     for geo, points in data["public_spending_pct_gdp"].items():
         for p in points:
             rows.extend(("eurostat_sdmx", f"gasto_vivienda_{k}_pct_pib", geo, p["year"], p[k]) for k in ("development", "allowances", "total"))
-    rows.extend(("vclc_housing_curated", "vivienda_social_alquiler_pct", row["country"], row["year"], row["value"]) for row in data["social_rental_stock"])
+    rows.extend(("vclc_housing_curated", "vivienda_social_alquiler_pct", row["country"], row["year"] or "ultimo_de_cada_pais", row["value"]) for row in data["social_rental_stock"])
     for row in (data.get("taxes") or {}).get("rates", []):
         rows.append(("vclc_housing_curated", f"{row['key']}_{row['scope']}", row["scope"], row["year"], row["value"]))
     buf = io.StringIO()

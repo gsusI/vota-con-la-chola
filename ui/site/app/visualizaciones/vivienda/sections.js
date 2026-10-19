@@ -34,7 +34,7 @@ function Bars({ rows, max, label }) {
   );
 }
 
-export function TaxesFigure({ taxes, wageLast, lastYear }) {
+export function TaxesFigure({ taxes, wageLast, lastYear, retrieved }) {
   if (!taxes?.scenarios?.length) return null;
   const years = [...new Set(taxes.scenarios.map((s) => s.year))].sort();
   const [first, last] = [years[0], years.at(-1)];
@@ -84,7 +84,7 @@ export function TaxesFigure({ taxes, wageLast, lastYear }) {
         { id: "first", label: String(first), color: C.peer },
       ]}
       legendKind="bar"
-      sources={[{ label: `BOE: la norma vigente el 1 de julio de cada año, una por fila (${taxes.rates.length} filas en la tabla)`, href: "https://www.boe.es/" }]}
+      sources={[{ label: `BOE: la norma vigente el 1 de julio de cada año, una por fila (${taxes.rates.length} filas en la tabla)${retrieved ? `; consultado ${retrieved}` : ""}`, href: "https://www.boe.es/" }]}
       notes={[
         "Tipos generales. Hay tipos reducidos para vivienda habitual de menor valor, jóvenes, familias numerosas o vivienda protegida (por ejemplo, el 4 % de IVA en vivienda protegida de régimen especial); se detallan en la tabla.",
         "La plusvalía municipal la paga el vendedor, depende del valor catastral del suelo y de los años de tenencia y no se puede calcular para un piso medio; se recoge su tipo y coeficiente máximos.",
@@ -188,7 +188,7 @@ export function CensusStockFigure({ rows, source }) {
   );
 }
 
-export function YoungOwnershipFigure({ young }) {
+export function YoungOwnershipFigure({ young, retrieved }) {
   if (!young?.length) return null;
   const groups = [...new Set(young.map((row) => row.age_group))];
   const ordered = [...groups.filter((g) => g !== "total"), ...groups.filter((g) => g === "total")];
@@ -206,17 +206,19 @@ export function YoungOwnershipFigure({ young }) {
   const main = series[0];
   const first = main.points[0];
   const last = main.points.at(-1);
-  const sources = [...new Map(young.map((row) => [row.source_url, row.source])).entries()].map(([href, label]) => ({ href, label }));
+  const peak = main.points.reduce((best, p) => (p.value > best.value ? p : best), first);
+  const low = main.points.filter((p) => p.year > peak.year).reduce((best, p) => (p.value < best.value ? p : best), last);
+  const sources = [...new Map(young.map((row) => [row.source_url, `Banco de España, EFF ${row.year}${retrieved ? ` (consultado ${retrieved})` : ""}`])).entries()].map(([href, label]) => ({ href, label }));
   return (
     <Figure
       id="jovenes-propietarios"
-      title={`Los hogares jóvenes propietarios de su vivienda pasan del ${num(first.value)} % en ${first.year} al ${num(last.value)} % en ${last.year}`}
-      dek="Hogares que tienen en propiedad su vivienda principal, según la edad de la persona de referencia. Cada punto es una ola de la encuesta; las líneas solo unen olas."
+      title={`Entre los hogares de menores de 35 años, los propietarios de su vivienda caen del ${num(peak.value)} % en ${peak.year} al ${num(last.value)} % en ${last.year}`}
+      dek={`Hogares que tienen en propiedad su vivienda principal, según la edad de la persona de referencia (Encuesta Financiera de las Familias del Banco de España). ${low.year !== last.year ? `El mínimo fue el ${num(low.value)} % de ${low.year}. ` : ""}En el conjunto de los hogares la caída es mucho menor: del ${num(series.at(-1).points[0].value)} % al ${num(series.at(-1).points.at(-1).value)} %. Cada punto es una ola de la encuesta; las líneas solo unen olas.`}
       legend={series}
-      sources={sources.slice(0, 3)}
+      sources={sources}
       notes={[
         "La encuesta es de hogares: los jóvenes que siguen en casa de sus padres no forman hogar propio y no cuentan aquí, así que la caída infravalora el problema de acceso.",
-        ...(sources.length > 3 ? [`Otras ${sources.length - 3} publicaciones citadas en la tabla de datos (JSON).`] : []),
+        "Cada ola se toma de su propio artículo del Banco de España; algunas se revisaron después (2011: 69,8 % en su artículo, 69,3 % en el de 2014). Edad de la persona de referencia (cabeza de familia).",
       ]}
       table={<HousingTable series={series} />}
     >
@@ -238,7 +240,7 @@ export function SocialStockBars({ rows, names }) {
       <Bars
         rows={sorted.map((row) => ({
           id: row.country,
-          label: `${names[row.country] || row.country} (${row.year})`,
+          label: `${names[row.country] || row.country} (${row.year ?? "último dato de cada país"})`,
           value: row.value,
           color: row.country === "ESP" ? C.blue : row.country === "OECD" || row.country === "EU" ? C.ref : C.peer,
           text: `${num(row.value)} %`,
