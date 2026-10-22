@@ -911,3 +911,55 @@
 .viz .vizTable__scroll {
   overflow: auto;
 }
+
+/* Closing blocks of each article: «Preguntas frecuentes» and «Sigue leyendo» (ArticleSeo.js), in the text column. */
+.viz .vizFaq,
+.viz .vizRelated {
+  display: grid;
+  gap: 14px;
+}
+
+.viz .vizFaq h2,
+.viz .vizRelated h2 {
+  margin-block: 0;
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+
+.viz .vizFaq__item {
+  display: grid;
+  gap: 4px;
+}
+
+.viz .vizFaq h3 {
+  margin-block: 0;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.viz .vizFaq p {
+  margin-block: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.viz .vizRelated ul {
+  margin-block: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 8px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.viz .vizRelated li span {
+  color: var(--viz-ink-2);
+}
+
+/* Hub: the card's keyword link sits above the stretched title link so both stay clickable. */
+.viz .vizHub a.vizStory__cta {
+  position: relative;
+  z-index: 2;
+  color: var(--viz-s1);
+  text-decoration: none;
+}

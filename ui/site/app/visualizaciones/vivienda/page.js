@@ -22,12 +22,9 @@ import {
   SalePricesFigure,
   TouristFigure,
 } from "./expanded";
+import ArticleSeo, { vizArticleMetadata } from "../ArticleSeo";
 
-export const metadata = {
-  title: "Vivienda: ¿falta construir o falta gasto público? | Vota Con La Chola",
-  description:
-    "Años de salario para comprar un piso, viviendas terminadas frente a hogares nuevos, edad de emancipación, propiedad y alquiler, impuestos de compra y gasto público en vivienda en España, con fuentes oficiales y datos descargables.",
-};
+export const metadata = vizArticleMetadata("vivienda");
 
 export default function ViviendaPage() {
   const data = readPublicJson("visualizaciones/data/vivienda.json", null);
@@ -872,6 +869,7 @@ export default function ViviendaPage() {
           .
         </p>
       </section>
+      <ArticleSeo slug="vivienda" />
     </main>
   );
 }

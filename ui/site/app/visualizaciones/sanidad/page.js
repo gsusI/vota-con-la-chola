@@ -9,12 +9,9 @@ import Scatter from "./Scatter";
 import ConnectedScatter from "./ConnectedScatter";
 import Dumbbell from "./Dumbbell";
 import GapDumbbell, { DIMENSION_COLORS, DIMENSION_LABELS } from "./GapDumbbell";
+import ArticleSeo, { vizArticleMetadata } from "../ArticleSeo";
 
-export const metadata = {
-  title: "Sanidad en España: esperanza de vida, gasto y listas de espera | Vota Con La Chola",
-  description:
-    "Esperanza de vida desde 1925, gasto sanitario público frente a Europa, listas de espera del SNS con sus rupturas de serie y médicos por habitante, con fuentes oficiales y datos descargables.",
-};
+export const metadata = vizArticleMetadata("sanidad");
 
 const C = {
   blue: "#2a78d6",
@@ -1739,6 +1736,7 @@ export default function SanidadPage() {
           .
         </p>
       </section>
+      <ArticleSeo slug="sanidad" />
     </main>
   );
 }

@@ -3,11 +3,28 @@ import { readPublicJson } from "../static-snapshot.mjs";
 import { getDatasetsForSection, getSectionById, withBasePath } from "../siteCatalog.mjs";
 import MiniChart from "./components/MiniChart";
 import { DEFAULT_LEVERS, simulate } from "./sistema/engine.mjs";
+import { JsonLd, breadcrumbLd, itemListLd, pageMetadata } from "../seo";
+import { ARTICLES, SIMULATOR, VIZ_SLUGS, articleSeo } from "./articleSeo.mjs";
 
-export const metadata = {
-  title: "Visualizaciones de datos públicos | Vota Con La Chola",
-  description: "Gráficos sobre datos públicos con fuente oficial, rupturas de serie señaladas y datos descargables.",
-};
+const HUB_PATH = "/visualizaciones/";
+
+// Description built from each article's headline figure, so the snippet carries numbers and follows the data.
+function hubFacts() {
+  const seo = Object.fromEntries(VIZ_SLUGS.map((slug) => [slug, articleSeo(slug, load(slug))]));
+  const t = seo["carga-fiscal"].card;
+  const e = load("empleo").headline;
+  return `Presión fiscal ${t.big} del PIB, paro ${num(e.es_last)} %, un piso ${seo.vivienda.card.big} años de sueldo, esperanza de vida ${seo.sanidad.card.big}: gráficos con fuente oficial y datos en CSV.`;
+}
+
+export function generateMetadata() {
+  return pageMetadata({
+    path: HUB_PATH,
+    title: "Gráficos de datos públicos de España",
+    description: hubFacts(),
+    image: { path: "/visualizaciones/og/visualizaciones.png", alt: "España en datos: impuestos, paro, vivienda, educación y sanidad" },
+    keywords: ["datos públicos España", "gráficos España", "presión fiscal", "paro", "precio de la vivienda", "gasto en educación", "esperanza de vida"],
+  });
+}
 
 const C = { blue: "#2a78d6", orange: "#eb6834", ref: "#52514e", peer: "#b4b2a9" };
 
@@ -55,6 +72,7 @@ function buildStories() {
     {
       href: "/visualizaciones/carga-fiscal/",
       topic: "Impuestos",
+      anchor: ARTICLES["carga-fiscal"].anchor,
       title: `De un ${num(th.first_value_imf, 0)} % a un ${num(th.last_value, 0)} % del PIB en un siglo`,
       dek: "Presión fiscal en España desde 1925. Dos series que se solapan sin empalmar: el Estado central (FMI) hasta 1980 y todas las administraciones (OCDE) desde 1965.",
       chart: {
@@ -77,6 +95,7 @@ function buildStories() {
     {
       href: "/visualizaciones/empleo/",
       topic: "Empleo",
+      anchor: ARTICLES.empleo.anchor,
       title: `Desde ${jh.hypothesis_from}, el paro de España ha sido de media ${num(jh.ratio_mean_since)} veces el europeo`,
       dek: "Tasa de paro desde 1960 frente a la media europea. La UE-15 cambia de cobertura en 1991 (reunificación alemana): se dibuja en dos tramos.",
       chart: {
@@ -97,6 +116,7 @@ function buildStories() {
     {
       href: "/visualizaciones/vivienda/",
       topic: "Vivienda",
+      anchor: ARTICLES.vivienda.anchor,
       title: `Desde ${s13.from} se han terminado ${howMany(s13.completed, "viviendas")} y se han formado ${howMany(s13.net_households, "hogares nuevos")}`,
       dek: `${num(s13.ratio, 2)} viviendas por cada hogar nuevo. Entre 1991 y 2011 fue al revés (máximo de ${thousands(hh.completed_peak)} terminadas en ${hh.completed_peak_year}) y aun así el precio subió: la página publica también esa contraevidencia. Línea vertical: cambio de la EPA en 2021.`,
       chart: {
@@ -119,6 +139,7 @@ function buildStories() {
     {
       href: "/visualizaciones/educacion/",
       topic: "Educación",
+      anchor: ARTICLES.educacion.anchor,
       title: `El abandono escolar temprano bajó del ${num(eh.leavers_2008)} % en 2008 al ${num(eh.leavers_last)} % en ${eh.leavers_last_year}`,
       dek: `Jóvenes de 18 a 24 años sin estudios más allá de la ESO. España sigue por encima de la UE-27 (${num(eh.leavers_eu_last)} %). Líneas verticales: rupturas de serie de Eurostat.`,
       chart: {
@@ -137,6 +158,7 @@ function buildStories() {
     {
       href: "/visualizaciones/sanidad/",
       topic: "Sanidad",
+      anchor: ARTICLES.sanidad.anchor,
       title: `La esperanza de vida pasó de ${num(es1925.value, 0)} años en ${es1925.year} a ${num(esLongLast.value)} en ${esLongLast.year}`,
       dek: `Hoy es ${num(leH.es - leH.eu27)} años mayor que la media de la UE (INE y Eurostat, ${leH.year}). En gris, Alemania, Francia, Italia y Portugal.`,
       chart: {
@@ -168,6 +190,7 @@ function simulatorStory() {
   return {
     href: "/visualizaciones/sistema/",
     topic: "Simulador",
+    anchor: "simulador de pensiones, impuestos y vivienda",
     title: `Subir las pensiones un punto sobre el IPC suma ${num(run.debt_dev_pp[end], 0)} puntos de deuda en 2050 si se paga con deuda`,
     dek: `Gasto en pensiones con la ley actual (Ageing Report 2024) y con una revalorización de un punto más que el IPC desde ${model.policy_start}. En la página: el mismo cambio pagado con cotizaciones o con IVA, y qué les pasa a dos casos tipo.`,
     chart: {
@@ -205,6 +228,22 @@ export default function VisualizacionesHubPage() {
 
   return (
     <main className="shell vizHub">
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { name: "Inicio", path: "/" },
+            { name: "Visualizaciones", path: HUB_PATH },
+          ]),
+          itemListLd({
+            path: HUB_PATH,
+            name: "Visualizaciones de datos públicos de España",
+            items: [
+              ...VIZ_SLUGS.map((slug) => ({ path: `/visualizaciones/${slug}/`, name: ARTICLES[slug].linkText })),
+              { path: SIMULATOR.href, name: SIMULATOR.anchor },
+            ],
+          }),
+        ]}
+      />
       <header className="card vizHub__hero">
         <p className="eyebrow">Visualizaciones · datos públicos</p>
         <h1>{section.title}</h1>
@@ -247,9 +286,9 @@ export default function VisualizacionesHubPage() {
             <p className="vizStory__also">
               <strong>En la página:</strong> {story.also}
             </p>
-            <span className="vizStory__cta" aria-hidden="true">
-              Ver todos los gráficos →
-            </span>
+            <Link href={withBasePath(story.href)} className="vizStory__cta">
+              {story.topic === "Simulador" ? `Abrir el ${story.anchor}` : `Ver los gráficos de ${story.anchor}`} →
+            </Link>
           </article>
         ))}
       </section>

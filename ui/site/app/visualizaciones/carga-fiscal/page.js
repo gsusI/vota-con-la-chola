@@ -10,12 +10,9 @@ import TerritoryFigure from "./Territory";
 import { SqueezeFigure, SqueezeIndexFigure, SurveyFigure } from "./Squeeze";
 import HouseholdsFigure from "./Households";
 import { SpendingSectionIntro, WhereItGoesFigure, DecompositionFigure, LongRunSpendingFigure } from "./WhereItGoes";
+import ArticleSeo, { vizArticleMetadata } from "../ArticleSeo";
 
-export const metadata = {
-  title: "Cien años de impuestos en España | Vota Con La Chola",
-  description:
-    "Presión fiscal, lo que pagan y lo que les queda a los hogares frente a Europa, quién paga, a dónde va el gasto y qué resultados dan los servicios, y complejidad normativa en España desde 1925, con fuentes oficiales y datos descargables.",
-};
+export const metadata = vizArticleMetadata("carga-fiscal");
 
 const C = {
   blue: "#2a78d6",
@@ -549,6 +546,7 @@ export default function CargaFiscalPage() {
           .
         </p>
       </section>
+      <ArticleSeo slug="carga-fiscal" />
     </main>
   );
 }

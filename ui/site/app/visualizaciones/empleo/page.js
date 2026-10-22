@@ -12,12 +12,9 @@ import { Conclusion, Glossary, Summary } from "./summary";
 import DatoMataRelato from "./relato";
 import { SectorTemporality, TypicalCases, WhoFigure } from "./segmentos";
 import { num } from "./format.mjs";
+import ArticleSeo, { vizArticleMetadata } from "../ArticleSeo";
 
-export const metadata = {
-  title: "El paro en España: ¿estructural o cíclico? | Vota Con La Chola",
-  description:
-    "Paro desde 1960 frente a Europa, ciclo y dualidad de contratos, causas de la brecha, fijos discontinuos, regiones, productividad y salarios, con fuentes oficiales, rupturas de serie y datos descargables.",
-};
+export const metadata = vizArticleMetadata("empleo");
 
 const pct = (value, digits = 1) => `${num(value, digits)} %`;
 
@@ -111,6 +108,7 @@ export default function EmpleoPage() {
       <Glossary />
       <LimitsCard />
       <MethodCard data={data} downloads={downloads} events={events} />
+      <ArticleSeo slug="empleo" />
     </main>
   );
 }

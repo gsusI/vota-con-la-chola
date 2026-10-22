@@ -4817,7 +4817,7 @@ placsp-launch-verify:
 site-build-frozen:
   just placsp-launch-verify
   node tests/test_spending_decision_dates.mjs
-  node --test ui/site/app/visualizaciones/sistema/engine.test.mjs ui/site/app/visualizaciones/sistema/scenarios.test.mjs
+  node --test ui/site/app/visualizaciones/sistema/engine.test.mjs ui/site/app/visualizaciones/sistema/scenarios.test.mjs ui/site/app/visualizaciones/articleSeo.test.mjs
   node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
   cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
   node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release

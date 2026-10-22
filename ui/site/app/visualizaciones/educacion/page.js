@@ -9,12 +9,9 @@ import { GapsFigure } from "./GapsFigure";
 import { BirthBars, DecompositionBars, MotherDumbbell } from "./LeaversSegments";
 import { fmt } from "./formatEdu.mjs";
 import { AdultSkillsFigure, AttainmentFigure, C, EquityFigure, Explain, FamiliesFigure, Glossary, LabourReturnFigure, NAMES, RegionsFigure, TeachersFigure, VocationalFigure, num } from "./sections";
+import ArticleSeo, { vizArticleMetadata } from "../ArticleSeo";
 
-export const metadata = {
-  title: "Gasto, resultados y abandono: la educación en España | Vota Con La Chola",
-  description:
-    "Gasto público real por alumno, PISA, abandono escolar, repetición, sobrecualificación y un siglo de alfabetización en España, frente a la OCDE, la UE y países similares, con fuentes oficiales y datos descargables.",
-};
+export const metadata = vizArticleMetadata("educacion");
 
 function retrieved(source) {
   return source?.retrieved_at ? ` (consultado ${String(source.retrieved_at).slice(0, 10)})` : "";
@@ -841,6 +838,7 @@ export default function EducacionPage() {
           .
         </p>
       </section>
+      <ArticleSeo slug="educacion" />
     </main>
   );
 }

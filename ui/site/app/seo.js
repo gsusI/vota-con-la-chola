@@ -150,3 +150,14 @@ export function faqLd(faqs) {
     mainEntity: faqs.map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
   };
 }
+
+// Hub pages: an ordered list of the pages they lead to (items: [{ path, name }]).
+export function itemListLd({ path, name, items }) {
+  return {
+    "@type": "ItemList",
+    "@id": `${absoluteSiteUrl(path)}#list`,
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({ "@type": "ListItem", position: i + 1, name: item.name, url: absoluteSiteUrl(item.path) })),
+  };
+}
