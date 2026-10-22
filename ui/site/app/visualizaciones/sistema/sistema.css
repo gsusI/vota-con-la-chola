@@ -660,3 +660,133 @@
     text-align: left;
   }
 }
+
+/* Scenario landing pages (/visualizaciones/sistema/escenarios/) and the FAQ / scenario links of the simulator. */
+.viz .scn__crumbs {
+  font-size: 0.85rem;
+  color: var(--viz-muted);
+}
+
+.viz .scn__crumbs a {
+  color: inherit;
+}
+
+.viz .scn__stats {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.viz .scn__years {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.viz .scn__years > span {
+  display: grid;
+  gap: 2px;
+  align-content: start;
+}
+
+.viz .scn__years small {
+  font-size: 0.78rem;
+  color: var(--viz-muted);
+}
+
+.viz .scn__stat .vizStat__value {
+  font-size: 1.6rem;
+}
+
+.viz .scn__caveat {
+  max-width: var(--viz-measure);
+  font-size: 0.92rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .scn__cta {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--viz-s1);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.viz .scn__cta:hover,
+.viz .scn__cta:focus-visible {
+  background: #1f62b3;
+}
+
+.viz .scn__cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.viz .scn__card {
+  padding: 16px 18px;
+  background: rgba(42, 120, 214, 0.05);
+  border-radius: 10px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  font-size: 0.92rem;
+}
+
+.viz .scn__card p {
+  margin: 0;
+}
+
+.viz .scn__grade {
+  font-size: 0.82rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .scn__sub {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.viz .scn__sources {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+}
+
+.viz .scn__faq h3 {
+  font-size: 1.02rem;
+  margin: 14px 0 4px;
+}
+
+.viz .scn__faq p {
+  margin: 0;
+}
+
+.viz .scn__index {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.viz .scn__index h3 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+
+.viz .scn__index p {
+  margin: 0;
+}
+
+.viz .scn__links {
+  columns: 2 18rem;
+  column-gap: 2rem;
+}
+
+@media (max-width: 560px) {
+  .viz .scn__years {
+    grid-template-columns: 1fr;
+  }
+}

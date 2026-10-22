@@ -5,12 +5,25 @@ import HousingCompare from "./scene/HousingCompare";
 import { housingRows } from "./housingScenarios.mjs";
 import { CLOSURES, DEFAULT_LEVERS, centralParams, quintileImpact, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
+import { JsonLd, breadcrumbLd, faqLd, pageMetadata, webApplicationLd } from "../../seo";
+import { withBasePath } from "../../path-utils.mjs";
+import { LEVER_LIST, SCENARIOS, SCENARIOS_PATH, SIM_PATH, SIM_TITLE, fmt, mainFindings, scenarioPath, simDescription } from "./scenarios.mjs";
 
-export const metadata = {
-  title: "Simulador: pensiones, impuestos, vivienda y cuentas públicas | Vota Con La Chola",
-  description:
-    "Qué pasa si se suben o se bajan las pensiones, el IRPF, el IVA, las cotizaciones o el Impuesto sobre Sociedades, o si se construye vivienda pública, se libera suelo, se topa el alquiler, se limitan las hipotecas o los pisos turísticos: cuánto cuesta, quién lo paga y qué les pasa a casos concretos. Modelo con supuestos visibles sobre líneas base oficiales (Ageing Report 2024, proyección de hogares del INE).",
+const loadModel = () => {
+  const model = readPublicJson("visualizaciones/data/sistema.json", null);
+  if (!model) throw new Error("Missing visualizaciones/data/sistema.json");
+  return model;
 };
+
+export function generateMetadata() {
+  return pageMetadata({
+    path: SIM_PATH,
+    title: SIM_TITLE,
+    description: simDescription(loadModel()),
+    image: { path: "/visualizaciones/sistema/og/inicio.png", alt: "Simulador de pensiones, impuestos y vivienda: ¿quién lo paga?" },
+    keywords: ["simulador pensiones", "simulador impuestos", "subir pensiones", "subir IVA", "bajar IRPF", "tope alquiler", "vivienda pública", "deuda pública"],
+  });
+}
 
 const num = (v, d = 1) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
 
@@ -22,8 +35,7 @@ const GRADE_TEXT = {
 };
 
 export default function SistemaPage() {
-  const model = readPublicJson("visualizaciones/data/sistema.json", null);
-  if (!model) throw new Error("Missing visualizaciones/data/sistema.json");
+  const model = loadModel();
   const b = model.baseline;
   const y2050 = model.years.length - 1;
   const src = model.sources;
@@ -91,8 +103,49 @@ export default function SistemaPage() {
   const r2 = creditRun.hs_price[t35h] / creditNoLoop.hs_price[t35h];
   const baseGap = H.net_households_next_k - (H.completions_free_k + H.completions_protected_k);
 
+  // Visible FAQ (and its FAQPage JSON-LD): answers use only the engine numbers computed above.
+  const costMeur35 = mainFindings(model).costMeur35;
+  const faqs = [
+    {
+      q: "¿Cómo funciona el simulador?",
+      a: `Mueves una palanca (pensiones, edad de jubilación, cotizaciones, IRPF, IVA, Sociedades, vivienda pública, suelo, tope del alquiler, pisos turísticos o hipotecas) y eliges cómo se paga: con deuda, cotizaciones, IVA o IRPF. El modelo calcula año a año, de ${model.policy_start} a 2050, la diferencia frente a la ley actual en deuda, empleo, precios, alquiler, por nivel de renta y en cuatro casos tipo, con 200 simulaciones que sortean cada parámetro dentro de su rango.`,
+    },
+    {
+      q: "¿Es una predicción?",
+      a: "No. Es un modelo pequeño de forma reducida con supuestos visibles: calcula diferencias frente a las proyecciones oficiales y no dice cuánto crecerá la economía ni qué hará el BCE. Los deslizadores se quedan cerca de lo observado; fuera de ese rango, el modo ilustrativo enseña el mecanismo, no estimaciones.",
+    },
+    {
+      q: "¿De dónde salen los números?",
+      a: `La línea base es el Ageing Report 2024 de la Comisión Europea y la proyección de hogares del INE; el punto de partida, las cuentas de ${model.start.year} de Eurostat; el reparto por renta, los microdatos de la Encuesta de Condiciones de Vida ${model.incidence.ecv.year} y la Encuesta de Presupuestos Familiares ${model.incidence.vat.year}. Cada una de las ${cards.length} relaciones tiene una ficha con su fuente, su rango, su grado de evidencia y lo que la contradice.`,
+    },
+    {
+      q: "¿Cuánto cuesta subir las pensiones un punto más que el IPC?",
+      a: `Unos ${fmt.meurAbs(costMeur35)} al año en 2035 y ${num(debt50, 0)} puntos de PIB de deuda extra en 2050 si se paga con deuda. Si se paga con impuestos, a Lucía (caso 1, 25 a 34 años) le cuesta entre ${num(Math.min(...taxPaid), 0)} y ${num(Math.max(...taxPaid), 0)} euros al mes en 2035 según el impuesto, y Carmen (caso 4, jubilada) gana unos ${num(p4Gain, 0)} euros al mes si se paga con deuda o con cotizaciones.`,
+    },
+    {
+      q: "¿Quién paga una subida del IVA?",
+      a: `Un punto más de IVA general recauda unos ${num(vatRow.behaviour / 1000, 1)} mil millones el primer año tras la reacción y pesa un ${num(-vatRow.q[0].pctDisposable, 2)} % de la renta disponible en el 20 % con menos renta y un ${num(-vatRow.q[4].pctDisposable, 2)} % en el 20 % con más: en proporción a la renta, pesa más abajo. Un punto de IRPF en todos los tramos pesa ${num(ratio(irpfRow), 1)} veces más en el quinto más rico que en el más pobre.`,
+    },
+    {
+      q: "¿Baja el alquiler con un tope?",
+      a: `A quien tiene o encuentra un contrato cubierto, sí: un tope del 10 % en la mitad del mercado ${verb(hRows.capIn.rent.v)} el alquiler de un contrato nuevo con tope en 2035. A quien busca fuera del tope, ${verb(hRows.capOut.rent.v)}, porque algunos caseros dejan el alquiler; cuántos es el supuesto más disputado del simulador (los estudios de Cataluña y San Francisco no coinciden).`,
+    },
+  ];
+  const crumbs = [
+    { name: "Visualizaciones", path: "/visualizaciones/" },
+    { name: "Simulador", path: SIM_PATH },
+  ];
+  const appLd = webApplicationLd({
+    path: SIM_PATH,
+    name: "Simulador de pensiones, impuestos y vivienda",
+    description: simDescription(model),
+    image: "/visualizaciones/sistema/og/inicio.png",
+    featureList: LEVER_LIST,
+  });
+
   return (
     <main className="shell vizArticle">
+      <JsonLd data={[breadcrumbLd(crumbs), appLd, faqLd(faqs)]} />
       <StaticRouteHero
         eyebrow="Visualizaciones · simulador"
         title="Si se suben las pensiones o los impuestos, o se interviene la vivienda, ¿quién lo paga?"
@@ -100,6 +153,7 @@ export default function SistemaPage() {
         actions={[
           { href: "#simulador", label: "Ir al simulador" },
           { href: "#vivienda", label: "Vivienda" },
+          { href: SCENARIOS_PATH, label: "Escenarios" },
           { href: "/visualizaciones/data/sistema.json", label: "Modelo y datos (JSON)" },
           { href: "/visualizaciones/data/sistema.csv", label: "Línea base (CSV)" },
           { href: "#metodo", label: "Método y fuentes" },
@@ -112,6 +166,9 @@ export default function SistemaPage() {
           Cada euro de más en pensiones o en vivienda pública se paga con deuda, con impuestos o recortando otra cosa, y cada forma de pagarlo mueve el
           empleo, los precios y los intereses. Elige un cambio y mira cómo circula el dinero, a quién le toca y por qué. El modelo solo calcula diferencias
           frente a la ley actual según las proyecciones oficiales, y cada relación tiene una ficha con su fuente, su rango y lo que la contradice.
+        </p>
+        <p>
+          <strong>Qué puedes mover:</strong> {LEVER_LIST.join("; ")}.
         </p>
       </div>
 
@@ -277,6 +334,29 @@ export default function SistemaPage() {
         </table>
       </div>
 
+
+      <section className="vizProse" id="escenarios" aria-labelledby="escenarios-title">
+        <h2 id="escenarios-title">Escenarios: las preguntas más buscadas, con su respuesta</h2>
+        <p>
+          Cada escenario tiene su página con el resultado y su rango, los casos tipo, las formas de pagarlo, las fichas de evidencia y las votaciones del
+          Congreso, y un botón que lo abre aquí. <a href={withBasePath(SCENARIOS_PATH)}>Todos los escenarios</a>.
+        </p>
+        <ul className="scn__links">
+          {SCENARIOS.map((sc) => (
+            <li key={sc.slug}><a href={withBasePath(scenarioPath(sc))}>{sc.question}</a></li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="vizProse" id="preguntas" aria-labelledby="preguntas-title">
+        <h2 id="preguntas-title">Preguntas frecuentes</h2>
+        {faqs.map((f) => (
+          <div key={f.q} className="scn__faq">
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </section>
 
       <section className="vizProse" id="metodo">
         <h2>Método</h2>
