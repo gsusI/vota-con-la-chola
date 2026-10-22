@@ -4823,6 +4823,7 @@ site-build-frozen:
   node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
+  python3 scripts/build_site_sitemap.py --path "{{site_out_dir}}"
   just cloudflare-pages-size-check
   just site-artifact-gate
 
@@ -4870,6 +4871,7 @@ site-build-refresh:
   fi
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
+  python3 scripts/build_site_sitemap.py --path "{{site_out_dir}}"
   just cloudflare-pages-size-check
   just privacy-check-public-artifacts
   @echo "Build Cloudflare Pages listo en {{site_out_dir}}"
@@ -5712,6 +5714,7 @@ cloudflare-pages-refresh-data:
   @just vote-explainer-next-prime
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
+  python3 scripts/build_site_sitemap.py --path "{{site_out_dir}}"
   @just outcome-context-built-check
   just cloudflare-pages-size-check
   cp -R "{{site_out_dir}}"/. "{{static_data_dir}}"/
@@ -5983,6 +5986,7 @@ cloudflare-pages-refresh-data:
   cp docs/ideal_sources_say_do.json "{{site_app_dir}}/public/legacy/graph/data/ideal.json"
   cd "{{site_app_dir}}" && NEXT_PUBLIC_BASE_PATH="{{site_base_path}}" node node_modules/next/dist/bin/next build --webpack
   python3 scripts/check_next_export_notfound_payloads.py --path "{{site_out_dir}}"
+  python3 scripts/build_site_sitemap.py --path "{{site_out_dir}}"
   just cloudflare-pages-size-check
   just privacy-check-public-artifacts
   @echo "Build Cloudflare Pages listo en {{site_out_dir}}"

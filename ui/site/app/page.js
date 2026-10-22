@@ -1,5 +1,6 @@
 import { readPublicJson } from "./static-snapshot.mjs";
 import { withBasePath } from "./path-utils.mjs";
+import { JsonLd, organizationLd, websiteLd } from "./seo";
 
 const primaryRoutes = [
   {
@@ -211,6 +212,7 @@ export default function HomePage() {
   if (!launch) throw new Error("Missing PLACSP launch");
   return (
     <main className="homepage">
+      <JsonLd data={[organizationLd(), websiteLd()]} />
       <section className="homepage-hero" aria-labelledby="homepage-title">
         <div className="homepage-hero__content">
           <p className="homepage-hero__eyebrow eyebrow">Corte público · evidencia primero</p>

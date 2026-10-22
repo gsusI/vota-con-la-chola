@@ -26,3 +26,11 @@ just site-origin-worker-deploy
 ```
 
 Vuelta atrás: del Worker, `wrangler versions deploy <version>@100` desde `infra/cloudflare/votaconlachola-worker/`; del contenido, `git checkout <source_commit>` del manifest de la release buena y `just site-publish` (R2 guarda solo la release actual). Plan gratuito: R2 ≤ 10 GB, escrituras solo de ficheros cambiados, ≤ 19k ficheros estáticos en el Worker.
+
+## SEO (desde `2026-10-22`)
+
+- `ui/site/public/robots.txt` (permite todo, `Content-Signal: search=yes, ai-input=yes`, enlaza el sitemap) y `ui/site/public/llms.txt` (índice para buscadores con IA).
+- `sitemap.xml` lo genera `scripts/build_site_sitemap.py` tras `next build` a partir de las páginas exportadas: entra todo `index.html` sin `noindex` cuya canonical sea la propia URL. No hay lista a mano: una página nueva entra sola.
+- Metadatos y datos estructurados: `ui/site/app/seo.js`. Toda página indexable usa `pageMetadata({ path, title, description, image })` (canonical + `og:url` + tarjeta coherentes) y, cuando aplica, `JsonLd` con `breadcrumbLd`, `articleLd`, `datasetLd`, `webApplicationLd` o `faqLd` (las respuestas del FAQ deben verse en la página).
+- Las páginas que queramos posicionar deben llevar su contenido en el HTML (render en servidor), no solo «Cargando…» en cliente.
+- Presupuesto: cada página exportada son ~10 ficheros y el Worker admite ≤ 19k (hoy ~16,4k). Las páginas programáticas nuevas se cuentan contra ese margen.
