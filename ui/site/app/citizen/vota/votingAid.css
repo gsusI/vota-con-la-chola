@@ -3246,3 +3246,300 @@ html.has-sideDrawer {
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Indexable static pages (VotaSeo.js): party, key question and topic pages, the crawlable summaries of the
+   explore pages and the «Cómo funciona» + FAQ block under the test. Server-rendered, no client JS. */
+
+.vs-page {
+  gap: 24px;
+}
+
+.vs-page--below {
+  padding-top: 8px;
+}
+
+.vs-about {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.vs-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 72rem;
+}
+
+.vs-section p,
+.vs-faq__item p {
+  margin: 0;
+  max-width: 70ch;
+  line-height: 1.55;
+}
+
+.vs-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vs-facts li {
+  padding: 8px 14px;
+  border-radius: var(--v-radius-s);
+  background: var(--v-sunk);
+  font-size: 0.95rem;
+}
+
+.vs-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  margin: 4px 0 0;
+}
+
+.vs-quote {
+  margin: 0;
+  padding: 16px 20px;
+  border-left: 4px solid var(--v-brand);
+  border-radius: var(--v-radius-s);
+  background: var(--v-card);
+  max-width: 70ch;
+}
+
+.vs-quote p {
+  margin: 0;
+  font-family: var(--v-display);
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+
+.vs-quote footer {
+  margin-top: 8px;
+  color: var(--v-soft);
+  font-size: 0.9rem;
+}
+
+.vs-theme {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vs-theme__title,
+.vs-qindex__theme,
+.vs-links__title,
+.vs-faq__item h3 {
+  margin: 8px 0 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.vs-rows,
+.vs-list,
+.vs-votes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-list {
+  gap: 6px;
+}
+
+.vs-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--v-line-2);
+}
+
+.vs-row--stack {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.vs-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 28rem;
+  min-width: 0;
+}
+
+.vs-row__quote {
+  color: var(--v-soft);
+  font-size: 0.92rem;
+}
+
+.vs-row__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.85rem;
+}
+
+.vs-table {
+  width: 100%;
+  max-width: 56rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.vs-table caption {
+  text-align: left;
+  padding-bottom: 6px;
+  font-size: 0.88rem;
+}
+
+.vs-table th,
+.vs-table td {
+  padding: 8px 10px 8px 0;
+  border-bottom: 1px solid var(--v-line-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.vs-table thead th {
+  color: var(--v-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.vs-table tbody th {
+  font-weight: 600;
+}
+
+.vs-vote {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--v-line-2);
+}
+
+.vs-section .vs-vote p {
+  max-width: none;
+}
+
+.vs-vote__title {
+  font-weight: 600;
+}
+
+.vs-vote__meta,
+.vs-vote__links {
+  color: var(--v-soft);
+  font-size: 0.85rem;
+}
+
+.vs-codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vs-code {
+  padding: 2px 8px 2px 6px;
+  border: 1px solid var(--v-line);
+  border-left-width: 4px;
+  border-radius: 6px;
+  background: var(--v-card);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.vs-code--agree,
+.vs-code--yes {
+  border-left-color: var(--v-yes);
+}
+
+.vs-code--disagree,
+.vs-code--no {
+  border-left-color: var(--v-no);
+}
+
+.vs-code--abstain {
+  border-left-color: var(--v-abs);
+}
+
+.vs-code--absent,
+.vs-code--no_data {
+  border-left-color: var(--v-absent);
+  color: var(--v-soft);
+}
+
+.vs-code.is-own {
+  border-color: var(--v-ink);
+  font-weight: 700;
+}
+
+.vs-qindex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 4px 28px;
+}
+
+.vs-qindex ul {
+  margin: 4px 0 0;
+  padding: 0 0 0 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vs-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vs-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--v-line);
+}
+
+.vs-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vs-inline--tools {
+  margin-top: 8px;
+}
+
+.vs-inline--names {
+  gap: 2px 12px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+  .vs-row__stat {
+    align-items: flex-start;
+  }
+
+  .vs-table {
+    display: block;
+    overflow-x: auto;
+    font-size: 0.88rem;
+  }
+}

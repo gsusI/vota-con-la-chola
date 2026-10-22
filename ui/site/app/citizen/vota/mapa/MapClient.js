@@ -155,7 +155,7 @@ function useWidth(fallback) {
 // ---------------------------------------------------------------------------
 // Page
 
-export default function MapClient() {
+export default function MapClient({ fallback = null }) {
   const [atlas, status] = useJson(ATLAS_PATH);
   const userValues = useUserValues();
   const isMobile = useMedia("(max-width: 767px)");
@@ -205,6 +205,7 @@ export default function MapClient() {
           ))}
         </nav>
         {status === "loading" ? <p className="v-muted">Cargando las posiciones de los partidos…</p> : null}
+        {atlas ? null : fallback}
         {status === "error" ? <p className="v-card">No se pudieron cargar los datos. Recarga la página para intentarlo de nuevo.</p> : null}
         {atlas && state.view === "mapa" ? (
           <MapView atlas={atlas} isMobile={isMobile} maxPicks={maxPicks} onPicks={(p) => update({ picks: p })} picks={picks} userValues={userValues} />

@@ -1,7 +1,12 @@
 import VotingAidClient from "../../VotingAidClient";
+import { absoluteSiteUrl } from "../../../../path-utils.mjs";
+import { questionPagePath } from "../../votaPaths.mjs";
 import { SITE_ORIGIN, hookImagePath, hookPagePath, hookStatements, loadVotingAidPageSnapshot, statementHook, statementVersion } from "../../votingAidHooks.mjs";
+import { CURRENT_VERSION } from "../../votingAidVersions.mjs";
 
 // One shareable page per curated statement: same game, opened on that question, with its own OG card.
+// Questions of the current test have an indexable page (/citizen/vota/pregunta/<slug>/), which is their canonical;
+// shares keep this URL (og:url) so a shared link still opens the game.
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -19,7 +24,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${title} | Vota Con La Chola`,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: statementVersion(statementId).id === CURRENT_VERSION.id ? absoluteSiteUrl(questionPagePath(statementId)) : url },
     openGraph: { title, description, url, type: "website", siteName: "Vota Con La Chola", locale: "es_ES", images: [image] },
     twitter: { card: "summary_large_image", title, description, images: [image.url] },
   };

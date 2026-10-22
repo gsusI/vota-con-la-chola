@@ -251,7 +251,7 @@ function VoteView({ atlas, people, voteId }) {
   );
 }
 
-export default function VoteClient() {
+export default function VoteClient({ fallback = null }) {
   const [atlas, atlasStatus] = useJson(ATLAS_PATH);
   const [people, peopleStatus] = useJson(PEOPLE_PATH);
   const hash = useHashState();
@@ -275,7 +275,9 @@ export default function VoteClient() {
               </p>
             </>
           )
-        ) : null}
+        ) : (
+          fallback
+        )}
       </main>
     </>
   );

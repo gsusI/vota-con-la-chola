@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { JsonLd, breadcrumbLd, pageMetadata } from "../../../seo.js";
 import { withBasePath } from "../../../siteCatalog.mjs";
 import { formatCount } from "../voteAtlasModel.mjs";
 import { MIN_ANSWERS_FOR_RANKING } from "../votingAidModel.mjs";
@@ -24,11 +25,13 @@ import {
   repoLink,
 } from "./methodologyData.mjs";
 
-export const metadata = {
-  title: "Cómo se hizo «¿Con quién coincides?» | Vota Con La Chola",
+export const metadata = pageMetadata({
+  path: "/citizen/vota/metodologia/",
+  title: "Cómo se hizo «¿Con quién coincides?»",
   description:
     "Proceso completo de la ayuda al voto: fuentes oficiales, cálculo, modelos de IA usados, prompts literales, revisiones, limitaciones y cómo mejorarlo.",
-};
+  image: { path: "/citizen/vota/og/inicio.png", alt: "¿Con quién coincides? Lo que votaron, no lo que dicen" },
+});
 
 const fmt = formatCount;
 // Step 8 reviewed the statements of this version (its evidence file is from the v1 sprint).
@@ -957,6 +960,13 @@ python3 -m unittest tests.test_export_voting_aid_snapshot tests.test_export_voti
           </Link>
         </p>
       </section>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Inicio", path: "/" },
+          { name: "¿Con quién coincides?", path: "/citizen/vota/" },
+          { name: "Metodología", path: "/citizen/vota/metodologia/" },
+        ])}
+      />
     </main>
   );
 }

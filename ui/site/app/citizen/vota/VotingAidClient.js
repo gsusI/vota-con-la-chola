@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
 import { withBasePath } from "../../path-utils.mjs";
+import { hasQuestionPage, partyPagePath, questionPagePath } from "./votaPaths.mjs";
 import {
   ANSWER_LABELS,
   ANSWER_VALUES,
@@ -332,6 +333,7 @@ function QuestionLinks({ question }) {
   const links = [];
   if (question.axis_id) {
     links.push({ href: axisMapHref(question), label: `Ver las ${question.votes_total} votaciones y cómo votó cada partido`, internal: true });
+    if (hasQuestionPage(question.statement_id)) links.push({ href: withBasePath(questionPagePath(question.statement_id)), label: "Página de la pregunta", page: true });
   } else if (question.source === "pool") {
     if (question.source_url) links.push({ href: question.source_url, label: "Votación oficial" });
     if (question.text_url) links.push({ href: question.text_url, label: "Texto (BOCG)" });
@@ -356,6 +358,10 @@ function QuestionLinks({ question }) {
               setPanelOpen(true);
             }}
           >
+            {l.label}
+          </a>
+        ) : l.page ? (
+          <a href={l.href} key={l.href + l.label}>
             {l.label}
           </a>
         ) : (
@@ -2024,7 +2030,7 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
         <h1 className="v-h1" id="va-party-title">
           Tú y {row.label} <span className="va-party__pct">{pctText(row.match)}</span>
         </h1>
-        <a className="va-votesLink" href={withBasePath(`/citizen/vota/partidos/#p=${encodeURIComponent(row.partyId)}`)}>
+        <a className="va-votesLink" href={withBasePath(partyPagePath(row.partyId))}>
           Cómo vota {row.label} en todos los temas →
         </a>
       </div>

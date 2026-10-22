@@ -1,21 +1,47 @@
-import { resolveBasePath } from "../../path-utils.mjs";
+import { JsonLd, breadcrumbLd, faqLd, pageMetadata, webApplicationLd } from "../../seo.js";
 import VotingAidClient from "./VotingAidClient";
-import { SITE_ORIGIN, hookImagePath, loadVotingAidPageSnapshot } from "./votingAidHooks.mjs";
+import { TestAbout, VOTA_ROOT_CRUMBS, testFaqs } from "./VotaSeo";
+import { loadVotingAidPageSnapshot } from "./votingAidHooks.mjs";
+import { VOTA_PATHS, loadVotaData, ogPath, testFacts, topicsWithVotes } from "./votaSeoData.mjs";
 
-const title = "¿Con quién coincides? Generales | Vota Con La Chola";
-const description =
-  "Responde afirmaciones sobre lo que se votó en el Congreso y compara tus respuestas con cómo votó cada partido, con cada voto enlazado.";
-const url = `${SITE_ORIGIN}${resolveBasePath()}/citizen/vota/`;
-const image = { url: `${SITE_ORIGIN}${hookImagePath("inicio")}`, width: 1200, height: 630, alt: "¿Con quién coincides?" };
+const facts = testFacts();
+const title = "Test político: qué partido vota como tú";
+const description = `Test de afinidad para las generales: responde ${facts.questions} preguntas y mira qué partidos votaron como tú en el Congreso, con cada voto enlazado.`;
 
-export const metadata = {
+export const metadata = pageMetadata({
+  path: VOTA_PATHS.test,
   title,
   description,
-  alternates: { canonical: url },
-  openGraph: { title: "¿Con quién coincides?", description, url, type: "website", siteName: "Vota Con La Chola", locale: "es_ES", images: [image] },
-  twitter: { card: "summary_large_image", title: "¿Con quién coincides?", description, images: [image.url] },
-};
+  image: { path: ogPath("inicio"), alt: "¿Con quién coincides? Lo que votaron, no lo que dicen" },
+  keywords: ["test político", "test de afinidad política", "a quién votar", "elecciones generales", "cómo vota cada partido", "Congreso de los Diputados"],
+});
 
 export default function VotingAidPage() {
-  return <VotingAidClient snapshot={loadVotingAidPageSnapshot()} />;
+  const { snapshot, atlas } = loadVotaData();
+  return (
+    <>
+      <VotingAidClient snapshot={loadVotingAidPageSnapshot()} />
+      <div className="v-page vs-page vs-page--below">
+        <TestAbout atlas={atlas} snapshot={snapshot} topics={topicsWithVotes(atlas)} />
+      </div>
+      <JsonLd
+        data={[
+          webApplicationLd({
+            path: VOTA_PATHS.test,
+            name: "¿Con quién coincides? Test de afinidad política",
+            description,
+            image: ogPath("inicio"),
+            featureList: [
+              `${facts.questions} preguntas clave que resumen ${facts.votes} votaciones del Congreso`,
+              `Compara con ${facts.parties} partidos: ${facts.partyLabels.join(", ")}`,
+              "Cada postura enlazada a las votaciones oficiales",
+              "Respuestas guardadas solo en tu navegador",
+            ],
+          }),
+          faqLd(testFaqs(facts)),
+          breadcrumbLd(VOTA_ROOT_CRUMBS),
+        ]}
+      />
+    </>
+  );
 }

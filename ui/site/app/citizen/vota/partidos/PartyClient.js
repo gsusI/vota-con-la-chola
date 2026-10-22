@@ -5,6 +5,7 @@ import "../explore.css";
 import { Crumbs, ExploreNav, LoadState, ROUTES, href, partyHref, useHashState, useJson } from "../explorar/ExploreClient";
 import { leaningText, partyAxisGroups, partyVoteCount, sameVoteShares } from "../exploreModel.mjs";
 import { ATLAS_PATH, formatCount, writeHash } from "../voteAtlasModel.mjs";
+import { partyPagePath } from "../votaPaths.mjs";
 
 const MIN_VOTES = 10;
 
@@ -77,6 +78,9 @@ function PartyView({ atlas, party }) {
           <a className="v-btn" href={href(ROUTES.people, writeHash({ partido: party.party_id }))}>
             Sus diputados
           </a>
+          <a className="v-btn" href={href(partyPagePath(party.party_id))}>
+            Resumen y votaciones clave
+          </a>
           <a className="v-btn v-btn--primary" href={href(ROUTES.test)}>
             ¿Coincides? Haz el test
           </a>
@@ -148,7 +152,7 @@ function PartyView({ atlas, party }) {
   );
 }
 
-export default function PartyClient() {
+export default function PartyClient({ fallback = null }) {
   const [atlas, status] = useJson(ATLAS_PATH);
   const hash = useHashState();
   const partyId = hash?.p || "";
@@ -172,7 +176,9 @@ export default function PartyClient() {
               <PartyList atlas={atlas} />
             </>
           )
-        ) : null}
+        ) : (
+          fallback
+        )}
       </main>
     </>
   );

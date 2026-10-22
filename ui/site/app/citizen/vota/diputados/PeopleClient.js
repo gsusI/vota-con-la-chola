@@ -387,7 +387,7 @@ function PersonView({ person, people, atlas, partiesById }) {
   );
 }
 
-export default function PeopleClient() {
+export default function PeopleClient({ fallback = null }) {
   const [people, peopleStatus] = useJson(PEOPLE_PATH);
   const [atlas, atlasStatus] = useJson(ATLAS_PATH);
   const hash = useHashState();
@@ -424,6 +424,7 @@ export default function PeopleClient() {
       <ExploreNav current="diputados" />
       <main className="v-page x-people-page">
         <LoadState status={status} what="los diputados" />
+        {status === "ready" && hash ? null : fallback}
         {status === "ready" && hash && person ? <PersonView atlas={atlas} key={person.id} partiesById={partiesById} people={people} person={person} /> : null}
         {status === "ready" && hash && !person ? (
           <>
