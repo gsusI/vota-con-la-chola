@@ -1,0 +1,46 @@
+{
+ "id": "fiscal_general",
+ "verdict": "errors",
+ "checked": [
+  "eligio-hernandez-1992",
+  "delgado-2020",
+  "garcia-ortiz-2022",
+  "delgado-fiscal-sala-2022",
+  "cgpj-no-idoneo-2023",
+  "condena-garcia-ortiz-2025",
+  "rule",
+  "classification",
+  "remedy_delay",
+  "power_holders(7)"
+ ],
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[condena-garcia-ortiz-2025].power_holder.government",
+   "category": "attribution",
+   "found": "government: 'sanchez' (body: Fiscal General del Estado); la nota dice 'responsabilidad penal personal'",
+   "source_says": "La Sala Segunda condena a García Ortiz como autor personal de un delito de revelación de datos reservados (art. 417.1 CP). Es un acto del Fiscal General, un órgano con autonomía funcional (art. 124 CE), no del Gobierno; ninguna fuente oficial atribuye el hecho al Gobierno. Con government='sanchez' se suma a la cuenta del PSOE. Corrección: government null; que lo propuso el Gobierno de Sánchez puede ir en la nota.",
+   "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-condena-a-Alvaro-Garcia-Ortiz-por-un-delito-de-revelacion-de-secretos-a-pena-de-multa-y-2-anos-de-inhabilitacion-para-el-cargo-de-fiscal-general-del-Estado",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[delgado-2020].summary",
+   "category": "date",
+   "found": "reingresó al servicio activo el 16-01-2020, 40 días antes",
+   "source_says": "Orden JUS/10/2020, de 16 de enero: reincorpora 'con efectos del día 15 de enero de 2020' (41 días antes del RD 410/2020)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-687",
+   "severity": "minor"
+  },
+  {
+   "field": "episodes[delgado-2020].summary",
+   "category": "legal_text",
+   "found": "LO 3/2024: prohíbe proponer a quien haya sido ministro, secretario de Estado o parlamentario en los cinco años anteriores",
+   "source_says": "La lista también incluye a los consejeros autonómicos y a los presidentes de corporaciones locales (preámbulo de la LO 3/2024)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-16127",
+   "severity": "minor"
+  }
+ ],
+ "notes": [
+  "Los demás episodios se confirman en el BOE y en las notas del CGPJ/TS: RD 364/1992, la STS de 28-06-1994 que lo anula y sus tres recurrentes, RD 1103/1994, CGPJ 12-7 (21-07-2022) y 8-7 (30-11-2023), RD 807/2022, STS de 21-11-2023, incidente de 25-01-2024, RD 371/2024, RD 1181 y 1182/2023, nota del 28-01-2025, fallo del 20-11-2025 (multa de 12 meses a 20 EUR, 2 años de inhabilitación, dos votos particulares), notificación del 09-12-2025, RD 1138 y 1140/2025. Desfases de 809 y 413 días, mediana 611, recalculados."
+ ]
+}

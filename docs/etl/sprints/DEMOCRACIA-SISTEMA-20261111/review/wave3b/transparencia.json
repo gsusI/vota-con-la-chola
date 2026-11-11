@@ -1,0 +1,32 @@
+{
+ "id": "transparencia",
+ "verdict": "errors",
+ "checked": 12,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[1].summary",
+   "category": "figure",
+   "found": "la descarga de datos de Infoelectoral del Ministerio del Interior está bloqueada por un desafío de Cloudflare desde el 11-08-2026",
+   "source_says": "El incidente nso-2026-08-infoelectoral-candidate-origin-reset (first_seen 2026-08-11) describe acceso intermitente: timeouts de 30s con 0 bytes y 'curl (56) Connection reset by peer', no un desafío de Cloudflare. El desafío de Cloudflare (HTTP 403 + cf-mitigated: challenge) es otro incidente, nso-2026-10-interior-cf-challenge, de 2026-10-13, sobre las estadísticas de www.interior.gob.es, no Infoelectoral. La ficha mezcla los dos y presenta un fallo de conexión como bloqueo anti-bot",
+   "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[0].summary",
+   "category": "figure",
+   "found": "17 incidentes en el Senado ... en los que las descargas por script de los datos abiertos de iniciativas devuelven HTTP 403",
+   "source_says": "Los 17 incidentes del Senado (18-02-2026 a 13-10-2026, recuento y fechas correctos) no son todos de iniciativas ni todos 403: 13 son senado_iniciativas (403 y 500 alternos, uno 'intermitente'), 1 senado_senadores (403), 1 senado_votaciones XML (403), 1 detalle de iniciativas con HTTP 500 a escala y 1 senado_votaciones XV con HTTP 404 (ficheros enlazados que el servidor no sirve). Debe decir p. ej. '17 incidentes (403, 500 y 404) en iniciativas, senadores y votaciones'",
+   "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[2].start",
+   "category": "date",
+   "found": "2026-02-16 (primer incidente del registro)",
+   "source_says": "Los dos incidentes BDNS (nso-2026-02-bdns-api-antihtml y nso-2026-02-bdns-autonomico-antihtml) tienen first_seen 2026-02-17; la fecha exacta sí está en el registro. Usar 2026-02-17 y quitar la nota de fecha aproximada",
+   "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md",
+   "severity": "minor"
+  }
+ ]
+}

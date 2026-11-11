@@ -1,0 +1,27 @@
+{
+ "id": "indultos",
+ "verdict": "verified",
+ "checked": 19,
+ "unverifiable": [
+  "Peer ITA (Costituzione art. 87): citado en PDF de cortecostituzionale.it, no leído; el mecanismo coincide con el texto constitucional conocido",
+  "Cargo de Alfredo Sáenz (consejero delegado de un banco): el RD 1761/2011 no lo menciona"
+ ],
+ "errors": [
+  {
+   "field": "episodes[2].summary",
+   "category": "figure",
+   "found": "ocho reales decretos de 22-06-2021 (fuentes: RD 456-462 y 464/2021)",
+   "source_says": "Fueron nueve: también el Real Decreto 463/2021, de 22 de junio, por el que se indulta a don Jordi Sánchez i Picanyol (BOE-A-2021-10470, BOE 23-06-2021), omitido en summary y sources",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10470",
+   "severity": "minor"
+  },
+  {
+   "field": "rule.text",
+   "category": "legal_text",
+   "found": "con informe del tribunal sentenciador (arts. 24-25)",
+   "source_says": "La remisión de la solicitud a informe del Tribunal sentenciador está en el art. 23 de la Ley de 1870; los arts. 24-25 regulan cómo se instruye y remite ese informe. Citar arts. 23-25",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1870-4759",
+   "severity": "minor"
+  }
+ ]
+}

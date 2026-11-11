@@ -1,0 +1,30 @@
+{
+ "id": "financiacion_partidos",
+ "verdict": "errors",
+ "checked": [
+  "finpart-2004-2006",
+  "finpart-2007-2011",
+  "finpart-2012-2015",
+  "finpart-2016-2020",
+  "finpart-2020-palau-cdc",
+  "rule",
+  "classification",
+  "remedy_delay",
+  "power_holders(5)",
+  "peers.DEU"
+ ],
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "rule.deadline / rule.text",
+   "category": "legal_text",
+   "found": "deadline: null; rule.text no menciona plazos",
+   "source_says": "LO 8/2007 art. 16.Tres: 'El Tribunal de Cuentas, en el plazo de seis meses desde la recepción de la documentación ... emitirá un informe'; art. 14.Siete: los partidos remiten las cuentas 'antes del 30 de junio del año siguiente'. Hay plazo legal (unos 18 meses desde el cierre) y todos los retrasos medidos (789-2293 días) lo superan; la clase tercero_tarde no cambia.",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-13022",
+   "severity": "major"
+  }
+ ],
+ "notes": [
+  "Las 12 resoluciones de la Comisión Mixta: las fechas, los ejercicios y los días desde el cierre (1019, 1242, 1269, 1814, 1749, 801, 1501, 1136, 789, 1907, 2293, 1391) coinciden con lo recalculado. Palau: notas del CGPJ, 29-12-2017 (sentencia de la AP), 30-04-2020 (TS) y comiso de 6,6 M a CDC confirmados."
+ ]
+}

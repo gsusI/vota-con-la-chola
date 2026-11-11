@@ -1,0 +1,26 @@
+{
+ "id": "transparencia",
+ "verdict": "verified",
+ "checked": [
+  "transparencia-2026-senado-403",
+  "transparencia-2026-infoelectoral",
+  "transparencia-2026-bdns",
+  "rule",
+  "classification",
+  "power_holders(3)"
+ ],
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[transparencia-2026-senado-403].summary",
+   "category": "figure",
+   "found": "el índice oficial enlaza 100 ficheros de votación de la XV legislatura que devuelven 404",
+   "source_says": "nso-2026-10-senado-votos-xv-404: de los 100 ficheros enlazados solo se probó una muestra de 15 (15x404 sin VPN; 9x500 + 6x404 con VPN); no consta que los 100 den 404",
+   "url": "docs/etl/name-and-shame-access-blockers.md",
+   "severity": "minor"
+  }
+ ],
+ "notes": [
+  "Senado: 17 incidentes del registro (14 de iniciativas, senadores, votaciones 403 y XV 404), entre 2026-02-18 y 2026-10-13. Infoelectoral (11-13-08-2026) y Cloudflare en interior.gob.es (13-10-2026) coinciden, y también los dos incidentes de la BDNS (17-02-2026). Ningún bloqueo técnico se atribuye al Gobierno (government null). Art. 20.1 y art. 24 de la Ley 19/2013 bien resumidos."
+ ]
+}

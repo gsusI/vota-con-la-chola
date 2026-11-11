@@ -204,9 +204,54 @@ mayores fueron volcados de la hoja de trabajo JSON (12-20 k caracteres) y el bri
   opinión comprobada (`no_signal`). Recomendaciones de los Informes sobre el Estado de Derecho: no incluidas (los PDF de
   la Comisión Europea no respondieron a scripts).
 
-## 1. Estado
+### 3.1 Revisiones de la ola 3
+- **Agente 1** (revisión `review/wave3a/`): 4/5 verificadas; mesa_plazos con un error mayor factual (STC 89/2005 trata del
+  Fiscal antidroga, no del anticorrupción), corregido. **Supera la regla** (sin errores de atribución). El coordinador
+  aceptó 1,18 M por ficha y autorizó el agente 2.
+- **Agente 2** (indultos, amnistia, estado_derecho_sentencias, transparencia, financiacion_partidos): 43 turnos,
+  **4,95 M = 0,99 M por ficha** (filas del TC con el fallo ya extraído). Antes de revisar: la ficha de transparencia
+  atribuía al Gobierno bloqueos técnicos del registro propio (el registro no dice quién los decidió) → `government` nulo
+  y comprobación mecánica nueva. Revisión `review/wave3b/`: 4/5 verificadas; transparencia con 2 errores mayores
+  factuales (descripción de los incidentes del registro), corregidos contra el propio registro. **Supera la regla.**
 
-- **Dónde estamos.** Método fijado; series reproducibles; 10 fichas verificadas y publicadas en la página (sin enlazar en
-  el índice); piloto y ola 2 fallaron la regla por un error de atribución cada uno, corregidos y revisados de nuevo.
-- **A dónde vamos.** 25 fichas revisadas, mapa de salvaguardas con panel de pares, contexto Polonia/Hungría.
-- **Qué sigue.** Decisión del coordinador sobre la ola 3 (preparada, no lanzada), después muestra aleatoria de 10.
+### 3.2 Muestra aleatoria de 10 sobre todo lo publicado
+Semilla 20261111 sobre las 20 fichas verificadas: art155, defensor_pueblo, financiacion_partidos, fiscal_general,
+indultos, investidura_plazo, mesa_plazos, rtve_consejo, tramitacion_reforzada, veto_presupuestario (+ transparencia,
+revisada de nuevo por haberse corregido sin revisión). Dos revisores independientes; en cada ficha, texto legal, clase,
+toda atribución, cifras de retraso y hasta 6 episodios al azar (`review/sample10/`).
+
+| Resultado | Fichas |
+|---|---|
+| Verificadas | art155, defensor_pueblo, indultos, investidura_plazo, mesa_plazos, rtve_consejo, tramitacion_reforzada, veto_presupuestario, transparencia |
+| Error mayor de texto legal | financiacion_partidos: faltaba el plazo de seis meses del Tribunal de Cuentas (art. 16.4 LO 8/2007) |
+| Error mayor de atribución | fiscal_general: la condena penal personal del Fiscal General atribuida al Gobierno |
+
+**8/10 verificadas, con un error de atribución**: según la regla escrita antes de revisar, las fichas que fallan se
+corrigen o se retiran antes de publicar. Se corrigieron las dos (y los menores) y se añadió la comprobación mecánica
+correspondiente: `government` solo puede ir con un órgano que sea el Gobierno o un ministerio.
+
+### 3.3 Atribución: comprobaciones mecánicas acumuladas (todas en `scripts/validate_democracy_safeguards.py`)
+1. Gobierno vigente en la fecha del episodio (desde el principio).
+2. Mayoría reforzada (3/5, 2/3) → la decisión es de las Cámaras: `government` nulo y aritmética calculada (ola 2).
+3. Órgano Cortes, Cámara, Mesa o Diputación Permanente → `government` nulo (ola 3; encontró 5 casos publicados).
+4. Bloqueo técnico del registro propio → `government` nulo (ola 3B).
+5. `government` solo con órgano Gobierno o ministerio (muestra aleatoria).
+Lección: cada revisión humana encontró un patrón nuevo; la combinación de revisión independiente y comprobaciones
+mecánicas que se activan sobre todo lo publicado detectó 7 errores de atribución que una sola revisión no había visto.
+
+### 3.4 Coste total de redacción (tokens de entrada, `subagent_usage_report.py`)
+Piloto 23,6 M (5 fichas) · ola 2 16,5 M (5) · tabla de escaños 8,4 M · ola 3: 5,9 M + 5,0 M (10). Revisiones: entre
+0,13 y 0,2 M por agente según el informe del arnés. Coste por ficha: 4,7 M → 3,3 M → 1,2 M → 1,0 M.
+
+## 4. Estado
+
+- **Dónde estamos.** `/visualizaciones/democracia/` (sin enlazar en el índice, sin desplegar) publica 20 salvaguardas
+  revisadas de forma independiente (8 dependen de la buena voluntad, 9 se hacen cumplir tarde, 3 a tiempo) y 5 «pendiente
+  de documentar» con su referencia legal; series reproducibles (decretos-leyes y leyes 1979-2026, presupuestos 1983-2026,
+  ampliaciones de plazos de la XV, V-Dem, mandatos caducados, retrasos del remedio), aritmética de mayorías reforzadas
+  con la tabla de escaños de la JEC, y el panel Polonia/Hungría con nueve opiniones de la Comisión de Venecia.
+- **A dónde vamos.** Completar las 5 pendientes, los pares sin fuente (13 de 32 comparaciones de las fichas de buena
+  voluntad tienen fuente), la tabla de escaños 1989-1996 y el Senado designado, y las recomendaciones de los Informes
+  sobre el Estado de Derecho.
+- **Qué sigue.** El coordinador añade el enlace del índice, la receta del justfile y la fila del tracker; decide cuándo
+  publicar (las Cortes están disueltas y hay elecciones el 29-11-2026).

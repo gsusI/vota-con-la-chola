@@ -23,8 +23,8 @@
   },
   "sanction": "Ninguna sanción. Si el TC otorga el amparo, declara vulnerado el derecho de los parlamentarios (art. 23.2 CE) y anula los acuerdos de la Mesa, normalmente años después, cuando la iniciativa ya no puede tramitarse en la misma legislatura. Las prórrogas de plazos no tienen límite efectivo fuera de la propia Mesa.",
   "remedy_delay": {
-    "days": 1316,
-    "basis": "Mediana de días entre el acuerdo de la Mesa y la sentencia de amparo del TC en los 5 casos documentados (rango 393-1867 días).",
+    "days": 1452,
+    "basis": "Mediana de días entre el acuerdo de la Mesa y la sentencia del TC que otorgó el amparo, en los 4 casos documentados (1091-1867 días); la STC 110/2019 desestimó el amparo y no se cuenta.",
     "sources": [
       {
         "label": "STC 177/2002 (BOE-T-2002-21849)",
@@ -41,10 +41,6 @@
       {
         "label": "STC 57/2011 (BOE-A-2011-9130)",
         "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-9130"
-      },
-      {
-        "label": "STC 110/2019 (BOE-A-2019-15677)",
-        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15677"
       }
     ]
   },

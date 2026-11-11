@@ -318,6 +318,37 @@
         "files": [
           "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/art155.json"
         ]
+      },
+      "indultos": {
+        "round": "wave3b",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3b/indultos.json"
+        ]
+      },
+      "amnistia": {
+        "round": "wave3b",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3b/amnistia.json"
+        ]
+      },
+      "estado_derecho_sentencias": {
+        "round": "wave3b",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3b/estado_derecho_sentencias.json"
+        ]
+      },
+      "financiacion_partidos": {
+        "round": "wave3b",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3b/financiacion_partidos.json"
+        ]
+      },
+      "transparencia": {
+        "round": "wave3b",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3b/transparencia.json"
+        ],
+        "note": "Errores mayores factuales (descripción de los incidentes del registro) corregidos contra el propio registro; ver README."
       }
     },
     "pending_documentation": {
@@ -329,6 +360,25 @@
         "cgpj_funciones"
       ],
       "reason": "Sin documentar en esta fase (coste): se publican solo con su referencia legal; cgpj_funciones ya está cubierta en cgpj_renovacion."
+    },
+    "sample10": {
+      "seed": 20261111,
+      "ids": [
+        "art155",
+        "defensor_pueblo",
+        "financiacion_partidos",
+        "fiscal_general",
+        "indultos",
+        "investidura_plazo",
+        "mesa_plazos",
+        "rtve_consejo",
+        "tramitacion_reforzada",
+        "veto_presupuestario"
+      ],
+      "extra_recheck": [
+        "transparencia"
+      ],
+      "dir": "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/sample10"
     }
   }
 }

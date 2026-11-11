@@ -33,9 +33,9 @@
     {
       "id": "transparencia-2026-senado-403",
       "start": "2026-02-18",
-      "end": null,
+      "end": "2026-10-13",
       "kind": "tension",
-      "summary": "El registro público de este proyecto anota 17 incidentes en el Senado, abiertos entre el 18-02-2026 y el 13-10-2026, en los que las descargas por script de los datos abiertos de iniciativas devuelven HTTP 403.",
+      "summary": "El registro público de este proyecto anota 17 incidentes en descargas por script de datos abiertos del Senado entre el 18-02-2026 y el 13-10-2026: 14 sobre iniciativas (HTTP 403 o 500, con ventanas intermitentes), uno sobre la relación de senadores (403), uno sobre votaciones (403) y uno en que el índice oficial enlaza 100 ficheros de votación de la XV legislatura que no se sirven (de una muestra de 15, todos devolvieron 404 o 500).",
       "power_holder": {
         "government": null,
         "body": "Senado",
@@ -53,9 +53,9 @@
     {
       "id": "transparencia-2026-infoelectoral",
       "start": "2026-08-11",
-      "end": null,
+      "end": "2026-10-13",
       "kind": "tension",
-      "summary": "El registro público de este proyecto anota que la descarga de datos de Infoelectoral del Ministerio del Interior está bloqueada por un desafío de Cloudflare desde el 11-08-2026, sin resolver a 2026-10-19.",
+      "summary": "El registro público de este proyecto anota acceso intermitente a los datos de candidaturas de Infoelectoral (Ministerio del Interior) entre el 11 y el 13-08-2026 (tiempos de espera y conexiones cortadas) y, el 13-10-2026, un desafío anti-bot de Cloudflare (HTTP 403) en otra descarga de estadísticas del Ministerio.",
       "power_holder": {
         "government": null,
         "body": "Ministerio del Interior",
@@ -72,15 +72,15 @@
     },
     {
       "id": "transparencia-2026-bdns",
-      "start": "2026-02-16",
-      "end": null,
+      "start": "2026-02-17",
+      "end": "2026-02-17",
       "kind": "tension",
       "summary": "El registro público de este proyecto anota dos incidentes en la Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda) que devuelve HTML anti-scraping en lugar de datos.",
       "power_holder": {
         "government": null,
         "body": "IGAE (Ministerio de Hacienda)",
         "indispensable_parties": null,
-        "note": "Fecha de inicio: primer incidente del registro; la fecha exacta de este organismo no se ha extraído. El registro no identifica quién decidió el bloqueo; se atribuye al organismo, no al Gobierno."
+        "note": "El registro no identifica quién decidió el bloqueo; se atribuye al organismo, no al Gobierno."
       },
       "remedy": null,
       "sources": [

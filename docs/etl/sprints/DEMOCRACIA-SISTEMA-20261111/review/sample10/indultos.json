@@ -1,0 +1,28 @@
+{
+ "id": "indultos",
+ "verdict": "verified",
+ "checked": [
+  "indultos-1998-barrionuevo",
+  "indultos-2011-saenz",
+  "indultos-2021-proces",
+  "rule",
+  "classification",
+  "remedy_delay",
+  "power_holders(3)",
+  "peers"
+ ],
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[indultos-1998-barrionuevo/indultos-2011-saenz].summary",
+   "category": "link",
+   "found": "'exministro del Interior' y 'consejero delegado de un banco'",
+   "source_says": "Los RD 2838/1998 y 1761/2011 citados no recogen esos cargos (los hechos son ciertos, pero ninguna fuente citada los respalda)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1999-1545",
+   "severity": "minor"
+  }
+ ],
+ "notes": [
+  "Comprobados: las fechas de los RD y del BOE, las sentencias del TS (29-07-1998 y 24-02-2011), la distancia a las elecciones del 20-11-2011 (5 días) y los 9 RD 456-464/2021 (BOE 23-06-2021). Notas del CGPJ: informe contrario del 26-05-2021, cautelares rechazadas el 13-07-2021 y falta de legitimación el 20-01-2022 (212 días, recalculados). Atribuciones aznar/zapatero/sanchez correctas en cada fecha."
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "id": "estado_derecho_sentencias",
+ "verdict": "verified",
+ "checked": 22,
+ "unverifiable": [
+  "Peer ITA (Costituzione art. 136): PDF no leído; el mecanismo coincide con el texto constitucional conocido",
+  "Traslado al Ministerio Fiscal en ATC 170/2016 y ATC 24/2017: en los antecedentes consta que el Abogado del Estado lo pidió; el fallo no se extrajo (coherente con lo conocido)"
+ ],
+ "errors": [
+  {
+   "field": "limits",
+   "category": "peer",
+   "found": "La clase de Alemania se fija sin datos de plazos.",
+   "source_says": "DEU está como no_signal (sin clase); el único par clasificado es ITA (tercero_a_tiempo, art. 136). La frase debería referirse a Italia",
+   "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf",
+   "severity": "minor"
+  }
+ ]
+}

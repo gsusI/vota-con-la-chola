@@ -134,6 +134,8 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
             rep.err(eid, f"body {ph.get('body')!r} is a chamber or its bureau: the act is not the Government's, set government null")
         if ph.get("government") and any("name-and-shame-access-blockers" in str(src.get("url", "")) for src in ep.get("sources") or []):
             rep.err(eid, "a technical access block from the project's own log does not show who decided it: government must be null")
+        if ph.get("government") and not re.search(r"gobierno|consejo de ministros|ministr|presidencia|presidente del gobierno|delegaci[oó]n del gobierno|abogac[ií]a del estado", body):
+            rep.err(eid, f"government set but the acting body {ph.get('body')!r} is not the Government or a ministry: attribute to the body, government null")
         maj = ph.get("majority")
         if maj is not None:
             if maj.get("rule") not in ("3/5", "2/3") or not set(maj.get("chambers") or []) <= {"Congreso", "Senado"} or not maj.get("chambers"):

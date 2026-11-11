@@ -200,7 +200,7 @@ export default function DemocraciaPage() {
             <strong>
               {goodwill} de las {m.n} salvaguardas revisadas dependen de la buena voluntad de quien debe cumplirlas.
             </strong>{" "}
-            Si no se cumplen, nadie puede obligar ni sustituir: solo queda el coste político. Otras {late} tienen un tercero que puede anular u obligar, pero llega tarde (cuando el acto ya produjo sus efectos), y {inTime} se cumplen solas o con un tercero a tiempo. En {m.goodwillWherePeersMostlyFix} de las {goodwill} que dependen de la buena voluntad en España, al menos tres de los cuatro países vecinos comparados tienen una salida que no depende de ella.
+            Si no se cumplen, nadie puede obligar ni sustituir: solo queda el coste político. Otras {late} tienen un tercero que puede anular u obligar, pero llega tarde (cuando el acto ya produjo sus efectos), y {inTime} se cumplen solas o con un tercero a tiempo. En {m.goodwillWithAnyPeerFix} de las {goodwill} que dependen de la buena voluntad en España, al menos uno de los países comparados resuelve el mismo bloqueo con un tercero; de las {m.peerCellsGoodwill} comparaciones posibles con Alemania, Francia, Italia y Portugal, {m.peerWithData} tienen fuente y {m.peerThirdParty} de ellas dan con un tercero (las demás quedan sin dato).
           </li>
           {m.longest ? (
             <li>
@@ -320,7 +320,7 @@ export default function DemocraciaPage() {
       >
         <Explain
           shows="Todas las reglas que separan los poderes y que este análisis ha documentado, con lo que pasa cuando alguien no las cumple y cómo lo resuelven los países vecinos."
-          read="Las filas van de las más débiles (rojo: nadie puede obligar) a las más sólidas (verde). La línea de cada fila es el tiempo, de 1978 a hoy: cada marca es un episodio, del color del partido que gobernaba. Las cuatro casillas DE, FR, IT y PT dicen si en Alemania, Francia, Italia y Portugal el mismo bloqueo lo resuelve un tercero (verde o ámbar) o también depende de la buena voluntad (rojo). Pase el cursor por una marca o abra la ficha para ver el hecho y su fuente."
+          read="Las filas van de las más débiles (rojo: nadie puede obligar) a las más sólidas (verde). La línea de cada fila es el tiempo, de 1978 a hoy: cada marca es un episodio, del color del partido que gobernaba. Las cuatro casillas DE, FR, IT y PT dicen si en Alemania, Francia, Italia y Portugal el mismo bloqueo lo resuelve un tercero (verde o ámbar) o también depende de la buena voluntad (rojo); en gris, los países sin fuente comprobada. Pase el cursor por una marca o abra la ficha para ver el hecho y su fuente."
           not="No mide la gravedad de cada episodio ni compara intenciones. Una regla sin episodios no está probada como fuerte: puede que nadie la haya puesto a prueba. Los recuentos dependen de lo que se recurrió y de lo que llegó a juicio, y los años recientes están mejor documentados."
         />
         <MapLegend />
@@ -351,7 +351,7 @@ export default function DemocraciaPage() {
       <Figure
         id="todos-los-partidos"
         title={`Episodios atribuidos a cada partido de gobierno: ${party("PSOE").episodes} con el PSOE (${num(party("PSOE").per10, 1)} por cada diez años de gobierno) y ${party("PP").episodes} con el PP (${num(party("PP").per10, 1)})`}
-        dek={`Incumplimientos declarados, tensiones y plazos vencidos que la ficha atribuye al Gobierno de la fecha (${m.attributedCount} de ${m.episodesCount} episodios; el resto son de mayorías reforzadas, de otros órganos, o avales y remedios). Dividir por los años de gobierno evita premiar a quien gobernó menos. ${m.recent} de los ${m.attributedCount} son de 2004 en adelante: la documentación disponible y la litigiosidad crecen con el tiempo, así que esta cifra no basta para decir que un gobierno incumple más que otro.`}
+        dek={`Incumplimientos declarados, tensiones y plazos vencidos que la ficha atribuye al Gobierno de la fecha (${m.attributedCount} de ${m.episodesCount} episodios; el resto son de mayorías reforzadas, de otros órganos, o avales y remedios). Dividir por los años de gobierno evita premiar a quien gobernó menos. ${m.recent} de los ${m.attributedCount} son de 2004 en adelante, y una sola ficha pesa mucho: los decretos-leyes anulados o derogados son ${party("PP").decreeLaws} de los ${party("PP").episodes} episodios del PP y ${party("PSOE").decreeLaws} de los ${party("PSOE").episodes} del PSOE. La documentación disponible y la litigiosidad (quién recurre y cuánto tarda el TC) cambian con el tiempo, así que esta cifra no basta para decir que un gobierno incumple más que otro.`}
         sources={[S.sheets]}
         table={
           <details className="vizTable">
@@ -366,6 +366,7 @@ export default function DemocraciaPage() {
                     <th scope="col">Salvaguardas afectadas</th>
                     <th scope="col">Años de gobierno desde 1979</th>
                     <th scope="col">Episodios por diez años</th>
+                    <th scope="col">De ellos, decretos-leyes</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -377,6 +378,7 @@ export default function DemocraciaPage() {
                       <td>{r.safeguards}</td>
                       <td>{num(r.years, 1)}</td>
                       <td>{num(r.per10, 1)}</td>
+                      <td>{r.decreeLaws}</td>
                     </tr>
                   ))}
                 </tbody>

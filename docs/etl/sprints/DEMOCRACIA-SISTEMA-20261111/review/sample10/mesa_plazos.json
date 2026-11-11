@@ -1,0 +1,31 @@
+{
+ "id": "mesa_plazos",
+ "verdict": "verified",
+ "checked": 5,
+ "checked_episodes": [
+  "mesa_telefonica_1997",
+  "mesa_cgpj_2000",
+  "mesa_fiscal_antidroga_2000",
+  "mesa_iniciativa_2007",
+  "mesa_xii_2018"
+ ],
+ "checked_other": [
+  "Mesa agreement dates and STC dates/numbers in BOE for all 5",
+  "remedy_delay median 1316 (1867,1091,1588,1316,393) recomputed",
+  "power_holder: all Mesa del Congreso, no government",
+  "classification tercero_tarde"
+ ],
+ "unverifiable": [
+  "exact wording of RC art. 91 not captured by kit grep (checked art. 94 only)"
+ ],
+ "errors": [
+  {
+   "field": "remedy_delay",
+   "category": "figure",
+   "found": "median of days to the TC ruling in 5 cases, presented as the delay of the remedy",
+   "source_says": "STC 110/2019 dismissed the amparo (no remedy); the 4 cases with a remedy give 1091-1867 days (median 1452); classification unchanged",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15677",
+   "severity": "minor"
+  }
+ ]
+}

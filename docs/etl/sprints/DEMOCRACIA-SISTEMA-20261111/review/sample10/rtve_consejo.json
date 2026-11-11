@@ -1,0 +1,36 @@
+{
+ "id": "rtve_consejo",
+ "verdict": "verified",
+ "checked": 6,
+ "checked_episodes": [
+  "ley-4-1980-director-gobierno",
+  "eleccion-2012-2014-mayoria-absoluta",
+  "administradora-provisional-2018-2021",
+  "aval-tc-rdl-4-2018",
+  "vencimiento-2024",
+  "eleccion-2024-mayoria-absoluta"
+ ],
+ "checked_other": [
+  "14 BOE acuerdos/decrees: dates, 1st/2nd vote and majority",
+  "mandate_terms dates",
+  "remedy_delay 2071/1098 -> 1585 recomputed",
+  "fallos STC 150/2017, 134/2021, 45/2023",
+  "RDL 5/2024: 11+4, 48 h second vote",
+  "Ley 4/1980 art. 10",
+  "power_holder: chamber acts not attributed to the Government; RDL 4/2018 to sanchez correct"
+ ],
+ "unverifiable": [
+  "Ley 17/2006 art. 12.3 15-day deadline not grepped",
+  "peers DEU/ITA not fetched"
+ ],
+ "errors": [
+  {
+   "field": "episodes[6].summary",
+   "category": "figure",
+   "found": "STC 134/2021 'avaló el núcleo' ... apreció la urgencia del artículo único",
+   "source_says": "STC 134/2021 also declared unconstitutional and null apartado tercero of the artículo único and the disposición final primera (stated elsewhere in the file, in sanction/remedy_delay, but omitted here)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018",
+   "severity": "minor"
+  }
+ ]
+}

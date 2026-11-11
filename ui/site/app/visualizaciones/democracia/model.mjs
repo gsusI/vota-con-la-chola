@@ -24,6 +24,10 @@ export function democracyModel(data) {
     peersWithThirdParty: PEER_CODES.filter((c) => ["tercero_a_tiempo", "tercero_tarde"].includes(s.peers[c]?.classification)).length,
   }));
   const goodwillWherePeersMostlyFix = goodwillPeerFix.filter((r) => r.peersWithThirdParty >= 3).length;
+  const peerCells = byClass.buena_voluntad.flatMap((s) => PEER_CODES.map((c) => s.peers[c]?.classification));
+  const peerWithData = peerCells.filter((c) => c && c !== "no_signal" && c !== "no_aplica").length;
+  const peerThirdParty = peerCells.filter((c) => c === "tercero_a_tiempo" || c === "tercero_tarde").length;
+  const goodwillWithAnyPeerFix = goodwillPeerFix.filter((r) => r.peersWithThirdParty >= 1).length;
   const peerClassCounts = Object.fromEntries(
     PEER_CODES.map((c) => [c, sgs.reduce((acc, s) => ({ ...acc, [s.peers[c]?.classification]: (acc[s.peers[c]?.classification] || 0) + 1 }), {})]),
   );
@@ -40,7 +44,8 @@ export function democracyModel(data) {
   const byParty = {};
   for (const e of attributed) {
     const p = partyOf(data.governments, e.power_holder.government);
-    byParty[p] = byParty[p] || { party: p, episodes: 0, declared: 0, safeguards: new Set() };
+    byParty[p] = byParty[p] || { party: p, episodes: 0, declared: 0, safeguards: new Set(), bySg: {} };
+    byParty[p].bySg[e.safeguard] = (byParty[p].bySg[e.safeguard] || 0) + 1;
     byParty[p].episodes += 1;
     if (e.kind === "incumplimiento_declarado") byParty[p].declared += 1;
     byParty[p].safeguards.add(e.safeguard);
@@ -53,6 +58,7 @@ export function democracyModel(data) {
       safeguards: r.safeguards.size,
       years: Math.round(yearsInOffice[r.party] * 10) / 10,
       per10: Math.round((r.episodes / yearsInOffice[r.party]) * 100) / 10,
+      decreeLaws: r.bySg.decretos_ley || 0,
     }))
     .sort((a, b) => b.episodes - a.episodes);
   const recent = attributed.filter((e) => e.start >= "2004-01-01").length;
@@ -94,6 +100,10 @@ export function democracyModel(data) {
     byClass,
     goodwillPeerFix,
     goodwillWherePeersMostlyFix,
+    peerCellsGoodwill: peerCells.length,
+    peerWithData,
+    peerThirdParty,
+    goodwillWithAnyPeerFix,
     peerClassCounts,
     partyRows,
     attributedCount: attributed.length,

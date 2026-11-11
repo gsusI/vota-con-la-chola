@@ -162,6 +162,10 @@ export function MapLegend() {
         <span className="vizLegend__key" style={{ background: "#52514e", width: 10, height: 10, borderRadius: 6 }} aria-hidden="true" />
         Mayoría reforzada u otro órgano
       </li>
+      <li>
+        <span className="vizLegend__key" style={{ background: "#d9d7cf", width: 12, height: 12 }} aria-hidden="true" />
+        País sin dato
+      </li>
       <li>● incumplimiento declarado · ○ tensión · ▬ plazo vencido · ◇ aval o remedio</li>
     </ul>
   );
