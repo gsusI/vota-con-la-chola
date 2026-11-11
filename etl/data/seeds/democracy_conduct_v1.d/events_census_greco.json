@@ -1,0 +1,360 @@
+{
+ "part": "census_greco",
+ "census": {
+  "family": "greco",
+  "scope": "Informes del GRECO sobre España de la cuarta (parlamentarios, jueces, fiscales) y quinta ronda (altos cargos del Gobierno, Policía y Guardia Civil) adoptados del 21-12-2011 al 11-11-2026; la página oficial de país devolvió HTTP 403, la lista sale de la historia que recoge cada informe (GrecoRC4(2024)10, GrecoRC5(2025)17) y del informe de actividad 2025",
+  "list_source": {
+   "url": "https://www.coe.int/en/web/greco/evaluations/spain",
+   "title": "GRECO - Evaluations: Spain",
+   "retrieved": "2026-11-11"
+  },
+  "rows": [
+   {
+    "ref": "Greco Eval IV Rep (2013) 5E",
+    "date": "2013-12-06",
+    "subject": "España (autoridades nacionales)",
+    "outcome": "Informe de evaluación de la cuarta ronda: 11 recomendaciones",
+    "in_scope": false,
+    "reason": "Primera evaluación, no informe de cumplimiento",
+    "event_id": null
+   },
+   {
+    "ref": "GrecoRC4(2016)1",
+    "date": "2016-07-01",
+    "subject": "Gobierno Rajoy (PP), en funciones",
+    "outcome": "Ninguna de 11 recomendaciones cumplida; cumplimiento «globally unsatisfactory»",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones no aplicadas",
+    "event_id": "greco-4-ronda-cr-2016"
+   },
+   {
+    "ref": "GrecoRC4(2017)18",
+    "date": "2017-12-08",
+    "subject": "Gobierno Rajoy II (PP)",
+    "outcome": "Interim: sigue «globally unsatisfactory», ninguna de 11 cumplida",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones no aplicadas",
+    "event_id": "greco-4-ronda-pp"
+   },
+   {
+    "ref": "GrecoRC4(2019)12",
+    "date": "2019-06-21",
+    "subject": "Gobierno Sánchez I (PSOE), en funciones",
+    "outcome": "Segundo interim: 2 de 11 cumplidas, 8 parcialmente, 1 no aplicada",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-4-ronda-interim2-2019"
+   },
+   {
+    "ref": "GrecoRC4(2021)3",
+    "date": "2021-03-25",
+    "subject": "Gobierno Sánchez II (PSOE-UP)",
+    "outcome": "Segundo informe de cumplimiento: 6 de 11 cumplidas",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-4-ronda-psoe"
+   },
+   {
+    "ref": "GrecoRC4(2022)16",
+    "date": "2022-12-02",
+    "subject": "Gobierno Sánchez II (PSOE-UP)",
+    "outcome": "Adenda: 7 de 11 cumplidas, 3 parcialmente, 1 no aplicada",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-4-ronda-addendum-2022"
+   },
+   {
+    "ref": "GrecoRC4(2024)10",
+    "date": "2024-06-21",
+    "subject": "Gobierno Sánchez III (PSOE-Sumar)",
+    "outcome": "Segunda adenda: 7 de 11 cumplidas, 3 parcialmente, 1 no aplicada; cierra la ronda",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-4-ronda-psoe-sumar-2024"
+   },
+   {
+    "ref": "GrecoEval5Rep(2018)5",
+    "date": "2019-06-21",
+    "subject": "España (autoridades nacionales)",
+    "outcome": "Informe de evaluación de la quinta ronda: 19 recomendaciones",
+    "in_scope": false,
+    "reason": "Primera evaluación, no informe de cumplimiento",
+    "event_id": null
+   },
+   {
+    "ref": "GrecoRC5(2021)8",
+    "date": "2021-09-22",
+    "subject": "Gobierno Sánchez II (PSOE-UP)",
+    "outcome": "Ninguna de 19 cumplida: 7 parcialmente, 12 no aplicadas",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-5-ronda-cr-2021"
+   },
+   {
+    "ref": "GrecoRC5(2023)8",
+    "date": "2023-12-01",
+    "subject": "Gobierno Sánchez III (PSOE-Sumar)",
+    "outcome": "Ninguna de 19 cumplida; «not in sufficient compliance», aplica la regla 32",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-5-ronda-cr2-2023"
+   },
+   {
+    "ref": "GrecoRC5(2025)17",
+    "date": "2025-06-06",
+    "subject": "Gobierno Sánchez III (PSOE-Sumar)",
+    "outcome": "Adenda: ninguna de 19 cumplida (16 parcialmente, 3 no); sigue la regla 32",
+    "in_scope": true,
+    "reason": "Informe de cumplimiento con recomendaciones parcial o no aplicadas",
+    "event_id": "greco-5-ronda-addendum-2025"
+   }
+  ],
+  "n_listed": 11,
+  "n_in_scope": 9
+ },
+ "events": [
+  {
+   "event_id": "greco-4-ronda-cr-2016",
+   "title": "GRECO: España no había cumplido ninguna de las 11 recomendaciones sobre diputados, jueces y fiscales (2016)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2016-07-01",
+   "act_date": "2013-12-06",
+   "act": "Aplicación de las 11 recomendaciones del Informe de Evaluación de la cuarta ronda del GRECO sobre España (6-12-2013)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP), en funciones. GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/16806ca04a",
+    "title": "GrecoRC4(2016)1. Fourth Evaluation Round, Corruption prevention in respect of members of parliament, judges and prosecutors. Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "Five recommendations have been partly implemented; six recommendations have not been implemented.",
+    "quote_lang": "en",
+    "locator": "§60"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  },
+  {
+   "event_id": "greco-4-ronda-interim2-2019",
+   "title": "GRECO: España cumple 2 de 11 recomendaciones sobre diputados, jueces y fiscales (2019)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2019-06-21",
+   "act_date": "2013-12-06",
+   "act": "Aplicación de las 11 recomendaciones del Informe de Evaluación de la cuarta ronda del GRECO sobre España (6-12-2013)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez I (PSOE), en funciones. GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/168098c67d",
+    "title": "GrecoRC4(2019)12. Fourth Evaluation Round, Corruption prevention in respect of members of parliament, judges and prosecutors. Second Interim Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "In addition, eight recommendations have been partly implemented. One recommendation remains not implemented.",
+    "quote_lang": "en",
+    "locator": "§74"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  },
+  {
+   "event_id": "greco-4-ronda-addendum-2022",
+   "title": "GRECO: España deja 4 de 11 recomendaciones sobre diputados, jueces y fiscales sin cumplir (2022)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2022-12-02",
+   "act_date": "2013-12-06",
+   "act": "Aplicación de las 11 recomendaciones del Informe de Evaluación de la cuarta ronda del GRECO sobre España (6-12-2013)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-Unidas Podemos). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción). La recomendación no aplicada (v) es la elección del CGPJ; GRECO no atribuye el bloqueo de su renovación al Gobierno."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio del Gobierno Sánchez II (PSOE-UP). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/1680a93b24",
+    "title": "GrecoRC4(2022)16. Fourth Evaluation Round, Corruption prevention in respect of members of parliament, judges and prosecutors. Addendum to the Second Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "three have been partly implemented and one remains not implemented",
+    "quote_lang": "en",
+    "locator": "§40"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  },
+  {
+   "event_id": "greco-5-ronda-cr-2021",
+   "title": "GRECO: España no cumple ninguna de las 19 recomendaciones sobre Gobierno y policías (2021)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2021-09-22",
+   "act_date": "2019-06-21",
+   "act": "Aplicación de las 19 recomendaciones del Informe de Evaluación de la quinta ronda del GRECO sobre España (21-6-2019)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-Unidas Podemos). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio del Gobierno Sánchez II (PSOE-UP). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/fifth-evaluation-round-preventing-corruption-and-promoting-integrity-i/1680a5dd9e",
+    "title": "GrecoRC5(2021)8. Fifth Evaluation Round, Preventing corruption and promoting integrity in central governments (top executive functions) and law enforcement agencies. Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "has not implemented satisfactorily or dealt with in a satisfactory manner any of the nineteen",
+    "quote_lang": "en",
+    "locator": "§108"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  },
+  {
+   "event_id": "greco-5-ronda-cr2-2023",
+   "title": "GRECO: España no cumple ninguna de las 19 recomendaciones sobre Gobierno y policías (2023)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2023-12-01",
+   "act_date": "2019-06-21",
+   "act": "Aplicación de las 19 recomendaciones del Informe de Evaluación de la quinta ronda del GRECO sobre España (21-6-2019)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    },
+    {
+     "party_id": "sumar",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Sumar, socio del Gobierno Sánchez III (PSOE-Sumar). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/grecorc5-2023-8-final-eng-2nd-compliance-report-spain-public/1680b547d8",
+    "title": "GrecoRC5(2023)8. Fifth Evaluation Round, Preventing corruption and promoting integrity in central governments (top executive functions) and law enforcement agencies. Second Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "Spain is not in sufficient compliance with the recommendations",
+    "quote_lang": "en",
+    "locator": "§139"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  },
+  {
+   "event_id": "greco-5-ronda-addendum-2025",
+   "title": "GRECO: España sigue sin cumplir ninguna de las 19 recomendaciones sobre Gobierno y policías (2025)",
+   "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2025-06-06",
+   "act_date": "2019-06-21",
+   "act": "Aplicación de las 19 recomendaciones del Informe de Evaluación de la quinta ronda del GRECO sobre España (21-6-2019)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    },
+    {
+     "party_id": "sumar",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Sumar, socio del Gobierno Sánchez III (PSOE-Sumar). GRECO se dirige a «the authorities of Spain»; la atribución al Gobierno sigue la regla del códice (Gobierno en la fecha de adopción)."
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/grecorc5-2025-17-final-eng-add-to-2nd-compliance-report-spain-public/1680b6ce89",
+    "title": "GrecoRC5(2025)17. Fifth Evaluation Round, Preventing corruption and promoting integrity in central governments (top executive functions) and law enforcement agencies. Addendum to the Second Compliance Report Spain",
+    "retrieved": "2026-11-11",
+    "quote": "Spain is not in sufficient compliance with the recommendations",
+    "quote_lang": "en",
+    "locator": "§132"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "greco"
+   }
+  }
+ ],
+ "pending": []
+}

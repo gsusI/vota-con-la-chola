@@ -1,0 +1,147 @@
+[
+ {
+  "kind": "event",
+  "event_id": "jec-2023-548-rodriguez-rueda-prensa-25-abril",
+  "title": "JEC 548/2023: multa de 2.200 € a la ministra portavoz por la rueda de prensa del Consejo de Ministros del 25-04-2023",
+  "body": "Junta Electoral Central",
+  "date": "2023-08-03",
+  "act_date": "2023-04-25",
+  "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 25 de abril de 2023 (art. 50.2 LOREG)",
+  "status": "firme; el Tribunal Supremo desestimó el recurso de la sancionada (nota del CGPJ de 24-10-2024)",
+  "indicator": "reglas",
+  "indicator_definition": "Resolución vinculante (tribunal, Tribunal Constitucional, Junta Electoral) de que el partido, su grupo o sus cargos adoptaron o ejecutaron un acto fuera del procedimiento constitucional para obtener o ejercer el poder, o desobedecieron una orden de un tribunal o de la administración electoral.",
+  "finding_type": "sanction_jec",
+  "severity": 2,
+  "attributions": [
+   {
+    "party_id": "psoe",
+    "role": "national_government",
+    "attribution": "office_holder",
+    "lineage": "same",
+    "note": "Isabel Rodríguez García, ministra de Política Territorial y portavoz del Gobierno (Gobierno Sánchez II, PSOE-UP)"
+   }
+  ],
+  "source": {
+   "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=122852&idsesion=&template=Doctrina/JEC_Detalle",
+   "quote": "Imponer a la Sra. R. G. una sanción de multa de 2.200 €",
+   "locator": "Resolución, punto 2"
+  },
+  "extra_sources": [
+   {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-sancion-de-4-700-euros-de-la-Junta-Electoral-Central-a-la-ministra-Isabel-Rodriguez-por-incumplir-el-deber-de-neutralidad-durante-el-periodo-electoral",
+    "quote": "ha desestimado el recurso planteado por la ministra Isabel Rodríguez"
+   }
+  ]
+ },
+ {
+  "kind": "event",
+  "event_id": "tcu-2021-psc-barcelona-gasto-electoral-locales-2019",
+  "title": "TCu sanciona a la coalición del PSC en Barcelona con 49.201,52 € por exceso de gasto (municipales 2019)",
+  "body": "Tribunal de Cuentas",
+  "date": "2021-10-28",
+  "act_date": "2019-05-26",
+  "act": "Contabilidad electoral de la coalición PSC-Compromís per Barcelona-Units-Candidatura de Progrés, elecciones locales de 26 de mayo de 2019 (art. 193.2 LOREG)",
+  "status": "firme; recurso contencioso-administrativo ante el TS desestimado (registro del TCu)",
+  "indicator": "corrupcion",
+  "indicator_definition": "Condena firme de un cargo del partido por delitos de corrupción (cohecho, malversación, tráfico de influencias, financiación ilegal, prevaricación ligada a fondos públicos), responsabilidad civil firme del propio partido (partícipe a título lucrativo) o condena penal del partido como persona jurídica; informe del Tribunal de Cuentas que constata financiación irregular.",
+  "finding_type": "sanction_tcu",
+  "severity": 2,
+  "attributions": [
+   {
+    "party_id": "psoe",
+    "role": "party_organization",
+    "attribution": "party",
+    "lineage": "list",
+    "note": "Coalición Partit dels Socialistes de Catalunya-Compromís per Barcelona-Units-Candidatura de Progrés, encabezada por el PSC (partido federado con el PSOE); art. 17.Cuatro b) LOFPP"
+   }
+  ],
+  "source": {
+   "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-electoral-2019.pdf",
+   "quote": "V66514423 28/10/2021 LOFPP 193.2 LOREG 49.201,52 SI DESESTIMADO",
+   "locator": "p. 2, fila Partit dels Socialistes de Catalunya-Compromís per Barcelona"
+  },
+  "extra_sources": []
+ },
+ {
+  "kind": "event",
+  "event_id": "stc-111-2021-decreto-ley-15-2020",
+  "title": "STC 111/2021: anula preceptos del Real Decreto-ley 15/2020 por los límites del decreto ley",
+  "body": "Tribunal Constitucional",
+  "date": "2021-05-13",
+  "act_date": "2020-04-21",
+  "act": "Real Decreto-ley 15/2020, de 21 de abril (preceptos anulados según el fallo)",
+  "status": "firme",
+  "indicator": "contrapesos",
+  "indicator_definition": "El Tribunal Constitucional anula un acto por exceder los límites del decreto ley, de los poderes de excepción o del procedimiento parlamentario, o por vulnerar derechos de los parlamentarios; la Comisión de Venecia o el Informe sobre el Estado de Derecho concluyen que la tramitación de un acto concreto eludió consulta o control; GRECO constata que el Gobierno de turno no aplicó sus recomendaciones.",
+  "finding_type": "court_annulment_partial",
+  "severity": 2,
+  "attributions": [
+   {
+    "party_id": "psoe",
+    "role": "national_government",
+    "attribution": "government_act",
+    "lineage": "same",
+    "note": "Gobierno Sánchez II (PSOE y Unidas Podemos)"
+   },
+   {
+    "party_id": "podemos",
+    "role": "national_government",
+    "attribution": "government_act",
+    "lineage": "list",
+    "note": "Unidas Podemos, socio de coalición del Gobierno Sánchez II"
+   }
+  ],
+  "source": {
+   "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-10024",
+   "quote": "declarar inconstitucionales y nulas las disposiciones adicionales sexta y séptima, la disposición transitoria segunda y",
+   "locator": "fallo"
+  },
+  "extra_sources": []
+ },
+ {
+  "kind": "pending",
+  "pending_id": "tcu-2025-vox-donaciones-2020",
+  "party_id": "vox",
+  "role": "party_organization",
+  "person": "",
+  "body": "Tribunal de Cuentas",
+  "date": "2025-07-28",
+  "finding": "Sanción de 50.000 € por donaciones contrarias a los arts. 4 y 5 LOFPP (contabilidad anual 2020)",
+  "appeal": "recurso contencioso-administrativo ante el TS interpuesto el 31/07/2025; sin resolución en el registro (junio 2026)",
+  "check": "date of the first-instance ruling/sanction; person belonged to the party (or the party itself); the finding is NOT firm (appealed or appealable per official record); quote literal",
+  "source": {
+   "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-ordinaria.pdf",
+   "quote": "VOX G86867108 28/07/2025 contraviniendo arts. 4 y 5."
+  },
+  "membership_source": null
+ },
+ {
+  "kind": "event",
+  "event_id": "jec-2024-302-psoe-madrid-jornada-reflexion",
+  "title": "JEC 302/2024: multa de 250 € al PSOE de Madrid por un mensaje en X en la jornada de reflexión catalana",
+  "body": "Junta Electoral Central",
+  "date": "2024-12-12",
+  "act_date": "2024-05-11",
+  "act": "Publicación en la cuenta del PSOE de Madrid en X de una imagen del candidato del PSC con el texto «Salvador» (art. 53 LOREG)",
+  "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+  "indicator": "reglas",
+  "indicator_definition": "Resolución vinculante (tribunal, Tribunal Constitucional, Junta Electoral) de que el partido, su grupo o sus cargos adoptaron o ejecutaron un acto fuera del procedimiento constitucional para obtener o ejercer el poder, o desobedecieron una orden de un tribunal o de la administración electoral.",
+  "finding_type": "sanction_jec",
+  "severity": 2,
+  "attributions": [
+   {
+    "party_id": "psoe",
+    "role": "party_organization",
+    "attribution": "party",
+    "lineage": "same",
+    "note": "PSOE de la Comunidad de Madrid; sancionada su secretaria de organización «como responsable de esta formación política»"
+   }
+  ],
+  "source": {
+   "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=135783&idsesion=&template=Doctrina/JEC_Detalle",
+   "quote": "e imponerle una sanción de multa de 250 euros",
+   "locator": "Resolución"
+  },
+  "extra_sources": []
+ }
+]

@@ -1,0 +1,1691 @@
+{
+ "part": "census_jec_sancion",
+ "census": {
+  "family": "jec_sancion",
+  "scope": "Acuerdos de la Junta Electoral Central de 21-12-2011 a 11-11-2026 que imponen una multa en expediente sancionador a un partido o a un miembro del Gobierno de España o de un gobierno autonómico",
+  "list_source": {
+   "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/buscador",
+   "title": "Junta Electoral Central, Doctrina: buscador de acuerdos",
+   "retrieved": "2026-11-11",
+   "notes": "Enumeración: buscador de doctrina de la JEC (GET /cs/jec/doctrina/buscadorresult), ventana 21/12/2011-11/11/2026, partida por años y subdividida por fechas hasta <=10 resultados por consulta (la paginación sPag>1 no responde). Lista A: materia «MULTAS Y SANCIONES» (materias=220): 116 acuerdos. Lista B: objeto contiene «expediente sancionador» (objeto=expediente+sancionador&operadorobjeto=1): 128 acuerdos. Lista C (control): texto del acuerdo contiene «multa» (acuerdotexto=multa&operadoracuerdo=1): 136 acuerdos, 39 fuera de A∪B (denuncias previas, incoaciones 2026, remisiones penales); ninguno impone multa a partido o gobierno. Unión A∪B∪C: 199 acuerdos. Ejemplo de URL: https://www.juntaelectoralcentral.es/cs/jec/doctrina/buscadorresult?fecDesde=01/01/2023&fecHasta=31/12/2023&materias=220&sPag=1&template=Doctrina/JEC_ResBusqueda . Filas: los acuerdos de la unión cuyo expedientado o denunciado es un partido/coalición o un miembro de un gobierno (estatal, autonómico o de Ceuta/Melilla); el resto (alcaldes, concejales, candidatos, altos cargos no miembros del gobierno, medios, empresas, proveedores, consultas) se cuenta en out_of_scope_total. En alcance: la propia JEC impone la multa (incluida la terminación por pago o reconocimiento, art. 85 Ley 39/2015); las confirmaciones de multas impuestas por juntas inferiores quedan fuera. 2025 no tiene acuerdos en ninguna de las dos listas."
+  },
+  "rows": [
+   {
+    "ref": "Acuerdo JEC 52/2012",
+    "date": "2012-03-22",
+    "subject": "Ministerio de Empleo y Seguridad Social (Gobierno Rajoy, PP)",
+    "outcome": "Estima en parte la denuncia del PSOE sobre una campaña; no impone multa",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 61/2013",
+    "date": "2013-03-07",
+    "subject": "Administradores electorales de 881 formaciones (contabilidad locales 2011)",
+    "outcome": "Acuerda abrir expedientes sancionadores",
+    "in_scope": false,
+    "reason": "incoación; no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 218/2014",
+    "date": "2014-09-11",
+    "subject": "Candidatura Puyalón de Cuchas-Os Pueblos Deciden",
+    "outcome": "Declara que no le corresponde (expediente municipal)",
+    "in_scope": false,
+    "reason": "no es sanción de la JEC; no es unidad del Congreso actual",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 268/2014",
+    "date": "2014-11-06",
+    "subject": "EH Bildu",
+    "outcome": "Anula la propuesta de la JEZ Vitoria y asume el expediente",
+    "in_scope": false,
+    "reason": "no impone; la multa la impone el acuerdo 20/2015",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 20/2015",
+    "date": "2015-01-22",
+    "subject": "EH Bildu (candidatura en Los Pueblos Deciden)",
+    "outcome": "Multa de 300 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2015-20-ehbildu-propaganda-vitoria"
+   },
+   {
+    "ref": "Acuerdo JEC 183/2015",
+    "date": "2015-05-06",
+    "subject": "Gobierno de la Ciudad Autónoma de Melilla",
+    "outcome": "Revoca la multa de 600 € de la JEZ Melilla por defecto de procedimiento",
+    "in_scope": false,
+    "reason": "no impone; revoca multa de junta inferior",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 347/2015",
+    "date": "2015-06-17",
+    "subject": "Presidente de la Ciudad Autónoma de Melilla (Gobierno de la Ciudad)",
+    "outcome": "Estima el recurso y revoca la multa de 600 € de la JEZ Melilla",
+    "in_scope": false,
+    "reason": "no impone; revoca multa de junta inferior",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 251/2016",
+    "date": "2016-10-11",
+    "subject": "Emiliano García-Page, presidente de Castilla-La Mancha (PSOE)",
+    "outcome": "Multa de 1.500 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2016-251-garcia-page-carta-plan-empleo"
+   },
+   {
+    "ref": "Acuerdo JEC 75/2019",
+    "date": "2019-03-18",
+    "subject": "Presidente de Castilla-La Mancha (PSOE)",
+    "outcome": "Desestima la petición del PP de abrir expediente",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 178/2019",
+    "date": "2019-04-11",
+    "subject": "Gobierno de la Ciudad Autónoma de Melilla",
+    "outcome": "Anula lo actuado por la JE Melilla (archivo) por defecto de procedimiento",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 179/2019",
+    "date": "2019-04-11",
+    "subject": "Viceconsejería de la Mujer y Juventud de Melilla",
+    "outcome": "Anula lo actuado por la JE Melilla (archivo) por defecto de procedimiento",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 180/2019",
+    "date": "2019-04-11",
+    "subject": "Presidente y consejero de Medio Ambiente de Melilla",
+    "outcome": "Anula lo actuado por la JE Melilla (archivo) por defecto de procedimiento",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 509/2019",
+    "date": "2019-04-25",
+    "subject": "Ciudadanos",
+    "outcome": "Revoca el archivo del expediente acordado por la JEP Madrid",
+    "in_scope": false,
+    "reason": "no impone; no es unidad del Congreso actual",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 305/2019",
+    "date": "2019-05-09",
+    "subject": "Consejero de Medio Ambiente de Melilla",
+    "outcome": "Confirma la no incoación de expediente",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 481/2019",
+    "date": "2019-06-10",
+    "subject": "Coalición por Melilla",
+    "outcome": "Anula lo actuado en el expediente de la JE Melilla",
+    "in_scope": false,
+    "reason": "no impone; no es unidad del Congreso actual",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 500/2019",
+    "date": "2019-06-13",
+    "subject": "Quim Torra, president de la Generalitat (JxCat)",
+    "outcome": "Multa de 3.000 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2019-500-torra-lazos-amarillos"
+   },
+   {
+    "ref": "Acuerdo JEC 538/2019",
+    "date": "2019-07-22",
+    "subject": "Quim Torra, president de la Generalitat (JxCat)",
+    "outcome": "Multa de 2.500 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2019-538-torra-correo-funcionarios"
+   },
+   {
+    "ref": "Acuerdo JEC 539/2019",
+    "date": "2019-07-22",
+    "subject": "Quim Torra, president de la Generalitat (JxCat)",
+    "outcome": "Multa de 3.000 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2019-539-torra-sant-jordi"
+   },
+   {
+    "ref": "Acuerdo JEC 540/2019",
+    "date": "2019-07-22",
+    "subject": "Consejero de Economía, Hacienda y Empleo de Cantabria",
+    "outcome": "Desestima el recurso; confirma la multa de la JEP Cantabria",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEP; la JEC solo la confirma",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 541/2019",
+    "date": "2019-07-22",
+    "subject": "Consejera de Sanidad de Cantabria",
+    "outcome": "Desestima el recurso; confirma la multa de la JEP Cantabria",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEP; la JEC solo la confirma",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 681/2019",
+    "date": "2019-11-06",
+    "subject": "Consejero de Gobernanza Pública del Gobierno de La Rioja",
+    "outcome": "Anula lo actuado por la JEP La Rioja (multa de 300 €) y ordena tramitar expediente",
+    "in_scope": false,
+    "reason": "no impone; anula multa de junta inferior",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 730/2019",
+    "date": "2019-11-20",
+    "subject": "Coalición por Melilla",
+    "outcome": "Revoca la multa de 600 € de la JEZ Melilla",
+    "in_scope": false,
+    "reason": "no impone; no es unidad del Congreso actual",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 744/2019",
+    "date": "2019-12-18",
+    "subject": "Partido Popular",
+    "outcome": "Acuerda abrir expediente por envíos de SMS",
+    "in_scope": false,
+    "reason": "incoación; resuelto con archivo en 31/2020",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 12/2020",
+    "date": "2020-01-23",
+    "subject": "Pedro Sánchez, presidente del Gobierno en funciones (PSOE)",
+    "outcome": "Multa de 500 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2020-12-sanchez-exhumacion-entrevista"
+   },
+   {
+    "ref": "Acuerdo JEC 13/2020",
+    "date": "2020-01-23",
+    "subject": "Isabel Celaá, ministra portavoz en funciones (PSOE)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2020-13-celaa-rueda-prensa"
+   },
+   {
+    "ref": "Acuerdo JEC 31/2020",
+    "date": "2020-02-26",
+    "subject": "Partido Popular",
+    "outcome": "Archiva: no hubo infracción del art. 58 bis LOREG",
+    "in_scope": false,
+    "reason": "archivo sin sanción",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 42/2020",
+    "date": "2020-02-26",
+    "subject": "Consejera de Igualdad de la Junta de Andalucía",
+    "outcome": "Remite el recurso a la JEP Granada por competencia",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 46/2020",
+    "date": "2020-03-04",
+    "subject": "Consejera de Igualdad de la Junta de Andalucía",
+    "outcome": "Asume la ejecución de la resolución de la JEZ Granada",
+    "in_scope": false,
+    "reason": "la sanción la resolvió la JEZ; la JEC solo ejecuta",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 138/2020",
+    "date": "2020-09-17",
+    "subject": "PSOE de Villalba del Alcor",
+    "outcome": "Asume la ejecución de la multa impuesta por la JEZ",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEZ; la JEC solo ejecuta",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 139/2020",
+    "date": "2020-09-17",
+    "subject": "PSOE de Hinojos",
+    "outcome": "Asume la ejecución de la multa impuesta por la JEZ",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEZ; la JEC solo ejecuta",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 141/2020",
+    "date": "2020-09-17",
+    "subject": "PSOE de Almonte",
+    "outcome": "Asume la ejecución de la multa impuesta por la JEZ",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEZ; la JEC solo ejecuta",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 337/2021",
+    "date": "2021-09-16",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Anula la resolución sancionadora de la JEP Madrid",
+    "in_scope": false,
+    "reason": "no impone; la JEC abre su propio expediente",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 338/2021",
+    "date": "2021-09-16",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Abre expediente sancionador",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 390/2021",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 339/2021",
+    "date": "2021-09-16",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Anula la resolución sancionadora de la JEP Madrid",
+    "in_scope": false,
+    "reason": "no impone; la JEC abre su propio expediente",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 340/2021",
+    "date": "2021-09-16",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Abre expediente sancionador",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 391/2021",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 356/2021",
+    "date": "2021-10-06",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Trámite del expediente",
+    "in_scope": false,
+    "reason": "trámite; resuelto en 390/2021",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 357/2021",
+    "date": "2021-10-06",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid",
+    "outcome": "Trámite del expediente",
+    "in_scope": false,
+    "reason": "trámite; resuelto en 391/2021",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 390/2021",
+    "date": "2021-12-09",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid (PP)",
+    "outcome": "Multa de 600 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2021-390-ayuso-campana-logros"
+   },
+   {
+    "ref": "Acuerdo JEC 391/2021",
+    "date": "2021-12-09",
+    "subject": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid (PP)",
+    "outcome": "Multa de 360 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2021-391-ayuso-homenaje-las-ventas"
+   },
+   {
+    "ref": "Acuerdo JEC 183/2023",
+    "date": "2023-05-10",
+    "subject": "Consejero de Industria de Cantabria",
+    "outcome": "Anula el acuerdo de la JEP Cantabria y retrotrae",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 184/2023",
+    "date": "2023-05-10",
+    "subject": "Presidente del Gobierno de Cantabria",
+    "outcome": "Anula el acuerdo de la JEP Cantabria y retrotrae",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 189/2023",
+    "date": "2023-05-10",
+    "subject": "Isabel Rodríguez, ministra portavoz",
+    "outcome": "Estima en parte la denuncia del PP y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 549/2023",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 207/2023",
+    "date": "2023-05-18",
+    "subject": "PSOE de Ceuta",
+    "outcome": "Anula la multa de 400 € de la JEZ Ceuta y retrotrae",
+    "in_scope": false,
+    "reason": "no impone; anula multa de junta inferior",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 493/2023",
+    "date": "2023-07-12",
+    "subject": "Consejero de Industria de Cantabria",
+    "outcome": "Desestima el recurso; confirma la multa de la JEP Cantabria",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEP; la JEC solo la confirma",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 548/2023",
+    "date": "2023-08-03",
+    "subject": "Isabel Rodríguez, ministra portavoz (PSOE)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-548-rodriguez-rueda-prensa-25-abril"
+   },
+   {
+    "ref": "Acuerdo JEC 549/2023",
+    "date": "2023-08-03",
+    "subject": "Isabel Rodríguez, ministra portavoz (PSOE)",
+    "outcome": "Multa de 2.500 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-549-rodriguez-rueda-prensa-3-mayo"
+   },
+   {
+    "ref": "Acuerdo JEC 552/2023",
+    "date": "2023-08-03",
+    "subject": "Vox (persona responsable)",
+    "outcome": "Abre expediente sancionador",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 564/2023",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 558/2023",
+    "date": "2023-08-14",
+    "subject": "Ramón Fernández-Pacheco, portavoz de la Junta de Andalucía (PP)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-558-fernandez-pacheco-23-mayo"
+   },
+   {
+    "ref": "Acuerdo JEC 562/2023",
+    "date": "2023-09-06",
+    "subject": "Ramón Fernández-Pacheco, portavoz de la Junta de Andalucía (PP)",
+    "outcome": "Multa de 2.600 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-562-fernandez-pacheco-12-junio"
+   },
+   {
+    "ref": "Acuerdo JEC 564/2023",
+    "date": "2023-09-14",
+    "subject": "Vox (formación política)",
+    "outcome": "Termina por reconocimiento de responsabilidad (art. 85.3 Ley 39/2015)",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-564-vox-okdiario"
+   },
+   {
+    "ref": "Acuerdo JEC 565/2023",
+    "date": "2023-09-14",
+    "subject": "Antonio Sanz, consejero de la Presidencia de Andalucía (PP)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-565-sanz-112-maremotos"
+   },
+   {
+    "ref": "Acuerdo JEC 574/2023",
+    "date": "2023-10-05",
+    "subject": "Carlos Fernández Carriedo, portavoz de la Junta de Castilla y León (PP)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-574-fernandez-carriedo-consejo-gobierno"
+   },
+   {
+    "ref": "Acuerdo JEC 575/2023",
+    "date": "2023-10-05",
+    "subject": "Pedro Sánchez, presidente del Gobierno (PSOE)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-575-sanchez-rueda-prensa-consejo-europeo"
+   },
+   {
+    "ref": "Acuerdo JEC 576/2023",
+    "date": "2023-10-05",
+    "subject": "Pere Aragonès, president de la Generalitat (ERC)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2023-576-aragones-movilidad-maresme"
+   },
+   {
+    "ref": "Acuerdo JEC 107/2024",
+    "date": "2024-04-25",
+    "subject": "Vox",
+    "outcome": "Desestima el recurso contra la retirada y apertura de expediente de la JEP Barcelona",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 123/2024",
+    "date": "2024-04-29",
+    "subject": "Pedro Sánchez, presidente del Gobierno",
+    "outcome": "Denuncia por la rueda de prensa en Doha (trámite previo)",
+    "in_scope": false,
+    "reason": "no impone; la multa se impone en 247/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 124/2024",
+    "date": "2024-04-29",
+    "subject": "Conseller de Salut de la Generalitat",
+    "outcome": "Denuncia del PSC por visitas a centros sanitarios (trámite previo)",
+    "in_scope": false,
+    "reason": "no impone; la multa se impone en 238/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 142/2024",
+    "date": "2024-05-12",
+    "subject": "Pilar Alegría, ministra portavoz",
+    "outcome": "Estima la denuncia del PP y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 248/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 149/2024",
+    "date": "2024-05-23",
+    "subject": "PSOE (cuenta del PSOE de Madrid)",
+    "outcome": "Denuncia de Vox (trámite previo)",
+    "in_scope": false,
+    "reason": "no impone; la multa se impone en 302/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 150/2024",
+    "date": "2024-05-23",
+    "subject": "Elma Saiz, ministra de Inclusión",
+    "outcome": "Denuncia del PP (trámite previo)",
+    "in_scope": false,
+    "reason": "no impone; concluido en 315/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 185/2024",
+    "date": "2024-05-30",
+    "subject": "Partido Popular (PP de Catalunya)",
+    "outcome": "Deduce testimonio al Ministerio Fiscal (art. 144.1 LOREG); no expediente",
+    "in_scope": false,
+    "reason": "no impone multa; remisión penal",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 186/2024",
+    "date": "2024-05-30",
+    "subject": "Partido Popular (PP de Catalunya)",
+    "outcome": "Deduce testimonio al Ministerio Fiscal (art. 144.1 LOREG); no expediente",
+    "in_scope": false,
+    "reason": "no impone multa; remisión penal",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 205/2024",
+    "date": "2024-06-09",
+    "subject": "Pilar Alegría, ministra portavoz",
+    "outcome": "Reclamación del PP (trámite previo)",
+    "in_scope": false,
+    "reason": "no impone; la multa se impone en 251/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 238/2024",
+    "date": "2024-06-27",
+    "subject": "Manel Balcells, conseller de Salut (indep., Govern ERC)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-238-balcells-visitas-sanitarias"
+   },
+   {
+    "ref": "Acuerdo JEC 247/2024",
+    "date": "2024-07-01",
+    "subject": "Pedro Sánchez, presidente del Gobierno (PSOE)",
+    "outcome": "Multa de 1.500 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-247-sanchez-doha"
+   },
+   {
+    "ref": "Acuerdo JEC 248/2024",
+    "date": "2024-07-01",
+    "subject": "Pilar Alegría, ministra portavoz (PSOE)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-248-alegria-rueda-prensa-7-mayo"
+   },
+   {
+    "ref": "Acuerdo JEC 251/2024",
+    "date": "2024-07-24",
+    "subject": "Pilar Alegría, ministra portavoz (PSOE)",
+    "outcome": "Multa de 2.200 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-251-alegria-rueda-prensa-4-junio"
+   },
+   {
+    "ref": "Acuerdo JEC 254/2024",
+    "date": "2024-07-24",
+    "subject": "Presidenta del Gobierno de Cantabria",
+    "outcome": "Desestima el recurso; confirma la multa de 600 € de la JEP Cantabria",
+    "in_scope": false,
+    "reason": "la multa la impuso la JEP; la JEC solo la confirma",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 255/2024",
+    "date": "2024-07-24",
+    "subject": "Pere Aragonès, president de la Generalitat",
+    "outcome": "Revoca la resolución sancionadora de la JEP Barcelona",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 256/2024",
+    "date": "2024-07-24",
+    "subject": "Conseller de Drets Socials de la Generalitat",
+    "outcome": "Revoca la resolución sancionadora de la JEP Barcelona",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 257/2024",
+    "date": "2024-07-24",
+    "subject": "Conseller de Salut de la Generalitat",
+    "outcome": "Revoca la resolución sancionadora de la JEP Barcelona",
+    "in_scope": false,
+    "reason": "no impone; la JEC resuelve en 303/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 258/2024",
+    "date": "2024-07-24",
+    "subject": "Consellera d'Igualtat i Feminismes de la Generalitat",
+    "outcome": "Revoca la resolución sancionadora de la JEP Barcelona",
+    "in_scope": false,
+    "reason": "no impone; la JEC resuelve en 303/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 259/2024",
+    "date": "2024-07-24",
+    "subject": "Elma Saiz, ministra de Inclusión",
+    "outcome": "Estima la denuncia del PP y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; concluido en 315/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 276/2024",
+    "date": "2024-10-17",
+    "subject": "Presidente de la Junta de Castilla y León",
+    "outcome": "Asume el expediente de la JEP Valladolid",
+    "in_scope": false,
+    "reason": "trámite; resuelto en 300/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 278/2024",
+    "date": "2024-10-17",
+    "subject": "PSOE (cuenta del PSOE de Madrid)",
+    "outcome": "Abre expediente sancionador",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 302/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 279/2024",
+    "date": "2024-10-17",
+    "subject": "Pere Aragonès, president de la Generalitat",
+    "outcome": "Archiva el expediente",
+    "in_scope": false,
+    "reason": "archivo sin sanción",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 280/2024",
+    "date": "2024-10-17",
+    "subject": "Conseller de Drets Socials de la Generalitat",
+    "outcome": "Archiva el expediente",
+    "in_scope": false,
+    "reason": "archivo sin sanción",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 281/2024",
+    "date": "2024-10-17",
+    "subject": "Conseller de Salut de la Generalitat",
+    "outcome": "Asume y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; resuelto en 303/2024",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 315/2024",
+    "date": "2024-10-17",
+    "subject": "Elma Saiz, ministra de Inclusión (PSOE)",
+    "outcome": "Toma conocimiento del pago de la multa; concluye el procedimiento",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-315-saiz-jornada-electoral"
+   },
+   {
+    "ref": "Acuerdo JEC 300/2024",
+    "date": "2024-12-12",
+    "subject": "Alfonso Fernández Mañueco, presidente de la Junta de Castilla y León (PP)",
+    "outcome": "Multa de 600 €; archiva respecto del director de Comunicación",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-300-manueco-visita-boecillo"
+   },
+   {
+    "ref": "Acuerdo JEC 302/2024",
+    "date": "2024-12-12",
+    "subject": "PSOE de Madrid (su secretaria de organización como responsable)",
+    "outcome": "Multa de 250 €",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-302-psoe-madrid-jornada-reflexion"
+   },
+   {
+    "ref": "Acuerdo JEC 303/2024",
+    "date": "2024-12-12",
+    "subject": "Manel Balcells y Tània Verge, consellers (indep., Govern ERC)",
+    "outcome": "Multas de 300 € a cada uno",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2024-303-balcells-verge-martorell"
+   },
+   {
+    "ref": "Acuerdo JEC 130/2025",
+    "date": "2025-12-19",
+    "subject": "Pedro Sánchez, presidente del Gobierno",
+    "outcome": "Reclamación por el informe «Cumpliendo»; abre expediente",
+    "in_scope": false,
+    "reason": "incoación; concluido en 138/2026",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 138/2026",
+    "date": "2026-01-19",
+    "subject": "Pedro Sánchez, presidente del Gobierno (PSOE)",
+    "outcome": "Toma conocimiento del pago de la multa; concluye el procedimiento",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2026-138-sanchez-informe-cumpliendo"
+   },
+   {
+    "ref": "Acuerdo JEC 79/2026",
+    "date": "2026-03-05",
+    "subject": "Elma Saiz, ministra portavoz",
+    "outcome": "Estima la denuncia del PP y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; concluido en 139/2026",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 139/2026",
+    "date": "2026-03-26",
+    "subject": "Elma Saiz, ministra portavoz (PSOE)",
+    "outcome": "Toma conocimiento del pago de la multa; concluye el procedimiento",
+    "in_scope": true,
+    "reason": "La JEC impone la sanción a un partido o a un miembro de un gobierno",
+    "event_id": "jec-2026-139-saiz-rueda-prensa"
+   },
+   {
+    "ref": "Acuerdo JEC 92/2026",
+    "date": "2026-03-26",
+    "subject": "Alfonso Fernández Mañueco, presidente en funciones de Castilla y León",
+    "outcome": "Inadmite su recurso contra la incoación de la JE Castilla y León",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 222/2026",
+    "date": "2026-09-14",
+    "subject": "Alfonso Fernández Mañueco, presidente de la Junta de Castilla y León",
+    "outcome": "Revoca la sanción de la JE Castilla y León y retrotrae",
+    "in_scope": false,
+    "reason": "no impone; revoca sanción de junta inferior",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 249/2026",
+    "date": "2026-10-15",
+    "subject": "Pedro Sánchez, presidente del Gobierno",
+    "outcome": "Estima en parte las denuncias y abre expediente",
+    "in_scope": false,
+    "reason": "incoación; sin resolución publicada a 11-11-2026",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 324/2026",
+    "date": "2026-10-29",
+    "subject": "Elma Saiz, ministra portavoz (y ministra de Vivienda)",
+    "outcome": "Estima en parte la denuncia del PP y abre expediente a la ministra portavoz",
+    "in_scope": false,
+    "reason": "incoación; sin resolución publicada a 11-11-2026",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 325/2026",
+    "date": "2026-10-29",
+    "subject": "Pedro Sánchez, presidente del Gobierno",
+    "outcome": "Estima la denuncia del PP y abre expediente (vídeo ante el «Guernica»)",
+    "in_scope": false,
+    "reason": "incoación; sin resolución publicada a 11-11-2026",
+    "event_id": null
+   },
+   {
+    "ref": "Acuerdo JEC 337/2026",
+    "date": "2026-11-05",
+    "subject": "Pedro Sánchez y Carlos Cuerpo, presidente y vicepresidente primero",
+    "outcome": "Desestima la denuncia del PP",
+    "in_scope": false,
+    "reason": "no impone multa",
+    "event_id": null
+   }
+  ],
+  "n_listed": 92,
+  "n_in_scope": 28,
+  "list_total": 199,
+  "out_of_scope_total": 107
+ },
+ "events": [
+  {
+   "event_id": "jec-2015-20-ehbildu-propaganda-vitoria",
+   "title": "JEC 20/2015: multa de 300 € a EH Bildu por carteles fuera de los espacios habilitados (europeas 2014)",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2015-01-22",
+   "act_date": "2014-05-23",
+   "act": "Colocación de carteles de la candidatura EH Bildu fuera de los espacios habilitados en Vitoria-Gasteiz (arts. 55 y 56 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "bildu",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "list",
+     "power_only": false,
+     "note": "Formación electoral «EH BILDU-Coalición Los Pueblos Deciden», elecciones al Parlamento Europeo de 2014"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2015&idacuerdoinstruccion=32104&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 20/2015 de 22/01/2015",
+    "retrieved": "2026-11-11",
+    "quote": "procede imponerle la sanción de multa de trescientos (300) euros",
+    "quote_lang": "es",
+    "locator": "Resolución"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2016-251-garcia-page-carta-plan-empleo",
+   "title": "JEC 251/2016: multa de 1.500 € al presidente de Castilla-La Mancha por una carta difundida en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2016-10-11",
+   "act_date": "2016-06-09",
+   "act": "Carta del presidente de la Junta de Comunidades a los destinatarios del Plan extraordinario por el empleo (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Emiliano García-Page, presidente de la Junta de Comunidades de Castilla-La Mancha (PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2016&idacuerdoinstruccion=42785&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 251/2016 de 11/10/2016",
+    "retrieved": "2026-11-11",
+    "quote": "por lo que se debe imponer la sanción de multa en cuantía de 1.500 €",
+    "quote_lang": "es",
+    "locator": "Fundamentos, sanción"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2019-538-torra-correo-funcionarios",
+   "title": "JEC 538/2019: multa de 2.500 € al president de la Generalitat por un correo a funcionarios en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2019-07-22",
+   "act_date": "2019-04-23",
+   "act": "Correo electrónico del president de la Generalitat a los funcionarios con referencias al «nefasto 155» (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Quim Torra, president de la Generalitat, elegido en la lista de Junts per Catalunya"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2019&idacuerdoinstruccion=69417&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 538/2019 de 22/07/2019",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al Presidente de la Generalitat de Catalunya una sanción de multa de 2.500 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2019-539-torra-sant-jordi",
+   "title": "JEC 539/2019: multa de 3.000 € al president de la Generalitat por la comunicación institucional de Sant Jordi",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2019-07-22",
+   "act_date": "2019-04-23",
+   "act": "Comunicación institucional del president de la Generalitat el día de Sant Jordi en periodo electoral (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Quim Torra, president de la Generalitat, elegido en la lista de Junts per Catalunya"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2019&idacuerdoinstruccion=69415&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 539/2019 de 22/07/2019",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al Presidente de la Generalitat una sanción de multa de 3.000 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2020-12-sanchez-exhumacion-entrevista",
+   "title": "JEC 12/2020: multa de 500 € al presidente del Gobierno en funciones por una declaración y una entrevista en Moncloa",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2020-01-23",
+   "act_date": "2019-10-24",
+   "act": "Declaración institucional sobre la exhumación de Francisco Franco (24-10-2019) y entrevista en Moncloa difundida en su web (25-10-2019)",
+   "status": "firme; el Tribunal Supremo desestimó el recurso del sancionado (nota del CGPJ de 31-05-2021)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pedro Sánchez, presidente del Gobierno en funciones (Gobierno Sánchez I, PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2020&idacuerdoinstruccion=72044&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 12/2020 de 23/01/2020",
+    "retrieved": "2026-11-11",
+    "quote": "atendiendo a su escaso grado de culpabilidad, una sanción de multa de 500 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/en/Judiciary/Supreme-Court/Pressroom/Press-Archive/El-Tribunal-Supremo-confirma-la-multa-de-la-Junta-Electoral-a-Pedro-Sanchez-por-una-entrevista-televisiva-en-Moncloa-durante-el-periodo-electoral-publicada-en-la-web-de-Presidencia-de-Gobierno",
+     "title": "CGPJ, nota de prensa 31-05-2021: el TS confirma la multa de la JEC a Pedro Sánchez por una entrevista en Moncloa",
+     "retrieved": "2026-11-11",
+     "quote": "ha desestimado el recurso presentado por el presidente del Gobierno, Pedro Sánchez",
+     "quote_lang": "es",
+     "locator": "cuerpo de la nota"
+    }
+   ],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2020-13-celaa-rueda-prensa",
+   "title": "JEC 13/2020: multa de 2.200 € a la ministra portavoz en funciones por la rueda de prensa del 25-10-2019",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2020-01-23",
+   "act_date": "2019-10-25",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 25 de octubre de 2019 (art. 50.2 LOREG)",
+   "status": "firme; el Tribunal Supremo desestimó el recurso de la sancionada (nota del CGPJ de 25-05-2021)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Celaá, ministra de Educación y portavoz del Gobierno en funciones (Gobierno Sánchez I, PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2020&idacuerdoinstruccion=72042&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 13/2020 de 23/01/2020",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer a la Sra. Ministra una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-multa-de-la-Junta-Electoral-a-la-ministra-de-Educacion-por-realzar-los-logros-del-Gobierno-tras-un-Consejo-de-Ministros-durante-el-periodo-electoral",
+     "title": "CGPJ, nota de prensa 25-05-2021: el TS confirma la multa de la JEC a la ministra de Educación",
+     "retrieved": "2026-11-11",
+     "quote": "ha desestimado el recurso presentado por la ministra Isabel Celaá",
+     "quote_lang": "es",
+     "locator": "cuerpo de la nota"
+    }
+   ],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2021-391-ayuso-homenaje-las-ventas",
+   "title": "JEC 391/2021: multa de 360 € a la presidenta de la Comunidad de Madrid por un acto en Las Ventas",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2021-12-09",
+   "act_date": "2021-04-08",
+   "act": "Manifestaciones de la presidenta en el acto de homenaje celebrado en la plaza de Las Ventas el 8 de abril de 2021 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2021&idacuerdoinstruccion=78613&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 391/2021 de 09/12/2021",
+    "retrieved": "2026-11-11",
+    "quote": "a la Presidenta de la Comunidad de Madrid una sanción de multa de 360 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-548-rodriguez-rueda-prensa-25-abril",
+   "title": "JEC 548/2023: multa de 2.200 € a la ministra portavoz por la rueda de prensa del Consejo de Ministros del 25-04-2023",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-08-03",
+   "act_date": "2023-04-25",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 25 de abril de 2023 (art. 50.2 LOREG)",
+   "status": "firme; el Tribunal Supremo desestimó el recurso de la sancionada (nota del CGPJ de 24-10-2024)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Rodríguez García, ministra de Política Territorial y portavoz del Gobierno (Gobierno Sánchez II, PSOE-UP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=122852&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 548/2023 de 03/08/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer a la Sra. R. G. una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-sancion-de-4-700-euros-de-la-Junta-Electoral-Central-a-la-ministra-Isabel-Rodriguez-por-incumplir-el-deber-de-neutralidad-durante-el-periodo-electoral",
+     "title": "CGPJ, nota de prensa 24-10-2024: el TS confirma la sanción de 4.700 euros de la JEC a la ministra Isabel Rodríguez",
+     "retrieved": "2026-11-11",
+     "quote": "ha desestimado el recurso planteado por la ministra Isabel Rodríguez",
+     "quote_lang": "es",
+     "locator": "cuerpo de la nota"
+    }
+   ],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-549-rodriguez-rueda-prensa-3-mayo",
+   "title": "JEC 549/2023: multa de 2.500 € a la ministra portavoz por la rueda de prensa del Consejo de Ministros del 03-05-2023",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-08-03",
+   "act_date": "2023-05-03",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 3 de mayo de 2023 (art. 50.2 LOREG)",
+   "status": "firme; el Tribunal Supremo desestimó el recurso de la sancionada (nota del CGPJ de 24-10-2024)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Rodríguez García, ministra de Política Territorial y portavoz del Gobierno (Gobierno Sánchez II, PSOE-UP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=122854&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 549/2023 de 03/08/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer a la expedientada una sanción de multa de 2.500 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-sancion-de-4-700-euros-de-la-Junta-Electoral-Central-a-la-ministra-Isabel-Rodriguez-por-incumplir-el-deber-de-neutralidad-durante-el-periodo-electoral",
+     "title": "CGPJ, nota de prensa 24-10-2024: el TS confirma la sanción de 4.700 euros de la JEC a la ministra Isabel Rodríguez",
+     "retrieved": "2026-11-11",
+     "quote": "ha desestimado el recurso planteado por la ministra Isabel Rodríguez",
+     "quote_lang": "es",
+     "locator": "cuerpo de la nota"
+    }
+   ],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-558-fernandez-pacheco-23-mayo",
+   "title": "JEC 558/2023: multa de 2.200 € al portavoz de la Junta de Andalucía por la rueda de prensa del 23-05-2023",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-08-14",
+   "act_date": "2023-05-23",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Gobierno de la Junta de Andalucía del 23 de mayo de 2023 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Ramón Fernández-Pacheco, portavoz del Gobierno de la Junta de Andalucía y consejero (Gobierno Moreno, PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=122941&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 558/2023 de 14/08/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al expedientado una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-562-fernandez-pacheco-12-junio",
+   "title": "JEC 562/2023: multa de 2.600 € al portavoz de la Junta de Andalucía por la rueda de prensa del 12-06-2023",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-09-06",
+   "act_date": "2023-06-12",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Gobierno de la Junta de Andalucía del 12 de junio de 2023 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Ramón Fernández-Pacheco, portavoz del Gobierno de la Junta de Andalucía y consejero (Gobierno Moreno, PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=122985&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 562/2023 de 06/09/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al interesado una sanción de multa de 2.600 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-564-vox-okdiario",
+   "title": "JEC 564/2023: Vox reconoce la infracción por los anuncios «Sánchez destruye España» y se aplica el art. 85.3 Ley 39/2015",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-09-14",
+   "act_date": "2023-07-20",
+   "act": "Contratación de inserciones publicitarias en Okdiario antes del inicio de la campaña de las generales de 2023 (art. 53 LOREG)",
+   "status": "firme; procedimiento terminado por reconocimiento de responsabilidad (art. 85.3 Ley 39/2015)",
+   "attributions": [
+    {
+     "party_id": "vox",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Vox como formación responsable; terminación por reconocimiento de responsabilidad y pago (art. 85.3 Ley 39/2015)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=123063&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 564/2023 de 14/09/2023",
+    "retrieved": "2026-11-11",
+    "quote": "la infracción objeto del expediente fue cometida por la formación política VOX",
+    "quote_lang": "es",
+    "locator": "Acuerdo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-565-sanz-112-maremotos",
+   "title": "JEC 565/2023: multa de 2.200 € al consejero de la Presidencia de Andalucía por un mensaje del 112",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-09-14",
+   "act_date": "2023-06-07",
+   "act": "Mensaje en la cuenta del servicio 112 de la Junta de Andalucía sobre el plan ante maremotos (art. 50.2 y 50.3 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Antonio Sanz, consejero de la Presidencia, Interior, Diálogo Social y Simplificación Administrativa (Gobierno Moreno, PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=123061&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 565/2023 de 14/09/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al interesado una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2023-574-fernandez-carriedo-consejo-gobierno",
+   "title": "JEC 574/2023: multa de 2.200 € al portavoz de la Junta de Castilla y León por la rueda de prensa del 29-06-2023",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-10-05",
+   "act_date": "2023-06-29",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Gobierno de la Junta de Castilla y León del 29 de junio de 2023 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Carlos Fernández Carriedo, portavoz y consejero de Economía y Hacienda (Gobierno Mañueco, PP-Vox), del PP"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2023&idacuerdoinstruccion=123215&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 574/2023 de 05/10/2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al interesado una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-238-balcells-visitas-sanitarias",
+   "title": "JEC 238/2024: multa de 2.200 € al conseller de Salut por visitas a centros sanitarios en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-06-27",
+   "act_date": "2024-04-10",
+   "act": "Visitas a centros sanitarios del 10 al 22 de abril de 2024 y su difusión en la cuenta institucional del Departament (art. 50.2 y 50.3 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Manel Balcells, conseller de Salut, independiente nombrado en el Govern Aragonès (ERC). Atribuido como acto del Govern de ERC (en solitario desde octubre de 2022), no por afiliación: la persona era independiente."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=132942&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 238/2024 de 27/06/2024",
+    "retrieved": "2026-11-11",
+    "quote": "Consejero de Salud de la Generalitat de Cataluña una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-247-sanchez-doha",
+   "title": "JEC 247/2024: multa de 1.500 € al presidente del Gobierno por la rueda de prensa del 03-04-2024 en Doha",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-07-01",
+   "act_date": "2024-04-03",
+   "act": "Declaraciones en la rueda de prensa en Doha durante un viaje oficial, en periodo electoral (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pedro Sánchez, presidente del Gobierno (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=133105&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 247/2024 de 01/07/2024",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al Sr. Sánchez Pérez-Castejón una sanción de multa de 1.500 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-248-alegria-rueda-prensa-7-mayo",
+   "title": "JEC 248/2024: multa de 2.200 € a la ministra portavoz por la rueda de prensa del Consejo de Ministros del 07-05-2024",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-07-01",
+   "act_date": "2024-05-07",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 7 de mayo de 2024 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pilar Alegría, ministra de Educación, Formación Profesional y Deportes y portavoz del Gobierno (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=133115&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 248/2024 de 01/07/2024",
+    "retrieved": "2026-11-11",
+    "quote": "y portavoz del Gobierno una sanción de multa de 2.200 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-251-alegria-rueda-prensa-4-junio",
+   "title": "JEC 251/2024: multa de 2.200 € a la ministra portavoz por la rueda de prensa del Consejo de Ministros del 04-06-2024",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-07-24",
+   "act_date": "2024-06-04",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 4 de junio de 2024 (art. 50.2 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pilar Alegría, ministra de Educación, Formación Profesional y Deportes y portavoz del Gobierno (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=133231&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 251/2024 de 24/07/2024",
+    "retrieved": "2026-11-11",
+    "quote": "y Portavoz del Gobierno una sanción de multa de 2.200 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-302-psoe-madrid-jornada-reflexion",
+   "title": "JEC 302/2024: multa de 250 € al PSOE de Madrid por un mensaje en X en la jornada de reflexión catalana",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-12-12",
+   "act_date": "2024-05-11",
+   "act": "Publicación en la cuenta del PSOE de Madrid en X de una imagen del candidato del PSC con el texto «Salvador» (art. 53 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "PSOE de la Comunidad de Madrid; sancionada su secretaria de organización «como responsable de esta formación política»"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=135783&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 302/2024 de 12/12/2024",
+    "retrieved": "2026-11-11",
+    "quote": "e imponerle una sanción de multa de 250 euros",
+    "quote_lang": "es",
+    "locator": "Resolución"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-303-balcells-verge-martorell",
+   "title": "JEC 303/2024: multas de 300 € al conseller de Salut y a la consellera d'Igualtat por una visita al Hospital de Martorell",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-12-12",
+   "act_date": "2024-05-02",
+   "act": "Visita al centro de nacimientos del Hospital de Martorell el 2 de mayo de 2024 y su cobertura informativa (art. 50.2 y 50.3 LOREG)",
+   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Manel Balcells (Salut) y Tània Verge (Igualtat i Feminismes), independientes nombrados en el Govern Aragonès (ERC). Atribuido como acto del Govern de ERC (en solitario desde octubre de 2022), no por afiliación: la persona era independiente."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=135787&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 303/2024 de 12/12/2024",
+    "retrieved": "2026-11-11",
+    "quote": "Conseller de Salut de la Generalitat de Catalunya una sanción de multa de 300 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2024-315-saiz-jornada-electoral",
+   "title": "JEC 315/2024: pago de la multa por la ministra Elma Saiz por un mensaje en X el día de las elecciones catalanas",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-10-17",
+   "act_date": "2024-05-12",
+   "act": "Mensaje en X de apoyo al PSC el día de las elecciones al Parlamento de Cataluña de 2024 (art. 53 LOREG)",
+   "status": "firme; procedimiento terminado por pago voluntario de la multa (art. 85 Ley 39/2015)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Elma Saiz, ministra de Inclusión, Seguridad Social y Migraciones (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2024&idacuerdoinstruccion=134768&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 315/2024 de 17/10/2024",
+    "retrieved": "2026-11-11",
+    "quote": "Tomar conocimiento del pago a los efectos de lo previsto en el artículo 85.2",
+    "quote_lang": "es",
+    "locator": "Acuerdo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2026-138-sanchez-informe-cumpliendo",
+   "title": "JEC 138/2026: pago de la multa por el presidente del Gobierno por la presentación del informe «Cumpliendo»",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2026-01-19",
+   "act_date": "2025-12-15",
+   "act": "Declaraciones en la comparecencia en La Moncloa para presentar el informe «Cumpliendo», en periodo electoral (art. 50.2 LOREG)",
+   "status": "firme; procedimiento terminado por pago voluntario de la multa (art. 85 Ley 39/2015)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pedro Sánchez, presidente del Gobierno (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2026&idacuerdoinstruccion=143236&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 138/2026 de 19/01/2026",
+    "retrieved": "2026-11-11",
+    "quote": "Tomar conocimiento del pago a los efectos de lo previsto en el artículo 85.2",
+    "quote_lang": "es",
+    "locator": "Acuerdo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  },
+  {
+   "event_id": "jec-2026-139-saiz-rueda-prensa",
+   "title": "JEC 139/2026: pago de la multa por la ministra portavoz por la rueda de prensa del Consejo de Ministros del 24-02-2026",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2026-03-26",
+   "act_date": "2026-02-24",
+   "act": "Declaraciones en la rueda de prensa posterior al Consejo de Ministros del 24 de febrero de 2026 (art. 50.2 LOREG)",
+   "status": "firme; procedimiento terminado por pago voluntario de la multa (art. 85 Ley 39/2015)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Elma Saiz, ministra de Inclusión, Seguridad Social y Migraciones y portavoz del Gobierno (Gobierno Sánchez III, PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2026&idacuerdoinstruccion=148666&idsesion=&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 139/2026 de 26/03/2026",
+    "retrieved": "2026-11-11",
+    "quote": "Tomar conocimiento del pago a los efectos de lo previsto en el artículo 85.2",
+    "quote_lang": "es",
+    "locator": "Acuerdo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "jec_sancion"
+   }
+  }
+ ],
+ "pending": []
+}

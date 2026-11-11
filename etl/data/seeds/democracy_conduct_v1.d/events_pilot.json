@@ -279,7 +279,7 @@
    "date": "2019-10-14",
    "act_date": "2017-09-06",
    "act": "Hechos de septiembre y octubre de 2017 en Cataluña: leyes 19/2017 y 20/2017, referéndum del 1 de octubre y uso de fondos públicos",
-   "status": "firme",
+   "status": "firme el 14-10-2019; indultos parciales de la prisión pendiente (Reales Decretos 456/2021 a 464/2021, BOE 23-6-2021; no a Vila, Borràs ni Mundó, sin pena de prisión); revisión tras la LO 14/2022 (auto TS 13-2-2023): derogada la sedición, Junqueras, Romeva, Turull y Bassa quedan condenados por desobediencia y malversación con inhabilitación absoluta hasta 2030-2031, y se extingue por completo la inhabilitación de Forcadell, Rull, Forn (desobediencia), Sànchez y Cuixart (desórdenes públicos); Ley Orgánica 1/2024 de amnistía: autos TS 1-7-2024 y 30-9-2024 no amnistían la malversación (sí la desobediencia); el TC otorgó el amparo a Bassa (Pleno, 6-10-2026) y el auto TS 20-10-2026 declara extinguida la responsabilidad criminal de Junqueras, Bassa, Turull y Romeva. A 11-11-2026 no queda ninguna pena ni responsabilidad penal por cumplir. La amnistía y los indultos extinguen la pena o la responsabilidad penal, no la resolución firme de 2019, que sigue contando con la gravedad que tenía (regla 1.3).",
    "attributions": [
     {
      "party_id": "erc",
@@ -287,7 +287,15 @@
      "attribution": "office_holder",
      "lineage": "same",
      "power_only": true,
-     "note": "Oriol Junqueras, vicepresidente del Govern y presidente de ERC (sentencia, p. 302): 13 años de prisión; también condenada Dolors Bassa, consejera de Trabajo, a 12 años"
+     "note": "Oriol Junqueras, vicepresidente del Govern y presidente de ERC (STS, p. 302): 13 años de prisión e inhabilitación absoluta (sedición y malversación). Sin militancia en ERC probada en fuente oficial a la fecha de los hechos (elegidos o nombrados con la lista Junts pel Sí 2015, coalición que ningún partido actual encabeza): Dolors Bassa (consejera de Trabajo, 12 años), Raül Romeva (consejero de Exteriores, 12 años), Carles Mundó (consejero de Justicia, desobediencia: multa e inhabilitación especial de 1 año y 8 meses); Carme Forcadell (presidenta del Parlament, 11 años y 6 meses por sedición) aparece en la STS como «militante de ERC» al citar una querella. No cuenta ninguno: nada firme sobrevive (malversación amnistiada, auto TS 20-10-2026; sedición derogada, auto TS 13-2-2023; desobediencia amnistiada en 2024)"
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "person",
+     "power_only": true,
+     "note": "Jordi Turull, consejero de Presidencia (PDeCAT, predecesor de Junts), 12 años de prisión e inhabilitación absoluta; hoy secretario general de Junts (junts.cat): cuenta solo como persona. Predecesor PDeCAT/CDC sin cargo directivo actual en Junts comprobado: Josep Rull (consejero de Territorio, 10 años y 6 meses por sedición; la STS le sitúa representando a CDC en el acuerdo de 2015) y Joaquim Forn (Interior, 10 años y 6 meses); Santi Vila y Meritxell Borràs (desobediencia: multa e inhabilitación especial). Militancia PDeCAT de cada uno no probada en fuente oficial. No cuenta ninguno: la malversación de Turull fue amnistiada (auto TS 20-10-2026) y la inhabilitación de Rull y Forn se extinguió en 2023. Jordi Sànchez (ANC) y Jordi Cuixart (Òmnium), 9 años por sedición, no tenían cargo público ni de partido: no cuentan"
     }
    ],
    "source": {
@@ -298,7 +306,64 @@
     "quote_lang": "es",
     "locator": "fallo, 1.a) (p. 488)"
    },
-   "extra_sources": []
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/Sentencia%20459_2019.pdf",
+     "title": "STS 459/2019, fundamentos: liderazgo de Oriol Junqueras",
+     "retrieved": "2026-11-11",
+     "quote": "Vicepresidente del Govern y Presidente del partido Esquerra Republicana de Cataluña (ERC)",
+     "quote_lang": "es",
+     "locator": "p. 302"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-10467",
+     "title": "Real Decreto 460/2021, de 22 de junio, por el que se indulta a don Oriol Junqueras i Vies (y RRDD 456 a 464/2021, BOE-A-2021-10463 a 10471)",
+     "retrieved": "2026-11-11",
+     "quote": "indultar a don Oriol Junqueras i Vies la pena privativa de libertad pendiente",
+     "quote_lang": "es",
+     "locator": "parte dispositiva"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-TS-condena-a-Junqueras--Romeva--Turull-y-Bassa-por-desobediencia-en-concurso-con-malversacion-y-mantiene-sus-penas-de-inhabilitacion-absoluta",
+     "title": "Tribunal Supremo, nota de 13-2-2023: auto de revisión de la STS 459/2019 tras la LO 14/2022",
+     "retrieved": "2026-11-11",
+     "quote": "determina la extinción total de sus respectivas condenas de inhabilitación",
+     "quote_lang": "es",
+     "locator": "entradilla (Sànchez, Cuixart, Forcadell, Rull, Forn)"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-declara-no-amnistiado-el-delito-de-malversacion-de-caudales-publicos-en-la-causa-del--proces-",
+     "title": "Tribunal Supremo, nota de 1-7-2024: auto sobre la Ley Orgánica 1/2024 de amnistía",
+     "retrieved": "2026-11-11",
+     "quote": "ha declarado no amnistiado el delito de malversación de caudales públicos",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Oficina-de-Comunicacion/Notas-de-prensa/El-Tribunal-Supremo-confirma-la-no-aplicacion-de-la-amnistia-al-delito-de-malversacion-de-los-condenados-en-la-causa-del-proces",
+     "title": "Tribunal Supremo, nota de 30-9-2024: rechaza las súplicas; desestima la de VOX que pedía excluir también la desobediencia",
+     "retrieved": "2026-11-11",
+     "quote": "consideraba que el delito de desobediencia también estaba excluido de la amnistía",
+     "quote_lang": "es",
+     "locator": "párrafo 2 (súplica de VOX, rechazada)"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-declara-extinguida-la-responsabilidad-penal-de-Oriol-Junqueras--Raul-Romeva--Jordi-Turull-y-Dolors-Bassa-en-aplicacion-de-la-amnistia-al-asumir-la-sentencia-del-TC",
+     "title": "Tribunal Supremo, nota de 20-10-2026: auto que asume la sentencia de amparo del TC a Dolors Bassa",
+     "retrieved": "2026-11-11",
+     "quote": "ha declarado extinguida la responsabilidad criminal derivada de la sentencia de la causa del procés",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    },
+    {
+     "url": "https://junts.cat/",
+     "title": "Junts per Catalunya, portada (Junts TV, 18-7-2026)",
+     "retrieved": "2026-11-11",
+     "quote": "Intervenció del secretari general Jordi Turull al Consell Nacional",
+     "quote_lang": "ca",
+     "locator": "Junts TV, 18.07.2026"
+    }
+   ]
   },
   {
    "event_id": "sts-torra-desobediencia",

@@ -1,0 +1,588 @@
+{
+ "part": "census_rolr",
+ "census": {
+  "family": "rolr",
+  "scope": "Capítulos sobre España del Informe sobre el Estado de Derecho de la Comisión Europea 2020-2026: preocupaciones o recomendaciones propias de la Comisión sobre un acto concreto atribuible a un partido",
+  "list_source": {
+   "url": "https://commission.europa.eu/publications/2026-rule-law-report-communication-and-country-chapters_en",
+   "title": "Comisión Europea, 2026 Rule of Law Report - communication and country chapters",
+   "retrieved": "2026-11-11"
+  },
+  "n_listed": 12,
+  "n_in_scope": 3,
+  "chapters_read": "7 de 7",
+  "chapters": [
+   {
+    "year": 2020,
+    "swd": "SWD(2020) 308 final",
+    "date": "2020-09-30",
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/33262/imfname_11007489.pdf",
+    "read": true,
+    "events": 0,
+    "system": 3
+   },
+   {
+    "year": 2021,
+    "swd": "SWD(2021) 710 final",
+    "date": "2021-07-20",
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+    "read": true,
+    "events": 2,
+    "system": 5
+   },
+   {
+    "year": 2022,
+    "swd": "SWD(2022) 509 final",
+    "date": "2022-07-13",
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+    "read": true,
+    "events": 1,
+    "system": 4
+   },
+   {
+    "year": 2023,
+    "swd": "SWD(2023) 809 final",
+    "date": "2023-07-05",
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+    "read": true,
+    "events": 0,
+    "system": 5
+   },
+   {
+    "year": 2024,
+    "swd": "SWD(2024) 809 final",
+    "date": "2024-07-24",
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+    "read": true,
+    "events": 0,
+    "system": 5
+   },
+   {
+    "year": 2025,
+    "swd": "SWD(2025) 909 final",
+    "date": "2025-07-08",
+    "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+    "read": true,
+    "events": 0,
+    "system": 4
+   },
+   {
+    "year": 2026,
+    "swd": "SWD(2026) 909 final",
+    "date": "2026-07-17",
+    "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+    "read": true,
+    "events": 0,
+    "system": 5
+   }
+  ],
+  "already_in_ledger": [
+   "rolr-2021-cgpj-mayoria"
+  ],
+  "already_in_ledger_system": [
+   "2022: retraso en la renovación del CGPJ (events_european_bodies.json, system_findings)",
+   "2023: la falta de renovación del CGPJ perjudica al Tribunal Supremo (events_european_bodies.json, system_findings)"
+  ],
+  "method": "Texto completo de cada capítulo (copia del Parlamento de Austria; commission.europa.eu responde 429) extraído sin notas al pie y filtrado por frases con la voz de la Comisión (concern, recommend, important, should, risk...) más el resumen y el recuadro de recomendaciones; solo cuentan como evento las preocupaciones o recomendaciones propias de la Comisión sobre un acto concreto atribuible por registro oficial.",
+  "excluded_descriptive": [
+   "2021: LO 4/2021 (CGPJ en funciones), descrita sin preocupación propia",
+   "2023-2024: LO 14/2022 (malversación), crítica atribuida a terceros",
+   "2023: enmiendas de diciembre de 2022 sobre nombramientos del TC, descritas; la preocupación de la Comisión es sobre la práctica (ver system_findings 2023)",
+   "2024-2025: Ley de amnistía, la Comisión solo dice que la analiza",
+   "2025-2026: RDL 5/2024 (RTVE), preocupación atribuida a terceros",
+   "2025-2026: proposición sobre la acción popular y anteproyecto de carreras judicial y fiscal, críticas de terceros",
+   "2023-2026: borradores de Ley de Información Clasificada, críticas de terceros"
+  ],
+  "rows": [
+   {
+    "ref": "rolr-2021-cgpj-mayoria",
+    "year": 2021,
+    "act": "Proposición de LO 122/000090 (CGPJ por mayoría absoluta)",
+    "in_scope": true,
+    "reason": "Preocupación propia de la Comisión; ya en el ledger (events_pilot.json)",
+    "event_id": "rolr-2021-cgpj-mayoria"
+   },
+   {
+    "ref": "rolr-2021-ley-seguridad-ciudadana",
+    "year": 2021,
+    "act": "LO 4/2015 de seguridad ciudadana",
+    "in_scope": true,
+    "reason": "La Comisión pide que la reforma tenga en cuenta la opinión de la Comisión de Venecia",
+    "event_id": "rolr-2021-ley-seguridad-ciudadana"
+   },
+   {
+    "ref": "rolr-2022-ley-comunicacion-audiovisual-recursos",
+    "year": 2022,
+    "act": "Ley 13/2022 General de Comunicación Audiovisual",
+    "in_scope": true,
+    "reason": "La Comisión constata que la ley no atiende el requisito de recursos adecuados de la AVMSD",
+    "event_id": "rolr-2022-ley-comunicacion-audiovisual-recursos"
+   },
+   {
+    "ref": "LO 4/2021",
+    "year": 2021,
+    "act": "LO 4/2021, CGPJ en funciones",
+    "in_scope": false,
+    "reason": "Descrita sin preocupación propia (la consecuencia sobre el Supremo va a system_findings)"
+   },
+   {
+    "ref": "LO 14/2022",
+    "year": 2023,
+    "act": "LO 14/2022, malversación y enriquecimiento ilícito",
+    "in_scope": false,
+    "reason": "Críticas atribuidas a terceros (sociedad civil) en 2023 y 2024"
+   },
+   {
+    "ref": "Enmiendas diciembre 2022 (nombramientos TC)",
+    "year": 2023,
+    "act": "Enmiendas a la proposición de reforma del Código Penal sobre nombramientos del TC",
+    "in_scope": false,
+    "reason": "Descritas; la Comisión no las nombra al expresar su preocupación por la práctica (system_findings 2023)"
+   },
+   {
+    "ref": "Ley de amnistía (LO 1/2024)",
+    "year": 2024,
+    "act": "LO 1/2024 de amnistía",
+    "in_scope": false,
+    "reason": "La Comisión solo dice que la analiza; preocupaciones de terceros y de la Comisión de Venecia"
+   },
+   {
+    "ref": "RDL 5/2024 (RTVE)",
+    "year": 2025,
+    "act": "Real Decreto-ley 5/2024, consejo de administración de RTVE",
+    "in_scope": false,
+    "reason": "Descrito en 2025; en 2026 las preocupaciones son de terceros"
+   },
+   {
+    "ref": "Proposición acción popular (2025)",
+    "year": 2025,
+    "act": "Proposición de ley que limita la acción popular",
+    "in_scope": false,
+    "reason": "Descrita; críticas de terceros"
+   },
+   {
+    "ref": "Anteproyecto carreras judicial y fiscal (2025)",
+    "year": 2025,
+    "act": "Proyecto de ley de carreras judicial y fiscal",
+    "in_scope": false,
+    "reason": "Preocupaciones de terceros"
+   },
+   {
+    "ref": "Proyecto de Ley de Información Clasificada",
+    "year": 2026,
+    "act": "Borradores 2022 y proyecto 2025 de Ley de Información Clasificada",
+    "in_scope": false,
+    "reason": "Críticas de terceros; la Comisión registra avances"
+   },
+   {
+    "ref": "Iniciativas autonómicas de cierre de oficinas antifraude",
+    "year": 2024,
+    "act": "Iniciativas legislativas autonómicas",
+    "in_scope": false,
+    "reason": "Preocupación de sociedad civil y fiscalía, no de la Comisión; sin acto identificado en el texto"
+   }
+  ]
+ },
+ "events": [
+  {
+   "event_id": "rolr-2021-ley-seguridad-ciudadana",
+   "title": "Informe sobre el Estado de Derecho 2021 (España): pide que la reforma de la Ley de Seguridad Ciudadana siga a la Comisión de Venecia",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "medios",
+   "severity": 1,
+   "date": "2021-07-20",
+   "act_date": "2015-03-30",
+   "act": "Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana",
+   "status": "firme; los capítulos 2022-2026 siguen registrando la reforma pendiente (proposición de octubre de 2024 en tramitación en 2026)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP): proyecto de ley orgánica 121/000105. El capítulo 2021 dice también que persisten las preocupaciones por su impacto en periodistas (p. 16)"
+    }
+   ],
+   "source": {
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+    "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+    "retrieved": "2026-11-11",
+    "quote": "it is important that this opinion is taken into account",
+    "quote_lang": "en",
+    "locator": "PDF p. 20, sección IV"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/BOCG-10-A-105-1.PDF",
+     "title": "BOCG Congreso, X Legislatura, Serie A, núm. 105-1, 25 de julio de 2014: Proyecto de Ley Orgánica de protección de la seguridad ciudadana",
+     "retrieved": "2026-11-11",
+     "quote": "121/000105 Proyecto de Ley Orgánica de protección de la seguridad ciudadana.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ]
+  },
+  {
+   "event_id": "rolr-2022-ley-comunicacion-audiovisual-recursos",
+   "title": "Informe sobre el Estado de Derecho 2022 (España): la Ley General de Comunicación Audiovisual no garantiza recursos al regulador",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "medios",
+   "severity": 1,
+   "date": "2022-07-13",
+   "act_date": "2022-07-07",
+   "act": "Ley 13/2022, de 7 de julio, General de Comunicación Audiovisual (requisito de recursos adecuados del art. 30.4 de la Directiva AVMSD)",
+   "status": "firme; el capítulo 2023 da por plenamente cumplida la recomendación tras aumentar los recursos de la CNMC",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP): proyecto de ley 121/000076"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio del Gobierno Sánchez II (PSOE-UP) a la fecha del proyecto"
+    }
+   ],
+   "source": {
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+    "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+    "retrieved": "2026-11-11",
+    "quote": "However, the law does not address the adequacy of resources requirement",
+    "quote_lang": "en",
+    "locator": "PDF p. 16, sección III"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-77-1.PDF",
+     "title": "BOCG Congreso, XIV Legislatura, Serie A, núm. 77-1, 17 de diciembre de 2021: Proyecto de Ley General de Comunicación Audiovisual",
+     "retrieved": "2026-11-11",
+     "quote": "121/000076 Proyecto de Ley General de Comunicación Audiovisual.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ]
+  }
+ ],
+ "system_findings": [
+  {
+   "year": 2020,
+   "finding": "La falta de nombramiento de los nuevos vocales del CGPJ es un reto para el sistema judicial.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/33262/imfname_11007489.pdf",
+   "title": "Comisión Europea, SWD(2020) 308 final, 2020 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The situation of the Judicial Council is another challenge",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, resumen"
+  },
+  {
+   "year": 2020,
+   "finding": "La justicia afronta problemas de eficiencia, con procedimientos judiciales cada vez más largos.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/33262/imfname_11007489.pdf",
+   "title": "Comisión Europea, SWD(2020) 308 final, 2020 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The Spanish justice system is facing challenges concerning its efficiency",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, resumen"
+  },
+  {
+   "year": 2020,
+   "finding": "España carece de un marco general de protección de denunciantes y de regulación de los grupos de interés.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/33262/imfname_11007489.pdf",
+   "title": "Comisión Europea, SWD(2020) 308 final, 2020 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Whistle-blower protection and lobbying regulation require attention",
+   "quote_lang": "en",
+   "locator": "PDF p. 10, sección II"
+  },
+  {
+   "year": 2021,
+   "finding": "Persiste la preocupación por la falta de renovación del CGPJ, en funciones desde diciembre de 2018.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+   "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Concerns over the lack of renewal of the Council for the Judiciary persist",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, sección I"
+  },
+  {
+   "year": 2021,
+   "finding": "Preocupa el aforamiento ante el Tribunal Supremo de altos cargos y el régimen de incompatibilidades de jueces y fiscales.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+   "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "concerns related to the competence of the Supreme Court for criminal liability",
+   "quote_lang": "en",
+   "locator": "PDF p. 5, sección I"
+  },
+  {
+   "year": 2021,
+   "finding": "La autonomía de la Fiscalía respecto del Gobierno sigue suscitando dudas.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+   "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The autonomy of the prosecution service continues to raise questions and be discussed",
+   "quote_lang": "en",
+   "locator": "PDF p. 5, sección I"
+  },
+  {
+   "year": 2021,
+   "finding": "La falta de recursos sigue impidiendo tramitar con eficacia los casos de corrupción de alto nivel.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+   "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Inadequate resources continue to be an obstacle to handle effectively high-level cases of corruption",
+   "quote_lang": "en",
+   "locator": "PDF p. 11, sección II"
+  },
+  {
+   "year": 2021,
+   "finding": "El acoso a periodistas en redes sociales es un fenómeno creciente y preocupante.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+   "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Harassment of journalists on social media is an increasing, worrying phenomenon",
+   "quote_lang": "en",
+   "locator": "PDF p. 17, sección III"
+  },
+  {
+   "year": 2022,
+   "finding": "Recomienda separar el mandato del Fiscal General del Estado del mandato del Gobierno.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Strengthen the statute of the Prosecutor General, in particular regarding the separation of the terms",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, recomendaciones"
+  },
+  {
+   "year": 2022,
+   "finding": "La duración de las investigaciones y enjuiciamientos de corrupción de alto nivel sigue siendo motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The length of corruption investigations and prosecutions remains a concern",
+   "quote_lang": "en",
+   "locator": "PDF p. 13, sección II"
+  },
+  {
+   "year": 2022,
+   "finding": "Recomienda presentar una ley de grupos de interés con registro público obligatorio.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Continue efforts to table legislation on lobbying",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, recomendaciones"
+  },
+  {
+   "year": 2022,
+   "finding": "Recomienda mejorar el acceso a la información revisando la Ley de Secretos Oficiales de 1968.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "strengthen access to information, in particular via revision of the Law on Official Secrets",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, recomendaciones"
+  },
+  {
+   "year": 2023,
+   "finding": "La situación del CGPJ suscita serias preocupaciones: sin renovar y sin cambios en la elección de sus vocales jueces.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The situation of the Council for the Judiciary raises serious concerns",
+   "quote_lang": "en",
+   "locator": "PDF p. 2, resumen"
+  },
+  {
+   "year": 2023,
+   "finding": "Preocupa reformar leyes mediante disposiciones de otras ajenas y el uso excesivo de la urgencia, que eluden consultas e informes.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "All these practices raise concerns",
+   "quote_lang": "en",
+   "locator": "PDF p. 27, sección IV"
+  },
+  {
+   "year": 2023,
+   "finding": "Sigue preocupando el aforamiento de altos cargos ante el Tribunal Supremo; no hay medidas a nivel nacional.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Concerns continue regarding the competence of the Supreme Court for criminal liability",
+   "quote_lang": "en",
+   "locator": "PDF p. 10, sección I"
+  },
+  {
+   "year": 2023,
+   "finding": "La larga duración de la investigación y enjuiciamiento de la corrupción de alto nivel suscita preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The long duration of the investigation and prosecution of high-level corruption raises concerns",
+   "quote_lang": "en",
+   "locator": "PDF p. 16, sección II"
+  },
+  {
+   "year": 2023,
+   "finding": "Recomienda reforzar las normas de conflictos de intereses y declaraciones de bienes de altos cargos.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Strengthen the rules on conflicts of interest and asset declarations of persons with top executive",
+   "quote_lang": "en",
+   "locator": "PDF p. 3, recomendaciones"
+  },
+  {
+   "year": 2024,
+   "finding": "La falta de renovación del CGPJ hasta 2024 perjudicó al Tribunal Supremo y a la justicia en su conjunto.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+   "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The lack of renewal of the Council for the Judiciary has had a negative impact",
+   "quote_lang": "en",
+   "locator": "PDF p. 2, resumen"
+  },
+  {
+   "year": 2024,
+   "finding": "La regulación de las comunicaciones Gobierno-Fiscalía no se aprobó en el plazo legal de seis meses.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+   "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "the requirement to act within six months has not been respected",
+   "quote_lang": "en",
+   "locator": "PDF p. 7, sección I"
+  },
+  {
+   "year": 2024,
+   "finding": "El aforamiento de altos cargos ante el Tribunal Supremo sigue siendo motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+   "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "criminal liability of high-level positions remains a cause of concern",
+   "quote_lang": "en",
+   "locator": "PDF p. 9, sección I"
+  },
+  {
+   "year": 2024,
+   "finding": "La transparencia de la propiedad de los medios sigue siendo un motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+   "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "transparency of media ownership, which remains overall an area of concern",
+   "quote_lang": "en",
+   "locator": "PDF p. 2, resumen"
+  },
+  {
+   "year": 2024,
+   "finding": "Persisten las preocupaciones por el uso del procedimiento de urgencia para aprobar leyes.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+   "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "procedural practices relating to the use of emergency procedures for the approval of legislation",
+   "quote_lang": "en",
+   "locator": "PDF p. 2, resumen"
+  },
+  {
+   "year": 2025,
+   "finding": "Faltan pasos para adaptar la elección de los vocales jueces del CGPJ a los estándares europeos.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "further steps are needed to finalise the process to adapt the appointment procedure",
+   "quote_lang": "en",
+   "locator": "PDF p. 5, sección I"
+  },
+  {
+   "year": 2025,
+   "finding": "Ejecutivo y legislativo deben evitar críticas que socaven la independencia judicial o la confianza en ella.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "the executive and legislative powers should avoid criticism that undermines the independence",
+   "quote_lang": "en",
+   "locator": "PDF p. 6, sección I"
+  },
+  {
+   "year": 2025,
+   "finding": "La financiación de partidos sigue siendo un área de alto riesgo; no se ha reformado la ley según el Tribunal de Cuentas.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Political party financing remains a high-risk area",
+   "quote_lang": "en",
+   "locator": "PDF p. 14, sección II"
+  },
+  {
+   "year": 2025,
+   "finding": "La transparencia de la propiedad de medios no audiovisuales sigue siendo motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "remains an area of concern, pending the adoption of new legislation",
+   "quote_lang": "en",
+   "locator": "PDF p. 16, sección III"
+  },
+  {
+   "year": 2026,
+   "finding": "Recomienda adaptar la elección de los vocales jueces del CGPJ siguiendo la guía de la Comisión de Venecia.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+   "title": "Comisión Europea, SWD(2026) 909 final, 2026 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "it is recommended to Spain to take forward the process of adapting the appointment procedure",
+   "quote_lang": "en",
+   "locator": "PDF p. 4, recomendaciones"
+  },
+  {
+   "year": 2026,
+   "finding": "Recomienda separar el mandato del Fiscal General del Estado del mandato del Gobierno.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+   "title": "Comisión Europea, SWD(2026) 909 final, 2026 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "separation of the terms of office of the Prosecutor General from that of the Government",
+   "quote_lang": "en",
+   "locator": "PDF p. 4, recomendaciones"
+  },
+  {
+   "year": 2026,
+   "finding": "Persisten dificultades en la investigación y enjuiciamiento de la corrupción de alto nivel.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+   "title": "Comisión Europea, SWD(2026) 909 final, 2026 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Challenges remain in the investigation and prosecution of high-level corruption cases",
+   "quote_lang": "en",
+   "locator": "PDF p. 12, sección II"
+  },
+  {
+   "year": 2026,
+   "finding": "La aplicación práctica de las normas de conflictos de intereses de altos cargos no ha mejorado.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+   "title": "Comisión Europea, SWD(2026) 909 final, 2026 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "practical implementation of the existing rules has not improved",
+   "quote_lang": "en",
+   "locator": "PDF p. 4, recomendaciones"
+  },
+  {
+   "year": 2026,
+   "finding": "Sigue preocupando la transparencia de la propiedad de medios no audiovisuales, pendiente de nueva ley.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/85130/imfname_11651900.pdf",
+   "title": "Comisión Europea, SWD(2026) 909 final, 2026 Rule of Law Report - Country Chapter Spain (transmitido al Consejo; copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "concerns remain as regards the ownership transparency of media other than audiovisual media services",
+   "quote_lang": "en",
+   "locator": "PDF p. 18, sección III"
+  }
+ ]
+}

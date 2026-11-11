@@ -65,6 +65,8 @@ the same law stays in (`contrapesos`). Membership proof for `office_holder`: an 
 the facts happened; when none is reachable, the nearest later official record in an unbroken public career, said in
 the item's note (José Antonio Viera, PSOE, 2011 list; Miguel Zerolo, CC, 2007 group while still mayor).
 
+Pardons and amnesty extinguish the penalty or the criminal liability, not the firm finding, so they do not change
+severity (STS 459/2019 keeps its code after the 2021 pardons and the 2024-2026 amnesty decisions, recorded in `status`).
 If a later ruling annuls or narrows the finding (e.g. Constitutional Court amparo against a Supreme Court conviction),
 severity is that of what survives, and the item keeps the history (`status`). Pending cases (not firm) never count;
 this includes administrative sanctions (electoral board, Tribunal de Cuentas) that an official record shows under appeal.
@@ -227,6 +229,70 @@ weightings (ties allowed). Otherwise the page publishes profiles without a compo
 
 ### Composite «riesgo»
 Sensitivity test (7 weightings, rule in 1.6): 92 pairwise order reversals, so **no composite is published**; the page shows the test table and per-party profiles.
+
+## 5. Census or selection (coordinator review, 2026-11-11)
+
+Counts are comparable between parties only when they come from an official list read end to end. Each item now carries
+`coverage` (`census` + family, or `selection`); the matrix numbers, the profiles' counts and the sensitivity test use
+census items only; selection items are listed in the profiles and marked with a ring in the matrix, never counted; the
+CSV carries `coverage` and `coverage_family`.
+
+| Family | What | Listed | In scope | Events | Attributed (counted lineages) |
+|---|---|---|---|---|---|
+| `greco` | Informes de cumplimiento de GRECO sobre España | 11 | 9 | 9 | psoe 7 · sumar 3 · podemos 3 · pp 2 |
+| `jec_sancion` | Sanciones de la Junta Electoral Central a partidos y miembros de Gobiernos | 92 | 28 | 28 | psoe 13 · pp 7 · erc 3 · junts 3 · bildu 1 · vox 1 |
+| `rolr` | Capítulos de España del Informe sobre el Estado de Derecho | 12 | 3 | 3 | psoe 2 · podemos 2 · pp 1 |
+| `tc_decreto_ley` | Decretos-leyes anulados por el Tribunal Constitucional (art. 86) | 91 | 23 | 23 | pp 15 · psoe 8 · podemos 3 |
+| `tc_estado_alarma` | Estados de alarma ante el Tribunal Constitucional | 3 | 3 | 2 | psoe 2 · podemos 2 |
+| `tcu_sancion` | Sanciones del Tribunal de Cuentas a partidos | 687 | 541 | 5 | bildu 1 · pnv 1 · psoe 1 |
+| `venecia` | Dictámenes de la Comisión de Venecia sobre España | 4 | 3 | 3 | pp 2 · psoe 1 |
+
+| Family | What | Type | Items |
+|---|---|---|---|
+| `condenas_firmes` | Condenas firmes de cargos o del propio partido | selección, no censo | 10 listed, not counted |
+| `tc_otras` | Otras sentencias del Tribunal Constitucional (leyes, actos autonómicos, amparos, conflictos) | selección, no censo | 11 listed, not counted |
+| `otros_organos` | Otras conclusiones de órganos oficiales o internacionales | selección, no censo | 1 listed, not counted |
+
+How each list was built (deterministic listing first, agents only to code):
+- `tc_decreto_ley`: `tools/census_tc_decreto_ley.py` (BOE search, TC section, titles with «Real Decreto-ley», 2012-2026:
+  267 documents → 91 rulings citing decree-law limits → fallo read → 23 annul on art. 86 grounds; the 7 annulments on
+  competence or other grounds are out, each with its reason in `evidence/census-tc-decreto-ley.json`). Attribution by
+  the decree-law's date. Rulings before 2012 are outside the window, so the Zapatero governments are only partly covered;
+  recent decree-laws may still be pending (lag), stated on the page with annulments per decree-laws issued.
+- `tc_estado_alarma`: same BOE search with «estado de alarma» (11 documents, 3 rulings on declarations, 2 annul).
+- `jec_sancion`: JEC search (199 acuerdos; 92 in sanction cases on parties or members of national/regional governments;
+  28 sanctions imposed by the JEC; 107 on mayors, councillors, officials, media out of scope). Fines imposed by lower
+  boards and only upheld by the JEC are out by the scope wording. Two consellers who were independents in the
+  single-party ERC Govern are attributed as acts of that Govern, not by membership.
+- `tcu_sancion`: the four Tribunal de Cuentas sanction registers (687 resolutions, 541 sanctions, mostly local lists;
+  5 attributable; CDC/PDeCAT/CiU as predecessors; PSC as PSOE «list»; Vox 2025 under appeal → pending; sanctions the
+  Supreme Court annulled are out).
+- `venecia`, `greco`: the official list pages answered 403/502 to scripted access; lists rebuilt from the documents
+  themselves (GRECO from the history paragraphs of its 2024 and 2025 reports). Every GRECO compliance report is one event
+  attributed to the government of the day by the codebook rule (GRECO addresses «the authorities»).
+- `rolr`: 7 of 7 Spain chapters (2020-2026) read; 12 specific acts examined, 3 with the Commission's own concern and an
+  attributable act; 31 system findings.
+
+Lineage (coordinator point 2): STS 459/2019 now carries ERC (Junqueras, same) and Junts (Turull, «person»: PDeCAT
+consejero at the facts, Junts secretary general today per junts.cat). Rull, Forn, Vila and Meritxell Borràs: PDeCAT
+membership at the facts not proven by an official record, noted, not counted; Jordi Sànchez and Cuixart held no
+public or party office. Pardons (2021) and the amnesty decisions (2024-2026) are in `status`; by rule 1.3 they do not
+undo the finding. Other multi-defendant rulings in the ledger (Gürtel, «caja B», ERE, De Miguel, Palau, Ábalos) convict
+office holders of a single party, so the gap does not recur.
+
+Pending, not counted (coordinator point 3): 5 findings excluded only because not firm, same rule for every party
+(`pending_findings.json` and the census files' `pending`); every other party searched with no result. Local-government
+coverage is not exhaustive (CGPJ notes rarely name the party).
+
+Review of what is new (rule: no attribution error): random 10 of 58 new items (52 events, 5 pending, the reworked
+procés item; seed 20261112; `evidence/review-census/`): **10/10 verified, 0 attribution errors.** Caveats kept in the
+verdicts: JEC acuerdos name the office, not the person or party (party from public record or parliament member pages);
+the Venice 2021 opinion recommends changes to LO 4/2015 without finding a breach (coded `libertades`, severity 1,
+borderline); one act_date is the date the act stopped.
+
+Decree-law framing (coordinator point 5): tile and section now give decree-laws and laws per month by government
+(1.99 and 1.72 a month since 2018; 0.80-1.79 and 2.40-5.85 before) and a counterfactual split: with only decree-laws at
+today's pace the share would be 34 %, with only laws at today's pace 40 %; the fall in laws moves it more.
 
 ## 4. Status
 

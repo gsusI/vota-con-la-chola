@@ -1,0 +1,107 @@
+{
+ "part": "census_venecia",
+ "census": {
+  "family": "venecia",
+  "scope": "Opiniones (CDL-AD) de la Comisión de Venecia sobre España adoptadas del 21-12-2011 al 11-11-2026; la lista oficial por país devolvió HTTP 502/403 el 11-11-2026, así que cada fila se comprobó en el PDF oficial de la opinión",
+  "list_source": {
+   "url": "https://www.venice.coe.int/webforms/documents/?country=19&year=all",
+   "title": "Venice Commission - Documents by country: Spain",
+   "retrieved": "2026-11-11"
+  },
+  "rows": [
+   {
+    "ref": "CDL-AD(2017)003",
+    "date": "2017-03-11",
+    "subject": "Grupo Parlamentario Popular (proposición de LO 15/2015)",
+    "outcome": "Opinión sobre la reforma de la LOTC de 2015: recomendaciones sobre la ejecución de sentencias",
+    "in_scope": true,
+    "reason": "Opinión sobre una ley concreta, atribuible al grupo que la propuso",
+    "event_id": "venice-2017-ley-tc"
+   },
+   {
+    "ref": "CDL-AD(2021)004",
+    "date": "2021-03-20",
+    "subject": "Gobierno Rajoy (PP), proyecto de LO 4/2015",
+    "outcome": "Opinión sobre la Ley de seguridad ciudadana: pide precisar potestades policiales y sanciones",
+    "in_scope": true,
+    "reason": "Opinión sobre una ley concreta; proyecto de ley del Gobierno (BOCG 121/000105)",
+    "event_id": "venice-2021-ley-seguridad-ciudadana"
+   },
+   {
+    "ref": "CDL-AD(2024)003",
+    "date": "2024-03-16",
+    "subject": "Grupo Parlamentario Socialista (proposición de ley de amnistía)",
+    "outcome": "Opinión sobre la proposición de ley de amnistía: objeciones al procedimiento de urgencia",
+    "in_scope": true,
+    "reason": "Opinión sobre un proyecto concreto, atribuible al grupo que lo presentó",
+    "event_id": "venice-2024-amnistia"
+   },
+   {
+    "ref": "CDL-AD(2025)038",
+    "date": "2025-10-10",
+    "subject": "Consejo General del Poder Judicial (presidenta Isabel Perelló)",
+    "outcome": "Opinión sobre la propuesta del CGPJ para elegir a sus vocales judiciales",
+    "in_scope": false,
+    "reason": "Examina una propuesta del propio CGPJ, no una ley ni un proyecto de un partido",
+    "event_id": null
+   }
+  ],
+  "n_listed": 4,
+  "n_in_scope": 3
+ },
+ "events": [
+  {
+   "event_id": "venice-2021-ley-seguridad-ciudadana",
+   "title": "Comisión de Venecia: recomienda precisar potestades policiales y sanciones de la Ley Orgánica 4/2015",
+   "body": "Comisión de Venecia (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "libertades",
+   "severity": 1,
+   "date": "2021-03-20",
+   "act_date": "2015-03-30",
+   "act": "Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP): proyecto de ley 121/000105, autor Gobierno; LO refrendada por Mariano Rajoy Brey"
+    }
+   ],
+   "source": {
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2021)004-e",
+    "title": "CDL-AD(2021)004. Spain - Opinion on the Citizens' Security Law (126th Plenary Session, 19-20 March 2021)",
+    "retrieved": "2026-11-11",
+    "quote": "contains a number of open-ended provisions which entrust the police with broad powers",
+    "quote_lang": "en",
+    "locator": "§21 (y conclusión §94-97)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/BOCG-10-A-105-1.PDF",
+     "title": "BOCG Congreso, X Legislatura, Serie A, núm. 105-1, 25-7-2014: Proyecto de Ley Orgánica de protección de la seguridad ciudadana (121/000105)",
+     "retrieved": "2026-11-11",
+     "quote": "Proyecto de Ley. Autor: Gobierno.",
+     "quote_lang": "es",
+     "locator": "pág. 1"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-3442",
+     "title": "Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana",
+     "retrieved": "2026-11-11",
+     "quote": "El Presidente del Gobierno, MARIANO RAJOY BREY",
+     "quote_lang": "es",
+     "locator": "firma"
+    }
+   ],
+   "coverage": {
+    "type": "census",
+    "family": "venecia"
+   }
+  }
+ ],
+ "pending": []
+}

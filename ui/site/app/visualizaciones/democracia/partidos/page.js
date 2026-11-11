@@ -306,7 +306,7 @@ export default function DemocraciaPartidosPage() {
       <StaticRouteHero
         eyebrow="Visualizaciones · democracia"
         title={`Cómo han usado el poder los partidos: ${h.events} resoluciones oficiales desde ${h.firstYear}`}
-        summary="Un registro con fuentes, no un ranking: sentencias firmes, anulaciones del Tribunal Constitucional y conclusiones de la Comisión de Venecia, la Comisión Europea y GRECO, atribuidas a cada partido con el papel que tenía entonces; junto a cómo votó cada uno las reglas que limitan a cualquier Gobierno y cuántos decretos-leyes firmó cada Gobierno."
+        summary="Un registro con fuentes, no un ranking: sentencias firmes, anulaciones del Tribunal Constitucional y conclusiones de la Comisión de Venecia, la Comisión Europea y GRECO, atribuidas a cada partido con el papel que tenía entonces. Solo se cuentan y comparan las que salen de listas oficiales recorridas enteras; el resto se lista sin contar. Junto a ello, cómo votó cada partido las reglas que limitan a cualquier Gobierno y cuántos decretos-leyes y leyes salieron con cada Gobierno."
         actions={[
           { href: "#matriz", label: "La figura que lo resume" },
           { href: "#perfiles", label: "Perfil por partido" },
