@@ -1,0 +1,45 @@
+{
+ "part": "census_tc_estado_alarma",
+ "census": {
+  "family": "tc_estado_alarma",
+  "scope": "Sentencias del Tribunal Constitucional publicadas en el BOE desde el 1-1-2012 que resuelven sobre la declaración o la prórroga de un estado de alarma por el Gobierno de España.",
+  "list_source": {
+   "url": "https://www.boe.es/buscar/boe.php",
+   "title": "BOE, buscador: sección del Tribunal Constitucional, títulos con «estado de alarma»",
+   "retrieved": "2026-11-11",
+   "notes": "11 documentos; 8 sentencias tratan otros actos (amparos sobre la actividad de las cámaras, conflictos de competencia, decretos leyes autonómicos, leyes) y quedan fuera."
+  },
+  "rows": [
+   {
+    "ref": "STC 83/2016",
+    "date": "2016-04-28",
+    "subject": "Real Decreto 1673/2010 y prórroga (controladores aéreos), Gobierno Rodríguez Zapatero",
+    "outcome": "deniega el amparo; no anula",
+    "in_scope": true,
+    "reason": "resuelve sobre una declaración de alarma; sin anulación",
+    "event_id": null
+   },
+   {
+    "ref": "STC 148/2021",
+    "date": "2021-07-14",
+    "subject": "Real Decreto 463/2020, Gobierno Sánchez II",
+    "outcome": "anula en parte",
+    "in_scope": true,
+    "reason": "declaración de alarma",
+    "event_id": "stc-148-2021-estado-alarma-1"
+   },
+   {
+    "ref": "STC 183/2021",
+    "date": "2021-10-27",
+    "subject": "Real Decreto 926/2020 y prórroga, Gobierno Sánchez II",
+    "outcome": "anula en parte",
+    "in_scope": true,
+    "reason": "declaración y prórroga de alarma",
+    "event_id": "stc-183-2021-estado-alarma-2"
+   }
+  ],
+  "n_listed": 3,
+  "n_in_scope": 3
+ },
+ "events": []
+}

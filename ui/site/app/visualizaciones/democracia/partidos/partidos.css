@@ -288,3 +288,31 @@
     font-size: 0.66rem;
   }
 }
+
+/* Selection items (not a census): a ring, never a number. */
+.viz .dpxCell__half--sel {
+  box-shadow: inset 0 0 0 2px #6f6e69;
+}
+
+.viz .dpxCell__half--sel:empty::after {
+  content: "";
+}
+
+.viz .dpxCensus td,
+.viz .dpxCensus th {
+  white-space: normal;
+  vertical-align: top;
+}
+
+.viz .dpxCensus td:first-child {
+  min-width: 200px;
+}
+
+.viz .dpxSubhead {
+  margin: 6px 0 2px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--viz-ink-2);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}

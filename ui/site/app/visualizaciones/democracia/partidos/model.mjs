@@ -74,11 +74,12 @@ export function eventsFor(data, pid) {
 export function matrixTotals(data) {
   const out = {};
   for (const ind of data.codebook.indicators) {
-    out[ind.id] = { gobierno: 0, fuera: 0 };
+    out[ind.id] = { gobierno: 0, fuera: 0, selection: 0 };
     for (const p of data.parties) {
       const cell = data.matrix[p.party_id][ind.id];
       out[ind.id].gobierno += cell.gobierno.n;
       out[ind.id].fuera += cell.fuera.n;
+      out[ind.id].selection += (cell.gobierno.selection || 0) + (cell.fuera.selection || 0);
     }
   }
   return out;
@@ -90,7 +91,12 @@ export function headline(data) {
     .filter((a) => ["national_government", "regional_government", "local_government"].includes(a.role)).length;
   const allAtts = counted.flatMap((e) => e.attributions.filter((a) => a.lineage !== "predecessor")).length;
   const withItems = data.parties.filter((p) => p.events_counted > 0).length;
+  const census = counted.filter((e) => e.coverage?.type === "census");
   return {
+    censusEvents: census.length,
+    selectionEvents: counted.length - census.length,
+    censusFamilies: (data.census?.families || []).filter((f) => f.type === "census").length,
+    pending: (data.pending || []).length,
     events: counted.length,
     attributions: allAtts,
     govShare: allAtts ? govItems / allAtts : null,

@@ -12,17 +12,19 @@ const SHORT = {
   contrapesos: "Contrapesos",
 };
 
+// Number = items from complete census lists only; a ring marks items found by selection (listed, never counted).
 function Half({ cell, side, party, indicator }) {
   const sev = cell.max_severity;
-  const label = `${party} · ${indicator} · ${side === "gobierno" ? "gobernando" : "sin gobernar"}: ${cell.n} ${cell.n === 1 ? "resolución" : "resoluciones"}${sev ? `, gravedad máxima ${sev}` : ""}`;
+  const sel = cell.selection || 0;
+  const label = `${party} · ${indicator} · ${side === "gobierno" ? "gobernando" : "sin gobernar"}: ${cell.n} en censos completos${sev ? ` (gravedad máxima ${sev})` : ""}${sel ? `; además, ${sel} en selección, no censo (no comparable)` : ""}`;
   return (
     <span
-      className={`dpxCell__half dpxCell__half--${side}`}
+      className={`dpxCell__half dpxCell__half--${side}${sel ? " dpxCell__half--sel" : ""}`}
       style={{ background: SEVERITY_FILL[sev], color: SEVERITY_INK[sev] }}
       title={label}
       aria-label={label}
     >
-      {cell.n ? cell.n : "·"}
+      {cell.n ? cell.n : sel ? "" : "·"}
     </span>
   );
 }
@@ -30,7 +32,9 @@ function Half({ cell, side, party, indicator }) {
 // Consolidated figure: parties × indicators, each cell split into «gobernando» (left) and «sin gobernar» (right).
 export function ConductMatrix({ data }) {
   const inds = data.codebook.indicators;
-  const parties = [...data.parties].sort((a, b) => b.severity_sum - a.severity_sum || a.label.localeCompare(b.label));
+  const parties = [...data.parties].sort(
+    (a, b) => b.severity_sum_census - a.severity_sum_census || b.events_selection - a.events_selection || a.label.localeCompare(b.label),
+  );
   return (
     <div className="dpxMatrix__scroll">
       <table className="dpxMatrix">
@@ -80,7 +84,13 @@ export function SeverityLegend() {
           <span className="dpxCell__half dpxCell__half--gobierno">2</span>
           <span className="dpxCell__half dpxCell__half--fuera">1</span>
         </span>
-        izquierda: gobernando · derecha: sin gobernar (número de resoluciones)
+        izquierda: gobernando · derecha: sin gobernar (resoluciones de censos completos)
+      </li>
+      <li>
+        <span className="dpxCell dpxCell--legend">
+          <span className="dpxCell__half dpxCell__half--gobierno dpxCell__half--sel" />
+        </span>
+        anillo: hay casos de selección, no censo (se listan en el perfil, no se cuentan)
       </li>
       {[1, 2, 3].map((s) => (
         <li key={s}>

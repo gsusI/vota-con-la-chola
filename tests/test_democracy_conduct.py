@@ -80,7 +80,8 @@ class SensitivityTest(unittest.TestCase):
         }
 
     def ev(self, pid, sev, ind, power):
-        return {"severity": sev, "indicator": ind, "attributions": [{"party_id": pid, "lineage": "same", "power_only": power, "role": "opposition"}]}
+        return {"severity": sev, "indicator": ind, "coverage": {"type": "census", "family": "x"},
+                "attributions": [{"party_id": pid, "lineage": "same", "power_only": power, "role": "opposition"}]}
 
     def test_reversal_blocks_composite(self):
         # a: one severe power-only act; b: two mild acts not needing power. W1 a=3 > b=2; W5 a=0 < b=2 -> reversal.
@@ -108,9 +109,29 @@ class OutputTest(unittest.TestCase):
             self.assertTrue(all(a["party_id"] in parties for a in ev["attributions"]))
 
     def test_matrix_counts_match_events(self):
-        total = sum(c[s]["n"] for p in self.data["matrix"].values() for c in p.values() for s in ("gobierno", "fuera"))
-        counted = sum(1 for e in self.data["events"] for a in e["attributions"] if a["lineage"] != "predecessor")
-        self.assertEqual(total, counted)
+        cells = [c[s] for p in self.data["matrix"].values() for c in p.values() for s in ("gobierno", "fuera")]
+        counted = [(e, a) for e in self.data["events"] for a in e["attributions"] if a["lineage"] != "predecessor"]
+        self.assertEqual(sum(c["n"] for c in cells), sum(1 for e, _a in counted if e["coverage"]["type"] == "census"))
+        self.assertEqual(sum(c["selection"] for c in cells), sum(1 for e, _a in counted if e["coverage"]["type"] == "selection"))
+
+    def test_every_event_says_census_or_selection(self):
+        fams = {f["family"]: f for f in self.data["census"]["families"]}
+        for e in self.data["events"]:
+            self.assertIn(e["coverage"]["type"], ("census", "selection"), e["event_id"])
+            self.assertIn(e["coverage"]["family"], fams, e["event_id"])
+            self.assertEqual(fams[e["coverage"]["family"]]["type"], e["coverage"]["type"])
+        for f in fams.values():
+            if f["type"] == "census":
+                self.assertEqual(f["n_in_scope"], sum(1 for r in f["rows"] if r["in_scope"]))
+                self.assertTrue(f["list_source"]["url"].startswith("https://"))
+
+    def test_sensitivity_uses_census_only(self):
+        n = sum(1 for e in self.data["events"] if e["coverage"]["type"] == "census")
+        self.assertEqual(self.data["sensitivity"]["events_used"], n)
+
+    def test_csv_carries_coverage(self):
+        head = (REPO / "ui/site/public/visualizaciones/data/democracia-partidos.csv").read_text(encoding="utf-8").splitlines()[0]
+        self.assertTrue(head.startswith("event_id,coverage,coverage_family"))
 
     def test_composite_only_when_no_reversal(self):
         s = self.data["sensitivity"]

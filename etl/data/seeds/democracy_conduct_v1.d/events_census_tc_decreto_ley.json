@@ -1,0 +1,1450 @@
+{
+ "part": "census_tc_decreto_ley",
+ "generated_by": "docs/etl/sprints/DEMOCRACIA-PARTIDOS-20261111/tools/census_tc_decreto_ley.py",
+ "census": {
+  "family": "tc_decreto_ley",
+  "scope": "Sentencias del Tribunal Constitucional publicadas en el BOE desde el 1-1-2012 que anulan preceptos de un real decreto-ley del Estado por los límites del art. 86 de la Constitución (urgencia, conexión de sentido, materias vedadas).",
+  "list_source": {
+   "url": "https://www.boe.es/buscar/boe.php?campo%5B0%5D=ORIS&dato%5B0%5D%5BT%5D=T&operador%5B0%5D=and&campo%5B1%5D=TITULOS&dato%5B1%5D=Real+Decreto-ley&operador%5B1%5D=and&campo%5B2%5D=DEM&dato%5B2%5D=&operador%5B2%5D=and&campo%5B3%5D=DOC&dato%5B3%5D=&operador%5B3%5D=and&campo%5B4%5D=NBOS&dato%5B4%5D=&operador%5B4%5D=and&campo%5B5%5D=NOF&dato%5B5%5D=&operador%5B5%5D=and&campo%5B6%5D=FPU&dato%5B6%5D%5B0%5D=2012-01-01&dato%5B6%5D%5B1%5D=2026-11-11&operador%5B6%5D=and&page_hits=2000&sort_field%5B0%5D=FPU&sort_order%5B0%5D=asc&accion=Buscar",
+   "title": "BOE, buscador: sección del Tribunal Constitucional, títulos con «Real Decreto-ley»",
+   "retrieved": "2026-11-11",
+   "notes": "267 documentos; 91 sentencias cuyo resumen de doctrina cita los límites del decreto ley; criterio y motivo de cada una en docs/etl/sprints/DEMOCRACIA-PARTIDOS-20261111/evidence/census-tc-decreto-ley.json"
+  },
+  "rows": [
+   {
+    "ref": "STC 1/2012",
+    "date": "2012-01-13",
+    "subject": "Real Decreto-ley 9/2000",
+    "outcome": "nulidad por distribución de competencias en medio ambiente (Real Decreto-ley 9/2000), no por el art.",
+    "in_scope": false,
+    "reason": "nulidad por distribución de competencias en medio ambiente (Real Decreto-ley 9/2000), no por el art.",
+    "event_id": null
+   },
+   {
+    "ref": "STC 100/2012",
+    "date": "2012-05-08",
+    "subject": "",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 170/2012",
+    "date": "2012-10-04",
+    "subject": "Real Decreto-ley 6/2000",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 233/2012",
+    "date": "2012-12-13",
+    "subject": "Real Decreto-ley 6/2000",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 237/2012",
+    "date": "2012-12-13",
+    "subject": "Real Decreto-ley 2/2004",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 39/2013",
+    "date": "2013-02-14",
+    "subject": "Real Decreto-ley 4/2006",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 51/2013",
+    "date": "2013-02-28",
+    "subject": "Real Decreto-ley 2/2004",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 64/2013",
+    "date": "2013-03-14",
+    "subject": "Real Decreto-ley 2/2004",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 182/2013",
+    "date": "2013-10-23",
+    "subject": "Real Decreto-ley 9/2009",
+    "outcome": "nulidad por distribución de competencias (informe autonómico), no por el art. 86",
+    "in_scope": false,
+    "reason": "nulidad por distribución de competencias (informe autonómico), no por el art. 86",
+    "event_id": null
+   },
+   {
+    "ref": "STC 83/2014",
+    "date": "2014-05-29",
+    "subject": "Real Decreto-ley 5/2000",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 96/2014",
+    "date": "2014-06-12",
+    "subject": "Real Decreto-ley 14/2010",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 109/2014",
+    "date": "2014-06-26",
+    "subject": "Real Decreto-ley 14/2010",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 142/2014",
+    "date": "2014-09-11",
+    "subject": "Real Decreto-ley 1/2009",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 183/2014",
+    "date": "2014-11-06",
+    "subject": "Real Decreto-ley 2/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 12/2015",
+    "date": "2015-02-05",
+    "subject": "Real Decreto-ley 6/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 27/2015",
+    "date": "2015-02-19",
+    "subject": "Real Decreto-ley 11/2013",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-27-2015-decreto-ley-11-2013"
+   },
+   {
+    "ref": "STC 28/2015",
+    "date": "2015-02-19",
+    "subject": "Real Decreto-ley 2/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 29/2015",
+    "date": "2015-02-19",
+    "subject": "Real Decreto-ley 8/2011",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-29-2015-decreto-ley-8-2011"
+   },
+   {
+    "ref": "STC 47/2015",
+    "date": "2015-03-05",
+    "subject": "Real Decreto-ley 2/2011",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 48/2015",
+    "date": "2015-03-05",
+    "subject": "Real Decreto-ley 1/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 81/2015",
+    "date": "2015-04-30",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 95/2015",
+    "date": "2015-05-14",
+    "subject": "Real Decreto-ley 28/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 105/2015",
+    "date": "2015-05-28",
+    "subject": "Real Decreto-ley 1/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 106/2015",
+    "date": "2015-05-28",
+    "subject": "Real Decreto-ley 1/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 136/2015",
+    "date": "2015-06-11",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "FJ: falta la identificación de la extraordinaria y urgente necesidad (art. 86.1)",
+    "event_id": "stc-136-2015-decreto-ley-20-2012"
+   },
+   {
+    "ref": "STC 156/2015",
+    "date": "2015-07-09",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 196/2015",
+    "date": "2015-09-24",
+    "subject": "Real Decreto-ley 12/2011",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-196-2015-decreto-ley-12-2011"
+   },
+   {
+    "ref": "STC 197/2015",
+    "date": "2015-09-24",
+    "subject": "Real Decreto-ley 4/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 199/2015",
+    "date": "2015-09-24",
+    "subject": "Real Decreto-ley 8/2014",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-199-2015-decreto-ley-8-2014"
+   },
+   {
+    "ref": "STC 211/2015",
+    "date": "2015-10-08",
+    "subject": "Real Decreto-ley 8/2014",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-211-2015-decreto-ley-8-2014"
+   },
+   {
+    "ref": "STC 215/2015",
+    "date": "2015-10-22",
+    "subject": "Real Decreto-ley 20/2011",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 243/2015",
+    "date": "2015-11-30",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 270/2015",
+    "date": "2015-12-17",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 18/2016",
+    "date": "2016-02-04",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "FJ: «contrarios al orden constitucional de distribución de competencias»",
+    "in_scope": false,
+    "reason": "FJ: «contrarios al orden constitucional de distribución de competencias»",
+    "event_id": null
+   },
+   {
+    "ref": "STC 19/2016",
+    "date": "2016-02-04",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 26/2016",
+    "date": "2016-02-18",
+    "subject": "Real Decreto-ley 14/2012",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "FJ: «vulneran el art. 86.1 CE y son, por tanto, inconstitucionales y nulos»",
+    "event_id": "stc-26-2016-decreto-ley-14-2012"
+   },
+   {
+    "ref": "STC 29/2016",
+    "date": "2016-02-18",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 30/2016",
+    "date": "2016-02-18",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 42/2016",
+    "date": "2016-03-03",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 61/2016",
+    "date": "2016-03-17",
+    "subject": "Real Decreto-ley 9/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 67/2016",
+    "date": "2016-04-14",
+    "subject": "Real Decreto-ley 14/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 68/2016",
+    "date": "2016-04-14",
+    "subject": "Real Decreto-ley 14/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 70/2016",
+    "date": "2016-04-14",
+    "subject": "Real Decreto-ley 7/2013",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "límite de los decretos-leyes: reserva de ley orgánica",
+    "event_id": "stc-70-2016-decreto-ley-7-2013"
+   },
+   {
+    "ref": "STC 84/2016",
+    "date": "2016-04-28",
+    "subject": "Real Decreto-ley 14/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 119/2016",
+    "date": "2016-06-23",
+    "subject": "Real Decreto-ley 20/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 125/2016",
+    "date": "2016-07-07",
+    "subject": "Real Decreto-ley 13/2005",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-125-2016-decreto-ley-13-2005"
+   },
+   {
+    "ref": "STC 126/2016",
+    "date": "2016-07-07",
+    "subject": "Real Decreto-ley 10/2014",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-126-2016-decreto-ley-10-2014"
+   },
+   {
+    "ref": "STC 139/2016",
+    "date": "2016-07-21",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "nulidad por remisión en blanco al reglamento (reserva de ley), no por el art. 86",
+    "in_scope": false,
+    "reason": "nulidad por remisión en blanco al reglamento (reserva de ley), no por el art. 86",
+    "event_id": null
+   },
+   {
+    "ref": "STC 169/2016",
+    "date": "2016-10-06",
+    "subject": "Real Decreto-ley 7/2015",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-169-2016-decreto-ley-7-2015"
+   },
+   {
+    "ref": "STC 183/2016",
+    "date": "2016-11-03",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "nulidad por competencias en sanidad y función pública",
+    "in_scope": false,
+    "reason": "nulidad por competencias en sanidad y función pública",
+    "event_id": null
+   },
+   {
+    "ref": "STC 195/2016",
+    "date": "2016-11-16",
+    "subject": "Real Decreto-ley 8/2014",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 33/2017",
+    "date": "2017-03-01",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 34/2017",
+    "date": "2017-03-01",
+    "subject": "Real Decreto-ley 6/2000",
+    "outcome": "nulidad por competencias en urbanismo y comercio interior (Real Decreto-ley 6/2000)",
+    "in_scope": false,
+    "reason": "nulidad por competencias en urbanismo y comercio interior (Real Decreto-ley 6/2000)",
+    "event_id": null
+   },
+   {
+    "ref": "STC 35/2017",
+    "date": "2017-03-01",
+    "subject": "Real Decreto-ley 3/2013",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 46/2017",
+    "date": "2017-04-27",
+    "subject": "Real Decreto-ley 8/2014",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 63/2017",
+    "date": "2017-05-25",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "nulidad por competencias (funciones ejecutivas de la Organización Nacional de Trasplantes), no por e",
+    "in_scope": false,
+    "reason": "nulidad por competencias (funciones ejecutivas de la Organización Nacional de Trasplantes), no por e",
+    "event_id": null
+   },
+   {
+    "ref": "STC 64/2017",
+    "date": "2017-05-25",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 73/2017",
+    "date": "2017-06-08",
+    "subject": "Real Decreto-ley 12/2012",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-73-2017-amnistia-fiscal"
+   },
+   {
+    "ref": "STC 98/2017",
+    "date": "2017-07-20",
+    "subject": "Real Decreto-ley 16/2012",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 150/2017",
+    "date": "2017-12-21",
+    "subject": "Real Decreto-ley 15/2012",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-150-2017-rtve-rdl-15-2012"
+   },
+   {
+    "ref": "STC 152/2017",
+    "date": "2017-12-21",
+    "subject": "Real Decreto-ley 13/2014",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-152-2017-decreto-ley-13-2014"
+   },
+   {
+    "ref": "STC 61/2018",
+    "date": "2018-06-07",
+    "subject": "Real Decreto-ley 5/2013",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-61-2018-rdl-5-2013"
+   },
+   {
+    "ref": "STC 14/2020",
+    "date": "2020-01-28",
+    "subject": "Real Decreto-ley 7/2019",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-14-2020-rdl-7-2019"
+   },
+   {
+    "ref": "STC 78/2020",
+    "date": "2020-07-01",
+    "subject": "Real Decreto-ley 2/2016",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-78-2020-decreto-ley-2-2016"
+   },
+   {
+    "ref": "STC 101/2020",
+    "date": "2020-09-10",
+    "subject": "Real Decreto-ley 2/2016",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 110/2021",
+    "date": "2021-05-13",
+    "subject": "Real Decreto-ley 8/2020",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-110-2021-cni-decreto-ley"
+   },
+   {
+    "ref": "STC 111/2021",
+    "date": "2021-05-13",
+    "subject": "Real Decreto-ley 15/2020",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-111-2021-decreto-ley-15-2020"
+   },
+   {
+    "ref": "STC 124/2021",
+    "date": "2021-06-03",
+    "subject": "Real Decreto-ley 8/2020",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 134/2021",
+    "date": "2021-06-24",
+    "subject": "Real Decreto-ley 4/2018",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-134-2021-rtve-rdl-4-2018"
+   },
+   {
+    "ref": "STC 156/2021",
+    "date": "2021-09-16",
+    "subject": "Real Decreto-ley 1/2017",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-156-2021-decreto-ley-1-2017"
+   },
+   {
+    "ref": "STC 9/2023",
+    "date": "2023-02-22",
+    "subject": "Real Decreto-ley 1/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 10/2023",
+    "date": "2023-02-23",
+    "subject": "Real Decreto-ley 14/2019",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 15/2023",
+    "date": "2023-03-07",
+    "subject": "Real Decreto-ley 1/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 16/2023",
+    "date": "2023-03-07",
+    "subject": "Real Decreto-ley 12/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 17/2023",
+    "date": "2023-03-09",
+    "subject": "Real Decreto-ley 26/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 18/2023",
+    "date": "2023-03-21",
+    "subject": "Real Decreto-ley 6/2019",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 35/2023",
+    "date": "2023-04-18",
+    "subject": "Real Decreto-ley 26/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 36/2023",
+    "date": "2023-04-19",
+    "subject": "Real Decreto-ley 14/2019",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 45/2023",
+    "date": "2023-05-10",
+    "subject": "Real Decreto-ley 4/2018",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 60/2023",
+    "date": "2023-05-24",
+    "subject": "Real Decreto-ley 14/2019",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 144/2023",
+    "date": "2023-10-25",
+    "subject": "Real Decreto-ley 9/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 145/2023",
+    "date": "2023-10-25",
+    "subject": "Real Decreto-ley 14/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 147/2023",
+    "date": "2023-11-06",
+    "subject": "Real Decreto-ley 9/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 166/2023",
+    "date": "2023-11-22",
+    "subject": "Real Decreto-ley 8/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 7/2024",
+    "date": "2024-01-16",
+    "subject": "Real Decreto-ley 16/2021",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 11/2024",
+    "date": "2024-01-18",
+    "subject": "Real Decreto-ley 3/2016",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-11-2024-decreto-ley-3-2016"
+   },
+   {
+    "ref": "STC 16/2024",
+    "date": "2024-01-30",
+    "subject": "Real Decreto-ley 3/2016",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 20/2024",
+    "date": "2024-01-31",
+    "subject": "Real Decreto-ley 14/2022",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 4/2026",
+    "date": "2026-01-14",
+    "subject": "Real Decreto-ley 14/2022",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 9/2026",
+    "date": "2026-01-27",
+    "subject": "Real Decreto-ley 6/2023",
+    "outcome": "el fallo no declara ninguna nulidad",
+    "in_scope": false,
+    "reason": "el fallo no declara ninguna nulidad",
+    "event_id": null
+   },
+   {
+    "ref": "STC 40/2026",
+    "date": "2026-05-26",
+    "subject": "Real Decreto-ley 32/2021",
+    "outcome": "anula preceptos",
+    "in_scope": true,
+    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
+    "event_id": "stc-40-2026-decreto-ley-32-2021"
+   }
+  ],
+  "n_listed": 91,
+  "n_in_scope": 23
+ },
+ "events": [
+  {
+   "event_id": "stc-27-2015-decreto-ley-11-2013",
+   "title": "STC 27/2015: anula preceptos del Real Decreto-ley 11/2013 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-02-19",
+   "act_date": "2013-08-02",
+   "act": "Real Decreto-ley 11/2013, de 2 de agosto (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-2828",
+    "title": "Pleno. Sentencia 27/2015, de 19 de febrero de 2015. Recurso de inconstitucionalidad 6368-2013. Interpuesto por el Gobierno de la Generalitat de Cataluña en relación con diversos preceptos del Real Dec",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucionales y nulos los arts. 7 y 8.5 del Real Decreto-ley 11/2013, de 2",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-29-2015-decreto-ley-8-2011",
+   "title": "STC 29/2015: anula preceptos del Real Decreto-ley 8/2011 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-02-19",
+   "act_date": "2011-07-01",
+   "act": "Real Decreto-ley 8/2011, de 1 de julio (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rodríguez Zapatero (PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-2830",
+    "title": "Pleno. Sentencia 29/2015, de 19 de febrero de 2015. Cuestión de inconstitucionalidad núm. 1772-2014. Planteada por el Juzgado de lo Contencioso-Administrativo número 2 de Santa Cruz de Tenerife, en re",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad del art. 23 del Real Decreto-ley 8/2011, de 1 de",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-136-2015-decreto-ley-20-2012",
+   "title": "STC 136/2015: anula preceptos del Real Decreto-ley 20/2012 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-06-11",
+   "act_date": "2012-07-13",
+   "act": "Real Decreto-ley 20/2012, de 13 de julio (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-7588",
+    "title": "Pleno. Sentencia 136/2015, de 11 de junio de 2015. Recurso de inconstitucionalidad 2205-2013. Interpuesto por la Junta de Extremadura en relación con diversos preceptos del Real Decreto-ley 20/2012, d",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y consiguiente nulidad del art. 38 y la disposición adicional decimoquinta del",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-196-2015-decreto-ley-12-2011",
+   "title": "STC 196/2015: anula preceptos del Real Decreto-ley 12/2011 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-09-24",
+   "act_date": "2011-08-26",
+   "act": "Real Decreto-ley 12/2011, de 26 de agosto (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rodríguez Zapatero (PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-11710",
+    "title": "Pleno. Sentencia 196/2015, de 24 de septiembre de 2015. Recurso de inconstitucionalidad 6363-2011. Interpuesto por el Consejo de Gobierno de la Generalitat Valenciana respecto de la disposición final ",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y consiguiente nulidad de la disposición final primera del Real Decreto-ley 12/2011",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-199-2015-decreto-ley-8-2014",
+   "title": "STC 199/2015: anula preceptos del Real Decreto-ley 8/2014 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-09-24",
+   "act_date": "2014-07-04",
+   "act": "Real Decreto-ley 8/2014, de 4 de julio (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-11713",
+    "title": "Pleno. Sentencia 199/2015, de 24 de septiembre de 2015. Recurso de inconstitucionalidad 5099-2014. Interpuesto por más de cincuenta Diputados de los Grupos Parlamentarios Socialista; IU, ICV-EUiA, CHA",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que: 1.º Son inconstitucionales y nulos el art. 116 y las disposiciones adicionales vigésima",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-211-2015-decreto-ley-8-2014",
+   "title": "STC 211/2015: anula preceptos del Real Decreto-ley 8/2014 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2015-10-08",
+   "act_date": "2014-07-04",
+   "act": "Real Decreto-ley 8/2014, de 4 de julio (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-12296",
+    "title": "Pleno. Sentencia 211/2015, de 8 de octubre de 2015. Recurso de inconstitucionalidad 5970-2014. Interpuesto por el Consell de la Generalitat Valenciana respecto del artículo 124 del Real Decreto-ley 8/",
+    "retrieved": "2026-11-11",
+    "quote": "declarar su inconstitucionalidad y nulidad con los efectos establecidos en el fundamento octavo.",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-26-2016-decreto-ley-14-2012",
+   "title": "STC 26/2016: anula preceptos del Real Decreto-ley 14/2012 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2016-02-18",
+   "act_date": "2012-04-20",
+   "act": "Real Decreto-ley 14/2012, de 20 de abril (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-2907",
+    "title": "Pleno. Sentencia 26/2016, de 18 de febrero de 2016. Recurso de inconstitucionalidad 4528-2012. Interpuesto por el Consejo de Gobierno de la Junta de Andalucía en relación con diversos preceptos del Re",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que los arts. 6.1 y 2 del Real Decreto-ley 14/2012, de 20 de abril",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-70-2016-decreto-ley-7-2013",
+   "title": "STC 70/2016: anula preceptos del Real Decreto-ley 7/2013 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2016-04-14",
+   "act_date": "2013-06-28",
+   "act": "Real Decreto-ley 7/2013, de 28 de junio (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-4854",
+    "title": "Pleno. Sentencia 70/2016, de 14 de abril de 2016. Recurso de inconstitucionalidad 5567-2013. Interpuesto por el Gobierno de Canarias respecto del artículo 7 de la Ley 38/2003, de 17 de noviembre, gene",
+    "retrieved": "2026-11-11",
+    "quote": "declarar su inconstitucionalidad y consiguiente nulidad",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-125-2016-decreto-ley-13-2005",
+   "title": "STC 125/2016: anula preceptos del Real Decreto-ley 13/2005 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "contrapesos",
+   "severity": 3,
+   "date": "2016-07-07",
+   "act_date": "2005-10-28",
+   "act": "Real Decreto-ley 13/2005, de 28 de octubre (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rodríguez Zapatero (PSOE)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-7732",
+    "title": "Pleno. Sentencia 125/2016, de 7 de julio de 2016. Recurso de inconstitucionalidad 1044-2006. Interpuesto por más de cincuenta diputados del Grupo Popular del Congreso en relación con el Real Decreto-l",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucional y nulo, con el alcance establecido en el fundamento jurídico 5, el citado",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-126-2016-decreto-ley-10-2014",
+   "title": "STC 126/2016: anula preceptos del Real Decreto-ley 10/2014 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2016-07-07",
+   "act_date": "2014-08-01",
+   "act": "Real Decreto-ley 10/2014, de 1 de agosto (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-7733",
+    "title": "Pleno. Sentencia 126/2016, de 7 de julio de 2016. Recurso de inconstitucionalidad 6524-2014. Interpuesto por más de cincuenta diputados, integrantes de los Grupos Parlamentarios Socialista; IU, ICV-EU",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucional y nulo el apartado 1 del art. 2 del Real Decreto-ley 10/2014, de",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-169-2016-decreto-ley-7-2015",
+   "title": "STC 169/2016: anula preceptos del Real Decreto-ley 7/2015 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2016-10-06",
+   "act_date": "2015-05-14",
+   "act": "Real Decreto-ley 7/2015, de 14 de mayo (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-10667",
+    "title": "Pleno. Sentencia 169/2016, de 6 de octubre de 2016. Recurso de inconstitucionalidad 3925-2015. Interpuesto por más de cincuenta diputados del Grupo Parlamentario Socialista en el Congreso respecto del",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucional y nulo el art. 1.1 del Real Decreto-ley 7/2015, de 14 de mayo",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-152-2017-decreto-ley-13-2014",
+   "title": "STC 152/2017: anula preceptos del Real Decreto-ley 13/2014 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2017-12-21",
+   "act_date": "2014-10-03",
+   "act": "Real Decreto-ley 13/2014, de 3 de octubre (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-614",
+    "title": "Pleno. Sentencia 152/2017, de 21 de diciembre de 2017. Recursos de inconstitucionalidad 7848-2014, 7874-2014 y 21-2015 (acumulados). Interpuestos por el Parlamento de Cataluña, el Gobierno de la Gener",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucionales y nulos los artículos 4 a 6, así como el artículo 2.2, la",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-78-2020-decreto-ley-2-2016",
+   "title": "STC 78/2020: anula preceptos del Real Decreto-ley 2/2016 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "contrapesos",
+   "severity": 3,
+   "date": "2020-07-01",
+   "act_date": "2016-09-30",
+   "act": "Real Decreto-ley 2/2016, de 30 de septiembre (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2020-8959",
+    "title": "Pleno. Sentencia 78/2020, de 1 de julio de 2020. Cuestión de inconstitucionalidad 1021-2019. Planteada por la Sección Séptima de la Sala de lo Contencioso-Administrativo de la Audiencia Nacional respe",
+    "retrieved": "2026-11-11",
+    "quote": "declarar que el Real Decreto-ley 2/2016, de 30 de septiembre, es inconstitucional y nulo, con",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-111-2021-decreto-ley-15-2020",
+   "title": "STC 111/2021: anula preceptos del Real Decreto-ley 15/2020 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-05-13",
+   "act_date": "2020-04-21",
+   "act": "Real Decreto-ley 15/2020, de 21 de abril (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE y Unidas Podemos)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición del Gobierno Sánchez II"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-10024",
+    "title": "Pleno. Sentencia 111/2021, de 13 de mayo de 2021. Recurso de inconstitucionalidad 2295-2020. Interpuesto por más de cincuenta senadores del Grupo Parlamentario Popular en relación con diversas disposi",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucionales y nulas las disposiciones adicionales sexta y séptima, la disposición transitoria segunda y",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-156-2021-decreto-ley-1-2017",
+   "title": "STC 156/2021: anula preceptos del Real Decreto-ley 1/2017 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-09-16",
+   "act_date": "2017-01-20",
+   "act": "Real Decreto-ley 1/2017, de 20 de enero (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-17105",
+    "title": "Pleno. Sentencia 156/2021, de 16 de septiembre de 2021. Recurso de inconstitucionalidad 1960-2017. Interpuesto por más de cincuenta diputados del Grupo Parlamentario Confederal de Unidos Podemos-En Co",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucional y nulo el inciso «persona física» del art. 2.2 del Real Decreto-ley 1/2017",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-11-2024-decreto-ley-3-2016",
+   "title": "STC 11/2024: anula preceptos del Real Decreto-ley 3/2016 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2024-01-18",
+   "act_date": "2016-12-02",
+   "act": "Real Decreto-ley 3/2016, de 2 de diciembre (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-3277",
+    "title": "Pleno. Sentencia 11/2024, de 18 de enero de 2024. Cuestión de inconstitucionalidad 2577-2023. Planteada por la Sección Segunda de la Sala de lo Contencioso-Administrativo de la Audiencia Nacional en r",
+    "retrieved": "2026-11-11",
+    "quote": "declarar que la disposición adicional decimoquinta y el apartado tercero de la disposición transitoria decimosexta",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  },
+  {
+   "event_id": "stc-40-2026-decreto-ley-32-2021",
+   "title": "STC 40/2026: anula preceptos del Real Decreto-ley 32/2021 por los límites del decreto ley",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2026-05-26",
+   "act_date": "2021-12-28",
+   "act": "Real Decreto-ley 32/2021, de 28 de diciembre (preceptos anulados según el fallo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE y Unidas Podemos)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición del Gobierno Sánchez II"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-13752",
+    "title": "Pleno. Sentencia 40/2026, de 26 de mayo de 2026. Recurso de inconstitucionalidad 2191-2022. Interpuesto por más de cincuenta diputados del Congreso de los Diputados respecto del Real Decreto-ley 32/20",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucionales y nulas la disposición adicional segunda y la disposición final quinta del Real",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "coverage": {
+    "type": "census",
+    "family": "tc_decreto_ley"
+   }
+  }
+ ]
+}

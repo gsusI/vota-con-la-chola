@@ -67,13 +67,44 @@ BOE_KINDS = {"rdl": "Real Decreto-ley", "l": "Ley", "lo": "Ley Orgánica"}
 
 
 # ---------------------------------------------------------------- merge
+SELECTION_FAMILIES = {
+    "condenas_firmes": "Condenas firmes de cargos o del propio partido",
+    "tc_otras": "Otras sentencias del Tribunal Constitucional (leyes, actos autonómicos, amparos, conflictos)",
+    "otros_organos": "Otras conclusiones de órganos oficiales o internacionales",
+}
+CENSUS_LABELS = {
+    "tc_decreto_ley": "Decretos-leyes anulados por el Tribunal Constitucional (art. 86)",
+    "tc_estado_alarma": "Estados de alarma ante el Tribunal Constitucional",
+    "jec_sancion": "Sanciones de la Junta Electoral Central a partidos y miembros de Gobiernos",
+    "tcu_sancion": "Sanciones del Tribunal de Cuentas a partidos",
+    "venecia": "Dictámenes de la Comisión de Venecia sobre España",
+    "greco": "Informes de cumplimiento de GRECO sobre España",
+    "rolr": "Capítulos de España del Informe sobre el Estado de Derecho",
+}
+
+
+def selection_family(ev: dict) -> str:
+    if ev["finding_type"] in ("conviction_prison_ge1", "conviction_other", "civil_liability_party"):
+        return "condenas_firmes"
+    if "Constitucional" in ev.get("body", ""):
+        return "tc_otras"
+    return "otros_organos"
+
+
 def merge() -> int:
     seed = json.loads(SEED.read_text(encoding="utf-8"))
     events = []
     system = []
+    census = []
+    pending = []
+    for path in sorted(PARTS_DIR.glob("pending_*.json")):
+        pending += [x | {"part": path.stem} for x in json.loads(path.read_text(encoding="utf-8")).get("pending") or []]
     for path in sorted(PARTS_DIR.glob("events_*.json")):
         doc = json.loads(path.read_text(encoding="utf-8"))
         system += [f | {"part": path.stem} for f in doc.get("system_findings") or []]
+        pending += [x | {"part": path.stem} for x in doc.get("pending") or []]
+        if doc.get("census"):
+            census.append(doc["census"] | {"part": path.stem})
         for ev in doc.get("events") or []:
             if ev.get("_exclude"):
                 continue
@@ -83,6 +114,28 @@ def merge() -> int:
     if dup:
         print("ERROR duplicate event_id:", dup, file=sys.stderr)
         return 1
+    family_of = {}
+    for c in census:
+        refs = [r.get("event_id") for r in c.get("rows") or []] + list(c.get("already_in_ledger") or [])
+        for eid in refs:
+            if eid:
+                family_of[eid] = c["family"]
+    known = {e["event_id"] for e in events}
+    missing = sorted(eid for eid in family_of if eid not in known)
+    if missing:
+        print("ERROR census rows point to unknown/excluded events:", missing, file=sys.stderr)
+        return 1
+    for e in events:
+        if e["event_id"] in family_of:
+            e["coverage"] = {"type": "census", "family": family_of[e["event_id"]]}
+        else:
+            e["coverage"] = {"type": "selection", "family": selection_family(e)}
+    seen = Counter(x.get("pending_id") for x in pending)
+    if any(n > 1 for n in seen.values()):
+        print("ERROR duplicate pending_id:", [k for k, n in seen.items() if n > 1], file=sys.stderr)
+        return 1
+    seed["census"] = sorted(census, key=lambda c: c["family"])
+    seed["pending"] = sorted(pending, key=lambda x: (x.get("party_id") or "", x.get("date") or ""))
     seed["events"] = sorted(events, key=lambda e: (e.get("date") or "", e["event_id"]))
     seed["system_findings"] = sorted(system, key=lambda f: (str(f.get("year") or ""), f.get("event_id") or ""))
     SEED.write_text(json.dumps(seed, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -330,13 +383,20 @@ def matrix(seed: dict, events: list[dict]) -> dict:
             if not counted(a):
                 continue
             side = "gobierno" if a["role"] in GOV_ROLES else "fuera"
-            out[a["party_id"]][ev["indicator"]][side].append((ev["event_id"], ev["severity"]))
+            out[a["party_id"]][ev["indicator"]][side].append((ev["event_id"], ev["severity"], ev["coverage"]["type"] == "census"))
     res = {}
     for pid, inds in out.items():
         res[pid] = {}
         for ind, sides in inds.items():
-            res[pid][ind] = {side: {"n": len(lst), "max_severity": max((s for _e, s in lst), default=0), "events": [e for e, _s in lst]}
-                             for side, lst in sides.items()}
+            res[pid][ind] = {}
+            for side, lst in sides.items():
+                cen = [x for x in lst if x[2]]
+                sel = [x for x in lst if not x[2]]
+                res[pid][ind][side] = {
+                    "n": len(cen), "max_severity": max((x[1] for x in cen), default=0),
+                    "selection": len(sel), "max_severity_selection": max((x[1] for x in sel), default=0),
+                    "events": [x[0] for x in lst],
+                }
     return res
 
 
@@ -354,6 +414,7 @@ WEIGHTINGS = {
 def sensitivity(seed: dict, events: list[dict], votes: dict, gov_years: dict) -> dict:
     parties = [p["party_id"] for p in seed["parties"]]
     scores: dict[str, dict[str, float | None]] = {w: {} for w in WEIGHTINGS}
+    events = [ev for ev in events if ev["coverage"]["type"] == "census"]
     for pid in parties:
         rows = [(ev, a) for ev in events for a in ev["attributions"] if a["party_id"] == pid and counted(a)]
         w1 = sum(ev["severity"] for ev, _a in rows)
@@ -386,6 +447,8 @@ def sensitivity(seed: dict, events: list[dict], votes: dict, gov_years: dict) ->
     publish = len(active) >= 2 and not reversals
     return {
         "rule": "Se publica un nivel compuesto solo si ningún par de partidos invierte su orden entre dos ponderaciones cualesquiera (empates permitidos).",
+        "items": "Solo resoluciones de los censos completos (las de selección no son comparables entre partidos).",
+        "events_used": len(events),
         "weightings": WEIGHTINGS, "parties_with_items": active, "scores": scores, "ranks": ranks,
         "reversals": reversals, "reversal_count": len(reversals), "publish_composite": publish,
         "composite": ([{"party_id": p, "W1": scores["W1"][p]} for p in sorted(active, key=lambda p: -scores["W1"][p])] if publish else None),
@@ -393,17 +456,21 @@ def sensitivity(seed: dict, events: list[dict], votes: dict, gov_years: dict) ->
 
 
 def profiles(seed: dict, events: list[dict], votes: dict, gov_years: dict, vparty: dict) -> list[dict]:
+    pending = seed.get("pending") or []
     out = []
     for p in seed["parties"]:
         pid = p["party_id"]
         mine = [ev for ev in events if any(a["party_id"] == pid for a in ev["attributions"])]
         cnt = [ev for ev in mine if any(a["party_id"] == pid and counted(a) for a in ev["attributions"])]
+        cen = [ev for ev in cnt if ev["coverage"]["type"] == "census"]
         roles = Counter(a["role"] for ev in cnt for a in ev["attributions"] if a["party_id"] == pid)
         out.append({
             "party_id": pid, "label": p["label"], "note": p.get("note"),
             "national_government_years_in_window": gov_years.get(pid, 0),
             "events_counted": len(cnt), "events_predecessor": len(mine) - len(cnt),
-            "severity_sum": sum(ev["severity"] for ev in cnt),
+            "events_census": len(cen), "events_selection": len(cnt) - len(cen),
+            "severity_sum": sum(ev["severity"] for ev in cnt), "severity_sum_census": sum(ev["severity"] for ev in cen),
+            "pending": sum(1 for x in pending if x.get("party_id") == pid),
             "by_role": dict(roles), "by_indicator": dict(Counter(ev["indicator"] for ev in cnt)),
             "no_signal": not cnt,
             "vparty": vparty.get(pid),
@@ -439,6 +506,32 @@ def vparty_layer(seed: dict) -> tuple[dict, list[dict]]:
     return by_party, [meta | {"series": series}]
 
 
+def census_summary(seed: dict, events: list[dict], decrees: dict) -> dict:
+    by_id = {e["event_id"]: e for e in events}
+    fams = []
+    for c in seed.get("census") or []:
+        evs = [by_id[e] for e in {r.get("event_id") for r in c.get("rows") or []} | set(c.get("already_in_ledger") or []) if e in by_id]
+        per_party = Counter(a["party_id"] for e in evs for a in e["attributions"] if counted(a))
+        fam = {"family": c["family"], "label": CENSUS_LABELS.get(c["family"], c["family"]), "type": "census",
+               "scope": c.get("scope"), "list_source": c.get("list_source"), "n_listed": c.get("n_listed"),
+               "n_in_scope": c.get("n_in_scope"), "n_events": len(evs), "by_party": dict(per_party), "rows": c.get("rows") or []}
+        if c["family"] == "tc_decreto_ley" and decrees.get("available"):
+            ann = Counter()
+            for e in evs:
+                g = next((g for g in decrees["by_government"] if g["start"] <= e["act_date"] < (g["end"] or "9999")), None)
+                if g:
+                    ann[g["id"]] += 1
+            fam["by_government"] = [{"id": g["id"], "president": g["president"], "party": g["party"], "rdl": g["rdl"], "annulled_rulings": ann.get(g["id"], 0)}
+                                    for g in decrees["by_government"] if g["start"] >= "2004"]
+            fam["lag_note"] = "Las sentencias llegan años después del decreto: los decretos-leyes recientes pueden estar aún pendientes de recurso."
+        fams.append(fam)
+    sel = Counter(e["coverage"]["family"] for e in events if e["coverage"]["type"] == "selection")
+    for fid, label in SELECTION_FAMILIES.items():
+        fams.append({"family": fid, "label": label, "type": "selection", "n_events": sel.get(fid, 0),
+                     "scope": "Selección, no censo: casos encontrados en la búsqueda, sin lista oficial completa; no se cuentan ni se comparan entre partidos."})
+    return {"families": fams}
+
+
 # ---------------------------------------------------------------- main
 def export() -> int:
     seed = json.loads(SEED.read_text(encoding="utf-8"))
@@ -448,6 +541,7 @@ def export() -> int:
     votes = vote_layer(seed)
     vp_party, vp_meta = vparty_layer(seed)
     sens = sensitivity(seed, events, votes, gov_years)
+    decrees = decree_layer(seed, today)
     out = {
         "meta": {
             "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "snapshot_date": today,
@@ -458,18 +552,19 @@ def export() -> int:
         "codebook": seed["codebook"], "parties": profiles(seed, events, votes, gov_years, vp_party),
         "national_governments": seed["national_governments"], "national_governments_source": seed["national_governments_source"],
         "events": events, "system_findings": seed.get("system_findings") or [],
-        "matrix": matrix(seed, events), "votes": votes, "decrees": decree_layer(seed, today),
+        "matrix": matrix(seed, events), "votes": votes, "decrees": decrees,
+        "census": census_summary(seed, events, decrees), "pending": seed.get("pending") or [],
         "vparty": vp_meta[0], "sensitivity": sens,
     }
     OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator="\n")
-    w.writerow(["event_id", "date", "act_date", "party_id", "role", "attribution", "lineage", "power_only", "indicator",
+    w.writerow(["event_id", "coverage", "coverage_family", "date", "act_date", "party_id", "role", "attribution", "lineage", "power_only", "indicator",
                 "severity", "finding_type", "body", "title", "act", "status", "source_url", "source_retrieved", "quote"])
     for ev in events:
         for a in ev["attributions"]:
             s = ev["source"]
-            w.writerow([ev["event_id"], ev["date"], ev.get("act_date", ""), a["party_id"], a["role"], a["attribution"], a["lineage"],
+            w.writerow([ev["event_id"], "censo" if ev["coverage"]["type"] == "census" else "selección, no censo", ev["coverage"]["family"], ev["date"], ev.get("act_date", ""), a["party_id"], a["role"], a["attribution"], a["lineage"],
                         a["power_only"], ev["indicator"], ev["severity"], ev["finding_type"], ev["body"], ev["title"], ev["act"],
                         ev.get("status", ""), s["url"], s["retrieved"], s["quote"]])
     OUT_CSV.write_text(buf.getvalue(), encoding="utf-8")

@@ -77,6 +77,77 @@ function EventItem({ event, pid, data }) {
   );
 }
 
+function PendingItem({ x }) {
+  return (
+    <li className="dpxEvent dpxEvent--pending">
+      <span className="dpxEvent__head">
+        {dateEs(x.date)} · {x.finding}
+      </span>
+      <span className="dpxEvent__meta">
+        {x.person} · {x.body} · {ROLE_LABEL[x.role] || x.role}
+      </span>
+      <span>
+        {x.appeal}. <q lang={x.source.quote_lang || "es"}>{x.source.quote}</q>{" "}
+        <a href={x.source.url} rel="noopener noreferrer" target="_blank">
+          fuente
+        </a>
+      </span>
+    </li>
+  );
+}
+
+function CensusTable({ data }) {
+  const fams = data.census?.families || [];
+  return (
+    <details className="vizTable" open>
+      <summary>Qué cuenta y qué no: censo o selección, familia por familia</summary>
+      <div className="vizTable__scroll">
+        <table className="dpxCensus">
+          <thead>
+            <tr>
+              <th scope="col">Familia</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Cobertura</th>
+              <th scope="col">Por partido</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fams.map((f) => (
+              <tr key={f.family}>
+                <td>
+                  {f.label}
+                  {f.list_source?.url ? (
+                    <>
+                      {" "}
+                      <a href={f.list_source.url} rel="noopener noreferrer" target="_blank">
+                        lista oficial
+                      </a>
+                    </>
+                  ) : null}
+                </td>
+                <td>{f.type === "census" ? "censo" : "selección, no censo"}</td>
+                <td>
+                  {f.type === "census"
+                    ? `${f.n_in_scope} de ${f.n_listed} elementos de la lista entran en el alcance; ${f.n_events} atribuibles a un partido. ${f.scope}`
+                    : `${f.n_events} casos listados en los perfiles. ${f.scope}`}
+                </td>
+                <td>
+                  {f.type === "census"
+                    ? Object.entries(f.by_party || {})
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([pid, n]) => `${partyLabel(data, pid)} ${n}`)
+                        .join(" · ") || "ninguno"
+                    : "no se cuenta"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  );
+}
+
 function VoteSummary({ s }) {
   if (!s) return null;
   const parts = [];
@@ -97,12 +168,16 @@ function Profile({ party, data }) {
   const evs = eventsFor(data, party.party_id);
   const counted = evs.filter((e) => e.attributions.find((a) => a.party_id === party.party_id)?.lineage !== "predecessor");
   const vp = party.vparty;
+  const pend = (data.pending || []).filter((x) => x.party_id === party.party_id);
   return (
     <details className="dpxProfile" id={`perfil-${party.party_id}`}>
       <summary>
         {party.label}{" "}
         <span className="dpxProfile__meta">
-          · {counted.length ? `${counted.length} ${counted.length === 1 ? "resolución" : "resoluciones"}, suma de gravedad ${party.severity_sum}` : "sin señal en el registro"}
+          · {counted.length
+            ? `${party.events_census} en censos completos${party.events_selection ? `, ${party.events_selection} en selección` : ""}`
+            : "sin señal en el registro"}
+          {pend.length ? ` · ${pend.length} pendiente${pend.length === 1 ? "" : "s"}, no contado${pend.length === 1 ? "" : "s"}` : ""}
           {party.national_government_years_in_window ? ` · ${num(party.national_government_years_in_window, 1)} años en el Gobierno de España` : ""}
         </span>
       </summary>
@@ -115,12 +190,39 @@ function Profile({ party, data }) {
             tener poder.
           </p>
         ) : null}
-        {evs.length ? (
-          <ul className="dpxEvents">
-            {evs.map((e) => (
-              <EventItem key={e.event_id} event={e} pid={party.party_id} data={data} />
-            ))}
-          </ul>
+        {evs.filter((e) => e.coverage?.type === "census").length ? (
+          <>
+            <p className="dpxSubhead">De censos completos (comparables)</p>
+            <ul className="dpxEvents">
+              {evs
+                .filter((e) => e.coverage?.type === "census")
+                .map((e) => (
+                  <EventItem key={e.event_id} event={e} pid={party.party_id} data={data} />
+                ))}
+            </ul>
+          </>
+        ) : null}
+        {evs.filter((e) => e.coverage?.type !== "census").length ? (
+          <>
+            <p className="dpxSubhead">Selección, no censo (no se cuenta ni se compara)</p>
+            <ul className="dpxEvents">
+              {evs
+                .filter((e) => e.coverage?.type !== "census")
+                .map((e) => (
+                  <EventItem key={e.event_id} event={e} pid={party.party_id} data={data} />
+                ))}
+            </ul>
+          </>
+        ) : null}
+        {pend.length ? (
+          <>
+            <p className="dpxSubhead">Pendiente, no contado (no es firme)</p>
+            <ul className="dpxEvents">
+              {pend.map((x) => (
+                <PendingItem key={x.pending_id} x={x} />
+              ))}
+            </ul>
+          </>
         ) : null}
         <VoteSummary s={party.votes} />
         {party.alignment_with_psoe_leg15?.same_as_psoe_pct != null && party.party_id !== "psoe" ? (
@@ -167,7 +269,9 @@ export default function DemocraciaPartidosPage() {
   const sensParties = data.parties.filter((p) => sens.parties_with_items.includes(p.party_id));
   const reversalPairs = [...new Set(sens.reversals.map((r) => r.pair.map((pid) => partyLabel(data, pid)).join(" y ")))];
   const indTotals = data.codebook.indicators.map((i) => ({ ...i, ...totals[i.id] }));
-  const emptyInds = indTotals.filter((i) => !i.gobierno && !i.fuera).map((i) => i.label.toLowerCase());
+  const emptyList = indTotals.filter((i) => !i.gobierno && !i.fuera && !i.selection);
+  const emptyInds = emptyList.map((i) => i.label.toLowerCase());
+  const emptyIds = emptyList.map((i) => i.id);
 
   return (
     <main className="shell vizArticle">
@@ -196,10 +300,10 @@ export default function DemocraciaPartidosPage() {
 
       <section className="vizStats" aria-label="Cifras clave">
         <div className="card vizStat">
-          <span className="vizStat__label">Resoluciones atribuidas a un partido</span>
-          <span className="vizStat__value">{h.events}</span>
+          <span className="vizStat__label">Resoluciones de censos completos</span>
+          <span className="vizStat__value">{h.censusEvents}</span>
           <span className="vizStat__note">
-            {h.attributions} atribuciones; {num(100 * h.govShare, 0)} % por actos hechos gobernando
+            de {h.censusFamilies} listas oficiales completas; además, {h.selectionEvents} en selección (no comparables) y {h.pending} pendientes, no contadas
           </span>
         </div>
         <div className="card vizStat">
@@ -229,17 +333,55 @@ export default function DemocraciaPartidosPage() {
 
       <Figure
         id="matriz"
-        title={`Quién aparece en el registro y con qué papel: ${h.events} resoluciones, ${h.partiesWithItems} partidos con alguna`}
-        dek={`Cada casilla tiene dos mitades: a la izquierda, las resoluciones sobre actos hechos gobernando (España, una comunidad o un ayuntamiento); a la derecha, sin gobernar. El color es la gravedad máxima según la fuerza legal de la resolución. Bajo cada partido, su exposición: años en el Gobierno de España dentro del periodo.`}
+        title={`Quién aparece y con qué papel: ${h.censusEvents} resoluciones de ${h.censusFamilies} listas oficiales completas`}
+        dek={`Los números solo cuentan resoluciones de listas oficiales recorridas de principio a fin (censos): por eso son comparables entre partidos. Un anillo indica casos encontrados por selección, que se listan en el perfil pero no se cuentan. Cada casilla tiene dos mitades: a la izquierda, actos hechos gobernando (España, una comunidad o un ayuntamiento); a la derecha, sin gobernar. El color es la gravedad máxima según la fuerza legal de la resolución. Bajo cada partido, su exposición: años en el Gobierno de España dentro del periodo.`}
         sources={[{ href: "#perfiles", label: "registro de resoluciones (tribunales, Comisión de Venecia, Comisión Europea, GRECO), enlazadas una a una en cada perfil" }]}
         notes={[
           "Zanja dos relatos: «solo un lado abusa» (la tabla muestra resoluciones en varios partidos y en los dos papeles) y «todos son iguales» (difieren el indicador, la gravedad y el papel). Lo que no zanja: quien no ha gobernado tiene pocas ocasiones de aparecer, y las condenas llegan años después de los hechos.",
-          emptyInds.length ? `Sin ninguna resolución en el periodo: ${emptyInds.join(", ")}.` : "",
         ].filter(Boolean)}
+        table={<CensusTable data={data} />}
       >
         <SeverityLegend />
         <ConductMatrix data={data} />
+        {emptyInds.length ? (
+          <p className="vizFigure__dek">
+            {emptyInds.length === 1 ? "Un indicador del codebook no tiene" : `${emptyInds.length} indicadores del codebook no tienen`} ninguna resolución, ni de censo ni de
+            selección: {emptyInds.join(", ")}. No es una prueba de ausencia: el método solo cuenta resoluciones oficiales, y sobre discursos, insultos o
+            tolerancia hacia la violencia casi nunca hay una.
+            {emptyIds.includes("legitimidad") && emptyIds.includes("violencia")
+              ? " Dos de ellos, negar la legitimidad del adversario y tolerar la violencia, son los indicadores de Levitsky y Ziblatt más ligados a la erosión democrática; la única aproximación que mostramos para ellos es la valoración de expertos de V-Party (más abajo), que no es una resolución oficial."
+              : ""}
+          </p>
+        ) : null}
       </Figure>
+
+      {(data.pending || []).length ? (
+        <section className="vizProse" id="pendiente" aria-labelledby="pendiente-title">
+          <h2 id="pendiente-title">Pendiente, no contado: {data.pending.length} resoluciones que aún no son firmes</h2>
+          <p>
+            Condenas en primera instancia recurridas y sanciones administrativas recurridas, con la misma vara para todos los partidos. No cuentan en
+            ninguna cifra; se muestran para que un perfil corto no se lea como un perfil limpio.
+          </p>
+          <ul className="dpxEvents">
+            {data.pending.map((x) => (
+              <li key={x.pending_id} className="dpxEvent">
+                <span className="dpxEvent__head">
+                  {partyLabel(data, x.party_id)} · {dateEs(x.date)} · {x.finding}
+                </span>
+                <span className="dpxEvent__meta">
+                  {x.person} · {x.body} · {x.appeal}
+                </span>
+                <span>
+                  <q lang={x.source.quote_lang || "es"}>{x.source.quote}</q>{" "}
+                  <a href={x.source.url} rel="noopener noreferrer" target="_blank">
+                    fuente
+                  </a>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="vizProse" aria-labelledby="como-leer">
         <h2 id="como-leer">Cómo se ha hecho y qué no puede decir</h2>
@@ -397,7 +539,7 @@ export default function DemocraciaPartidosPage() {
       <Figure
         id="sensibilidad"
         title={sens.publish_composite ? "La prueba de sensibilidad: el orden de partidos resiste" : `Por qué no hay un «riesgómetro»: ${sens.reversal_count} inversiones de orden en la prueba de sensibilidad`}
-        dek={`Regla fijada antes de mirar los datos: ${sens.rule.charAt(0).toLowerCase()}${sens.rule.slice(1)} Probamos ${weightIds.length} ponderaciones.${sens.publish_composite ? "" : ` El orden cambia, sobre todo entre ${reversalPairs.slice(0, 4).join("; ")}, así que publicamos perfiles sin nivel compuesto.`}`}
+        dek={`Regla fijada antes de mirar los datos: ${sens.rule.charAt(0).toLowerCase()}${sens.rule.slice(1)} Probamos ${weightIds.length} ponderaciones sobre las ${sens.events_used} resoluciones de censos completos (las de selección no son comparables).${sens.publish_composite ? "" : ` El orden cambia, sobre todo entre ${reversalPairs.slice(0, 4).join("; ")}, así que publicamos perfiles sin nivel compuesto.`}`}
         table={
           <details className="vizTable" open>
             <summary>Puntuación de cada partido con cada ponderación</summary>
@@ -437,12 +579,13 @@ export default function DemocraciaPartidosPage() {
       <section className="vizProse" id="perfiles" aria-labelledby="perfiles-title">
         <h2 id="perfiles-title">Perfil por partido</h2>
         <p>
-          Cada resolución enlaza al documento oficial, con una cita literal breve. Ordenados por la suma de gravedad, que no es un ranking: depende de
-          cuánto tiempo y dónde ha gobernado cada uno.
+          Cada resolución enlaza al documento oficial, con una cita literal breve. Ordenados por la gravedad de lo que cuentan los censos, que no es un
+          ranking: depende de cuánto tiempo y dónde ha gobernado cada uno. Cada perfil separa lo que viene de un censo, lo que viene de una selección y
+          lo que está pendiente.
         </p>
         <div className="dpxProfiles">
           {[...data.parties]
-            .sort((a, b) => b.severity_sum - a.severity_sum || a.label.localeCompare(b.label))
+            .sort((a, b) => b.severity_sum_census - a.severity_sum_census || b.events_selection - a.events_selection || a.label.localeCompare(b.label))
             .map((p) => (
               <Profile key={p.party_id} party={p} data={data} />
             ))}

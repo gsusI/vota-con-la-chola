@@ -42,7 +42,7 @@ WINDOW_START = "2011-12-21"
 ALLOWED_HOSTS = (
     "boe.es", "tribunalconstitucional.es", "poderjudicial.es", "venice.coe.int", "coe.int", "commission.europa.eu",
     "ec.europa.eu", "eur-lex.europa.eu", "junta-electoral-central.es", "juntaelectoralcentral.es", "tcu.es",
-    "congreso.es", "senado.es", "parlament.gv.at", "parcan.es", "ohchr.org", "cnmc.es", "gob.es", "hudoc.echr.coe.int", "parlament.cat", "dogc.gencat.cat", "europa.eu",
+    "congreso.es", "senado.es", "parlament.gv.at", "parcan.es", "junts.cat", "esquerra.cat", "ohchr.org", "cnmc.es", "gob.es", "hudoc.echr.coe.int", "parlament.cat", "dogc.gencat.cat", "europa.eu",
 )
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -118,6 +118,43 @@ def check_event(ev: dict, where: str, today: str) -> list[str]:
     return errs
 
 
+def check_pending(x: dict, where: str) -> list[str]:
+    errs = []
+    p = f"{where}:pending:{x.get('pending_id')}"
+    if x.get("party_id") not in PARTIES:
+        errs.append(f"{p}: party {x.get('party_id')!r} invalid")
+    if x.get("role") not in ROLES:
+        errs.append(f"{p}: role {x.get('role')!r} invalid")
+    if not DATE_RE.match(str(x.get("date") or "")):
+        errs.append(f"{p}: date")
+    for k in ("finding", "body", "appeal"):
+        if not str(x.get(k) or "").strip():
+            errs.append(f"{p}: {k} empty")
+    s = x.get("source") or {}
+    url = str(s.get("url") or "")
+    if not url.startswith("https://") or not any(h in url.split("/")[2] for h in ALLOWED_HOSTS):
+        errs.append(f"{p}: source url must be https on an official host ({url[:60]})")
+    q = str(s.get("quote") or "")
+    if not q.strip() or words(q) > 15:
+        errs.append(f"{p}: quote empty or > 15 words")
+    return errs
+
+
+def check_census(c: dict, where: str) -> list[str]:
+    errs = []
+    rows = c.get("rows") or []
+    if not c.get("family") or not c.get("scope") or not (c.get("list_source") or {}).get("url"):
+        errs.append(f"{where}: census needs family, scope and list_source.url")
+    if c.get("n_listed") != len(rows):
+        errs.append(f"{where}: census n_listed {c.get('n_listed')} != {len(rows)} rows")
+    if c.get("n_in_scope") != sum(1 for r in rows if r.get("in_scope")):
+        errs.append(f"{where}: census n_in_scope does not match rows")
+    for r in rows:
+        if not r.get("ref") or not str(r.get("reason") or "").strip():
+            errs.append(f"{where}: census row without ref/reason: {r}")
+    return errs
+
+
 def load_events(paths: list[Path]) -> list[tuple[str, dict]]:
     out = []
     for path in paths:
@@ -134,10 +171,16 @@ def main(argv: list[str]) -> int:
     if argv:
         paths = [Path(a) for a in argv]
     else:
-        paths = sorted(PARTS_DIR.glob("events_*.json"))
+        paths = sorted(PARTS_DIR.glob("events_*.json")) + sorted(PARTS_DIR.glob("pending_*.json"))
     errs: list[str] = []
     events = load_events(paths)
     ids: dict[str, str] = {}
+    for path in paths:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        for x in doc.get("pending") or []:
+            errs += check_pending(x, path.name)
+        if doc.get("census"):
+            errs += check_census(doc["census"], path.name)
     for where, ev in events:
         errs += check_event(ev, where, today)
         eid = ev.get("event_id")
