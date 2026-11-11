@@ -177,7 +177,55 @@ function buildStories() {
       sources: [{ label: "Our World in Data (HMD)", href: health.sources.owid_grapher.page, retrieved: day(health.sources.owid_grapher) }],
       also: "Gasto sanitario público frente a Europa, listas de espera del SNS con sus rupturas, médicos por habitante y pago de bolsillo.",
     },
+    democracyStory(),
     simulatorStory(),
+  ];
+}
+
+// Separation of powers: decree-laws against ordinary laws per year (complete years only), as on the page.
+function democracyStory() {
+  const demo = load("democracia");
+  const dl = demo.decree_laws;
+  const full = dl.annual.filter((row) => row.year < dl.partial_year);
+  const weak = demo.safeguards.filter((item) => item.classification === "buena_voluntad").length;
+  return {
+    href: "/visualizaciones/democracia/",
+    topic: "Separación de poderes",
+    anchor: "la separación de poderes",
+    title: `${weak} de las ${demo.safeguards.length} reglas revisadas que limitan al poder no tienen quien las haga cumplir`,
+    dek: "Decretos-leyes, mandatos caducados, presupuestos prorrogados y vetos: cada salvaguarda con su fuente, quién gobernaba y cómo lo resuelven Alemania, Francia, Italia y Portugal.",
+    chart: {
+      series: [
+        { id: "laws", color: C.ref, endLabel: "Leyes", points: full.map((row) => ({ year: row.year, value: row.laws })) },
+        { id: "rdl", color: C.blue, emphasis: true, endLabel: "Decretos-leyes", points: full.map((row) => ({ year: row.year, value: row.rdl })) },
+      ],
+      xMin: full[0].year,
+      xMax: full.at(-1).year,
+      yMax: Math.ceil(Math.max(...full.map((row) => Math.max(row.laws, row.rdl))) / 20) * 20,
+      format: (value) => String(Math.round(value)),
+      tick: plainTick,
+      ariaLabel: "Leyes y decretos-leyes aprobados por año en España",
+    },
+    unitNote: "normas con rango de ley por año",
+    sources: [{ label: "BOE, identificador europeo de legislación (ELI)", href: "https://www.boe.es/eli/es", retrieved: String(dl.retrieved_at).slice(0, 10) }],
+    also: "El mapa de salvaguardas con quién las hace cumplir, la aritmética de los bloqueos de tres quintos y Polonia y Hungría según la Comisión de Venecia.",
+  };
+}
+
+// Pages without a preview chart: what each party did, item by item.
+function partyPages() {
+  const decisions = load("decisiones");
+  return [
+    {
+      href: "/visualizaciones/democracia/partidos/",
+      topic: "Democracia por partido",
+      text: "Cómo ha usado el poder cada partido: resoluciones oficiales con su fuente, votos sobre contrapesos y decretos-leyes por Gobierno",
+    },
+    {
+      href: "/visualizaciones/decisiones/",
+      topic: "Decisiones por partido",
+      text: `Qué votó cada partido en ${decisions.counts.measures} leyes y decretos de empleo, autónomos, sanidad e inmigración, y qué dicen las evaluaciones`,
+    },
   ];
 }
 
@@ -221,9 +269,10 @@ export default function VisualizacionesHubPage() {
   const section = getSectionById("visualizaciones");
   const stories = buildStories();
   const datasets = getDatasetsForSection("visualizaciones");
+  const byParty = partyPages();
   const downloadsByPage = stories.map((story) => ({
     ...story,
-    files: datasets.filter((dataset) => dataset.path.includes(story.href.split("/").filter(Boolean).at(-1))),
+    files: datasets.filter((dataset) => dataset.path.split("/").at(-1).split(".")[0] === story.href.split("/").filter(Boolean).at(-1)),
   }));
 
   return (
@@ -240,6 +289,8 @@ export default function VisualizacionesHubPage() {
             items: [
               ...VIZ_SLUGS.map((slug) => ({ path: `/visualizaciones/${slug}/`, name: ARTICLES[slug].linkText })),
               { path: SIMULATOR.href, name: SIMULATOR.anchor },
+              { path: "/visualizaciones/democracia/", name: "separación de poderes en España" },
+              ...byParty.map((page) => ({ path: page.href, name: page.text })),
             ],
           }),
         ]}
@@ -291,6 +342,19 @@ export default function VisualizacionesHubPage() {
             </Link>
           </article>
         ))}
+      </section>
+
+      <section className="card vizHub__data" aria-labelledby="viz-partidos">
+        <h2 id="viz-partidos">Partido a partido</h2>
+        <p>Lo que hizo cada partido, resolución a resolución y voto a voto, con el enlace a cada documento oficial.</p>
+        <ul>
+          {byParty.map((page) => (
+            <li key={page.href}>
+              <span>{page.topic}</span>
+              <Link href={withBasePath(page.href)}>{page.text}</Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="card vizHub__data" aria-labelledby="viz-datos">
