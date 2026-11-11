@@ -6,6 +6,7 @@ import Explain from "./Explain";
 import SafeguardMap, { MapLegend, partyOfEpisode } from "./SafeguardMap";
 import { CLASS_COLORS, CLASS_LABELS, CLASS_SHORT, COUNTRY, HBars, LineChart, PairedBars, PARTY_COLORS, YearStrip, num } from "./charts";
 import { PEER_CODES, democracyModel, democracySeo, partyOf } from "./model.mjs";
+import { REPO_URL } from "../../citizen/vota/metodologia/methodologyData.mjs";
 import "./democracia.css";
 
 const DATA_PATH = "visualizaciones/data/democracia.json";
@@ -192,6 +193,17 @@ export default function DemocraciaPage() {
           { href: "#fichas", label: "Fichas con fuentes" },
         ]}
       />
+
+      <p className="demoNote" role="note">
+        <strong>Versión en revisión.</strong> Las fichas las documentaron agentes de IA a partir de las fuentes primarias que cada una
+        enlaza; otro agente de IA comprobó cada ficha contra sus fuentes antes de publicarla, y una muestra al azar de {data.review_sample_size} pasó
+        una segunda comprobación. Ninguna persona las ha revisado todavía: úsalas con sus fuentes delante. Si encuentras un error, abre
+        una incidencia en{" "}
+        <a href={`${REPO_URL}/issues`} rel="noopener noreferrer" target="_blank">
+          GitHub
+        </a>{" "}
+        con el identificador de la ficha (aparece en cada una, p. ej. <code>cgpj_renovacion</code>), qué está mal y la fuente.
+      </p>
 
       <section className="card vizProse" id="resumen" aria-labelledby="resumen-title">
         <h2 id="resumen-title">Lo esencial, con sus cifras</h2>
@@ -827,6 +839,10 @@ export default function DemocraciaPage() {
                 </dd>
                 <dt>Lo que la ficha no dice</dt>
                 <dd>{s.limits}</dd>
+                <dt>Identificador</dt>
+                <dd>
+                  <code>{s.id}</code>
+                </dd>
               </dl>
               {s.episodes.length ? (
                 <div className="vizTable__scroll">

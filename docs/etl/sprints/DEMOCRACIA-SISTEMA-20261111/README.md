@@ -230,6 +230,15 @@ toda atribución, cifras de retraso y hasta 6 episodios al azar (`review/sample1
 corrigen o se retiran antes de publicar. Se corrigieron las dos (y los menores) y se añadió la comprobación mecánica
 correspondiente: `government` solo puede ir con un órgano que sea el Gobierno o un ministerio.
 
+**Cada una de las 20 fichas publicadas pasó su propia revisión independiente completa antes de publicarse** (no solo la
+muestra): piloto (`review/pilot/` y `pilot-recheck/`: decretos_ley, cgpj_renovacion, presupuesto_presentacion,
+estado_alarma, investidura_plazo), ola 2 (`review/wave2/` y `wave2-recheck/`: tc_renovacion, defensor_pueblo,
+tribunal_cuentas, rtve_consejo, fiscal_general), ola 3A (`review/wave3a/`: veto_presupuestario, control_parlamentario,
+mesa_plazos, tramitacion_reforzada, art155) y ola 3B (`review/wave3b/`: indultos, amnistia, estado_derecho_sentencias,
+transparencia, financiacion_partidos). La muestra aleatoria de 10 fue una segunda comprobación sobre ese conjunto. Todas
+las revisiones las hicieron agentes de IA distintos del que redactó; ninguna persona ha revisado todavía las fichas, y la
+página lo dice en un aviso al principio con el canal de errores del sitio (incidencias de GitHub).
+
 ### 3.3 Atribución: comprobaciones mecánicas acumuladas (todas en `scripts/validate_democracy_safeguards.py`)
 1. Gobierno vigente en la fecha del episodio (desde el principio).
 2. Mayoría reforzada (3/5, 2/3) → la decisión es de las Cámaras: `government` nulo y aritmética calculada (ola 2).

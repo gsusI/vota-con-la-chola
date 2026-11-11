@@ -557,6 +557,7 @@ def build_payload(seed: dict) -> dict:
         "safeguards": safeguards,
         "pending": pending,
         "review_rule": seed.get("reviews", {}).get("rule"),
+        "review_sample_size": len(seed.get("reviews", {}).get("sample10", {}).get("ids", [])),
         "decree_laws": dl,
         "budgets": budget_series(seed),
         "freezer": freezer_series(),

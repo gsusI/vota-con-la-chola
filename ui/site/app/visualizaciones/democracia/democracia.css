@@ -393,3 +393,12 @@
   overflow-x: auto;
   max-width: 100%;
 }
+
+/* Disclosure callout in the reading column: tinted, no frame. */
+.viz .demoNote {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(192, 138, 0, 0.1);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
