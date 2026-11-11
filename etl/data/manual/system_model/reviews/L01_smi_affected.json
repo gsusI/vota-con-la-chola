@@ -1,0 +1,12 @@
+{
+ "id": "L01_smi_affected",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Nota MITES pág. 1: 'beneficiará de forma directa a unos 2,4 millones de personas trabajadoras' (literal). BdE DO 2113 pág. 16: 10 % de relaciones laborales en o bajo SMI-19, 4 % con el SMI 2018 (literal). INE 65132 (API): asalariados 2025T1-T4 18.499,2/18.978,6/19.107,8/19.159,1, media 18.936,2 -> 2,4/18,936 = 0,1267. INE 28186: 29.540,26 (2024), 28.049,94 (2023). Aritmética de cuota_masa correcta (0,071; 0,04; 0,085). Defecto: la portada del DO 2113 firma 'Ernesto Villanueva', no 'Roldán'.",
+ "corrections": {
+  "sources.1.authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva, Banco de España (2021)"
+ }
+}

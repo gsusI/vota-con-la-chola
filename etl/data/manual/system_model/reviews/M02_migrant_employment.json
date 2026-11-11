@@ -1,0 +1,10 @@
+{
+ "id": "M02_migrant_employment",
+ "verdict": "pass",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Eurostat API lfsa_ergan ES, FOR, Y15-64, 2025 = 62,9; tramos 2025: 20-24 48,4, 25-29 65,1, 30-34 70,5, 35-39 70,6, 40-44 72,0, 45-49 71,9, 50-54 72,3, 55-59 64,6, 60-64 45,3, 65-69 22,6 (medias por etapa plausibles; pesos EUROPOP no verificados). lfsa_pganws: POP 3.920,4 (2019) y 5.460,8 (2025); EMP 2.378,8 y 3.434,5 -> 1.055,7/1.540,4 = 68,5 %. 68,5/62,9 = 1,09 -> alto 1,1. Bajo 0,85 declarado supuesto; nota C correcta.",
+ "corrections": {}
+}

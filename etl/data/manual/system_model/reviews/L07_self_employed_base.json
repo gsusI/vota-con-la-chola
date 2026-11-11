@@ -1,0 +1,12 @@
+{
+ "id": "L07_self_employed_base",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Revista SS dic-2025: '3.425.767 trabajadores por cuenta propia, 39.002 más' (RETA y SETA), literal. Oct-2026: 3.501.598, 79.163 más (literal). Media de los tres meses 3.411,7 miles (central 3.410 redondeado). RDL 13/2022 DT 1ª tabla 2025: reducida tramo 1 653,59; general tramo 12 base mínima 1.928,10. Orden PJC/178/2025 art. 18.4: 28,30 % y 1,30 %; MEI 0,80 % en el mismo texto. 205 y 605 € bien calculados. Defecto: la unidad dice solo RETA y la cifra incluye SETA.",
+ "corrections": {
+  "parameter.unit": "miles de afiliados por cuenta propia (RETA y SETA), media de 2025 aproximada con dic-2024, oct-2025 y dic-2025"
+ }
+}

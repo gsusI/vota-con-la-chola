@@ -1652,7 +1652,7 @@
     {
      "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
      "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documento Ocasional 2113)",
-     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Roldán, Banco de España (2021)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva, Banco de España (2021)",
      "country": "España",
      "period": "dic. 2018 (SMI 2019)",
      "method": "registros MCVL con base de cotización igual o inferior al nuevo SMI",
@@ -1703,6 +1703,10 @@
    ],
    "derivation": "Cuota: 2,4 millones de perceptores directos (nota del Ministerio, SMI 2025) / 18,936 millones de asalariados (media EPA 2025T1-T4, tabla INE 65132) = 0,127. El Ministerio no explica en la nota su método ni su denominador (AIReF e inclusion.gob.es no accesibles desde aquí; el informe de la Comisión asesora no se ha leído). Contraste: Banco de España DO 2113 halla un 10 % de relaciones laborales (MCVL) en o bajo el SMI 2019, nivel relativo algo menor. Rango: 0,10 (BdE 2019) a 0,15 (si el Ministerio usa un denominador menor, p. ej. afiliados del régimen general o asalariados del sector privado). Extra cuota_masa: no publicada; aproximación = cuota x SMI anual / salario medio EES 2024 = 0,127 x 16.576 / 29.540,26 = 0,071, cota superior porque muchos afectados trabajan a tiempo parcial o parte del año y ganan menos que el SMI anual completo; central 0,06 suponiendo que ganan de media el 85 % del SMI anual (supuesto); bajo 0,10 x 0,56 x 0,7 = 0,04; alto 0,15 x 0,561 = 0,085.",
    "note_es": "Según el Ministerio de Trabajo, la subida del SMI de 2025 (1.184 € x 14) llega de forma directa a unos 2,4 millones de personas, alrededor del 12,7 % de los asalariados de la EPA de 2025; el Banco de España halló un 10 % con el SMI de 2019. El método del Ministerio no está publicado en la nota y la parte de la masa salarial (≈6 %) es una aproximación.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Nota MITES pág. 1: 'beneficiará de forma directa a unos 2,4 millones de personas trabajadoras' (literal). BdE DO 2113 pág. 16: 10 % de relaciones laborales en o bajo SMI-19, 4 % con el SMI 2018 (literal). INE 65132 (API): asalariados 2025T1-T4 18.499,2/18.978,6/19.107,8/19.159,1, media 18.936,2 -> 2,4/18,936 = 0,1267. INE 28186: 29.540,26 (2024), 28.049,94 (2023). Aritmética de cuota_masa correcta (0,071; 0,04; 0,085). Defecto: la portada del DO 2113 firma 'Ernesto Villanueva', no 'Roldán'."
+   },
    "part_file": "part_labour_w1.json"
   },
   {
@@ -2066,7 +2070,7 @@
    "layer": "contable",
    "parameter": {
     "name": "autonomos_k",
-    "unit": "miles de afiliados al Régimen Especial de Trabajadores Autónomos (RETA), media de 2025",
+    "unit": "miles de afiliados por cuenta propia (RETA y SETA), media de 2025 aproximada con dic-2024, oct-2025 y dic-2025",
     "low": 3387,
     "central": 3410,
     "high": 3426
@@ -2145,6 +2149,10 @@
    ],
    "derivation": "Afiliados: no se encontró publicada la media anual de 2025; se aproxima con la media de los meses conocidos: dic-2024 3.386.765 (3.425.767 - 39.002), oct-2025 3.422.435 (3.501.598 - 79.163), dic-2025 3.425.767; central 3.410 miles, bajo 3.387 (dic-2024), alto 3.426 (dic-2025). Incluye SETA. Cuota: tipo 2025 = 28,30 + 1,30 + 0,80 (MEI) leídos en la Orden PJC/178/2025, más 0,9 cese y 0,1 formación (no verificados en este extracto) = 31,4 %. Bajo: 653,59 × 31,4 % = 205 €; alto: base mínima del tramo 12 general, 1.928,10 × 31,4 % = 605 €. Central 330 €: hipótesis de base media de unos 1.050 € (la mayoría cotiza cerca de la base mínima de los primeros tramos); no se encontró la recaudación del RETA para dividir, de ahí la nota D.",
    "note_es": "Según la Seguridad Social, en diciembre de 2025 había 3.425.767 autónomos afiliados (RETA y SETA), 39.002 más que un año antes; usamos 3,41 millones de media en 2025. La cuota de 2025 iba de unos 205 a 605 euros al mes según el tramo de ingresos; la cuota media de 330 euros es una estimación nuestra, no un dato publicado.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Revista SS dic-2025: '3.425.767 trabajadores por cuenta propia, 39.002 más' (RETA y SETA), literal. Oct-2026: 3.501.598, 79.163 más (literal). Media de los tres meses 3.411,7 miles (central 3.410 redondeado). RDL 13/2022 DT 1ª tabla 2025: reducida tramo 1 653,59; general tramo 12 base mínima 1.928,10. Orden PJC/178/2025 art. 18.4: 28,30 % y 1,30 %; MEI 0,80 % en el mismo texto. 205 y 605 € bien calculados. Defecto: la unidad dice solo RETA y la cifra incluye SETA."
+   },
    "part_file": "part_labour_pilot.json"
   },
   {
@@ -2329,6 +2337,10 @@
    "debate": null,
    "derivation": "El modelo pone a trabajar a los residentes adicionales con la tasa de empleo de los extranjeros de su edad en la EPA 2025 (cada etapa pondera sus tramos de 5 años por la edad de los inmigrantes adicionales de EUROPOP2023). Entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de 15-64 (frente al 62,9 % de tasa), de ahí el alto 1,1 (68,5/62,9 ≈ 1,09). El bajo 0,85 es un supuesto para los primeros años de residencia. Las nacionalizaciones sacan del grupo a extranjeros ya empleados y sesgan la comparación.",
    "note_es": "Según la EPA (Eurostat), el 62,9 % de los extranjeros de 15 a 64 años trabaja; entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de esa edad. El modelo usa la tasa por edad, con un margen del 85 % al 110 %.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Eurostat API lfsa_ergan ES, FOR, Y15-64, 2025 = 62,9; tramos 2025: 20-24 48,4, 25-29 65,1, 30-34 70,5, 35-39 70,6, 40-44 72,0, 45-49 71,9, 50-54 72,3, 55-59 64,6, 60-64 45,3, 65-69 22,6 (medias por etapa plausibles; pesos EUROPOP no verificados). lfsa_pganws: POP 3.920,4 (2019) y 5.460,8 (2025); EMP 2.378,8 y 3.434,5 -> 1.055,7/1.540,4 = 68,5 %. 68,5/62,9 = 1,09 -> alto 1,1. Bajo 0,85 declarado supuesto; nota C correcta."
+   },
    "part_file": "part_labour_own.json"
   },
   {
@@ -2561,6 +2573,10 @@
    "extra_parameters": [],
    "derivation": "Escuela marginal: se aplica la clasificación de Dustmann y Frattini (tabla A3) al COFOG español de 2024 (Eurostat). Puros: servicios generales sin intereses (92.551 - 39.644 = 52.907) + defensa 14.233 + asuntos económicos 80.908 = 148.048 M EUR. Congestionables (crecen con la población): orden público 28.628 + medio ambiente 15.539 + vivienda 7.613 + cultura 19.193 = 70.973 M EUR. Cuota = 70.973/219.021 = 0,324 (0,334 en 2023). Simplificación: la clasificación es por funciones enteras (D&F la hacen por subfunciones) y deja fuera la protección social no contributiva. Escuela de coste medio: 1,0. Central 0,5 = juicio propio: parte de asuntos económicos (transporte) y de la administración general también crece con la población a medio plazo; con la mitad de asuntos económicos como congestionable la cuota sería (70.973 + 40.454)/219.021 = 0,51. El capítulo 4 de la OCDE (IMO 2021) usa la misma separación puros/congestionables, pero su web devuelve 403 desde aquí y no se ha podido citar.",
    "note_es": "Según Dustmann y Frattini y las cuentas COFOG de Eurostat (2024), si solo crecen con la población el orden público, el medio ambiente, la vivienda y la cultura, cada residente más eleva un 32 % del gasto medio por persona en estos servicios; si cuesta la media, un 100 %. Usamos 0,5 como juicio propio: nadie mide bien cuánto crecen el transporte o la administración general.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "D&F CDP 22/13 pág. 9: cita literal; congestionables con coste marginal 'unknown, likely smaller than the average cost'. Tabla A1 pág. 44: puros 23,3 %, congestionables 7,5 %; A3 págs. 46-47: puros = COFOG 1, 2 y 4; congestionables = 3.2/3.5/3.6, 5, 6.2-6.6, 8. Eurostat gov_10a_exp ES 2024 (API): cifras coinciden; 70.973/219.021 = 0,324 (2023 0,334); con media GF04, 0,509. ESRI SUSTAT141 (jun. 2026) pág. 9: cita literal, cotas inferior/superior. Simplificación y juicio central declarados."
+   },
    "part_file": "part_labour_w2.json"
   },
   {
@@ -2741,7 +2757,7 @@
     4,
     11
    ],
-   "grade": "A",
+   "grade": "C",
    "spain_evidence": "si",
    "sources": [
     {
@@ -2802,7 +2818,11 @@
     }
    ],
    "derivation": "Residencia: 4 años (Medicina Familiar y Comunitaria) o 5 (muchas hospitalarias), Sanidad 2022 pág. 4. Grado: 360 ECTS = 6 cursos (Orden ECI/332/2008). Bajo 4: la plaza se cubre con un graduado que ya existe y termina en 4 años. Alto 11: hace falta un graduado nuevo (6 años de grado + 5 de residencia). La oferta MIR 2026 (9.276 plazas; 9.275 en la nota de adjudicación de abril de 2026) supera las plazas de nuevo ingreso del grado (unas 7.000-7.500 al año según la figura 1 del estudio de 2022, con datos anteriores), así que las plazas adicionales dependen de nuevos graduados o de médicos extranjeros: central 9 años (juicio), más cerca de 11 que de 4. Los graduados anuales recientes no se verificaron directamente.",
-   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. Como la oferta de 2026 (9.276 plazas) ya supera a los estudiantes que entran cada año en Medicina, usamos 9 años (rango 4-11).",
+   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. La oferta de 2026 (9.276 plazas) supera las plazas de nuevo ingreso en Medicina de hasta 2020 (unas 7.000-7.300), así que usamos 9 años como juicio propio (rango 4-11).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Sanidad 2022 pág. 4: cita literal (4 o 5 años). Figura 1 (pág. 18): plazas de grado 6.949-7.264 hasta ~2020; texto: numerus clausus 'hasta llegar a 7.000'. Orden ECI/332/2008 apdo. 5: 360 créditos europeos (literal). Nota Sanidad 17-7-2025: 9.276 plazas MIR, 12.366 FSE (literal). Bajo 4 y alto 11 salen de la norma, pero el central 9 es juicio propio: nota A demasiado alta (C). La nota compara la oferta de 2026 con plazas de grado de hasta 2020, no con el ingreso actual."
+   },
    "part_file": "part_labour_pilot.json"
   },
   {
@@ -2870,6 +2890,10 @@
    "extra_parameters": [],
    "derivation": "Stock 2021: ~70 % de los 192.484 especialistas activos trabaja en la red pública (los mixtos cuentan como públicos, pág. 14), 30 % solo en la privada (pág. 69). Ese 70 % incluye médicos formados fuera (4.293 títulos homologados en 2021, pág. 23), así que no es exactamente la permanencia de los formados en España. Emigración: 2.189 solicitantes de certificado en 2020 (~1,1 % del stock; ~70 % para trabajar; los flujos OCDE de llegada son menores), resto 2-4 pp de pérdida acumulada (supuesto). Central 0,70 x (1-0,03) = 0,68. Bajo 0,58: promociones recientes más hacia la privada (privado +7 %, público -1,7 % desde 2018). Alto 0,78: si los formados fuera pesan más en la privada. No hay un seguimiento de cohortes MIR: todo es derivación del stock.",
    "note_es": "Según el estudio del Ministerio de Sanidad (2022), en torno al 70 % de los especialistas activos trabaja en la red pública (incluidos los que también ejercen en la privada) y el 30 % solo en la privada; la emigración es pequeña (unos 2.200 médicos pidieron certificado para salir en 2020). Suponemos que 2 de cada 3 formados acaban en el SNS; no hay seguimiento por promoción MIR.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Ministerio de Sanidad 2022 PDF: pág. 69 '192.484 ... El empleo privado estaría en torno al 30% del total, con un incremento desde 2018 del 7%, frente a la caída del empleo público del 1,7%'; pág. 14 mixtos 'figuran en la pública'; págs. 23-24 4.293 títulos homologados 2021, 3.559 certificados de 2.189 médicos en 2020, ~70% para trabajar, salida 'relativamente infrecuente'. 0,70x0,97=0,68; 2.189/192.484=1,1 %. Grado C y supuesto declarados."
+   },
    "part_file": "part_labour_w3.json"
   },
   {
@@ -2995,8 +3019,12 @@
    ],
    "debate": null,
    "extra_parameters": [],
-   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual y, según su resumen, efectos que no duran sin aumento permanente de oferta; Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, como sugiere la nula correlación entre comunidades); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
+   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual de la financiación adicional (su resumen no da cifra ni dice cuánto duran los efectos); Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, compatible con la escasa correlación entre comunidades: 0,10, o 0,31 ajustada por edad); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
    "note_es": "Según la OCDE (2020), dar más dinero para reducir esperas ha tenido éxito desigual; en Italia la oferta quirúrgica responde algo a la espera. Suponemos que, sin más médicos, cada 1 % de gasto extra compra un 0,4 % de capacidad (entre 0,1 y 0,8): es un juicio, no un dato medido. En España el gasto por habitante de cada comunidad apenas se relaciona con sus días de espera.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Econsalut reproduce el resumen OCDE 2020: 'often supported by additional funding, with mixed success' (sin cifra); el resumen NO dice que los efectos no duren sin más oferta, como afirma la derivación. Riganti et al. pág. 2: 'supply is more elastic'. Web propia /visualizaciones/sanidad/: correlación de rangos 0,10 sin ajustar, 0,31 ajustada por edad (escasa, no nula). Grado D declarado como juicio."
+   },
    "part_file": "part_labour_w3.json"
   },
   {
@@ -3049,7 +3077,11 @@
    "debate": null,
    "extra_parameters": [],
    "derivation": "Central -0,2: punto medio del rango italiano con variables instrumentales (-0,15 a -0,24) y del resumen británico (la mayoría por debajo de -0,2 en valor absoluto). Alto -0,1: estimación MCO italiana. Bajo -0,5: España tiene un sector privado y seguros privados más extendidos que Reino Unido o Italia, por lo que la salida hacia la privada al alargarse la espera puede ser mayor; sin llegar al -1,7 australiano. Los artículos británicos originales (Martin y Smith 1999, etc.) no se han leído directamente: se citan vía la revisión de Riganti et al. No hay estimación española.",
-   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan en torno a un 0,2 % (entre 0,1 y 0,5): la demanda responde poco. En Australia, con mucho seguro privado, responde bastante más. No hay estimación para España, donde el peso del seguro privado podría hacerla algo mayor.",
+   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan entre un 0,1 % y un 0,24 % (central 0,2 %): la demanda responde poco. En Australia, con mucho seguro privado, responde mucho más (-1,7). No hay estimación para España; suponemos que podría llegar a -0,5 porque el seguro privado pesa más que en Italia o Reino Unido.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Riganti, Siciliani y Fiorio, pág. 2: 'demand is inelastic ... between -0.15 to -0.24'; pág. 16 (tabla 2): MCO -0.1, instrumentada -0.15; pág. 4: 'In most studies, demand elasticity is below -0.2'; págs. 5 y 20: Australia -1.7, más de la mitad con seguro privado. Rango -0,1 a -0,24 de las fuentes; el -0,5 es supuesto propio, pero la nota lo atribuye a los estudios ('entre 0,1 y 0,5')."
+   },
    "part_file": "part_labour_w3.json"
   },
   {
@@ -3175,14 +3207,18 @@
    ],
    "contrary_evidence": [
     {
-     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
-     "title": "Ministerio de Sanidad, listas de espera (metodología del SISLE)",
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+     "title": "Ministerio de Sanidad, SISLE-SNS diciembre 2025 (rectificado), criterios RD 605/2003, pág. 20",
      "finding": "La espera media del SISLE es la de quienes están en lista el día del corte, no la de quienes salen; la ley de Little solo da el flujo de salida en un estado estable, así que es una aproximación."
     }
    ],
    "debate": null,
-   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). Con el corte de 2018 (668.288 pacientes, 129 días) saldría 1,89 millones: la lista y su flujo crecieron. El rango ±10 % recoge que la espera media del corte no es la de las salidas. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
+   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). La espera media del SISLE es la de los pacientes pendientes en la fecha de corte (pág. 20), no la de quienes salen, así que es una aproximación. El rango ±10 % es un supuesto que recoge esa diferencia. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
    "note_es": "Según el Ministerio de Sanidad, a 31 de diciembre de 2025 había 853.740 personas esperando una operación, con 122 días de media. Si la lista estuviera estable, eso supone unos 2,55 millones de salidas al año (ley de Little, una aproximación).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "SISLE dic-2025 rectificado, pág. 3 fila 'TOTAL 853.740 7.157 21.012 17,70 21,6 122 -4' (también pág. 8). 853.740x365/122=2.554.269, ok. La definición está en pág. 20 del PDF ('diferencia en días naturales entre la fecha de corte y la fecha de entrada' de los pendientes), no en listaEspera.htm, que solo enlaza informes. El corte de 2018 (668.288; 129 días) no sale de ninguna fuente citada: no verificado (PDF de 2018 no localizado)."
+   },
    "part_file": "part_labour_own.json"
   },
   {
@@ -3193,9 +3229,9 @@
    "layer": "contable",
    "parameter": {
     "name": "medicos_ejercicio_k",
-    "unit": "miles de médicos en ejercicio en España (464 por 100.000 habitantes, 2024, por la población de 2025)",
+    "unit": "miles de médicos en ejercicio en España (Eurostat, 2024)",
     "low": 220,
-    "central": 225.6,
+    "central": 226.7,
     "high": 230
    },
    "extra_parameters": [],
@@ -3204,15 +3240,15 @@
    "spain_evidence": "si",
    "sources": [
     {
-     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&unit=P_HTHAB&geo=ES",
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&wstatus=PRACT&geo=ES",
      "title": "Health personnel (excluding nursing and caring professionals) - practising physicians (hlth_rs_prs2)",
      "authors_year": "Eurostat (2026)",
      "country": "España",
      "period": "2024",
      "method": "registros de colegiados y empleo (estimación de Eurostat)",
-     "locator": "geo=ES, med_spec=PHYS, unit=P_HTHAB, 2024",
-     "quote": "Spain, practising physicians per hundred thousand inhabitants, 2024: 464 (e)",
-     "value_in_source": "464 por 100.000 habitantes (estimado)"
+     "locator": "geo=ES, med_spec=PHYS, wstatus=PRACT, unit=NR y P_HTHAB, 2024",
+     "quote": "Spain, practising physicians, 2024: 226,667 (e); per hundred thousand inhabitants: 463.78 (e)",
+     "value_in_source": "226.667 médicos en ejercicio; 463,78 por 100.000 habitantes (estimado)"
     }
    ],
    "contrary_evidence": [
@@ -3223,8 +3259,12 @@
     }
    ],
    "debate": null,
-   "derivation": "464 médicos en ejercicio por 100.000 habitantes (Eurostat 2024, estimado) × 48,6 millones de habitantes en 2025 (EUROPOP2023) ≈ 225.600. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
-   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 225.600. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR.",
+   "derivation": "Eurostat da directamente 226.667 médicos en ejercicio en España en 2024 (estimado; 463,78 por 100.000 habitantes). El rango 220-230 recoge que es una estimación. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
+   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 226.700. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Eurostat hlth_rs_prs2 (actualizado 2026-07-13), ES 2024, med_spec=PHYS: wstatus=PRACT 463,78 por 100.000 (e) y 226.667 personas (unit=NR, e). La URL citada sin wstatus devuelve también PACT (498,02) y LIC (635,43). La cifra directa de Eurostat (226.667) sustituye a la derivación con la población de 2025 (225.600)."
+   },
    "part_file": "part_labour_own.json"
   },
   {

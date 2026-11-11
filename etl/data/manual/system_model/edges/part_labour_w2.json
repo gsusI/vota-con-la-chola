@@ -208,7 +208,11 @@
    },
    "extra_parameters": [],
    "derivation": "Escuela marginal: se aplica la clasificación de Dustmann y Frattini (tabla A3) al COFOG español de 2024 (Eurostat). Puros: servicios generales sin intereses (92.551 - 39.644 = 52.907) + defensa 14.233 + asuntos económicos 80.908 = 148.048 M EUR. Congestionables (crecen con la población): orden público 28.628 + medio ambiente 15.539 + vivienda 7.613 + cultura 19.193 = 70.973 M EUR. Cuota = 70.973/219.021 = 0,324 (0,334 en 2023). Simplificación: la clasificación es por funciones enteras (D&F la hacen por subfunciones) y deja fuera la protección social no contributiva. Escuela de coste medio: 1,0. Central 0,5 = juicio propio: parte de asuntos económicos (transporte) y de la administración general también crece con la población a medio plazo; con la mitad de asuntos económicos como congestionable la cuota sería (70.973 + 40.454)/219.021 = 0,51. El capítulo 4 de la OCDE (IMO 2021) usa la misma separación puros/congestionables, pero su web devuelve 403 desde aquí y no se ha podido citar.",
-   "note_es": "Según Dustmann y Frattini y las cuentas COFOG de Eurostat (2024), si solo crecen con la población el orden público, el medio ambiente, la vivienda y la cultura, cada residente más eleva un 32 % del gasto medio por persona en estos servicios; si cuesta la media, un 100 %. Usamos 0,5 como juicio propio: nadie mide bien cuánto crecen el transporte o la administración general."
+   "note_es": "Según Dustmann y Frattini y las cuentas COFOG de Eurostat (2024), si solo crecen con la población el orden público, el medio ambiente, la vivienda y la cultura, cada residente más eleva un 32 % del gasto medio por persona en estos servicios; si cuesta la media, un 100 %. Usamos 0,5 como juicio propio: nadie mide bien cuánto crecen el transporte o la administración general.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "D&F CDP 22/13 pág. 9: cita literal; congestionables con coste marginal 'unknown, likely smaller than the average cost'. Tabla A1 pág. 44: puros 23,3 %, congestionables 7,5 %; A3 págs. 46-47: puros = COFOG 1, 2 y 4; congestionables = 3.2/3.5/3.6, 5, 6.2-6.6, 8. Eurostat gov_10a_exp ES 2024 (API): cifras coinciden; 70.973/219.021 = 0,324 (2023 0,334); con media GF04, 0,509. ESRI SUSTAT141 (jun. 2026) pág. 9: cita literal, cotas inferior/superior. Simplificación y juicio central declarados."
+   }
   },
   {
    "id": "M07_consumption_tax",

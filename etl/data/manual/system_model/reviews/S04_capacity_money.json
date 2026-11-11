@@ -1,0 +1,12 @@
+{
+ "id": "S04_capacity_money",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Econsalut reproduce el resumen OCDE 2020: 'often supported by additional funding, with mixed success' (sin cifra); el resumen NO dice que los efectos no duren sin más oferta, como afirma la derivación. Riganti et al. pág. 2: 'supply is more elastic'. Web propia /visualizaciones/sanidad/: correlación de rangos 0,10 sin ajustar, 0,31 ajustada por edad (escasa, no nula). Grado D declarado como juicio.",
+ "corrections": {
+  "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual de la financiación adicional (su resumen no da cifra ni dice cuánto duran los efectos); Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, compatible con la escasa correlación entre comunidades: 0,10, o 0,31 ajustada por edad); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada)."
+ }
+}

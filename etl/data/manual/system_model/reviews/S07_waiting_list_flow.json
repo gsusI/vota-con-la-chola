@@ -1,0 +1,14 @@
+{
+ "id": "S07_waiting_list_flow",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "SISLE dic-2025 rectificado, pág. 3 fila 'TOTAL 853.740 7.157 21.012 17,70 21,6 122 -4' (también pág. 8). 853.740x365/122=2.554.269, ok. La definición está en pág. 20 del PDF ('diferencia en días naturales entre la fecha de corte y la fecha de entrada' de los pendientes), no en listaEspera.htm, que solo enlaza informes. El corte de 2018 (668.288; 129 días) no sale de ninguna fuente citada: no verificado (PDF de 2018 no localizado).",
+ "corrections": {
+  "contrary_evidence.0.url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+  "contrary_evidence.0.title": "Ministerio de Sanidad, SISLE-SNS diciembre 2025 (rectificado), criterios RD 605/2003, pág. 20",
+  "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). La espera media del SISLE es la de los pacientes pendientes en la fecha de corte (pág. 20), no la de quienes salen, así que es una aproximación. El rango ±10 % es un supuesto que recoge esa diferencia. La línea base supone una lista estable; el simulador solo calcula desviaciones."
+ }
+}

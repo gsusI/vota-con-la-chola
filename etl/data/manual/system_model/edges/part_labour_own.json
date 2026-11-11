@@ -115,7 +115,11 @@
    ],
    "debate": null,
    "derivation": "El modelo pone a trabajar a los residentes adicionales con la tasa de empleo de los extranjeros de su edad en la EPA 2025 (cada etapa pondera sus tramos de 5 años por la edad de los inmigrantes adicionales de EUROPOP2023). Entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de 15-64 (frente al 62,9 % de tasa), de ahí el alto 1,1 (68,5/62,9 ≈ 1,09). El bajo 0,85 es un supuesto para los primeros años de residencia. Las nacionalizaciones sacan del grupo a extranjeros ya empleados y sesgan la comparación.",
-   "note_es": "Según la EPA (Eurostat), el 62,9 % de los extranjeros de 15 a 64 años trabaja; entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de esa edad. El modelo usa la tasa por edad, con un margen del 85 % al 110 %."
+   "note_es": "Según la EPA (Eurostat), el 62,9 % de los extranjeros de 15 a 64 años trabaja; entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de esa edad. El modelo usa la tasa por edad, con un margen del 85 % al 110 %.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Eurostat API lfsa_ergan ES, FOR, Y15-64, 2025 = 62,9; tramos 2025: 20-24 48,4, 25-29 65,1, 30-34 70,5, 35-39 70,6, 40-44 72,0, 45-49 71,9, 50-54 72,3, 55-59 64,6, 60-64 45,3, 65-69 22,6 (medias por etapa plausibles; pesos EUROPOP no verificados). lfsa_pganws: POP 3.920,4 (2019) y 5.460,8 (2025); EMP 2.378,8 y 3.434,5 -> 1.055,7/1.540,4 = 68,5 %. 68,5/62,9 = 1,09 -> alto 1,1. Bajo 0,85 declarado supuesto; nota C correcta."
+   }
   },
   {
    "id": "M06_migrant_pensions",
@@ -284,14 +288,18 @@
    ],
    "contrary_evidence": [
     {
-     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
-     "title": "Ministerio de Sanidad, listas de espera (metodología del SISLE)",
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+     "title": "Ministerio de Sanidad, SISLE-SNS diciembre 2025 (rectificado), criterios RD 605/2003, pág. 20",
      "finding": "La espera media del SISLE es la de quienes están en lista el día del corte, no la de quienes salen; la ley de Little solo da el flujo de salida en un estado estable, así que es una aproximación."
     }
    ],
    "debate": null,
-   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). Con el corte de 2018 (668.288 pacientes, 129 días) saldría 1,89 millones: la lista y su flujo crecieron. El rango ±10 % recoge que la espera media del corte no es la de las salidas. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
-   "note_es": "Según el Ministerio de Sanidad, a 31 de diciembre de 2025 había 853.740 personas esperando una operación, con 122 días de media. Si la lista estuviera estable, eso supone unos 2,55 millones de salidas al año (ley de Little, una aproximación)."
+   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). La espera media del SISLE es la de los pacientes pendientes en la fecha de corte (pág. 20), no la de quienes salen, así que es una aproximación. El rango ±10 % es un supuesto que recoge esa diferencia. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
+   "note_es": "Según el Ministerio de Sanidad, a 31 de diciembre de 2025 había 853.740 personas esperando una operación, con 122 días de media. Si la lista estuviera estable, eso supone unos 2,55 millones de salidas al año (ley de Little, una aproximación).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "SISLE dic-2025 rectificado, pág. 3 fila 'TOTAL 853.740 7.157 21.012 17,70 21,6 122 -4' (también pág. 8). 853.740x365/122=2.554.269, ok. La definición está en pág. 20 del PDF ('diferencia en días naturales entre la fecha de corte y la fecha de entrada' de los pendientes), no en listaEspera.htm, que solo enlaza informes. El corte de 2018 (668.288; 129 días) no sale de ninguna fuente citada: no verificado (PDF de 2018 no localizado)."
+   }
   },
   {
    "id": "S08_doctors_stock",
@@ -301,9 +309,9 @@
    "layer": "contable",
    "parameter": {
     "name": "medicos_ejercicio_k",
-    "unit": "miles de médicos en ejercicio en España (464 por 100.000 habitantes, 2024, por la población de 2025)",
+    "unit": "miles de médicos en ejercicio en España (Eurostat, 2024)",
     "low": 220,
-    "central": 225.6,
+    "central": 226.7,
     "high": 230
    },
    "extra_parameters": [],
@@ -312,15 +320,15 @@
    "spain_evidence": "si",
    "sources": [
     {
-     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&unit=P_HTHAB&geo=ES",
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&wstatus=PRACT&geo=ES",
      "title": "Health personnel (excluding nursing and caring professionals) - practising physicians (hlth_rs_prs2)",
      "authors_year": "Eurostat (2026)",
      "country": "España",
      "period": "2024",
      "method": "registros de colegiados y empleo (estimación de Eurostat)",
-     "locator": "geo=ES, med_spec=PHYS, unit=P_HTHAB, 2024",
-     "quote": "Spain, practising physicians per hundred thousand inhabitants, 2024: 464 (e)",
-     "value_in_source": "464 por 100.000 habitantes (estimado)"
+     "locator": "geo=ES, med_spec=PHYS, wstatus=PRACT, unit=NR y P_HTHAB, 2024",
+     "quote": "Spain, practising physicians, 2024: 226,667 (e); per hundred thousand inhabitants: 463.78 (e)",
+     "value_in_source": "226.667 médicos en ejercicio; 463,78 por 100.000 habitantes (estimado)"
     }
    ],
    "contrary_evidence": [
@@ -331,8 +339,12 @@
     }
    ],
    "debate": null,
-   "derivation": "464 médicos en ejercicio por 100.000 habitantes (Eurostat 2024, estimado) × 48,6 millones de habitantes en 2025 (EUROPOP2023) ≈ 225.600. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
-   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 225.600. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR."
+   "derivation": "Eurostat da directamente 226.667 médicos en ejercicio en España en 2024 (estimado; 463,78 por 100.000 habitantes). El rango 220-230 recoge que es una estimación. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
+   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 226.700. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Eurostat hlth_rs_prs2 (actualizado 2026-07-13), ES 2024, med_spec=PHYS: wstatus=PRACT 463,78 por 100.000 (e) y 226.667 personas (unit=NR, e). La URL citada sin wstatus devuelve también PACT (498,02) y LIC (635,43). La cifra directa de Eurostat (226.667) sustituye a la derivación con la población de 2025 (225.600)."
+   }
   },
   {
    "id": "S09_school_cost",

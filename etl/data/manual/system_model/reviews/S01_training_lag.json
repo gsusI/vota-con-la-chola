@@ -1,0 +1,13 @@
+{
+ "id": "S01_training_lag",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": false,
+ "wording_ok": false,
+ "evidence": "Sanidad 2022 pág. 4: cita literal (4 o 5 años). Figura 1 (pág. 18): plazas de grado 6.949-7.264 hasta ~2020; texto: numerus clausus 'hasta llegar a 7.000'. Orden ECI/332/2008 apdo. 5: 360 créditos europeos (literal). Nota Sanidad 17-7-2025: 9.276 plazas MIR, 12.366 FSE (literal). Bajo 4 y alto 11 salen de la norma, pero el central 9 es juicio propio: nota A demasiado alta (C). La nota compara la oferta de 2026 con plazas de grado de hasta 2020, no con el ingreso actual.",
+ "corrections": {
+  "grade": "C",
+  "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. La oferta de 2026 (9.276 plazas) supera las plazas de nuevo ingreso en Medicina de hasta 2020 (unas 7.000-7.300), así que usamos 9 años como juicio propio (rango 4-11)."
+ }
+}

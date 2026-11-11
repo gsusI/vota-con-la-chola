@@ -1,0 +1,12 @@
+{
+ "id": "S05_waiting_demand",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Riganti, Siciliani y Fiorio, pág. 2: 'demand is inelastic ... between -0.15 to -0.24'; pág. 16 (tabla 2): MCO -0.1, instrumentada -0.15; pág. 4: 'In most studies, demand elasticity is below -0.2'; págs. 5 y 20: Australia -1.7, más de la mitad con seguro privado. Rango -0,1 a -0,24 de las fuentes; el -0,5 es supuesto propio, pero la nota lo atribuye a los estudios ('entre 0,1 y 0,5').",
+ "corrections": {
+  "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan entre un 0,1 % y un 0,24 % (central 0,2 %): la demanda responde poco. En Australia, con mucho seguro privado, responde mucho más (-1,7). No hay estimación para España; suponemos que podría llegar a -0,5 porque el seguro privado pesa más que en Italia o Reino Unido."
+ }
+}

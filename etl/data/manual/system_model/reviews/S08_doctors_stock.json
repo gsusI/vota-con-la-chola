@@ -1,0 +1,19 @@
+{
+ "id": "S08_doctors_stock",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Eurostat hlth_rs_prs2 (actualizado 2026-07-13), ES 2024, med_spec=PHYS: wstatus=PRACT 463,78 por 100.000 (e) y 226.667 personas (unit=NR, e). La URL citada sin wstatus devuelve también PACT (498,02) y LIC (635,43). La cifra directa de Eurostat (226.667) sustituye a la derivación con la población de 2025 (225.600).",
+ "corrections": {
+  "sources.0.url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&wstatus=PRACT&geo=ES",
+  "sources.0.locator": "geo=ES, med_spec=PHYS, wstatus=PRACT, unit=NR y P_HTHAB, 2024",
+  "sources.0.quote": "Spain, practising physicians, 2024: 226,667 (e); per hundred thousand inhabitants: 463.78 (e)",
+  "sources.0.value_in_source": "226.667 médicos en ejercicio; 463,78 por 100.000 habitantes (estimado)",
+  "parameter.unit": "miles de médicos en ejercicio en España (Eurostat, 2024)",
+  "parameter.central": 226.7,
+  "derivation": "Eurostat da directamente 226.667 médicos en ejercicio en España en 2024 (estimado; 463,78 por 100.000 habitantes). El rango 220-230 recoge que es una estimación. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
+  "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 226.700. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR."
+ }
+}

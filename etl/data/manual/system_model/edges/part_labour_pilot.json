@@ -199,7 +199,7 @@
     4,
     11
    ],
-   "grade": "A",
+   "grade": "C",
    "spain_evidence": "si",
    "sources": [
     {
@@ -260,7 +260,11 @@
     }
    ],
    "derivation": "Residencia: 4 años (Medicina Familiar y Comunitaria) o 5 (muchas hospitalarias), Sanidad 2022 pág. 4. Grado: 360 ECTS = 6 cursos (Orden ECI/332/2008). Bajo 4: la plaza se cubre con un graduado que ya existe y termina en 4 años. Alto 11: hace falta un graduado nuevo (6 años de grado + 5 de residencia). La oferta MIR 2026 (9.276 plazas; 9.275 en la nota de adjudicación de abril de 2026) supera las plazas de nuevo ingreso del grado (unas 7.000-7.500 al año según la figura 1 del estudio de 2022, con datos anteriores), así que las plazas adicionales dependen de nuevos graduados o de médicos extranjeros: central 9 años (juicio), más cerca de 11 que de 4. Los graduados anuales recientes no se verificaron directamente.",
-   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. Como la oferta de 2026 (9.276 plazas) ya supera a los estudiantes que entran cada año en Medicina, usamos 9 años (rango 4-11)."
+   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. La oferta de 2026 (9.276 plazas) supera las plazas de nuevo ingreso en Medicina de hasta 2020 (unas 7.000-7.300), así que usamos 9 años como juicio propio (rango 4-11).",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Sanidad 2022 pág. 4: cita literal (4 o 5 años). Figura 1 (pág. 18): plazas de grado 6.949-7.264 hasta ~2020; texto: numerus clausus 'hasta llegar a 7.000'. Orden ECI/332/2008 apdo. 5: 360 créditos europeos (literal). Nota Sanidad 17-7-2025: 9.276 plazas MIR, 12.366 FSE (literal). Bajo 4 y alto 11 salen de la norma, pero el central 9 es juicio propio: nota A demasiado alta (C). La nota compara la oferta de 2026 con plazas de grado de hasta 2020, no con el ingreso actual."
+   }
   },
   {
    "id": "L07_self_employed_base",
@@ -270,7 +274,7 @@
    "layer": "contable",
    "parameter": {
     "name": "autonomos_k",
-    "unit": "miles de afiliados al Régimen Especial de Trabajadores Autónomos (RETA), media de 2025",
+    "unit": "miles de afiliados por cuenta propia (RETA y SETA), media de 2025 aproximada con dic-2024, oct-2025 y dic-2025",
     "low": 3387,
     "central": 3410,
     "high": 3426
@@ -348,7 +352,11 @@
     }
    ],
    "derivation": "Afiliados: no se encontró publicada la media anual de 2025; se aproxima con la media de los meses conocidos: dic-2024 3.386.765 (3.425.767 - 39.002), oct-2025 3.422.435 (3.501.598 - 79.163), dic-2025 3.425.767; central 3.410 miles, bajo 3.387 (dic-2024), alto 3.426 (dic-2025). Incluye SETA. Cuota: tipo 2025 = 28,30 + 1,30 + 0,80 (MEI) leídos en la Orden PJC/178/2025, más 0,9 cese y 0,1 formación (no verificados en este extracto) = 31,4 %. Bajo: 653,59 × 31,4 % = 205 €; alto: base mínima del tramo 12 general, 1.928,10 × 31,4 % = 605 €. Central 330 €: hipótesis de base media de unos 1.050 € (la mayoría cotiza cerca de la base mínima de los primeros tramos); no se encontró la recaudación del RETA para dividir, de ahí la nota D.",
-   "note_es": "Según la Seguridad Social, en diciembre de 2025 había 3.425.767 autónomos afiliados (RETA y SETA), 39.002 más que un año antes; usamos 3,41 millones de media en 2025. La cuota de 2025 iba de unos 205 a 605 euros al mes según el tramo de ingresos; la cuota media de 330 euros es una estimación nuestra, no un dato publicado."
+   "note_es": "Según la Seguridad Social, en diciembre de 2025 había 3.425.767 autónomos afiliados (RETA y SETA), 39.002 más que un año antes; usamos 3,41 millones de media en 2025. La cuota de 2025 iba de unos 205 a 605 euros al mes según el tramo de ingresos; la cuota media de 330 euros es una estimación nuestra, no un dato publicado.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Revista SS dic-2025: '3.425.767 trabajadores por cuenta propia, 39.002 más' (RETA y SETA), literal. Oct-2026: 3.501.598, 79.163 más (literal). Media de los tres meses 3.411,7 miles (central 3.410 redondeado). RDL 13/2022 DT 1ª tabla 2025: reducida tramo 1 653,59; general tramo 12 base mínima 1.928,10. Orden PJC/178/2025 art. 18.4: 28,30 % y 1,30 %; MEI 0,80 % en el mismo texto. 205 y 605 € bien calculados. Defecto: la unidad dice solo RETA y la cifra incluye SETA."
+   }
   }
  ]
 }

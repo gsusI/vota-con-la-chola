@@ -484,6 +484,19 @@ bien o corregidas con corrección exacta. Las corregidas se aplican; las sin res
   elasticidad de la jornada pasa de +0,3 a +0,8 (Hunt leído al revés); título y autores de DO 2113 corregidos; la
   ficha propia M01 decía «sobre todo de 16 a 44» (es el 72 % de 16 a 64); el escenario demográfico del Ageing Report era
   el de 2049. Las demás fueron de redacción o de rango.
+- **Segunda pasada de revisión** (2026-11-11, a petición del coordinador, porque la muestra corrigió 8 de 15): las otras
+  10 fichas nuevas, mismo revisor y misma regla: **3 bien, 7 corregidas con corrección exacta, 0 sin respaldo**. En total,
+  las 25 fichas nuevas revisadas: 10 bien, 15 corregidas, 0 sin respaldo. Correcciones: autores de DO 2113 (L01),
+  «RETA y SETA» en la unidad (L07), el retardo de formación de un médico baja de grado A a C porque el central de 9 años
+  es un juicio y las 9.276 plazas MIR se comparan con las plazas de entrada de hasta 2020 (S01), el resumen de la OCDE no
+  dice que el efecto del dinero no dure sin más oferta (S04), el −0,5 de la respuesta de la demanda a la espera es un
+  supuesto propio (S05), se quita el corte de 2018 que ninguna fuente citada da y se repunta la definición de espera
+  media (S07), y Eurostat da el número de médicos en ejercicio directamente (226.667 en 2024; S08). **Ninguna cifra de la
+  página cambia**: comparadas antes y después las 108 cifras de cabecera (inmigración con y sin servicios que crecen,
+  SMI, jornada, cuota, MIR; 2035 y 2050; central y rango), son idénticas, porque las correcciones tocan fuentes,
+  redacción y grados, y el motor calcula los médicos con la tasa por 100.000 y la población de EUROPOP (225.600, un 0,5 %
+  menos que la cifra de la ficha). Siguen valiendo los titulares de `#inmigracion`: 1,33 millones de residentes más,
+  15,6 mil millones pagados, 10,0 usados, espera de 122 a 126 días (130 con el mismo dinero).
 - **Página**: pestañas Empleo y Sanidad, inmigración en múltiplos de la variante oficial y el interruptor de servicios;
   panel en vivo «Empleo, inmigración y servicios» (por etapa: residentes, pagan, usan; espera y pacientes que dejan de
   apuntarse); cadena de causas con 20 relaciones nuevas; votaciones por palanca desde el atlas (ejes `empleo_derechos`,

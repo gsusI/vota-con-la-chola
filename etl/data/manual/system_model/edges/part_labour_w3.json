@@ -64,7 +64,11 @@
    "debate": null,
    "extra_parameters": [],
    "derivation": "Stock 2021: ~70 % de los 192.484 especialistas activos trabaja en la red pública (los mixtos cuentan como públicos, pág. 14), 30 % solo en la privada (pág. 69). Ese 70 % incluye médicos formados fuera (4.293 títulos homologados en 2021, pág. 23), así que no es exactamente la permanencia de los formados en España. Emigración: 2.189 solicitantes de certificado en 2020 (~1,1 % del stock; ~70 % para trabajar; los flujos OCDE de llegada son menores), resto 2-4 pp de pérdida acumulada (supuesto). Central 0,70 x (1-0,03) = 0,68. Bajo 0,58: promociones recientes más hacia la privada (privado +7 %, público -1,7 % desde 2018). Alto 0,78: si los formados fuera pesan más en la privada. No hay un seguimiento de cohortes MIR: todo es derivación del stock.",
-   "note_es": "Según el estudio del Ministerio de Sanidad (2022), en torno al 70 % de los especialistas activos trabaja en la red pública (incluidos los que también ejercen en la privada) y el 30 % solo en la privada; la emigración es pequeña (unos 2.200 médicos pidieron certificado para salir en 2020). Suponemos que 2 de cada 3 formados acaban en el SNS; no hay seguimiento por promoción MIR."
+   "note_es": "Según el estudio del Ministerio de Sanidad (2022), en torno al 70 % de los especialistas activos trabaja en la red pública (incluidos los que también ejercen en la privada) y el 30 % solo en la privada; la emigración es pequeña (unos 2.200 médicos pidieron certificado para salir en 2020). Suponemos que 2 de cada 3 formados acaban en el SNS; no hay seguimiento por promoción MIR.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Ministerio de Sanidad 2022 PDF: pág. 69 '192.484 ... El empleo privado estaría en torno al 30% del total, con un incremento desde 2018 del 7%, frente a la caída del empleo público del 1,7%'; pág. 14 mixtos 'figuran en la pública'; págs. 23-24 4.293 títulos homologados 2021, 3.559 certificados de 2.189 médicos en 2020, ~70% para trabajar, salida 'relativamente infrecuente'. 0,70x0,97=0,68; 2.189/192.484=1,1 %. Grado C y supuesto declarados."
+   }
   },
   {
    "id": "S03_doctor_cost",
@@ -188,8 +192,12 @@
    ],
    "debate": null,
    "extra_parameters": [],
-   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual y, según su resumen, efectos que no duran sin aumento permanente de oferta; Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, como sugiere la nula correlación entre comunidades); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
-   "note_es": "Según la OCDE (2020), dar más dinero para reducir esperas ha tenido éxito desigual; en Italia la oferta quirúrgica responde algo a la espera. Suponemos que, sin más médicos, cada 1 % de gasto extra compra un 0,4 % de capacidad (entre 0,1 y 0,8): es un juicio, no un dato medido. En España el gasto por habitante de cada comunidad apenas se relaciona con sus días de espera."
+   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual de la financiación adicional (su resumen no da cifra ni dice cuánto duran los efectos); Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, compatible con la escasa correlación entre comunidades: 0,10, o 0,31 ajustada por edad); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
+   "note_es": "Según la OCDE (2020), dar más dinero para reducir esperas ha tenido éxito desigual; en Italia la oferta quirúrgica responde algo a la espera. Suponemos que, sin más médicos, cada 1 % de gasto extra compra un 0,4 % de capacidad (entre 0,1 y 0,8): es un juicio, no un dato medido. En España el gasto por habitante de cada comunidad apenas se relaciona con sus días de espera.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Econsalut reproduce el resumen OCDE 2020: 'often supported by additional funding, with mixed success' (sin cifra); el resumen NO dice que los efectos no duren sin más oferta, como afirma la derivación. Riganti et al. pág. 2: 'supply is more elastic'. Web propia /visualizaciones/sanidad/: correlación de rangos 0,10 sin ajustar, 0,31 ajustada por edad (escasa, no nula). Grado D declarado como juicio."
+   }
   },
   {
    "id": "S05_waiting_demand",
@@ -241,7 +249,11 @@
    "debate": null,
    "extra_parameters": [],
    "derivation": "Central -0,2: punto medio del rango italiano con variables instrumentales (-0,15 a -0,24) y del resumen británico (la mayoría por debajo de -0,2 en valor absoluto). Alto -0,1: estimación MCO italiana. Bajo -0,5: España tiene un sector privado y seguros privados más extendidos que Reino Unido o Italia, por lo que la salida hacia la privada al alargarse la espera puede ser mayor; sin llegar al -1,7 australiano. Los artículos británicos originales (Martin y Smith 1999, etc.) no se han leído directamente: se citan vía la revisión de Riganti et al. No hay estimación española.",
-   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan en torno a un 0,2 % (entre 0,1 y 0,5): la demanda responde poco. En Australia, con mucho seguro privado, responde bastante más. No hay estimación para España, donde el peso del seguro privado podría hacerla algo mayor."
+   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan entre un 0,1 % y un 0,24 % (central 0,2 %): la demanda responde poco. En Australia, con mucho seguro privado, responde mucho más (-1,7). No hay estimación para España; suponemos que podría llegar a -0,5 porque el seguro privado pesa más que en Italia o Reino Unido.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Riganti, Siciliani y Fiorio, pág. 2: 'demand is inelastic ... between -0.15 to -0.24'; pág. 16 (tabla 2): MCO -0.1, instrumentada -0.15; pág. 4: 'In most studies, demand elasticity is below -0.2'; págs. 5 y 20: Australia -1.7, más de la mitad con seguro privado. Rango -0,1 a -0,24 de las fuentes; el -0,5 es supuesto propio, pero la nota lo atribuye a los estudios ('entre 0,1 y 0,5')."
+   }
   },
   {
    "id": "B08_smi_2019",

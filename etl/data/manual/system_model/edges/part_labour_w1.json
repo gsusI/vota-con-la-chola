@@ -31,7 +31,7 @@
     {
      "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
      "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documento Ocasional 2113)",
-     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Roldán, Banco de España (2021)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva, Banco de España (2021)",
      "country": "España",
      "period": "dic. 2018 (SMI 2019)",
      "method": "registros MCVL con base de cotización igual o inferior al nuevo SMI",
@@ -81,7 +81,11 @@
     }
    ],
    "derivation": "Cuota: 2,4 millones de perceptores directos (nota del Ministerio, SMI 2025) / 18,936 millones de asalariados (media EPA 2025T1-T4, tabla INE 65132) = 0,127. El Ministerio no explica en la nota su método ni su denominador (AIReF e inclusion.gob.es no accesibles desde aquí; el informe de la Comisión asesora no se ha leído). Contraste: Banco de España DO 2113 halla un 10 % de relaciones laborales (MCVL) en o bajo el SMI 2019, nivel relativo algo menor. Rango: 0,10 (BdE 2019) a 0,15 (si el Ministerio usa un denominador menor, p. ej. afiliados del régimen general o asalariados del sector privado). Extra cuota_masa: no publicada; aproximación = cuota x SMI anual / salario medio EES 2024 = 0,127 x 16.576 / 29.540,26 = 0,071, cota superior porque muchos afectados trabajan a tiempo parcial o parte del año y ganan menos que el SMI anual completo; central 0,06 suponiendo que ganan de media el 85 % del SMI anual (supuesto); bajo 0,10 x 0,56 x 0,7 = 0,04; alto 0,15 x 0,561 = 0,085.",
-   "note_es": "Según el Ministerio de Trabajo, la subida del SMI de 2025 (1.184 € x 14) llega de forma directa a unos 2,4 millones de personas, alrededor del 12,7 % de los asalariados de la EPA de 2025; el Banco de España halló un 10 % con el SMI de 2019. El método del Ministerio no está publicado en la nota y la parte de la masa salarial (≈6 %) es una aproximación."
+   "note_es": "Según el Ministerio de Trabajo, la subida del SMI de 2025 (1.184 € x 14) llega de forma directa a unos 2,4 millones de personas, alrededor del 12,7 % de los asalariados de la EPA de 2025; el Banco de España halló un 10 % con el SMI de 2019. El método del Ministerio no está publicado en la nota y la parte de la masa salarial (≈6 %) es una aproximación.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Nota MITES pág. 1: 'beneficiará de forma directa a unos 2,4 millones de personas trabajadoras' (literal). BdE DO 2113 pág. 16: 10 % de relaciones laborales en o bajo SMI-19, 4 % con el SMI 2018 (literal). INE 65132 (API): asalariados 2025T1-T4 18.499,2/18.978,6/19.107,8/19.159,1, media 18.936,2 -> 2,4/18,936 = 0,1267. INE 28186: 29.540,26 (2024), 28.049,94 (2023). Aritmética de cuota_masa correcta (0,071; 0,04; 0,085). Defecto: la portada del DO 2113 firma 'Ernesto Villanueva', no 'Roldán'."
+   }
   },
   {
    "id": "L04_hours_affected",
