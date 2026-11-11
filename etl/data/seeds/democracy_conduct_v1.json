@@ -1,0 +1,1948 @@
+{
+ "schema_version": "democracy_conduct_v1",
+ "snapshot_date": "2026-11-11",
+ "method": "docs/etl/sprints/DEMOCRACIA-PARTIDOS-20261111/README.md",
+ "window": {
+  "start": "2011-12-21",
+  "note": "Resoluciones fechadas desde la llegada del Gobierno Rajoy: PP y PSOE tienen ambos años de Gobierno dentro."
+ },
+ "codebook": {
+  "references": [
+   {
+    "id": "lz",
+    "label": "Levitsky, S. y Ziblatt, D. (2018), How Democracies Die, tabla 1",
+    "url": "https://www.penguinrandomhouse.com/books/562246/how-democracies-die-by-steven-levitsky-and-daniel-ziblatt/"
+   },
+   {
+    "id": "vparty",
+    "label": "V-Dem, V-Party v2 (2022): índice de antipluralismo y sus cuatro ítems",
+    "url": "https://v-dem.net/data/v-party-dataset/"
+   },
+   {
+    "id": "rolr",
+    "label": "Comisión Europea, Informe sobre el Estado de Derecho: cuatro pilares",
+    "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/upholding-rule-law/rule-law/annual-rule-law-cycle_en"
+   }
+  ],
+  "indicators": [
+   {
+    "id": "reglas",
+    "label": "Rechaza las reglas del juego",
+    "family": "Levitsky y Ziblatt 1 · V-Party v2paplur",
+    "power": "mixed",
+    "definition": "Resolución vinculante (tribunal, Tribunal Constitucional, Junta Electoral) de que el partido, su grupo o sus cargos adoptaron o ejecutaron un acto fuera del procedimiento constitucional para obtener o ejercer el poder, o desobedecieron una orden de un tribunal o de la administración electoral."
+   },
+   {
+    "id": "legitimidad",
+    "label": "Niega la legitimidad del adversario",
+    "family": "Levitsky y Ziblatt 2 · V-Party v2paopresp",
+    "power": "no",
+    "definition": "Resolución vinculante de que el partido intentó excluir de la competición a un rival legal, o condena firme de un cargo del partido por injurias o calumnias a un rival político en ese papel. Las declaraciones sin resolución oficial no cuentan."
+   },
+   {
+    "id": "violencia",
+    "label": "Tolera o alienta la violencia",
+    "family": "Levitsky y Ziblatt 3 · V-Party v2paviol",
+    "power": "no",
+    "definition": "Condena firme de un cargo del partido por violencia contra personas, incitación a la violencia o enaltecimiento del terrorismo en un contexto político, o resolución judicial de que el partido apoya la violencia."
+   },
+   {
+    "id": "libertades",
+    "label": "Restringe libertades de opositores o medios",
+    "family": "Levitsky y Ziblatt 4",
+    "power": "mostly",
+    "definition": "Ley, decreto o acto adoptado por el partido en el poder que un tribunal o el Tribunal Constitucional anuló por vulnerar las libertades de expresión, información, reunión, asociación o circulación, o informe no vinculante de un órgano internacional o de la UE que lo concluye sobre ese acto."
+   },
+   {
+    "id": "minorias",
+    "label": "Derechos de minorías",
+    "family": "V-Party v2paminor",
+    "power": "mostly",
+    "definition": "Ley o acto adoptado por el partido en el poder anulado por discriminar a una minoría, o condena firme de un cargo del partido por un delito de odio."
+   },
+   {
+    "id": "justicia",
+    "label": "Independencia judicial",
+    "family": "Informe sobre el Estado de Derecho, pilar 1",
+    "power": "mostly",
+    "definition": "Resolución del Tribunal Constitucional, dictamen de la Comisión de Venecia, informe GRECO o Informe sobre el Estado de Derecho que concluye que un acto concreto del partido (una ley que propuso, una decisión de su Gobierno) debilitó la independencia de jueces, CGPJ, Tribunal Constitucional o Fiscalía, o resolución vinculante de que obstruyó su renovación."
+   },
+   {
+    "id": "corrupcion",
+    "label": "Corrupción",
+    "family": "Informe sobre el Estado de Derecho, pilar 2",
+    "power": "mostly",
+    "definition": "Condena firme de un cargo del partido por delitos de corrupción (cohecho, malversación, tráfico de influencias, financiación ilegal, prevaricación ligada a fondos públicos), responsabilidad civil firme del propio partido (partícipe a título lucrativo) o condena penal del partido como persona jurídica; informe del Tribunal de Cuentas que constata financiación irregular."
+   },
+   {
+    "id": "medios",
+    "label": "Pluralismo de medios",
+    "family": "Informe sobre el Estado de Derecho, pilar 3",
+    "power": "mostly",
+    "definition": "Informe sobre el Estado de Derecho, Comisión de Venecia, tribunal o regulador que concluye que un acto concreto del partido en el poder redujo la independencia de los medios públicos o el pluralismo."
+   },
+   {
+    "id": "contrapesos",
+    "label": "Controles y contrapesos",
+    "family": "Informe sobre el Estado de Derecho, pilar 4",
+    "power": "mostly",
+    "definition": "El Tribunal Constitucional anula un acto por exceder los límites del decreto ley, de los poderes de excepción o del procedimiento parlamentario, o por vulnerar derechos de los parlamentarios; la Comisión de Venecia o el Informe sobre el Estado de Derecho concluyen que la tramitación de un acto concreto eludió consulta o control; GRECO constata que el Gobierno de turno no aplicó sus recomendaciones."
+   }
+  ],
+  "severity": {
+   "3": "Condena penal firme con prisión de un año o más, o resolución vinculante que anula un acto entero.",
+   "2": "Condena firme sin prisión o de menos de un año, responsabilidad civil firme del partido, anulación parcial, amparo o declaración vinculante de que se vulneró una atribución de otro órgano (conflicto entre órganos constitucionales), sanción de la Junta Electoral o del Tribunal de Cuentas.",
+   "1": "Conclusión crítica no vinculante que nombra el acto: Comisión de Venecia, Informe sobre el Estado de Derecho, GRECO."
+  },
+  "finding_severity": {
+   "court_annulment_full": 3,
+   "conviction_prison_ge1": 3,
+   "court_annulment_partial": 2,
+   "amparo": 2,
+   "conviction_other": 2,
+   "civil_liability_party": 2,
+   "sanction_jec": 2,
+   "sanction_tcu": 2,
+   "nonbinding_finding": 1,
+   "binding_declaration": 2
+  }
+ },
+ "parties": [
+  {
+   "party_id": "psoe",
+   "label": "PSOE"
+  },
+  {
+   "party_id": "pp",
+   "label": "PP"
+  },
+  {
+   "party_id": "vox",
+   "label": "Vox"
+  },
+  {
+   "party_id": "sumar",
+   "label": "Sumar",
+   "note": "Desde 2023; IU y los Comuns, antes en Unidas Podemos, están hoy en Sumar."
+  },
+  {
+   "party_id": "podemos",
+   "label": "Podemos",
+   "note": "Incluye Unidas Podemos (2016-2023) como lista que encabezaba."
+  },
+  {
+   "party_id": "erc",
+   "label": "ERC"
+  },
+  {
+   "party_id": "junts",
+   "label": "Junts",
+   "note": "Incluye la lista JxCat (2017-2020); CDC y PDeCAT son partidos predecesores distintos."
+  },
+  {
+   "party_id": "bildu",
+   "label": "EH Bildu"
+  },
+  {
+   "party_id": "pnv",
+   "label": "PNV"
+  },
+  {
+   "party_id": "bng",
+   "label": "BNG"
+  },
+  {
+   "party_id": "cc",
+   "label": "Coalición Canaria"
+  },
+  {
+   "party_id": "upn",
+   "label": "UPN"
+  }
+ ],
+ "national_governments": [
+  {
+   "id": "rajoy",
+   "label": "Rajoy (PP)",
+   "parties": [
+    "pp"
+   ],
+   "start": "2011-12-21",
+   "end": "2018-06-02"
+  },
+  {
+   "id": "sanchez1",
+   "label": "Sánchez I (PSOE)",
+   "parties": [
+    "psoe"
+   ],
+   "start": "2018-06-02",
+   "end": "2020-01-13"
+  },
+  {
+   "id": "sanchez2",
+   "label": "Sánchez II (PSOE y Unidas Podemos)",
+   "parties": [
+    "psoe",
+    "podemos"
+   ],
+   "start": "2020-01-13",
+   "end": "2023-11-21"
+  },
+  {
+   "id": "sanchez3",
+   "label": "Sánchez III (PSOE y Sumar)",
+   "parties": [
+    "psoe",
+    "sumar"
+   ],
+   "start": "2023-11-21",
+   "end": null
+  }
+ ],
+ "national_governments_source": {
+  "label": "La Moncloa, presidentes y gobiernos; mismas fechas que democracy_safeguards_v1.json",
+  "url": "https://www.lamoncloa.gob.es/presidente/presidentes/Paginas/index.aspx"
+ },
+ "vparty": {
+  "release": "V-Party v2 (febrero de 2022), país-partido-elección",
+  "url": "https://v-dem.net/data/v-party-dataset/",
+  "mirror_url": "https://raw.githubusercontent.com/vdeminstitute/vdemdata/cf87496460cd6eff8ef534b9d7f39e20dc558d23/data/vparty.RData",
+  "mirror_note": "La descarga oficial está tras un formulario web; usamos el paquete R oficial de V-Dem (vdemdata, commit cf87496 de 2022-03-10).",
+  "sha256": "a4bde75e84c01ddfe5fc1fe8b32a87df2c13158eb658769f8a4ceb8f3ca5b964",
+  "retrieved": "2026-11-11",
+  "extract": "docs/etl/sprints/DEMOCRACIA-PARTIDOS-20261111/evidence/vparty-v2-spain-2011plus.csv",
+  "election": "2019-11-10",
+  "map": {
+   "pp": "AP / PP",
+   "psoe": "PSOE",
+   "vox": "Vox",
+   "podemos": "PODEMOS",
+   "erc": "ERC"
+  },
+  "map_partial": {
+   "sumar": [
+    "PCE/IU",
+    "ECP"
+   ]
+  },
+  "measures": "Puntuaciones de expertos (5 o más por partido) sobre el comportamiento de los líderes antes de cada elección: compromiso con el pluralismo, demonización del adversario, derechos de minorías y violencia. Índice de 0 (pluralista) a 1 (antipluralista), con intervalo de confianza.",
+  "does_not_measure": "No mide actos de gobierno ni resoluciones judiciales; es la percepción de expertos en una fecha, y la última elección española cubierta es la de noviembre de 2019 (Junts, EH Bildu, PNV, BNG, CC, UPN y Sumar no tienen puntuación propia)."
+ },
+ "events": [
+  {
+   "event_id": "ohchr-ol-esp-1-2015-seguridad-ciudadana",
+   "title": "Relatores de la ONU (OL ESP 1/2015): el proyecto de ley de seguridad ciudadana contradice estándares de reunión y expresión",
+   "body": "Relatores Especiales de Naciones Unidas (libertad de expresión; reunión pacífica y asociación; defensores; migrantes)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "libertades",
+   "severity": 1,
+   "date": "2015-02-05",
+   "act_date": "2014-12-11",
+   "act": "Proyecto de Ley Orgánica de Protección de la Seguridad Ciudadana, aprobado por el Pleno del Congreso el 11 de diciembre de 2014",
+   "status": "no vinculante; el proyecto se aprobó como Ley Orgánica 4/2015, de 30 de marzo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proyecto de ley del Gobierno Rajoy I (PP), aprobado con la mayoría absoluta del PP."
+    }
+   ],
+   "source": {
+    "url": "https://spcommreports.ohchr.org/TMResultsBase/DownLoadPublicCommunicationFile?gId=19137",
+    "title": "Comunicación OL ESP 1/2015, de 5 de febrero de 2015, de cuatro Relatores Especiales de la ONU al Gobierno de España",
+    "retrieved": "2026-11-11",
+    "quote": "disposiciones que contradecirían las normas y estándares internacionales en materia de derechos humanos",
+    "quote_lang": "es",
+    "locator": "p. 3"
+   },
+   "extra_sources": [],
+   "part": "events_rights_regional"
+  },
+  {
+   "event_id": "stc-24-2015-subdelegacion-jaen-reunion",
+   "title": "STC 24/2015: la prohibición de marchas sindicales por la Subdelegación del Gobierno en Jaén vulneró el derecho de reunión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2015-02-16",
+   "act_date": "2014-02-27",
+   "act": "Resolución de la Subdelegación del Gobierno en Jaén de 27 de febrero de 2014 que prohibió concentraciones y marchas de CCOO-Andalucía en Úbeda",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP): la Subdelegación del Gobierno es administración periférica del Estado."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-2825",
+    "title": "Sala Segunda. Sentencia 24/2015, de 16 de febrero de 2015. Recurso de amparo 2126-2014",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que ha sido vulnerado el derecho fundamental de reunión (art. 21 CE)",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_rights_regional"
+  },
+  {
+   "event_id": "stc-187-2015-murcia-sancion-expresion",
+   "title": "STC 187/2015: anula la sanción de la Consejería de Educación de Murcia a un funcionario por vulnerar su libertad de expresión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2015-09-21",
+   "act_date": "2010-01-18",
+   "act": "Resolución sancionadora de 18 de enero de 2010 del Director General de Recursos Humanos, por delegación del Consejero de Educación, Formación y Empleo de la Región de Murcia",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno regional de Ramón Luis Valcárcel (PP), Región de Murcia; sanción a un funcionario por las afirmaciones de su denuncia de acoso laboral."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-11701",
+    "title": "Sala Primera. Sentencia 187/2015, de 21 de septiembre de 2015. Recurso de amparo 1388-2013",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar vulnerado el derecho del demandante de amparo de libertad de expresión",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_rights_regional"
+  },
+  {
+   "event_id": "stc-259-2015-resolucion-1-xi",
+   "title": "STC 259/2015: anula la Resolución 1/XI del Parlament sobre el inicio del proceso político en Cataluña",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2015-12-02",
+   "act_date": "2015-11-09",
+   "act": "Resolución 1/XI del Parlamento de Cataluña, de 9 de noviembre de 2015, y su anexo",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "opposition",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; propuesta presentada por los grupos Junts pel Sí y CUP-CC (antecedentes de la STC). Rol: Junts pel Sí era el grupo mayoritario y su candidato presidía el Govern en funciones (Artur Mas, CDC); ERC no formaba parte de ese Govern en funciones. ERC no formaba parte del Govern en funciones (Mas, CDC) en esa fecha: rol «fuera del Gobierno», como parte de la mayoría parlamentaria de Junts pel Sí."
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC dentro de Junts pel Sí; propuesta presentada por Junts pel Sí y CUP-CC; Govern en funciones de Artur Mas (CDC), al que la STC dirige la notificación como «Gobierno en funciones»"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-308",
+    "title": "Pleno. Sentencia 259/2015, de 2 de diciembre de 2015. Impugnación de disposiciones autonómicas 6330-2015 (BOE de 12 de enero de 2016)",
+    "retrieved": "2026-11-11",
+    "quote": "y su anexo, declarando en consecuencia su inconstitucionalidad y nulidad",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "part": "events_catalonia"
+  },
+  {
+   "event_id": "venice-2017-ley-tc",
+   "title": "Comisión de Venecia CDL-AD(2017)003: no recomienda dar al TC los poderes de ejecución de la LO 15/2015",
+   "body": "Comisión de Venecia (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2017-03-11",
+   "act_date": "2015-10-16",
+   "act": "Ley Orgánica 15/2015, de 16 de octubre, de reforma de la Ley Orgánica 2/1979 del Tribunal Constitucional (ejecución de resoluciones, multas coercitivas y suspensión de autoridades)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de ley orgánica 122/000213 presentada por el Grupo Parlamentario Popular en el Congreso (BOCG-10-B-237-1), con mayoría absoluta del PP (X legislatura). La Comisión señala además dudas sobre las multas coercitivas y la suspensión de cargos (§73-76)."
+    }
+   ],
+   "source": {
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2017)003-e",
+    "title": "CDL-AD(2017)003, Spain - Opinion on the Law of 16 October 2015 amending the Organic Law No. 2/1979 on the Constitutional Court (110th Plenary Session, 10-11 March 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "The Venice Commission does not recommend that these powers be attributed to the Constitutional Court",
+    "quote_lang": "en",
+    "locator": "§78 (Conclusions), p. 15"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/B/BOCG-10-B-237-1.PDF",
+     "title": "BOCG Congreso, X legislatura, Serie B, núm. 237-1, 4 de septiembre de 2015: Proposición de Ley Orgánica de reforma de la LO 2/1979 del Tribunal Constitucional (122/000213)",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por el Grupo Parlamentario Popular en el Congreso",
+     "quote_lang": "es",
+     "locator": "pág. 1"
+    }
+   ],
+   "part": "events_tc_national"
+  },
+  {
+   "event_id": "stc-73-2017-amnistia-fiscal",
+   "title": "STC 73/2017: anula la amnistía fiscal de la disposición adicional primera del Real Decreto-ley 12/2012",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2017-06-08",
+   "act_date": "2012-03-30",
+   "act": "Disposición adicional primera del Real Decreto-ley 12/2012, de 30 de marzo (declaración tributaria especial)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8345",
+    "title": "Pleno. Sentencia 73/2017, de 8 de junio de 2017. Recurso de inconstitucionalidad 3856-2012",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucional y nula la disposición adicional primera del Real Decreto-ley 12/2012",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "stc-114-2017-ley-referendum",
+   "title": "STC 114/2017: anula la Ley 19/2017 del referéndum de autodeterminación",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2017-10-17",
+   "act_date": "2017-09-06",
+   "act": "Ley del Parlamento de Cataluña 19/2017, de 6 de septiembre, del referéndum de autodeterminación",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; grupos proponentes Junts pel Sí y CUP (antecedentes de la STC). Govern Puigdemont (Junts pel Sí), con Oriol Junqueras (ERC) de vicepresidente"
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC (PDeCAT desde 2016) dentro de Junts pel Sí; grupos proponentes Junts pel Sí y CUP. Govern Puigdemont (Junts pel Sí)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2017-12206",
+    "title": "Pleno. Sentencia 114/2017, de 17 de octubre de 2017. Recurso de inconstitucionalidad 4334-2017 (BOE de 24 de octubre de 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la Ley de Cataluña 19/2017, de 6 de septiembre",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": [],
+   "part": "events_catalonia"
+  },
+  {
+   "event_id": "stc-124-2017-ley-transitoriedad",
+   "title": "STC 124/2017: anula la Ley 20/2017 de transitoriedad jurídica y fundacional de la República",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2017-11-08",
+   "act_date": "2017-09-08",
+   "act": "Ley del Parlamento de Cataluña 20/2017, de 8 de septiembre, de transitoriedad jurídica y fundacional de la República",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; proposición de ley presentada por los grupos JxS y CUP-CC el 28 de agosto de 2017 (antecedentes de la STC). Govern Puigdemont (Junts pel Sí), con Oriol Junqueras (ERC) de vicepresidente"
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC (PDeCAT desde 2016) dentro de Junts pel Sí; proposición de ley presentada por JxS y CUP-CC. Govern Puigdemont (Junts pel Sí)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2017-13228",
+    "title": "Pleno. Sentencia 124/2017, de 8 de noviembre de 2017. Recurso de inconstitucionalidad 4386-2017 (BOE de 16 de noviembre de 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la Ley del Parlamento de Cataluña 20/2017",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": [],
+   "part": "events_catalonia"
+  },
+  {
+   "event_id": "greco-4-ronda-pp",
+   "title": "GRECO, cuarta ronda (España): cumplimiento «globalmente insatisfactorio» bajo el Gobierno Rajoy",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2017-12-08",
+   "act_date": "2017-12-08",
+   "act": "Falta de aplicación de las 11 recomendaciones de la cuarta ronda de GRECO (diputados, jueces y fiscales), incluida la recomendación v sobre el marco legal del CGPJ",
+   "status": "firme; en 2019 GRECO concluyó que el cumplimiento ya no era «globalmente insatisfactorio» (GrecoRC4(2019)12)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy II (PP); GRECO concluyó además que la recomendación v (CGPJ) no se había aplicado (§35)"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680779c4d",
+    "title": "GRECO, Fourth Evaluation Round, Interim Compliance Report Spain, GrecoRC4(2017)18, adoptado el 8 de diciembre de 2017",
+    "retrieved": "2026-11-11",
+    "quote": "the current level of compliance with the recommendations remains “globally unsatisfactory”",
+    "quote_lang": "en",
+    "locator": "§79, p. 12"
+   },
+   "extra_sources": [],
+   "part": "events_european_bodies"
+  },
+  {
+   "event_id": "stc-150-2017-rtve-rdl-15-2012",
+   "title": "STC 150/2017: anula parte del Real Decreto-ley 15/2012 sobre el consejo de RTVE",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2017-12-21",
+   "act_date": "2012-04-20",
+   "act": "Apartados primero, segundo y tercero e inciso del apartado quinto del artículo 1 del Real Decreto-ley 15/2012 (régimen de administración de RTVE)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP). Anulado por falta de justificación de la extraordinaria y urgente necesidad (art. 86.1 CE); el TC desestimó que el decreto-ley afectara a una institución básica o al art. 20.3 CE. Recurso del Grupo Parlamentario Socialista en el Congreso."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-612",
+    "title": "Pleno. Sentencia 150/2017, de 21 de diciembre de 2017. Recurso de inconstitucionalidad 3418-2012 (BOE-A-2018-612)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de los apartados primero, segundo y tercero",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_media"
+  },
+  {
+   "event_id": "stc-61-2018-rdl-5-2013",
+   "title": "STC 61/2018: anula varias disposiciones del Real Decreto-ley 5/2013 por falta de presupuesto habilitante",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2018-06-07",
+   "act_date": "2013-03-15",
+   "act": "Disposiciones adicionales sexta, séptima y octava, transitoria única y finales primera.1-4, segunda, cuarta, sexta y octava del Real Decreto-ley 5/2013, de 15 de marzo",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP). Recurso de diputados del Grupo Socialista; nulidad por no acreditarse la extraordinaria y urgente necesidad (art. 86.1 CE)."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-9537",
+    "title": "Pleno. Sentencia 61/2018, de 7 de junio de 2018. Recurso de inconstitucionalidad 3688-2013 (BOE-A-2018-9537)",
+    "retrieved": "2026-11-11",
+    "quote": "disposiciones para cuya aprobación no se ha acreditado la concurrencia del presupuesto habilitante",
+    "quote_lang": "es",
+    "locator": "sumario de la sentencia (encabezamiento); fallo 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_national"
+  },
+  {
+   "event_id": "sts-matas-noos-2018",
+   "title": "STS de 2018 (caso Nóos): condena firme de Jaume Matas, expresidente balear, a 3 años y 8 meses de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2018-06-12",
+   "act_date": "",
+   "act": "Contratación de la Asociación Instituto Nóos por el Govern balear para las cumbres de 2005 y 2006 (Fundación Illesport)",
+   "status": "firme (Sala Segunda del TS, ECLI:ES:TS:2018:2056, confirma la pena de la Audiencia de Palma; fecha = nota del CGPJ que comunica el fallo, 12-06-2018). Otras condenas firmes menores: STS 657/2013 (Palma Arena, 9 meses y 1 día de prisión) y la del encargo de la ópera a Calatrava (7 meses)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Jaume Matas Palou, presidente de les Illes Balears (2003-2007) tras las elecciones autonómicas de 2003 que dieron la mayoría al Partido Popular (hechos probados de la STS 657/2013)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-condena-a-Inaki-Urdangarin-a-5-anos-y-10-meses-de-prision-por-malversacion--prevaricacion--fraude--dos-delitos-fiscales-y-trafico-de-influencias-en-el--caso-Noos-",
+    "title": "El Tribunal Supremo condena a Iñaki Urdangarin a 5 años y 10 meses de prisión (...) en el caso Nóos (CGPJ, 12-06-2018)",
+    "retrieved": "2026-11-11",
+    "quote": "la condena de 3 años y 8 meses de prisión al expresidente balear Jaume Matas",
+    "quote_lang": "es",
+    "locator": "nota de prensa del TS"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/stfls/SALA%20DE%20PRENSA/NOVEDADES/Sentencia-Jaume%20Matas-Antonio%20Alemany.pdf",
+     "title": "Tribunal Supremo, Sala de lo Penal, Sentencia 657/2013, de 15 de julio (Jaume Matas, Palma Arena)",
+     "retrieved": "2026-11-11",
+     "quote": "que confirieron la mayoría al Partido Popular",
+     "quote_lang": "es",
+     "locator": "hechos probados, primero (p. 4)"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/en/Judiciary/Novelties/El-Tribunal-Supremo-condena-por-trafico-de-influencias-al-ex-presidente-de-Baleares-Jaume-Matas-a-la-pena-de-9-meses-de-prision",
+     "title": "El Tribunal Supremo condena por tráfico de influencias al ex presidente de Baleares Jaume Matas a la pena de 9 meses de prisión (CGPJ, 23-07-2013)",
+     "retrieved": "2026-11-11",
+     "quote": "a la pena de nueve meses y un día de prisión",
+     "quote_lang": "es",
+     "locator": "nota de prensa del TS"
+    }
+   ],
+   "part": "events_corruption_pp_psoe"
+  },
+  {
+   "event_id": "stc-124-2018-gobierno-en-funciones",
+   "title": "STC 124/2018: el Gobierno en funciones vulneró la atribución de control del Congreso (art. 66.2 CE)",
+   "body": "Tribunal Constitucional",
+   "finding_type": "binding_declaration",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2018-11-14",
+   "act_date": "2016-03-10",
+   "act": "Oficio del Ministerio de la Presidencia de 10 de marzo de 2016 que rechazó la comparecencia del ministro de Defensa en funciones ante el Congreso",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I en funciones (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-17131",
+    "title": "Pleno. Sentencia 124/2018, de 14 de noviembre de 2018. Conflicto entre órganos constitucionales 3102-2016",
+    "retrieved": "2026-11-11",
+    "quote": "vulneró la atribución que al Congreso de los Diputados confiere el artículo 66.2 CE",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "sts-zerolo-teresitas",
+   "title": "Caso Las Teresitas: el Supremo confirma siete años de prisión al alcalde de Santa Cruz de Tenerife",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2019-03-28",
+   "act_date": "",
+   "act": "Compra municipal de terrenos de Las Teresitas por el Ayuntamiento de Santa Cruz de Tenerife (2001)",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Santa Cruz de Tenerife)",
+   "attributions": [
+    {
+     "party_id": "cc",
+     "role": "local_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "M.Z. (Miguel Zerolo Aguilar), alcalde de Santa Cruz de Tenerife en 2001: siete años de prisión por malversación de caudales públicos y prevaricación administrativa. Afiliación acreditada por registro oficial posterior: grupo de Coalición Canaria en el Parlamento de Canarias (BOPC, 6-7-2007), mientras seguía siendo alcalde."
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-condena-dictada-por-la-Audiencia-de-Tenerife-en-el-caso--Las-Teresitas-",
+    "title": "El Tribunal Supremo confirma la condena dictada por la Audiencia de Tenerife en el caso 'Las Teresitas' (nota informativa, 28-03-2019)",
+    "retrieved": "2026-11-11",
+    "quote": "ha confirmado las condenas de siete años de prisión a los dos primeros",
+    "quote_lang": "es",
+    "locator": "nota informativa, segundo párrafo"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-condena-dictada-por-la-Audiencia-de-Tenerife-en-el-caso--Las-Teresitas-",
+     "title": "El Tribunal Supremo confirma la condena dictada por la Audiencia de Tenerife en el caso 'Las Teresitas'",
+     "retrieved": "2026-11-11",
+     "quote": "condenó al alcalde de la ciudad de Santa Cruz de Tenerife",
+     "quote_lang": "es",
+     "locator": "nota informativa, primer párrafo"
+    },
+    {
+     "url": "https://www.parcan.es/files/pub/bop/7l/2007/004/bo004.pdf",
+     "title": "Boletín Oficial del Parlamento de Canarias, VII legislatura, núm. 4, 6 de julio de 2007: composición de los grupos parlamentarios",
+     "retrieved": "2026-11-11",
+     "quote": "DENOMINACIÓN: COALICIÓN CANARIA (CC)",
+     "quote_lang": "es",
+     "locator": "p. 2"
+    }
+   ],
+   "part": "events_corruption_others"
+  },
+  {
+   "event_id": "jec-2019-500-torra-lazos-amarillos",
+   "title": "La JEC multa con 3.000 euros al presidente de la Generalitat por exhibir lazos amarillos en edificios públicos en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2019-06-13",
+   "act_date": "2019-03-21",
+   "act": "Exhibición de lazos amarillos y otros símbolos partidistas en fachadas de edificios de la Generalitat durante el periodo electoral de las generales de abril de 2019 (expediente incoado el 21 de marzo de 2019)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Quim Torra, president de la Generalitat, elegido diputado en 2017 en la lista de Junts per Catalunya (JxCat), la candidatura que hoy lidera Junts. La JEC le impuso otras dos multas por hechos de abril de 2019 (Acuerdos 538/2019, 2.500 €, y 539/2019, 3.000 €)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=69285&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 500/2019 (expte. 360/192), sesión de 13 de junio de 2019",
+    "retrieved": "2026-11-11",
+    "quote": "por lo que procede imponerle una sanción de multa de 3.000 €",
+    "quote_lang": "es",
+    "locator": "Resolución"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-426",
+     "title": "Acuerdo de 11 de enero de 2018, de la Junta Electoral Central: resultados de las elecciones al Parlamento de Cataluña de 21 de diciembre de 2017",
+     "retrieved": "2026-11-11",
+     "quote": "(53) Joaquim Torra i Pla (JUNTSxCAT)",
+     "quote_lang": "ca",
+     "locator": "relación de electos"
+    }
+   ],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "stc-111-2019-comision-monarquia",
+   "title": "STC 111/2019: anula la creación por el Parlament de una comisión de investigación sobre la monarquía",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2019-10-02",
+   "act_date": "2019-03-07",
+   "act": "Resolución 298/XII del Parlamento de Cataluña, de 7 de marzo de 2019, de creación de la Comisión de Investigación sobre la Monarquía",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Grupo Parlamentario Junts per Catalunya (lista JxCat), coautor de la propuesta con ERC, Catalunya en Comú Podem y el subgrupo CUP-CC (antecedentes de la STC); Govern Torra (JxCat-ERC)"
+    },
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Grupo Parlamentario Republicà, coautor de la propuesta con JxCat, Catalunya en Comú Podem y CUP-CC; Govern Torra (JxCat-ERC)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2019-15678",
+    "title": "Pleno. Sentencia 111/2019, de 2 de octubre de 2019. Impugnación de disposiciones autonómicas 1741-2019 (BOE de 31 de octubre de 2019)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y consiguiente nulidad de la resolución 298/XII, de 7 de marzo",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": [],
+   "part": "events_catalonia"
+  },
+  {
+   "event_id": "sts-459-2019-proces",
+   "title": "STS 459/2019: condena por sedición y malversación (procés)",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2019-10-14",
+   "act_date": "2017-09-06",
+   "act": "Hechos de septiembre y octubre de 2017 en Cataluña: leyes 19/2017 y 20/2017, referéndum del 1 de octubre y uso de fondos públicos",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Oriol Junqueras, vicepresidente del Govern y presidente de ERC (sentencia, p. 302): 13 años de prisión; también condenada Dolors Bassa, consejera de Trabajo, a 12 años"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/Sentencia%20459_2019.pdf",
+    "title": "Tribunal Supremo, Sala de lo Penal, Sentencia núm. 459/2019, de 14 de octubre de 2019, Causa Especial 20907/2017",
+    "retrieved": "2026-11-11",
+    "quote": "D. ORIOL JUNQUERAS, a las penas de 13 años de prisión",
+    "quote_lang": "es",
+    "locator": "fallo, 1.a) (p. 488)"
+   },
+   "extra_sources": [],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "stc-14-2020-rdl-7-2019",
+   "title": "STC 14/2020: anula dos disposiciones adicionales del Real Decreto-ley 7/2019 de vivienda y alquiler",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2020-01-28",
+   "act_date": "2019-03-01",
+   "act": "Disposiciones adicionales primera y tercera del Real Decreto-ley 7/2019, de 1 de marzo, de medidas urgentes en materia de vivienda y alquiler",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez I (PSOE). Recurso de diputados del Grupo Popular; nulidad por insuficiente justificación del presupuesto habilitante o falta de conexión de sentido con la urgencia (art. 86.1 CE)."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-2941",
+    "title": "Pleno. Sentencia 14/2020, de 28 de enero de 2020. Recurso de inconstitucionalidad 2208-2019 (BOE-A-2020-2941)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucionales y nulos los siguientes preceptos del Real Decreto-ley 7/2019",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_national"
+  },
+  {
+   "event_id": "sts-palau-cdc",
+   "title": "Caso Palau: el Supremo confirma 3 años y 6 meses de prisión al extesorero de CDC y el comiso a CDC",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2020-04-30",
+   "act_date": "",
+   "act": "Desvío de fondos del Palau de la Música y pagos a CDC (caso Palau)",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Barcelona de 29-12-2017, con ligeras variaciones)",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "predecessor",
+     "power_only": false,
+     "note": "Convergència Democràtica de Catalunya, partido distinto de Junts. Extesorero de CDC (D. O. en la nota del CGPJ): 3 años y 6 meses de prisión por blanqueo de capitales y falsedades; absuelto de tráfico de influencias. Hallazgo menor: comiso de 6,6 millones de euros a CDC como ganancias obtenidas mediante tráfico de influencias. Fecha = nota informativa del CGPJ"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+    "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau' (nota informativa, 30-04-2020)",
+    "retrieved": "2026-11-11",
+    "quote": "Se le confirman 3 años y 6 meses de prisión",
+    "quote_lang": "es",
+    "locator": "nota informativa, párrafo sobre el extesorero de CDC"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+     "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau'",
+     "retrieved": "2026-11-11",
+     "quote": "se modifica la pena al extesorero de CDC D. O.",
+     "quote_lang": "es",
+     "locator": "nota informativa, párrafo sobre el extesorero de CDC"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+     "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau'",
+     "retrieved": "2026-11-11",
+     "quote": "el comiso de 6,6 millones de euros a la formación política Convergència Democràtica de Catalunya",
+     "quote_lang": "es",
+     "locator": "nota informativa, primer párrafo"
+    }
+   ],
+   "part": "events_corruption_others"
+  },
+  {
+   "event_id": "sts-torra-desobediencia",
+   "title": "Tribunal Supremo confirma la condena de Quim Torra por desobediencia a la Junta Electoral Central",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_other",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2020-09-28",
+   "act_date": "2019-03-19",
+   "act": "Incumplimiento de los acuerdos de la JEC de 11 y 18 de marzo de 2019 de retirar lazos amarillos y esteladas de edificios de la Generalitat",
+   "status": "firme; confirma la sentencia 149/2019 del TSJ de Cataluña (19 de diciembre de 2019): inhabilitación especial de un año y seis meses y multa",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Joaquim Torra, president de la Generalitat, elegido en la lista Junts per Catalunya (2017)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/TS%20Penal%2028%20sep%202020.pdf",
+    "title": "Tribunal Supremo, Sala de lo Penal, sentencia de 28 de septiembre de 2020, recurso de casación 203/2020",
+    "retrieved": "2026-11-11",
+    "quote": "Desestimar el recurso de casación interpuesto por la representación procesal del MHP de la Generalitat",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-426",
+     "title": "Acuerdo de 11 de enero de 2018, de la Junta Electoral Central: resultados de las elecciones al Parlamento de Cataluña de 21 de diciembre de 2017",
+     "retrieved": "2026-11-11",
+     "quote": "(53) Joaquim Torra i Pla (JUNTSxCAT)",
+     "quote_lang": "ca",
+     "locator": "relación de electos"
+    }
+   ],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "sts-507-2020-gurtel",
+   "title": "STS 507/2020: condena firme del extesorero del PP Luis Bárcenas y del PP como partícipe a título lucrativo (Gürtel)",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2020-10-14",
+   "act_date": "",
+   "act": "Actos electorales del PP en Majadahonda y Pozuelo de Alarcón sufragados por empresas del grupo Correa (1999-2005)",
+   "status": "firme; confirma la SAN 20/2018, de 17 de mayo; el PP debe abonar 133.628,48 y 111.864,32 euros",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Luis Bárcenas, extesorero nacional del PP: 29 años y 1 mes de prisión; el PP, además, partícipe a título lucrativo (responsabilidad civil)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+    "title": "Comunicación Poder Judicial: El Tribunal Supremo confirma penas de hasta 51 años de prisión para los procesados en el «caso Gürtel» (14 de octubre de 2020)",
+    "retrieved": "2026-11-11",
+    "quote": "extesorero nacional del PP Luis Bárcenas en los hechos por los que ha sido condenado",
+    "quote_lang": "es",
+    "locator": "nota de prensa del TS, apartado «Luis Bárcenas»"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+     "title": "Comunicación Poder Judicial: El Tribunal Supremo confirma penas de hasta 51 años de prisión para los procesados en el «caso Gürtel» (14 de octubre de 2020)",
+     "retrieved": "2026-11-11",
+     "quote": "la responsabilidad como partícipes a título lucrativo del Partido Popular",
+     "quote_lang": "es",
+     "locator": "nota de prensa, apartado «PP, Ana Mato y Gema Matamoros, partícipes a título lucrativo»"
+    }
+   ],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "stc-172-2020-seguridad-ciudadana",
+   "title": "STC 172/2020: anula el inciso «no autorizado» de la Ley Orgánica 4/2015 de seguridad ciudadana",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2020-11-19",
+   "act_date": "2015-03-30",
+   "act": "Inciso «no autorizado» del art. 36.23 de la Ley Orgánica 4/2015 (uso de imágenes de agentes)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP): proyecto de ley orgánica 121/000105"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-16819",
+    "title": "Pleno. Sentencia 172/2020, de 19 de noviembre de 2020. Recurso de inconstitucionalidad 2896-2015",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar la inconstitucionalidad y la nulidad del inciso «no autorizado» del art. 36.23",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/BOCG-10-A-105-1.PDF",
+     "title": "BOCG Congreso, X Legislatura, Serie A, núm. 105-1, 25 de julio de 2014: Proyecto de Ley Orgánica de protección de la seguridad ciudadana",
+     "retrieved": "2026-11-11",
+     "quote": "121/000105 Proyecto de Ley Orgánica de protección de la seguridad ciudadana.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "greco-4-ronda-psoe",
+   "title": "GRECO, cuarta ronda (España): la recomendación sobre el CGPJ sigue sin aplicarse bajo el Gobierno Sánchez II",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2021-03-25",
+   "act_date": "2021-03-25",
+   "act": "Falta de aplicación de la recomendación v de GRECO (evaluar y corregir el marco legal del CGPJ y su independencia)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP); en el mismo informe GRECO recuerda que expresó su preocupación por la proposición de octubre de 2020 (§41)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio del Gobierno Sánchez II (PSOE-UP) a la fecha de adopción"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680a3fd50",
+    "title": "GRECO, Fourth Evaluation Round, Second Compliance Report Spain, GrecoRC4(2021)3, adoptado el 25 de marzo de 2021",
+    "retrieved": "2026-11-11",
+    "quote": "GRECO concludes that recommendation v has not been implemented.",
+    "quote_lang": "en",
+    "locator": "§44, p. 9"
+   },
+   "extra_sources": [],
+   "part": "events_european_bodies"
+  },
+  {
+   "event_id": "stc-110-2021-cni-decreto-ley",
+   "title": "STC 110/2021: anula la disposición final segunda del Real Decreto-ley 8/2020 (comisión delegada del CNI)",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-05-13",
+   "act_date": "2020-03-17",
+   "act": "Disposición final segunda del Real Decreto-ley 8/2020, de 17 de marzo (composición de la Comisión Delegada del Gobierno para Asuntos de Inteligencia)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP). Recurso de diputados de Vox; nulidad por límites materiales de los decretos-leyes (art. 86.1 CE)."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP): socio de coalición por Unidas Podemos, cuya lista encabeza Podemos; la disposición incorporaba al vicepresidente segundo a la comisión delegada."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10023",
+    "title": "Pleno. Sentencia 110/2021, de 13 de mayo de 2021. Recurso de inconstitucionalidad 1813-2020 (BOE-A-2021-10023)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la disposición final segunda del Real Decreto-ley 8/2020",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": [],
+   "part": "events_tc_national"
+  },
+  {
+   "event_id": "stc-134-2021-rtve-rdl-4-2018",
+   "title": "STC 134/2021: anula parte del Real Decreto-ley 4/2018 sobre el consejo de RTVE",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-06-24",
+   "act_date": "2018-06-22",
+   "act": "Disposición final primera y apartado tercero del artículo único del Real Decreto-ley 4/2018 (designación del consejo de administración de RTVE)",
+   "status": "firme; efectos declarados meramente declarativos (FJ 3 y FJ 4 c)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez I (PSOE). Anulados la disposición final primera por falta de justificación de la urgencia y el apartado tercero del artículo único por infringir el límite material del art. 86.1 CE (afectar a derechos fundamentales, art. 20 CE). Recurso del Grupo Parlamentario Popular en el Congreso."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-13018",
+    "title": "Pleno. Sentencia 134/2021, de 24 de junio de 2021. Recurso de inconstitucionalidad 3883-2018 (BOE-A-2021-13018)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucional y nula la disposición final primera del Real Decreto-ley 4/2018",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_media"
+  },
+  {
+   "event_id": "stc-148-2021-estado-alarma-1",
+   "title": "STC 148/2021: anula parte del Real Decreto 463/2020 del primer estado de alarma",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2021-07-14",
+   "act_date": "2020-03-14",
+   "act": "Apartados 1, 3 y 5 del artículo 7 y un inciso del artículo 10.6 del Real Decreto 463/2020, de 14 de marzo, que declaró el estado de alarma",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (lista Unidas Podemos)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13032",
+    "title": "Pleno. Sentencia 148/2021, de 14 de julio de 2021. Recurso de inconstitucionalidad 2054-2020",
+    "retrieved": "2026-11-11",
+    "quote": "Estimar parcialmente el recurso de inconstitucionalidad interpuesto contra el Real Decreto 463/2020",
+    "quote_lang": "es",
+    "locator": "fallo, 2.º"
+   },
+   "extra_sources": [],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "rolr-2021-cgpj-mayoria",
+   "title": "Informe sobre el Estado de Derecho 2021 (España): propuesta de rebajar la mayoría para elegir el CGPJ",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2021-07-20",
+   "act_date": "2020-10-13",
+   "act": "Proposición de Ley Orgánica 122/000090 de reforma de la LOPJ: vocales judiciales del CGPJ elegibles por mayoría absoluta en segunda votación",
+   "status": "firme; según el informe, los grupos proponentes retiraron formalmente la proposición en mayo de 2021",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Grupo Parlamentario Socialista (coautor de la proposición 122/000090)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": false,
+     "note": "Grupo Parlamentario Confederal de Unidas Podemos-En Comú Podem-Galicia en Común (lista Unidas Podemos), coautor"
+    }
+   ],
+   "source": {
+    "url": "https://commission.europa.eu/system/files/2021-07/2021_rolr_country_chapter_spain_en.pdf",
+    "title": "2021 Rule of Law Report. Country Chapter on the rule of law situation in Spain, SWD(2021) 710 final, 20.7.2021",
+    "retrieved": "2026-11-11",
+    "quote": "the draft law would have increased the perception of the Council as vulnerable to politicisation",
+    "quote_lang": "en",
+    "locator": "p. 3 (sección I)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-120-1.PDF",
+     "title": "BOCG Congreso, XIV Legislatura, Serie B, núm. 120-1, 23 de octubre de 2020: Proposición de Ley Orgánica 122/000090",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por los Grupos Parlamentarios Socialista y Confederal de Unidas Podemos-En Comú Podem-Galicia en Común.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "stc-183-2021-estado-alarma-2",
+   "title": "STC 183/2021: anula parte del Real Decreto 926/2020 y de la prórroga de seis meses del estado de alarma",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-10-27",
+   "act_date": "2020-10-25",
+   "act": "Real Decreto 926/2020 (entre otros, art. 2.2 y 2.3, arts. 10 y 11), acuerdo del Congreso de 29 de octubre de 2020 y Real Decreto 956/2020 (prórroga hasta el 9 de mayo de 2021)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (lista Unidas Podemos)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-19512",
+    "title": "Pleno. Sentencia 183/2021, de 27 de octubre de 2021. Recurso de inconstitucionalidad 5342-2020",
+    "retrieved": "2026-11-11",
+    "quote": "Estimar parcialmente el presente recurso de inconstitucionalidad y, en su virtud, declarar inconstitucionales y nulos",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "jec-2021-390-ayuso-campana-logros",
+   "title": "La JEC multa con 600 euros a la presidenta de la Comunidad de Madrid por manifestaciones electoralistas en actos institucionales",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2021-12-09",
+   "act_date": "2021-04-12",
+   "act": "Manifestaciones de la presidenta de la Comunidad de Madrid en los actos institucionales de 12 y 16 de abril de 2021 (avión de Iberia; obras del puente Valdebebas-T4), en periodo electoral de las autonómicas de 4 de mayo de 2021",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid (PP). La JEC resolvió el mismo día otro expediente por un acto en Las Ventas (Acuerdo 391/2021)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=78611&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 390/2021 (expte. 360/305), sesión de 9 de diciembre de 2021",
+    "retrieved": "2026-11-11",
+    "quote": "Presidenta de la Comunidad de Madrid una sanción de multa de 600 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "sts-erea-749-2022",
+   "title": "STS 749/2022 (ERE de Andalucía): condena firme del exconsejero José Antonio Viera a 7 años de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2022-09-13",
+   "act_date": "",
+   "act": "Ayudas sociolaborales del programa 31L de la Junta de Andalucía concedidas por la Consejería de Empleo (2000-2004, etapa de Viera)",
+   "status": "firme para José Antonio Viera: el TC desestimó su amparo (STC 90/2024, de 17-06-2024); también desestimó el de Juan Márquez (STC 101/2024; pena fijada en 3 años). El TC estimó parcialmente los amparos de Álvarez (STC 93/2024), Serrano (94), Fernández (95), Vallejo (96), Rodríguez Román (97), Martínez Aguayo (98), Chaves (99), Griñán (100), Zarrías (102) y Lozano (103/2024) y anuló sus condenas para nuevo pronunciamiento; la Audiencia de Sevilla planteó cuestión prejudicial al TJUE (auto de 14-07-2025) y suspendió la ejecución de esos mandatos",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "José Antonio Viera Chacón, consejero de Empleo y Desarrollo Tecnológico de la Junta de Andalucía (2000-2004), Gobierno andaluz del PSOE; diputado electo por el PSOE en 2011 (JEC). Condenas de Griñán, Chaves y otros anuladas en amparo (STC 93-100, 102 y 103/2024); Márquez (director general de Trabajo) no atribuido por falta de registro oficial de afiliación. Afiliación acreditada por registro oficial posterior (candidatura del PSOE, elecciones generales de 2011, BOE-A-2011-19391); el BOJA de 2004 no fue accesible."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15425",
+    "title": "Pleno. Sentencia 90/2024, de 17 de junio de 2024. Recurso de amparo 2552-2023 (José Antonio Viera Chacón)",
+    "retrieved": "2026-11-11",
+    "quote": "a la pena de siete años y un día de prisión",
+    "quote_lang": "es",
+    "locator": "antecedentes (condena de la SAP Sevilla 490/2019, cuyo recurso de casación desestimó la STS 749/2022)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15425",
+     "title": "Pleno. Sentencia 90/2024, de 17 de junio de 2024 (fallo)",
+     "retrieved": "2026-11-11",
+     "quote": "ha decidido desestimar el recurso de amparo interpuesto por don José Antonio Viera Chacón",
+     "quote_lang": "es",
+     "locator": "fallo"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2011-19391",
+     "title": "Acuerdo de 7 de diciembre de 2011, de la Junta Electoral Central, resumen de los resultados de las elecciones al Congreso y al Senado de 20-11-2011",
+     "retrieved": "2026-11-11",
+     "quote": "Don José Antonio Viera Chacón. PARTIDO SOCIALISTA OBRERO ESPAÑOL",
+     "quote_lang": "es",
+     "locator": "Diputados electos, Sevilla"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-17481",
+     "title": "Pleno. Sentencia 100/2024, de 16 de julio de 2024. Recurso de amparo 2119-2023 (José Antonio Griñán Martínez)",
+     "retrieved": "2026-11-11",
+     "quote": "declarar la nulidad de la sentencia núm. 490/2019, de 19 de noviembre",
+     "quote_lang": "es",
+     "locator": "fallo 2.º"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-17482",
+     "title": "Pleno. Sentencia 101/2024, de 16 de julio de 2024. Recurso de amparo 2239-2023 (Juan Márquez Contreras)",
+     "retrieved": "2026-11-11",
+     "quote": "ha decidido desestimar el presente recurso de amparo",
+     "quote_lang": "es",
+     "locator": "fallo"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunales-Superiores-de-Justicia/TSJ-Andalucia--Ceuta-y-Melilla/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/La-Audiencia-de-Sevilla-acuerda-plantear-una-cuestion-prejudicial-ante-el-TJUE-tras-las-sentencias-del-Tribunal-Constitucional-sobre-el-caso-ERE",
+     "title": "La Audiencia de Sevilla acuerda plantear una cuestión prejudicial ante el TJUE tras las sentencias del Tribunal Constitucional sobre el caso ERE (CGPJ, 15-07-2025)",
+     "retrieved": "2026-11-11",
+     "quote": "acuerda plantear una cuestión prejudicial ante el Tribunal de Justicia de la Unión Europea",
+     "quote_lang": "es",
+     "locator": "nota de prensa, párrafo 1"
+    }
+   ],
+   "part": "events_corruption_pp_psoe"
+  },
+  {
+   "event_id": "sts-de-miguel-pnv",
+   "title": "Caso De Miguel: el Supremo confirma las condenas de prisión a tres miembros de la ejecutiva del PNV en Álava",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2023-01-10",
+   "act_date": "",
+   "act": "Contratos de organismos públicos de Álava (Parque Tecnológico, Departamento de Cultura del Gobierno Vasco, municipios y cuadrillas) dirigidos a sociedades de los condenados",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Álava de 17-12-2019, con correcciones técnicas)",
+   "attributions": [
+    {
+     "party_id": "pnv",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Alfredo D.M.A. (12 años y 4 meses de prisión), Luis Felipe O.C. (7 años y 6 meses) y Carlos Aitor T.L. (5 años, 1 mes y 15 días), integrantes del Araba Buru Batzar (ejecutiva alavesa del PNV); según la nota, los contratos los otorgaron organismos regidos por miembros del PNV. Fecha = nota informativa del CGPJ (fecha de la sentencia no comprobada en texto oficial); fecha de los hechos no consta en la nota"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-las-principales-condenas-por-corrupcion-impuestas-a-integrantes-del-Partido-Nacionalista-Vasco-en-Alava",
+    "title": "El Tribunal Supremo confirma las principales condenas por corrupción impuestas a integrantes del Partido Nacionalista Vasco en Álava (nota informativa de la Sala, 10-01-2023)",
+    "retrieved": "2026-11-11",
+    "quote": "un total de 12 años y 4 meses de prisión",
+    "quote_lang": "es",
+    "locator": "nota informativa, párrafo sobre las penas (Alfredo D.M.)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-las-principales-condenas-por-corrupcion-impuestas-a-integrantes-del-Partido-Nacionalista-Vasco-en-Alava",
+     "title": "El Tribunal Supremo confirma las principales condenas por corrupción impuestas a integrantes del Partido Nacionalista Vasco en Álava",
+     "retrieved": "2026-11-11",
+     "quote": "como miembros de la ejecutiva alavesa del Partido Nacionalista Vasco",
+     "quote_lang": "es",
+     "locator": "nota informativa, segundo párrafo"
+    }
+   ],
+   "part": "events_corruption_others"
+  },
+  {
+   "event_id": "jec-2023-575-sanchez-rueda-prensa-consejo-europeo",
+   "title": "La JEC multa con 2.200 euros al presidente del Gobierno por declaraciones en rueda de prensa en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-10-05",
+   "act_date": "2023-06-30",
+   "act": "Declaraciones del presidente del Gobierno en la rueda de prensa tras el Consejo Europeo de 29 y 30 de junio de 2023 (elecciones generales de 23 de julio de 2023)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pedro Sánchez, presidente del Gobierno y secretario general del PSOE. Antes, la JEC le impuso 500 € (Acuerdo 12/2020) por la declaración institucional y la entrevista en La Moncloa de octubre de 2019."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=123217&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 575/2023 (expte. 360/324), sesión de 5 de octubre de 2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al Presidente del Gobierno una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "jec-2023-576-aragones-movilidad-maresme",
+   "title": "La JEC multa con 2.200 euros al presidente de la Generalitat por un acto institucional en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-10-05",
+   "act_date": "2023-07-13",
+   "act": "Acto «Presentación de las mejoras de movilidad del Maresme» y declaraciones del presidente de la Generalitat el 13 de julio de 2023 (elecciones generales de 23 de julio de 2023)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pere Aragonès, president de la Generalitat (ERC)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=123219&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 576/2023 (expte. 360/327), sesión de 5 de octubre de 2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al interesado una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "stc-164-2023-delegacion-madrid-8m",
+   "title": "STC 164/2023: la prohibición del 8M de 2021 por el delegado del Gobierno en Madrid vulneró el derecho de reunión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2023-11-21",
+   "act_date": "2021-03-03",
+   "act": "Resolución del delegado del Gobierno en Madrid de 3 de marzo de 2021 que prohibió la concentración de UGT del 8 de marzo de 2021",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP); la Delegación del Gobierno es administración periférica del Estado. Misma doctrina en las SSTC 173 a 178/2023 y 188/2023 sobre otras concentraciones del 7 y 8 de marzo de 2021 (no codificadas aparte)."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (PSOE-UP) en marzo de 2021"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2023-25985",
+    "title": "Pleno. Sentencia 164/2023, de 21 de noviembre de 2023. Recurso de amparo 1293-2021",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que se ha vulnerado su derecho fundamental de reunión y manifestación",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_rights_regional"
+  },
+  {
+   "event_id": "venice-2024-amnistia",
+   "title": "Comisión de Venecia CDL-AD(2024)003: opinión sobre la proposición de ley orgánica de amnistía",
+   "body": "Comisión de Venecia (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2024-03-15",
+   "act_date": "2023-11-13",
+   "act": "Proposición de Ley Orgánica de amnistía para la normalización institucional, política y social en Cataluña (122/000019)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Grupo Parlamentario Socialista; el ministro de Justicia participó en la preparación del texto (opinión, §25)"
+    }
+   ],
+   "source": {
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2024)003-e",
+    "title": "CDL-AD(2024)003. Spain. Opinion on the rule of law requirements of amnesties, with particular reference to the parliamentary bill on the Organic Law on amnesty (138th Plenary Session, 15-16 March 2024)",
+    "retrieved": "2026-11-11",
+    "quote": "presented in the form of a legislative proposal, which is a procedure with limited consultation",
+    "quote_lang": "en",
+    "locator": "§127"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-32-1.PDF",
+     "title": "BOCG Congreso, XV Legislatura, Serie B, núm. 32-1, 24 de noviembre de 2023: Proposición de Ley Orgánica de amnistía",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por el Grupo Parlamentario Socialista.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ],
+   "part": "events_pilot"
+  },
+  {
+   "event_id": "tcu-2024-pnv-deber-colaboracion",
+   "title": "El Tribunal de Cuentas sanciona al PNV con 5.000 euros por faltar al deber de colaboración en la fiscalización de sus cuentas",
+   "body": "Tribunal de Cuentas",
+   "finding_type": "sanction_tcu",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-04-25",
+   "act_date": "",
+   "act": "Falta al deber de colaboración del artículo 19 de la Ley Orgánica 8/2007 en la fiscalización de la contabilidad anual 2018-2019 del Partido Nacionalista Vasco",
+   "status": "firme; el Tribunal Supremo desestimó el recurso (22/05/2025)",
+   "attributions": [
+    {
+     "party_id": "pnv",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Infracción del artículo 17.Cuatro a) LOFPP en relación con el artículo 19."
+    }
+   ],
+   "source": {
+    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-ordinaria.pdf",
+    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad ordinaria (registro de resoluciones del Pleno, junio de 2026)",
+    "retrieved": "2026-11-11",
+    "quote": "G48103956 25/04/2024 relación con el art. 19 de la 5.000,00",
+    "quote_lang": "es",
+    "locator": "tabla, p. 9"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "greco-4-ronda-psoe-sumar-2024",
+   "title": "GRECO, cuarta ronda (España): bloqueo del CGPJ, «preocupación crítica» bajo el Gobierno Sánchez III",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2024-06-21",
+   "act_date": "2024-06-21",
+   "act": "Falta de aplicación de la recomendación v de GRECO (marco legal del CGPJ); GRECO califica de preocupación crítica el bloqueo de la renovación sin atribuirlo a nadie",
+   "status": "firme; el CGPJ se renovó en julio de 2024 (Informe sobre el Estado de Derecho 2024, SWD(2024) 809)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar)"
+    },
+    {
+     "party_id": "sumar",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Sumar, socio del Gobierno Sánchez III (PSOE-Sumar) a la fecha de adopción"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/grecorc4-2024-10-final-eng-2nd-add-to-the-2nd-compliance-report-spain-/1680b5482c",
+    "title": "GRECO, Fourth Evaluation Round, Second Addendum to the Second Compliance Report Spain, GrecoRC4(2024)10, adoptado el 21 de junio de 2024",
+    "retrieved": "2026-11-11",
+    "quote": "a matter of critical concern, which needs to be addressed as a matter of priority",
+    "quote_lang": "en",
+    "locator": "§19-20, p. 4"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+     "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter on the rule of law situation in Spain (copia del Parlamento de Austria)",
+     "retrieved": "2026-11-11",
+     "quote": "Due to the lack of renewal until July 2024",
+     "quote_lang": "en",
+     "locator": "p. 7"
+    }
+   ],
+   "part": "events_european_bodies"
+  },
+  {
+   "event_id": "san-caja-b-pp",
+   "title": "STS de 2024 (papeles de Bárcenas): el PP, responsable civil subsidiario por los pagos en B de la obra de Génova",
+   "body": "Tribunal Supremo",
+   "finding_type": "civil_liability_party",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-11-15",
+   "act_date": "",
+   "act": "Pagos en B de 1.072.000 euros a Unifica por las obras de la sede del PP en la calle Génova (Impuesto de Sociedades 2007 de Unifica)",
+   "status": "firme (STS ECLI:ES:TS:2024:5577, que confirma en lo sustancial la sentencia de la Audiencia Nacional de 28-10-2021)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Partido Popular como responsable civil subsidiario hasta el importe defraudado atribuible a los pagos en B; el extesorero Luis Bárcenas, condenado como cooperador necesario a 8 meses de prisión en casación (conviction_other, misma severidad)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-el-delito-de-defraudacion-tributaria-en-el-caso--Papeles-de-Barcenas--y-reduce-las-penas-al-apreciar-dilaciones-indebidas",
+    "title": "CGPJ, nota de prensa de 15-11-2024: El Tribunal Supremo confirma el delito de defraudación tributaria en el caso 'Papeles de Bárcenas' (STS ECLI:ES:TS:2024:5577)",
+    "retrieved": "2026-11-11",
+    "quote": "si no lo hacen los responsables penales, tanto Unifica S.L, como el Partido Popular",
+    "quote_lang": "es",
+    "locator": "párrafo 1 (responsables civiles subsidiarios; fecha = nota de prensa)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-el-delito-de-defraudacion-tributaria-en-el-caso--Papeles-de-Barcenas--y-reduce-las-penas-al-apreciar-dilaciones-indebidas",
+     "title": "CGPJ, nota de prensa de 15-11-2024 (penas en casación)",
+     "retrieved": "2026-11-11",
+     "quote": "de 2 años a 8 meses (la de Luis B. como cooperador necesario)",
+     "quote_lang": "es",
+     "locator": "párrafo 2"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Audiencia-Nacional/Noticias-Judiciales/La-Audiencia-Nacional-condena-al-extesorero-del-Partido-Popular-a-dos-anos-de-carcel-por-pagar-en-B-mas-de-1-millon-de-euros-por-las-obras-de-la-sede-de-Genova",
+     "title": "CGPJ, nota de prensa de 28-10-2021: La Audiencia Nacional condena al extesorero del Partido Popular a dos años de cárcel",
+     "retrieved": "2026-11-11",
+     "quote": "La Audiencia Nacional ha condenado a dos años de cárcel al extesorero del PP",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    }
+   ],
+   "part": "events_corruption_pp_psoe"
+  },
+  {
+   "event_id": "tcu-2024-bildu-juntas-generales-2023-gasto-electoral",
+   "title": "El Tribunal de Cuentas sanciona a EH Bildu con 245.392,82 euros por superar límites de gasto en las elecciones a Juntas Generales de 2023",
+   "body": "Tribunal de Cuentas",
+   "finding_type": "sanction_tcu",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-11-28",
+   "act_date": "2023-05-28",
+   "act": "Gastos electorales de EH Bildu en las elecciones a Juntas Generales de 2023 (registro: «EE. JJ.GG. THV 2023») por encima de los límites de los artículos 193.2 y 58.1 LOREG",
+   "status": "firme en vía administrativa; sanciones reducidas en aplicación del art. 85 LPACAP; el registro del Tribunal de Cuentas de junio de 2026 no anota recurso ante el TS",
+   "attributions": [
+    {
+     "party_id": "bildu",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Infracción del artículo 17.Dos b) LOFPP en relación con los arts. 193.2 y 58.1 LOREG: 219.890,95 € + 25.501,87 €."
+    }
+   ],
+   "source": {
+    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-electoral-2023.pdf",
+    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad electoral, elecciones 2023 (junio de 2026)",
+    "retrieved": "2026-11-11",
+    "quote": "219.890,95* EUSKAL HERRIA BILDU G71206700 28/11/2024",
+    "quote_lang": "es",
+    "locator": "tabla, p. 1"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "jec-2024-300-manueco-visita-boecillo",
+   "title": "La JEC multa con 600 euros al presidente de la Junta de Castilla y León por manifestaciones en una visita oficial en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-12-12",
+   "act_date": "2024-05-29",
+   "act": "Manifestaciones del presidente de la Junta de Castilla y León en la visita del 29 de mayo de 2024 a una empresa en Boecillo (Valladolid), difundidas en la web institucional (elecciones europeas de 9 de junio de 2024)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Alfonso Fernández Mañueco, presidente de la Junta de Castilla y León (PP). La JEC archivó el expediente respecto del director de Comunicación."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=135779&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 300/2024 (expte. 360/356), sesión de 12 de diciembre de 2024",
+    "retrieved": "2026-11-11",
+    "quote": "así como imponerle la sanción de multa de 600 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 1"
+   },
+   "extra_sources": [],
+   "part": "events_electoral_audit"
+  },
+  {
+   "event_id": "stc-22-2026-telemadrid-lectura-unica",
+   "title": "STC 22/2026: amparo a diputados del PSOE por la lectura única de la reforma de Telemadrid de 2021",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2026-03-11",
+   "act_date": "2021-06-23",
+   "act": "Acuerdos de la Mesa (23-6-2021) y del Pleno (8-7-2021) de la Asamblea de Madrid de tramitar en lectura única la proposición de ley de modificación de la Ley 8/2015 de Radio Televisión Madrid",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de ley presentada el 21-6-2021 por el portavoz del Grupo Parlamentario Popular en la Asamblea de Madrid (antecedente 2.a); lectura única aprobada en el Pleno por 63 votos a favor, 56 en contra y 13 abstenciones de Vox; la ley se aprobó con los votos del Grupo Popular (64) y la abstención de Vox. El TC anula los acuerdos de tramitación; el fallo no anula la ley resultante."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-8277",
+    "title": "Pleno. Sentencia 22/2026, de 11 de marzo de 2026. Recurso de amparo 5996-2021 (BOE-A-2026-8277)",
+    "retrieved": "2026-11-11",
+    "quote": "Reconocer su derecho a acceder a los cargos públicos en condiciones de igualdad",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_media"
+  },
+  {
+   "event_id": "sts-abalos-koldo",
+   "title": "STS de 22-06-2026 (caso mascarillas): condena al exministro José Luis Ábalos a 24 años y 3 meses de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2026-06-22",
+   "act_date": "2020-03-20",
+   "act": "Adquisición de mascarillas por Puertos del Estado y ADIF (OM TMA/263/2020 y OM TMA/292/2020) y otras adjudicaciones y contrataciones en empresas públicas (2020-2021)",
+   "status": "firme (causa especial 20775/2020 juzgada en instancia única por la Sala Segunda del TS; ejecutoria abierta el 2026-11-04)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "José Luis Ábalos, ministro de Transportes, Movilidad y Agenda Urbana del Gobierno Sánchez II (PSOE-UP) y secretario de organización del PSOE (2017-2021) en la fecha de los hechos"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-condena-al-exministro-Jose-Luis-Abalos-y-a-su-exasesor-Koldo-Garcia-a-24-anos-y-19-anos-de-prision--respectivamente--por-delitos-de-organizacion-criminal--cohecho--malversacion-y-trafico-de-influencias",
+    "title": "CGPJ, nota de prensa de 22-06-2026: El Tribunal Supremo condena al exministro José Luis Ábalos y a su exasesor Koldo García (STS ECLI:ES:TS:2026:2553)",
+    "retrieved": "2026-11-11",
+    "quote": "condena al exministro José Luis Ábalos a 24 años y 3 meses de prisión",
+    "quote_lang": "es",
+    "locator": "párrafo 1"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-abre-la-ejecutoria-de-la-sentencia-del--caso-mascarillas--y-requiere-a-los-condenados-el-pago-de-647-000-euros-en-multas--decomisos-e-indemnizaciones",
+     "title": "CGPJ, nota de prensa de 04-11-2026: El Tribunal Supremo abre la ejecutoria de la sentencia del 'caso mascarillas'",
+     "retrieved": "2026-11-11",
+     "quote": "la apertura de la ejecutoria de la sentencia dictada el pasado 22 de junio",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    },
+    {
+     "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/Nota%20resumen%20STS%20Causa%20Especial%2020775-2020%20Sala%20II%2022JUN26.docx",
+     "title": "Tribunal Supremo, Sala de lo Penal: Nota resumen STS Causa Especial 20775/2020 (22-06-2026)",
+     "retrieved": "2026-11-11",
+     "quote": "nombrado secretario de organización del Partido Socialista Obrero Español (PSOE)",
+     "quote_lang": "es",
+     "locator": "hechos probados, apartado 1"
+    },
+    {
+     "url": "https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=267&idLegislatura=XIV",
+     "title": "Congreso de los Diputados: ficha de José Luis Ábalos Meco (XIV Legislatura, G.P. Socialista, formación PSOE)",
+     "retrieved": "2026-11-11",
+     "quote": "Secretario General del PSPV-PSOE de la provincia de Valencia",
+     "quote_lang": "es",
+     "locator": "ficha personal"
+    }
+   ],
+   "part": "events_corruption_pp_psoe"
+  },
+  {
+   "event_id": "stc-48-2026-telemadrid",
+   "title": "STC 48/2026: amparo a diputados del PSOE por la lectura única de la reforma de Telemadrid de 2022",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2026-06-23",
+   "act_date": "2022-03-28",
+   "act": "Acuerdos de la Mesa (28-3-2022) y del Pleno (21-4-2022) de la Asamblea de Madrid de tramitar en lectura única la proposición de ley 4-22, origen de la Ley 3/2022 de Radio Televisión Madrid",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Acto distinto del de la STC 22/2026 (segunda reforma, 2022). Proposición de ley presentada el 24-3-2022 por el portavoz del Grupo Parlamentario Popular en la Asamblea de Madrid (antecedente 2.a); propuesta de lectura única respaldada por el Grupo Popular con la abstención de Vox en la Junta de Portavoces. El fallo anula los acuerdos de tramitación, no la Ley 3/2022."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-16244",
+    "title": "Pleno. Sentencia 48/2026, de 23 de junio de 2026. Recurso de amparo 4651-2022 (BOE-A-2026-16244)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que se ha vulnerado su derecho a acceder a los cargos públicos",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [],
+   "part": "events_tc_media"
+  }
+ ],
+ "system_findings": [
+  {
+   "year": 2022,
+   "finding": "El retraso en la renovación del CGPJ, en funciones desde diciembre de 2018, sigue siendo motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The delay in the renewal of the Council for the Judiciary remains a concern",
+   "quote_lang": "en",
+   "locator": "p. 4, sección I.A",
+   "part": "events_european_bodies"
+  },
+  {
+   "year": 2023,
+   "finding": "La falta de renovación del CGPJ perjudica el trabajo del Tribunal Supremo (más del 30 % de plazas vacantes).",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "negatively affecting the work of the Supreme Court and the justice system as a whole",
+   "quote_lang": "en",
+   "locator": "p. 6, sección I.A",
+   "part": "events_european_bodies"
+  },
+  {
+   "year": 2025,
+   "finding": "Recomendación de reforzar el estatuto del Fiscal General, separando su mandato del del Gobierno.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Continue ongoing efforts to strengthen the statute of the Prosecutor General",
+   "quote_lang": "en",
+   "locator": "p. 3, recomendaciones",
+   "part": "events_european_bodies"
+  }
+ ]
+}

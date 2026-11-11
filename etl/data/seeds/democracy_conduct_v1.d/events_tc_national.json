@@ -1,0 +1,188 @@
+{
+ "part": "tc_national",
+ "brief": "TC rulings on acts of national governments (both PP and PSOE). Also: you MAY add up to 3 more items you find: Constitutional Court rulings 2012-2026 that annulled (fully or partly) provisions of a Real Decreto-ley for lack of 'extraordinaria y urgente necesidad' or for affecting matters excluded by art. 86 CE, of either the Rajoy or the Sánchez governments. Out of scope: rulings that annul only for State/region distribution of competences.",
+ "events": [
+  {
+   "event_id": "stc-110-2021-cni-decreto-ley",
+   "title": "STC 110/2021: anula la disposición final segunda del Real Decreto-ley 8/2020 (comisión delegada del CNI)",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-05-13",
+   "act_date": "2020-03-17",
+   "act": "Disposición final segunda del Real Decreto-ley 8/2020, de 17 de marzo (composición de la Comisión Delegada del Gobierno para Asuntos de Inteligencia)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP). Recurso de diputados de Vox; nulidad por límites materiales de los decretos-leyes (art. 86.1 CE)."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP): socio de coalición por Unidas Podemos, cuya lista encabeza Podemos; la disposición incorporaba al vicepresidente segundo a la comisión delegada."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10023",
+    "title": "Pleno. Sentencia 110/2021, de 13 de mayo de 2021. Recurso de inconstitucionalidad 1813-2020 (BOE-A-2021-10023)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la disposición final segunda del Real Decreto-ley 8/2020",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-amnistia-2025",
+   "title": "STC 137/2025: anula el art. 1.3, párrafo segundo, de la Ley Orgánica 1/2024 de amnistía",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2025-06-26",
+   "act_date": "2024-06-10",
+   "act": "Ley Orgánica 1/2024, de 10 de junio, de amnistía para la normalización institucional, política y social en Cataluña (arts. 1.1 y 1.3, párrafo segundo)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de ley orgánica 122/000019 presentada solo por el Grupo Parlamentario Socialista (BOCG-15-B-32-1). Fallo: nulo el art. 1.3, párrafo segundo (efectos prospectivos ilimitados), e inconstitucional sin nulidad el art. 1.1 (FJ 8.3.5), ambos por vulnerar la igualdad (art. 14 CE); se desestima el resto del recurso del PP."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-15939",
+    "title": "Pleno. Sentencia 137/2025, de 26 de junio de 2025. Recurso de inconstitucionalidad 6436-2024 (BOE-A-2025-15939)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucional y nulo el art. 1.3, párrafo segundo",
+    "quote_lang": "es",
+    "locator": "fallo, punto 2.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-32-1.PDF",
+     "title": "BOCG Congreso, XV legislatura, Serie B, núm. 32-1, 24 de noviembre de 2023: Proposición de Ley Orgánica de amnistía (122/000019)",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por el Grupo Parlamentario Socialista",
+     "quote_lang": "es",
+     "locator": "pág. 1"
+    }
+   ],
+   "_exclude": "Fuera del codebook: la STC 137/2025 anula solo por igualdad (art. 14 CE), que no es ninguno de los nueve indicadores; tampoco se recogen otras anulaciones solo por art. 14. Decisión del coordinador del registro, 2026-11-11."
+  },
+  {
+   "event_id": "venice-2017-ley-tc",
+   "title": "Comisión de Venecia CDL-AD(2017)003: no recomienda dar al TC los poderes de ejecución de la LO 15/2015",
+   "body": "Comisión de Venecia (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2017-03-11",
+   "act_date": "2015-10-16",
+   "act": "Ley Orgánica 15/2015, de 16 de octubre, de reforma de la Ley Orgánica 2/1979 del Tribunal Constitucional (ejecución de resoluciones, multas coercitivas y suspensión de autoridades)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de ley orgánica 122/000213 presentada por el Grupo Parlamentario Popular en el Congreso (BOCG-10-B-237-1), con mayoría absoluta del PP (X legislatura). La Comisión señala además dudas sobre las multas coercitivas y la suspensión de cargos (§73-76)."
+    }
+   ],
+   "source": {
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2017)003-e",
+    "title": "CDL-AD(2017)003, Spain - Opinion on the Law of 16 October 2015 amending the Organic Law No. 2/1979 on the Constitutional Court (110th Plenary Session, 10-11 March 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "The Venice Commission does not recommend that these powers be attributed to the Constitutional Court",
+    "quote_lang": "en",
+    "locator": "§78 (Conclusions), p. 15"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/B/BOCG-10-B-237-1.PDF",
+     "title": "BOCG Congreso, X legislatura, Serie B, núm. 237-1, 4 de septiembre de 2015: Proposición de Ley Orgánica de reforma de la LO 2/1979 del Tribunal Constitucional (122/000213)",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por el Grupo Parlamentario Popular en el Congreso",
+     "quote_lang": "es",
+     "locator": "pág. 1"
+    }
+   ]
+  },
+  {
+   "event_id": "stc-61-2018-rdl-5-2013",
+   "title": "STC 61/2018: anula varias disposiciones del Real Decreto-ley 5/2013 por falta de presupuesto habilitante",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2018-06-07",
+   "act_date": "2013-03-15",
+   "act": "Disposiciones adicionales sexta, séptima y octava, transitoria única y finales primera.1-4, segunda, cuarta, sexta y octava del Real Decreto-ley 5/2013, de 15 de marzo",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP). Recurso de diputados del Grupo Socialista; nulidad por no acreditarse la extraordinaria y urgente necesidad (art. 86.1 CE)."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-9537",
+    "title": "Pleno. Sentencia 61/2018, de 7 de junio de 2018. Recurso de inconstitucionalidad 3688-2013 (BOE-A-2018-9537)",
+    "retrieved": "2026-11-11",
+    "quote": "disposiciones para cuya aprobación no se ha acreditado la concurrencia del presupuesto habilitante",
+    "quote_lang": "es",
+    "locator": "sumario de la sentencia (encabezamiento); fallo 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-14-2020-rdl-7-2019",
+   "title": "STC 14/2020: anula dos disposiciones adicionales del Real Decreto-ley 7/2019 de vivienda y alquiler",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2020-01-28",
+   "act_date": "2019-03-01",
+   "act": "Disposiciones adicionales primera y tercera del Real Decreto-ley 7/2019, de 1 de marzo, de medidas urgentes en materia de vivienda y alquiler",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez I (PSOE). Recurso de diputados del Grupo Popular; nulidad por insuficiente justificación del presupuesto habilitante o falta de conexión de sentido con la urgencia (art. 86.1 CE)."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-2941",
+    "title": "Pleno. Sentencia 14/2020, de 28 de enero de 2020. Recurso de inconstitucionalidad 2208-2019 (BOE-A-2020-2941)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucionales y nulos los siguientes preceptos del Real Decreto-ley 7/2019",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": []
+  }
+ ]
+}

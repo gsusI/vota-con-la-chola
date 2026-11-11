@@ -1,0 +1,142 @@
+{
+ "part": "corruption_others",
+ "brief": "Firm corruption convictions 2011-2026 of office holders of the other Congress parties (pnv, cc, upn, erc, junts, bildu, bng, podemos, sumar, vox) or of the parties themselves. One event per ruling. Same rules as for PP/PSOE: only firm rulings; person must be a member holding public or party office at the facts. Predecessor parties (CDC, PDeCAT) -> lineage 'predecessor' with note. If you find nothing firm for a party, that is a valid result: do not add weak items.",
+ "events": [
+  {
+   "event_id": "sts-de-miguel-pnv",
+   "title": "Caso De Miguel: el Supremo confirma las condenas de prisión a tres miembros de la ejecutiva del PNV en Álava",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2023-01-10",
+   "act_date": "",
+   "act": "Contratos de organismos públicos de Álava (Parque Tecnológico, Departamento de Cultura del Gobierno Vasco, municipios y cuadrillas) dirigidos a sociedades de los condenados",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Álava de 17-12-2019, con correcciones técnicas)",
+   "attributions": [
+    {
+     "party_id": "pnv",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Alfredo D.M.A. (12 años y 4 meses de prisión), Luis Felipe O.C. (7 años y 6 meses) y Carlos Aitor T.L. (5 años, 1 mes y 15 días), integrantes del Araba Buru Batzar (ejecutiva alavesa del PNV); según la nota, los contratos los otorgaron organismos regidos por miembros del PNV. Fecha = nota informativa del CGPJ (fecha de la sentencia no comprobada en texto oficial); fecha de los hechos no consta en la nota"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-las-principales-condenas-por-corrupcion-impuestas-a-integrantes-del-Partido-Nacionalista-Vasco-en-Alava",
+    "title": "El Tribunal Supremo confirma las principales condenas por corrupción impuestas a integrantes del Partido Nacionalista Vasco en Álava (nota informativa de la Sala, 10-01-2023)",
+    "retrieved": "2026-11-11",
+    "quote": "un total de 12 años y 4 meses de prisión",
+    "quote_lang": "es",
+    "locator": "nota informativa, párrafo sobre las penas (Alfredo D.M.)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-las-principales-condenas-por-corrupcion-impuestas-a-integrantes-del-Partido-Nacionalista-Vasco-en-Alava",
+     "title": "El Tribunal Supremo confirma las principales condenas por corrupción impuestas a integrantes del Partido Nacionalista Vasco en Álava",
+     "retrieved": "2026-11-11",
+     "quote": "como miembros de la ejecutiva alavesa del Partido Nacionalista Vasco",
+     "quote_lang": "es",
+     "locator": "nota informativa, segundo párrafo"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-palau-cdc",
+   "title": "Caso Palau: el Supremo confirma 3 años y 6 meses de prisión al extesorero de CDC y el comiso a CDC",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2020-04-30",
+   "act_date": "",
+   "act": "Desvío de fondos del Palau de la Música y pagos a CDC (caso Palau)",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Barcelona de 29-12-2017, con ligeras variaciones)",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "predecessor",
+     "power_only": false,
+     "note": "Convergència Democràtica de Catalunya, partido distinto de Junts. Extesorero de CDC (D. O. en la nota del CGPJ): 3 años y 6 meses de prisión por blanqueo de capitales y falsedades; absuelto de tráfico de influencias. Hallazgo menor: comiso de 6,6 millones de euros a CDC como ganancias obtenidas mediante tráfico de influencias. Fecha = nota informativa del CGPJ"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+    "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau' (nota informativa, 30-04-2020)",
+    "retrieved": "2026-11-11",
+    "quote": "Se le confirman 3 años y 6 meses de prisión",
+    "quote_lang": "es",
+    "locator": "nota informativa, párrafo sobre el extesorero de CDC"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+     "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau'",
+     "retrieved": "2026-11-11",
+     "quote": "se modifica la pena al extesorero de CDC D. O.",
+     "quote_lang": "es",
+     "locator": "nota informativa, párrafo sobre el extesorero de CDC"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-",
+     "title": "El Tribunal Supremo ratifica las condenas a la cúpula del 'caso Palau'",
+     "retrieved": "2026-11-11",
+     "quote": "el comiso de 6,6 millones de euros a la formación política Convergència Democràtica de Catalunya",
+     "quote_lang": "es",
+     "locator": "nota informativa, primer párrafo"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-zerolo-teresitas",
+   "title": "Caso Las Teresitas: el Supremo confirma siete años de prisión al alcalde de Santa Cruz de Tenerife",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2019-03-28",
+   "act_date": "",
+   "act": "Compra municipal de terrenos de Las Teresitas por el Ayuntamiento de Santa Cruz de Tenerife (2001)",
+   "status": "firme (casación del Tribunal Supremo sobre la sentencia de la Audiencia Provincial de Santa Cruz de Tenerife)",
+   "attributions": [
+    {
+     "party_id": "cc",
+     "role": "local_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "M.Z. (Miguel Zerolo Aguilar), alcalde de Santa Cruz de Tenerife en 2001: siete años de prisión por malversación de caudales públicos y prevaricación administrativa. Afiliación acreditada por registro oficial posterior: grupo de Coalición Canaria en el Parlamento de Canarias (BOPC, 6-7-2007), mientras seguía siendo alcalde."
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-condena-dictada-por-la-Audiencia-de-Tenerife-en-el-caso--Las-Teresitas-",
+    "title": "El Tribunal Supremo confirma la condena dictada por la Audiencia de Tenerife en el caso 'Las Teresitas' (nota informativa, 28-03-2019)",
+    "retrieved": "2026-11-11",
+    "quote": "ha confirmado las condenas de siete años de prisión a los dos primeros",
+    "quote_lang": "es",
+    "locator": "nota informativa, segundo párrafo"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-la-condena-dictada-por-la-Audiencia-de-Tenerife-en-el-caso--Las-Teresitas-",
+     "title": "El Tribunal Supremo confirma la condena dictada por la Audiencia de Tenerife en el caso 'Las Teresitas'",
+     "retrieved": "2026-11-11",
+     "quote": "condenó al alcalde de la ciudad de Santa Cruz de Tenerife",
+     "quote_lang": "es",
+     "locator": "nota informativa, primer párrafo"
+    },
+    {
+     "url": "https://www.parcan.es/files/pub/bop/7l/2007/004/bo004.pdf",
+     "title": "Boletín Oficial del Parlamento de Canarias, VII legislatura, núm. 4, 6 de julio de 2007: composición de los grupos parlamentarios",
+     "retrieved": "2026-11-11",
+     "quote": "DENOMINACIÓN: COALICIÓN CANARIA (CC)",
+     "quote_lang": "es",
+     "locator": "p. 2"
+    }
+   ]
+  }
+ ]
+}

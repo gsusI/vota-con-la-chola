@@ -1,0 +1,310 @@
+{
+ "part": "european_bodies",
+ "brief": "Findings of the European Commission Rule of Law Report (Spain chapters 2020-2026), GRECO and the Venice Commission that name a specific act attributable to a party. Findings about the system with no specific act of a party (e.g. 'the CGPJ has not been renewed') are NOT events: list them in the part file top-level key 'system_findings' (same source shape, plus 'year' and one-line 'finding'). GRECO: a compliance report concluding that recommendations remain not implemented is attributed to the government of the day (attribution government_act, role national_government, indicator contrapesos or justicia as fits). You MAY add up to 3 more items of this kind for either PP or PSOE governments.",
+ "events": [
+  {
+   "event_id": "rolr-2022-lo-4-2021-cgpj-funciones",
+   "title": "Informe sobre el Estado de Derecho 2021 (España): la LO 4/2021 impide al CGPJ en funciones hacer nombramientos",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2021-07-20",
+   "act_date": "2021-03-29",
+   "act": "Ley Orgánica 4/2021, de 29 de marzo, régimen jurídico del Consejo General del Poder Judicial en funciones",
+   "status": "firme; el TC declaró la LO 4/2021 conforme a la Constitución (STC 128/2023), según el Informe 2024 de la Comisión",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de Ley Orgánica 122/000109 del Grupo Parlamentario Socialista (coautor), aprobada como LO 4/2021 durante el Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Grupo Parlamentario Confederal de Unidas Podemos-En Comú Podem-Galicia en Común, coautor de la proposición 122/000109; Unidas Podemos en el Gobierno Sánchez II (PSOE-UP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+    "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter on the rule of law situation in Spain, 20.7.2021 (copia publicada por el Parlamento de Austria; commission.europa.eu respondió HTTP 429/503)",
+    "retrieved": "2026-11-11",
+    "quote": "prevents, among others, the acting Council from making appointments for top judicial positions",
+    "quote_lang": "en",
+    "locator": "p. 4, sección I.A (y nota 15: la petición del CGPJ de consultar a la Comisión de Venecia no fue atendida por el Parlamento)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-137-1.PDF",
+     "title": "BOCG Congreso, Serie B, núm. 137-1, 9 de diciembre de 2020: Proposición de Ley Orgánica 122/000109 (régimen jurídico aplicable al CGPJ en funciones)",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por los Grupos Parlamentarios Socialista, Confederal de Unidas Podemos-En Comú Podem-Galicia en Común",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    },
+    {
+     "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+     "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter on the rule of law situation in Spain (copia del Parlamento de Austria)",
+     "retrieved": "2026-11-11",
+     "quote": "declared to be in accordance with the Spanish Constitution by the Constitutional Court",
+     "quote_lang": "en",
+     "locator": "p. 7, nota 23"
+    }
+   ],
+   "_exclude": "El capítulo 2021 describe la LO 4/2021 sin expresar preocupación ni recomendación propia (mismo criterio que RTVE); el TC la declaró conforme (STC 128/2023)."
+  },
+  {
+   "event_id": "rolr-2021-ppl-cgpj-mayoria-absoluta",
+   "title": "Informe sobre el Estado de Derecho 2021 (España): la proposición de 2020 para elegir vocales del CGPJ por mayoría absoluta",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2021-07-20",
+   "act_date": "2020-10-13",
+   "act": "Proposición de Ley Orgánica 122/000090 de reforma de la elección de los vocales judiciales del CGPJ (retirada en 2021)",
+   "status": "firme; la proposición se suspendió el 22 de octubre de 2020 y se retiró en mayo de 2021 (mismo informe; GRECO, GrecoRC4(2021)3, §41)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Grupo Parlamentario Socialista (coautor de la proposición 122/000090); Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": false,
+     "note": "Grupo Parlamentario Confederal de Unidas Podemos-En Comú Podem-Galicia en Común (coautor de la proposición 122/000090); Unidas Podemos en el Gobierno Sánchez II (PSOE-UP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
+    "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter on the rule of law situation in Spain, 20.7.2021 (copia publicada por el Parlamento de Austria; commission.europa.eu respondió HTTP 429/503)",
+    "retrieved": "2026-11-11",
+    "quote": "would have increased the perception of the Council as vulnerable to politicisation",
+    "quote_lang": "en",
+    "locator": "p. 2, resumen (y p. 4, sección I.A)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-120-1.PDF",
+     "title": "BOCG Congreso, Serie B, núm. 120-1, 23 de octubre de 2020: Proposición de Ley Orgánica 122/000090",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por los Grupos Parlamentarios Socialista y Confederal de Unidas Podemos-En Comú Podem-Galicia en Común",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    },
+    {
+     "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680a3fd50",
+     "title": "GRECO, Cuarta ronda, Second Compliance Report Spain, GrecoRC4(2021)3, adoptado el 25 de marzo de 2021",
+     "retrieved": "2026-11-11",
+     "quote": "expressed its concerns on the aforementioned proposal",
+     "quote_lang": "en",
+     "locator": "§41"
+    }
+   ],
+   "_exclude": "Duplicado de rolr-2021-cgpj-mayoria (events_pilot.json): mismo informe, misma proposición 122/000090."
+  },
+  {
+   "event_id": "rolr-rtve-rdl-5-2024",
+   "title": "Informe sobre el Estado de Derecho 2025 (España): el Real Decreto-ley 5/2024 sobre la elección del consejo de RTVE",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "medios",
+   "severity": 1,
+   "date": "2025-07-08",
+   "act_date": "2024-10-22",
+   "act": "Real Decreto-ley 5/2024, de 22 de octubre, régimen jurídico de la Corporación RTVE",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar)"
+    },
+    {
+     "party_id": "sumar",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar)"
+    }
+   ],
+   "source": {
+    "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+    "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter on the rule of law situation in Spain, 8.7.2025 (copia publicada por el Parlamento de Austria)",
+    "retrieved": "2026-11-11",
+    "quote": "Stakeholders have cautioned that lowering the majority requirement could weaken the public broadcaster’s independence",
+    "quote_lang": "en",
+    "locator": "p. 14-15, sección III (pluralismo de medios), nota 112"
+   },
+   "extra_sources": [],
+   "_exclude": "El capítulo 2025 describe el RDL 5/2024 de forma neutral: recoge la justificación del Gobierno y la advertencia de 'stakeholders' y del MPM, pero la Comisión no expresa preocupación propia ni formula recomendación sobre RTVE."
+  },
+  {
+   "event_id": "greco-4-ronda-pp",
+   "title": "GRECO, cuarta ronda (España): cumplimiento «globalmente insatisfactorio» bajo el Gobierno Rajoy",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2017-12-08",
+   "act_date": "2017-12-08",
+   "act": "Falta de aplicación de las 11 recomendaciones de la cuarta ronda de GRECO (diputados, jueces y fiscales), incluida la recomendación v sobre el marco legal del CGPJ",
+   "status": "firme; en 2019 GRECO concluyó que el cumplimiento ya no era «globalmente insatisfactorio» (GrecoRC4(2019)12)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy II (PP); GRECO concluyó además que la recomendación v (CGPJ) no se había aplicado (§35)"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680779c4d",
+    "title": "GRECO, Fourth Evaluation Round, Interim Compliance Report Spain, GrecoRC4(2017)18, adoptado el 8 de diciembre de 2017",
+    "retrieved": "2026-11-11",
+    "quote": "the current level of compliance with the recommendations remains “globally unsatisfactory”",
+    "quote_lang": "en",
+    "locator": "§79, p. 12"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "greco-4-ronda-psoe",
+   "title": "GRECO, cuarta ronda (España): la recomendación sobre el CGPJ sigue sin aplicarse bajo el Gobierno Sánchez II",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2021-03-25",
+   "act_date": "2021-03-25",
+   "act": "Falta de aplicación de la recomendación v de GRECO (evaluar y corregir el marco legal del CGPJ y su independencia)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP); en el mismo informe GRECO recuerda que expresó su preocupación por la proposición de octubre de 2020 (§41)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio del Gobierno Sánchez II (PSOE-UP) a la fecha de adopción"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680a3fd50",
+    "title": "GRECO, Fourth Evaluation Round, Second Compliance Report Spain, GrecoRC4(2021)3, adoptado el 25 de marzo de 2021",
+    "retrieved": "2026-11-11",
+    "quote": "GRECO concludes that recommendation v has not been implemented.",
+    "quote_lang": "en",
+    "locator": "§44, p. 9"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "greco-4-ronda-psoe-sumar-2024",
+   "title": "GRECO, cuarta ronda (España): bloqueo del CGPJ, «preocupación crítica» bajo el Gobierno Sánchez III",
+   "body": "GRECO (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2024-06-21",
+   "act_date": "2024-06-21",
+   "act": "Falta de aplicación de la recomendación v de GRECO (marco legal del CGPJ); GRECO califica de preocupación crítica el bloqueo de la renovación sin atribuirlo a nadie",
+   "status": "firme; el CGPJ se renovó en julio de 2024 (Informe sobre el Estado de Derecho 2024, SWD(2024) 809)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez III (PSOE-Sumar)"
+    },
+    {
+     "party_id": "sumar",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Sumar, socio del Gobierno Sánchez III (PSOE-Sumar) a la fecha de adopción"
+    }
+   ],
+   "source": {
+    "url": "https://rm.coe.int/grecorc4-2024-10-final-eng-2nd-add-to-the-2nd-compliance-report-spain-/1680b5482c",
+    "title": "GRECO, Fourth Evaluation Round, Second Addendum to the Second Compliance Report Spain, GrecoRC4(2024)10, adoptado el 21 de junio de 2024",
+    "retrieved": "2026-11-11",
+    "quote": "a matter of critical concern, which needs to be addressed as a matter of priority",
+    "quote_lang": "en",
+    "locator": "§19-20, p. 4"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.parlament.gv.at/dokument/XXVII/EU/193981/imfname_11399599.pdf",
+     "title": "Comisión Europea, SWD(2024) 809 final, 2024 Rule of Law Report - Country Chapter on the rule of law situation in Spain (copia del Parlamento de Austria)",
+     "retrieved": "2026-11-11",
+     "quote": "Due to the lack of renewal until July 2024",
+     "quote_lang": "en",
+     "locator": "p. 7"
+    }
+   ]
+  }
+ ],
+ "system_findings": [
+  {
+   "year": 2022,
+   "finding": "El retraso en la renovación del CGPJ, en funciones desde diciembre de 2018, sigue siendo motivo de preocupación.",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/108677/imfname_11168166.pdf",
+   "title": "Comisión Europea, SWD(2022) 509 final, 2022 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "The delay in the renewal of the Council for the Judiciary remains a concern",
+   "quote_lang": "en",
+   "locator": "p. 4, sección I.A"
+  },
+  {
+   "year": 2023,
+   "finding": "La falta de renovación del CGPJ perjudica el trabajo del Tribunal Supremo (más del 30 % de plazas vacantes).",
+   "url": "https://www.parlament.gv.at/dokument/XXVII/EU/148330/imfname_11269723.pdf",
+   "title": "Comisión Europea, SWD(2023) 809 final, 2023 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "negatively affecting the work of the Supreme Court and the justice system as a whole",
+   "quote_lang": "en",
+   "locator": "p. 6, sección I.A"
+  },
+  {
+   "year": 2025,
+   "finding": "Recomendación de reforzar el estatuto del Fiscal General, separando su mandato del del Gobierno.",
+   "url": "https://www.parlament.gv.at/dokument/XXVIII/EU/28095/imfname_11496679.pdf",
+   "title": "Comisión Europea, SWD(2025) 909 final, 2025 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
+   "retrieved": "2026-11-11",
+   "quote": "Continue ongoing efforts to strengthen the statute of the Prosecutor General",
+   "quote_lang": "en",
+   "locator": "p. 3, recomendaciones"
+  }
+ ]
+}

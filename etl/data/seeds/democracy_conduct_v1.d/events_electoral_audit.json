@@ -1,0 +1,264 @@
+{
+ "part": "electoral_audit",
+ "brief": "Sanctions imposed 2011-2026 by the Junta Electoral Central (JEC) on parties or on their office holders (fines for institutional propaganda during campaigns, etc.), and Tribunal de Cuentas sanctions on parties' financing (sanction procedures under Ley Orgánica 8/2007). Fill the two seeds if confirmed and ADD up to 6 more items across parties (PP, PSOE, Vox, Podemos, Sumar, ERC, Junts...). Indicator: 'reglas' for JEC sanctions on use of public office in campaigns; 'corrupcion' for Tribunal de Cuentas financing sanctions. Severity 2 (sanction_jec / sanction_tcu). Source: the JEC acuerdo on junta-electoral-central.es or BOE; the Tribunal de Cuentas report/resolution on tcu.es. Do not count JEC warnings without sanction.",
+ "events": [
+  {
+   "event_id": "jec-2023-575-sanchez-rueda-prensa-consejo-europeo",
+   "title": "La JEC multa con 2.200 euros al presidente del Gobierno por declaraciones en rueda de prensa en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-10-05",
+   "act_date": "2023-06-30",
+   "act": "Declaraciones del presidente del Gobierno en la rueda de prensa tras el Consejo Europeo de 29 y 30 de junio de 2023 (elecciones generales de 23 de julio de 2023)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pedro Sánchez, presidente del Gobierno y secretario general del PSOE. Antes, la JEC le impuso 500 € (Acuerdo 12/2020) por la declaración institucional y la entrevista en La Moncloa de octubre de 2019."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=123217&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 575/2023 (expte. 360/324), sesión de 5 de octubre de 2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al Presidente del Gobierno una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "jec-2021-390-ayuso-campana-logros",
+   "title": "La JEC multa con 600 euros a la presidenta de la Comunidad de Madrid por manifestaciones electoralistas en actos institucionales",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2021-12-09",
+   "act_date": "2021-04-12",
+   "act": "Manifestaciones de la presidenta de la Comunidad de Madrid en los actos institucionales de 12 y 16 de abril de 2021 (avión de Iberia; obras del puente Valdebebas-T4), en periodo electoral de las autonómicas de 4 de mayo de 2021",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Isabel Díaz Ayuso, presidenta de la Comunidad de Madrid (PP). La JEC resolvió el mismo día otro expediente por un acto en Las Ventas (Acuerdo 391/2021)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=78611&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 390/2021 (expte. 360/305), sesión de 9 de diciembre de 2021",
+    "retrieved": "2026-11-11",
+    "quote": "Presidenta de la Comunidad de Madrid una sanción de multa de 600 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "jec-2019-500-torra-lazos-amarillos",
+   "title": "La JEC multa con 3.000 euros al presidente de la Generalitat por exhibir lazos amarillos en edificios públicos en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2019-06-13",
+   "act_date": "2019-03-21",
+   "act": "Exhibición de lazos amarillos y otros símbolos partidistas en fachadas de edificios de la Generalitat durante el periodo electoral de las generales de abril de 2019 (expediente incoado el 21 de marzo de 2019)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Quim Torra, president de la Generalitat, elegido diputado en 2017 en la lista de Junts per Catalunya (JxCat), la candidatura que hoy lidera Junts. La JEC le impuso otras dos multas por hechos de abril de 2019 (Acuerdos 538/2019, 2.500 €, y 539/2019, 3.000 €)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=69285&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 500/2019 (expte. 360/192), sesión de 13 de junio de 2019",
+    "retrieved": "2026-11-11",
+    "quote": "por lo que procede imponerle una sanción de multa de 3.000 €",
+    "quote_lang": "es",
+    "locator": "Resolución"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-426",
+     "title": "Acuerdo de 11 de enero de 2018, de la Junta Electoral Central: resultados de las elecciones al Parlamento de Cataluña de 21 de diciembre de 2017",
+     "retrieved": "2026-11-11",
+     "quote": "(53) Joaquim Torra i Pla (JUNTSxCAT)",
+     "quote_lang": "ca",
+     "locator": "relación de electos"
+    }
+   ]
+  },
+  {
+   "event_id": "jec-2023-576-aragones-movilidad-maresme",
+   "title": "La JEC multa con 2.200 euros al presidente de la Generalitat por un acto institucional en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2023-10-05",
+   "act_date": "2023-07-13",
+   "act": "Acto «Presentación de las mejoras de movilidad del Maresme» y declaraciones del presidente de la Generalitat el 13 de julio de 2023 (elecciones generales de 23 de julio de 2023)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Pere Aragonès, president de la Generalitat (ERC)."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=123219&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 576/2023 (expte. 360/327), sesión de 5 de octubre de 2023",
+    "retrieved": "2026-11-11",
+    "quote": "Imponer al interesado una sanción de multa de 2.200 €",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 2"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "jec-2024-300-manueco-visita-boecillo",
+   "title": "La JEC multa con 600 euros al presidente de la Junta de Castilla y León por manifestaciones en una visita oficial en periodo electoral",
+   "body": "Junta Electoral Central",
+   "finding_type": "sanction_jec",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2024-12-12",
+   "act_date": "2024-05-29",
+   "act": "Manifestaciones del presidente de la Junta de Castilla y León en la visita del 29 de mayo de 2024 a una empresa en Boecillo (Valladolid), difundidas en la web institucional (elecciones europeas de 9 de junio de 2024)",
+   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Alfonso Fernández Mañueco, presidente de la Junta de Castilla y León (PP). La JEC archivó el expediente respecto del director de Comunicación."
+    }
+   ],
+   "source": {
+    "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?idacuerdoinstruccion=135779&template=Doctrina/JEC_Detalle",
+    "title": "Junta Electoral Central, Acuerdo 300/2024 (expte. 360/356), sesión de 12 de diciembre de 2024",
+    "retrieved": "2026-11-11",
+    "quote": "así como imponerle la sanción de multa de 600 euros",
+    "quote_lang": "es",
+    "locator": "Resolución, punto 1"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "tcu-2025-vox-donaciones-2020",
+   "title": "El Tribunal de Cuentas sanciona a Vox con 50.000 euros por donaciones contrarias a la Ley de financiación (cuentas de 2020)",
+   "body": "Tribunal de Cuentas",
+   "finding_type": "sanction_tcu",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2025-07-28",
+   "act_date": "",
+   "act": "Donaciones recibidas por Vox en el ejercicio 2020 contraviniendo los artículos 4 y 5 de la Ley Orgánica 8/2007 (contabilidad anual 2020)",
+   "status": "recurrida ante el Tribunal Supremo (recurso de 31/07/2025), sin resolución anotada en el registro del Tribunal de Cuentas de junio de 2026; el TS anuló dos sanciones anteriores del Tribunal de Cuentas a Vox (resoluciones de 04/07/2024 y 28/04/2025)",
+   "attributions": [
+    {
+     "party_id": "vox",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Infracción muy grave del artículo 17.Dos a) LOFPP en relación con los artículos 4.Dos a) y 5.Uno a)."
+    }
+   ],
+   "source": {
+    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-ordinaria.pdf",
+    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad ordinaria (registro de resoluciones del Pleno, junio de 2026)",
+    "retrieved": "2026-11-11",
+    "quote": "VOX G86867108 28/07/2025 contraviniendo arts. 4 y 5.",
+    "quote_lang": "es",
+    "locator": "tabla, p. 9"
+   },
+   "extra_sources": [],
+   "_exclude": "Recurrida ante el Tribunal Supremo (no firme): la regla excluye toda resolución pendiente de recurso; el TS anuló dos sanciones anteriores del Tribunal de Cuentas a Vox."
+  },
+  {
+   "event_id": "tcu-2024-pnv-deber-colaboracion",
+   "title": "El Tribunal de Cuentas sanciona al PNV con 5.000 euros por faltar al deber de colaboración en la fiscalización de sus cuentas",
+   "body": "Tribunal de Cuentas",
+   "finding_type": "sanction_tcu",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-04-25",
+   "act_date": "",
+   "act": "Falta al deber de colaboración del artículo 19 de la Ley Orgánica 8/2007 en la fiscalización de la contabilidad anual 2018-2019 del Partido Nacionalista Vasco",
+   "status": "firme; el Tribunal Supremo desestimó el recurso (22/05/2025)",
+   "attributions": [
+    {
+     "party_id": "pnv",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Infracción del artículo 17.Cuatro a) LOFPP en relación con el artículo 19."
+    }
+   ],
+   "source": {
+    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-ordinaria.pdf",
+    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad ordinaria (registro de resoluciones del Pleno, junio de 2026)",
+    "retrieved": "2026-11-11",
+    "quote": "G48103956 25/04/2024 relación con el art. 19 de la 5.000,00",
+    "quote_lang": "es",
+    "locator": "tabla, p. 9"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "tcu-2024-bildu-juntas-generales-2023-gasto-electoral",
+   "title": "El Tribunal de Cuentas sanciona a EH Bildu con 245.392,82 euros por superar límites de gasto en las elecciones a Juntas Generales de 2023",
+   "body": "Tribunal de Cuentas",
+   "finding_type": "sanction_tcu",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-11-28",
+   "act_date": "2023-05-28",
+   "act": "Gastos electorales de EH Bildu en las elecciones a Juntas Generales de 2023 (registro: «EE. JJ.GG. THV 2023») por encima de los límites de los artículos 193.2 y 58.1 LOREG",
+   "status": "firme en vía administrativa; sanciones reducidas en aplicación del art. 85 LPACAP; el registro del Tribunal de Cuentas de junio de 2026 no anota recurso ante el TS",
+   "attributions": [
+    {
+     "party_id": "bildu",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Infracción del artículo 17.Dos b) LOFPP en relación con los arts. 193.2 y 58.1 LOREG: 219.890,95 € + 25.501,87 €."
+    }
+   ],
+   "source": {
+    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-electoral-2023.pdf",
+    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad electoral, elecciones 2023 (junio de 2026)",
+    "retrieved": "2026-11-11",
+    "quote": "219.890,95* EUSKAL HERRIA BILDU G71206700 28/11/2024",
+    "quote_lang": "es",
+    "locator": "tabla, p. 1"
+   },
+   "extra_sources": []
+  }
+ ]
+}

@@ -1,0 +1,279 @@
+{
+ "part": "corruption_pp_psoe",
+ "brief": "Firm corruption convictions 2011-2026 of PP and PSOE office holders (or of the party). One event per ruling; if a ruling convicts several, use the most severe finding attributable to the party (e.g. a party treasurer sentenced to prison -> conviction_prison_ge1, attribution office_holder, and mention the party's civil liability in note). Only firm rulings (Supreme Court, or lower court not appealed — prove firmness). A person counts only if a member of the party holding public or party office at the facts. You MAY add up to 3 more firm convictions of high-level office holders (minister, regional president/consejero, mayor of a capital, party treasurer/manager) of PP or PSOE; keep the PP/PSOE balance faithful to what exists, never invent symmetry.",
+ "events": [
+  {
+   "event_id": "sts-erea-749-2022",
+   "title": "STS 749/2022 (ERE de Andalucía): condena firme del exconsejero José Antonio Viera a 7 años de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2022-09-13",
+   "act_date": "",
+   "act": "Ayudas sociolaborales del programa 31L de la Junta de Andalucía concedidas por la Consejería de Empleo (2000-2004, etapa de Viera)",
+   "status": "firme para José Antonio Viera: el TC desestimó su amparo (STC 90/2024, de 17-06-2024); también desestimó el de Juan Márquez (STC 101/2024; pena fijada en 3 años). El TC estimó parcialmente los amparos de Álvarez (STC 93/2024), Serrano (94), Fernández (95), Vallejo (96), Rodríguez Román (97), Martínez Aguayo (98), Chaves (99), Griñán (100), Zarrías (102) y Lozano (103/2024) y anuló sus condenas para nuevo pronunciamiento; la Audiencia de Sevilla planteó cuestión prejudicial al TJUE (auto de 14-07-2025) y suspendió la ejecución de esos mandatos",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "José Antonio Viera Chacón, consejero de Empleo y Desarrollo Tecnológico de la Junta de Andalucía (2000-2004), Gobierno andaluz del PSOE; diputado electo por el PSOE en 2011 (JEC). Condenas de Griñán, Chaves y otros anuladas en amparo (STC 93-100, 102 y 103/2024); Márquez (director general de Trabajo) no atribuido por falta de registro oficial de afiliación. Afiliación acreditada por registro oficial posterior (candidatura del PSOE, elecciones generales de 2011, BOE-A-2011-19391); el BOJA de 2004 no fue accesible."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15425",
+    "title": "Pleno. Sentencia 90/2024, de 17 de junio de 2024. Recurso de amparo 2552-2023 (José Antonio Viera Chacón)",
+    "retrieved": "2026-11-11",
+    "quote": "a la pena de siete años y un día de prisión",
+    "quote_lang": "es",
+    "locator": "antecedentes (condena de la SAP Sevilla 490/2019, cuyo recurso de casación desestimó la STS 749/2022)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-15425",
+     "title": "Pleno. Sentencia 90/2024, de 17 de junio de 2024 (fallo)",
+     "retrieved": "2026-11-11",
+     "quote": "ha decidido desestimar el recurso de amparo interpuesto por don José Antonio Viera Chacón",
+     "quote_lang": "es",
+     "locator": "fallo"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2011-19391",
+     "title": "Acuerdo de 7 de diciembre de 2011, de la Junta Electoral Central, resumen de los resultados de las elecciones al Congreso y al Senado de 20-11-2011",
+     "retrieved": "2026-11-11",
+     "quote": "Don José Antonio Viera Chacón. PARTIDO SOCIALISTA OBRERO ESPAÑOL",
+     "quote_lang": "es",
+     "locator": "Diputados electos, Sevilla"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-17481",
+     "title": "Pleno. Sentencia 100/2024, de 16 de julio de 2024. Recurso de amparo 2119-2023 (José Antonio Griñán Martínez)",
+     "retrieved": "2026-11-11",
+     "quote": "declarar la nulidad de la sentencia núm. 490/2019, de 19 de noviembre",
+     "quote_lang": "es",
+     "locator": "fallo 2.º"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2024-17482",
+     "title": "Pleno. Sentencia 101/2024, de 16 de julio de 2024. Recurso de amparo 2239-2023 (Juan Márquez Contreras)",
+     "retrieved": "2026-11-11",
+     "quote": "ha decidido desestimar el presente recurso de amparo",
+     "quote_lang": "es",
+     "locator": "fallo"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunales-Superiores-de-Justicia/TSJ-Andalucia--Ceuta-y-Melilla/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/La-Audiencia-de-Sevilla-acuerda-plantear-una-cuestion-prejudicial-ante-el-TJUE-tras-las-sentencias-del-Tribunal-Constitucional-sobre-el-caso-ERE",
+     "title": "La Audiencia de Sevilla acuerda plantear una cuestión prejudicial ante el TJUE tras las sentencias del Tribunal Constitucional sobre el caso ERE (CGPJ, 15-07-2025)",
+     "retrieved": "2026-11-11",
+     "quote": "acuerda plantear una cuestión prejudicial ante el Tribunal de Justicia de la Unión Europea",
+     "quote_lang": "es",
+     "locator": "nota de prensa, párrafo 1"
+    }
+   ]
+  },
+  {
+   "event_id": "san-caja-b-pp",
+   "title": "STS de 2024 (papeles de Bárcenas): el PP, responsable civil subsidiario por los pagos en B de la obra de Génova",
+   "body": "Tribunal Supremo",
+   "finding_type": "civil_liability_party",
+   "indicator": "corrupcion",
+   "severity": 2,
+   "date": "2024-11-15",
+   "act_date": "",
+   "act": "Pagos en B de 1.072.000 euros a Unifica por las obras de la sede del PP en la calle Génova (Impuesto de Sociedades 2007 de Unifica)",
+   "status": "firme (STS ECLI:ES:TS:2024:5577, que confirma en lo sustancial la sentencia de la Audiencia Nacional de 28-10-2021)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Partido Popular como responsable civil subsidiario hasta el importe defraudado atribuible a los pagos en B; el extesorero Luis Bárcenas, condenado como cooperador necesario a 8 meses de prisión en casación (conviction_other, misma severidad)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-el-delito-de-defraudacion-tributaria-en-el-caso--Papeles-de-Barcenas--y-reduce-las-penas-al-apreciar-dilaciones-indebidas",
+    "title": "CGPJ, nota de prensa de 15-11-2024: El Tribunal Supremo confirma el delito de defraudación tributaria en el caso 'Papeles de Bárcenas' (STS ECLI:ES:TS:2024:5577)",
+    "retrieved": "2026-11-11",
+    "quote": "si no lo hacen los responsables penales, tanto Unifica S.L, como el Partido Popular",
+    "quote_lang": "es",
+    "locator": "párrafo 1 (responsables civiles subsidiarios; fecha = nota de prensa)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-confirma-el-delito-de-defraudacion-tributaria-en-el-caso--Papeles-de-Barcenas--y-reduce-las-penas-al-apreciar-dilaciones-indebidas",
+     "title": "CGPJ, nota de prensa de 15-11-2024 (penas en casación)",
+     "retrieved": "2026-11-11",
+     "quote": "de 2 años a 8 meses (la de Luis B. como cooperador necesario)",
+     "quote_lang": "es",
+     "locator": "párrafo 2"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Audiencia-Nacional/Noticias-Judiciales/La-Audiencia-Nacional-condena-al-extesorero-del-Partido-Popular-a-dos-anos-de-carcel-por-pagar-en-B-mas-de-1-millon-de-euros-por-las-obras-de-la-sede-de-Genova",
+     "title": "CGPJ, nota de prensa de 28-10-2021: La Audiencia Nacional condena al extesorero del Partido Popular a dos años de cárcel",
+     "retrieved": "2026-11-11",
+     "quote": "La Audiencia Nacional ha condenado a dos años de cárcel al extesorero del PP",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-matas-noos-2018",
+   "title": "STS de 2018 (caso Nóos): condena firme de Jaume Matas, expresidente balear, a 3 años y 8 meses de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2018-06-12",
+   "act_date": "",
+   "act": "Contratación de la Asociación Instituto Nóos por el Govern balear para las cumbres de 2005 y 2006 (Fundación Illesport)",
+   "status": "firme (Sala Segunda del TS, ECLI:ES:TS:2018:2056, confirma la pena de la Audiencia de Palma; fecha = nota del CGPJ que comunica el fallo, 12-06-2018). Otras condenas firmes menores: STS 657/2013 (Palma Arena, 9 meses y 1 día de prisión) y la del encargo de la ópera a Calatrava (7 meses)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Jaume Matas Palou, presidente de les Illes Balears (2003-2007) tras las elecciones autonómicas de 2003 que dieron la mayoría al Partido Popular (hechos probados de la STS 657/2013)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-condena-a-Inaki-Urdangarin-a-5-anos-y-10-meses-de-prision-por-malversacion--prevaricacion--fraude--dos-delitos-fiscales-y-trafico-de-influencias-en-el--caso-Noos-",
+    "title": "El Tribunal Supremo condena a Iñaki Urdangarin a 5 años y 10 meses de prisión (...) en el caso Nóos (CGPJ, 12-06-2018)",
+    "retrieved": "2026-11-11",
+    "quote": "la condena de 3 años y 8 meses de prisión al expresidente balear Jaume Matas",
+    "quote_lang": "es",
+    "locator": "nota de prensa del TS"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/stfls/SALA%20DE%20PRENSA/NOVEDADES/Sentencia-Jaume%20Matas-Antonio%20Alemany.pdf",
+     "title": "Tribunal Supremo, Sala de lo Penal, Sentencia 657/2013, de 15 de julio (Jaume Matas, Palma Arena)",
+     "retrieved": "2026-11-11",
+     "quote": "que confirieron la mayoría al Partido Popular",
+     "quote_lang": "es",
+     "locator": "hechos probados, primero (p. 4)"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/en/Judiciary/Novelties/El-Tribunal-Supremo-condena-por-trafico-de-influencias-al-ex-presidente-de-Baleares-Jaume-Matas-a-la-pena-de-9-meses-de-prision",
+     "title": "El Tribunal Supremo condena por tráfico de influencias al ex presidente de Baleares Jaume Matas a la pena de 9 meses de prisión (CGPJ, 23-07-2013)",
+     "retrieved": "2026-11-11",
+     "quote": "a la pena de nueve meses y un día de prisión",
+     "quote_lang": "es",
+     "locator": "nota de prensa del TS"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-abalos-koldo",
+   "title": "STS de 22-06-2026 (caso mascarillas): condena al exministro José Luis Ábalos a 24 años y 3 meses de prisión",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2026-06-22",
+   "act_date": "2020-03-20",
+   "act": "Adquisición de mascarillas por Puertos del Estado y ADIF (OM TMA/263/2020 y OM TMA/292/2020) y otras adjudicaciones y contrataciones en empresas públicas (2020-2021)",
+   "status": "firme (causa especial 20775/2020 juzgada en instancia única por la Sala Segunda del TS; ejecutoria abierta el 2026-11-04)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "José Luis Ábalos, ministro de Transportes, Movilidad y Agenda Urbana del Gobierno Sánchez II (PSOE-UP) y secretario de organización del PSOE (2017-2021) en la fecha de los hechos"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-condena-al-exministro-Jose-Luis-Abalos-y-a-su-exasesor-Koldo-Garcia-a-24-anos-y-19-anos-de-prision--respectivamente--por-delitos-de-organizacion-criminal--cohecho--malversacion-y-trafico-de-influencias",
+    "title": "CGPJ, nota de prensa de 22-06-2026: El Tribunal Supremo condena al exministro José Luis Ábalos y a su exasesor Koldo García (STS ECLI:ES:TS:2026:2553)",
+    "retrieved": "2026-11-11",
+    "quote": "condena al exministro José Luis Ábalos a 24 años y 3 meses de prisión",
+    "quote_lang": "es",
+    "locator": "párrafo 1"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-abre-la-ejecutoria-de-la-sentencia-del--caso-mascarillas--y-requiere-a-los-condenados-el-pago-de-647-000-euros-en-multas--decomisos-e-indemnizaciones",
+     "title": "CGPJ, nota de prensa de 04-11-2026: El Tribunal Supremo abre la ejecutoria de la sentencia del 'caso mascarillas'",
+     "retrieved": "2026-11-11",
+     "quote": "la apertura de la ejecutoria de la sentencia dictada el pasado 22 de junio",
+     "quote_lang": "es",
+     "locator": "párrafo 1"
+    },
+    {
+     "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/Nota%20resumen%20STS%20Causa%20Especial%2020775-2020%20Sala%20II%2022JUN26.docx",
+     "title": "Tribunal Supremo, Sala de lo Penal: Nota resumen STS Causa Especial 20775/2020 (22-06-2026)",
+     "retrieved": "2026-11-11",
+     "quote": "nombrado secretario de organización del Partido Socialista Obrero Español (PSOE)",
+     "quote_lang": "es",
+     "locator": "hechos probados, apartado 1"
+    },
+    {
+     "url": "https://www.congreso.es/es/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&codParlamentario=267&idLegislatura=XIV",
+     "title": "Congreso de los Diputados: ficha de José Luis Ábalos Meco (XIV Legislatura, G.P. Socialista, formación PSOE)",
+     "retrieved": "2026-11-11",
+     "quote": "Secretario General del PSPV-PSOE de la provincia de Valencia",
+     "quote_lang": "es",
+     "locator": "ficha personal"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-gurtel-epoca-i-2020",
+   "title": "STS de 14-10-2020 (Gürtel, primera época): condena al extesorero del PP Luis Bárcenas a 29 años y 1 mes",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2020-10-14",
+   "act_date": "",
+   "act": "Contratación pública amañada y cobros ilícitos en administraciones gobernadas por el PP y desvío de fondos del PP (1999-2005)",
+   "status": "firme (STS ECLI:ES:TS:2020:3191, que confirma con ajustes la sentencia de la Audiencia Nacional de 17-05-2018)",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Luis Bárcenas, «extesorero nacional del PP» según el TS; la misma sentencia confirma al Partido Popular como partícipe a título lucrativo (civil_liability_party) y condena a exalcaldes del PP de Pozuelo y Majadahonda"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+    "title": "CGPJ, nota de prensa de 14-10-2020: El Tribunal Supremo confirma penas de hasta 51 años de prisión para los procesados en el caso Gürtel (STS ECLI:ES:TS:2020:3191)",
+    "retrieved": "2026-11-11",
+    "quote": "Luis Bárcenas 29 años y 1 mes",
+    "quote_lang": "es",
+    "locator": "tabla de penas, columna Tribunal Supremo"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+     "title": "CGPJ, nota de prensa de 14-10-2020 (apartado Luis Bárcenas)",
+     "retrieved": "2026-11-11",
+     "quote": "el extesorero nacional del PP Luis Bárcenas",
+     "quote_lang": "es",
+     "locator": "apartado «Luis Bárcenas»"
+    },
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+     "title": "CGPJ, nota de prensa de 14-10-2020 (partícipes a título lucrativo)",
+     "retrieved": "2026-11-11",
+     "quote": "la responsabilidad como partícipes a título lucrativo del Partido Popular",
+     "quote_lang": "es",
+     "locator": "apartado «PP, Ana Mato y Gema Matamoros»"
+    }
+   ],
+   "_exclude": "Duplicado: la misma sentencia (STS 507/2020) ya está en events_pilot.json como sts-507-2020-gurtel."
+  }
+ ]
+}

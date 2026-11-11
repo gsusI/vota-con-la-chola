@@ -1,0 +1,228 @@
+{
+ "part": "rights_regional",
+ "brief": "Indicators still empty: 'libertades', 'minorias', 'violencia', 'legitimidad', 'medios'. Search 2011-12-21..2026-11-11 for: (a) Constitutional Court or TSJ rulings annulling (fully/partly) acts of REGIONAL governments or parliamentary majorities for breaching freedom of expression, information, assembly, association, or for discrimination against a minority (any party: PP, PSOE, Vox as coalition partner, PNV, ERC, Junts, CC...); (b) firm criminal convictions of party office holders (member holding public or party office at the facts) for violence against persons in a political context, incitement to hatred, or glorification of terrorism (any party, including Bildu, Vox, Podemos, PP, PSOE); (c) firm rulings that a party sought to exclude a lawful rival, or firm convictions of office holders for slander/insult of political rivals; (d) the media regulator (CNMC) or courts finding a public broadcaster's governance or coverage breached pluralism, attributable to the regional/national government of the day. Add up to 8 items, only with official sources and firm/binding findings (or non-binding findings by named international bodies such as UN special rapporteurs only if hosted on ohchr.org — add ohchr.org items with source host spinternet.ohchr.org/ohchr.org, they will be added to the allow-list). Balance must reflect what exists: search every party and say in your report which parties you searched with no result. Codebook definitions: libertades = act annulled for breaching expression/information/assembly/association/movement; minorias = act annulled for discrimination against a minority, or firm hate-crime conviction of an office holder; violencia = firm conviction of an office holder for political violence/incitement/glorification of terrorism; legitimidad = binding finding the party sought to exclude a lawful rival, or firm conviction for slander of a rival; medios = finding that a specific act of the party in office reduced public-media independence or pluralism.",
+ "events": [
+  {
+   "event_id": "stc-138-2012-sortu-inscripcion",
+   "title": "STC 138/2012: ampara a Sortu y anula el auto del TS que denegó su inscripción a instancia del Gobierno",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "legitimidad",
+   "severity": 2,
+   "date": "2012-06-20",
+   "act_date": "2011-03-03",
+   "act": "Demanda incidental del Abogado del Estado (Gobierno) contra la inscripción de Sortu y Auto de la Sala Especial del art. 61 LOPJ del TS de 30 de marzo de 2011",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Zapatero II (PSOE): el Abogado del Estado, en representación del Gobierno, pidió declarar improcedente la constitución de Sortu (3 de marzo de 2011); el Ministerio Fiscal también lo pidió. El acto anulado es el auto del TS que estimó esas demandas."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2012-9214",
+    "title": "Pleno. Sentencia 138/2012, de 20 de junio de 2012. Recurso de amparo 2891-2011 (Sortu)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar vulnerado el derecho de asociación de los recurrentes",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2012-9214",
+     "title": "Pleno. Sentencia 138/2012 (antecedentes)",
+     "retrieved": "2026-11-11",
+     "quote": "el Abogado del Estado formuló demanda incidental en el proceso de ejecución núm. 1-2003",
+     "quote_lang": "es",
+     "locator": "antecedentes, letra c)"
+    }
+   ],
+   "_exclude": "Revisión dirigida (2026-11-11): la STC 138/2012 anula el auto del Supremo por insuficiencia de prueba de continuidad con Batasuna; no declara que el Gobierno intentara excluir a un rival legal (la demanda fue un procedimiento de la LOPP que también presentó el Fiscal). No encaja en «legitimidad»."
+  },
+  {
+   "event_id": "stc-24-2015-subdelegacion-jaen-reunion",
+   "title": "STC 24/2015: la prohibición de marchas sindicales por la Subdelegación del Gobierno en Jaén vulneró el derecho de reunión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2015-02-16",
+   "act_date": "2014-02-27",
+   "act": "Resolución de la Subdelegación del Gobierno en Jaén de 27 de febrero de 2014 que prohibió concentraciones y marchas de CCOO-Andalucía en Úbeda",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP): la Subdelegación del Gobierno es administración periférica del Estado."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-2825",
+    "title": "Sala Segunda. Sentencia 24/2015, de 16 de febrero de 2015. Recurso de amparo 2126-2014",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que ha sido vulnerado el derecho fundamental de reunión (art. 21 CE)",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-187-2015-murcia-sancion-expresion",
+   "title": "STC 187/2015: anula la sanción de la Consejería de Educación de Murcia a un funcionario por vulnerar su libertad de expresión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2015-09-21",
+   "act_date": "2010-01-18",
+   "act": "Resolución sancionadora de 18 de enero de 2010 del Director General de Recursos Humanos, por delegación del Consejero de Educación, Formación y Empleo de la Región de Murcia",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno regional de Ramón Luis Valcárcel (PP), Región de Murcia; sanción a un funcionario por las afirmaciones de su denuncia de acoso laboral."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2015-11701",
+    "title": "Sala Primera. Sentencia 187/2015, de 21 de septiembre de 2015. Recurso de amparo 1388-2013",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar vulnerado el derecho del demandante de amparo de libertad de expresión",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-164-2023-delegacion-madrid-8m",
+   "title": "STC 164/2023: la prohibición del 8M de 2021 por el delegado del Gobierno en Madrid vulneró el derecho de reunión",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2023-11-21",
+   "act_date": "2021-03-03",
+   "act": "Resolución del delegado del Gobierno en Madrid de 3 de marzo de 2021 que prohibió la concentración de UGT del 8 de marzo de 2021",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP); la Delegación del Gobierno es administración periférica del Estado. Misma doctrina en las SSTC 173 a 178/2023 y 188/2023 sobre otras concentraciones del 7 y 8 de marzo de 2021 (no codificadas aparte)."
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (PSOE-UP) en marzo de 2021"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2023-25985",
+    "title": "Pleno. Sentencia 164/2023, de 21 de noviembre de 2023. Recurso de amparo 1293-2021",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que se ha vulnerado su derecho fundamental de reunión y manifestación",
+    "quote_lang": "es",
+    "locator": "fallo 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "ohchr-ol-esp-1-2015-seguridad-ciudadana",
+   "title": "Relatores de la ONU (OL ESP 1/2015): el proyecto de ley de seguridad ciudadana contradice estándares de reunión y expresión",
+   "body": "Relatores Especiales de Naciones Unidas (libertad de expresión; reunión pacífica y asociación; defensores; migrantes)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "libertades",
+   "severity": 1,
+   "date": "2015-02-05",
+   "act_date": "2014-12-11",
+   "act": "Proyecto de Ley Orgánica de Protección de la Seguridad Ciudadana, aprobado por el Pleno del Congreso el 11 de diciembre de 2014",
+   "status": "no vinculante; el proyecto se aprobó como Ley Orgánica 4/2015, de 30 de marzo",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proyecto de ley del Gobierno Rajoy I (PP), aprobado con la mayoría absoluta del PP."
+    }
+   ],
+   "source": {
+    "url": "https://spcommreports.ohchr.org/TMResultsBase/DownLoadPublicCommunicationFile?gId=19137",
+    "title": "Comunicación OL ESP 1/2015, de 5 de febrero de 2015, de cuatro Relatores Especiales de la ONU al Gobierno de España",
+    "retrieved": "2026-11-11",
+    "quote": "disposiciones que contradecirían las normas y estándares internacionales en materia de derechos humanos",
+    "quote_lang": "es",
+    "locator": "p. 3"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "ohchr-ol-esp-3-2026-prioridad-nacional",
+   "title": "Relator de la ONU (OL ESP 3/2026): la «prioridad nacional» de cuatro pactos autonómicos PP-Vox transmite discriminación",
+   "body": "Relator Especial de Naciones Unidas sobre una vivienda adecuada",
+   "finding_type": "nonbinding_finding",
+   "indicator": "minorias",
+   "severity": 1,
+   "date": "2026-08-06",
+   "act_date": "",
+   "act": "Principio de «prioridad nacional» en los pactos de gobierno de coalición de Andalucía, Aragón, Castilla y León y Extremadura (2026)",
+   "status": "no vinculante; el relator señala que los pactos aún no se habían materializado en políticas concretas; respuesta del Gobierno de España de 6 de octubre de 2026",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Firmante de los pactos de gobierno de coalición en Andalucía, Aragón, Castilla y León y Extremadura; la comunicación no nombra partidos, los nombra la respuesta oficial del Gobierno de España («pactos entre PP y VOX»)."
+    },
+    {
+     "party_id": "vox",
+     "role": "party_organization",
+     "attribution": "party",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Firmante de los mismos pactos de gobierno de coalición; atribución por la respuesta oficial del Gobierno de España (extra_sources)."
+    }
+   ],
+   "source": {
+    "url": "https://spcommreports.ohchr.org/TMResultsBase/DownLoadPublicCommunicationFile?gId=31226",
+    "title": "Comunicación OL ESP 3/2026, de 6 de agosto de 2026, del Relator Especial sobre una vivienda adecuada",
+    "retrieved": "2026-11-11",
+    "quote": "el lenguaje utilizado en ellos transmite discriminación y prejuicios",
+    "quote_lang": "es",
+    "locator": "p. 1"
+   },
+   "extra_sources": [
+    {
+     "url": "https://spcommreports.ohchr.org/TMResultsBase/DownLoadFile?gId=39907",
+     "title": "Respuesta de España a la comunicación OL ESP 3/2026 (6 de octubre de 2026)",
+     "retrieved": "2026-11-11",
+     "quote": "también en relación con los pactos entre PP y VOX",
+     "quote_lang": "es",
+     "locator": "p. 3"
+    }
+   ],
+   "_exclude": "Revisión dirigida (2026-11-11): la carta de los relatores no nombra partidos (solo lo hace la respuesta del Gobierno de España) y es una preocupación sobre pactos que «aún no se han materializado en políticas concretas»: ni atribución con fuente neutral ni acto concreto que encaje en «minorías»."
+  }
+ ]
+}

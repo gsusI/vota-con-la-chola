@@ -1,0 +1,290 @@
+/* /visualizaciones/democracia/partidos/ only. Shared article rules live in ../../visualizaciones.css. */
+
+.viz .dpxMatrix__scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.viz .dpxMatrix {
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-variant-numeric: tabular-nums;
+  margin-inline: auto;
+}
+
+.viz .dpxMatrix th[scope="row"] {
+  text-align: right;
+  padding-right: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.viz .dpxMatrix th[scope="row"] a {
+  color: inherit;
+  text-decoration-color: var(--viz-axis);
+  text-underline-offset: 2px;
+}
+
+.viz .dpxMatrix__ind {
+  vertical-align: bottom;
+  height: 118px;
+  padding: 0 0 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--viz-ink-2);
+}
+
+.viz .dpxMatrix__ind span {
+  display: inline-block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+.viz .dpxMatrix__years {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--viz-muted);
+}
+
+.viz .dpxMatrix__tot {
+  font-size: 0.74rem;
+  color: var(--viz-ink-2);
+  text-align: center;
+  max-width: 64px;
+  white-space: normal;
+  vertical-align: bottom;
+  padding-bottom: 4px;
+}
+
+.viz td.dpxMatrix__tot {
+  vertical-align: middle;
+  font-size: 0.82rem;
+}
+
+.viz .dpxCell {
+  padding: 0;
+}
+
+.viz .dpxCell,
+.viz .dpxCell--legend {
+  display: inline-flex;
+  gap: 1px;
+}
+
+.viz td.dpxCell {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+.viz .dpxCell__half {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 28px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--viz-grid);
+}
+
+.viz .dpxCell__half--gobierno {
+  border-radius: 5px 0 0 5px;
+}
+
+.viz .dpxCell__half--fuera {
+  border-radius: 0 5px 5px 0;
+  margin-left: 1px;
+}
+
+.viz .dpxCell--legend .dpxCell__half {
+  width: 18px;
+  height: 20px;
+  font-size: 0.72rem;
+}
+
+.viz .dpxLegend li {
+  align-items: center;
+}
+
+.viz .dpxDots,
+.viz .dpxBars {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+
+/* Small canvases so labels stay legible on phones; capped on desktop so the text does not balloon. */
+.viz .dpxDots {
+  max-width: 760px;
+}
+
+.viz .dpxBars {
+  max-width: 900px;
+}
+
+.viz .dpxAxis {
+  font-size: 11px;
+  fill: var(--viz-muted);
+}
+
+.viz .dpxRowLabel {
+  font-size: 12.5px;
+  fill: var(--viz-ink);
+  font-weight: 600;
+}
+
+.viz .dpxVotes {
+  display: grid;
+  gap: 22px;
+}
+
+.viz .dpxVotes h3 {
+  margin-block: 0 4px;
+  font-size: 1rem;
+}
+
+/* Profiles: one disclosure per party, the ledger items inside. */
+.viz .dpxProfiles {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.viz .dpxProfile {
+  border-radius: 8px;
+  background: rgba(23, 25, 31, 0.035);
+  padding: 12px 16px;
+}
+
+.viz .dpxProfile > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.02rem;
+  max-width: none;
+  margin-inline: 0 !important;
+}
+
+.viz .dpxProfile__meta {
+  font-weight: 400;
+  color: var(--viz-ink-2);
+  font-size: 0.9rem;
+}
+
+.viz .dpxProfile__body {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.viz .dpxProfile__body p {
+  margin: 0;
+  max-width: none;
+  margin-inline: 0 !important;
+  width: auto !important;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.viz .dpxEvents {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  max-width: none;
+}
+
+.viz .dpxEvent {
+  display: grid;
+  gap: 2px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  padding-left: 10px;
+  border-left: 3px solid var(--viz-grid);
+}
+
+.viz .dpxEvent--s1 {
+  border-left-color: #f5d9c8;
+}
+
+.viz .dpxEvent--s2 {
+  border-left-color: #e79a6c;
+}
+
+.viz .dpxEvent--s3 {
+  border-left-color: #b8461b;
+}
+
+.viz .dpxEvent__head {
+  font-weight: 600;
+}
+
+.viz .dpxEvent__meta {
+  color: var(--viz-ink-2);
+  font-size: 0.85rem;
+}
+
+.viz .dpxEvent q {
+  font-style: italic;
+}
+
+.viz .dpxEvent a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+.viz .dpxEvent--predecessor {
+  opacity: 0.75;
+}
+
+.viz .dpxTag {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--viz-tile, #f2f4f1);
+  color: var(--viz-ink-2);
+  margin-right: 4px;
+}
+
+@media (max-width: 640px) {
+  .viz .dpxCell__half {
+    width: 14px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .viz .dpxCell__half--fuera {
+    margin-left: 0;
+  }
+
+  .viz .dpxMatrix {
+    border-spacing: 1px 3px;
+  }
+
+  .viz .dpxMatrix__ind {
+    height: 104px;
+    font-size: 0.7rem;
+  }
+
+  .viz .dpxMatrix th[scope="row"] {
+    font-size: 0.76rem;
+    padding-right: 4px;
+  }
+
+  .viz .dpxMatrix__years {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--viz-muted);
+}
+
+.viz .dpxMatrix__tot {
+    max-width: 40px;
+    font-size: 0.66rem;
+  }
+}

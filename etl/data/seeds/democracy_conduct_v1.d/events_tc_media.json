@@ -1,0 +1,130 @@
+{
+ "part": "tc_media",
+ "brief": "Four Constitutional Court rulings on public-broadcaster governance acts, to be coded by one rule so PP and PSOE acts get the same code. No additions.",
+ "events": [
+  {
+   "event_id": "stc-150-2017-rtve-rdl-15-2012",
+   "title": "STC 150/2017: anula parte del Real Decreto-ley 15/2012 sobre el consejo de RTVE",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2017-12-21",
+   "act_date": "2012-04-20",
+   "act": "Apartados primero, segundo y tercero e inciso del apartado quinto del artículo 1 del Real Decreto-ley 15/2012 (régimen de administración de RTVE)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP). Anulado por falta de justificación de la extraordinaria y urgente necesidad (art. 86.1 CE); el TC desestimó que el decreto-ley afectara a una institución básica o al art. 20.3 CE. Recurso del Grupo Parlamentario Socialista en el Congreso."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-612",
+    "title": "Pleno. Sentencia 150/2017, de 21 de diciembre de 2017. Recurso de inconstitucionalidad 3418-2012 (BOE-A-2018-612)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de los apartados primero, segundo y tercero",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-134-2021-rtve-rdl-4-2018",
+   "title": "STC 134/2021: anula parte del Real Decreto-ley 4/2018 sobre el consejo de RTVE",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-06-24",
+   "act_date": "2018-06-22",
+   "act": "Disposición final primera y apartado tercero del artículo único del Real Decreto-ley 4/2018 (designación del consejo de administración de RTVE)",
+   "status": "firme; efectos declarados meramente declarativos (FJ 3 y FJ 4 c)",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez I (PSOE). Anulados la disposición final primera por falta de justificación de la urgencia y el apartado tercero del artículo único por infringir el límite material del art. 86.1 CE (afectar a derechos fundamentales, art. 20 CE). Recurso del Grupo Parlamentario Popular en el Congreso."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-13018",
+    "title": "Pleno. Sentencia 134/2021, de 24 de junio de 2021. Recurso de inconstitucionalidad 3883-2018 (BOE-A-2021-13018)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar inconstitucional y nula la disposición final primera del Real Decreto-ley 4/2018",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-22-2026-telemadrid-lectura-unica",
+   "title": "STC 22/2026: amparo a diputados del PSOE por la lectura única de la reforma de Telemadrid de 2021",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2026-03-11",
+   "act_date": "2021-06-23",
+   "act": "Acuerdos de la Mesa (23-6-2021) y del Pleno (8-7-2021) de la Asamblea de Madrid de tramitar en lectura única la proposición de ley de modificación de la Ley 8/2015 de Radio Televisión Madrid",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Proposición de ley presentada el 21-6-2021 por el portavoz del Grupo Parlamentario Popular en la Asamblea de Madrid (antecedente 2.a); lectura única aprobada en el Pleno por 63 votos a favor, 56 en contra y 13 abstenciones de Vox; la ley se aprobó con los votos del Grupo Popular (64) y la abstención de Vox. El TC anula los acuerdos de tramitación; el fallo no anula la ley resultante."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-8277",
+    "title": "Pleno. Sentencia 22/2026, de 11 de marzo de 2026. Recurso de amparo 5996-2021 (BOE-A-2026-8277)",
+    "retrieved": "2026-11-11",
+    "quote": "Reconocer su derecho a acceder a los cargos públicos en condiciones de igualdad",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-48-2026-telemadrid",
+   "title": "STC 48/2026: amparo a diputados del PSOE por la lectura única de la reforma de Telemadrid de 2022",
+   "body": "Tribunal Constitucional",
+   "finding_type": "amparo",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2026-06-23",
+   "act_date": "2022-03-28",
+   "act": "Acuerdos de la Mesa (28-3-2022) y del Pleno (21-4-2022) de la Asamblea de Madrid de tramitar en lectura única la proposición de ley 4-22, origen de la Ley 3/2022 de Radio Televisión Madrid",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Acto distinto del de la STC 22/2026 (segunda reforma, 2022). Proposición de ley presentada el 24-3-2022 por el portavoz del Grupo Parlamentario Popular en la Asamblea de Madrid (antecedente 2.a); propuesta de lectura única respaldada por el Grupo Popular con la abstención de Vox en la Junta de Portavoces. El fallo anula los acuerdos de tramitación, no la Ley 3/2022."
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2026-16244",
+    "title": "Pleno. Sentencia 48/2026, de 23 de junio de 2026. Recurso de amparo 4651-2022 (BOE-A-2026-16244)",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar que se ha vulnerado su derecho a acceder a los cargos públicos",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": []
+  }
+ ]
+}

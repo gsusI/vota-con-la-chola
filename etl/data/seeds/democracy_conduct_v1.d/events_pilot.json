@@ -1,0 +1,384 @@
+{
+ "part": "pilot",
+ "events": [
+  {
+   "event_id": "stc-73-2017-amnistia-fiscal",
+   "title": "STC 73/2017: anula la amnistía fiscal de la disposición adicional primera del Real Decreto-ley 12/2012",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2017-06-08",
+   "act_date": "2012-03-30",
+   "act": "Disposición adicional primera del Real Decreto-ley 12/2012, de 30 de marzo (declaración tributaria especial)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8345",
+    "title": "Pleno. Sentencia 73/2017, de 8 de junio de 2017. Recurso de inconstitucionalidad 3856-2012",
+    "retrieved": "2026-11-11",
+    "quote": "declarar inconstitucional y nula la disposición adicional primera del Real Decreto-ley 12/2012",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-172-2020-seguridad-ciudadana",
+   "title": "STC 172/2020: anula el inciso «no autorizado» de la Ley Orgánica 4/2015 de seguridad ciudadana",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2020-11-19",
+   "act_date": "2015-03-30",
+   "act": "Inciso «no autorizado» del art. 36.23 de la Ley Orgánica 4/2015 (uso de imágenes de agentes)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I (PP): proyecto de ley orgánica 121/000105"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-16819",
+    "title": "Pleno. Sentencia 172/2020, de 19 de noviembre de 2020. Recurso de inconstitucionalidad 2896-2015",
+    "retrieved": "2026-11-11",
+    "quote": "Declarar la inconstitucionalidad y la nulidad del inciso «no autorizado» del art. 36.23",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/BOCG-10-A-105-1.PDF",
+     "title": "BOCG Congreso, X Legislatura, Serie A, núm. 105-1, 25 de julio de 2014: Proyecto de Ley Orgánica de protección de la seguridad ciudadana",
+     "retrieved": "2026-11-11",
+     "quote": "121/000105 Proyecto de Ley Orgánica de protección de la seguridad ciudadana.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ]
+  },
+  {
+   "event_id": "stc-124-2018-gobierno-en-funciones",
+   "title": "STC 124/2018: el Gobierno en funciones vulneró la atribución de control del Congreso (art. 66.2 CE)",
+   "body": "Tribunal Constitucional",
+   "finding_type": "binding_declaration",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2018-11-14",
+   "act_date": "2016-03-10",
+   "act": "Oficio del Ministerio de la Presidencia de 10 de marzo de 2016 que rechazó la comparecencia del ministro de Defensa en funciones ante el Congreso",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Rajoy I en funciones (PP)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-17131",
+    "title": "Pleno. Sentencia 124/2018, de 14 de noviembre de 2018. Conflicto entre órganos constitucionales 3102-2016",
+    "retrieved": "2026-11-11",
+    "quote": "vulneró la atribución que al Congreso de los Diputados confiere el artículo 66.2 CE",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-148-2021-estado-alarma-1",
+   "title": "STC 148/2021: anula parte del Real Decreto 463/2020 del primer estado de alarma",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "libertades",
+   "severity": 2,
+   "date": "2021-07-14",
+   "act_date": "2020-03-14",
+   "act": "Apartados 1, 3 y 5 del artículo 7 y un inciso del artículo 10.6 del Real Decreto 463/2020, de 14 de marzo, que declaró el estado de alarma",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (lista Unidas Podemos)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13032",
+    "title": "Pleno. Sentencia 148/2021, de 14 de julio de 2021. Recurso de inconstitucionalidad 2054-2020",
+    "retrieved": "2026-11-11",
+    "quote": "Estimar parcialmente el recurso de inconstitucionalidad interpuesto contra el Real Decreto 463/2020",
+    "quote_lang": "es",
+    "locator": "fallo, 2.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-183-2021-estado-alarma-2",
+   "title": "STC 183/2021: anula parte del Real Decreto 926/2020 y de la prórroga de seis meses del estado de alarma",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_partial",
+   "indicator": "contrapesos",
+   "severity": 2,
+   "date": "2021-10-27",
+   "act_date": "2020-10-25",
+   "act": "Real Decreto 926/2020 (entre otros, art. 2.2 y 2.3, arts. 10 y 11), acuerdo del Congreso de 29 de octubre de 2020 y Real Decreto 956/2020 (prórroga hasta el 9 de mayo de 2021)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Gobierno Sánchez II (PSOE-UP)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "government_act",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Unidas Podemos, socio de coalición en el Gobierno Sánchez II (lista Unidas Podemos)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-19512",
+    "title": "Pleno. Sentencia 183/2021, de 27 de octubre de 2021. Recurso de inconstitucionalidad 5342-2020",
+    "retrieved": "2026-11-11",
+    "quote": "Estimar parcialmente el presente recurso de inconstitucionalidad y, en su virtud, declarar inconstitucionales y nulos",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "venice-2024-amnistia",
+   "title": "Comisión de Venecia CDL-AD(2024)003: opinión sobre la proposición de ley orgánica de amnistía",
+   "body": "Comisión de Venecia (Consejo de Europa)",
+   "finding_type": "nonbinding_finding",
+   "indicator": "contrapesos",
+   "severity": 1,
+   "date": "2024-03-15",
+   "act_date": "2023-11-13",
+   "act": "Proposición de Ley Orgánica de amnistía para la normalización institucional, política y social en Cataluña (122/000019)",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Grupo Parlamentario Socialista; el ministro de Justicia participó en la preparación del texto (opinión, §25)"
+    }
+   ],
+   "source": {
+    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2024)003-e",
+    "title": "CDL-AD(2024)003. Spain. Opinion on the rule of law requirements of amnesties, with particular reference to the parliamentary bill on the Organic Law on amnesty (138th Plenary Session, 15-16 March 2024)",
+    "retrieved": "2026-11-11",
+    "quote": "presented in the form of a legislative proposal, which is a procedure with limited consultation",
+    "quote_lang": "en",
+    "locator": "§127"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/B/BOCG-15-B-32-1.PDF",
+     "title": "BOCG Congreso, XV Legislatura, Serie B, núm. 32-1, 24 de noviembre de 2023: Proposición de Ley Orgánica de amnistía",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por el Grupo Parlamentario Socialista.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ]
+  },
+  {
+   "event_id": "rolr-2021-cgpj-mayoria",
+   "title": "Informe sobre el Estado de Derecho 2021 (España): propuesta de rebajar la mayoría para elegir el CGPJ",
+   "body": "Comisión Europea",
+   "finding_type": "nonbinding_finding",
+   "indicator": "justicia",
+   "severity": 1,
+   "date": "2021-07-20",
+   "act_date": "2020-10-13",
+   "act": "Proposición de Ley Orgánica 122/000090 de reforma de la LOPJ: vocales judiciales del CGPJ elegibles por mayoría absoluta en segunda votación",
+   "status": "firme; según el informe, los grupos proponentes retiraron formalmente la proposición en mayo de 2021",
+   "attributions": [
+    {
+     "party_id": "psoe",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Grupo Parlamentario Socialista (coautor de la proposición 122/000090)"
+    },
+    {
+     "party_id": "podemos",
+     "role": "national_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": false,
+     "note": "Grupo Parlamentario Confederal de Unidas Podemos-En Comú Podem-Galicia en Común (lista Unidas Podemos), coautor"
+    }
+   ],
+   "source": {
+    "url": "https://commission.europa.eu/system/files/2021-07/2021_rolr_country_chapter_spain_en.pdf",
+    "title": "2021 Rule of Law Report. Country Chapter on the rule of law situation in Spain, SWD(2021) 710 final, 20.7.2021",
+    "retrieved": "2026-11-11",
+    "quote": "the draft law would have increased the perception of the Council as vulnerable to politicisation",
+    "quote_lang": "en",
+    "locator": "p. 3 (sección I)"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/B/BOCG-14-B-120-1.PDF",
+     "title": "BOCG Congreso, XIV Legislatura, Serie B, núm. 120-1, 23 de octubre de 2020: Proposición de Ley Orgánica 122/000090",
+     "retrieved": "2026-11-11",
+     "quote": "Presentada por los Grupos Parlamentarios Socialista y Confederal de Unidas Podemos-En Comú Podem-Galicia en Común.",
+     "quote_lang": "es",
+     "locator": "p. 1"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-459-2019-proces",
+   "title": "STS 459/2019: condena por sedición y malversación (procés)",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2019-10-14",
+   "act_date": "2017-09-06",
+   "act": "Hechos de septiembre y octubre de 2017 en Cataluña: leyes 19/2017 y 20/2017, referéndum del 1 de octubre y uso de fondos públicos",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Oriol Junqueras, vicepresidente del Govern y presidente de ERC (sentencia, p. 302): 13 años de prisión; también condenada Dolors Bassa, consejera de Trabajo, a 12 años"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/Sentencia%20459_2019.pdf",
+    "title": "Tribunal Supremo, Sala de lo Penal, Sentencia núm. 459/2019, de 14 de octubre de 2019, Causa Especial 20907/2017",
+    "retrieved": "2026-11-11",
+    "quote": "D. ORIOL JUNQUERAS, a las penas de 13 años de prisión",
+    "quote_lang": "es",
+    "locator": "fallo, 1.a) (p. 488)"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "sts-torra-desobediencia",
+   "title": "Tribunal Supremo confirma la condena de Quim Torra por desobediencia a la Junta Electoral Central",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_other",
+   "indicator": "reglas",
+   "severity": 2,
+   "date": "2020-09-28",
+   "act_date": "2019-03-19",
+   "act": "Incumplimiento de los acuerdos de la JEC de 11 y 18 de marzo de 2019 de retirar lazos amarillos y esteladas de edificios de la Generalitat",
+   "status": "firme; confirma la sentencia 149/2019 del TSJ de Cataluña (19 de diciembre de 2019): inhabilitación especial de un año y seis meses y multa",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "office_holder",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Joaquim Torra, president de la Generalitat, elegido en la lista Junts per Catalunya (2017)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/stfls/TRIBUNAL%20SUPREMO/DOCUMENTOS%20DE%20INTER%C3%89S/TS%20Penal%2028%20sep%202020.pdf",
+    "title": "Tribunal Supremo, Sala de lo Penal, sentencia de 28 de septiembre de 2020, recurso de casación 203/2020",
+    "retrieved": "2026-11-11",
+    "quote": "Desestimar el recurso de casación interpuesto por la representación procesal del MHP de la Generalitat",
+    "quote_lang": "es",
+    "locator": "fallo, 1.º"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-426",
+     "title": "Acuerdo de 11 de enero de 2018, de la Junta Electoral Central: resultados de las elecciones al Parlamento de Cataluña de 21 de diciembre de 2017",
+     "retrieved": "2026-11-11",
+     "quote": "(53) Joaquim Torra i Pla (JUNTSxCAT)",
+     "quote_lang": "ca",
+     "locator": "relación de electos"
+    }
+   ]
+  },
+  {
+   "event_id": "sts-507-2020-gurtel",
+   "title": "STS 507/2020: condena firme del extesorero del PP Luis Bárcenas y del PP como partícipe a título lucrativo (Gürtel)",
+   "body": "Tribunal Supremo",
+   "finding_type": "conviction_prison_ge1",
+   "indicator": "corrupcion",
+   "severity": 3,
+   "date": "2020-10-14",
+   "act_date": "",
+   "act": "Actos electorales del PP en Majadahonda y Pozuelo de Alarcón sufragados por empresas del grupo Correa (1999-2005)",
+   "status": "firme; confirma la SAN 20/2018, de 17 de mayo; el PP debe abonar 133.628,48 y 111.864,32 euros",
+   "attributions": [
+    {
+     "party_id": "pp",
+     "role": "party_organization",
+     "attribution": "office_holder",
+     "lineage": "same",
+     "power_only": false,
+     "note": "Luis Bárcenas, extesorero nacional del PP: 29 años y 1 mes de prisión; el PP, además, partícipe a título lucrativo (responsabilidad civil)"
+    }
+   ],
+   "source": {
+    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+    "title": "Comunicación Poder Judicial: El Tribunal Supremo confirma penas de hasta 51 años de prisión para los procesados en el «caso Gürtel» (14 de octubre de 2020)",
+    "retrieved": "2026-11-11",
+    "quote": "extesorero nacional del PP Luis Bárcenas en los hechos por los que ha sido condenado",
+    "quote_lang": "es",
+    "locator": "nota de prensa del TS, apartado «Luis Bárcenas»"
+   },
+   "extra_sources": [
+    {
+     "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/El-Tribunal-Supremo-confirma-penas-de-hasta-51-anos-de-prision-para-los-procesados-en-el--caso-Gurtel-",
+     "title": "Comunicación Poder Judicial: El Tribunal Supremo confirma penas de hasta 51 años de prisión para los procesados en el «caso Gürtel» (14 de octubre de 2020)",
+     "retrieved": "2026-11-11",
+     "quote": "la responsabilidad como partícipes a título lucrativo del Partido Popular",
+     "quote_lang": "es",
+     "locator": "nota de prensa, apartado «PP, Ana Mato y Gema Matamoros, partícipes a título lucrativo»"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "part": "catalonia",
+ "brief": "Acts of the Parliament and Government of Catalonia annulled by the Constitutional Court, 2015-2024, and attribution to the groups that tabled them. Junts pel Sí (2015-2017) was a CDC+ERC coalition: attribute to erc with lineage 'list' (note: 'Junts pel Sí, coalición de CDC y ERC') and to junts with lineage 'predecessor' (note: 'CDC dentro de Junts pel Sí'). JxCat group 2018-2021 -> junts lineage 'list'; ERC group -> erc same. You MAY add up to 3 more TC rulings (2018-2024) annulling Parlament resolutions/motions tabled by JxCat and/or ERC (e.g. on self-determination or the monarchy).",
+ "events": [
+  {
+   "event_id": "stc-259-2015-resolucion-1-xi",
+   "title": "STC 259/2015: anula la Resolución 1/XI del Parlament sobre el inicio del proceso político en Cataluña",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2015-12-02",
+   "act_date": "2015-11-09",
+   "act": "Resolución 1/XI del Parlamento de Cataluña, de 9 de noviembre de 2015, y su anexo",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "opposition",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; propuesta presentada por los grupos Junts pel Sí y CUP-CC (antecedentes de la STC). Rol: Junts pel Sí era el grupo mayoritario y su candidato presidía el Govern en funciones (Artur Mas, CDC); ERC no formaba parte de ese Govern en funciones. ERC no formaba parte del Govern en funciones (Mas, CDC) en esa fecha: rol «fuera del Gobierno», como parte de la mayoría parlamentaria de Junts pel Sí."
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC dentro de Junts pel Sí; propuesta presentada por Junts pel Sí y CUP-CC; Govern en funciones de Artur Mas (CDC), al que la STC dirige la notificación como «Gobierno en funciones»"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2016-308",
+    "title": "Pleno. Sentencia 259/2015, de 2 de diciembre de 2015. Impugnación de disposiciones autonómicas 6330-2015 (BOE de 12 de enero de 2016)",
+    "retrieved": "2026-11-11",
+    "quote": "y su anexo, declarando en consecuencia su inconstitucionalidad y nulidad",
+    "quote_lang": "es",
+    "locator": "fallo"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-114-2017-ley-referendum",
+   "title": "STC 114/2017: anula la Ley 19/2017 del referéndum de autodeterminación",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2017-10-17",
+   "act_date": "2017-09-06",
+   "act": "Ley del Parlamento de Cataluña 19/2017, de 6 de septiembre, del referéndum de autodeterminación",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; grupos proponentes Junts pel Sí y CUP (antecedentes de la STC). Govern Puigdemont (Junts pel Sí), con Oriol Junqueras (ERC) de vicepresidente"
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC (PDeCAT desde 2016) dentro de Junts pel Sí; grupos proponentes Junts pel Sí y CUP. Govern Puigdemont (Junts pel Sí)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2017-12206",
+    "title": "Pleno. Sentencia 114/2017, de 17 de octubre de 2017. Recurso de inconstitucionalidad 4334-2017 (BOE de 24 de octubre de 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la Ley de Cataluña 19/2017, de 6 de septiembre",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-124-2017-ley-transitoriedad",
+   "title": "STC 124/2017: anula la Ley 20/2017 de transitoriedad jurídica y fundacional de la República",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2017-11-08",
+   "act_date": "2017-09-08",
+   "act": "Ley del Parlamento de Cataluña 20/2017, de 8 de septiembre, de transitoriedad jurídica y fundacional de la República",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Junts pel Sí, coalición de CDC y ERC; proposición de ley presentada por los grupos JxS y CUP-CC el 28 de agosto de 2017 (antecedentes de la STC). Govern Puigdemont (Junts pel Sí), con Oriol Junqueras (ERC) de vicepresidente"
+    },
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "predecessor",
+     "power_only": true,
+     "note": "CDC (PDeCAT desde 2016) dentro de Junts pel Sí; proposición de ley presentada por JxS y CUP-CC. Govern Puigdemont (Junts pel Sí)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2017-13228",
+    "title": "Pleno. Sentencia 124/2017, de 8 de noviembre de 2017. Recurso de inconstitucionalidad 4386-2017 (BOE de 16 de noviembre de 2017)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y nulidad de la Ley del Parlamento de Cataluña 20/2017",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": []
+  },
+  {
+   "event_id": "stc-111-2019-comision-monarquia",
+   "title": "STC 111/2019: anula la creación por el Parlament de una comisión de investigación sobre la monarquía",
+   "body": "Tribunal Constitucional",
+   "finding_type": "court_annulment_full",
+   "indicator": "reglas",
+   "severity": 3,
+   "date": "2019-10-02",
+   "act_date": "2019-03-07",
+   "act": "Resolución 298/XII del Parlamento de Cataluña, de 7 de marzo de 2019, de creación de la Comisión de Investigación sobre la Monarquía",
+   "status": "firme",
+   "attributions": [
+    {
+     "party_id": "junts",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "list",
+     "power_only": true,
+     "note": "Grupo Parlamentario Junts per Catalunya (lista JxCat), coautor de la propuesta con ERC, Catalunya en Comú Podem y el subgrupo CUP-CC (antecedentes de la STC); Govern Torra (JxCat-ERC)"
+    },
+    {
+     "party_id": "erc",
+     "role": "regional_government",
+     "attribution": "group_initiative",
+     "lineage": "same",
+     "power_only": true,
+     "note": "Grupo Parlamentario Republicà, coautor de la propuesta con JxCat, Catalunya en Comú Podem y CUP-CC; Govern Torra (JxCat-ERC)"
+    }
+   ],
+   "source": {
+    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2019-15678",
+    "title": "Pleno. Sentencia 111/2019, de 2 de octubre de 2019. Impugnación de disposiciones autonómicas 1741-2019 (BOE de 31 de octubre de 2019)",
+    "retrieved": "2026-11-11",
+    "quote": "declarar la inconstitucionalidad y consiguiente nulidad de la resolución 298/XII, de 7 de marzo",
+    "quote_lang": "es",
+    "locator": "fallo; proponentes en antecedentes"
+   },
+   "extra_sources": []
+  }
+ ]
+}
