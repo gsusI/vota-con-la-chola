@@ -1,0 +1,59 @@
+{
+  "boe_budget_laws.json": {
+    "source_id": "boe_legislacion_consolidada",
+    "url": "https://www.boe.es/datosabiertos/api/legislacion-consolidada?limit=-1&query=%7B%22query%22%3A%20%7B%22query_string%22%3A%20%7B%22query%22%3A%20%22titulo%3A%28Presupuestos%20Generales%20del%20Estado%20para%29%20and%20rango%40codigo%3A1300%22%7D%7D%7D",
+    "retrieved_at": "2026-11-11T07:58:17Z",
+    "note": "BOE open-data API, consolidated legislation: laws whose title contains 'Presupuestos Generales del Estado para'.",
+    "file": "boe_budget_laws.json",
+    "sha256": "b21945cad5dfe07518a082924fabaf3121421086ea0eda25bb202668102d496b",
+    "bytes": 44573
+  },
+  "boe_eli_inventory.json.gz": {
+    "source_id": "boe_eli",
+    "url": "https://www.boe.es/eli/es",
+    "retrieved_at": "2026-11-11T08:00:05Z",
+    "note": "Inventory of /eli/es/{rdl,l,lo}/YYYY/MM/DD/N crawled from the BOE ELI listing pages; sha256 of each listing page inside.",
+    "file": "boe_eli_inventory.json.gz",
+    "sha256": "774718ff9646a687f734235fc8f96578d6848de4258ca6937324ba71fe711efe",
+    "bytes": 141030
+  },
+  "congreso_xv_plazos.json.gz": {
+    "source_id": "congreso_iniciativas",
+    "url": "https://www.congreso.es/es/opendata/iniciativas",
+    "retrieved_at": "2026-02-12",
+    "note": "Bills of the XV legislature (121-125) with their deadline history, extracted from the project's Congress open-data ingest (parl_initiatives).",
+    "file": "congreso_xv_plazos.json.gz",
+    "sha256": "0f596ff26916234496c0c50fdd6b53eb8e10ee204c432796b5d635afbed24604",
+    "bytes": 34855
+  },
+  "owid_vdem_jucon.csv.gz": {
+    "source_id": "vdem_owid_mirror",
+    "url": "https://ourworldindata.org/grapher/judicial-constraints-on-the-executive-index.csv?v=1&csvType=full&useColumnShortNames=true",
+    "retrieved_at": "2026-11-11T07:58:22Z",
+    "official_page": "https://www.v-dem.net/data/the-v-dem-dataset/",
+    "note": "V-Dem country-year index (central estimate) through the Our World in Data mirror: the official V-Dem download sits behind a web form.",
+    "file": "owid_vdem_jucon.csv.gz",
+    "sha256": "2632aaa37939908ab1f0faabf911975631a162491060b91b38e360ea6f8ef860",
+    "bytes": 110676
+  },
+  "owid_vdem_legcon.csv.gz": {
+    "source_id": "vdem_owid_mirror",
+    "url": "https://ourworldindata.org/grapher/legislative-constraints-on-the-executive-index.csv?v=1&csvType=full&useColumnShortNames=true",
+    "retrieved_at": "2026-11-11T07:58:23Z",
+    "official_page": "https://www.v-dem.net/data/the-v-dem-dataset/",
+    "note": "V-Dem country-year index (central estimate) through the Our World in Data mirror: the official V-Dem download sits behind a web form.",
+    "file": "owid_vdem_legcon.csv.gz",
+    "sha256": "a88392ffcacafe6981b1d0f14db84b1478a43d996aefd1603e1eb4ab2b1a8c4d",
+    "bytes": 94866
+  },
+  "owid_vdem_libdem.csv.gz": {
+    "source_id": "vdem_owid_mirror",
+    "url": "https://ourworldindata.org/grapher/liberal-democracy-index.csv?v=1&csvType=full&useColumnShortNames=true",
+    "retrieved_at": "2026-11-11T07:58:19Z",
+    "official_page": "https://www.v-dem.net/data/the-v-dem-dataset/",
+    "note": "V-Dem country-year index (central estimate) through the Our World in Data mirror: the official V-Dem download sits behind a web form.",
+    "file": "owid_vdem_libdem.csv.gz",
+    "sha256": "880ee1bd7f4ca71509d22ec4499ab114f17b345e394afcbdc73497d0863ffcab",
+    "bytes": 129050
+  }
+}

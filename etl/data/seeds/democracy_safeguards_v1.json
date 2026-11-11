@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "snapshot_date": "2026-11-11",
+  "method": "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/README.md",
+  "classes": {
+    "tercero_a_tiempo": "Un órgano distinto del obligado puede obligar, anular o sustituir el acto, o la norma fija una consecuencia automática, y el efecto llega antes de que el incumplimiento se consume (o en 6 meses o menos si es continuado).",
+    "tercero_tarde": "Un tercero puede anular u obligar, pero el remedio típico llega después de que el acto haya producido sus efectos o tarda más de 6 meses.",
+    "buena_voluntad": "Nadie puede obligar ni sustituir: la única consecuencia es política (elecciones, censura, reproche) o una declaración sin efecto ejecutivo."
+  },
+  "episode_kinds": {
+    "incumplimiento_declarado": "Un tribunal u órgano competente declaró que la regla se incumplió.",
+    "plazo_vencido": "Un plazo fijado por la norma pasó sin que se cumpliera (mandato caducado, presupuesto no presentado).",
+    "tension": "Uso en el límite de la regla, discutido por órganos oficiales, sin declaración de incumplimiento.",
+    "remedio": "Un tercero actuó y la regla se hizo cumplir.",
+    "aval": "Un tribunal u órgano competente avaló el acto discutido."
+  },
+  "governments": [
+    {"id": "suarez", "president": "Adolfo Suárez", "party": "UCD", "start": "1979-01-01", "end": "1981-02-26"},
+    {"id": "calvo_sotelo", "president": "Leopoldo Calvo-Sotelo", "party": "UCD", "start": "1981-02-26", "end": "1982-12-02"},
+    {"id": "gonzalez", "president": "Felipe González", "party": "PSOE", "start": "1982-12-02", "end": "1996-05-05"},
+    {"id": "aznar", "president": "José María Aznar", "party": "PP", "start": "1996-05-05", "end": "2004-04-17"},
+    {"id": "zapatero", "president": "José Luis Rodríguez Zapatero", "party": "PSOE", "start": "2004-04-17", "end": "2011-12-21"},
+    {"id": "rajoy", "president": "Mariano Rajoy", "party": "PP", "start": "2011-12-21", "end": "2018-06-02"},
+    {"id": "sanchez", "president": "Pedro Sánchez", "party": "PSOE", "coalition": "PSOE en solitario hasta el 13-1-2020; PSOE y Unidas Podemos hasta noviembre de 2023; PSOE y Sumar desde entonces", "start": "2018-06-02", "end": null}
+  ],
+  "legislatures": [
+    {"id": "I", "label": "I (1979-1982)", "start": "1979-03-23", "end": "1982-11-18", "governments": ["suarez", "calvo_sotelo"]},
+    {"id": "II", "label": "II (1982-1986)", "start": "1982-11-18", "end": "1986-07-15", "governments": ["gonzalez"]},
+    {"id": "III", "label": "III (1986-1989)", "start": "1986-07-15", "end": "1989-11-21", "governments": ["gonzalez"]},
+    {"id": "IV", "label": "IV (1989-1993)", "start": "1989-11-21", "end": "1993-06-29", "governments": ["gonzalez"]},
+    {"id": "V", "label": "V (1993-1996)", "start": "1993-06-29", "end": "1996-03-27", "governments": ["gonzalez"]},
+    {"id": "VI", "label": "VI (1996-2000)", "start": "1996-03-27", "end": "2000-04-05", "governments": ["gonzalez", "aznar"]},
+    {"id": "VII", "label": "VII (2000-2004)", "start": "2000-04-05", "end": "2004-04-02", "governments": ["aznar"]},
+    {"id": "VIII", "label": "VIII (2004-2008)", "start": "2004-04-02", "end": "2008-04-01", "governments": ["aznar", "zapatero"]},
+    {"id": "IX", "label": "IX (2008-2011)", "start": "2008-04-01", "end": "2011-12-13", "governments": ["zapatero"]},
+    {"id": "X", "label": "X (2011-2016)", "start": "2011-12-13", "end": "2016-01-13", "governments": ["zapatero", "rajoy"]},
+    {"id": "XI", "label": "XI (2016)", "start": "2016-01-13", "end": "2016-07-19", "governments": ["rajoy"]},
+    {"id": "XII", "label": "XII (2016-2019)", "start": "2016-07-19", "end": "2019-05-21", "governments": ["rajoy", "sanchez"]},
+    {"id": "XIII", "label": "XIII (2019)", "start": "2019-05-21", "end": "2019-12-03", "governments": ["sanchez"]},
+    {"id": "XIV", "label": "XIV (2019-2023)", "start": "2019-12-03", "end": "2023-08-17", "governments": ["sanchez"]},
+    {"id": "XV", "label": "XV (2023-)", "start": "2023-08-17", "end": null, "governments": ["sanchez"]}
+  ],
+  "legislature_sources": [
+    {"label": "Congreso de los Diputados, legislaturas y sesiones constitutivas", "url": "https://www.congreso.es/es/historia-legislaturas"},
+    {"label": "La Moncloa, presidentes del Gobierno", "url": "https://www.lamoncloa.gob.es/presidente/presidentes/Paginas/index.aspx"}
+  ]
+}
