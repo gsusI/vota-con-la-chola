@@ -127,6 +127,34 @@ escala; se corrige y se informa.
 - Brief con presupuesto (≤ 60 llamadas, ≤ 3.000 caracteres por salida, ≤ 15 episodios) y campos cortos para el mapa.
 - 20 fichas más preparadas (esqueletos con pistas) y un contexto Polonia/Hungría, en 5 agentes por afinidad de fuentes.
 
+## 2. Ola 2 (aprobada por el coordinador con condiciones)
+
+Condiciones: 5 fichas con ≥ 3 que exigen atribuir a quien tenía el poder de bloquear o nombrar; misma regla de revisión;
+tabla de escaños con fuente antes de cualquier atribución de una mayoría reforzada; ≤ 0,5 M tokens por ficha.
+
+### Tabla de escaños (`etl/data/seeds/democracy_safeguards_v1.d/seats.json`)
+- Fuente: acuerdos de la Junta Electoral Central con el resumen de resultados, en el BOE (una referencia por elección).
+  Congreso completo (350) de 2000 a 2023; Senado elegido completo en 2004, 2016, 2019-11 y 2023, con 1-2 electos sin
+  leer en 2011, 2015 y 2019-04 y sin recuento en 2000 y 2008; 1989, 1993 y 1996 sin cifras (PDF escaneados ilegibles).
+  Las correcciones de errores de la JEC están listadas pero no aplicadas. UPN cuenta aparte del PP.
+- **La atribución ya no la escribe nadie a mano**: los episodios de mayoría reforzada llevan `power_holder.majority`
+  y el exportador calcula, por legislatura y cámara, quién podía bloquear solo y qué parejas de los cinco mayores podían
+  bloquear juntas (Congreso con escaños exactos; Senado solo con elegidos y «no determinado» salvo que un partido supere
+  por sí solo 2/5 del Senado máximo, 266). Ejemplo, CGPJ 2018-2024: en la XIV y la XV ningún grupo bloqueaba solo en el
+  Congreso; en el Senado, el PP sí en la XII y la XV; en la XIV, no determinado.
+- Bloqueo de acceso nuevo: la API de Infoelectoral (Ministerio del Interior) responde con un desafío de Cloudflare
+  (2026-11-11), por eso la fuente es el BOE. Pendiente de registrar en el log de bloqueos (fichero compartido).
+
+### Redacción (hojas de trabajo con texto legal consolidado y cronología del BOE ya extraídos)
+| Agente | Fichas | Turnos | Tokens de entrada | Por ficha |
+|---|---|---|---|---|
+| 2A | tc_renovacion, defensor_pueblo, tribunal_cuentas | 58 | 7,70 M | 2,6 M |
+| 2B | rtve_consejo, fiscal_general | 65 | 8,79 M | 4,4 M |
+| Tabla de escaños | — | 75 | 8,40 M | (compartido) |
+
+Medido con `scripts/subagent_usage_report.py`. **Ola 2: 16,5 M para 5 fichas (3,3 M por ficha), lejos del objetivo de
+0,5 M**: el coste lo marca releer un contexto que crece en cada turno (60 turnos × 130 k), no el número de llamadas.
+
 ## 1. Estado
 
 - **Dónde estamos.** Método fijado; series de decretos-leyes, presupuestos, V-Dem y ampliaciones de plazos reproducibles;

@@ -1,0 +1,519 @@
+{
+  "id": "defensor_pueblo",
+  "name": "Renovación del Defensor del Pueblo cada cinco años por tres quintos (art. 54; LO 3/1981)",
+  "group": "nombramientos",
+  "rule": {
+    "text": "Las Cortes eligen al Defensor del Pueblo por cinco años con 3/5 del Congreso y ratificación por 3/5 del Senado; vacante el cargo, el procedimiento debe iniciarse en un mes.",
+    "articles": [
+      "CE art. 54",
+      "LO 3/1981 arts. 2 y 5"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1981-10325",
+    "deadline": "Cinco años; procedimiento iniciado en un mes desde la vacante (art. 5.3 LO 3/1981)"
+  },
+  "obligated": "Congreso y Senado (Comisión Mixta y Plenos, mayoría de 3/5)",
+  "enforcer": {
+    "who": "Nadie puede obligar a las Cortes a elegir ni sustituirlas; la ley solo prevé que los adjuntos ejerzan interinamente mientras no haya titular (art. 5.4).",
+    "short": "Nadie (ejercen los adjuntos)",
+    "power": "nadie"
+  },
+  "sanction": "Ninguna; los adjuntos desempeñan las funciones interinamente hasta la nueva designación.",
+  "sanction_short": "Ninguna; ejerce el adjunto en funciones",
+  "remedy_delay": {
+    "days": 411,
+    "basis": "Mediana del tiempo entre el fin del mandato (o la declaración de vacante) y el nombramiento del sucesor en las 6 renovaciones completadas (1987-2021). No hay remedio de un tercero.",
+    "sources": [
+      {
+        "label": "Declaración de vacante 2017",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8477"
+      },
+      {
+        "label": "Nombramiento 2021",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+      },
+      {
+        "label": "Declaración de vacante 1993",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-7262"
+      },
+      {
+        "label": "Nombramiento 1994",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-26640"
+      }
+    ]
+  },
+  "classification": "buena_voluntad",
+  "classification_reason": "Nadie puede obligar ni sustituir a las Cortes; el plazo de un mes para iniciar el procedimiento (art. 5.3) no tiene consecuencia. La interinidad de los adjuntos (art. 5.4) mantiene la institución en marcha pero no cumple el mandato de elegir a su titular, que llegó a faltar más de cuatro años (2017-2021).",
+  "episodes": [
+    {
+      "id": "dp-1987",
+      "start": "1987-12-30",
+      "end": "1988-03-16",
+      "kind": "plazo_vencido",
+      "summary": "El Presidente del Congreso declaró vacante el cargo al expirar el mandato de Ruiz-Giménez (30-12-1987); las Cortes eligieron a Gil-Robles, publicado el 16-3-1988 (77 días). Entretanto ejercieron los adjuntos.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Declaración de vacante 1987",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1987-28789"
+        },
+        {
+          "label": "Nombramiento de Gil-Robles",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-6868"
+        }
+      ]
+    },
+    {
+      "id": "dp-1993",
+      "start": "1993-03-16",
+      "end": "1994-12-01",
+      "kind": "plazo_vencido",
+      "summary": "Vacante declarada el 16-3-1993 al expirar el mandato de Gil-Robles; Álvarez de Miranda fue nombrado el 1-12-1994, casi 21 meses después (625 días). La ley pide iniciar el procedimiento en un mes (art. 5.3). Ejerció como interina la adjunta primera, Margarita Retuerto.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador. Desde la LO 2/1992, si no se alcanzan las mayorías, en las propuestas sucesivas basta 3/5 del Congreso y mayoría absoluta del Senado (art. 2.5)."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Declaración de vacante 1993",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-7262"
+        },
+        {
+          "label": "Nombramiento de Álvarez de Miranda",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-26640"
+        },
+        {
+          "label": "LO 2/1992",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-5304"
+        }
+      ]
+    },
+    {
+      "id": "dp-1999",
+      "start": "1999-12-01",
+      "end": "2000-06-15",
+      "kind": "plazo_vencido",
+      "summary": "Vacante declarada el 1-12-1999; Múgica Herzog fue nombrado el 15-6-2000 (197 días), ya en la VII legislatura (iniciada el 5-4-2000). Ejerció como interino el adjunto primero, Antonio Rovira.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador. La vacante abarcó el final de la VI legislatura y el inicio de la VII."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Declaración de vacante 1999",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1999-24070"
+        },
+        {
+          "label": "Nombramiento de Múgica",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2000-11192"
+        }
+      ]
+    },
+    {
+      "id": "dp-2010",
+      "start": "2010-06-30",
+      "end": "2012-07-21",
+      "kind": "plazo_vencido",
+      "summary": "Vacante declarada el 30-6-2010 al expirar el segundo mandato de Múgica; Soledad Becerril fue nombrada el 21-7-2012, más de dos años después (752 días), en el mismo BOE que cuatro magistrados del TC y los consejeros del Tribunal de Cuentas, también pendientes. Ejerció como interina la adjunta primera, María Luisa Cava de Llano.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador. La vacante abarcó el final de la IX legislatura y el inicio de la X."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Declaración de vacante 2010",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-10493"
+        },
+        {
+          "label": "Nombramiento de Becerril",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9790"
+        },
+        {
+          "label": "Consejeros de Cuentas (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9788"
+        }
+      ]
+    },
+    {
+      "id": "dp-2017",
+      "start": "2017-07-19",
+      "end": "2021-11-18",
+      "kind": "plazo_vencido",
+      "summary": "Vacante declarada el 19-7-2017 al expirar el mandato de Becerril; Ángel Gabilondo fue nombrado el 18-11-2021, cuatro años y cuatro meses después (1.583 días), en el mismo BOE que cuatro magistrados del TC y los consejeros del Tribunal de Cuentas. Ejerció como interino el adjunto primero, Francisco Fernández Marugán.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador. La vacante abarcó las legislaturas XII, XIII y XIV."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Declaración de vacante 2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8477"
+        },
+        {
+          "label": "Nombramiento de Gabilondo",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        },
+        {
+          "label": "RD 1033/2021, magistrado del TC (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18901"
+        }
+      ]
+    },
+    {
+      "id": "dp-2026-disolucion",
+      "start": "2026-10-05",
+      "end": null,
+      "kind": "tension",
+      "summary": "El mandato de Gabilondo, publicado el 18-11-2021, vence en torno al 18-11-2026 con las Cortes disueltas desde el 5-10-2026 (RD 806/2026) y elecciones el 29-11-2026: la elección del sucesor solo podrán hacerla las nuevas Cámaras, y mientras tanto ejercerán los adjuntos (art. 5.4).",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Episodio abierto: el plazo aún no ha vencido a 2026-11-11."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Nombramiento de Gabilondo",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        },
+        {
+          "label": "RD 806/2026 de disolución",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20742"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "No hay un defensor general federal; el Bundestag cuenta con un Comisionado para las Fuerzas Armadas (Wehrbeauftragter, art. 45b de la Ley Fundamental), regulado por ley federal.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Grundgesetz art. 45b",
+          "url": "https://www.gesetze-im-internet.de/gg/art_45b.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "El Défenseur des droits lo nombra el Presidente de la República por seis años (art. 71-1 de la Constitución) con el procedimiento del art. 13: las comisiones solo pueden vetar un nombre con 3/5 de votos en contra, no hace falta una mayoría cualificada a favor.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Constitution du 4 octobre 1958 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"
+        }
+      ]
+    },
+    "ITA": {
+      "mechanism": "no_signal",
+      "classification": "no_signal",
+      "sources": []
+    },
+    "PRT": {
+      "mechanism": "La Asamblea de la República elige al Provedor de Justiça por dos tercios de los presentes, superior a la mayoría absoluta (art. 163 h de la Constitución), sin vía para sustituirla si no lo hace.",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Constituição da República Portuguesa (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "No dice por qué no se alcanzaron las mayorías ni quién bloqueó (el BOE no publica votos; la aritmética de escaños la añade el exportador), ni mide el trabajo de la institución durante las interinidades.",
+  "mandate_terms": [
+    {
+      "body": "Defensor del Pueblo",
+      "term": 1,
+      "mandate_start": "1982-12-30",
+      "mandate_end": "1987-12-30",
+      "successor_took_office": "1988-03-16",
+      "sources": [
+        {
+          "label": "BOE-A-1982-34733",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1982-34733"
+        },
+        {
+          "label": "BOE-A-1987-28789",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1987-28789"
+        },
+        {
+          "label": "BOE-A-1988-6868",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-6868"
+        }
+      ],
+      "note": "Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Adjuntos en funciones (art. 5.4 LO 3/1981)",
+      "term": "interino 1",
+      "mandate_start": "1987-12-30",
+      "mandate_end": "1988-03-16",
+      "successor_took_office": "1988-03-16",
+      "sources": [
+        {
+          "label": "BOE-A-1987-28789",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1987-28789"
+        },
+        {
+          "label": "BOE-A-1983-11740",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-11740"
+        }
+      ],
+      "note": "Vacante sin titular: ejercen interinamente los adjuntos nombrados en 1983, por su orden (art. 5.4)."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 2,
+      "mandate_start": "1988-03-16",
+      "mandate_end": "1993-03-16",
+      "successor_took_office": "1994-12-01",
+      "sources": [
+        {
+          "label": "BOE-A-1988-6868",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-6868"
+        },
+        {
+          "label": "BOE-A-1993-7262",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-7262"
+        },
+        {
+          "label": "BOE-A-1994-26640",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-26640"
+        }
+      ],
+      "note": "Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Adjuntos en funciones (art. 5.4 LO 3/1981)",
+      "term": "interino 2",
+      "mandate_start": "1993-03-16",
+      "mandate_end": "1994-12-01",
+      "successor_took_office": "1994-12-01",
+      "sources": [
+        {
+          "label": "BOE-A-1993-7262",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1993-7262"
+        },
+        {
+          "label": "BOE-A-1988-7505",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1988-7505"
+        }
+      ],
+      "note": "Vacante sin titular: ejerce interinamente la adjunta primera nombrada en 1988 (art. 5.4)."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 3,
+      "mandate_start": "1994-12-01",
+      "mandate_end": "1999-12-01",
+      "successor_took_office": "2000-06-15",
+      "sources": [
+        {
+          "label": "BOE-A-1994-26640",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-26640"
+        },
+        {
+          "label": "BOE-A-1999-24070",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1999-24070"
+        },
+        {
+          "label": "BOE-A-2000-11192",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2000-11192"
+        }
+      ],
+      "note": "Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Adjuntos en funciones (art. 5.4 LO 3/1981)",
+      "term": "interino 3",
+      "mandate_start": "1999-12-01",
+      "mandate_end": "2000-06-15",
+      "successor_took_office": "2000-06-15",
+      "sources": [
+        {
+          "label": "BOE-A-1999-24070",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1999-24070"
+        },
+        {
+          "label": "BOE-A-1996-23366",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1996-23366"
+        }
+      ],
+      "note": "Vacante sin titular: ejerce interinamente el adjunto primero nombrado en 1996 (art. 5.4)."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 4,
+      "mandate_start": "2000-06-15",
+      "mandate_end": "2005-06-15",
+      "successor_took_office": "2005-06-30",
+      "sources": [
+        {
+          "label": "BOE-A-2000-11192",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2000-11192"
+        },
+        {
+          "label": "BOE-A-2005-11134",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2005-11134"
+        }
+      ],
+      "note": "Reelegido el mismo titular; no consta en el BOE declaración de vacante. Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 5,
+      "mandate_start": "2005-06-30",
+      "mandate_end": "2010-06-30",
+      "successor_took_office": "2012-07-21",
+      "sources": [
+        {
+          "label": "BOE-A-2005-11134",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2005-11134"
+        },
+        {
+          "label": "BOE-A-2010-10493",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-10493"
+        },
+        {
+          "label": "BOE-A-2012-9790",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9790"
+        }
+      ],
+      "note": "Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Adjuntos en funciones (art. 5.4 LO 3/1981)",
+      "term": "interino 5",
+      "mandate_start": "2010-06-30",
+      "mandate_end": "2012-07-21",
+      "successor_took_office": "2012-07-21",
+      "sources": [
+        {
+          "label": "BOE-A-2010-10493",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-10493"
+        },
+        {
+          "label": "BOE-A-2005-11646",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2005-11646"
+        }
+      ],
+      "note": "Vacante sin titular: ejerce interinamente la adjunta primera nombrada en 2005 (art. 5.4)."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 6,
+      "mandate_start": "2012-07-21",
+      "mandate_end": "2017-07-19",
+      "successor_took_office": "2021-11-18",
+      "sources": [
+        {
+          "label": "BOE-A-2012-9790",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9790"
+        },
+        {
+          "label": "BOE-A-2017-8477",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8477"
+        },
+        {
+          "label": "BOE-A-2021-18905",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        }
+      ],
+      "note": "Inicio por la publicación del nombramiento en el BOE; fin legal a cinco años (art. 2.1 LO 3/1981) o, cuando existe, la resolución del Presidente del Congreso que declara la vacante."
+    },
+    {
+      "body": "Adjuntos en funciones (art. 5.4 LO 3/1981)",
+      "term": "interino 6",
+      "mandate_start": "2017-07-19",
+      "mandate_end": "2021-11-18",
+      "successor_took_office": "2021-11-18",
+      "sources": [
+        {
+          "label": "BOE-A-2017-8477",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-8477"
+        },
+        {
+          "label": "BOE-A-2012-9987",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9987"
+        }
+      ],
+      "note": "Vacante sin titular: ejerce interinamente el adjunto primero nombrado en 2012 (art. 5.4)."
+    },
+    {
+      "body": "Defensor del Pueblo",
+      "term": 7,
+      "mandate_start": "2021-11-18",
+      "mandate_end": "2026-11-18",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2021-18905",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        }
+      ],
+      "note": "Fin legal calculado a cinco años de la publicación del nombramiento; a 2026-11-11 aún no ha vencido."
+    }
+  ],
+  "_hints": "mandate_terms: una fila por mandato desde el primero: {body, term, mandate_start, mandate_end (fin legal), successor_took_office (toma de posesión del sustituto o null si sigue), sources}. Incluye periodos con adjunto en funciones."
+}

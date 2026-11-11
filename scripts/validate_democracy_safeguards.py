@@ -25,7 +25,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 import export_public_viz_democracy as exp  # noqa: E402
 
 CLASSES = {"tercero_a_tiempo", "tercero_tarde", "buena_voluntad"}
-PEER_CLASSES = CLASSES | {"no_aplica"}
+PEER_CLASSES = CLASSES | {"no_aplica", "no_signal"}
 KINDS = {"incumplimiento_declarado", "plazo_vencido", "tension", "remedio", "aval"}
 POWERS = {"obliga", "anula", "sustituye", "automatica", "declara", "nadie"}
 GROUPS = {"legislar", "nombramientos", "control", "justicia", "excepcion", "transparencia"}
@@ -129,6 +129,12 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
             if gov and gov["id"] != ph["government"] and not ph.get("note"):
                 rep.err(eid, f"government {ph['government']} but {gov['id']} governed on {ep['start']} (add a note if intended)")
         text_ok(rep, eid + ".power_holder.body", ph.get("body"))
+        maj = ph.get("majority")
+        if maj is not None:
+            if maj.get("rule") not in ("3/5", "2/3") or not set(maj.get("chambers") or []) <= {"Congreso", "Senado"} or not maj.get("chambers"):
+                rep.err(eid, "power_holder.majority needs rule 3/5|2/3 and chambers Congreso/Senado")
+            if ph.get("indispensable_parties"):
+                rep.err(eid, "with a qualified majority, indispensable parties are computed from seats.json: leave null")
         rem = ep.get("remedy")
         if rem is not None:
             check_date(rep, eid + ".remedy.date", rem.get("date"))
@@ -146,7 +152,8 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
         text_ok(rep, f"{sid}.peers.{code}.mechanism", peer.get("mechanism"))
         if peer.get("classification") not in PEER_CLASSES:
             rep.err(sid, f"peers.{code}.classification {peer.get('classification')!r}")
-        urls += check_sources(rep, f"{sid}.peers.{code}", peer.get("sources"))
+        if peer.get("classification") != "no_signal":
+            urls += check_sources(rep, f"{sid}.peers.{code}", peer.get("sources"))
     for i, term in enumerate(doc.get("mandate_terms") or []):
         where = f"{sid}.mandate_terms[{i}]"
         for key in ("mandate_start", "mandate_end"):
@@ -217,11 +224,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--only", default="")
     ap.add_argument("--seed-only", action="store_true")
     ap.add_argument("--check-links", action="store_true")
+    ap.add_argument("--published", action="store_true", help="check only the reviewed safeguards (the ones the page publishes) and the artifact")
     args = ap.parse_args(argv)
     rep = Report()
     seed = exp.load_seed()
     gov_ids = {g["id"] for g in seed["governments"]}
     only = {x for x in args.only.split(",") if x}
+    if args.published:
+        only = set(seed.get("reviews", {}).get("verified", {})) | {"context"}
     urls: list[str] = []
     files = sorted(exp.SAFEGUARD_DIR.glob("*.json"))
     for path in files:
@@ -231,14 +241,15 @@ def main(argv: list[str] | None = None) -> int:
         if doc.get("id") != path.stem:
             rep.err(path.name, "id must equal file name")
         urls += validate_safeguard(rep, doc, gov_ids)
-    if not only or "context" in only:
+    ctx_ready = bool(json.loads((exp.SEED_DIR / "context.json").read_text()).get("erosion")) if (exp.SEED_DIR / "context.json").exists() else False
+    if (not only and ctx_ready) or ("context" in only and (ctx_ready or not args.published)):
         urls += validate_context(rep, {p.stem for p in files})
     for name, entry in exp.load_manifest().items():
         try:
             exp.read_raw(name)
         except Exception as exc:  # noqa: BLE001
             rep.err(f"raw/{name}", str(exc))
-    if not only and not args.seed_only:
+    if (args.published or not only) and not args.seed_only:
         validate_published(rep)
     if args.check_links:
         for line in check_links(urls):

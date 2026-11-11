@@ -1,0 +1,390 @@
+/* /visualizaciones/democracia/: safeguard map and charts. Loaded by this page only. */
+.viz .demoChart {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.viz .demoChart__grid {
+  stroke: var(--viz-grid);
+}
+
+.viz .demoChart__tick,
+.viz .demoChart__band {
+  font-size: 11px;
+  fill: var(--viz-muted);
+}
+
+.viz .demoChart__label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.viz .srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.viz .demoSwatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-right: 6px;
+  vertical-align: baseline;
+}
+
+.viz .demoPill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Safeguard map */
+.viz .demoMap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.viz .demoMap__head,
+.viz .demoMap__row {
+  display: grid;
+  grid-template-columns: minmax(130px, 1.25fr) 100px minmax(130px, 1.25fr) 92px minmax(160px, 1.7fr) 116px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.viz .demoMap__head {
+  font-size: 0.75rem;
+  color: var(--viz-muted);
+  border-bottom: 1px solid var(--viz-axis);
+  position: sticky;
+  top: 0;
+  background: var(--viz-surface);
+  z-index: 1;
+}
+
+.viz .demoMap__row + .demoMap__row {
+  border-top: 1px solid var(--viz-grid);
+}
+
+.viz .demoMap__group {
+  padding: 18px 0 4px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.viz .demoMap__name a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration-color: var(--viz-axis);
+  text-underline-offset: 2px;
+}
+
+.viz .demoMap__art,
+.viz .demoMap__muted {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--viz-muted);
+}
+
+.viz .demoMap__enf {
+  color: var(--viz-ink-2);
+}
+
+.viz .demoMap__enf strong {
+  color: var(--viz-ink);
+  font-weight: 600;
+}
+
+.viz .demoMap__delay {
+  display: grid;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+.viz .demoMap__delayBar {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--viz-ref);
+}
+
+.viz .demoMap__timeline svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.viz .demoMap__axis {
+  stroke: var(--viz-axis);
+  stroke-width: 1;
+}
+
+.viz .demoMap__peers {
+  display: flex;
+  gap: 4px;
+}
+
+.viz .demoPeer {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 22px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.viz .demoLegend li:last-child {
+  color: var(--viz-ink-2);
+}
+
+/* Paired and simple bars */
+.viz .demoPaired {
+  display: grid;
+  gap: 8px;
+}
+
+.viz .demoPaired__row {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) 1fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.viz .demoPaired__bars {
+  display: grid;
+  gap: 3px;
+}
+
+.viz .demoPaired__track,
+.viz .demoHBars__track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viz .demoPaired__bar,
+.viz .demoHBars__bar {
+  height: 12px;
+  border-radius: 2px;
+  min-width: 1px;
+}
+
+.viz .demoPaired__value,
+.viz .demoHBars__value {
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.viz .demoHBars {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.viz .demoHBars li {
+  display: grid;
+  grid-template-columns: minmax(150px, 280px) 1fr;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+.viz .demoHBars__note {
+  color: var(--viz-muted);
+}
+
+/* Year strip */
+.viz .demoStrip__years {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.viz .demoStrip__years li {
+  display: grid;
+  gap: 2px;
+}
+
+.viz .demoStrip__cell {
+  display: block;
+  height: 26px;
+  border-radius: 3px;
+}
+
+.viz .demoStrip__party {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.viz .demoStrip__year {
+  font-size: 0.68rem;
+  color: var(--viz-muted);
+  height: 12px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* Small multiples (V-Dem) */
+.viz .demoMultiples {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.viz .demoMultiples h3 {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  max-width: none;
+}
+
+/* Safeguard detail sheets (the table view of the map) */
+.viz .demoSheets {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.viz .demoSheet,
+.viz .demoSheet > * {
+  min-width: 0;
+}
+
+.viz .demoSheet {
+  border-radius: 8px;
+  background: rgba(23, 25, 31, 0.03);
+  padding: 10px 14px;
+}
+
+.viz .demoSheet > summary {
+  cursor: pointer;
+  font-weight: 600;
+  max-width: none;
+}
+
+.viz .demoSheet dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 190px) 1fr;
+  gap: 6px 14px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.viz .demoSheet dt {
+  font-weight: 600;
+  color: var(--viz-ink-2);
+}
+
+.viz .demoSheet dd {
+  margin: 0;
+  max-width: none;
+}
+
+.viz .demoSheet table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.viz .demoSheet th,
+.viz .demoSheet td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 8px;
+  border-top: 1px solid var(--viz-grid);
+}
+
+.viz .demoSheet td a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+.viz .demoErosion {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.viz .demoErosion th,
+.viz .demoErosion td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px;
+  border-top: 1px solid var(--viz-grid);
+}
+
+@media (max-width: 1060px) {
+  .viz .demoMap__head {
+    display: none;
+  }
+
+  .viz .demoMap__row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name class"
+      "enf enf"
+      "delay peers"
+      "time time";
+    gap: 6px 10px;
+    padding: 12px 0;
+  }
+
+  .viz .demoMap__row > :nth-child(1) { grid-area: name; }
+  .viz .demoMap__row > :nth-child(2) { grid-area: class; }
+  .viz .demoMap__row > :nth-child(3) { grid-area: enf; }
+  .viz .demoMap__row > :nth-child(4) { grid-area: delay; }
+  .viz .demoMap__row > :nth-child(5) { grid-area: time; }
+  .viz .demoMap__row > :nth-child(6) { grid-area: peers; }
+
+  .viz .demoPaired__row,
+  .viz .demoHBars li,
+  .viz .demoSheet dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+.viz .demoArith {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--viz-ink-2);
+  display: grid;
+  gap: 3px;
+}
+
+/* Sheets and the erosion table are data blocks: keep their text left-aligned, not on the centred reading column. */
+.viz main.vizArticle .demoSheet :is(dt, dd, p, ul, li, summary),
+.viz main.vizArticle .demoErosion :is(p, ul, li) {
+  margin-inline: 0 !important;
+  width: auto;
+  max-width: none;
+}
+
+.viz .demoArith strong {
+  font-weight: 600;
+}

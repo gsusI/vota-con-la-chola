@@ -1,0 +1,153 @@
+{
+  "id": "fiscal_general",
+  "name": "Nombramiento y autonomía del Fiscal General del Estado (art. 124.4)",
+  "group": "justicia",
+  "rule": {
+    "text": "El Rey nombra al Fiscal General a propuesta del Gobierno, oído el CGPJ (informe no vinculante) y tras comparecer en el Congreso; debe ser jurista con más de 15 años de ejercicio y, desde 2007, tiene mandato de cuatro años y solo cesa por causas tasadas, entre ellas el cese del Gobierno que lo propuso.",
+    "articles": ["CE art. 124.4", "Ley 50/1981 (EOMF) arts. 29 y 31"],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a124",
+    "deadline": null
+  },
+  "obligated": "Gobierno (propuesta, nombramiento y cese) y Fiscal General del Estado (legalidad e imparcialidad, art. 124.2 CE)",
+  "enforcer": {
+    "who": "Tribunal Supremo: la Sala Tercera puede anular el nombramiento y los actos del Fiscal General; la Sala Segunda juzga sus delitos. El informe del CGPJ no obliga al Gobierno y el Congreso solo oye al candidato.",
+    "short": "Tribunal Supremo (Salas Tercera y Segunda)",
+    "power": "anula"
+  },
+  "sanction": "Nulidad del nombramiento o del acto cuando ya ha producido efectos; condena penal e inhabilitación si hay delito",
+  "sanction_short": "Nulidad o condena, más de un año después",
+  "remedy_delay": {
+    "days": 413,
+    "basis": "Mediana de tres sentencias de la Sala Tercera del TS sobre nombramientos ligados al Fiscal General (809 días en 1994, 413 en 2023 y 398 en 2025), contados desde el real decreto recurrido",
+    "sources": [
+      {"label": "Orden de ejecución de la STS de 28-06-1994", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-19587"},
+      {"label": "TS: incidente de nulidad sobre la STS de 21-11-2023", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-rechaza-el-incidente-de-nulidad-de-Dolores-Delgado-contra-la-sentencia-que-anulo-su-promocion-a-fiscal-de-Sala-y-su-nombramiento-como-fiscal-togada"},
+      {"label": "TS: sentencia de 28-01-2025 (recurso de la APIF)", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-desestima-recurso-de-la-APIF-contra-el-nombramiento-del-fiscal-general-del-Estado"}
+    ]
+  },
+  "classification": "tercero_tarde",
+  "classification_reason": "Un tercero (el Tribunal Supremo) puede anular el nombramiento o los actos del Fiscal General, pero sus sentencias llegan más de un año después, cuando el nombramiento ya ha surtido efecto (en 1994 el Fiscal General ya había cesado). El informe del CGPJ es la otra vía y no vincula: en 2023 el Gobierno renovó a un candidato declarado no idóneo.",
+  "episodes": [
+    {
+      "id": "eligio-hernandez-1992",
+      "start": "1992-04-10",
+      "end": "1994-06-28",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Gobierno nombró Fiscal General a Eligio Hernández Gutiérrez (RD 364/1992). La Unión Judicial Independiente, la Asociación Profesional de la Magistratura y la Asociación de Fiscales lo recurrieron y la Sala Tercera del Tribunal Supremo, en Pleno, declaró nulo el nombramiento el 28-06-1994, dos años y dos meses después; para entonces ya había cesado (RD 1103/1994, de 27 de mayo). El fallo publicado en el BOE no recoge el motivo.",
+      "power_holder": {"government": "gonzalez", "body": "Gobierno", "indispensable_parties": null, "note": null},
+      "remedy": {"by": "Tribunal Supremo (Sala Tercera)", "ruling": "STS de 28-06-1994 (recursos 7105, 7143 y 7167/1992)", "date": "1994-06-28", "act_date": "1992-04-10"},
+      "sources": [
+        {"label": "RD 364/1992, nombramiento", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-8103"},
+        {"label": "RD 1103/1994, cese", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1994-12772"},
+        {"label": "Orden de 31-07-1995 de cumplimiento de la sentencia", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-19587"}
+      ]
+    },
+    {
+      "id": "delgado-2020",
+      "start": "2020-02-25",
+      "end": "2022-07-19",
+      "kind": "tension",
+      "summary": "El Gobierno nombró Fiscal General a Dolores Delgado García (RD 410/2020), que había estado en servicios especiales en la carrera fiscal desde junio de 2018 y reingresó al servicio activo el 16-01-2020, 40 días antes. Cesó el 19-07-2022 (RD 591/2022). La Ley Orgánica 3/2024 añadió después al art. 29 del Estatuto la prohibición de proponer a quien haya sido ministro, secretario de Estado o parlamentario en los cinco años anteriores.",
+      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": "Los documentos del BOE consultados no indican el cargo que motivó los servicios especiales."},
+      "remedy": null,
+      "sources": [
+        {"label": "RD 410/2020, nombramiento", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-2672"},
+        {"label": "Orden JUS/643/2018, servicios especiales", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8019"},
+        {"label": "Orden JUS/10/2020, reingreso", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-687"},
+        {"label": "RD 591/2022, cese", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-12020"},
+        {"label": "Ley Orgánica 3/2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-16127"}
+      ]
+    },
+    {
+      "id": "garcia-ortiz-2022",
+      "start": "2022-07-21",
+      "end": "2022-08-01",
+      "kind": "aval",
+      "summary": "El Pleno del CGPJ consideró por 12 votos a 7 que Álvaro García Ortiz reunía los requisitos legales para ser Fiscal General (21-07-2022), y el Gobierno lo nombró el 01-08-2022 (RD 675/2022).",
+      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": null},
+      "remedy": null,
+      "sources": [
+        {"label": "CGPJ, informe de 21-07-2022", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Consejo-General-del-Poder-Judicial/En-Portada/El-Pleno-del-CGPJ-considera-por-mayoria-que-Alvaro-Garcia-reune-los-requisitos-legales-exigidos-para-ser-nombrado-fiscal-general-del-Estado-"},
+        {"label": "RD 675/2022, nombramiento", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-12946"}
+      ]
+    },
+    {
+      "id": "delgado-fiscal-sala-2022",
+      "start": "2022-10-04",
+      "end": "2024-04-09",
+      "kind": "incumplimiento_declarado",
+      "summary": "A propuesta del Fiscal General García Ortiz, el Gobierno promovió a Dolores Delgado a Fiscal de Sala y la nombró Fiscal de Sala de la Fiscalía Togada (RD 807/2022). La Sala Tercera del Tribunal Supremo anuló ese real decreto el 21-11-2023, trece meses y medio después, y rechazó el incidente de nulidad el 25-01-2024; el Gobierno ejecutó la sentencia con el RD 371/2024 (09-04-2024). En 2025 el propio TS recordó que había apreciado desviación de poder en algunas decisiones del Fiscal General.",
+      "power_holder": {"government": "sanchez", "body": "Gobierno, a propuesta del Fiscal General del Estado", "indispensable_parties": null, "note": null},
+      "remedy": {"by": "Tribunal Supremo (Sala Tercera)", "ruling": "STS de 21-11-2023", "date": "2023-11-21", "act_date": "2022-10-04"},
+      "sources": [
+        {"label": "RD 807/2022", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-16204"},
+        {"label": "TS rechaza el incidente de nulidad (25-01-2024)", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-rechaza-el-incidente-de-nulidad-de-Dolores-Delgado-contra-la-sentencia-que-anulo-su-promocion-a-fiscal-de-Sala-y-su-nombramiento-como-fiscal-togada"},
+        {"label": "RD 371/2024, ejecución de sentencia", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-7042"}
+      ]
+    },
+    {
+      "id": "cgpj-no-idoneo-2023",
+      "start": "2023-11-30",
+      "end": "2023-12-27",
+      "kind": "tension",
+      "summary": "Tras la formación del nuevo Gobierno, el Pleno del CGPJ consideró por 8 votos a 7 que García Ortiz no era idóneo para el cargo (30-11-2023). El informe no es vinculante: el Gobierno declaró su cese y lo volvió a nombrar el 27-12-2023 (RD 1181/2023 y RD 1182/2023).",
+      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": null},
+      "remedy": null,
+      "sources": [
+        {"label": "CGPJ, informe de 30-11-2023", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/En-Portada/El-Pleno-del-CGPJ-considera-que-Alvaro-Garcia-Ortiz-no-es-idoneo-para-el-cargo-de-fiscal-general-del-Estado"},
+        {"label": "RD 1181/2023, cese", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-26469"},
+        {"label": "RD 1182/2023, nombramiento", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-26470"}
+      ]
+    },
+    {
+      "id": "ts-avala-renombramiento-2025",
+      "start": "2025-01-28",
+      "end": "2025-01-28",
+      "kind": "aval",
+      "summary": "La Sala Tercera del Tribunal Supremo desestimó el recurso de la Asociación Profesional e Independiente de Fiscales contra el RD 1182/2023: la ilegalidad judicialmente apreciada de algunas decisiones del Fiscal General, incluso por desviación de poder, no equivale a incumplimiento grave y reiterado de sus funciones.",
+      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": null},
+      "remedy": {"by": "Tribunal Supremo (Sala Tercera)", "ruling": "STS de 28-01-2025 (desestimatoria)", "date": "2025-01-28", "act_date": "2023-12-27"},
+      "sources": [
+        {"label": "TS, nota de 28-01-2025", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-desestima-recurso-de-la-APIF-contra-el-nombramiento-del-fiscal-general-del-Estado"}
+      ]
+    },
+    {
+      "id": "condena-garcia-ortiz-2025",
+      "start": "2025-11-20",
+      "end": "2025-12-09",
+      "kind": "remedio",
+      "summary": "La Sala Segunda del Tribunal Supremo condenó a García Ortiz por revelación de datos reservados a multa de 12 meses (cuota de 20 euros) y dos años de inhabilitación especial para el cargo de Fiscal General, con dos votos particulares favorables a la absolución (fallo el 20-11-2025, sentencia notificada el 09-12-2025). El Gobierno dispuso su cese y nombró a Teresa Peramato Martín el 09-12-2025 (RD 1138/2025 y RD 1140/2025).",
+      "power_holder": {"government": "sanchez", "body": "Fiscal General del Estado", "indispensable_parties": null, "note": "Responsabilidad penal personal del Fiscal General propuesto por el Gobierno de Sánchez."},
+      "remedy": {"by": "Tribunal Supremo (Sala Segunda)", "ruling": "Sentencia de la Sala Segunda del TS (notificada el 09-12-2025)", "date": "2025-12-09", "act_date": null},
+      "sources": [
+        {"label": "TS, fallo de 20-11-2025", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-condena-a-Alvaro-Garcia-Ortiz-por-un-delito-de-revelacion-de-secretos-a-pena-de-multa-y-2-anos-de-inhabilitacion-para-el-cargo-de-fiscal-general-del-Estado"},
+        {"label": "TS, notificación de la sentencia (09-12-2025)", "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-notifica-la-sentencia-que-condena-por-revelacion-de-datos-reservados-al-fiscal-general-del-Estado-"},
+        {"label": "RD 1138/2025, cese", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-25142"},
+        {"label": "RD 1140/2025, nombramiento de Teresa Peramato", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-25144"}
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "El Ministro federal de Justicia tiene la supervisión y dirección del Fiscal General Federal (§ 147 GVG), que es un funcionario político al que se puede pasar a la reserva en cualquier momento (§ 54 BBG).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {"label": "§ 147 GVG", "url": "https://www.gesetze-im-internet.de/gvg/__147.html"},
+        {"label": "§ 54 BBG", "url": "https://www.gesetze-im-internet.de/bbg_2009/__54.html"}
+      ]
+    },
+    "FRA": {
+      "mechanism": "El Consejo Superior de la Magistratura solo da un dictamen no vinculante sobre los nombramientos de magistrados de la fiscalía (art. 65 de la Constitución).",
+      "classification": "buena_voluntad",
+      "sources": [{"label": "Constitution de 1958 (Legifrance)", "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"}]
+    },
+    "ITA": {
+      "mechanism": "No hay un fiscal general nombrado por el Gobierno: el ministerio público goza de las garantías de la magistratura y tiene la obligación de ejercer la acción penal (arts. 107 y 112 de la Constitución).",
+      "classification": "no_aplica",
+      "sources": [{"label": "Costituzione (Corte costituzionale)", "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"}]
+    },
+    "PRT": {"mechanism": "no_signal", "classification": "no_signal", "sources": []}
+  },
+  "limits": "No encontré resoluciones que anulen nombramientos o actos del Fiscal General con los gobiernos de UCD, Aznar ni Rajoy; las sentencias del TS no están en el BOE y se citan por sus notas oficiales, sin el texto íntegro.",
+  "_hints": "Nombramiento por el Gobierno oído el CGPJ (informe no vinculante) y comparecencia en el Congreso; Estatuto Orgánico del Ministerio Fiscal (Ley 50/1981) y cese. Episodios en todos los gobiernos: nombramientos anulados por el Tribunal Supremo (p. ej. el de Eligio Hernández en los noventa), informes de idoneidad negativos del CGPJ, nombramientos de exministros o cargos del Gobierno, actuaciones anuladas por el Supremo, condenas o procesamientos de un Fiscal General. Pares: dependencia o no del Ministerio de Justicia."
+}

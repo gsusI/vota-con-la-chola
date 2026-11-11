@@ -7,6 +7,20 @@ de datos. Cada hecho debe salir de una fuente primaria que hayas abierto. Escrib
 Rellena estos ficheros (ya existen con el esqueleto; edítalos, no crees otros):
 {FILES}
 
+**Empieza por la hoja de trabajo** de cada ficha: `docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/worklists/{WAVE}/<id>.json`.
+Trae ya el texto consolidado de los artículos (`legal`, del BOE) y la cronología oficial de nombramientos y ceses del BOE
+(`chronology`, filas con referencia, fecha y título). Sácale los datos con python (no la imprimas entera); busca fuera solo
+lo que falte (sentencias, informes) con el kit.
+
+## Atribución en mayorías reforzadas (3/5, 2/3): regla obligatoria
+- No nombres tú a ningún partido como responsable de un bloqueo. En cada episodio que dependa de una mayoría reforzada
+  pon `power_holder.majority = {"rule": "3/5", "chambers": ["Congreso", "Senado"]}` (las cámaras que votan) y
+  `indispensable_parties: null`. El exportador calcula la aritmética de cada legislatura con la tabla de escaños oficial
+  (JEC en el BOE) y la muestra junto al episodio.
+- Si un documento oficial (Diario de Sesiones, BOCG, acuerdo de la Mesa) recoge quién votó qué o quién propuso a quién,
+  dilo en `summary` con su fuente; si no, no lo digas.
+- Nombramientos que hace el Gobierno: `government` con el id del Gobierno que firmó el real decreto.
+
 ## Reglas editoriales (obligatorias)
 - Solo hechos con fecha y documento. Nada de motivos, intenciones, insultos ni previsiones.
 - Misma vara para todos: cada episodio se atribuye a quien tenía el poder relevante en la fecha (Gobierno y su
@@ -49,7 +63,9 @@ Rellena estos ficheros (ya existen con el esqueleto; edítalos, no crees otros):
 
 ## Presupuesto de trabajo
 - Haz las búsquedas en lote: una llamada de python que consulte varias referencias vale más que diez curl.
-- Nunca imprimas más de ~3.000 caracteres por llamada. Objetivo: ≤ 60 llamadas a herramientas en total.
+- Nunca imprimas más de ~3.000 caracteres por llamada. Objetivo: ≤ 25 llamadas a herramientas por ficha, y escribe cada
+  ficha de una vez (un solo Write por fichero).
+- Pares: no investigues; una frase con fuente oficial por país o `no_signal` (sin fuentes).
 - Episodios: los significativos y documentados (orientativo ≤ 15 por ficha); si hay una serie larga de casos iguales
   (p. ej. decenas de sentencias similares), resume el recuento en un episodio y enlaza la búsqueda o la memoria oficial.
 
@@ -75,7 +91,7 @@ Rellena estos ficheros (ya existen con el esqueleto; edítalos, no crees otros):
      "sources": [{"label": "…", "url": "…"}]}
   ],
   "peers": {
-    "DEU": {"mechanism": "Cómo se resuelve el mismo bloqueo, una o dos frases", "classification": "tercero_a_tiempo|tercero_tarde|buena_voluntad|no_aplica", "sources": [{"label": "…", "url": "…"}]},
+    "DEU": {"mechanism": "UNA frase con su fuente oficial (kit peers), o «no_signal» si no la tienes a mano", "classification": "tercero_a_tiempo|tercero_tarde|buena_voluntad|no_aplica|no_signal", "sources": [{"label": "…", "url": "…"}]},
     "FRA": {…}, "ITA": {…}, "PRT": {…}
   },
   "limits": "Lo que esta ficha no puede decir (una frase)"

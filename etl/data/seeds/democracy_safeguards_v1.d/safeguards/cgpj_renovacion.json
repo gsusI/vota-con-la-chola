@@ -44,7 +44,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -68,7 +75,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -96,7 +110,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -120,7 +141,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -144,7 +172,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -168,7 +203,14 @@
         "government": null,
         "body": "Cortes Generales (3/5 del Congreso y 3/5 del Senado)",
         "indispensable_parties": null,
-        "note": "Exige 3/5 del Congreso y 3/5 del Senado: la renovación no estaba en manos de un solo partido. Esta ficha no atribuye el bloqueo a ningún partido concreto: hacerlo exige un recuento de escaños por cámara y legislatura con fuente, que la ficha todavía no tiene (la aritmética cambia de una legislatura a otra)."
+        "note": "Exige 3/5 de cada Cámara: la aritmética de cada legislatura, con la tabla de escaños de la Junta Electoral Central, acompaña al episodio.",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        }
       },
       "remedy": null,
       "sources": [
@@ -295,7 +337,7 @@
       ]
     }
   },
-  "limits": "Las fechas de mandato son las de los reales decretos de nombramiento publicados en el BOE (para 1980, la del Presidente elegido por el Consejo), no las de la sesión constitutiva; la ficha no atribuye el bloqueo escaño a escaño.",
+  "limits": "Las fechas de mandato son las de los reales decretos de nombramiento publicados en el BOE (para 1980, la del Presidente elegido por el Consejo), no las de la sesión constitutiva; la ficha no atribuye el bloqueo a ningún partido: la aritmética de escaños de cada legislatura la calcula el exportador con la tabla de la Junta Electoral Central (sin cifras para 1989-1996) y se muestra junto a cada episodio.",
   "mandate_terms": [
     {
       "term": "I (1980)",

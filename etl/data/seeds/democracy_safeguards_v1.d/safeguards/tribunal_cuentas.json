@@ -1,0 +1,397 @@
+{
+  "id": "tribunal_cuentas",
+  "name": "Renovación de los consejeros del Tribunal de Cuentas cada nueve años (art. 136; LO 2/1982)",
+  "group": "nombramientos",
+  "rule": {
+    "text": "Las Cortes designan a los doce consejeros de cuentas por nueve años, seis el Congreso y seis el Senado, por mayoría de 3/5 de cada Cámara.",
+    "articles": [
+      "CE art. 136",
+      "LO 2/1982 art. 30"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1982-11584",
+    "deadline": "Nueve años desde la designación (art. 30.1 LO 2/1982); sin plazo para designar a los sucesores"
+  },
+  "obligated": "Congreso y Senado (mayoría de 3/5 de cada Cámara)",
+  "enforcer": {
+    "who": "Nadie: el art. 30 de la LO 2/1982 no fija plazo para designar a los sucesores ni consecuencia por el retraso, y ningún órgano puede sustituir a las Cámaras.",
+    "short": "Nadie",
+    "power": "nadie"
+  },
+  "sanction": "Ninguna prevista en la ley.",
+  "sanction_short": "Ninguna",
+  "remedy_delay": {
+    "days": 237,
+    "basis": "Mediana del retraso entre el fin de los nueve años y la publicación de los sucesores en las 4 renovaciones completadas (1991-2021; Congreso y Senado designaron cada vez con días de diferencia). No hay remedio de un tercero.",
+    "sources": [
+      {
+        "label": "Acuerdo 1991",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30427"
+      },
+      {
+        "label": "Acuerdo 2001",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20745"
+      },
+      {
+        "label": "Acuerdo 2012",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9788"
+      },
+      {
+        "label": "Acuerdo 2021",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18906"
+      }
+    ]
+  },
+  "classification": "buena_voluntad",
+  "classification_reason": "Ningún órgano puede obligar a las Cámaras a designar ni sustituirlas, y la ley no fija plazo ni consecuencia: las cuatro renovaciones llegaron entre 4 y 20 meses tarde.",
+  "episodes": [
+    {
+      "id": "tcu-1991",
+      "start": "1991-07-21",
+      "end": "1991-12-20",
+      "kind": "plazo_vencido",
+      "summary": "Los doce consejeros nombrados en julio de 1982 cumplían nueve años en julio de 1991; los Plenos del Congreso y del Senado designaron a los sucesores el 19-12-1991 (152 días tarde).",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Los acuerdos del BOE no recogen el voto de cada grupo; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Nombramientos de 1982",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1982-18290"
+        },
+        {
+          "label": "Acuerdo del Congreso 1991",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30427"
+        },
+        {
+          "label": "Acuerdo del Senado 1991",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30428"
+        }
+      ]
+    },
+    {
+      "id": "tcu-2001",
+      "start": "2000-12-20",
+      "end": "2001-11-07",
+      "kind": "plazo_vencido",
+      "summary": "El mandato de los consejeros designados en diciembre de 1991 venció en diciembre de 2000; el Congreso designó a los seis suyos el 30-10-2001 y el Senado el 6-11-2001 (publicados el 7-11-2001, 322 días tarde).",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Los acuerdos del BOE no recogen el voto de cada grupo; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Acuerdo del Congreso 2001",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20745"
+        },
+        {
+          "label": "Acuerdo del Senado 2001",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20746"
+        }
+      ]
+    },
+    {
+      "id": "tcu-2010",
+      "start": "2010-11-07",
+      "end": "2012-07-21",
+      "kind": "plazo_vencido",
+      "summary": "El mandato de los consejeros designados en 2001 venció en noviembre de 2010; el Congreso designó a los suyos el 17-7-2012 y el Senado el 18-7-2012 (publicados el 21-7-2012, 622 días tarde), en el mismo BOE que cuatro magistrados del TC y la Defensora del Pueblo, también pendientes.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Los acuerdos del BOE no recogen el voto de cada grupo; la aritmética de escaños la calcula el exportador. La vacante abarcó el final de la IX legislatura y el inicio de la X."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Acuerdo del Congreso 2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9788"
+        },
+        {
+          "label": "Acuerdo del Senado 2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9789"
+        },
+        {
+          "label": "RD 1115/2012, magistrado del TC (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9782"
+        }
+      ]
+    },
+    {
+      "id": "tcu-2021",
+      "start": "2021-07-21",
+      "end": "2021-11-18",
+      "kind": "plazo_vencido",
+      "summary": "El mandato de los consejeros designados en 2012 venció en julio de 2021; el Congreso designó a los suyos el 11-11-2021 y el Senado el 16-11-2021 (publicados el 18-11-2021, 120 días tarde), en el mismo BOE que cuatro magistrados del TC y el Defensor del Pueblo.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales (3/5 del Congreso y del Senado)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Los acuerdos del BOE no recogen el voto de cada grupo; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Acuerdo del Congreso 2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18906"
+        },
+        {
+          "label": "Acuerdo del Senado 2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18907"
+        },
+        {
+          "label": "Nombramiento del Defensor del Pueblo (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "El Bundestag (por mayoría de sus miembros) y el Bundesrat eligen al presidente y al vicepresidente del Bundesrechnungshof a propuesta del Gobierno federal (§ 5 BRHG); no se exige una mayoría cualificada.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "BRHG § 5",
+          "url": "https://www.gesetze-im-internet.de/brhg_1985/__5.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "no_signal",
+      "classification": "no_signal",
+      "sources": []
+    },
+    "ITA": {
+      "mechanism": "La Constitución sitúa a la Corte dei conti entre los órganos auxiliares y remite a la ley su independencia (art. 100); no prevé una designación parlamentaria por mayoría cualificada.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Costituzione (Corte costituzionale, PDF)",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
+    },
+    "PRT": {
+      "mechanism": "El Presidente de la República nombra y cesa al presidente del Tribunal de Contas a propuesta del Gobierno (art. 133 m de la Constitución); no interviene una mayoría parlamentaria cualificada.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Constituição da República Portuguesa (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "Solo mide el retraso de las renovaciones completas; no evalúa los perfiles de los consejeros ni los nombramientos discutidos, y no atribuye el bloqueo a partidos (los acuerdos no publican votos; la aritmética de escaños la añade el exportador).",
+  "mandate_terms": [
+    {
+      "body": "Congreso (6 consejeros)",
+      "term": 1,
+      "mandate_start": "1982-07-21",
+      "mandate_end": "1991-07-21",
+      "successor_took_office": "1991-12-20",
+      "sources": [
+        {
+          "label": "BOE-A-1982-18290",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1982-18290"
+        },
+        {
+          "label": "BOE-A-1991-30427",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30427"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982). Las vacantes intermedias (p. ej. 1989, 1994) no alteran el ciclo."
+    },
+    {
+      "body": "Congreso (6 consejeros)",
+      "term": 2,
+      "mandate_start": "1991-12-20",
+      "mandate_end": "2000-12-20",
+      "successor_took_office": "2001-11-07",
+      "sources": [
+        {
+          "label": "BOE-A-1991-30427",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30427"
+        },
+        {
+          "label": "BOE-A-2001-20745",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20745"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Congreso (6 consejeros)",
+      "term": 3,
+      "mandate_start": "2001-11-07",
+      "mandate_end": "2010-11-07",
+      "successor_took_office": "2012-07-21",
+      "sources": [
+        {
+          "label": "BOE-A-2001-20745",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20745"
+        },
+        {
+          "label": "BOE-A-2012-9788",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9788"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Congreso (6 consejeros)",
+      "term": 4,
+      "mandate_start": "2012-07-21",
+      "mandate_end": "2021-07-21",
+      "successor_took_office": "2021-11-18",
+      "sources": [
+        {
+          "label": "BOE-A-2012-9788",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9788"
+        },
+        {
+          "label": "BOE-A-2021-18906",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18906"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Congreso (6 consejeros)",
+      "term": 5,
+      "mandate_start": "2021-11-18",
+      "mandate_end": "2030-11-18",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2021-18906",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18906"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Senado (6 consejeros)",
+      "term": 1,
+      "mandate_start": "1982-07-21",
+      "mandate_end": "1991-07-21",
+      "successor_took_office": "1991-12-20",
+      "sources": [
+        {
+          "label": "BOE-A-1982-18290",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1982-18290"
+        },
+        {
+          "label": "BOE-A-1991-30428",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30428"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Senado (6 consejeros)",
+      "term": 2,
+      "mandate_start": "1991-12-20",
+      "mandate_end": "2000-12-20",
+      "successor_took_office": "2001-11-07",
+      "sources": [
+        {
+          "label": "BOE-A-1991-30428",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1991-30428"
+        },
+        {
+          "label": "BOE-A-2001-20746",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20746"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Senado (6 consejeros)",
+      "term": 3,
+      "mandate_start": "2001-11-07",
+      "mandate_end": "2010-11-07",
+      "successor_took_office": "2012-07-21",
+      "sources": [
+        {
+          "label": "BOE-A-2001-20746",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20746"
+        },
+        {
+          "label": "BOE-A-2012-9789",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9789"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Senado (6 consejeros)",
+      "term": 4,
+      "mandate_start": "2012-07-21",
+      "mandate_end": "2021-07-21",
+      "successor_took_office": "2021-11-18",
+      "sources": [
+        {
+          "label": "BOE-A-2012-9789",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9789"
+        },
+        {
+          "label": "BOE-A-2021-18907",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18907"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    },
+    {
+      "body": "Senado (6 consejeros)",
+      "term": 5,
+      "mandate_start": "2021-11-18",
+      "mandate_end": "2030-11-18",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2021-18907",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18907"
+        }
+      ],
+      "note": "Inicio y sucesión por la publicación en el BOE de los acuerdos de los Plenos; fin legal a nueve años (art. 30.1 LO 2/1982)."
+    }
+  ],
+  "_hints": "mandate_terms: una fila por mandato desde el primero: {body, term, mandate_start, mandate_end (fin legal), successor_took_office (toma de posesión del sustituto o null si sigue), sources}. Episodios: renovaciones retrasadas; nombramientos discutidos."
+}

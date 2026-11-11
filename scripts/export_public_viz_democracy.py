@@ -416,6 +416,10 @@ def vdem_series(first: int = 1975) -> dict:
     return {"indices": out, "latest_year": latest, "countries": PEER_CODES}
 
 
+BODY_SHORT = {"cgpj_renovacion": "CGPJ", "tc_renovacion": "Tribunal Constitucional", "defensor_pueblo": "Defensor del Pueblo",
+              "tribunal_cuentas": "Tribunal de Cuentas", "rtve_consejo": "Consejo de RTVE"}
+
+
 def mandate_series(safeguards: list[dict], snapshot: str) -> list[dict]:
     rows = []
     for sg in safeguards:
@@ -423,7 +427,7 @@ def mandate_series(safeguards: list[dict], snapshot: str) -> list[dict]:
             took = term.get("successor_took_office")
             end_ref = took or snapshot
             expired = max(0, (date.fromisoformat(end_ref) - date.fromisoformat(term["mandate_end"])).days)
-            rows.append({"safeguard": sg["id"], "body": term.get("body") or sg["name"], "term": term.get("term"),
+            rows.append({"safeguard": sg["id"], "body": BODY_SHORT.get(sg["id"], sg["name"]) + (f" ({term['body']})" if term.get("body") else ""), "term": term.get("term"),
                          "mandate_start": term["mandate_start"], "mandate_end": term["mandate_end"],
                          "successor_took_office": took, "days_expired": expired, "ongoing": took is None,
                          "sources": term.get("sources", [])})
@@ -461,11 +465,81 @@ def load_context() -> dict:
     return doc
 
 
+SENATE_MAX = 266  # upper bound of the Senate size (208 elected + at most 58 designated): elected seats above 2/5 of it block for sure
+MAJORITY_SHARE = {"3/5": 3 / 5, "2/3": 2 / 3}
+
+
+def load_seats() -> dict:
+    path = SEED_DIR / "seats.json"
+    return json.loads(path.read_text()) if path.exists() else {"elections": []}
+
+
+def legislatures_between(start: str, end: str | None, legislatures: list[dict], snapshot: str) -> list[dict]:
+    end = end or snapshot
+    return [leg for leg in legislatures if leg["start"] <= end and (leg.get("end") is None or leg["end"] > start)]
+
+
+def qualified_arithmetic(rule: str, chambers: list[str], legs: list[dict], seats: dict) -> list[dict]:
+    """For each legislature: who could block a qualified majority alone, and which pairs of the largest could together.
+
+    Congress: exact seats (JEC). Senate: elected seats only; a family is reported as blocking only when its elected
+    seats alone exceed (1 - share) of the largest possible Senate, otherwise the Senate is 'no determinado'."""
+    share = MAJORITY_SHARE[rule]
+    by_leg = {e["legislature"]: e for e in seats.get("elections", [])}
+    out = []
+    for leg in legs:
+        el = by_leg.get(leg["id"])
+        if not el:
+            out.append({"legislature": leg["id"], "status": "sin_tabla"})
+            continue
+        row = {"legislature": leg["id"], "election": el["election"], "boe_ref": el["boe_ref"], "url": el["url"],
+               "status": el.get("status", "completa"), "rule": rule}
+        congress = {k: v for k, v in (el.get("congress") or {}).items() if v}
+        senate = {k: v for k, v in (el.get("senate_elected") or {}).items() if v}
+        if "Congreso" in chambers:
+            if sum(congress.values()) != 350:
+                row["congress"] = None
+            else:
+                needed = int(-(-350 * share // 1))  # ceil
+                alone = sorted([k for k, v in congress.items() if v > 350 - needed], key=lambda k: -congress[k])
+                top = sorted(congress, key=lambda k: -congress[k])[:5]
+                pairs = [[a, b] for i, a in enumerate(top) for b in top[i + 1:]
+                         if a not in alone and b not in alone and congress[a] + congress[b] > 350 - needed]
+                row["congress"] = {"needed": needed, "seats": dict(sorted(congress.items(), key=lambda kv: -kv[1])),
+                                   "block_alone": alone, "block_pairs": pairs}
+        if "Senado" in chambers:
+            if sum(senate.values()) != 208:
+                row["senate"] = None
+            else:
+                threshold = SENATE_MAX * (1 - share)
+                alone = sorted([k for k, v in senate.items() if v > threshold and k != "Sin atribuir"], key=lambda k: -senate[k])
+                row["senate"] = {"elected": dict(sorted(senate.items(), key=lambda kv: -kv[1])), "block_alone_certain": alone,
+                                 "determined": bool(alone), "threshold_elected": round(threshold, 1)}
+        if all(row.get(k) is None for k in ("congress", "senate")):
+            row["status"] = "sin_tabla"
+        out.append(row)
+    return out
+
+
+def attach_arithmetic(safeguards: list[dict], seed: dict) -> None:
+    seats = load_seats()
+    for sg in safeguards:
+        for ep in sg.get("episodes", []):
+            maj = (ep.get("power_holder") or {}).get("majority")
+            if maj:
+                legs = legislatures_between(ep["start"], ep.get("end"), seed["legislatures"], seed["snapshot_date"])
+                ep["arithmetic"] = qualified_arithmetic(maj["rule"], maj.get("chambers", ["Congreso", "Senado"]), legs, seats)
+
+
 REPRODUCIBLE_KEYS = ("decree_laws", "budgets", "freezer", "vdem", "mandates", "tc_delays")
 
 
 def build_payload(seed: dict) -> dict:
-    safeguards = load_safeguards(seed)
+    all_docs = load_safeguards(seed)
+    verified = seed.get("reviews", {}).get("verified", {})
+    safeguards = [d for d in all_docs if d["id"] in verified]
+    pending = [{"id": d["id"], "name": d["name"], "group": d["group"]} for d in all_docs if d["id"] not in verified]
+    attach_arithmetic(safeguards, seed)
     manifest = load_manifest()
     dl = decree_law_series(seed)
     dl["governments"] = government_series(seed)
@@ -477,6 +551,8 @@ def build_payload(seed: dict) -> dict:
         "governments": seed["governments"],
         "legislatures": seed["legislatures"],
         "safeguards": safeguards,
+        "pending": pending,
+        "review_rule": seed.get("reviews", {}).get("rule"),
         "decree_laws": dl,
         "budgets": budget_series(seed),
         "freezer": freezer_series(),
@@ -617,6 +693,30 @@ def kit_boe_doc(args: argparse.Namespace) -> int:
     return 0
 
 
+def boe_articles(ref: str, anchors: list[str], limit: int = 2500) -> dict[str, str]:
+    """Consolidated text of articles of a BOE norm (act.php), by block anchor (CE: a159; LOTC: adieciseis...)."""
+    import html as htmlmod
+    body = _cached_get(f"https://www.boe.es/buscar/act.php?id={ref}").decode("utf-8", "replace")
+    out = {}
+    for anchor in anchors:
+        i = body.find(f'<div class="bloque" id="{anchor}"')
+        if i < 0:
+            out[anchor] = "(no encontrado)"
+            continue
+        j = body.find('<div class="bloque"', i + 10)
+        text = re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", body[i:j if j > 0 else i + 20000]))).strip()
+        text = re.sub(r"^\[Bloque \d+: #\w+\]\s*", "", text)
+        text = re.sub(r"\s(Téngase en cuenta|Se modifica por|Redactado conforme|Ver Sentencia|Ver texto consolidado|Ir a la versión).*$", "", text)
+        out[anchor] = text[:limit]
+    return out
+
+
+def kit_boe_articles(args: argparse.Namespace) -> int:
+    for anchor, text in boe_articles(args.ref, args.anchors).items():
+        print(f"[{anchor}] {text}")
+    return 0
+
+
 def kit_grep(args: argparse.Namespace) -> int:
     """Fetch a page or PDF (cached), strip tags, print bounded context around each regex hit."""
     try:
@@ -682,6 +782,10 @@ def main(argv: list[str] | None = None) -> int:
     k.add_argument("--context", type=int, default=200)
     k.add_argument("--max", type=int, default=5)
     k.set_defaults(func=kit_grep)
+    k = kit.add_parser("boe-articles", help="e.g. kit boe-articles BOE-A-1978-31229 a159 a122  |  LOTC: kit boe-articles BOE-A-1979-23709 adieciseis")
+    k.add_argument("ref")
+    k.add_argument("anchors", nargs="+")
+    k.set_defaults(func=kit_boe_articles)
     kit.add_parser("peers", help="pre-checked official links for DE/FR/IT/PT/EU and known blocked hosts").set_defaults(func=kit_peers)
     kit.add_parser("govs", help="governments and legislatures with dates").set_defaults(func=kit_govs)
     p = sub.add_parser("fetch-congreso-plazos")

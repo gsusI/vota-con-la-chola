@@ -1,0 +1,970 @@
+{
+  "id": "tc_renovacion",
+  "name": "Renovación por tercios del Tribunal Constitucional cada tres años (art. 159)",
+  "group": "nombramientos",
+  "rule": {
+    "text": "Los doce magistrados se nombran por nueve años y el Tribunal se renueva por terceras partes cada tres: cuatro a propuesta del Congreso y cuatro del Senado (3/5 de sus miembros), dos del Gobierno y dos del CGPJ.",
+    "articles": [
+      "CE art. 159",
+      "LOTC arts. 16 y 17"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a159",
+    "deadline": "Cada tres años; el Presidente del TC pide iniciar el procedimiento cuatro meses antes del vencimiento (art. 17.1 LOTC)"
+  },
+  "obligated": "Congreso y Senado (mayoría de 3/5), Gobierno y Consejo General del Poder Judicial (3/5 de su Pleno)",
+  "enforcer": {
+    "who": "Nadie: el Presidente del TC solo solicita que se inicie el procedimiento (art. 17.1 LOTC); los magistrados salientes siguen en funciones hasta que toman posesión los sucesores (art. 17.2 LOTC). Para el CGPJ, la LO 8/2022 fija un plazo de tres meses sin consecuencia por incumplirlo.",
+    "short": "Nadie (prórroga automática del saliente)",
+    "power": "nadie"
+  },
+  "sanction": "Ninguna: los salientes siguen en funciones y, desde la LO 8/2010, el retraso se resta del mandato de los sucesores (art. 16.5 LOTC).",
+  "sanction_short": "Ninguna; el saliente sigue y el retraso se resta al sucesor",
+  "remedy_delay": {
+    "days": 104,
+    "basis": "Mediana del retraso entre el fin legal del mandato y el nombramiento de los sucesores en las 14 renovaciones de tercio completadas (1983-2022; 0 si llegó a tiempo). No hay remedio de un tercero; la del Senado vencida en 2025 sigue pendiente.",
+    "sources": [
+      {
+        "label": "RD 1784/2010 (renovación de 2011)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-476"
+      },
+      {
+        "label": "RD 1033/2021 (renovación de 2021)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18901"
+      },
+      {
+        "label": "RD 1092/2022 (renovación de 2022)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24441"
+      }
+    ]
+  },
+  "classification": "buena_voluntad",
+  "classification_reason": "Ningún órgano puede obligar a las Cámaras, al Gobierno ni al CGPJ a proponer, ni sustituirlos: la prórroga del saliente (art. 17.2 LOTC) mantiene el Tribunal funcionando pero no renueva el tercio. El plazo de tres meses de la LO 8/2022 para el CGPJ no tiene consecuencia y se superó en 2022.",
+  "episodes": [
+    {
+      "id": "tc-congreso-1983",
+      "start": "1983-02-22",
+      "end": "1983-10-25",
+      "kind": "plazo_vencido",
+      "summary": "Primera renovación por tercios: el tercio que debía renovarse a los tres años de la constitución del Tribunal (febrero de 1983) se nombró el 24 de octubre de 1983 (RD 2709 a 2712/1983, los cuatro magistrados salientes renombrados), unos ocho meses después (245 días).",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Órgano proponente deducido de la sucesión de nombramientos (los RD de 1983 no tienen texto en el BOE). El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 2709/1983",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-28015"
+        },
+        {
+          "label": "RD 2712/1983",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-28018"
+        }
+      ]
+    },
+    {
+      "id": "tc-gob-cgpj-1995",
+      "start": "1995-02-22",
+      "end": "1995-04-08",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Gobierno y del CGPJ, nombrado en febrero de 1986, se renovó en abril de 1995 (45 días tarde): Jiménez de Parga y Vives Antón a propuesta del Gobierno; Delgado Barrio y Ruiz Vadillo a propuesta del CGPJ.",
+      "power_holder": {
+        "government": "gonzalez",
+        "body": "Gobierno y CGPJ (3/5 de su Pleno)",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": "El BOE no indica cuál de los dos órganos retrasó su propuesta."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 528/1995 (propuesta del Gobierno)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8648"
+        },
+        {
+          "label": "RD 530/1995 (propuesta del CGPJ)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8650"
+        }
+      ]
+    },
+    {
+      "id": "tc-senado-1998",
+      "start": "1998-02-22",
+      "end": "1998-12-17",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Senado nombrado en febrero de 1989 se renovó en diciembre de 1998, unos diez meses tarde (298 días): Casas Baamonde, Conde Martín de Hijas, Garrido Falla y Jiménez Sánchez, a propuesta del Senado.",
+      "power_holder": {
+        "government": null,
+        "body": "Senado (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 2713/1998",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1998-29130"
+        },
+        {
+          "label": "RD 2716/1998",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1998-29133"
+        }
+      ]
+    },
+    {
+      "id": "tc-congreso-2001",
+      "start": "2001-07-06",
+      "end": "2001-11-07",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Congreso nombrado en julio de 1992 se renovó en noviembre de 2001, cuatro meses tarde (124 días): Delgado Barrio, García Calvo, Gay Montalvo y Pérez Vera, a propuesta del Congreso.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 1218/2001",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20739"
+        },
+        {
+          "label": "RD 1221/2001",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20742"
+        }
+      ]
+    },
+    {
+      "id": "tc-gob-cgpj-2004",
+      "start": "2004-04-08",
+      "end": "2004-06-09",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Gobierno y del CGPJ nombrado en abril de 1995 se renovó en junio de 2004 (62 días tarde): Aragón Reyes y Pérez Tremps a propuesta del Gobierno; Rodríguez Arribas y Sala Sánchez a propuesta del CGPJ.",
+      "power_holder": {
+        "government": "aznar",
+        "body": "Gobierno y CGPJ (3/5 de su Pleno)",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": "El mandato venció con el Gobierno de Aznar (hasta el 2004-04-17); los RD de junio de 2004 los firmó el Gobierno de Zapatero. El BOE no indica qué órgano retrasó su propuesta."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 1404/2004 (Gobierno)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10672"
+        },
+        {
+          "label": "RD 1406/2004 (CGPJ)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10674"
+        }
+      ]
+    },
+    {
+      "id": "tc-recusacion-perez-tremps",
+      "start": "2007-02-05",
+      "end": "2007-02-05",
+      "kind": "tension",
+      "summary": "El Pleno del TC estimó la recusación del magistrado Pérez Tremps, propuesto por el Gobierno en 2004, promovida por diputados del Grupo Popular en el recurso 8045-2006 contra el Estatuto de Cataluña (ATC 26/2007): el Tribunal resolvió ese recurso con un magistrado menos.",
+      "power_holder": {
+        "government": null,
+        "body": "Pleno del Tribunal Constitucional",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": "Resolución del propio Tribunal; no es un retraso de renovación."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "ATC 26/2007",
+          "url": "https://hj.tribunalconstitucional.es/es/Resolucion/Show/21138"
+        },
+        {
+          "label": "RD 1405/2004",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10673"
+        }
+      ]
+    },
+    {
+      "id": "lo-6-2007-aval",
+      "start": "2007-05-25",
+      "end": "2008-04-09",
+      "kind": "aval",
+      "summary": "La LO 6/2007 reformó el art. 16 LOTC: los magistrados del Senado se eligen entre candidatos de los parlamentos autonómicos y el mandato de Presidente y Vicepresidente se prorroga hasta la renovación del tercio. Diputados del Grupo Popular recurrieron los apartados 16.1 y 16.3; la STC 49/2008 desestimó el recurso.",
+      "power_holder": {
+        "government": "zapatero",
+        "body": "Cortes Generales (ley orgánica)",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 49/2008",
+        "date": "2008-04-09",
+        "act_date": "2007-05-25"
+      },
+      "sources": [
+        {
+          "label": "LO 6/2007",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2007-10483"
+        },
+        {
+          "label": "STC 49/2008",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2008-8459"
+        }
+      ]
+    },
+    {
+      "id": "rs-184-7-aval",
+      "start": "2007-11-21",
+      "end": "2008-07-24",
+      "kind": "aval",
+      "summary": "La reforma del Reglamento del Senado de 21 de noviembre de 2007 (art. 184.7) reguló la elección de magistrados entre los candidatos de los parlamentos autonómicos. Senadores del Grupo Popular la recurrieron; la STC 101/2008 la declaró conforme con la Constitución en la interpretación que fija.",
+      "power_holder": {
+        "government": null,
+        "body": "Senado (reforma del Reglamento)",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 101/2008",
+        "date": "2008-07-24",
+        "act_date": "2007-11-21"
+      },
+      "sources": [
+        {
+          "label": "STC 101/2008",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2008-14045"
+        }
+      ]
+    },
+    {
+      "id": "tc-senado-2007",
+      "start": "2007-12-17",
+      "end": "2011-01-10",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Senado nombrado en diciembre de 1998 se renovó en enero de 2011, tres años tarde (1.120 días), en la primera elección con candidatos de los parlamentos autonómicos: Asúa Batarrita, Hernando Santiago, Ortega Álvarez y Pérez de los Cobos. Desde la LO 8/2010 el retraso se resta del mandato de los nuevos (art. 16.5 LOTC).",
+      "power_holder": {
+        "government": null,
+        "body": "Senado (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 1784/2010",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-476"
+        },
+        {
+          "label": "RD 1787/2010",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-479"
+        },
+        {
+          "label": "LO 8/2010",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ]
+    },
+    {
+      "id": "tc-congreso-2010",
+      "start": "2010-11-07",
+      "end": "2012-07-21",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Congreso nombrado en noviembre de 2001 se renovó en julio de 2012, 20 meses tarde (622 días): González Rivas, Ollero Tassara, Roca Trías y Valdés Dal-Ré. El mismo BOE publicó la Defensora del Pueblo y los consejeros del Tribunal de Cuentas, también pendientes.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 1115/2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9782"
+        },
+        {
+          "label": "RD 1118/2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9785"
+        },
+        {
+          "label": "Nombramiento de la Defensora del Pueblo (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9790"
+        }
+      ]
+    },
+    {
+      "id": "tc-senado-2016",
+      "start": "2016-12-17",
+      "end": "2017-03-11",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Senado venció en diciembre de 2016 (fin calculado con el art. 16.5 LOTC) y se renovó en marzo de 2017 (84 días): Balaguer Callejón, Conde-Pumpido, Enríquez Sancho y Montoya Melgar.",
+      "power_holder": {
+        "government": null,
+        "body": "Senado (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 260/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-2632"
+        },
+        {
+          "label": "RD 263/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-2635"
+        }
+      ]
+    },
+    {
+      "id": "tc-congreso-2019",
+      "start": "2019-11-07",
+      "end": "2021-11-18",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Congreso venció en noviembre de 2019 y se renovó en noviembre de 2021, dos años tarde (742 días): Arnaldo Alcubilla, Espejel Jorquera, Montalbán Huertas y Sáez Valcárcel. El mismo BOE publicó el Defensor del Pueblo y los consejeros del Tribunal de Cuentas, también pendientes.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Congreso"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 1033/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18901"
+        },
+        {
+          "label": "RD 1036/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18904"
+        },
+        {
+          "label": "Nombramiento del Defensor del Pueblo (mismo BOE)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18905"
+        }
+      ]
+    },
+    {
+      "id": "tc-gob-cgpj-2022",
+      "start": "2022-06-09",
+      "end": "2022-12-31",
+      "kind": "plazo_vencido",
+      "summary": "El tercio del Gobierno y del CGPJ venció en junio de 2022. La LO 8/2022 (BOE 28-7-2022) devolvió al CGPJ en funciones la facultad de proponer sus dos magistrados y le fijó un plazo máximo de tres meses desde el vencimiento. Los cuatro nombramientos se publicaron el 31-12-2022 (205 días tras el vencimiento, más de tres meses después del plazo legal): Campo Moreno y Díez Bueso a propuesta del Gobierno; Tolosa Tribiño y Segoviano Astaburuaga a propuesta del CGPJ.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "CGPJ (3/5 de su Pleno) y Gobierno",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": "La mayoría de 3/5 es la del Pleno del CGPJ, no la de las Cámaras; el BOE no recoge el voto de cada vocal ni la fecha en que cada órgano formuló su propuesta. El plazo de tres meses de la LO 8/2022 obligaba al CGPJ."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "LO 8/2022",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-12579"
+        },
+        {
+          "label": "RD 1092/2022 (Gobierno)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24441"
+        },
+        {
+          "label": "RD 1095/2022 (CGPJ)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24444"
+        }
+      ]
+    },
+    {
+      "id": "lo-8-2022-aval",
+      "start": "2022-07-28",
+      "end": "2024-11-06",
+      "kind": "aval",
+      "summary": "Más de cincuenta diputados del Grupo Popular recurrieron la LO 8/2022 (plazo de tres meses al CGPJ para proponer sus magistrados del TC); la STC 139/2024 desestimó el recurso.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Cortes Generales (ley orgánica)",
+        "majority": null,
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 139/2024",
+        "date": "2024-11-06",
+        "act_date": "2022-07-28"
+      },
+      "sources": [
+        {
+          "label": "LO 8/2022",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-12579"
+        },
+        {
+          "label": "STC 139/2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25522"
+        }
+      ]
+    },
+    {
+      "id": "tc-senado-2025",
+      "start": "2025-12-17",
+      "end": null,
+      "kind": "plazo_vencido",
+      "summary": "El mandato de los cuatro magistrados propuestos por el Senado en 2017 (con Macías Castaño, que en 2024 cubrió la vacante de Montoya Melgar) venció en diciembre de 2025 según el cálculo del art. 16.5 LOTC. A 2026-11-11 el BOE no ha publicado sucesores (más de 10 meses) y las Cortes están disueltas desde el 2026-10-05 (RD 806/2026): la elección corresponderá al Senado que salga de las elecciones del 2026-11-29.",
+      "power_holder": {
+        "government": null,
+        "body": "Senado (3/5)",
+        "majority": {
+          "rule": "3/5",
+          "chambers": [
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "El BOE no recoge quién votó qué; la aritmética de escaños la calcula el exportador. La fecha exacta de fin de mandato no la publica el BOE; se calcula."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "RD 262/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-2634"
+        },
+        {
+          "label": "RD 757/2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-15661"
+        },
+        {
+          "label": "RD 806/2026 de disolución",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20742"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "Si en dos meses no se elige sucesor, el propio Tribunal Constitucional Federal propone candidatos, y si el órgano competente (Bundestag o Bundesrat) no elige en tres meses desde esa propuesta, puede elegir el otro órgano (§ 7a BVerfGG).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "BVerfGG § 7a",
+          "url": "https://www.gesetze-im-internet.de/bverfgg/__7a.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "Los miembros del Conseil constitutionnel los nombran por separado el Presidente de la República y los presidentes de la Asamblea Nacional y del Senado (art. 56 de la Constitución); las comisiones parlamentarias solo pueden vetar un nombre con 3/5 de votos en contra (art. 13), no hace falta una mayoría cualificada a favor.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Constitution du 4 octobre 1958 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"
+        }
+      ]
+    },
+    "ITA": {
+      "mechanism": "Los jueces de la Corte costituzionale se nombran por nueve años y al vencer cesan en el cargo y en sus funciones, sin prórroga (art. 135 de la Constitución); nadie puede obligar al Parlamento a elegir a los cinco que le corresponden.",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Costituzione (Corte costituzionale, PDF)",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
+    },
+    "PRT": {
+      "mechanism": "La Asamblea de la República elige a diez jueces del Tribunal Constitucional por dos tercios de los presentes, superior a la mayoría absoluta (art. 163 h de la Constitución), sin vía para sustituirla si no lo hace.",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Constituição da República Portuguesa (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "No puede atribuir los retrasos a partidos concretos (el BOE no publica votos; la aritmética de escaños la añade el exportador) y las fechas de fin de mandato son cálculos sobre la publicación en el BOE, no fechas oficiales de toma de posesión.",
+  "mandate_terms": [
+    {
+      "body": "Congreso",
+      "term": 1,
+      "mandate_start": "1980-02-22",
+      "mandate_end": "1983-02-22",
+      "successor_took_office": "1983-10-25",
+      "sources": [
+        {
+          "label": "BOE-A-1980-4121",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-4121"
+        },
+        {
+          "label": "BOE-A-1983-28016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-28016"
+        }
+      ],
+      "note": "Primer tercio que se renovó (a los tres años de la constitución del Tribunal). El órgano proponente de 1980-1992 se deduce de la cadena de ceses y nombramientos: los RD de esos años solo están en PDF sin texto. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Congreso",
+      "term": 2,
+      "mandate_start": "1983-10-25",
+      "mandate_end": "1992-10-25",
+      "successor_took_office": "1992-07-06",
+      "sources": [
+        {
+          "label": "BOE-A-1983-28017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1983-28017"
+        },
+        {
+          "label": "BOE-A-1992-15710",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-15710"
+        }
+      ],
+      "note": "Fin calculado a nueve años del nombramiento; la renovación llegó antes de esa fecha, así que el cómputo aplicado entonces no se puede fijar con el BOE."
+    },
+    {
+      "body": "Congreso",
+      "term": 3,
+      "mandate_start": "1992-07-06",
+      "mandate_end": "2001-07-06",
+      "successor_took_office": "2001-11-07",
+      "sources": [
+        {
+          "label": "BOE-A-1992-15711",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1992-15711"
+        },
+        {
+          "label": "BOE-A-2001-20739",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20739"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Congreso",
+      "term": 4,
+      "mandate_start": "2001-11-07",
+      "mandate_end": "2010-11-07",
+      "successor_took_office": "2012-07-21",
+      "sources": [
+        {
+          "label": "BOE-A-2001-20740",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-20740"
+        },
+        {
+          "label": "BOE-A-2012-9782",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9782"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Congreso",
+      "term": 5,
+      "mandate_start": "2012-07-21",
+      "mandate_end": "2019-11-07",
+      "successor_took_office": "2021-11-18",
+      "sources": [
+        {
+          "label": "BOE-A-2012-9783",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-9783"
+        },
+        {
+          "label": "BOE-A-2021-18901",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18901"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Congreso",
+      "term": 6,
+      "mandate_start": "2021-11-18",
+      "mandate_end": "2028-11-07",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2021-18902",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-18902"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años."
+    },
+    {
+      "body": "Senado",
+      "term": 1,
+      "mandate_start": "1980-02-22",
+      "mandate_end": "1989-02-22",
+      "successor_took_office": "1989-02-22",
+      "sources": [
+        {
+          "label": "BOE-A-1980-4116",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-4116"
+        },
+        {
+          "label": "BOE-A-1989-4147",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1989-4147"
+        }
+      ],
+      "note": "Tercio que agotó los nueve años en el primer ciclo. Órgano deducido de la sucesión (los ceses de 1998 de los nombrados en 1989 se cubren a propuesta del Senado). Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Senado",
+      "term": 2,
+      "mandate_start": "1989-02-22",
+      "mandate_end": "1998-02-22",
+      "successor_took_office": "1998-12-17",
+      "sources": [
+        {
+          "label": "BOE-A-1989-4148",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1989-4148"
+        },
+        {
+          "label": "BOE-A-1998-29131",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1998-29131"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Senado",
+      "term": 3,
+      "mandate_start": "1998-12-17",
+      "mandate_end": "2007-12-17",
+      "successor_took_office": "2011-01-10",
+      "sources": [
+        {
+          "label": "BOE-A-1998-29132",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1998-29132"
+        },
+        {
+          "label": "BOE-A-2011-477",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-477"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Senado",
+      "term": 4,
+      "mandate_start": "2011-01-10",
+      "mandate_end": "2016-12-17",
+      "successor_took_office": "2017-03-11",
+      "sources": [
+        {
+          "label": "BOE-A-2011-478",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-478"
+        },
+        {
+          "label": "BOE-A-2017-2633",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-2633"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Senado",
+      "term": 5,
+      "mandate_start": "2017-03-11",
+      "mandate_end": "2025-12-17",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2017-2634",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-2634"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años. A 2026-11-11 el BOE no publica nombramientos de sucesores."
+    },
+    {
+      "body": "Gobierno",
+      "term": 1,
+      "mandate_start": "1980-02-22",
+      "mandate_end": "1986-02-22",
+      "successor_took_office": "1986-02-22",
+      "sources": [
+        {
+          "label": "BOE-A-1980-4113",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-4113"
+        },
+        {
+          "label": "BOE-A-1986-4757",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-4757"
+        },
+        {
+          "label": "BOE-A-1986-4758",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-4758"
+        }
+      ],
+      "note": "Órgano deducido de la sucesión (los nombrados en 1986 cesan en 1995 y se cubren a propuesta del Gobierno y del CGPJ). Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Gobierno",
+      "term": 2,
+      "mandate_start": "1986-02-22",
+      "mandate_end": "1995-02-22",
+      "successor_took_office": "1995-04-08",
+      "sources": [
+        {
+          "label": "BOE-A-1986-4758",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-4758"
+        },
+        {
+          "label": "BOE-A-1995-8648",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8648"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Gobierno",
+      "term": 3,
+      "mandate_start": "1995-04-08",
+      "mandate_end": "2004-04-08",
+      "successor_took_office": "2004-06-09",
+      "sources": [
+        {
+          "label": "BOE-A-1995-8649",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8649"
+        },
+        {
+          "label": "BOE-A-2004-10672",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10672"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Gobierno",
+      "term": 4,
+      "mandate_start": "2004-06-09",
+      "mandate_end": "2013-06-09",
+      "successor_took_office": "2013-06-13",
+      "sources": [
+        {
+          "label": "BOE-A-2004-10673",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10673"
+        },
+        {
+          "label": "BOE-A-2013-6330",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2013-6330"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Gobierno",
+      "term": 5,
+      "mandate_start": "2013-06-13",
+      "mandate_end": "2022-06-09",
+      "successor_took_office": "2022-12-31",
+      "sources": [
+        {
+          "label": "BOE-A-2013-6331",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2013-6331"
+        },
+        {
+          "label": "BOE-A-2022-24441",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24441"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "Gobierno",
+      "term": 6,
+      "mandate_start": "2022-12-31",
+      "mandate_end": "2031-06-09",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2022-24442",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24442"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años."
+    },
+    {
+      "body": "CGPJ",
+      "term": 1,
+      "mandate_start": "1980-11-19",
+      "mandate_end": "1986-02-22",
+      "successor_took_office": "1986-02-22",
+      "sources": [
+        {
+          "label": "BOE-A-1980-25299",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-25299"
+        },
+        {
+          "label": "BOE-A-1986-4759",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-4759"
+        }
+      ],
+      "note": "El CGPJ se constituyó más tarde; sus dos magistrados entraron en noviembre de 1980 dentro del tercio que vencía en 1986. Órgano deducido de la sucesión. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "CGPJ",
+      "term": 2,
+      "mandate_start": "1986-02-22",
+      "mandate_end": "1995-02-22",
+      "successor_took_office": "1995-04-08",
+      "sources": [
+        {
+          "label": "BOE-A-1986-4760",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1986-4760"
+        },
+        {
+          "label": "BOE-A-1995-8650",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8650"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "CGPJ",
+      "term": 3,
+      "mandate_start": "1995-04-08",
+      "mandate_end": "2004-04-08",
+      "successor_took_office": "2004-06-09",
+      "sources": [
+        {
+          "label": "BOE-A-1995-8651",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1995-8651"
+        },
+        {
+          "label": "BOE-A-2004-10674",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10674"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "CGPJ",
+      "term": 4,
+      "mandate_start": "2004-06-09",
+      "mandate_end": "2013-06-09",
+      "successor_took_office": "2013-06-13",
+      "sources": [
+        {
+          "label": "BOE-A-2004-10675",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2004-10675"
+        },
+        {
+          "label": "BOE-A-2013-6332",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2013-6332"
+        }
+      ],
+      "note": "Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "CGPJ",
+      "term": 5,
+      "mandate_start": "2013-06-13",
+      "mandate_end": "2022-06-09",
+      "successor_took_office": "2022-12-31",
+      "sources": [
+        {
+          "label": "BOE-A-2013-6333",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2013-6333"
+        },
+        {
+          "label": "BOE-A-2022-24444",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24444"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años. Fechas por la publicación del BOE (la toma de posesión puede diferir unos días)."
+    },
+    {
+      "body": "CGPJ",
+      "term": 6,
+      "mandate_start": "2022-12-31",
+      "mandate_end": "2031-06-09",
+      "successor_took_office": null,
+      "sources": [
+        {
+          "label": "BOE-A-2022-24443",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-24443"
+        },
+        {
+          "label": "BOE-A-2010-16973",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-16973"
+        }
+      ],
+      "note": "Desde la LO 8/2010 (art. 16.5 LOTC) el retraso se resta del mandato siguiente: fin = fin anterior + 9 años."
+    }
+  ],
+  "_hints": "mandate_terms: una fila por mandato desde el primero: {body, term, mandate_start, mandate_end (fin legal), successor_took_office (toma de posesión del sustituto o null si sigue), sources}. Un mandato por tercio y órgano proponente (Congreso, Senado, Gobierno, CGPJ). Episodios: cada renovación retrasada y quién era indispensable; el bloqueo de los dos magistrados del CGPJ en 2022 y la reforma LO 8/2022; recusaciones."
+}
