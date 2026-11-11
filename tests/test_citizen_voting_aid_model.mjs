@@ -458,3 +458,97 @@ test("reveal summary and results spread: plain facts from the groups", async () 
   assert.equal(m.resultsSpread([{ match: 0.3 }, { match: 0.8 }]).narrow, false);
   assert.equal(m.resultsSpread([{ match: 0.7 }]).narrow, false);
 });
+
+// Tie-break round: concrete votes on which the tied leaders voted differently.
+const tieParties = [
+  { party_id: "a", label: "A" },
+  { party_id: "b", label: "B" },
+  { party_id: "c", label: "C" },
+];
+const tieCell = (a, b, c) => ({ a: { position: a }, b: { position: b }, c: { position: c } });
+// Eight key questions on which A and B vote alike and C the opposite.
+const tieKeys = Array.from({ length: 8 }, (_, i) => ({ statement_id: `k${i}`, source: "curated", cells: tieCell("agree", "agree", "disagree") }));
+const tieAnswers = Object.fromEntries(tieKeys.map((q) => [q.statement_id, "agree"]));
+const tieVote = (id, a, b, c, side = "cross") => ({ statement_id: id, source: "pool", tier: "split", side, cells: tieCell(a, b, c) });
+
+test("tied leaders and separation: who is within the margin and how far a vote pulls them apart", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const rows = [{ partyId: "a", match: 0.9 }, { partyId: "b", match: 0.86 }, { partyId: "c", match: 0.85 }, { partyId: "d", match: null }];
+  assert.deepEqual(m.tiedLeaders(rows).map((r) => r.partyId), ["a", "b"]);
+  assert.deepEqual(m.tiedLeaders([{ partyId: "d", match: null }]), []);
+  assert.equal(m.separation(tieVote("v", "agree", "disagree", "agree"), ["a", "b"]), 2);
+  assert.equal(m.separation(tieVote("v", "agree", "abstain", "agree"), ["a", "b"]), 1);
+  assert.equal(m.separation(tieVote("v", "agree", "agree", "disagree"), ["a", "b"]), 0);
+  // A party without data is left out of the pairs, never counted as a difference.
+  assert.equal(m.separation(tieVote("v", "agree", "no_data", "disagree"), ["a", "b"]), 0);
+  assert.equal(m.separation(tieVote("v", "agree", "disagree", "abstain"), ["a", "b", "c"]), 4);
+});
+
+test("tie-break: nothing to ask without enough answers, a tie or a separating vote", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const splitVote = tieVote("v1", "agree", "disagree", "agree");
+  const base = { parties: tieParties, questions: [...tieKeys, splitVote], answers: tieAnswers };
+  assert.equal(m.nextTieBreak(base).id, "v1");
+  assert.deepEqual(m.nextTieBreak(base).leaders.map((l) => l.partyId), ["a", "b"]);
+  // Fewer than MIN_ANSWERS_FOR_RANKING answers.
+  const few = Object.fromEntries(Object.entries(tieAnswers).slice(0, 7));
+  assert.equal(m.nextTieBreak({ ...base, answers: few }), null);
+  // A single leader: B now votes against the user on every key question.
+  const apart = tieKeys.map((q) => ({ ...q, cells: tieCell("agree", "disagree", "disagree") }));
+  assert.equal(m.nextTieBreak({ ...base, questions: [...apart, splitVote] }), null);
+  // The only vote left does not separate the leaders.
+  assert.equal(m.nextTieBreak({ ...base, questions: [...tieKeys, tieVote("v2", "agree", "agree", "disagree")] }), null);
+  // Answered and skipped votes are not asked again; votes outside the endless mode (no tier) are not used.
+  assert.equal(m.nextTieBreak({ ...base, skipped: { v1: true } }), null);
+  const untiered = { ...splitVote, statement_id: "v3", tier: undefined };
+  assert.equal(m.nextTieBreak({ ...base, questions: [...tieKeys, untiered] }), null);
+  const two = [...tieKeys, splitVote, tieVote("v4", "disagree", "agree", "agree")];
+  assert.equal(m.nextTieBreak({ ...base, questions: two, skipped: { v1: true } }).id, "v4");
+});
+
+test("tie-break: most separating vote first, and the least-answered bloc among near-best ones", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const weak = tieVote("v-weak", "agree", "abstain", "agree", "cross"); // separation 1: below 75 % of the best
+  const psoe = tieVote("v-psoe", "agree", "disagree", "agree", "psoe");
+  const pp = tieVote("v-pp", "disagree", "agree", "agree", "pp");
+  const questions = [...tieKeys, weak, psoe, pp];
+  const first = m.nextTieBreak({ parties: tieParties, questions, answers: tieAnswers });
+  assert.equal(first.id, "v-pp"); // same separation and no bloc answered yet: stable order by id
+  assert.equal(first.candidates, 3);
+  // The user already answered a vote whose «Sí» favours the PP bloc (one that keeps A and B tied): PSOE's turn.
+  const done = tieVote("v-done", "abstain", "abstain", "agree", "pp");
+  const next = m.nextTieBreak({ parties: tieParties, questions: [...questions, done], answers: { ...tieAnswers, "v-done": "neutral" } });
+  assert.deepEqual(next.leaders.map((l) => l.partyId), ["a", "b"]);
+  assert.equal(next.id, "v-psoe");
+});
+
+test("tie-break on the published data: answering like Sumar leaves a tie that a concrete vote separates", async () => {
+  const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
+  const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
+  const snap = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_generales_v2.json"), "utf8"));
+  const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf8"));
+  const questions = m.buildQuestions(snap, pool);
+  const answers = {};
+  for (const st of snap.statements) {
+    const value = m.cellValue(st.cells.sumar.position, st.cells.sumar.score);
+    answers[st.statement_id] = value > 1 / 3 ? "agree" : value < -1 / 3 ? "disagree" : "neutral";
+  }
+  const tie = m.nextTieBreak({ questions, parties: snap.parties, answers });
+  assert.ok(tie, "a tie-break vote is offered");
+  assert.ok(tie.leaders.length >= 2);
+  assert.ok(tie.leaders.some((l) => l.partyId === "sumar"));
+  const vote = questions.find((q) => q.statement_id === tie.id);
+  assert.equal(vote.source, "pool");
+  assert.ok(m.separation(vote, tie.leaders.map((l) => l.partyId)) > 0);
+  // A full round keeps offering unanswered votes and never repeats one.
+  const asked = new Set();
+  const state = { ...answers };
+  for (let i = 0; i < m.TIE_BREAK_ROUND; i += 1) {
+    const step = m.nextTieBreak({ questions, parties: snap.parties, answers: state });
+    if (!step) break;
+    assert.ok(!asked.has(step.id));
+    asked.add(step.id);
+    state[step.id] = questions.find((q) => q.statement_id === step.id).cells.sumar.position === "disagree" ? "disagree" : "agree";
+  }
+  assert.ok(asked.size >= 1);
+});

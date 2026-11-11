@@ -397,6 +397,13 @@ export default function VotingAidMethodologyPage() {
             un lado.
           </li>
           <li>
+            <strong>Desempate:</strong> si al acabar las preguntas clave varios partidos quedan a menos de 5 puntos del primero, las
+            siguientes votaciones (hasta 6 por ronda) se eligen entre las que no has respondido y en las que esos partidos votaron
+            distinto, alternando también a qué lado favorece el Sí. Solo cambia el orden: cada votación cuenta igual que cualquier
+            otra. Antes de responder ves qué partidos están empatados, no qué votó cada uno (<Code rel="ui/site/app/citizen/vota/votingAidModel.mjs" />,{" "}
+            <code>nextTieBreak</code>).
+          </li>
+          <li>
             <strong>Tema:</strong> por palabras clave del título (reglas en <Code rel="scripts/export_voting_aid_pool.py" />). Es tosco:{" "}
             {fmt(poolMeta.by_theme?.Otros)} votaciones quedan en «Otros».
           </li>

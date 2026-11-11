@@ -8,6 +8,8 @@ import {
   ANSWER_VALUES,
   MIN_ANSWERS_FOR_RANKING,
   POOL_ANSWER_LABELS,
+  TIE_BREAK_ROUND,
+  TIE_MARGIN,
   POSITION_LABELS,
   agreementKind,
   aiLinks,
@@ -24,6 +26,7 @@ import {
   mergeImpacts,
   nextInTopic,
   nextQuestionId,
+  nextTieBreak,
   partyColor,
   partyReactions,
   pendingSubId,
@@ -50,7 +53,7 @@ const ANSWER_ORDER = ["agree", "neutral", "disagree"];
 // D right = agree, S down = neutral. 1 · 2 · 3 keep working in button order.
 const ANSWER_KEYS = { agree: "D", neutral: "S", disagree: "A" };
 const KEY_ANSWERS = { KeyA: "disagree", KeyS: "neutral", KeyD: "agree" };
-const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false, shortcuts: true };
+const EMPTY_STATE = { answers: {}, important: {}, skipped: {}, split: {}, history: [], seed: 0, streak: 0, bestStreak: 0, showReveal: true, excludeOmnibus: false, shortcuts: true, tieLeft: 0 };
 const AGREEMENT_LABELS = { match: "Coincidís", partial: "A medias", clash: "Discrepáis", none: "Sin datos" };
 const AGREEMENT_ICONS = { match: "✓", partial: "≈", clash: "✗", none: "–" };
 const POOL_PATH = "/citizen/data/voting_aid_pool_v1.json";
@@ -79,6 +82,8 @@ function cleanState(raw) {
   out.showReveal = raw.showReveal !== false;
   out.excludeOmnibus = raw.excludeOmnibus === true;
   out.shortcuts = raw.shortcuts !== false;
+  // Concrete votes left in the tie-break round the user is in (0: none).
+  out.tieLeft = Number.isInteger(raw.tieLeft) && raw.tieLeft > 0 ? Math.min(raw.tieLeft, TIE_BREAK_ROUND) : 0;
   return out;
 }
 
@@ -2120,12 +2125,16 @@ function PartyView({ row, parties, questionsById, onBack, onEdit }) {
   );
 }
 
-const TIE_MARGIN = 0.05;
 // Topic chips shown before «+ N temas» on the results page.
 const RESULT_TOPICS_SHOWN = 4;
 
 function listJoin(items) {
   return items.length > 1 ? `${items.slice(0, -1).join(", ")} y ${items[items.length - 1]}` : items.join("");
+}
+
+/** The tied parties by name, or their count when the list would not fit a sentence. */
+function tiedNames(rows) {
+  return rows.length > 4 ? `${rows.length} partidos` : listJoin(rows.map((r) => r.label));
 }
 
 function ResultsView({
@@ -2152,6 +2161,8 @@ function ResultsView({
   onExcludeOmnibus,
   omnibusAnswered,
   compare,
+  tieBreak,
+  onTieBreak,
 }) {
   const [topic, setTopic] = useState("");
   const [allTopics, setAllTopics] = useState(false);
@@ -2227,10 +2238,21 @@ function ResultsView({
                 <strong>Resultado provisional.</strong> Con menos de {MIN_ANSWERS_FOR_RANKING} respuestas el orden cambia mucho con cada
                 respuesta.
               </p>
+            ) : tieBreak && !topic && tied.length > 1 ? (
+              <div className="va-note va-note--info va-tie" role="note">
+                <p>
+                  <strong>Empate técnico.</strong> {tiedNames(tied)} quedan a menos de {Math.round(TIE_MARGIN * 100)} puntos del primero:
+                  tus respuestas a las preguntas clave no los separan. Hay {plural(tieBreak.candidates, "votación concreta", "votaciones concretas")} sin
+                  responder en las que votaron distinto.
+                </p>
+                <button className="v-btn v-btn--primary" onClick={onTieBreak} type="button">
+                  Desempatar con {plural(Math.min(TIE_BREAK_ROUND, tieBreak.candidates), "votación", "votaciones")}
+                </button>
+              </div>
             ) : tied.length > 1 && !spread?.narrow ? (
               <p className="va-note va-note--info" role="note">
-                <strong>Empate técnico.</strong> {listJoin(tied.map((r) => r.label))} quedan a menos de {Math.round(TIE_MARGIN * 100)} puntos
-                del primero: con {answeredCount} respuestas esa diferencia no dice mucho.
+                <strong>Empate técnico.</strong> {tiedNames(tied)} quedan a menos de {Math.round(TIE_MARGIN * 100)} puntos del primero: con{" "}
+                {answeredCount} respuestas esa diferencia no dice mucho.
               </p>
             ) : null}
             {topicList.length > 1 ? (
@@ -2346,6 +2368,10 @@ function ResultsView({
             <li>«Neutral» coincide con quien se abstuvo. Una pregunta saltada no cuenta.</li>
             <li>«Me importa mucho» cuenta doble.</li>
             <li>Nunca rellenamos huecos: sin votos, sin dato.</li>
+            <li>
+              El desempate elige, entre las votaciones que no has respondido, aquellas en las que tus primeros partidos votaron distinto.
+              Cuentan igual que cualquier otra.
+            </li>
           </ul>
           <details className="va-method__more">
             <summary>La fórmula y qué no mide</summary>
@@ -2520,6 +2546,8 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   const [shareMessage, setShareMessage] = useState("");
   const [previousRanks, setPreviousRanks] = useState({});
   const [topBefore, setTopBefore] = useState(null);
+  // The tie-break round ended with the last answer: «Siguiente» shows the results instead of another vote.
+  const [afterTie, setAfterTie] = useState(false);
   // Topic the user chose to stay in (null: all topics, mixed in play order).
   const [focusTopic, setFocusTopic] = useState(null);
   // «¿Qué se votó?» stays as the user left it from one question to the next; the topic drawer is for narrow screens.
@@ -2553,6 +2581,21 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     [questions, state.answers],
   );
   const answeredCount = useMemo(() => Object.keys(state.answers).filter((id) => questionsById[id]).length, [state.answers, questionsById]);
+  /** A key question still to be asked (not answered, skipped or split): the tie-break only starts after them. */
+  const keysOpen = useCallback(
+    (answers, skipped, split) =>
+      questions.some((q) => q.source === "curated" && answers[q.statement_id] === undefined && !skipped?.[q.statement_id] && !split?.[q.statement_id]),
+    [questions],
+  );
+  // What a tie-break round would ask now: null while key questions are open, without a tie, or with nothing left to separate it.
+  const tieOffer = useMemo(
+    () =>
+      keysOpen(state.answers, state.skipped, state.split)
+        ? null
+        : nextTieBreak({ questions: scoredQuestions, parties, answers: state.answers, important: state.important, skipped: state.skipped }),
+    [keysOpen, scoredQuestions, parties, state.answers, state.important, state.skipped, state.split],
+  );
+  const activeTie = state.tieLeft > 0 ? tieOffer : null;
 
   // Data loads after the page's own load event so ~500 KB of JSON never competes with the first paint (LCP).
   useEffect(() => {
@@ -2710,15 +2753,18 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   }
 
   /** Next question to play (inside `topic` when one is chosen); `topicDone` when that topic has nothing left. */
-  function pickNext({ answers, skipped, split, topic, playIds = order }) {
+  function pickNext({ answers, skipped, split, topic, playIds = order, tieLeft = 0, important = state.important }) {
     let topicNext = null;
     if (topic) {
       const group = topicGroups(playIds, questionsById, split).find((g) => g.topic === topic);
       topicNext = group ? nextInTopic(group.ids, questionsById, answers, skipped, split) : null;
     }
+    // In a tie-break round the next vote is one that separates the tied leaders, not the next in play order.
+    const tie = !topic && tieLeft > 0 && !keysOpen(answers, skipped, split) ? nextTieBreak({ questions: scoredQuestions, parties, answers, important, skipped }) : null;
     const id =
       topicNext ||
       pendingSubId(questionsById, split, answers, skipped) ||
+      tie?.id ||
       nextQuestionId(
         playIds.filter((qid) => !split?.[qid]),
         answers,
@@ -2744,10 +2790,11 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     }
   }
 
-  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split, topic = focusTopic) {
+  function goPlay(nextId, answers = state.answers, skipped = state.skipped, split = state.split, topic = focusTopic, tieLeft = state.tieLeft) {
     let id = nextId;
+    setAfterTie(false);
     if (!id) {
-      const next = pickNext({ answers, skipped, split, topic });
+      const next = pickNext({ answers, skipped, split, topic, tieLeft });
       id = next.id;
       if (next.topicDone) {
         setFocusTopic(null);
@@ -2758,6 +2805,51 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     setCurrentId(id);
     setView("play");
     scrollTop();
+  }
+
+  /**
+   * Tie-break bookkeeping after answering or skipping `id`: votes left in the round, whether the round just ended,
+   * and what to tell the user. A round starts by itself when the last key question leaves a tie.
+   */
+  function tieStep(id, answers, skipped) {
+    const args = { questions: scoredQuestions, parties, answers, important: state.important, skipped };
+    const left = state.tieLeft || 0;
+    if (left > 0 && activeTie?.id === id) {
+      const more = left > 1 && nextTieBreak(args) ? left - 1 : 0;
+      return { left: more, ended: more === 0, toast: null };
+    }
+    if (left === 0 && keysOpen(state.answers, state.skipped, state.split) && !keysOpen(answers, skipped, state.split)) {
+      const tie = nextTieBreak(args);
+      if (tie) {
+        return {
+          left: TIE_BREAK_ROUND,
+          ended: false,
+          toast: `Preguntas clave completadas. ${tiedNames(tie.leaders)} quedan casi empatados: ahora, votaciones en las que votaron distinto.`,
+        };
+      }
+      return { left: 0, ended: false, toast: "Preguntas clave completadas. Ahora siguen votaciones concretas, una a una." };
+    }
+    return { left, ended: false, toast: null };
+  }
+
+  /** Close a tie-break round: back to the results, which now include its answers. */
+  function finishTie() {
+    setAfterTie(false);
+    setRevealId(null);
+    show("results");
+    showToast("Desempate terminado: este es el orden con tus nuevas respuestas.");
+  }
+
+  function startTieBreak() {
+    update({ ...state, tieLeft: TIE_BREAK_ROUND });
+    setFocusTopic(null);
+    goPlay(null, state.answers, state.skipped, state.split, null, TIE_BREAK_ROUND);
+  }
+
+  /** «Siguiente» after a reveal. */
+  function next() {
+    if (afterTie) finishTie();
+    else goPlay();
   }
 
   function answer(value) {
@@ -2776,6 +2868,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     const skipped = { ...state.skipped };
     delete skipped[id];
     const streak = wasAnswered ? state.streak || 0 : (state.streak || 0) + 1;
+    const tie = tieStep(id, answers, skipped);
     update({
       ...state,
       answers,
@@ -2783,13 +2876,14 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
       history: wasAnswered ? state.history : [...state.history, id],
       streak,
       bestStreak: Math.max(state.bestStreak || 0, streak),
+      tieLeft: tie.left,
     });
-    const count = Object.keys(answers).filter((qid) => questionsById[qid]).length;
-    if (!wasAnswered && count === curatedTotal && Object.keys(answers).every((qid) => questionsById[qid]?.source === "curated")) {
-      showToast("Preguntas clave completadas. Ahora siguen votaciones concretas, una a una.");
-    }
-    if (state.showReveal) setRevealId(id);
-    else goPlay(null, answers, skipped);
+    if (tie.toast) showToast(tie.toast);
+    if (state.showReveal) {
+      setRevealId(id);
+      setAfterTie(tie.ended);
+    } else if (tie.ended) finishTie();
+    else goPlay(null, answers, skipped, undefined, undefined, tie.left);
   }
 
   /** Answer a multi-vote statement "por partes": clear its own answer and play its concrete votes next. */
@@ -2811,8 +2905,11 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     const id = currentId;
     if (!id) return;
     const skipped = { ...state.skipped, [id]: true };
-    update({ ...state, skipped, streak: 0 });
-    goPlay(null, state.answers, skipped);
+    const tie = tieStep(id, state.answers, skipped);
+    update({ ...state, skipped, streak: 0, tieLeft: tie.left });
+    if (tie.toast) showToast(tie.toast);
+    if (tie.ended) finishTie();
+    else goPlay(null, state.answers, skipped, undefined, undefined, tie.left);
   }
 
   /** Stay in one topic (its next open question; its first one if all are answered), or null to mix them all again. */
@@ -2926,7 +3023,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
         // A focused button already reacts to Space/Enter by itself.
         if ((event.key === "Enter" || code === "Space") && tag !== "BUTTON" && tag !== "A") {
           event.preventDefault();
-          goPlay();
+          next();
         } else if (code === "KeyR") {
           event.preventDefault();
           setCurrentId(revealId);
@@ -2988,7 +3085,15 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     chooseTopic(topic);
   }
 
-  const phase = focusTopic ? (
+  const phase = activeTie && !focusTopic ? (
+    <>
+      Desempate entre <strong>{tiedNames(activeTie.leaders)}</strong>: votaciones en las que votaron distinto ·{" "}
+      {state.tieLeft === 1 ? "última" : `quedan ${state.tieLeft}`}.{" "}
+      <button className="v-link-btn va-linkish" onClick={() => update({ ...state, tieLeft: 0 })} type="button">
+        Salir del desempate
+      </button>
+    </>
+  ) : focusTopic ? (
     <>
       Solo <strong>{focusTopic}</strong>: {topicLeftLabel(topics, focusTopic, questionsById, state.answers, state.split)}.{" "}
       <button className="v-link-btn va-linkish" onClick={() => chooseTopic(null)} type="button">
@@ -3116,7 +3221,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
                       setCurrentId(revealQuestion.statement_id);
                       setRevealId(null);
                     }}
-                    onNext={() => goPlay()}
+                    onNext={next}
                     onSplit={() => splitStatement(revealQuestion.statement_id)}
                     question={revealQuestion}
                     reactions={partyReactions(revealQuestion, state.answers[revealQuestion.statement_id], parties)}
@@ -3192,6 +3297,8 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
               onPlay={() => goPlay()}
               onReset={reset}
               onReview={() => show("review")}
+              onTieBreak={startTieBreak}
+              tieBreak={fromShare ? null : tieOffer}
               onShare={share}
               onSharePodium={sharePodium}
               parties={parties}

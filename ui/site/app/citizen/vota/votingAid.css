@@ -1175,6 +1175,11 @@ html.has-sideDrawer {
   margin: 0 0 8px;
 }
 
+/* Tie-break offer on the results page: the explanation, then one button. */
+.va-tie p {
+  margin: 0 0 12px;
+}
+
 .va-soft {
   color: var(--v-soft);
 }

@@ -539,6 +539,60 @@ export function resultsSpread(rows) {
   return { min, max, narrow: scored.length > 1 && max - min < NARROW_SPREAD };
 }
 
+// ---------------------------------------------------------------------------
+// Tie-break: parties that vote alike on the key questions (a whole bloc) end up within a few points of each other.
+// The round asks concrete votes on which those tied leaders voted differently. Same questions, same scoring:
+// it only chooses which of the unanswered votes come first.
+
+// Parties this close to the first one are a statistical tie.
+export const TIE_MARGIN = 0.05;
+// Concrete votes asked per tie-break round.
+export const TIE_BREAK_ROUND = 6;
+// Candidates at least this close to the most separating vote compete on bloc balance instead.
+const TIE_BREAK_NEAR_BEST = 0.75;
+
+/** Scored rows within `margin` of the first one (the first included); empty without a scored row. */
+export function tiedLeaders(rows, margin = TIE_MARGIN) {
+  const scored = (rows || []).filter((r) => Number.isFinite(r.match));
+  return scored.length ? scored.filter((r) => scored[0].match - r.match < margin) : [];
+}
+
+/** How far a vote pulls a set of parties apart: sum over pairs of |a − b| (for 1, against −1, abstain/split 0). */
+export function separation(question, partyIds) {
+  const values = partyIds.map((pid) => POSITION_VALUES[question?.cells?.[pid]?.position]).filter((v) => v !== undefined);
+  let total = 0;
+  for (let i = 0; i < values.length; i += 1) for (let j = i + 1; j < values.length; j += 1) total += Math.abs(values[i] - values[j]);
+  return total;
+}
+
+/**
+ * Next concrete vote of a tie-break round, or null when there is nothing to break: fewer than
+ * MIN_ANSWERS_FOR_RANKING answers, a single leader, or no unanswered vote on which the leaders differ.
+ * Picks among the most separating votes the one whose bloc («Sí» favours psoe / pp / cross) the user has
+ * answered least, so the round does not drift towards one side. Skipped votes are not asked again.
+ */
+export function nextTieBreak({ questions = [], parties = [], answers = {}, important = {}, skipped = {} } = {}) {
+  const answered = questions.filter((q) => ANSWER_VALUES[answers[q.statement_id]] !== undefined);
+  if (answered.length < MIN_ANSWERS_FOR_RANKING) return null;
+  const leaders = tiedLeaders(scoreParties({ parties, statements: questions }, answers, important));
+  if (leaders.length < 2) return null;
+  const leaderIds = leaders.map((r) => r.partyId);
+  const sideCounts = {};
+  for (const q of answered) if (q.source === "pool" && q.tier) sideCounts[q.side || "cross"] = (sideCounts[q.side || "cross"] || 0) + 1;
+  const candidates = [];
+  for (const q of questions) {
+    // Votes of the endless mode only (they carry a tier): already written as a question and listed in the menus.
+    if (q.source !== "pool" || !q.tier || answers[q.statement_id] !== undefined || skipped[q.statement_id]) continue;
+    const score = separation(q, leaderIds);
+    if (score > 0) candidates.push({ id: q.statement_id, score, side: q.side || "cross" });
+  }
+  if (!candidates.length) return null;
+  const best = Math.max(...candidates.map((c) => c.score));
+  const near = candidates.filter((c) => c.score >= best * TIE_BREAK_NEAR_BEST);
+  near.sort((a, b) => (sideCounts[a.side] || 0) - (sideCounts[b.side] || 0) || b.score - a.score || a.id.localeCompare(b.id));
+  return { id: near[0].id, leaders: leaders.map((r) => ({ partyId: r.partyId, label: r.label })), candidates: candidates.length };
+}
+
 /** Split a party's score details into match / partial / clash / none lists. */
 export function groupDetails(details = []) {
   const out = { match: [], partial: [], clash: [], none: [] };
