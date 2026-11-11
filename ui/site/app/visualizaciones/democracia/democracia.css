@@ -388,3 +388,8 @@
 .viz .demoArith strong {
   font-weight: 600;
 }
+
+.viz .demoScrollX {
+  overflow-x: auto;
+  max-width: 100%;
+}

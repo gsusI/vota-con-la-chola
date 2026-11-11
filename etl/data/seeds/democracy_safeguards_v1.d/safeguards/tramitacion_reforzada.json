@@ -3,47 +3,92 @@
   "name": "Informes preceptivos y debate: proposiciones de ley de grupos del Gobierno, urgencia y lectura única",
   "group": "legislar",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "Los anteproyectos de ley del Gobierno pasan por consulta pública, memoria de impacto e informes preceptivos (art. 26 Ley 50/1997) antes de llegar al Congreso con sus antecedentes (art. 88 CE). Las proposiciones de ley de los grupos parlamentarios (art. 87 CE) no tienen esos trámites; la Mesa puede acordar el procedimiento de urgencia, que reduce los plazos a la mitad (arts. 93-94 RC), y el Pleno la lectura única (art. 150 RC).",
+    "articles": [
+      "CE art. 87",
+      "CE art. 88",
+      "CE art. 89",
+      "Ley 50/1997 art. 26",
+      "Reglamento del Congreso arts. 93-94",
+      "Reglamento del Congreso art. 150"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1997-25336#a26",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Gobierno de la Nación (solo para sus proyectos de ley); los grupos parlamentarios no están obligados a esos trámites",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Nadie: ningún órgano puede exigir informes preceptivos a una proposición de ley ni impedir que una mayoría elija esa vía, la urgencia o la lectura única",
+    "short": "Nadie",
+    "power": "nadie"
   },
-  "sanction": "",
+  "sanction": "Ninguna. La elección de la vía (proyecto o proposición de ley) y del procedimiento abreviado depende de la mayoría y de la Mesa; la falta de informes de la proposición de ley no invalida la ley.",
   "remedy_delay": {
     "days": null,
-    "basis": "",
-    "sources": []
+    "basis": "No existe remedio: ningún tercero puede exigir los trámites de un proyecto de ley a una proposición de ley.",
+    "sources": [
+      {
+        "label": "Ley 50/1997, art. 26",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1997-25336#a26"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "buena_voluntad",
+  "classification_reason": "Los informes y consultas solo obligan a los proyectos del Gobierno; si el texto se presenta como proposición de ley de un grupo, nadie puede exigirlos ni sustituirlos, y la urgencia y la lectura única las deciden la Mesa y el Pleno.",
+  "episodes": [
+    {
+      "id": "amnistia_2023",
+      "start": "2023-11-13",
+      "end": null,
+      "kind": "tension",
+      "summary": "El 13-11-2023 el Grupo Parlamentario Socialista presentó la proposición de ley orgánica de amnistía para la normalización institucional, política y social en Cataluña con solicitud de procedimiento de urgencia. La Comisión de Venecia señala que, a diferencia de un proyecto del Gobierno, una proposición de ley queda dispensada de consulta pública, memoria de impacto e informes (entre otros, del Consejo de Estado y del CGPJ), y que la ley se tramitó con consulta limitada y por urgencia.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados (proposición de ley de un grupo parlamentario)",
+        "indispensable_parties": null,
+        "note": "Según la Comisión de Venecia, el Ministro de Justicia, diputado, participó en la preparación del texto."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Comisión de Venecia, CDL-AD(2024)003, § 127",
+          "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2024)003-e"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Los proyectos del Gobierno federal se remiten primero al Bundesrat, que puede pronunciarse en seis semanas (art. 76.2 GG).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Art. 76 GG",
+          "url": "https://www.gesetze-im-internet.de/gg/art_76.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Todo proyecto se examina en comisión y en el Pleno artículo por artículo; los reglamentos fijan procedimientos abreviados para los declarados urgentes (art. 72 de la Constitución).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Costituzione, art. 72",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Las leyes que nacen como proyecto del Gobierno necesitan informes (Consejo de Estado, CGPJ, etc.); las proposiciones de ley de los grupos no. Episodios en todas las legislaturas en que el Gobierno o su mayoría usó proposiciones de ley o lectura única para leyes con reservas de órganos consultivos; menciones expresas en los Informes sobre el Estado de Derecho de la Comisión Europea (capítulo de España) y en opiniones de la Comisión de Venecia. Clasificación probable buena_voluntad."
+  "limits": "Solo se documenta un episodio con fuente primaria (opinión de la Comisión de Venecia sobre la amnistía). No se han podido verificar las menciones de los Informes sobre el Estado de Derecho de la Comisión Europea (capítulo de España): el PDF de 2023 no se encontró en la URL probada. No hay inventario oficial de leyes de calado tramitadas como proposición de ley o por lectura única en cada legislatura desde 1979, por lo que otros episodios (de cualquier mayoría) quedan fuera. No se clasifica el mecanismo de los pares.",
+  "_hints": "Las leyes que nacen como proyecto del Gobierno necesitan informes (Consejo de Estado, CGPJ, etc.); las proposiciones de ley de los grupos no. Episodios en todas las legislaturas en que el Gobierno o su mayoría usó proposiciones de ley o lectura única para leyes con reservas de órganos consultivos; menciones expresas en los Informes sobre el Estado de Derecho de la Comisión Europea (capítulo de España) y en opiniones de la Comisión de Venecia. Clasificación probable buena_voluntad.",
+  "sanction_short": "Ninguna: una proposición de ley evita los informes sin consecuencia"
 }

@@ -1,0 +1,24 @@
+{
+ "id": "mesa_plazos",
+ "verdict": "errors",
+ "checked": 26,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[2].summary (id mesa_fiscal_anticorrupcion_2000)",
+   "category": "link",
+   "found": "comparecencia del Fiscal especial para la prevención y represión de los delitos económicos relacionados con la corrupción",
+   "source_says": "comparecencia del Fiscal especial para la prevención y represión del tráfico ilegal de drogas ante la Comisión mixta para el estudio del problema de las drogas (Fiscalía Antidroga, no Anticorrupción); fechas 12-12-2000 y 07-02-2001 correctas",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2005-8267",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[4].summary",
+   "category": "link",
+   "found": "una solicitud de tramitación del Grupo Socialista",
+   "source_says": "solicitud de que se considerara tramitar una iniciativa por el procedimiento de lectura única (texto vago, no erróneo)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15677",
+   "severity": "minor"
+  }
+ ]
+}

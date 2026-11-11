@@ -3,47 +3,297 @@
   "name": "Veto del Gobierno a iniciativas que afectan al presupuesto (art. 134.6)",
   "group": "legislar",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
-    "deadline": null
+    "text": "Toda proposición o enmienda que suponga aumento de los créditos o disminución de los ingresos presupuestarios requiere la conformidad del Gobierno para su tramitación (art. 134.6 CE). La Mesa remite la proposición al Gobierno; si en treinta días no niega expresamente su conformidad, puede incluirse en el orden del día (art. 126.2-3 Reglamento del Congreso).",
+    "articles": [
+      "CE art. 134.6",
+      "Reglamento del Congreso art. 126.2",
+      "Reglamento del Congreso art. 126.3"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a134",
+    "deadline": "30 días para que el Gobierno manifieste su disconformidad (art. 126.3 RC)"
   },
-  "obligated": "",
+  "obligated": "Gobierno de la Nación (al negar la conformidad) y Mesas de las Cámaras (al aceptar o rechazar esa disconformidad)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Mesa de la Cámara, que puede rechazar una disconformidad no justificada; Tribunal Constitucional, en conflicto entre órganos constitucionales (Gobierno contra Cámara) o en recurso de amparo de los diputados",
+    "short": "Mesa de la Cámara; Tribunal Constitucional",
+    "power": "anula"
   },
-  "sanction": "",
+  "sanction": "Ninguna sanción. La Mesa puede tramitar la proposición pese al veto; el TC puede declarar que la Mesa vulneró el derecho de los diputados (art. 23 CE) al aceptar un veto injustificado, o desestimar el conflicto del Gobierno. No hay plazo para que el TC resuelva.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 548,
+    "basis": "Mediana de días entre el acuerdo de la Mesa y la sentencia del TC en los 8 casos documentados (rango 419-1455 días).",
+    "sources": [
+      {
+        "label": "STC 34/2018",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-6826"
+      },
+      {
+        "label": "STC 44/2018",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-7140"
+      },
+      {
+        "label": "STC 94/2018",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-13992"
+      },
+      {
+        "label": "STC 17/2019",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-3978"
+      },
+      {
+        "label": "STC 139/2018",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-956"
+      },
+      {
+        "label": "STC 143/2025",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-20263"
+      },
+      {
+        "label": "STC 132/2023",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-24495"
+      },
+      {
+        "label": "STC 135/2025",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-14588"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "La Mesa puede rechazar un veto injustificado en el acto, pero si lo acepta, la única vía es el TC, que resolvió entre 419 y 1455 días después (más de 6 meses en todos los casos), cuando la proposición ya había quedado fuera de la tramitación.",
+  "episodes": [
+    {
+      "id": "veto_lomce_2016",
+      "start": "2016-10-18",
+      "end": "2018-04-12",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Gobierno manifestó en octubre de 2016 su disconformidad (art. 134.6 CE) con la proposición de ley orgánica del Grupo Socialista para suspender el calendario de implantación de la LOMCE. La Mesa del Congreso rechazó la disconformidad el 18-10-2016 (ratificado el 20-12-2016); el Gobierno planteó conflicto y el TC lo desestimó (STC 34/2018).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno rechazado por la Mesa del Congreso; el TC avaló a la Mesa."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 34/2018 (desestima el conflicto 355-2017 del Gobierno)",
+        "date": "2018-04-12",
+        "act_date": "2016-10-18"
+      },
+      "sources": [
+        {
+          "label": "STC 34/2018 (BOE-A-2018-6826)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-6826"
+        }
+      ]
+    },
+    {
+      "id": "veto_et_2016",
+      "start": "2016-10-18",
+      "end": "2018-04-26",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Gobierno manifestó en octubre de 2016 su disconformidad (arts. 134.6 CE y 126.2 RC) con una proposición de ley del Grupo Socialista de modificación del Estatuto de los Trabajadores, invocando la Ley 48/2015 de presupuestos para 2016. La Mesa del Congreso la admitió a toma en consideración el 18-10-2016 (ratificado el 20-12-2016); el TC desestimó el conflicto del Gobierno (STC 44/2018).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno rechazado por la Mesa del Congreso; el TC avaló a la Mesa."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 44/2018 (desestima el conflicto 356-2017 del Gobierno)",
+        "date": "2018-04-26",
+        "act_date": "2016-10-18"
+      },
+      "sources": [
+        {
+          "label": "STC 44/2018 (BOE-A-2018-7140)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-7140"
+        }
+      ]
+    },
+    {
+      "id": "veto_nucleares_2017",
+      "start": "2017-04-28",
+      "end": "2018-09-17",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso acordó el 28-04-2017, con aceptación del criterio del Gobierno, no someter a toma en consideración la proposición de ley de Unidos Podemos para el cierre de las centrales nucleares. El TC otorgó el amparo al grupo (STC 94/2018).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación; Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno aceptado por la Mesa del Congreso; el TC estimó el amparo de los diputados."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 94/2018 (estima el amparo 4292-2017)",
+        "date": "2018-09-17",
+        "act_date": "2017-04-28"
+      },
+      "sources": [
+        {
+          "label": "STC 94/2018 (BOE-A-2018-13992)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-13992"
+        }
+      ]
+    },
+    {
+      "id": "veto_up_oct2017",
+      "start": "2017-10-10",
+      "end": "2019-02-11",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso acordó el 10-10-2017, con aceptación del criterio del Gobierno, que no procedía someter a toma en consideración una proposición de ley de modificación presentada por Unidos Podemos. El TC otorgó el amparo (STC 17/2019).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación; Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno aceptado por la Mesa del Congreso; el TC estimó el amparo de los diputados."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 17/2019 (estima el amparo 1104-2018)",
+        "date": "2019-02-11",
+        "act_date": "2017-10-10"
+      },
+      "sources": [
+        {
+          "label": "STC 17/2019 (BOE-A-2019-3978)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-3978"
+        }
+      ]
+    },
+    {
+      "id": "veto_psoe_oct2017",
+      "start": "2017-10-24",
+      "end": "2018-12-17",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso acordó el 24-10-2017, con aceptación del criterio del Gobierno, no someter a toma en consideración una proposición de ley del Grupo Socialista. El TC otorgó el amparo a sus diputados (STC 139/2018).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación; Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno aceptado por la Mesa del Congreso; el TC estimó el amparo de los diputados."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 139/2018 (estima el amparo 729-2018)",
+        "date": "2018-12-17",
+        "act_date": "2017-10-24"
+      },
+      "sources": [
+        {
+          "label": "STC 139/2018 (BOE-A-2019-956)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-956"
+        }
+      ]
+    },
+    {
+      "id": "veto_senado_iva_2021",
+      "start": "2021-09-14",
+      "end": "2025-09-08",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Senado acordó el 14-09-2021 estimar la disconformidad del Gobierno a la tramitación de la proposición de ley del Grupo Popular para modificar el art. 91.1.2 de la Ley 37/1992 del IVA. El TC otorgó el amparo a los senadores (STC 143/2025).",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno de la Nación; Mesa del Senado",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno aceptado por la Mesa del Senado; el TC estimó el amparo de los senadores."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 143/2025 (otorga el amparo 8030-2021)",
+        "date": "2025-09-08",
+        "act_date": "2021-09-14"
+      },
+      "sources": [
+        {
+          "label": "STC 143/2025 (BOE-A-2025-20263)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-20263"
+        }
+      ]
+    },
+    {
+      "id": "veto_airef_fondos_2021",
+      "start": "2021-04-20",
+      "end": "2023-10-23",
+      "kind": "aval",
+      "summary": "El Gobierno negó su conformidad (art. 134.6 CE) a la proposición de ley del Grupo Popular para crear una Autoridad Independiente de Recuperación Económica; la Mesa del Congreso acordó el 20-04-2021 no someterla a toma en consideración (reconsideración desestimada el 18-05-2021). El TC desestimó el amparo del grupo (STC 132/2023).",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno de la Nación; Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno aceptado por la Mesa del Congreso; el TC avaló el veto."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 132/2023 (desestima el amparo 5030-2021)",
+        "date": "2023-10-23",
+        "act_date": "2021-04-20"
+      },
+      "sources": [
+        {
+          "label": "STC 132/2023 (BOE-A-2023-24495)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-24495"
+        }
+      ]
+    },
+    {
+      "id": "veto_senado_2023",
+      "start": "2023-11-21",
+      "end": "2025-06-11",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Senado tomó en consideración el 21-11-2023 (ratificado el 18-01-2024) una proposición de ley del Grupo Popular pese a la disconformidad del Gobierno por el art. 134.6 CE; el Gobierno planteó conflicto y el TC lo desestimó (STC 135/2025).",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno de la Nación",
+        "indispensable_parties": null,
+        "note": "Veto del Gobierno rechazado por la Mesa del Senado; el TC avaló a la Mesa."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 135/2025 (desestima el conflicto 1219-2024 del Gobierno)",
+        "date": "2025-06-11",
+        "act_date": "2023-11-21"
+      },
+      "sources": [
+        {
+          "label": "STC 135/2025 (BOE-A-2025-14588)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-14588"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Las leyes que aumenten los gastos propuestos por el Gobierno federal o reduzcan ingresos requieren el consentimiento del Gobierno federal (art. 113 GG).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Art. 113 GG",
+          "url": "https://www.gesetze-im-internet.de/gg/art_113.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Toda ley que implique gastos nuevos o mayores debe indicar los medios para cubrirlos (art. 81 de la Constitución); no es un veto del Gobierno.",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Costituzione, art. 81",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Episodios: vetos discutidos y conflictos entre Gobierno y Congreso resueltos por el TC (SSTC 34/2018, 44/2018 y siguientes; comprueba números y fechas), vetos en otras legislaturas. remedy_delay: días entre el veto y la sentencia."
+  "limits": "Solo constan los vetos que llegaron al TC con sentencia publicada en el BOE (2016-2025); los vetos aceptados o rechazados por las Mesas sin recurso, y los de legislaturas anteriores a la XII, no están inventariados. La disconformidad del Gobierno de 2016 es del 14-10-2016, según la sentencia; como inicio de cada episodio se usa la fecha del acuerdo de la Mesa. No se clasifica el mecanismo de los pares.",
+  "_hints": "Episodios: vetos discutidos y conflictos entre Gobierno y Congreso resueltos por el TC (SSTC 34/2018, 44/2018 y siguientes; comprueba números y fechas), vetos en otras legislaturas. remedy_delay: días entre el veto y la sentencia.",
+  "sanction_short": "Sin sanción: la Mesa puede rechazar el veto; el TC, años después"
 }

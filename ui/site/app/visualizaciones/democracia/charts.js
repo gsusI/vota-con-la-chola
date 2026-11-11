@@ -30,9 +30,9 @@ function ticks(max, n = 4) {
 }
 
 // Lines over years on one zero-based axis. series: [{id,label,color,width,dash,points:[{year,value}]}]
-export function LineChart({ series, xMin, xMax, yMax, height = 300, bands = [], unitLabel, digits = 0, ariaLabel, markers = [] }) {
-  const W = 760;
-  const M = { top: 16, right: 110, bottom: 28, left: 40 };
+export function LineChart({ series, xMin, xMax, yMax, height = 300, width = 760, rightMargin = 110, bands = [], unitLabel, digits = 0, ariaLabel, markers = [] }) {
+  const W = width;
+  const M = { top: 16, right: rightMargin, bottom: 28, left: 40 };
   const all = series.flatMap((s) => s.points.map((p) => p.value));
   const top = yMax ?? niceMax(Math.max(...all));
   const x0 = xMin ?? Math.min(...series.flatMap((s) => s.points.map((p) => p.year)));

@@ -129,6 +129,11 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
             if gov and gov["id"] != ph["government"] and not ph.get("note"):
                 rep.err(eid, f"government {ph['government']} but {gov['id']} governed on {ep['start']} (add a note if intended)")
         text_ok(rep, eid + ".power_holder.body", ph.get("body"))
+        body = (ph.get("body") or "").strip().lower()
+        if ph.get("government") and re.match(r"(cortes|mesa|congreso|senado|pleno del congreso|pleno del senado|diputaci[oó]n permanente)", body):
+            rep.err(eid, f"body {ph.get('body')!r} is a chamber or its bureau: the act is not the Government's, set government null")
+        if ph.get("government") and any("name-and-shame-access-blockers" in str(src.get("url", "")) for src in ep.get("sources") or []):
+            rep.err(eid, "a technical access block from the project's own log does not show who decided it: government must be null")
         maj = ph.get("majority")
         if maj is not None:
             if maj.get("rule") not in ("3/5", "2/3") or not set(maj.get("chambers") or []) <= {"Congreso", "Senado"} or not maj.get("chambers"):
@@ -184,7 +189,8 @@ def validate_context(rep: Report, ids: set[str]) -> list[str]:
         text_ok(rep, where + ".what", row.get("what"))
         for code in ("POL", "HUN"):
             text_ok(rep, f"{where}.{code}.text", (row.get(code) or {}).get("text"))
-            urls += check_sources(rep, f"{where}.{code}", (row.get(code) or {}).get("sources"))
+            if (row.get(code) or {}).get("text") != "no_signal":
+                urls += check_sources(rep, f"{where}.{code}", (row.get(code) or {}).get("sources"))
         esp = row.get("ESP") or {}
         text_ok(rep, where + ".ESP.text", esp.get("text"))
         if esp.get("safeguard") and esp["safeguard"] not in ids:

@@ -3,47 +3,212 @@
   "name": "Control de la financiación de los partidos (LO 8/2007; Tribunal de Cuentas)",
   "group": "control",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "Corresponde en exclusiva al Tribunal de Cuentas el control de la actividad económico-financiera de los partidos (LO 8/2007, art. 16), que fiscaliza en todo caso a los que reciben subvenciones públicas; el Tribunal impone sanciones por las infracciones del art. 17 que no sean delito, mediante procedimiento sancionador acordado por su Pleno (art. 18), y los partidos deben remitirle la documentación que requiera (art. 19).",
+    "articles": [
+      "LO 8/2007, arts. 16, 17, 18 y 19",
+      "LO 2/1982 del Tribunal de Cuentas"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-13022",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Partidos políticos (rendición de cuentas) y Tribunal de Cuentas (fiscalización)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Tribunal de Cuentas (fiscalización y sanciones administrativas); jurisdicción penal para la financiación ilegal constitutiva de delito",
+    "short": "Tribunal de Cuentas; tribunales penales si hay delito",
+    "power": "declara"
   },
-  "sanction": "",
+  "sanction": "Multas del Tribunal de Cuentas por infracciones de la LO 8/2007 que no sean delito (art. 17); si hay delito, condena penal y comiso de las ganancias por los tribunales.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 1391,
+    "basis": "Retraso entre el cierre del ejercicio fiscalizado y la resolución de la Comisión Mixta sobre el informe del Tribunal de Cuentas, según las resoluciones publicadas en el BOE: de 789 a 2293 días (ejercicios 2004-2020); el último dato, ejercicio 2020, 1391 días.",
+    "sources": [
+      {
+        "label": "BOE-A-2024-27233, resolución de la Comisión Mixta de 2024-10-22 (ejercicio 2020)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-27233"
+      },
+      {
+        "label": "BOE-A-2008-291, resolución de la Comisión Mixta de 2007-10-16 (ejercicio 2004)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-291"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "El Tribunal de Cuentas fiscaliza y puede multar, pero la Comisión Mixta resuelve sobre sus informes entre 789 y 2.293 días (unos 2 a 6 años) después del cierre del ejercicio fiscalizado, cuando ese ejercicio y sus elecciones quedan atrás.",
+  "episodes": [
+    {
+      "id": "finpart-2004-2006",
+      "start": "2007-10-16",
+      "end": "2010-06-22",
+      "kind": "tension",
+      "summary": "La Comisión Mixta aprueba las resoluciones sobre los informes de fiscalización de los ejercicios 2004, 2005 y 2006 de los partidos políticos 1019 días, 1242 días y 1269 días después del cierre de cada ejercicio.",
+      "power_holder": {
+        "government": null,
+        "body": "Tribunal de Cuentas y Comisión Mixta Congreso-Senado para las Relaciones con el Tribunal de Cuentas",
+        "indispensable_parties": null,
+        "note": "Retraso medido desde el cierre del último ejercicio fiscalizado hasta la resolución de la Comisión Mixta sobre el informe, no hasta el informe del Tribunal."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2008-291, resolución de la Comisión Mixta de 2007-10-16 (ejercicio 2004)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-291"
+        },
+        {
+          "label": "BOE-A-2009-16125, resolución de la Comisión Mixta de 2009-05-26 (ejercicio 2005)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2009-16125"
+        },
+        {
+          "label": "BOE-A-2010-14880, resolución de la Comisión Mixta de 2010-06-22 (ejercicio 2006)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-14880"
+        }
+      ]
+    },
+    {
+      "id": "finpart-2007-2011",
+      "start": "2012-12-18",
+      "end": "2014-03-11",
+      "kind": "tension",
+      "summary": "Resoluciones sobre los ejercicios 2007 (1814 días después del cierre), 2008 (1749 días) y 2009-2011 (801 días desde el cierre de 2011).",
+      "power_holder": {
+        "government": null,
+        "body": "Tribunal de Cuentas y Comisión Mixta Congreso-Senado para las Relaciones con el Tribunal de Cuentas",
+        "indispensable_parties": null,
+        "note": "Retraso medido desde el cierre del último ejercicio fiscalizado hasta la resolución de la Comisión Mixta sobre el informe, no hasta el informe del Tribunal."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2013-2465, resolución de la Comisión Mixta de 2012-12-18 (ejercicio 2007)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2013-2465"
+        },
+        {
+          "label": "BOE-A-2014-1455, resolución de la Comisión Mixta de 2013-10-15 (ejercicio 2008)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-1455"
+        },
+        {
+          "label": "BOE-A-2014-5010, resolución de la Comisión Mixta de 2014-03-11 (ejercicio 2009-2011)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-5010"
+        }
+      ]
+    },
+    {
+      "id": "finpart-2012-2015",
+      "start": "2017-02-09",
+      "end": "2018-02-27",
+      "kind": "tension",
+      "summary": "Resoluciones sobre los ejercicios 2012 (1501 días después del cierre), 2013 (1136 días) y 2014-2015 (789 días desde el cierre de 2015).",
+      "power_holder": {
+        "government": null,
+        "body": "Tribunal de Cuentas y Comisión Mixta Congreso-Senado para las Relaciones con el Tribunal de Cuentas",
+        "indispensable_parties": null,
+        "note": "Retraso medido desde el cierre del último ejercicio fiscalizado hasta la resolución de la Comisión Mixta sobre el informe, no hasta el informe del Tribunal."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2017-3839, resolución de la Comisión Mixta de 2017-02-09 (ejercicio 2012)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-3839"
+        },
+        {
+          "label": "BOE-A-2017-3840, resolución de la Comisión Mixta de 2017-02-09 (ejercicio 2013)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-3840"
+        },
+        {
+          "label": "BOE-A-2018-5694, resolución de la Comisión Mixta de 2018-02-27 (ejercicio 2014-2015)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-5694"
+        }
+      ]
+    },
+    {
+      "id": "finpart-2016-2020",
+      "start": "2022-03-22",
+      "end": "2024-10-22",
+      "kind": "tension",
+      "summary": "Resoluciones sobre los ejercicios 2016 (1907 días después del cierre), 2017 (2293 días) y 2020 (1391 días); no se ha localizado en el BOE la de los ejercicios 2018 y 2019.",
+      "power_holder": {
+        "government": null,
+        "body": "Tribunal de Cuentas y Comisión Mixta Congreso-Senado para las Relaciones con el Tribunal de Cuentas",
+        "indispensable_parties": null,
+        "note": "Retraso medido desde el cierre del último ejercicio fiscalizado hasta la resolución de la Comisión Mixta sobre el informe, no hasta el informe del Tribunal."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2022-11615, resolución de la Comisión Mixta de 2022-03-22 (ejercicio 2016)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2022-11615"
+        },
+        {
+          "label": "BOE-A-2024-13379, resolución de la Comisión Mixta de 2024-04-11 (ejercicio 2017)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-13379"
+        },
+        {
+          "label": "BOE-A-2024-27233, resolución de la Comisión Mixta de 2024-10-22 (ejercicio 2020)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-27233"
+        }
+      ]
+    },
+    {
+      "id": "finpart-2020-palau-cdc",
+      "start": "2017-12-29",
+      "end": "2020-04-30",
+      "kind": "remedio",
+      "summary": "El Tribunal Supremo confirma el 30-04-2020 la sentencia de la Audiencia de Barcelona de 29-12-2017 en el caso Palau, incluido el comiso de 6,6 millones de euros a Convergència Democràtica de Catalunya (CDC) como ganancias obtenidas mediante tráfico de influencias.",
+      "power_holder": {
+        "government": null,
+        "body": "Tribunal Supremo (Sala de lo Penal)",
+        "indispensable_parties": null,
+        "note": "Condena penal firme con comiso a un partido; no es una sanción del Tribunal de Cuentas."
+      },
+      "remedy": {
+        "by": "Tribunal Supremo (Sala de lo Penal)",
+        "ruling": "Confirma condenas y comiso de 6,6 millones de euros a CDC",
+        "date": "2020-04-30",
+        "act_date": "2017-12-29"
+      },
+      "sources": [
+        {
+          "label": "CGPJ: el Tribunal Supremo ratifica las condenas a la cúpula del caso Palau (30-04-2020)",
+          "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-ratifica-las-condenas-a-la-cupula-del--caso-Palau-"
+        },
+        {
+          "label": "CGPJ: la Audiencia de Barcelona hace pública la sentencia del caso Palau",
+          "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunales-Superiores-de-Justicia/TSJ-Cataluna/Oficina-de-Comunicacion/Archivo-de-notas-de-prensa/La-Seccion-10---de-la-Audiencia-de-Barcelona-hace-publica-la-sentencia-del--caso--Palau"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Los partidos deben dar cuenta pública del origen y uso de sus fondos y de su patrimonio (art. 21.1 GG); la junta directiva presenta cada año un informe de rendición de cuentas (§ 23 PartG).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Grundgesetz, art. 21",
+          "url": "https://www.gesetze-im-internet.de/gg/art_21.html"
+        },
+        {
+          "label": "PartG § 23",
+          "url": "https://www.gesetze-im-internet.de/partg/__23.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Fiscalización por el Tribunal de Cuentas: años de retraso entre el ejercicio fiscalizado y el informe aprobado (calcula para varios ejercicios con las fechas de aprobación del Pleno), sanciones prescritas, casos judiciales de financiación ilegal con sentencia firme (todos los partidos que la tengan). Atribución: al partido condenado o fiscalizado, en body."
+  "limits": "El retraso se mide hasta la resolución de la Comisión Mixta, no hasta la aprobación del informe por el Pleno del Tribunal de Cuentas, cuya fecha no se ha extraído. El ejercicio de cada resolución se ha leído de la primera mención en su texto; no se han localizado las de 2018 y 2019. No se han documentado las sanciones impuestas ni las prescritas, ni otras sentencias firmes por financiación ilegal (solo el comiso a CDC en el caso Palau, con nota oficial del CGPJ). Para Alemania solo consta la obligación de rendir cuentas; no se ha leído quién las controla, por eso su clase es no_signal.",
+  "_hints": "Fiscalización por el Tribunal de Cuentas: años de retraso entre el ejercicio fiscalizado y el informe aprobado (calcula para varios ejercicios con las fechas de aprobación del Pleno), sanciones prescritas, casos judiciales de financiación ilegal con sentencia firme (todos los partidos que la tengan). Atribución: al partido condenado o fiscalizado, en body.",
+  "sanction_short": "Multas del Tribunal de Cuentas; comiso y condena penal si hay delito"
 }

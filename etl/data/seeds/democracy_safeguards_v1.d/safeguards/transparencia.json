@@ -3,47 +3,122 @@
   "name": "Derecho de acceso a la información pública (Ley 19/2013) y resoluciones del Consejo de Transparencia",
   "group": "transparencia",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
-    "deadline": null
+    "text": "Toda persona tiene derecho a acceder a la información pública (Ley 19/2013, art. 12); la Administración debe resolver en un mes, ampliable a otro (art. 20); frente a la denegación expresa o presunta cabe reclamación potestativa ante el Consejo de Transparencia y Buen Gobierno, previa al contencioso (art. 24). La ley no prevé multa por incumplir lo que el Consejo resuelve: su ejecución exige acudir a los tribunales.",
+    "articles": [
+      "Ley 19/2013, arts. 12, 13, 20, 24 y 38"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887",
+    "deadline": "Un mes para resolver la solicitud, ampliable a dos (art. 20.1)"
   },
-  "obligated": "",
+  "obligated": "Administraciones y organismos sujetos a la Ley 19/2013 (ministerios, Presidencia del Gobierno, Cortes y órganos constitucionales en lo sujeto a Derecho administrativo)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Consejo de Transparencia y Buen Gobierno (resuelve reclamaciones) y, para ejecutar, los juzgados de lo contencioso-administrativo",
+    "short": "Consejo de Transparencia; ejecución en contencioso",
+    "power": "obliga"
   },
-  "sanction": "",
+  "sanction": "Ninguna automática: si la Administración no cumple la resolución del Consejo, el solicitante tiene que acudir al contencioso-administrativo; la Ley 19/2013 no prevé multas coercitivas por ese incumplimiento.",
   "remedy_delay": {
     "days": null,
-    "basis": "",
-    "sources": []
+    "basis": "La ley no fija plazo para ejecutar la resolución del Consejo y no se ha encontrado un dato oficial de cuánto tarda la ejecución judicial ni de cuántas resoluciones se incumplen.",
+    "sources": [
+      {
+        "label": "Ley 19/2013 (BOE consolidado)",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-12887"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "El Consejo puede ordenar el acceso, pero si la Administración no cumple solo un juez puede obligarla, después de un proceso contencioso; la información llega, si llega, cuando ya ha perdido utilidad.",
+  "episodes": [
+    {
+      "id": "transparencia-2026-senado-403",
+      "start": "2026-02-18",
+      "end": null,
+      "kind": "tension",
+      "summary": "El registro público de este proyecto anota 17 incidentes en el Senado, abiertos entre el 18-02-2026 y el 13-10-2026, en los que las descargas por script de los datos abiertos de iniciativas devuelven HTTP 403.",
+      "power_holder": {
+        "government": null,
+        "body": "Senado",
+        "indispensable_parties": null,
+        "note": "Bloqueo técnico de datos abiertos documentado por este proyecto, no una resolución del Consejo de Transparencia. El registro no identifica quién decidió el bloqueo; se atribuye al organismo, no al Gobierno."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "docs/etl/name-and-shame-access-blockers.md (registro de bloqueos del proyecto)",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md"
+        }
+      ]
+    },
+    {
+      "id": "transparencia-2026-infoelectoral",
+      "start": "2026-08-11",
+      "end": null,
+      "kind": "tension",
+      "summary": "El registro público de este proyecto anota que la descarga de datos de Infoelectoral del Ministerio del Interior está bloqueada por un desafío de Cloudflare desde el 11-08-2026, sin resolver a 2026-10-19.",
+      "power_holder": {
+        "government": null,
+        "body": "Ministerio del Interior",
+        "indispensable_parties": null,
+        "note": "Bloqueo técnico de datos abiertos documentado por este proyecto, no una resolución del Consejo de Transparencia. El registro no identifica quién decidió el bloqueo; se atribuye al organismo, no al Gobierno."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "docs/etl/name-and-shame-access-blockers.md (registro de bloqueos del proyecto)",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md"
+        }
+      ]
+    },
+    {
+      "id": "transparencia-2026-bdns",
+      "start": "2026-02-16",
+      "end": null,
+      "kind": "tension",
+      "summary": "El registro público de este proyecto anota dos incidentes en la Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda) que devuelve HTML anti-scraping en lugar de datos.",
+      "power_holder": {
+        "government": null,
+        "body": "IGAE (Ministerio de Hacienda)",
+        "indispensable_parties": null,
+        "note": "Fecha de inicio: primer incidente del registro; la fecha exacta de este organismo no se ha extraído. El registro no identifica quién decidió el bloqueo; se atribuye al organismo, no al Gobierno."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "docs/etl/name-and-shame-access-blockers.md (registro de bloqueos del proyecto)",
+          "url": "https://github.com/gsusI/vota-con-la-chola/blob/main/docs/etl/name-and-shame-access-blockers.md"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Quien considere vulnerado su derecho de acceso puede acudir al Comisionado Federal para la Libertad de Información (§ 12 IFG).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "IFG § 12",
+          "url": "https://www.gesetze-im-internet.de/ifg/__12.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Las resoluciones del CTBG son vinculantes pero la Administración puede recurrirlas o ignorarlas sin multa; ejecución solo vía contencioso. Episodios en todos los gobiernos: resoluciones del CTBG incumplidas o recurridas por ministerios o Presidencia, sentencias que las confirmaron, y el registro de bloqueos de este proyecto: docs/etl/name-and-shame-access-blockers.md (cítalo con URL https://github.com/... no: usa la ruta del repo como label y la URL pública del organismo bloqueado). Datos oficiales: memorias del CTBG con número de resoluciones incumplidas si existen."
+  "limits": "No se han encontrado con fuente oficial resoluciones del Consejo de Transparencia incumplidas o recurridas por ministerios o Presidencia ni las sentencias de la Audiencia Nacional o el Supremo que las resolvieron, ni cifras de las memorias del Consejo; por eso no hay episodios anteriores a 2026 ni por gobierno. Los episodios vienen del registro de bloqueos de este propio proyecto (bloqueos técnicos de datos abiertos, no denegaciones formales de acceso). La fecha de inicio del incidente de la BDNS es aproximada (primer incidente del registro). Para Alemania solo se ha leído el § 12 IFG, no los poderes del Comisionado.",
+  "_hints": "Las resoluciones del CTBG son vinculantes pero la Administración puede recurrirlas o ignorarlas sin multa; ejecución solo vía contencioso. Episodios en todos los gobiernos: resoluciones del CTBG incumplidas o recurridas por ministerios o Presidencia, sentencias que las confirmaron, y el registro de bloqueos de este proyecto: docs/etl/name-and-shame-access-blockers.md (cítalo con URL https://github.com/... no: usa la ruta del repo como label y la URL pública del organismo bloqueado). Datos oficiales: memorias del CTBG con número de resoluciones incumplidas si existen.",
+  "sanction_short": "Sin multa; el solicitante debe ir al contencioso"
 }

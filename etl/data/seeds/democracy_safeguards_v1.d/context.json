@@ -1,9 +1,117 @@
 {
-  "title": "",
-  "intro": "",
-  "erosion": [],
-  "conclusion": "",
-  "sources": [],
-  "_hints": "Pregunta: en los casos documentados de erosión (Polonia 2015-2023, Hungría desde 2010), ¿qué se erosionó primero, y cuáles de esas salvaguardas deja España a la buena voluntad? Solo con informes oficiales (Comisión de Venecia, Informes sobre el Estado de Derecho de la Comisión Europea, sentencias del TJUE y del TEDH) e índices. Sin previsiones. erosion: 5-8 filas en orden cronológico de lo erosionado primero: {id, what (en español, p. ej. «Tribunal Constitucional: nombramientos y publicación de sentencias»), POL: {text con fecha y norma, sources}, HUN: {text, sources}, ESP: {text: qué regla rige aquí, safeguard: id de la ficha española (cgpj_renovacion, tc_renovacion, fiscal_general, rtve_consejo, defensor_pueblo, tribunal_cuentas, cnmc_reguladores, cis_presidencia, elecciones_plazos, mesa_plazos, decretos_ley, ...)}}. intro y conclusion: 2-3 frases factuales cada una; la conclusión dice qué de lo erosionado allí depende aquí de la buena voluntad y qué no, sin predecir. Añade también recommendations_spain: lista de recomendaciones de los Informes sobre el Estado de Derecho de la Comisión Europea a España por año (2022-2026) {year, text, url}, para mostrar cuáles se repiten.",
+  "title": "Lo primero que se tocó en Polonia y Hungría, y quién lo protege en España",
+  "intro": "En los dos casos de erosión del Estado de derecho que la Comisión de Venecia del Consejo de Europa examinó dentro de la Unión Europea, las primeras reformas recayeron en los árbitros: el tribunal constitucional, el órgano de gobierno de los jueces, la fiscalía y el regulador de los medios. La tabla resume lo que recogen esas opiniones oficiales y, al lado, cómo se elige cada árbitro en España y en qué clase queda su salvaguarda en este análisis.",
+  "erosion": [
+    {
+      "id": "tribunal-constitucional",
+      "what": "Tribunal constitucional: composición, nombramientos y publicación de sus sentencias",
+      "POL": {
+        "text": "Leyes de 2015 y 2016 sobre el Tribunal Constitucional. La Comisión de Venecia las examinó en marzo y octubre de 2016 y recogió que sentencias del Tribunal no se publicaron.",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2016)001 (11-03-2016)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2016)001-e"
+          },
+          {
+            "label": "Comisión de Venecia, CDL-AD(2016)026 (14/15-10-2016)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2016)026-e"
+          }
+        ]
+      },
+      "HUN": {
+        "text": "La Constitución de 2011 y las reformas que la acompañaron cambiaron el número de magistrados del Tribunal Constitucional, su mandato y la elección de su presidente (opinión de junio de 2011).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2011)016 (17/18-06-2011)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2011)016-e"
+          }
+        ]
+      },
+      "ESP": {
+        "text": "Doce magistrados: cuatro del Congreso y cuatro del Senado por 3/5, dos del Gobierno y dos del CGPJ; si una renovación no llega, siguen los salientes.",
+        "safeguard": "tc_renovacion"
+      }
+    },
+    {
+      "id": "consejo-judicial",
+      "what": "Órgano de gobierno de los jueces",
+      "POL": {
+        "text": "Proyecto de 2017: los 15 miembros jueces del Consejo Nacional del Poder Judicial pasarían a elegirse por 3/5 del Sejm, en vez de por los propios jueces (opinión de diciembre de 2017).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2017)031 (8/9-12-2017)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2017)031-e"
+          }
+        ]
+      },
+      "HUN": {
+        "text": "Leyes de 2011: el presidente de la Oficina Judicial Nacional lo elige el Parlamento por dos tercios para nueve años, con amplias competencias de gestión (opinión de marzo de 2012).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2012)001 (16/17-03-2012)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2012)001-e"
+          }
+        ]
+      },
+      "ESP": {
+        "text": "Veinte vocales elegidos por 3/5 del Congreso y del Senado; si no se renuevan, sigue el Consejo saliente con funciones limitadas desde 2021.",
+        "safeguard": "cgpj_renovacion"
+      }
+    },
+    {
+      "id": "fiscalia",
+      "what": "Fiscalía",
+      "POL": {
+        "text": "Ley de 2016 que unió el cargo de Fiscal General con el de ministro de Justicia (opinión de diciembre de 2017).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2017)028 (8/9-12-2017)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2017)028-e"
+          }
+        ]
+      },
+      "HUN": {
+        "text": "La Ley Fundamental de 2011 fija un Fiscal General elegido por el Parlamento por dos tercios para nueve años, a propuesta del presidente de la República (opinión de junio de 2012).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2012)008 (15/16-06-2012)",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2012)008-e"
+          }
+        ]
+      },
+      "ESP": {
+        "text": "El Fiscal General lo nombra el Gobierno, oído el CGPJ (informe no vinculante), y cesa con el Gobierno que lo nombró.",
+        "safeguard": "fiscal_general"
+      }
+    },
+    {
+      "id": "medios",
+      "what": "Medios públicos y su regulador",
+      "POL": {
+        "text": "no_signal",
+        "sources": []
+      },
+      "HUN": {
+        "text": "Leyes de medios de 2010 con un Consejo de Medios cuya composición y competencias examinó la Comisión de Venecia (opinión de 2015).",
+        "sources": [
+          {
+            "label": "Comisión de Venecia, CDL-AD(2015)015",
+            "url": "https://docs-venice.coe.int/api/Document?pdffile=CDL-AD(2015)015-e"
+          }
+        ]
+      },
+      "ESP": {
+        "text": "El Consejo de Administración de RTVE lo eligen las Cortes por mayoría reforzada; desde 2012 las leyes y decretos-leyes cambiaron esa mayoría varias veces.",
+        "safeguard": "rtve_consejo"
+      }
+    }
+  ],
+  "conclusion": "Las tres primeras piezas que se reformaron en Polonia y Hungría tienen en España reglas propias: las renovaciones del Tribunal Constitucional y del CGPJ dependen de que las Cortes reúnan tres quintos, sin salida prevista si no los reúnen, y al Fiscal General lo nombra el Gobierno, con un control judicial que llega tarde. Esto describe qué reglas no tienen un tercero que las haga cumplir; no compara la intención de nadie ni anticipa lo que pueda pasar.",
+  "sources": [
+    {
+      "label": "Comisión de Venecia, documentos por país",
+      "url": "https://www.venice.coe.int/webforms/documents/by_country.aspx"
+    }
+  ],
   "recommendations_spain": []
 }

@@ -3,47 +3,174 @@
   "name": "Indultos (Ley de 18 de junio de 1870, reformada por la Ley 1/1988)",
   "group": "justicia",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "El Rey ejerce el derecho de gracia con arreglo a la ley, que no puede autorizar indultos generales (CE art. 62.i); el Gobierno los concede por real decreto publicado en el BOE (Ley de 1870, art. 30), con informe del tribunal sentenciador (arts. 24-25); el indulto total exige razones de justicia, equidad o utilidad pública a juicio de ese tribunal (art. 11); no cabe para la responsabilidad penal de miembros del Gobierno del art. 102 CE.",
+    "articles": [
+      "CE art. 62.i",
+      "CE art. 102.3",
+      "Ley de 18 de junio de 1870, arts. 11, 24, 25 y 30"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1870-4759",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Gobierno (Consejo de Ministros, a propuesta del Ministerio de Justicia)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Tribunal Supremo, Sala Tercera (recurso contencioso contra el real decreto de indulto, limitado a sus elementos reglados y a quien tenga legitimación)",
+    "short": "Supremo (Sala Tercera), solo elementos reglados",
+    "power": "anula"
   },
-  "sanction": "",
+  "sanction": "Ninguna para el Gobierno. La Sala Tercera del Supremo puede anular un real decreto de indulto por vicios en sus elementos reglados, pero solo si lo recurre alguien con legitimación; el informe del tribunal sentenciador no es vinculante salvo para el indulto total (art. 11).",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 212,
+    "basis": "Indultos del procés: reales decretos de 22-06-2021; el Supremo (Sala Tercera) resolvió el 20-01-2022 que ningún recurrente tenía legitimación activa, 212 días después, sin entrar en el fondo. La ley no fija plazo.",
+    "sources": [
+      {
+        "label": "CGPJ, nota del Tribunal Supremo de 20-01-2022",
+        "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-estima-la-alegacion-de-la-Abogacia-del-Estado-de-falta-de-legitimacion-activa-de-todos-los-recursos-contra-los-indultos-de-los-condenados-en-la-causa-del--proces-"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "El control judicial llega después de que el indulto produce efectos, se limita a los elementos reglados y depende de la legitimación del recurrente: en los indultos de 2021 el Supremo no entró en el fondo porque ningún recurrente la tenía.",
+  "episodes": [
+    {
+      "id": "indultos-1998-barrionuevo",
+      "start": "1998-12-23",
+      "end": null,
+      "kind": "tension",
+      "summary": "El Gobierno indulta por Real Decreto 2838/1998 a José Barrionuevo, exministro del Interior condenado por la Sala Segunda del Tribunal Supremo en sentencia de 29-07-1998, con informes del Ministerio Fiscal y del tribunal sentenciador (BOE 22-01-1999).",
+      "power_holder": {
+        "government": "aznar",
+        "body": "Consejo de Ministros",
+        "indispensable_parties": null,
+        "note": "Indulto a un exmiembro de un Gobierno anterior condenado por el Supremo."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-1999-1545, Real Decreto 2838/1998",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1999-1545"
+        }
+      ]
+    },
+    {
+      "id": "indultos-2011-saenz",
+      "start": "2011-11-25",
+      "end": null,
+      "kind": "tension",
+      "summary": "El Gobierno indulta por Real Decreto 1761/2011 a Alfredo Sáenz Abad, consejero delegado de un banco condenado por la Sala Segunda del Tribunal Supremo en sentencia de 24-02-2011 (BOE 10-12-2011), cinco días después de las elecciones generales del 20-11-2011.",
+      "power_holder": {
+        "government": "zapatero",
+        "body": "Consejo de Ministros",
+        "indispensable_parties": null,
+        "note": "Real decreto aprobado tras las elecciones, con el Gobierno saliente."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2011-19378, Real Decreto 1761/2011",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-19378"
+        }
+      ]
+    },
+    {
+      "id": "indultos-2021-proces",
+      "start": "2021-06-22",
+      "end": "2022-01-20",
+      "kind": "tension",
+      "summary": "El Gobierno indulta por ocho reales decretos de 22-06-2021 (BOE 23-06-2021) a condenados por la Sala Segunda del Supremo en la causa del procés, que se había opuesto a la concesión. La Sala Tercera rechazó suspenderlos y el 20-01-2022 estimó la falta de legitimación activa de todos los recurrentes, sin pronunciarse sobre el fondo.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Consejo de Ministros",
+        "indispensable_parties": null,
+        "note": "Indultos parciales contra el criterio del tribunal sentenciador; el control judicial no llegó al fondo."
+      },
+      "remedy": {
+        "by": "Tribunal Supremo, Sala Tercera",
+        "ruling": "Falta de legitimación activa de todos los recurrentes; recursos no examinados en el fondo",
+        "date": "2022-01-20",
+        "act_date": "2021-06-22"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2021-10463, Real Decreto 456/2021 (Dolors Bassa)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10463"
+        },
+        {
+          "label": "BOE-A-2021-10464, Real Decreto 457/2021 (Jordi Cuixart)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10464"
+        },
+        {
+          "label": "BOE-A-2021-10465, Real Decreto 458/2021 (Carme Forcadell)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10465"
+        },
+        {
+          "label": "BOE-A-2021-10466, Real Decreto 459/2021 (Joaquim Forn)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10466"
+        },
+        {
+          "label": "BOE-A-2021-10467, Real Decreto 460/2021 (Oriol Junqueras)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10467"
+        },
+        {
+          "label": "BOE-A-2021-10468, Real Decreto 461/2021 (Raül Romeva)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10468"
+        },
+        {
+          "label": "BOE-A-2021-10469, Real Decreto 462/2021 (Josep Rull)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10469"
+        },
+        {
+          "label": "BOE-A-2021-10471, Real Decreto 464/2021 (Jordi Turull)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-10471"
+        },
+        {
+          "label": "CGPJ: el Supremo se opone a la concesión del indulto a los doce condenados del procés",
+          "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-se-opone-a-la-concesion-del-indulto-a-los-doce-condenados-en-la-causa-del--proces-"
+        },
+        {
+          "label": "CGPJ: el Supremo rechaza la suspensión cautelar de los indultos",
+          "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Sala-de-Prensa/Archivo-de-notas-de-prensa/El-Tribunal-Supremo-rechaza-la-suspension-cautelar-de-los-indultos-de-los-presos-del--proces--que-pedia-Ciudadanos-y-Vox"
+        },
+        {
+          "label": "CGPJ, nota de 20-01-2022: falta de legitimación activa de todos los recursos",
+          "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-estima-la-alegacion-de-la-Abogacia-del-Estado-de-falta-de-legitimacion-activa-de-todos-los-recursos-contra-los-indultos-de-los-condenados-en-la-causa-del--proces-"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "El Presidente Federal ejerce el derecho de gracia en casos individuales para la Federación y puede delegarlo en otras autoridades (art. 60.2-3 GG).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Grundgesetz, art. 60",
+          "url": "https://www.gesetze-im-internet.de/gg/art_60.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "El Presidente de la República puede conceder la gracia y conmutar penas (art. 87 de la Constitución).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Costituzione, art. 87",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Gracia del Gobierno con informe del tribunal sentenciador; control judicial limitado a lo reglado (STS de 20-11-2013 del Pleno de la Sala Tercera). Episodios en todos los gobiernos: indultos a cargos públicos o a condenados por delitos contra la Administración, indultos contra el informe del tribunal, recursos y lo que resolvió el Supremo (incluidos los indultos de 2021 a condenados del procés y la inadmisión o desestimación de recursos)."
+  "limits": "No es un censo: los episodios son una selección de reales decretos del BOE encontrados con búsquedas por nombre, sin recuento de indultos por gobierno. No se ha verificado con fuente oficial la sentencia del Pleno de la Sala Tercera de 20-11-2013 ni lo que resolvió el Supremo sobre el indulto de 2011, por lo que no figuran como remedios. La clasificación de los pares (Alemania, Italia) solo se basa en el texto constitucional: no se ha comprobado si allí cabe control judicial. La fecha del informe contrario del Supremo de 2021 no se ha extraído.",
+  "_hints": "Gracia del Gobierno con informe del tribunal sentenciador; control judicial limitado a lo reglado (STS de 20-11-2013 del Pleno de la Sala Tercera). Episodios en todos los gobiernos: indultos a cargos públicos o a condenados por delitos contra la Administración, indultos contra el informe del tribunal, recursos y lo que resolvió el Supremo (incluidos los indultos de 2021 a condenados del procés y la inadmisión o desestimación de recursos).",
+  "sanction_short": "Anulación por el Supremo solo de lo reglado y si recurre un legitimado"
 }

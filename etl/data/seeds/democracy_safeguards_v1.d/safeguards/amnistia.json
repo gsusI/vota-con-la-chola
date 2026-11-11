@@ -3,47 +3,145 @@
   "name": "Ley de amnistía (LO 1/2024) y sus controles",
   "group": "justicia",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "Las Cortes aprueban por ley orgánica una amnistía de actos ligados a las consultas de 2014 y 2017 y al proceso independentista catalán cometidos entre el 1-11-2011 y el 13-11-2023 (art. 1), con exclusiones de delitos graves (art. 2). La Constitución prohíbe los indultos generales (art. 62.i) y no regula la amnistía; su control corresponde al Tribunal Constitucional y a los tribunales que la aplican.",
+    "articles": [
+      "LO 1/2024, arts. 1 y 2",
+      "CE art. 62.i"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-11776",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Cortes Generales (legislador)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Tribunal Constitucional (recursos y cuestiones de inconstitucionalidad contra la ley)",
+    "short": "Tribunal Constitucional, tras recurso o cuestión",
+    "power": "anula"
   },
-  "sanction": "",
+  "sanction": "El Tribunal Constitucional puede declarar inconstitucionales y nulos preceptos de la ley; hasta que lo hace, la ley se aplica. No hay consecuencia para el legislador.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 380,
+    "basis": "La LO 1/2024 entró en vigor con su publicación en el BOE el 11-06-2024; el TC resolvió el primer recurso (STC 137/2025) el 26-06-2025, 380 días después.",
+    "sources": [
+      {
+        "label": "BOE-A-2024-11776, LO 1/2024",
+        "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-11776"
+      },
+      {
+        "label": "BOE-A-2025-15939, STC 137/2025",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-15939"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "El Tribunal Constitucional puede anular preceptos, pero lo hizo más de un año después de la entrada en vigor, cuando la ley ya se estaba aplicando.",
+  "episodes": [
+    {
+      "id": "amnistia-2024-aprobacion",
+      "start": "2023-11-21",
+      "end": "2024-06-10",
+      "kind": "tension",
+      "summary": "La Mesa del Congreso califica el 21-11-2023 la proposición de ley de amnistía y, oída la Junta de Portavoces, desestima las solicitudes de reconsideración de dos grupos; las Cortes aprueban la Ley Orgánica 1/2024, de 10 de junio (BOE 11-06-2024), que amnistía actos del proceso independentista catalán de 2011 a 2023.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales",
+        "indispensable_parties": null,
+        "note": "Proposición de ley del Grupo Parlamentario Socialista, no proyecto del Gobierno; la tramitación consta en los antecedentes de la STC 137/2025."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOE-A-2024-11776, LO 1/2024",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-11776"
+        },
+        {
+          "label": "BOE-A-2025-15939, STC 137/2025 (antecedentes)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-15939"
+        }
+      ]
+    },
+    {
+      "id": "amnistia-2025-stc137",
+      "start": "2025-06-26",
+      "end": "2025-06-26",
+      "kind": "remedio",
+      "summary": "El Tribunal Constitucional estima parcialmente el recurso de más de cincuenta diputados y cincuenta senadores del Grupo Popular: declara inconstitucional el art. 1.1 en cuanto deja fuera los actos de quienes se opusieron a la secesión o a las consultas, e inconstitucional y nulo el párrafo segundo del art. 1.3 por dar a la amnistía un efecto pro futuro contrario al art. 14 CE; el resto de la ley se mantiene.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales",
+        "indispensable_parties": null,
+        "note": "Remedio parcial sobre la ley de las Cortes."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "STC 137/2025: estimación parcial; art. 1.3, párrafo segundo, inconstitucional y nulo; art. 1.1 inconstitucional en los términos de la sentencia",
+        "date": "2025-06-26",
+        "act_date": "2024-06-10"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2025-15939, STC 137/2025",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-15939"
+        },
+        {
+          "label": "BOE-A-2025-15984, corrección de erratas",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-15984"
+        }
+      ]
+    },
+    {
+      "id": "amnistia-2025-stc164",
+      "start": "2025-10-08",
+      "end": "2025-10-08",
+      "kind": "remedio",
+      "summary": "El Tribunal Constitucional estima parcialmente la cuestión de inconstitucionalidad de la Sala de lo Penal del Tribunal Supremo y declara la inconstitucionalidad del art. 1.1 de la LO 1/2024 en los términos de la sentencia; desestima la duda sobre seguridad jurídica.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales",
+        "indispensable_parties": null,
+        "note": "Cuestión planteada por el Tribunal Supremo al aplicar la ley."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "STC 164/2025: estimación parcial de la cuestión 6053-2024",
+        "date": "2025-10-08",
+        "act_date": "2024-06-10"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2025-22787, STC 164/2025",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-22787"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "La amnistía exige una ley aprobada por dos tercios de los miembros de cada Cámara, artículo por artículo y en la votación final, y no puede aplicarse a delitos posteriores a la presentación del proyecto (art. 79 de la Constitución).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Costituzione, art. 79",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Proceso de aprobación (proposición de ley), opinión de la Comisión de Venecia (CDL-AD(2024)003), sentencia del TC sobre la ley (comprueba número y fecha), cuestiones prejudiciales ante el TJUE y su estado a 2026-11-11, aplicación por los tribunales. Solo hechos con fecha y documento."
+  "limits": "No se han documentado con fuente oficial la opinión de la Comisión de Venecia CDL-AD(2024)003, las cuestiones prejudiciales ante el TJUE ni su estado a 2026-11-11, ni las resoluciones del Tribunal Supremo sobre la malversación. Las demás sentencias del TC de 2025-2026 sobre recursos autonómicos y cuestiones del TSJ de Cataluña (SSTC 165, 176-182, 185 y 192/2025 y 10/2026) figuran en el BOE pero no se han resumido. Para Italia solo se ha leído el texto constitucional (mayoría de 2/3), no su control judicial.",
+  "_hints": "Proceso de aprobación (proposición de ley), opinión de la Comisión de Venecia (CDL-AD(2024)003), sentencia del TC sobre la ley (comprueba número y fecha), cuestiones prejudiciales ante el TJUE y su estado a 2026-11-11, aplicación por los tribunales. Solo hechos con fecha y documento.",
+  "sanction_short": "Nulidad de preceptos por el TC; la ley se aplica mientras tanto"
 }

@@ -184,6 +184,26 @@ mayores fueron volcados de la hoja de trabajo JSON (12-20 k caracteres) y el bri
   si el primero supera 1 M por ficha. Las otras 5 (cnmc_reguladores, cis_presidencia, mocion_censura,
   elecciones_plazos, cgpj_funciones) se publican como «pendiente de documentar» solo con su referencia legal.
 
+## 3. Ola 3 (aprobada agente a agente)
+
+- **Agente 1** (veto_presupuestario, control_parlamentario, mesa_plazos, tramitacion_reforzada, art155), brief compacto y
+  hojas de trabajo en Markdown: 54 turnos, **5,92 M tokens de entrada = 1,18 M por ficha** (frente a 3,3 M en la ola 2 y
+  4,7 M en el piloto). **Supera el tope de 1 M por ficha fijado por el coordinador: el agente 2 no se lanza.** Sus 5 fichas
+  (indultos, amnistia, estado_derecho_sentencias, transparencia, financiacion_partidos) pasan a «pendiente de documentar»
+  con su referencia legal, junto a cnmc_reguladores, cis_presidencia, mocion_censura, elecciones_plazos y cgpj_funciones.
+- Lo que aún domina: releer el contexto (~110 k de media en 54 turnos) y 4-6 consultas por ficha para sacar el fallo del
+  TC y la fecha del acto recurrido. Siguiente palanca (no aplicada): llevar esas dos columnas ya extraídas en cada fila
+  de la hoja de trabajo y escribir las 5 fichas en un solo turno de escritura.
+- Revisión independiente del agente 1: ver §3.1.
+- **Comprobación mecánica añadida** (por instrucción del coordinador para cada patrón de atribución que señalen las
+  revisiones): un episodio cuyo órgano es una Cámara, su Mesa o la Diputación Permanente no puede llevar `government`.
+  Al activarla encontró 5 episodios ya publicados que la revisión no había visto (tres votaciones de RTVE en las Cortes
+  y dos leyes orgánicas del TC); corregidos.
+- **Polonia y Hungría** (`context.json`): cuatro filas (tribunal constitucional, consejo judicial, fiscalía, medios) con
+  nueve opiniones de la Comisión de Venecia comprobadas en su PDF oficial (título, fecha y pasaje); Polonia/medios sin
+  opinión comprobada (`no_signal`). Recomendaciones de los Informes sobre el Estado de Derecho: no incluidas (los PDF de
+  la Comisión Europea no respondieron a scripts).
+
 ## 1. Estado
 
 - **Dónde estamos.** Método fijado; series reproducibles; 10 fichas verificadas y publicadas en la página (sin enlazar en

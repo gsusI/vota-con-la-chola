@@ -3,47 +3,93 @@
   "name": "Sometimiento del Gobierno al control del Congreso: preguntas, comparecencias y Gobierno en funciones (arts. 66, 108-111)",
   "group": "control",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
-    "deadline": null
+    "text": "Las Cortes controlan la acción del Gobierno (art. 66.2 CE); las Cámaras y sus Comisiones pueden reclamar la presencia de los miembros del Gobierno (art. 110 CE), que está sometido a interpelaciones y preguntas (art. 111 CE). Las preguntas escritas se contestan en 20 días desde su publicación, prorrogables 20 más por acuerdo de la Mesa (art. 190.1 RC).",
+    "articles": [
+      "CE art. 66.2",
+      "CE art. 108",
+      "CE art. 109",
+      "CE art. 110",
+      "CE art. 111",
+      "Reglamento del Congreso art. 185",
+      "Reglamento del Congreso art. 190"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a110",
+    "deadline": "20 días para responder preguntas escritas, prorrogables otros 20 (art. 190.1 RC)"
   },
-  "obligated": "",
+  "obligated": "Gobierno de la Nación y cada uno de sus miembros, también en funciones",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Presidencia del Congreso (si no hay respuesta escrita, pasa la pregunta a oral en Comisión, art. 190.2 RC); Tribunal Constitucional en conflicto entre órganos constitucionales, que solo declara la vulneración",
+    "short": "Presidencia del Congreso; Tribunal Constitucional",
+    "power": "declara"
   },
-  "sanction": "",
+  "sanction": "Ninguna sanción ni consecuencia automática. Una pregunta escrita sin respuesta pasa al orden del día de la Comisión como pregunta oral; si el Gobierno se niega a comparecer, el Congreso puede plantear conflicto y el TC declara la vulneración del art. 66.2 CE años después, sin poder ordenar la comparecencia ya pasada.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 979,
+    "basis": "Días entre el oficio del Gobierno de 10-03-2016 y la STC 124/2018 de 14-11-2018; la sentencia llegó cuando la XI legislatura ya se había disuelto.",
+    "sources": [
+      {
+        "label": "STC 124/2018",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-17131"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "buena_voluntad",
+  "classification_reason": "Nadie puede obligar al Gobierno a responder ni a comparecer: la pregunta escrita sin respuesta solo pasa a oral en Comisión, y el TC únicamente declara la vulneración, en el único caso documentado 979 días después y con la legislatura ya disuelta.",
+  "episodes": [
+    {
+      "id": "gobierno_funciones_2016",
+      "start": "2016-03-10",
+      "end": "2018-11-14",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Gobierno en funciones comunicó por oficio del Ministerio de la Presidencia de 10-03-2016 que no se sometía al control del Congreso de la XI legislatura y rechazó la comparecencia urgente del Ministro de Defensa en funciones. El Pleno del Congreso aprobó el 06-04-2016 plantear conflicto (218 votos a favor, 113 en contra, 4 abstenciones). El TC estimó el conflicto y declaró que ese criterio vulneró el art. 66.2 CE (STC 124/2018).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación (en funciones)",
+        "indispensable_parties": null,
+        "note": "Gobierno en funciones durante la XI legislatura; el Gobierno reiteró el mismo criterio en otras peticiones de comparecencia."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 124/2018 (estima el conflicto 3102-2016)",
+        "date": "2018-11-14",
+        "act_date": "2016-03-10"
+      },
+      "sources": [
+        {
+          "label": "STC 124/2018 (BOE-A-2018-17131)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-17131"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "El Bundestag y sus comisiones pueden exigir la presencia de cualquier miembro del Gobierno federal (art. 43.1 GG).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Art. 43 GG",
+          "url": "https://www.gesetze-im-internet.de/gg/art_43.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Plazo de respuesta a las preguntas escritas (Reglamento del Congreso art. 190); el conflicto de 2016 (Gobierno en funciones que no compareció) y la STC 124/2018; datos oficiales de preguntas sin respuesta si existen. Atribución por gobierno."
+  "limits": "No se ha localizado un documento oficial con el número de preguntas escritas respondidas fuera de plazo o sin respuesta por legislatura y gobierno, por lo que el incumplimiento del plazo de 20 días no está cuantificado. Solo consta el conflicto de 2016 resuelto por el TC; no se han revisado negativas a comparecer de otros gobiernos ni el periodo con Cortes disueltas desde el 05-10-2026. No se clasifica el mecanismo de los pares.",
+  "_hints": "Plazo de respuesta a las preguntas escritas (Reglamento del Congreso art. 190); el conflicto de 2016 (Gobierno en funciones que no compareció) y la STC 124/2018; datos oficiales de preguntas sin respuesta si existen. Atribución por gobierno.",
+  "sanction_short": "Sin sanción: pregunta pasa a oral; el TC declara años después"
 }

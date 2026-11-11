@@ -713,7 +713,9 @@ export default function DemocraciaPage() {
               <h3>{label}</h3>
               <LineChart
                 ariaLabel={`${label}, V-Dem`}
-                height={240}
+                height={260}
+                width={380}
+                rightMargin={64}
                 yMax={1}
                 digits={1}
                 xMin={1975}
@@ -738,7 +740,7 @@ export default function DemocraciaPage() {
         <section className="card vizProse" id="erosion" aria-labelledby="erosion-title">
           <h2 id="erosion-title">{context.title}</h2>
           <p>{context.intro}</p>
-          <div className="vizTable__scroll">
+          <div className="demoScrollX">
             <table className="demoErosion">
               <thead>
                 <tr>
@@ -753,10 +755,10 @@ export default function DemocraciaPage() {
                   <tr key={row.id}>
                     <td>{row.what}</td>
                     <td>
-                      {row.POL?.text} <SourceLinks sources={row.POL?.sources} />
+                      {row.POL?.text === "no_signal" ? "Sin dato en las fuentes consultadas." : row.POL?.text} <SourceLinks sources={row.POL?.sources} />
                     </td>
                     <td>
-                      {row.HUN?.text} <SourceLinks sources={row.HUN?.sources} />
+                      {row.HUN?.text === "no_signal" ? "Sin dato en las fuentes consultadas." : row.HUN?.text} <SourceLinks sources={row.HUN?.sources} />
                     </td>
                     <td>
                       {row.ESP?.text}{" "}

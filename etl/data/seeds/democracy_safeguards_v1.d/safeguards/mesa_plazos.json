@@ -3,47 +3,203 @@
   "name": "Tramitación de iniciativas: la Mesa no puede bloquear indefinidamente (Reglamento del Congreso arts. 31, 110, 126)",
   "group": "legislar",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
-    "deadline": null
+    "text": "La Mesa califica los escritos, declara su admisibilidad y decide su tramitación con arreglo al Reglamento (art. 31.1 RC); puede prorrogar o reducir plazos, pero salvo casos excepcionales las prórrogas no superan otro tanto del plazo (art. 91 RC). Contra sus decisiones cabe reconsideración ante la propia Mesa (art. 31.2 RC) y, una vez firmes, recurso de amparo ante el TC en tres meses (art. 42 LOTC).",
+    "articles": [
+      "CE art. 72",
+      "Reglamento del Congreso art. 31",
+      "Reglamento del Congreso art. 91",
+      "Reglamento del Congreso art. 110",
+      "Reglamento del Congreso art. 126",
+      "LOTC art. 42"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1982-5196#art91",
+    "deadline": "Prórrogas no superiores a otro tanto del plazo salvo casos excepcionales (art. 91.2 RC); amparo en 3 meses desde que el acuerdo es firme (art. 42 LOTC)"
   },
-  "obligated": "",
+  "obligated": "Mesa del Congreso y Mesa del Senado",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Tribunal Constitucional, en recurso de amparo de los diputados o senadores (art. 42 LOTC); antes, solo la reconsideración ante la propia Mesa",
+    "short": "Tribunal Constitucional (amparo de los parlamentarios)",
+    "power": "anula"
   },
-  "sanction": "",
+  "sanction": "Ninguna sanción. Si el TC otorga el amparo, declara vulnerado el derecho de los parlamentarios (art. 23.2 CE) y anula los acuerdos de la Mesa, normalmente años después, cuando la iniciativa ya no puede tramitarse en la misma legislatura. Las prórrogas de plazos no tienen límite efectivo fuera de la propia Mesa.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 1316,
+    "basis": "Mediana de días entre el acuerdo de la Mesa y la sentencia de amparo del TC en los 5 casos documentados (rango 393-1867 días).",
+    "sources": [
+      {
+        "label": "STC 177/2002 (BOE-T-2002-21849)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2002-21849"
+      },
+      {
+        "label": "STC 208/2003 (BOE-T-2004-306)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2004-306"
+      },
+      {
+        "label": "STC 89/2005 (BOE-T-2005-8267)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2005-8267"
+      },
+      {
+        "label": "STC 57/2011 (BOE-A-2011-9130)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-9130"
+      },
+      {
+        "label": "STC 110/2019 (BOE-A-2019-15677)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15677"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_tarde",
+  "classification_reason": "Solo el TC puede anular un acuerdo de la Mesa, y en los casos documentados tardó entre 393 y 1867 días; las prórrogas de plazos (art. 91 RC) solo las controla la propia Mesa.",
+  "episodes": [
+    {
+      "id": "mesa_telefonica_1997",
+      "start": "1997-09-03",
+      "end": "2002-10-14",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso inadmitió el 03-09-1997 la solicitud del Grupo Socialista de comparecencia del Presidente de Telefónica de España. El TC otorgó el amparo (STC 177/2002).",
+      "power_holder": {
+        "government": null,
+        "body": "Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Acto de la Mesa de la Cámara; no se atribuye al Gobierno."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 177/2002 (otorga el amparo 4507/97 y 5422/98)",
+        "date": "2002-10-14",
+        "act_date": "1997-09-03"
+      },
+      "sources": [
+        {
+          "label": "STC 177/2002 (BOE-T-2002-21849)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2002-21849"
+        }
+      ]
+    },
+    {
+      "id": "mesa_cgpj_2000",
+      "start": "2000-12-05",
+      "end": "2003-12-01",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso rechazó el 05-12-2000 (confirmado el 07-02-2001) la solicitud de comparecencia urgente del Presidente del Consejo General del Poder Judicial ante la Comisión de Justicia e Interior. El TC otorgó el amparo (STC 208/2003).",
+      "power_holder": {
+        "government": null,
+        "body": "Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Acto de la Mesa de la Cámara; no se atribuye al Gobierno."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 208/2003 (otorga el amparo 2602-2001)",
+        "date": "2003-12-01",
+        "act_date": "2000-12-05"
+      },
+      "sources": [
+        {
+          "label": "STC 208/2003 (BOE-T-2004-306)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2004-306"
+        }
+      ]
+    },
+    {
+      "id": "mesa_fiscal_antidroga_2000",
+      "start": "2000-12-12",
+      "end": "2005-04-18",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso rechazó el 12-12-2000 (reconsideración desestimada el 07-02-2001) la solicitud del Grupo Socialista de comparecencia del Fiscal especial para la prevención y represión del tráfico ilegal de drogas ante la Comisión mixta para el estudio del problema de las drogas. El TC otorgó el amparo (STC 89/2005).",
+      "power_holder": {
+        "government": null,
+        "body": "Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Acto de la Mesa de la Cámara; no se atribuye al Gobierno."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 89/2005 (otorga el amparo 2601-2001)",
+        "date": "2005-04-18",
+        "act_date": "2000-12-12"
+      },
+      "sources": [
+        {
+          "label": "STC 89/2005 (BOE-T-2005-8267)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2005-8267"
+        }
+      ]
+    },
+    {
+      "id": "mesa_iniciativa_2007",
+      "start": "2007-09-25",
+      "end": "2011-05-03",
+      "kind": "incumplimiento_declarado",
+      "summary": "La Mesa del Congreso no admitió a trámite el 25-09-2007 (reconsideración desestimada el 30-10-2007) una iniciativa parlamentaria de un diputado. El TC otorgó el amparo (STC 57/2011).",
+      "power_holder": {
+        "government": null,
+        "body": "Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Acto de la Mesa de la Cámara; no se atribuye al Gobierno."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 57/2011 (otorga el amparo 345-2008)",
+        "date": "2011-05-03",
+        "act_date": "2007-09-25"
+      },
+      "sources": [
+        {
+          "label": "STC 57/2011 (BOE-A-2011-9130)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-9130"
+        }
+      ]
+    },
+    {
+      "id": "mesa_xii_2018",
+      "start": "2018-09-04",
+      "end": "2019-10-02",
+      "kind": "aval",
+      "summary": "La Mesa del Congreso denegó el 04-09-2018 (reconsideración desestimada el 28-09-2018) una solicitud de tramitación del Grupo Socialista en la XII legislatura. El TC desestimó el amparo (STC 110/2019).",
+      "power_holder": {
+        "government": null,
+        "body": "Mesa del Congreso",
+        "indispensable_parties": null,
+        "note": "Acto de la Mesa de la Cámara; no se atribuye al Gobierno."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 110/2019 (desestima el amparo 6914-2018)",
+        "date": "2019-10-02",
+        "act_date": "2018-09-04"
+      },
+      "sources": [
+        {
+          "label": "STC 110/2019 (BOE-A-2019-15677)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15677"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "La serie de ampliaciones de la XV legislatura la calcula el exportador; aquí documenta la regla, el control (amparo ante el TC por los diputados, art. 42 LOTC) y episodios de bloqueo por la Mesa del Congreso o del Senado en todas las legislaturas (p. ej. ampliaciones masivas en la XII legislatura; sentencias del TC que ampararon a diputados frente a la Mesa; el Senado con mayoría del PP en 2023-2024). remedy_delay: tiempo típico de un amparo parlamentario."
+  "limits": "Los episodios son acuerdos de inadmisión o rechazo con sentencia de amparo publicada en el BOE; no se ha documentado aquí ninguna sentencia sobre prórrogas sucesivas de plazos de enmiendas (ni en la XII legislatura ni en el Senado en 2023-2024): la serie de ampliaciones de la XV legislatura la calcula el exportador aparte. Falta la fecha del acuerdo de la Mesa en la STC 190/2009 (comparecencia en Comisión de un vicepresidente de una Comisión Nacional, amparo estimado), por eso no figura. Las sentencias de 2023 sobre fórmulas de juramento en el Senado no son bloqueos y se excluyen. Sin pares en la hoja de trabajo.",
+  "_hints": "La serie de ampliaciones de la XV legislatura la calcula el exportador; aquí documenta la regla, el control (amparo ante el TC por los diputados, art. 42 LOTC) y episodios de bloqueo por la Mesa del Congreso o del Senado en todas las legislaturas (p. ej. ampliaciones masivas en la XII legislatura; sentencias del TC que ampararon a diputados frente a la Mesa; el Senado con mayoría del PP en 2023-2024). remedy_delay: tiempo típico de un amparo parlamentario.",
+  "sanction_short": "Sin sanción: el TC anula el acuerdo de la Mesa años después"
 }

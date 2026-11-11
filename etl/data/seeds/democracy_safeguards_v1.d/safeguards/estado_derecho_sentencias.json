@@ -3,47 +3,263 @@
   "name": "Cumplimiento de las resoluciones judiciales por los poderes públicos (art. 118) y ejecución de sentencias del TC",
   "group": "justicia",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "Es obligado cumplir las sentencias y resoluciones firmes de jueces y tribunales (CE art. 118); todos los poderes públicos deben cumplir lo que resuelva el Tribunal Constitucional, que vela por la ejecución de sus resoluciones, puede declarar nulas las que las contravengan y, desde la LO 15/2015, imponer multas coercitivas, suspender a autoridades o pedir la ejecución sustitutoria al Gobierno (LOTC arts. 87 y 92).",
+    "articles": [
+      "CE art. 118",
+      "LOTC art. 87",
+      "LOTC art. 92 (reforma LO 15/2015)"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1979-23709#anoventaydos",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Todos los poderes públicos (Gobierno, Cortes, parlamentos y gobiernos autonómicos, Administración)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Tribunal Constitucional (incidente de ejecución, art. 92 LOTC) y, para las sentencias ordinarias, el juez o tribunal que las dictó",
+    "short": "TC y tribunal sentenciador (ejecución forzosa)",
+    "power": "anula"
   },
-  "sanction": "",
+  "sanction": "El TC declara nulos los actos que contravienen sus resoluciones, puede imponer multas coercitivas y suspender a autoridades (art. 92.4 LOTC) y traslada los hechos al Ministerio Fiscal para la posible responsabilidad penal.",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 23,
+    "basis": "Resolución 1/XI del Parlamento de Cataluña de 9-11-2015 anulada por la STC 259/2015 de 2-12-2015 (23 días). Incidentes de ejecución posteriores: resolución 5/XI de 20-01-2016 anulada el 19-07-2016 (181 días); resolución 263/XI de 27-07-2016 el 6-10-2016 (71 días); acuerdos de 6-09-2017 el 19-09-2017 (13 días).",
+    "sources": [
+      {
+        "label": "BOE-A-2016-308, STC 259/2015",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-308"
+      },
+      {
+        "label": "BOE-A-2016-7908, ATC 141/2016",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-7908"
+      },
+      {
+        "label": "BOE-A-2016-10671, ATC 170/2016",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-10671"
+      },
+      {
+        "label": "BOE-A-2017-10826, ATC 123/2017",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-10826"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_a_tiempo",
+  "classification_reason": "En los incumplimientos documentados el TC anuló los actos contrarios a sus resoluciones en 13 a 181 días, dentro de seis meses; la anulación no impidió que el mismo órgano adoptara nuevos actos en el mismo sentido.",
+  "episodes": [
+    {
+      "id": "edsent-2015-res1xi",
+      "start": "2015-11-09",
+      "end": "2015-12-02",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Parlamento de Cataluña aprueba la resolución 1/XI sobre el inicio del proceso político en Cataluña; el TC estima la impugnación del Gobierno de la Nación y la declara inconstitucional y nula (STC 259/2015).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "STC 259/2015: estima la impugnación de la resolución 1/XI",
+        "date": "2015-12-02",
+        "act_date": "2015-11-09"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2016-308, STC 259/2015",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-308"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2015-lo15",
+      "start": "2015-10-16",
+      "end": "2016-12-15",
+      "kind": "aval",
+      "summary": "Las Cortes aprueban la LO 15/2015, que da al TC poderes de ejecución (multas coercitivas, suspensión de autoridades, ejecución sustitutoria). El TC desestima los recursos del Gobierno Vasco (STC 185/2016, 3-11-2016) y del Gobierno de la Generalitat (STC 215/2016, 15-12-2016).",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes Generales",
+        "indispensable_parties": null,
+        "note": "Ley de las Cortes avalada por el TC."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "SSTC 185/2016 y 215/2016: desestiman los recursos",
+        "date": "2016-12-15",
+        "act_date": "2015-10-16"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2016-11818, STC 185/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-11818"
+        },
+        {
+          "label": "BOE-A-2017-650, STC 215/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-650"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2016-res5xi",
+      "start": "2016-01-20",
+      "end": "2016-07-19",
+      "kind": "incumplimiento_declarado",
+      "summary": "El TC estima el incidente de ejecución de la STC 259/2015 promovido por el Gobierno de la Nación respecto de la resolución 5/XI del Parlamento de Cataluña, de 20-01-2016 (ATC 141/2016).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "ATC 141/2016: estima el incidente de ejecución",
+        "date": "2016-07-19",
+        "act_date": "2016-01-20"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2016-7908, ATC 141/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-7908"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2016-res263xi",
+      "start": "2016-07-27",
+      "end": "2016-10-06",
+      "kind": "incumplimiento_declarado",
+      "summary": "El TC estima el incidente de ejecución respecto de la resolución 263/XI del Parlamento de Cataluña, de 27-07-2016, y traslada los hechos al Ministerio Fiscal para que, si lo estima pertinente, promueva acciones penales (ATC 170/2016).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "ATC 170/2016: estima el incidente y da traslado al Ministerio Fiscal",
+        "date": "2016-10-06",
+        "act_date": "2016-07-27"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2016-10671, ATC 170/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-10671"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2017-res306xi",
+      "start": "2017-02-14",
+      "end": "2017-02-14",
+      "kind": "incumplimiento_declarado",
+      "summary": "El TC estima el incidente de ejecución respecto de apartados de la resolución 306/XI del Parlamento de Cataluña y traslada los hechos al Ministerio Fiscal (ATC 24/2017).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico; la fecha de la resolución 306/XI no se ha extraído."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "ATC 24/2017: estima el incidente y da traslado al Ministerio Fiscal",
+        "date": "2017-02-14",
+        "act_date": null
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2017-3258, ATC 24/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-3258"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2017-sept",
+      "start": "2017-09-06",
+      "end": "2017-09-19",
+      "kind": "incumplimiento_declarado",
+      "summary": "El TC estima el incidente de ejecución de la STC 259/2015 respecto de acuerdos del Parlamento de Cataluña de 6-09-2017 (ATC 123/2017; también ATC 124/2017 de la misma fecha).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "ATC 123/2017: estima el incidente de ejecución",
+        "date": "2017-09-19",
+        "act_date": "2017-09-06"
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2017-10826, ATC 123/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-10826"
+        },
+        {
+          "label": "BOE-A-2017-10827, ATC 124/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-10827"
+        }
+      ]
+    },
+    {
+      "id": "edsent-2019-res534xii",
+      "start": "2019-12-18",
+      "end": "2019-12-18",
+      "kind": "incumplimiento_declarado",
+      "summary": "El TC estima el incidente de ejecución de la STC 259/2015 instado por el Gobierno de la Nación respecto de incisos de la resolución 534/XII del Parlamento de Cataluña (ATC 180/2019; también ATC 181/2019).",
+      "power_holder": {
+        "government": null,
+        "body": "Parlamento de Cataluña",
+        "indispensable_parties": null,
+        "note": "Acto de un parlamento autonómico; la fecha de la resolución no se ha extraído."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional (Pleno)",
+        "ruling": "ATC 180/2019: estima el incidente de ejecución",
+        "date": "2019-12-18",
+        "act_date": null
+      },
+      "sources": [
+        {
+          "label": "BOE-A-2020-1123, ATC 180/2019",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-1123"
+        },
+        {
+          "label": "BOE-A-2020-1124, ATC 181/2019",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-1124"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "La norma declarada inconstitucional por la Corte deja de tener eficacia el día siguiente a la publicación de la decisión (art. 136 de la Constitución).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "Costituzione, art. 136",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Art. 118 CE, art. 92 LOTC (reforma LO 15/2015 que dio al TC poderes de ejecución). Episodios en todos los niveles de gobierno: desobediencia de autoridades autonómicas a resoluciones del TC (2015-2017), sentencias del Supremo o de la Audiencia Nacional no ejecutadas por gobiernos estatales, multas coercitivas. Atribuye al gobierno (estatal o autonómico, dilo en body) que incumplió."
+  "limits": "Solo se documentan incumplimientos de resoluciones del TC por el Parlamento de Cataluña con resolución en el BOE (2015-2019); no se han buscado incumplimientos del Gobierno de Cataluña ni casos de inejecución de sentencias por el Gobierno central u otros gobiernos, ni multas coercitivas o suspensiones efectivamente impuestas. La clase de Alemania se fija sin datos de plazos.",
+  "_hints": "Art. 118 CE, art. 92 LOTC (reforma LO 15/2015 que dio al TC poderes de ejecución). Episodios en todos los niveles de gobierno: desobediencia de autoridades autonómicas a resoluciones del TC (2015-2017), sentencias del Supremo o de la Audiencia Nacional no ejecutadas por gobiernos estatales, multas coercitivas. Atribuye al gobierno (estatal o autonómico, dilo en body) que incumplió.",
+  "sanction_short": "Nulidad, multas, suspensión de autoridades y traslado al Fiscal"
 }

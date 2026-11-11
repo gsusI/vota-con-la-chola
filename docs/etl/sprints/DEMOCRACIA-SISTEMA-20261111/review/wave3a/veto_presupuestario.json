@@ -1,0 +1,24 @@
+{
+ "id": "veto_presupuestario",
+ "verdict": "verified",
+ "checked": 34,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "limits",
+   "category": "date",
+   "found": "La fecha exacta de la disconformidad del Gobierno en los casos de 2016 es «octubre de 2016»",
+   "source_says": "El conflicto se inicia con el oficio de 14 de octubre de 2016 del Secretario de Estado de Relaciones con las Cortes (antecedentes de STC 34/2018 y 44/2018); la fecha exacta sí consta",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-6826",
+   "severity": "minor"
+  },
+  {
+   "field": "episodes[3].summary",
+   "category": "link",
+   "found": "una proposición de ley de modificación presentada por Unidos Podemos",
+   "source_says": "proposición de ley de reforma del Estatuto de los Trabajadores (texto incompleto, no erróneo)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-3978",
+   "severity": "minor"
+  }
+ ]
+}

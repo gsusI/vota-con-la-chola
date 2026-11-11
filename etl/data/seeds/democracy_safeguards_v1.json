@@ -288,6 +288,36 @@
           "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/rtve_consejo.json",
           "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2-recheck/rtve_consejo.json"
         ]
+      },
+      "veto_presupuestario": {
+        "round": "wave3a",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/veto_presupuestario.json"
+        ]
+      },
+      "control_parlamentario": {
+        "round": "wave3a",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/control_parlamentario.json"
+        ]
+      },
+      "mesa_plazos": {
+        "round": "wave3a",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/mesa_plazos.json"
+        ]
+      },
+      "tramitacion_reforzada": {
+        "round": "wave3a",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/tramitacion_reforzada.json"
+        ]
+      },
+      "art155": {
+        "round": "wave3a",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave3a/art155.json"
+        ]
       }
     },
     "pending_documentation": {
@@ -298,7 +328,7 @@
         "elecciones_plazos",
         "cgpj_funciones"
       ],
-      "reason": "Sin incumplimientos documentados que justifiquen el coste de la ficha en esta fase, o ya cubiertas por otra ficha (cgpj_funciones, en cgpj_renovacion): se publican solo con su referencia legal."
+      "reason": "Sin documentar en esta fase (coste): se publican solo con su referencia legal; cgpj_funciones ya está cubierta en cgpj_renovacion."
     }
   }
 }

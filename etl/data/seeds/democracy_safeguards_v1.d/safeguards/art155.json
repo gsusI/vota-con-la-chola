@@ -3,47 +3,165 @@
   "name": "Coerción estatal sobre una comunidad que incumple (art. 155)",
   "group": "excepcion",
   "rule": {
-    "text": "",
-    "articles": [],
-    "url": "",
+    "text": "Si una comunidad autónoma no cumple las obligaciones que la Constitución u otras leyes le imponen, o actúa de forma que atente gravemente al interés general de España, el Gobierno, previo requerimiento al Presidente de la comunidad y, si no es atendido, con la aprobación por mayoría absoluta del Senado, puede adoptar las medidas necesarias para obligarla al cumplimiento forzoso, y dar instrucciones a todas sus autoridades (art. 155 CE).",
+    "articles": [
+      "CE art. 155"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a155",
     "deadline": null
   },
-  "obligated": "",
+  "obligated": "Comunidades autónomas (sus órganos de gobierno)",
   "enforcer": {
-    "who": "",
-    "power": ""
+    "who": "Gobierno de la Nación, previo requerimiento y con aprobación por mayoría absoluta del Senado; control posterior del Tribunal Constitucional sobre las medidas",
+    "short": "Gobierno con aprobación del Senado (mayoría absoluta)",
+    "power": "sustituye"
   },
-  "sanction": "",
+  "sanction": "Medidas de cumplimiento forzoso aprobadas por el Senado: en 2017 incluyeron el cese del Gobierno de la Generalitat y la asunción de sus funciones por órganos del Estado; el TC puede anular las medidas desproporcionadas (STC 89/2019 anuló un párrafo).",
   "remedy_delay": {
-    "days": null,
-    "basis": "",
-    "sources": []
+    "days": 6,
+    "basis": "Días entre el Acuerdo del Consejo de Ministros de 21-10-2017 que tuvo por no atendido el requerimiento y la aprobación de las medidas por el Pleno del Senado el 27-10-2017 (único uso).",
+    "sources": [
+      {
+        "label": "Orden PRA/1034/2017 (BOE-A-2017-12328)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-12328"
+      },
+      {
+        "label": "Acuerdo del Pleno del Senado (BOE-A-2017-12327)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-12327"
+      }
+    ]
   },
-  "classification": "",
-  "classification_reason": "",
-  "episodes": [],
+  "classification": "tercero_a_tiempo",
+  "classification_reason": "En el único uso, el Estado sustituyó a los órganos de la comunidad seis días después de tener por no atendido el requerimiento, con aprobación del Senado; el TC revisó después las medidas y anuló solo un párrafo.",
+  "episodes": [
+    {
+      "id": "requerimiento_no_atendido_2017",
+      "start": "2017-10-21",
+      "end": null,
+      "kind": "remedio",
+      "summary": "El Consejo de Ministros acordó el 21-10-2017 tener por no atendido el requerimiento al Presidente de la Generalitat de Cataluña para que la Generalitat cumpliera sus obligaciones constitucionales y cesara en sus actuaciones gravemente contrarias al interés general, y propuso al Senado las medidas del art. 155 CE.",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación",
+        "indispensable_parties": null,
+        "note": "Requerimiento y propuesta de medidas del Gobierno; el incumplimiento previo es de la Generalitat de Cataluña."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Orden PRA/1034/2017 (BOE-A-2017-12328)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-12328"
+        }
+      ]
+    },
+    {
+      "id": "senado_aprueba_155_2017",
+      "start": "2017-10-27",
+      "end": null,
+      "kind": "remedio",
+      "summary": "El Pleno del Senado aprobó por mayoría absoluta el 27-10-2017 las medidas requeridas por el Gobierno respecto de la Generalitat de Cataluña. El mismo día el Gobierno dictó los Reales Decretos 942/2017 a 945/2017 en ejecución de esas medidas.",
+      "power_holder": {
+        "government": null,
+        "body": "Pleno del Senado (mayoría absoluta)",
+        "indispensable_parties": null,
+        "note": "Aprobación por mayoría absoluta del Senado, exigida por el art. 155.1 CE."
+      },
+      "remedy": {
+        "by": "Pleno del Senado",
+        "ruling": "Acuerdo del Pleno del Senado de 27-10-2017",
+        "date": "2017-10-27",
+        "act_date": "2017-10-21"
+      },
+      "sources": [
+        {
+          "label": "Acuerdo del Pleno del Senado (BOE-A-2017-12327)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-12327"
+        },
+        {
+          "label": "Real Decreto 942/2017 (BOE-A-2017-12332)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-12332"
+        }
+      ]
+    },
+    {
+      "id": "stc_89_2019",
+      "start": "2017-10-27",
+      "end": "2019-07-02",
+      "kind": "aval",
+      "summary": "El TC estimó parcialmente el recurso de más de cincuenta diputados de Unidos Podemos: declaró inconstitucional y nulo el párrafo segundo del apartado E.3 de las medidas y desestimó el recurso en todo lo demás (STC 89/2019).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación; Pleno del Senado",
+        "indispensable_parties": null,
+        "note": "Medidas acordadas por el Consejo de Ministros el 21-10-2017 y aprobadas por el Senado el 27-10-2017."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 89/2019 (estima parcialmente el recurso 5884-2017)",
+        "date": "2019-07-02",
+        "act_date": "2017-10-27"
+      },
+      "sources": [
+        {
+          "label": "STC 89/2019 (BOE-A-2019-11901)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-11901"
+        }
+      ]
+    },
+    {
+      "id": "stc_90_2019",
+      "start": "2017-10-27",
+      "end": "2019-07-02",
+      "kind": "aval",
+      "summary": "El TC resolvió el recurso del Parlamento de Cataluña contra el acuerdo del Senado: inadmisión parcial, pérdida sobrevenida de objeto en cuanto al párrafo ya anulado del apartado E.3 y desestimación en todo lo demás (STC 90/2019).",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno de la Nación; Pleno del Senado",
+        "indispensable_parties": null,
+        "note": "Medidas acordadas por el Consejo de Ministros el 21-10-2017 y aprobadas por el Senado el 27-10-2017."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 90/2019 (desestima en lo demás el recurso 143-2018)",
+        "date": "2019-07-02",
+        "act_date": "2017-10-27"
+      },
+      "sources": [
+        {
+          "label": "STC 90/2019 (BOE-A-2019-11902)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-11902"
+        }
+      ]
+    }
+  ],
   "peers": {
     "DEU": {
-      "mechanism": "",
-      "classification": "",
-      "sources": []
+      "mechanism": "Si un Land incumple sus deberes federales, el Gobierno federal, con el consentimiento del Bundesrat, puede adoptar las medidas necesarias para obligarle (coerción federal, art. 37.1 GG).",
+      "classification": "no_signal",
+      "sources": [
+        {
+          "label": "Art. 37 GG",
+          "url": "https://www.gesetze-im-internet.de/gg/art_37.html"
+        }
+      ]
     },
     "FRA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "ITA": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     },
     "PRT": {
-      "mechanism": "",
-      "classification": "",
+      "mechanism": "no_signal",
+      "classification": "no_signal",
       "sources": []
     }
   },
-  "limits": "",
-  "_hints": "Único uso: octubre de 2017 (acuerdo del Senado de 27-10-2017); SSTC 89/2019 y 90/2019 (comprueba). Episodios como remedio o aval. Pares: Bundeszwang (art. 37 GG), y equivalentes o ausencia en FR, IT (art. 120.2), PT."
+  "limits": "No se ha localizado en el BOE la fecha del requerimiento al Presidente de la Generalitat ni la fecha y el acto de cese de las medidas, por lo que los episodios del Gobierno y del Senado quedan sin fecha de fin. El Auto 142/2017 (inadmisión del recurso 5241-2017 de la Generalitat) no se incluye porque no se ha comprobado su objeto. Los incumplimientos previos de resoluciones del TC por el Parlamento de Cataluña se documentan en la ficha estado_derecho_sentencias. No se clasifica el mecanismo de los pares; el texto del art. 120 de la Constitución italiana extraído no llega al poder sustitutivo.",
+  "_hints": "Único uso: octubre de 2017 (acuerdo del Senado de 27-10-2017); SSTC 89/2019 y 90/2019 (comprueba). Episodios como remedio o aval. Pares: Bundeszwang (art. 37 GG), y equivalentes o ausencia en FR, IT (art. 120.2), PT.",
+  "sanction_short": "Cumplimiento forzoso: el Estado asume funciones de la comunidad"
 }
