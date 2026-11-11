@@ -1,0 +1,16 @@
+{
+ "id": "tc_renovacion",
+ "verdict": "verified",
+ "checked": 1,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[tc-senado-2025].summary",
+   "category": "figure",
+   "found": "El mandato de los cuatro magistrados propuestos por el Senado en 2017 venció en diciembre de 2025",
+   "source_says": "Uno de los cuatro puestos lo ocupa Macías Castaño, propuesto por el Senado en 2024 (RD 757/2024, aún citado en sources); mejor 'los cuatro magistrados del tercio del Senado (tres de 2017 y uno de 2024)'",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-15661",
+   "severity": "minor"
+  }
+ ]
+}

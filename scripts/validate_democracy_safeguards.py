@@ -135,6 +135,8 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
                 rep.err(eid, "power_holder.majority needs rule 3/5|2/3 and chambers Congreso/Senado")
             if ph.get("indispensable_parties"):
                 rep.err(eid, "with a qualified majority, indispensable parties are computed from seats.json: leave null")
+            if ph.get("government"):
+                rep.err(eid, "a qualified-majority decision belongs to the chambers, not the Government: government must be null")
         rem = ep.get("remedy")
         if rem is not None:
             check_date(rep, eid + ".remedy.date", rem.get("date"))

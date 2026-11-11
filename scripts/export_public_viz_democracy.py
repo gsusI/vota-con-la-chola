@@ -538,7 +538,11 @@ def build_payload(seed: dict) -> dict:
     all_docs = load_safeguards(seed)
     verified = seed.get("reviews", {}).get("verified", {})
     safeguards = [d for d in all_docs if d["id"] in verified]
-    pending = [{"id": d["id"], "name": d["name"], "group": d["group"]} for d in all_docs if d["id"] not in verified]
+    undocumented = set(seed.get("reviews", {}).get("pending_documentation", {}).get("ids", []))
+    pending = [{"id": d["id"], "name": d["name"], "group": d["group"],
+                "status": "pendiente_documentar" if d["id"] in undocumented else "en_revision",
+                "rule": {k: d["rule"].get(k) for k in ("text", "articles", "url")} if d["id"] in undocumented else None}
+               for d in all_docs if d["id"] not in verified]
     attach_arithmetic(safeguards, seed)
     manifest = load_manifest()
     dl = decree_law_series(seed)
@@ -648,7 +652,10 @@ def _text_of(body: bytes, url: str) -> str:
         import subprocess
         return subprocess.run(["pdftotext", "-layout", str(tmp), "-"], capture_output=True, text=True).stdout
     import html as htmlmod
-    text = body.decode("utf-8", "replace")
+    try:
+        text = body.decode("utf-8")
+    except UnicodeDecodeError:
+        text = body.decode("latin-1")
     text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", text)
     return re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", text)))
 

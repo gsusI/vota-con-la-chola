@@ -1,0 +1,50 @@
+{
+ "id": "rtve_consejo",
+ "verdict": "errors",
+ "checked": 34,
+ "unverifiable": [
+  "peers.ITA: Normattiva sirve solo parte del texto de la Ley 220/2015 en HTML estático; la composición del consejo de la RAI no se pudo leer"
+ ],
+ "errors": [
+  {
+   "field": "episodes[ley-5-2017-sin-renovar].power_holder.government",
+   "category": "attribution",
+   "found": "government: 'rajoy' en un episodio de mayoría de 2/3 de las Cortes (body 'Cortes (2/3)')",
+   "source_says": "La elección por 2/3 corresponde a las Cámaras, no al Gobierno; con la regla en vigor el campo debe ser null (como en las fichas TC, Defensor y Tribunal de Cuentas). Además el episodio (hasta 2018-06-22) sigue tras el relevo de Gobierno del 2018-06-02",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8577",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[vencimiento-2024].power_holder.government",
+   "category": "attribution",
+   "found": "government: 'sanchez' en un episodio de mayoría de 2/3 de las Cortes (body 'Cortes (2/3)')",
+   "source_says": "El preámbulo del RDL 5/2024 solo dice que en marzo de 2024 terminó el mandato de varios consejeros; la renovación por 2/3 era de las Cámaras: government debe ser null",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[rdl-4-2018].summary",
+   "category": "legal_text",
+   "found": "la STC 45/2023 resolvió el recurso de los senadores del PP en el mismo sentido",
+   "source_says": "La STC 45/2023 declaró la pérdida sobrevenida de objeto sobre el apartado 3 y la DF 1.ª (ya anulados por la STC 134/2021) y desestimó el resto; no anuló nada",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956",
+   "severity": "minor"
+  },
+  {
+   "field": "remedy_delay.days",
+   "category": "figure",
+   "found": "1783 = mediana de 2071, 1098 y 1783 días (incluye la STC 45/2023)",
+   "source_says": "La STC 45/2023 no fue un remedio (pérdida de objeto + desestimación); con solo las sentencias que anularon (150/2017 y 134/2021) la mediana sería ~1585 días. La base lo explica, pero el número sobrestima el retraso del remedio",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956",
+   "severity": "minor"
+  },
+  {
+   "field": "episodes[ley-5-2017-sin-renovar].start",
+   "category": "date",
+   "found": "2017-09-30 (publicación de la Ley 5/2017)",
+   "source_says": "La DT 2.ª daba tres meses desde la entrada en vigor; un episodio 'plazo_vencido' debería empezar al vencer ese plazo (~finales de 2017), no el día de la publicación",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-11091",
+   "severity": "minor"
+  }
+ ]
+}

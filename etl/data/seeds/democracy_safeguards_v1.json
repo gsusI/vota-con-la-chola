@@ -255,7 +255,50 @@
           "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/pilot/investidura_plazo.json",
           "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/pilot-recheck/investidura_plazo.json"
         ]
+      },
+      "tc_renovacion": {
+        "round": "wave2",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/tc_renovacion.json",
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2-recheck/tc_renovacion.json"
+        ]
+      },
+      "defensor_pueblo": {
+        "round": "wave2",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/defensor_pueblo.json"
+        ]
+      },
+      "tribunal_cuentas": {
+        "round": "wave2",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/tribunal_cuentas.json"
+        ]
+      },
+      "fiscal_general": {
+        "round": "wave2",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/fiscal_general.json",
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2-recheck/fiscal_general.json"
+        ]
+      },
+      "rtve_consejo": {
+        "round": "wave2",
+        "files": [
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2/rtve_consejo.json",
+          "docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/review/wave2-recheck/rtve_consejo.json"
+        ]
       }
+    },
+    "pending_documentation": {
+      "ids": [
+        "cnmc_reguladores",
+        "cis_presidencia",
+        "mocion_censura",
+        "elecciones_plazos",
+        "cgpj_funciones"
+      ],
+      "reason": "Sin incumplimientos documentados que justifiquen el coste de la ficha en esta fase, o ya cubiertas por otra ficha (cgpj_funciones, en cgpj_renovacion): se publican solo con su referencia legal."
     }
   }
 }

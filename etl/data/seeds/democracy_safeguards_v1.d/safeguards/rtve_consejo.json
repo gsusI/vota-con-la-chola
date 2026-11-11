@@ -4,7 +4,10 @@
   "group": "nombramientos",
   "rule": {
     "text": "Las Cortes eligen el Consejo de Administración de RTVE (hoy 11 consejeros el Congreso y 4 el Senado) por dos tercios en primera votación y, si no se alcanzan, por mayoría absoluta 48 horas después; el Congreso designa al presidente igual; el mandato es de seis años y la renovación debe iniciarse en 15 días.",
-    "articles": ["CE art. 20.3", "Ley 17/2006 arts. 10, 11, 12 y 13"],
+    "articles": [
+      "CE art. 20.3",
+      "Ley 17/2006 arts. 10, 11, 12 y 13"
+    ],
     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-9958",
     "deadline": "15 días desde el fin del mandato o el cese para iniciar la elección (art. 12.3)"
   },
@@ -17,12 +20,17 @@
   "sanction": "Ninguna para quien bloquea la elección o rebaja la mayoría; el TC declaró nulas partes de los decretos-leyes de 2012 y 2018 cuando sus efectos ya se habían producido",
   "sanction_short": "Ninguna; nulidad declarativa años después",
   "remedy_delay": {
-    "days": 1783,
-    "basis": "Mediana de las tres sentencias del TC sobre decretos-leyes que cambiaron la elección del Consejo (RDL 15/2012: 2.071 días; RDL 4/2018: 1.098 y 1.783 días), contados desde el decreto-ley",
+    "days": 1585,
+    "basis": "Mediana de las dos sentencias del TC que anularon preceptos de decretos-leyes que cambiaron la elección del Consejo (RDL 15/2012: 2.071 días; RDL 4/2018: 1.098 días), contados desde el decreto-ley; la STC 45/2023 no anuló nada y no se cuenta.",
     "sources": [
-      {"label": "STC 150/2017 (RDL 15/2012)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-612"},
-      {"label": "STC 134/2021 (RDL 4/2018)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"},
-      {"label": "STC 45/2023 (RDL 4/2018)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956"}
+      {
+        "label": "STC 150/2017 (RDL 15/2012)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-612"
+      },
+      {
+        "label": "STC 134/2021 (RDL 4/2018)",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"
+      }
     ]
   },
   "classification": "buena_voluntad",
@@ -34,11 +42,22 @@
       "end": "2006-06-06",
       "kind": "tension",
       "summary": "Con el Estatuto de 1980 (Ley 4/1980), el Director General del Ente público RTVE lo nombraba el Gobierno, oído el Consejo de Administración, con mandato de cuatro años salvo disolución anticipada (art. 10); el Consejo lo designaban las Cámaras. La Ley 17/2006 trasladó la elección del presidente al Congreso por dos tercios.",
-      "power_holder": {"government": null, "body": "Gobierno", "indispensable_parties": null, "note": "Regla vigente con todos los gobiernos de 1980 a 2006 (Suárez, Calvo-Sotelo, González, Aznar y Rodríguez Zapatero); no se atribuye a uno solo."},
+      "power_holder": {
+        "government": null,
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Regla vigente con todos los gobiernos de 1980 a 2006 (Suárez, Calvo-Sotelo, González, Aznar y Rodríguez Zapatero); no se atribuye a uno solo."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Ley 4/1980, Estatuto de la Radio y la Televisión", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-724"},
-        {"label": "Ley 17/2006", "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-9958"}
+        {
+          "label": "Ley 4/1980, Estatuto de la Radio y la Televisión",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1980-724"
+        },
+        {
+          "label": "Ley 17/2006",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-9958"
+        }
       ]
     },
     {
@@ -47,12 +66,31 @@
       "end": "2017-12-21",
       "kind": "incumplimiento_declarado",
       "summary": "El Real Decreto-ley 15/2012 redujo el Consejo de 12 a 9 miembros (suprimió los dos propuestos por los sindicatos) y permitió elegir consejeros y presidente por mayoría absoluta en una segunda votación a las 24 horas si no se alcanzaban los dos tercios. El Congreso lo convalidó el 17-05-2012. La STC 150/2017, cinco años y ocho meses después, declaró inconstitucional y nula la reducción del número de miembros por falta de presupuesto habilitante; el cambio de mayoría no fue declarado inconstitucional.",
-      "power_holder": {"government": "rajoy", "body": "Gobierno", "indispensable_parties": null, "note": "Decreto-ley del Gobierno de Rajoy, convalidado por el Congreso."},
-      "remedy": {"by": "Tribunal Constitucional", "ruling": "STC 150/2017", "date": "2017-12-21", "act_date": "2012-04-20"},
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Decreto-ley del Gobierno de Rajoy, convalidado por el Congreso."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 150/2017",
+        "date": "2017-12-21",
+        "act_date": "2012-04-20"
+      },
       "sources": [
-        {"label": "Real Decreto-ley 15/2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-5338"},
-        {"label": "Convalidación del RDL 15/2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-6869"},
-        {"label": "STC 150/2017", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-612"}
+        {
+          "label": "Real Decreto-ley 15/2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-5338"
+        },
+        {
+          "label": "Convalidación del RDL 15/2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-6869"
+        },
+        {
+          "label": "STC 150/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-612"
+        }
       ]
     },
     {
@@ -61,27 +99,65 @@
       "end": "2014-10-22",
       "kind": "tension",
       "summary": "Con la regla del RDL 15/2012, el Senado (20-06-2012) y el Congreso (21-06-2012) eligieron cinco consejeros en segunda votación por mayoría absoluta; el Congreso designó presidente a Leopoldo González-Echenique (28-06-2012) y a José Antonio Sánchez Domínguez (22-10-2014), ambos en segunda votación por mayoría absoluta. En 2006 el primer Consejo y su presidente se habían elegido por dos tercios.",
-      "power_holder": {"government": "rajoy", "body": "Cortes (mayoría absoluta en segunda votación)", "indispensable_parties": null, "note": "Elección parlamentaria por mayoría absoluta, no reforzada; los acuerdos del BOE no detallan quién votó qué."},
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Cortes (mayoría absoluta en segunda votación)",
+        "indispensable_parties": null,
+        "note": "Elección parlamentaria por mayoría absoluta, no reforzada; los acuerdos del BOE no detallan quién votó qué."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Acuerdo del Senado de 20-06-2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8397"},
-        {"label": "Acuerdo del Congreso de 21-06-2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8398"},
-        {"label": "Presidente González-Echenique (28-06-2012)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8701"},
-        {"label": "Presidente Sánchez Domínguez (22-10-2014)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-10758"},
-        {"label": "Elección del primer Consejo por dos tercios (19-12-2006)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22735"}
+        {
+          "label": "Acuerdo del Senado de 20-06-2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8397"
+        },
+        {
+          "label": "Acuerdo del Congreso de 21-06-2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8398"
+        },
+        {
+          "label": "Presidente González-Echenique (28-06-2012)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8701"
+        },
+        {
+          "label": "Presidente Sánchez Domínguez (22-10-2014)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2014-10758"
+        },
+        {
+          "label": "Elección del primer Consejo por dos tercios (19-12-2006)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22735"
+        }
       ]
     },
     {
       "id": "ley-5-2017-sin-renovar",
-      "start": "2017-09-30",
+      "start": "2018-01-01",
       "end": "2018-06-22",
       "kind": "plazo_vencido",
-      "summary": "La Ley 5/2017 devolvió la elección a los dos tercios, con concurso público previo, y dio a las Cortes tres meses para aplicarla. Según el preámbulo del RDL 4/2018, casi nueve meses después de aprobarse la ley el procedimiento para elegir el nuevo Consejo no se había iniciado en las Cámaras.",
-      "power_holder": {"government": "rajoy", "body": "Cortes (2/3)", "majority": {"rule": "2/3", "chambers": ["Congreso", "Senado"]}, "indispensable_parties": null, "note": "El retraso lo constata un decreto-ley del Gobierno siguiente; ningún documento oficial consultado atribuye el bloqueo a un grupo."},
+      "summary": "La Ley 5/2017 devolvió la elección a los dos tercios, con concurso público previo, y dio a las Cortes tres meses desde su entrada en vigor (1-10-2017) para aprobar las normas de selección; el plazo venció a comienzos de 2018. Según el preámbulo del RDL 4/2018, casi nueve meses después de aprobarse la ley el procedimiento para elegir el nuevo Consejo no se había iniciado en las Cámaras.",
+      "power_holder": {
+        "government": null,
+        "body": "Cortes (2/3)",
+        "majority": {
+          "rule": "2/3",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Elección por 2/3 de las Cámaras: no la decide el Gobierno. El retraso lo constata el preámbulo de un decreto-ley posterior; ningún documento oficial consultado atribuye el bloqueo a un grupo."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Ley 5/2017", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-11091"},
-        {"label": "Real Decreto-ley 4/2018 (preámbulo)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8577"}
+        {
+          "label": "Ley 5/2017",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2017-11091"
+        },
+        {
+          "label": "Real Decreto-ley 4/2018 (preámbulo)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8577"
+        }
       ]
     },
     {
@@ -89,14 +165,36 @@
       "start": "2018-06-22",
       "end": "2021-06-24",
       "kind": "incumplimiento_declarado",
-      "summary": "El Real Decreto-ley 4/2018 fijó una elección urgente en 15 días (segunda votación a las 48 horas por mayoría absoluta y con el apoyo de al menos la mitad de los grupos) y, si una Cámara no elegía, un administrador provisional único propuesto por el Gobierno y elegido por el Congreso. La STC 134/2021 declaró inconstitucionales y nulos su disposición final primera y el apartado 3 del artículo único, con efectos meramente declarativos, y desestimó el resto; la STC 45/2023 resolvió el recurso de los senadores del PP en el mismo sentido.",
-      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": "Decreto-ley del Gobierno de Sánchez, convalidado por el Congreso el 04-07-2018."},
-      "remedy": {"by": "Tribunal Constitucional", "ruling": "STC 134/2021", "date": "2021-06-24", "act_date": "2018-06-22"},
+      "summary": "El Real Decreto-ley 4/2018 fijó una elección urgente en 15 días (segunda votación a las 48 horas por mayoría absoluta y con el apoyo de al menos la mitad de los grupos) y, si una Cámara no elegía, un administrador provisional único propuesto por el Gobierno y elegido por el Congreso. La STC 134/2021 declaró inconstitucionales y nulos su disposición final primera y el apartado 3 del artículo único, con efectos meramente declarativos, y desestimó el resto; la STC 45/2023 declaró la pérdida sobrevenida de objeto respecto de lo ya anulado y desestimó el resto del recurso de los senadores del PP.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Decreto-ley del Gobierno de Sánchez, convalidado por el Congreso el 04-07-2018."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 134/2021",
+        "date": "2021-06-24",
+        "act_date": "2018-06-22"
+      },
       "sources": [
-        {"label": "Real Decreto-ley 4/2018", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8577"},
-        {"label": "Convalidación del RDL 4/2018", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-9704"},
-        {"label": "STC 134/2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"},
-        {"label": "STC 45/2023", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956"}
+        {
+          "label": "Real Decreto-ley 4/2018",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-8577"
+        },
+        {
+          "label": "Convalidación del RDL 4/2018",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-9704"
+        },
+        {
+          "label": "STC 134/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"
+        },
+        {
+          "label": "STC 45/2023",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956"
+        }
       ]
     },
     {
@@ -105,13 +203,30 @@
       "end": "2021-03-25",
       "kind": "tension",
       "summary": "El Congreso eligió administradora provisional única a Rosa María Mateo Isasi en segunda votación por mayoría absoluta (27-07-2018). La administración provisional duró 972 días, hasta que el Congreso (25-02-2021) y el Senado (24-03-2021) eligieron el nuevo Consejo en primera votación por dos tercios y el Congreso designó presidente a José Manuel Pérez Tornero, también por dos tercios (25-03-2021).",
-      "power_holder": {"government": "sanchez", "body": "Congreso (mayoría absoluta en segunda votación)", "indispensable_parties": null, "note": "La elección del administrador provisional exigía mayoría absoluta, no reforzada; el BOE no recoge quién votó qué."},
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Congreso (mayoría absoluta en segunda votación)",
+        "indispensable_parties": null,
+        "note": "La elección del administrador provisional exigía mayoría absoluta, no reforzada; el BOE no recoge quién votó qué."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Elección de la administradora provisional única", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"},
-        {"label": "Acuerdo del Congreso de 25-02-2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-3199"},
-        {"label": "Acuerdo del Senado de 24-03-2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4889"},
-        {"label": "Presidente Pérez Tornero (25-03-2021)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"}
+        {
+          "label": "Elección de la administradora provisional única",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"
+        },
+        {
+          "label": "Acuerdo del Congreso de 25-02-2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-3199"
+        },
+        {
+          "label": "Acuerdo del Senado de 24-03-2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4889"
+        },
+        {
+          "label": "Presidente Pérez Tornero (25-03-2021)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"
+        }
       ]
     },
     {
@@ -120,11 +235,22 @@
       "end": "2023-05-10",
       "kind": "aval",
       "summary": "El TC avaló el núcleo del RDL 4/2018: en la STC 134/2021 apreció la extraordinaria y urgente necesidad del artículo único y desestimó las quejas sobre los grupos parlamentarios y el administrador provisional; la STC 45/2023 aplicó esa doctrina y desestimó el resto del recurso de los senadores.",
-      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": null},
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
       "remedy": null,
       "sources": [
-        {"label": "STC 134/2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"},
-        {"label": "STC 45/2023", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956"}
+        {
+          "label": "STC 134/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13018"
+        },
+        {
+          "label": "STC 45/2023",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-13956"
+        }
       ]
     },
     {
@@ -133,10 +259,25 @@
       "end": "2024-10-22",
       "kind": "plazo_vencido",
       "summary": "Según el preámbulo del RDL 5/2024, en marzo de 2024 terminó el mandato de varios consejeros y había vacantes; la renovación parcial y la elección de la presidencia por dos tercios no se produjeron, y el Consejo siguió sin presidencia nombrada por el Congreso hasta el decreto-ley de octubre.",
-      "power_holder": {"government": "sanchez", "body": "Cortes (2/3)", "majority": {"rule": "2/3", "chambers": ["Congreso", "Senado"]}, "indispensable_parties": null, "note": "El preámbulo solo indica el mes (marzo de 2024); ningún documento oficial consultado atribuye el bloqueo a un grupo."},
+      "power_holder": {
+        "government": null,
+        "body": "Cortes (2/3)",
+        "majority": {
+          "rule": "2/3",
+          "chambers": [
+            "Congreso",
+            "Senado"
+          ]
+        },
+        "indispensable_parties": null,
+        "note": "Elección por 2/3 de las Cámaras: no la decide el Gobierno. El preámbulo solo indica el mes (marzo de 2024); ningún documento oficial consultado atribuye el bloqueo a un grupo."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Real Decreto-ley 5/2024 (preámbulo)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"}
+        {
+          "label": "Real Decreto-ley 5/2024 (preámbulo)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"
+        }
       ]
     },
     {
@@ -145,11 +286,22 @@
       "end": null,
       "kind": "tension",
       "summary": "El Real Decreto-ley 5/2024 amplió el Consejo de 10 a 15 miembros (11 del Congreso y 4 del Senado) y volvió a permitir la elección por mayoría absoluta en segunda votación a las 48 horas; el Congreso lo convalidó el 30-10-2024. La búsqueda en el BOE no devuelve sentencia del TC sobre él a 11-11-2026.",
-      "power_holder": {"government": "sanchez", "body": "Gobierno", "indispensable_parties": null, "note": "Decreto-ley del Gobierno de Sánchez, convalidado por el Congreso."},
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Decreto-ley del Gobierno de Sánchez, convalidado por el Congreso."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Real Decreto-ley 5/2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"},
-        {"label": "Convalidación del RDL 5/2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-22547"}
+        {
+          "label": "Real Decreto-ley 5/2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"
+        },
+        {
+          "label": "Convalidación del RDL 5/2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-22547"
+        }
       ]
     },
     {
@@ -158,12 +310,26 @@
       "end": "2024-11-28",
       "kind": "tension",
       "summary": "Con la regla del RDL 5/2024, el Congreso eligió 11 consejeros (14-11-2024) y el Senado 4 (21-11-2024), ambos en segunda votación por mayoría absoluta; el Congreso designó presidente a José Pablo López Sánchez en segunda votación por mayoría absoluta (28-11-2024).",
-      "power_holder": {"government": "sanchez", "body": "Cortes (mayoría absoluta en segunda votación)", "indispensable_parties": null, "note": "Elección por mayoría absoluta, no reforzada, en cada Cámara; los acuerdos del BOE no detallan quién votó qué."},
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Cortes (mayoría absoluta en segunda votación)",
+        "indispensable_parties": null,
+        "note": "Elección por mayoría absoluta, no reforzada, en cada Cámara; los acuerdos del BOE no detallan quién votó qué."
+      },
       "remedy": null,
       "sources": [
-        {"label": "Acuerdo del Congreso de 14-11-2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24415"},
-        {"label": "Acuerdo del Senado de 21-11-2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24733"},
-        {"label": "Presidente López Sánchez (28-11-2024)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25104"}
+        {
+          "label": "Acuerdo del Congreso de 14-11-2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24415"
+        },
+        {
+          "label": "Acuerdo del Senado de 21-11-2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24733"
+        },
+        {
+          "label": "Presidente López Sánchez (28-11-2024)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25104"
+        }
       ]
     }
   ],
@@ -171,15 +337,33 @@
     "DEU": {
       "mechanism": "El Tribunal Constitucional Federal (1 BvF 1/11, 25-03-2014) limitó a un tercio los miembros estatales o cercanos al Estado en los órganos de control del ZDF y anuló las reglas del tratado interestatal que lo superaban.",
       "classification": "tercero_tarde",
-      "sources": [{"label": "BVerfG, 1 BvF 1/11", "url": "https://www.bundesverfassungsgericht.de/e/fs20140325_1bvf000111.html"}]
+      "sources": [
+        {
+          "label": "BVerfG, 1 BvF 1/11",
+          "url": "https://www.bundesverfassungsgericht.de/e/fs20140325_1bvf000111.html"
+        }
+      ]
     },
-    "FRA": {"mechanism": "no_signal", "classification": "no_signal", "sources": []},
+    "FRA": {
+      "mechanism": "no_signal",
+      "classification": "no_signal",
+      "sources": []
+    },
     "ITA": {
       "mechanism": "La Ley 220/2015 fija el consejo de la RAI con miembros elegidos por la Cámara y el Senado y otros designados por el Gobierno; no hay un tercero que imponga mayorías reforzadas.",
       "classification": "buena_voluntad",
-      "sources": [{"label": "Legge 28 dicembre 2015, n. 220 (Normattiva)", "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2015-12-28;220"}]
+      "sources": [
+        {
+          "label": "Legge 28 dicembre 2015, n. 220 (Normattiva)",
+          "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2015-12-28;220"
+        }
+      ]
     },
-    "PRT": {"mechanism": "no_signal", "classification": "no_signal", "sources": []}
+    "PRT": {
+      "mechanism": "no_signal",
+      "classification": "no_signal",
+      "sources": []
+    }
   },
   "limits": "No recoge el voto de cada grupo en cada elección (los acuerdos del BOE no lo dicen) ni el régimen del Ente público anterior a 2006 consejero a consejero; las fechas de inicio de mandato son las de la elección, no las de toma de posesión.",
   "mandate_terms": [
@@ -190,10 +374,22 @@
       "mandate_end": "2012-12-19",
       "successor_took_office": "2018-07-27",
       "sources": [
-        {"label": "Congreso, 19-12-2006", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22735"},
-        {"label": "Senado, 19-12-2006", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22736"},
-        {"label": "Presidente Luis Fernández", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22737"},
-        {"label": "Administradora provisional (sucesión, 27-07-2018)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"}
+        {
+          "label": "Congreso, 19-12-2006",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22735"
+        },
+        {
+          "label": "Senado, 19-12-2006",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22736"
+        },
+        {
+          "label": "Presidente Luis Fernández",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2006-22737"
+        },
+        {
+          "label": "Administradora provisional (sucesión, 27-07-2018)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"
+        }
       ]
     },
     {
@@ -203,9 +399,18 @@
       "mandate_end": "2018-06-21",
       "successor_took_office": "2018-07-27",
       "sources": [
-        {"label": "Congreso, 21-06-2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8398"},
-        {"label": "Senado, 20-06-2012", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8397"},
-        {"label": "Administradora provisional (sucesión, 27-07-2018)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"}
+        {
+          "label": "Congreso, 21-06-2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8398"
+        },
+        {
+          "label": "Senado, 20-06-2012",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2012-8397"
+        },
+        {
+          "label": "Administradora provisional (sucesión, 27-07-2018)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"
+        }
       ]
     },
     {
@@ -215,8 +420,14 @@
       "mandate_end": "2021-03-25",
       "successor_took_office": "2021-03-25",
       "sources": [
-        {"label": "Elección de la administradora provisional", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"},
-        {"label": "Presidente Pérez Tornero (25-03-2021)", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"}
+        {
+          "label": "Elección de la administradora provisional",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2018-10715"
+        },
+        {
+          "label": "Presidente Pérez Tornero (25-03-2021)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"
+        }
       ]
     },
     {
@@ -226,10 +437,22 @@
       "mandate_end": "2027-03-25",
       "successor_took_office": "2024-11-28",
       "sources": [
-        {"label": "Congreso, 25-02-2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-3199"},
-        {"label": "Senado, 24-03-2021", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4889"},
-        {"label": "Presidente Pérez Tornero", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"},
-        {"label": "Real Decreto-ley 5/2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"}
+        {
+          "label": "Congreso, 25-02-2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-3199"
+        },
+        {
+          "label": "Senado, 24-03-2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4889"
+        },
+        {
+          "label": "Presidente Pérez Tornero",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-4743"
+        },
+        {
+          "label": "Real Decreto-ley 5/2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-21699"
+        }
       ]
     },
     {
@@ -239,9 +462,18 @@
       "mandate_end": "2030-11-28",
       "successor_took_office": null,
       "sources": [
-        {"label": "Congreso, 14-11-2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24415"},
-        {"label": "Senado, 21-11-2024", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24733"},
-        {"label": "Presidente López Sánchez", "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25104"}
+        {
+          "label": "Congreso, 14-11-2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24415"
+        },
+        {
+          "label": "Senado, 21-11-2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24733"
+        },
+        {
+          "label": "Presidente López Sánchez",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25104"
+        }
       ]
     }
   ],

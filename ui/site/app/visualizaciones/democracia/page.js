@@ -150,6 +150,8 @@ export default function DemocraciaPage() {
   const party = (p) => partyRows.find((r) => r.party === p) || { episodes: 0, per10: 0, safeguards: 0, years: 0 };
   const context = data.context || {};
   const pending = data.pending || [];
+  const inReview = pending.filter((p) => p.status !== "pendiente_documentar");
+  const undocumented = pending.filter((p) => p.status === "pendiente_documentar");
   const esPrev = m.atYear("libdem", "ESP", 2015);
   const delayRows = m.delays.map((d) => ({
     id: `${d.safeguard}-${d.episode}`,
@@ -182,7 +184,7 @@ export default function DemocraciaPage() {
       <StaticRouteHero
         eyebrow="Visualizaciones · datos públicos"
         title={`Separación de poderes: ${goodwill} de las ${m.n} reglas revisadas que limitan al poder en España no tienen quien las haga cumplir`}
-        summary={`Dónde puede romperse la democracia española, salvaguarda a salvaguarda: qué ordena cada regla, quién puede obligar a cumplirla, cuánto tarda el remedio, cada vez que se incumplió o se forzó desde 1978 con el Gobierno que había entonces, y cómo resuelven el mismo bloqueo Alemania, Francia, Italia y Portugal. Cada dato enlaza su fuente primaria.${pending.length ? ` Publicadas ${m.n} fichas revisadas; ${pending.length} más están en revisión.` : ""}`}
+        summary={`Dónde puede romperse la democracia española, salvaguarda a salvaguarda: qué ordena cada regla, quién puede obligar a cumplirla, cuánto tarda el remedio, cada vez que se incumplió o se forzó desde 1978 con el Gobierno que había entonces, y cómo resuelven el mismo bloqueo Alemania, Francia, Italia y Portugal. Cada dato enlaza su fuente primaria.${pending.length ? ` Publicadas ${m.n} fichas revisadas; ${pending.length} más están en revisión o pendientes de documentar.` : ""}`}
         actions={[
           { href: "/visualizaciones/data/democracia.csv", label: "Descargar datos (CSV)" },
           { href: "/visualizaciones/data/democracia.json", label: "JSON con procedencia" },
@@ -323,9 +325,25 @@ export default function DemocraciaPage() {
         />
         <MapLegend />
         <SafeguardMap safeguards={mapRows} governments={data.governments} snapshot={data.snapshot_date} maxDelay={m.maxDelay} />
-        {pending.length ? (
+        {inReview.length ? (
           <p className="vizFigure__dek">
-            En revisión ({pending.length}), se publicarán cuando una revisión independiente las verifique: {pending.map((p) => p.name).join(" · ")}.
+            En revisión ({inReview.length}), se publicarán cuando una revisión independiente las verifique: {inReview.map((p) => p.name).join(" · ")}.
+          </p>
+        ) : null}
+        {undocumented.length ? (
+          <p className="vizFigure__dek">
+            Pendientes de documentar ({undocumented.length}), solo con su referencia legal:{" "}
+            {undocumented.map((p, i) => (
+              <span key={p.id}>
+                {i ? " · " : ""}
+                {p.name} (
+                <a href={p.rule.url} rel="noopener noreferrer" target="_blank">
+                  {p.rule.articles.join(", ")}
+                </a>
+                )
+              </span>
+            ))}
+            .
           </p>
         ) : null}
       </Figure>
@@ -493,8 +511,8 @@ export default function DemocraciaPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {m.mandates.map((r) => (
-                      <tr key={`${r.safeguard}-${r.term}`}>
+                    {m.mandates.map((r, i) => (
+                      <tr key={`${r.safeguard}-${r.term}-${i}`}>
                         <td>{r.body}</td>
                         <td>{r.term}</td>
                         <td>{r.mandate_end}</td>
@@ -514,7 +532,7 @@ export default function DemocraciaPage() {
           <HBars
             ariaLabel="Días con el mandato caducado"
             unit=" días"
-            rows={m.mandates.map((r) => ({ id: `${r.safeguard}-${r.term}`, label: `${r.body}, ${r.term}`, value: r.days_expired, color: r.ongoing ? "#b23a48" : "#52514e", note: r.ongoing ? "(sigue)" : "" }))}
+            rows={m.mandates.map((r, i) => ({ id: `${r.safeguard}-${r.term}-${i}`, label: `${r.body}, ${r.term}`, value: r.days_expired, color: r.ongoing ? "#b23a48" : "#52514e", note: r.ongoing ? "(sigue)" : "" }))}
           />
         </Figure>
       ) : null}

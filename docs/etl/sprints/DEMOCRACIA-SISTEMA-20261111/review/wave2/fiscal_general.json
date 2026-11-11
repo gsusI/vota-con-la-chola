@@ -1,0 +1,26 @@
+{
+ "id": "fiscal_general",
+ "verdict": "verified",
+ "checked": 27,
+ "unverifiable": [
+  "peers.FRA: Légifrance bloquea scripts (403); art. 65 no comprobado en la fuente citada"
+ ],
+ "errors": [
+  {
+   "field": "episodes[delgado-2020].power_holder.note",
+   "category": "link",
+   "found": "Los documentos del BOE consultados no indican el cargo que motivó los servicios especiales",
+   "source_says": "La Orden JUS/10/2020 citada dice que reingresa 'tras cesar como Ministra de Justicia'",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-687",
+   "severity": "minor"
+  },
+  {
+   "field": "remedy_delay.days",
+   "category": "figure",
+   "found": "413 = mediana de 809, 413 y 398 días (incluye la STS de 28-01-2025, desestimatoria)",
+   "source_says": "La STS de 2025 desestimó el recurso (no hubo remedio); con solo las dos anulaciones (1994 y 2023) la mediana sería 611 días. La base lo explica",
+   "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunal-Supremo/Noticias-Judiciales/El-Tribunal-Supremo-desestima-recurso-de-la-APIF-contra-el-nombramiento-del-fiscal-general-del-Estado",
+   "severity": "minor"
+  }
+ ]
+}

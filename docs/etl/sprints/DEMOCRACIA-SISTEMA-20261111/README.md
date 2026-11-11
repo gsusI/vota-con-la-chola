@@ -155,11 +155,38 @@ tabla de escaños con fuente antes de cualquier atribución de una mayoría refo
 Medido con `scripts/subagent_usage_report.py`. **Ola 2: 16,5 M para 5 fichas (3,3 M por ficha), lejos del objetivo de
 0,5 M**: el coste lo marca releer un contexto que crece en cada turno (60 turnos × 130 k), no el número de llamadas.
 
+### Revisión independiente de la ola 2 (regla: ≥ 4/5 verificadas y ningún error de atribución)
+| Ficha | Veredicto | Error más grave |
+|---|---|---|
+| tc_renovacion | verificada | menor: una frase sobre qué vacante cubrió un magistrado no la respalda el BOE |
+| defensor_pueblo | verificada, sin errores | — (Francia sin verificar: Légifrance bloquea scripts) |
+| tribunal_cuentas | verificada, sin errores | — |
+| fiscal_general | verificada | menor: la mediana de 413 días contaba una sentencia que no anuló nada |
+| rtve_consejo | **errores** | **atribución (mayor)**: dos episodios de elección por 2/3 de las Cortes atribuidos al Gobierno (Rajoy, Sánchez) |
+
+**Resultado: la ola 2 NO supera la regla** (4/5, pero con un error de atribución). Según la instrucción del coordinador,
+no se lanza la ola 3. Correcciones aplicadas y revisadas de nuevo (`review/wave2-recheck/`): sin errores mayores; las
+10 fichas verificadas (piloto y ola 2) se publican. Para que este error no se repita, el validador ahora rechaza
+cualquier episodio con `majority` que lleve `government` (la decisión es de las Cámaras).
+
+### Qué dominó el coste de la ola 2 y qué se ha cambiado
+`subagent_usage_report.py`: 58-65 turnos por agente con ~130 k tokens de contexto releídos en cada uno; las salidas
+mayores fueron volcados de la hoja de trabajo JSON (12-20 k caracteres) y el brief largo (9 k). Cambios para la ola 3:
+- Brief compacto (`prompts/draft-compact.md`, ~3 k) y hojas de trabajo en Markdown de 5-15 k caracteres
+  (`worklists/wave3/*.md`) con el texto legal consolidado del BOE (artículos completos), las búsquedas del BOE ya
+  hechas (TC en sección T) y el texto oficial de los pares de Alemania e Italia ya extraído; Francia y Portugal,
+  `no_signal` salvo que la hoja lo traiga (Légifrance bloquea scripts).
+- Pares sin investigación abierta; escritura de cada ficha con una sola llamada de python; ≤ 3 consultas del kit por
+  ficha y ≤ 4 WebSearch por agente.
+- Ola 3 limitada a las 10 salvaguardas con incumplimientos o tensiones documentados, en 2 agentes de 5 que comparten
+  fuentes (Cortes y TC: veto_presupuestario, control_parlamentario, mesa_plazos, tramitacion_reforzada, art155; justicia
+  y rendición de cuentas: indultos, amnistia, estado_derecho_sentencias, transparencia, financiacion_partidos), con parada
+  si el primero supera 1 M por ficha. Las otras 5 (cnmc_reguladores, cis_presidencia, mocion_censura,
+  elecciones_plazos, cgpj_funciones) se publican como «pendiente de documentar» solo con su referencia legal.
+
 ## 1. Estado
 
-- **Dónde estamos.** Método fijado; series de decretos-leyes, presupuestos, V-Dem y ampliaciones de plazos reproducibles;
-  piloto de 5 fichas corregido tras no superar la regla de revisión (error de atribución en el CGPJ). Página en borrador
-  local, sin publicar.
+- **Dónde estamos.** Método fijado; series reproducibles; 10 fichas verificadas y publicadas en la página (sin enlazar en
+  el índice); piloto y ola 2 fallaron la regla por un error de atribución cada uno, corregidos y revisados de nuevo.
 - **A dónde vamos.** 25 fichas revisadas, mapa de salvaguardas con panel de pares, contexto Polonia/Hungría.
-- **Qué sigue.** Decisión del coordinador: escalar con los ajustes (tabla de escaños para mayorías reforzadas incluida)
-  o parar aquí.
+- **Qué sigue.** Decisión del coordinador sobre la ola 3 (preparada, no lanzada), después muestra aleatoria de 10.
