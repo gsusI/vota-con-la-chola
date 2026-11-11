@@ -1,0 +1,454 @@
+{
+  "id": "presupuesto_presentacion",
+  "name": "Presentar los Presupuestos al menos tres meses antes de que expiren los anteriores (art. 134.3)",
+  "group": "legislar",
+  "rule": {
+    "text": "El Gobierno debe presentar los Presupuestos Generales del Estado ante el Congreso al menos tres meses antes de que expiren los del año anterior; si no se aprueban a tiempo, se prorrogan automáticamente los anteriores.",
+    "articles": [
+      "CE art. 134.3",
+      "CE art. 134.4"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a134",
+    "deadline": "30 de septiembre del año anterior"
+  },
+  "obligated": "Gobierno",
+  "enforcer": {
+    "who": "Nadie con precedente: el Senado llevó el incumplimiento al TC por conflicto de atribuciones (admitido el 24-02-2026, pendiente)",
+    "power": "nadie",
+    "short": "Nadie con precedente (conflicto ante el TC pendiente)"
+  },
+  "sanction": "Ninguna: los Presupuestos anteriores se prorrogan automáticamente (art. 134.4).",
+  "remedy_delay": {
+    "days": null,
+    "basis": "No hay remedio de un tercero que se haya aplicado; el único intento, el conflicto del Senado, sigue pendiente.",
+    "sources": [
+      {
+        "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+      }
+    ]
+  },
+  "classification": "buena_voluntad",
+  "classification_reason": "Ningún órgano ha obligado nunca al Gobierno a presentar los Presupuestos ni puede presentarlos por él; la prórroga del art. 134.4 garantiza la continuidad, no el cumplimiento del plazo. El conflicto del Senado ante el TC está pendiente.",
+  "episodes": [
+    {
+      "id": "pge-2012",
+      "start": "2011-10-01",
+      "end": "2012-04-03",
+      "kind": "plazo_vencido",
+      "summary": "Los Presupuestos de 2012 no se presentaron antes del 30-09-2011: las Cortes se disolvieron el 26-09-2011. El proyecto llegó al Congreso en abril de 2012 (Mesa, 3-4-2012), 186 días tarde, y se aprobó en junio.",
+      "power_holder": {
+        "government": "zapatero",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "El plazo venció con las Cortes disueltas; presentó el proyecto el Gobierno de Rajoy."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOCG X-A-5-1: la Mesa califica el proyecto el 3-4-2012",
+          "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/A_005-01.PDF"
+        },
+        {
+          "label": "Real Decreto 1329/2011: disolución de las Cortes el 26-09-2011",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-15160"
+        }
+      ]
+    },
+    {
+      "id": "pge-2017",
+      "start": "2016-10-01",
+      "end": "2017-04-04",
+      "kind": "plazo_vencido",
+      "summary": "Con el Gobierno en funciones durante 2016, los Presupuestos de 2017 llegaron al Congreso en abril de 2017 (Mesa, 4-4-2017), 186 días tarde.",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Gobierno en funciones hasta noviembre de 2016."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOCG XII-A-6-1: la Mesa califica el proyecto el 4-4-2017",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-6-1.PDF"
+        }
+      ]
+    },
+    {
+      "id": "pge-2018",
+      "start": "2017-10-01",
+      "end": "2018-04-03",
+      "kind": "plazo_vencido",
+      "summary": "Los Presupuestos de 2018 llegaron al Congreso en abril de 2018 (Mesa, 3-4-2018), 185 días tarde; se aprobaron en julio.",
+      "power_holder": {
+        "government": "rajoy",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOCG XII-A-20-1: la Mesa califica el proyecto el 3-4-2018",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-20-1.PDF"
+        }
+      ]
+    },
+    {
+      "id": "pge-2019",
+      "start": "2018-10-01",
+      "end": "2019-02-13",
+      "kind": "plazo_vencido",
+      "summary": "Los Presupuestos de 2019 llegaron al Congreso en enero de 2019 (Mesa, 14-1-2019), 106 días tarde, y el Pleno los devolvió al Gobierno el 13-02-2019.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOCG XII-A-38-1: la Mesa califica el proyecto el 14-1-2019",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-38-1.PDF"
+        },
+        {
+          "label": "BOCG XII-A-38-5: devolución al Gobierno, 13-2-2019",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-38-5.PDF"
+        }
+      ]
+    },
+    {
+      "id": "pge-2020",
+      "start": "2019-10-01",
+      "end": "2020-12-31",
+      "kind": "plazo_vencido",
+      "summary": "Los Presupuestos de 2020 nunca se presentaron (Cortes disueltas el 24-09-2019 y Gobierno en funciones hasta enero de 2020); el ejercicio se cerró con los anteriores prorrogados.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Gobierno en funciones en la fecha del plazo."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Orden JUS/1073/2020: Presupuestos prorrogados para 2020",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-14460"
+        },
+        {
+          "label": "Real Decreto 551/2019: disolución de las Cortes el 24-09-2019",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-13558"
+        }
+      ]
+    },
+    {
+      "id": "pge-2021-2023",
+      "start": "2020-10-01",
+      "end": "2022-10-06",
+      "kind": "plazo_vencido",
+      "summary": "Los Presupuestos de 2021, 2022 y 2023 se presentaron con retraso de días a semanas (Mesa: 28-10-2020, 13-10-2021 y 6-10-2022) y se aprobaron antes de fin de año.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "BOCG XIV-A-35-1: la Mesa califica el proyecto el 28-10-2020",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-35-1.PDF"
+        },
+        {
+          "label": "BOCG XIV-A-70-2: la Mesa califica el proyecto el 13-10-2021",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-70-2.PDF"
+        },
+        {
+          "label": "BOCG XIV-A-125-1: la Mesa califica el proyecto el 6-10-2022",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-125-1.PDF"
+        }
+      ]
+    },
+    {
+      "id": "pge-2024-2027",
+      "start": "2023-10-01",
+      "end": null,
+      "kind": "plazo_vencido",
+      "summary": "No se ha presentado ningún proyecto de Presupuestos para 2024, 2025, 2026 ni 2027: los datos abiertos del Congreso no registran ninguno en la XV legislatura y rigen los de 2023 prorrogados. Las Cortes se disolvieron el 5-10-2026.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "Gobierno en funciones en la fecha del primer plazo (30-09-2023)."
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Congreso, datos abiertos: proyectos de ley de la XV legislatura (ninguno de Presupuestos hasta 2026-11-11)",
+          "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20261111050057.json"
+        },
+        {
+          "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+        },
+        {
+          "label": "Real Decreto 806/2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20742"
+        }
+      ]
+    },
+    {
+      "id": "conflicto-senado-2025",
+      "start": "2026-02-24",
+      "end": null,
+      "kind": "tension",
+      "summary": "El TC admitió el 24-02-2026 el conflicto entre órganos constitucionales 8992-2025, promovido por el Senado frente al Gobierno por no presentar los Presupuestos de 2024, 2025 y 2026 y por el uso de las prórrogas. No consta sentencia en el BOE a 2026-11-11.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "La Ley Fundamental no fija en sí misma la fecha de presentación; si el presupuesto no está aprobado al empezar el año, el Gobierno solo puede hacer los gastos necesarios para mantener lo ya establecido por ley (art. 111 GG).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "GG art. 111",
+          "url": "https://www.gesetze-im-internet.de/gg/art_111.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "Si el Parlamento no se pronuncia en 70 días, el proyecto puede aplicarse por ordenanza; si la ley de finanzas no se depositó a tiempo, el Gobierno pide al Parlamento autorización para recaudar y abre por decreto los créditos de los servicios votados (art. 47).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Constitución de 1958, art. 47 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"
+        }
+      ]
+    },
+    "ITA": {
+      "mechanism": "Las Cámaras aprueban cada año el presupuesto presentado por el Gobierno; el ejercicio provisional solo puede concederse por ley y por un máximo de cuatro meses (art. 81).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "Costituzione, art. 81 (Corte costituzionale)",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
+    },
+    "PRT": {
+      "mechanism": "La propuesta de presupuesto se presenta y vota en los plazos que fija la ley de encuadramiento, que prevé qué hacer cuando no se cumplen (art. 106 CRP); la Constitución no fija la fecha.",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Constituição, art. 106 (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "La fecha de presentación es la de calificación por la Mesa del Congreso publicada en el BOCG (la entrada fue ese día o antes); la ficha solo lista los ejercicios presentados fuera de plazo desde 2012 (2012 y 2017-2027) y no ha comprobado los ejercicios 1979-2011, entre ellos los años con Cortes disueltas en septiembre (1989).",
+  "budget_presentation": [
+    {
+      "budget_year": 2012,
+      "deadline": "2011-09-30",
+      "presented": "2012-04-03",
+      "outcome": "aprobado (Ley 2/2012, de 29 de junio)",
+      "sources": [
+        {
+          "label": "BOCG X-A-5-1: la Mesa califica el proyecto el 3-4-2012",
+          "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/A_005-01.PDF"
+        },
+        {
+          "label": "Real Decreto 1329/2011: disolución de las Cortes el 26-09-2011",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-15160"
+        }
+      ]
+    },
+    {
+      "budget_year": 2017,
+      "deadline": "2016-09-30",
+      "presented": "2017-04-04",
+      "outcome": "aprobado (Ley 3/2017, de 27 de junio)",
+      "sources": [
+        {
+          "label": "BOCG XII-A-6-1: la Mesa califica el proyecto el 4-4-2017",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-6-1.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2018,
+      "deadline": "2017-09-30",
+      "presented": "2018-04-03",
+      "outcome": "aprobado (Ley 6/2018, de 3 de julio)",
+      "sources": [
+        {
+          "label": "BOCG XII-A-20-1: la Mesa califica el proyecto el 3-4-2018",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-20-1.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2019,
+      "deadline": "2018-09-30",
+      "presented": "2019-01-14",
+      "outcome": "devuelto (enmiendas de totalidad aprobadas el 13-02-2019)",
+      "sources": [
+        {
+          "label": "BOCG XII-A-38-1: la Mesa califica el proyecto el 14-1-2019",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-38-1.PDF"
+        },
+        {
+          "label": "BOCG XII-A-38-5: devolución al Gobierno, 13-2-2019",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/BOCG/A/BOCG-12-A-38-5.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2020,
+      "deadline": "2019-09-30",
+      "presented": null,
+      "outcome": "no presentado; prorrogados los anteriores",
+      "sources": [
+        {
+          "label": "Orden JUS/1073/2020: Presupuestos prorrogados para 2020",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-14460"
+        },
+        {
+          "label": "Real Decreto 551/2019: disolución de las Cortes el 24-09-2019",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-13558"
+        }
+      ]
+    },
+    {
+      "budget_year": 2021,
+      "deadline": "2020-09-30",
+      "presented": "2020-10-28",
+      "outcome": "aprobado (Ley 11/2020, de 30 de diciembre)",
+      "sources": [
+        {
+          "label": "BOCG XIV-A-35-1: la Mesa califica el proyecto el 28-10-2020",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-35-1.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2022,
+      "deadline": "2021-09-30",
+      "presented": "2021-10-13",
+      "outcome": "aprobado (Ley 22/2021, de 28 de diciembre)",
+      "sources": [
+        {
+          "label": "BOCG XIV-A-70-2: la Mesa califica el proyecto el 13-10-2021",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-70-2.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2023,
+      "deadline": "2022-09-30",
+      "presented": "2022-10-06",
+      "outcome": "aprobado (Ley 31/2022, de 23 de diciembre)",
+      "sources": [
+        {
+          "label": "BOCG XIV-A-125-1: la Mesa califica el proyecto el 6-10-2022",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/BOCG/A/BOCG-14-A-125-1.PDF"
+        }
+      ]
+    },
+    {
+      "budget_year": 2024,
+      "deadline": "2023-09-30",
+      "presented": null,
+      "outcome": "no presentado; prorrogados los de 2023",
+      "sources": [
+        {
+          "label": "Congreso, datos abiertos: proyectos de ley de la XV legislatura (ninguno de Presupuestos hasta 2026-11-11)",
+          "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20261111050057.json"
+        },
+        {
+          "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+        },
+        {
+          "label": "Orden EFD/1392/2024: PGE 2023 prorrogados para 2024",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25791"
+        }
+      ]
+    },
+    {
+      "budget_year": 2025,
+      "deadline": "2024-09-30",
+      "presented": null,
+      "outcome": "no presentado; prorrogados los de 2023",
+      "sources": [
+        {
+          "label": "Congreso, datos abiertos: proyectos de ley de la XV legislatura (ninguno de Presupuestos hasta 2026-11-11)",
+          "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20261111050057.json"
+        },
+        {
+          "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+        },
+        {
+          "label": "Orden PJC/1249/2025: PGE 2023 prorrogados",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2025-22429"
+        }
+      ]
+    },
+    {
+      "budget_year": 2026,
+      "deadline": "2025-09-30",
+      "presented": null,
+      "outcome": "no presentado; prorrogados los de 2023",
+      "sources": [
+        {
+          "label": "Congreso, datos abiertos: proyectos de ley de la XV legislatura (ninguno de Presupuestos hasta 2026-11-11)",
+          "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20261111050057.json"
+        },
+        {
+          "label": "TC: admisión del conflicto 8992-2025 del Senado por no presentar los PGE 2024-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-4670"
+        },
+        {
+          "label": "Orden PJC/1004/2026: PGE 2023 prorrogados",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20004"
+        }
+      ]
+    },
+    {
+      "budget_year": 2027,
+      "deadline": "2026-09-30",
+      "presented": null,
+      "outcome": "no presentado a 2026-11-11; Cortes disueltas el 5-10-2026",
+      "sources": [
+        {
+          "label": "Congreso, datos abiertos: proyectos de ley de la XV legislatura (ninguno de Presupuestos hasta 2026-11-11)",
+          "url": "https://www.congreso.es/webpublica/opendata/iniciativas/ProyectosDeLey__20261111050057.json"
+        },
+        {
+          "label": "Real Decreto 806/2026: disolución de las Cortes y elecciones el 29-11-2026",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2026-20742"
+        }
+      ]
+    }
+  ],
+  "_hints": "budget_presentation: una fila por ejercicio sin presentar a tiempo desde 1979: {budget_year, deadline (30 sept. del año anterior), presented (fecha de entrada en el Congreso o null), outcome (aprobado/devuelto/no presentado), sources}. Recuerda la prórroga automática (art. 134.4). La serie de leyes de presupuestos aprobadas la calcula el exportador desde el BOE.",
+  "sanction_short": "Ninguna: se prorrogan los Presupuestos anteriores"
+}

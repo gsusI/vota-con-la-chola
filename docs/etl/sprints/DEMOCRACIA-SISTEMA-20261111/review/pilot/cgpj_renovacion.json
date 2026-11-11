@@ -1,0 +1,51 @@
+{
+ "id": "cgpj_renovacion",
+ "verdict": "errors",
+ "checked": 46,
+ "unverifiable": [
+  "peers.FRA: legifrance.gouv.fr devuelve 403 al acceso por script (arts. 13 y 65 no contrastados)",
+  "indispensable_parties en todos los episodios: la ficha no cita ninguna fuente de composición de las Cámaras; el recuento de escaños usado abajo procede de los resultados oficiales de las generales (no de una URL de la ficha)"
+ ],
+ "errors": [
+  {
+   "field": "episodes[1].power_holder.indispensable_parties",
+   "category": "attribution",
+   "found": "[PSOE, PP] indispensables para la renovación de 2001",
+   "source_says": "VII legislatura (elecciones 2000): PP 183 diputados; sin el PSOE (125) el resto sumaba 225 >= 210 (3/5 del Congreso) y en el Senado el PSOE no llegaba a 2/5, así que el PSOE no era aritméticamente indispensable (solo el PP lo era)",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a122",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[3].power_holder.indispensable_parties",
+   "category": "attribution",
+   "found": "[PSOE, PP] indispensables para la renovación de 2013",
+   "source_says": "X legislatura (elecciones 2011): PP 186 diputados; sin el PSOE (110) el resto sumaba 240 >= 210 y en el Senado el PSOE tenía en torno a una cuarta parte de los escaños: el PSOE no era aritméticamente indispensable",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a122",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[4].power_holder.indispensable_parties",
+   "category": "attribution",
+   "found": "[PSOE, PP] indispensables durante toda la prórroga 2018-2024",
+   "source_says": "El episodio cruza tres legislaturas con aritméticas distintas: en la XII (hasta 2019) el PSOE tenía 84-85 diputados y el resto sumaba >= 210, con mayoría absoluta del PP en el Senado; en la XIII-XIV ninguno de los dos era indispensable en el Congreso si se cuentan todos los demás grupos. La lista fija de dos partidos no se sostiene escaño a escaño (la propia nota de la ficha lo reconoce); debe desglosarse por legislatura o declararse no verificada",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a122",
+   "severity": "major"
+  },
+  {
+   "field": "episodes[6].power_holder.government",
+   "category": "attribution",
+   "found": "government: sanchez (con nota 'la ficha no comprueba si la iniciativa fue proposición de ley')",
+   "source_says": "La STC 139/2024 (antecedentes) dice que la LO 8/2022 nació de una proposición de ley orgánica del Grupo Parlamentario Socialista presentada el 24-06-2022: el poder lo ejercieron las Cortes, como en la LO 4/2021, que la ficha deja con government null. Debe ser null (o nota con el grupo proponente)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2024-25522",
+   "severity": "major"
+  },
+  {
+   "field": "episodes (falta)",
+   "category": "date",
+   "found": "No hay episodio para la prórroga del II Consejo",
+   "source_says": "mandate_terms[1]: mandato hasta 1990-10-16 y sucesor nombrado el 1990-11-06 (RD 1344/1990): 21 días en funciones tras vencer, plazo vencido que la ficha no lista aunque sí lista el de 68 días de 2013",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1990-26963",
+   "severity": "minor"
+  }
+ ]
+}

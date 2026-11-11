@@ -1,0 +1,16 @@
+{
+ "id": "decretos_ley",
+ "verdict": "verified",
+ "checked": 6,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "sanction_short",
+   "category": "figure",
+   "found": "nulidad del TC, años después",
+   "source_says": "remedy_delay: mediana 1610 días, pero el mínimo es 333 días (STC 14/2020), menos de un año; 'años después' vale para la mediana, no para todos los casos (p. ej. 'normalmente años después')",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-2941",
+   "severity": "minor"
+  }
+ ]
+}

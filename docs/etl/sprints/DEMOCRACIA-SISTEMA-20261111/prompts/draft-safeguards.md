@@ -36,14 +36,32 @@ Rellena estos ficheros (ya existen con el esqueleto; edítalos, no crees otros):
 - Usa `curl -s` + `grep`/`python3` para leer páginas (salida acotada, nunca vuelques páginas enteras). Máximo
   {WEBSEARCH} búsquedas WebSearch en total. No leas otros ficheros del repositorio.
 
+## Herramientas compartidas (úsalas antes que curl a mano; caché en /tmp/vclc-democracy-cache)
+- `python3 scripts/export_public_viz_democracy.py kit boe-search "Sentencia 148/2021" --section T` → referencia, fecha de
+  BOE, URL y título (los títulos del TC en el BOE resumen el motivo del fallo). `--section 2` = nombramientos y ceses;
+  `--year-from/--year-to` acotan. Ej.: `kit boe-search "Consejo General del Poder Judicial nombra Vocales" --section 2`.
+- `kit boe-doc BOE-A-2026-20742 BOE-T-2007-8660 --grep "fallo|declarar"` → título, fecha de publicación y extractos.
+- `kit grep <url o PDF> "<regex>"` → extractos acotados de cualquier página o PDF (pdftotext incluido).
+- `kit peers` → enlaces oficiales ya comprobados para DE/FR/IT/PT/UE y hosts que bloquean scripts.
+- `kit govs` → gobiernos y legislaturas con fechas. Contexto: las Cortes se disolvieron el 2026-10-05 (RD 806/2026,
+  BOE-A-2026-20742) y hay elecciones el 2026-11-29.
+- TC: cita la sentencia por su página del BOE (`https://www.boe.es/buscar/doc.php?id=BOE-A-...`), no por el buscador del TC.
+
+## Presupuesto de trabajo
+- Haz las búsquedas en lote: una llamada de python que consulte varias referencias vale más que diez curl.
+- Nunca imprimas más de ~3.000 caracteres por llamada. Objetivo: ≤ 60 llamadas a herramientas en total.
+- Episodios: los significativos y documentados (orientativo ≤ 15 por ficha); si hay una serie larga de casos iguales
+  (p. ej. decenas de sentencias similares), resume el recuento en un episodio y enlaza la búsqueda o la memoria oficial.
+
 ## Esquema (cada fichero)
 ```json
 {
   "id": "…", "name": "Título corto en español", "group": "legislar|nombramientos|control|justicia|excepcion|transparencia",
   "rule": {"text": "Qué ordena, en una frase", "articles": ["CE art. 86.1"], "url": "enlace oficial", "deadline": "plazo si lo hay o null"},
   "obligated": "Quién debe cumplirla",
-  "enforcer": {"who": "Quién puede hacerla cumplir", "power": "obliga|anula|sustituye|automatica|declara|nadie"},
+  "enforcer": {"who": "Quién puede hacerla cumplir", "short": "Lo mismo en ≤ 60 caracteres (p. ej. «Tribunal Constitucional»)", "power": "obliga|anula|sustituye|automatica|declara|nadie"},
   "sanction": "Qué pasa si se ignora (o «ninguna»)",
+  "sanction_short": "Lo mismo en ≤ 70 caracteres (p. ej. «Nulidad, años después»)",
   "remedy_delay": {"days": 123, "basis": "cómo se mide (mediana de los casos, caso único…)", "sources": [{"label": "…", "url": "…"}]},
   "classification": "tercero_a_tiempo|tercero_tarde|buena_voluntad",
   "classification_reason": "Una o dos frases que apliquen el criterio",
@@ -73,9 +91,9 @@ Rellena estos ficheros (ya existen con el esqueleto; edítalos, no crees otros):
  "summary": "El TC declaró inconstitucional el Real Decreto-ley 5/2002 (reforma del desempleo) por no justificar la extraordinaria y urgente necesidad, casi cinco años después; para entonces la Ley 45/2002 ya lo había sustituido.",
  "power_holder": {"government": "aznar", "body": "Gobierno", "indispensable_parties": null, "note": null},
  "remedy": {"by": "Tribunal Constitucional", "ruling": "STC 68/2007", "date": "2007-03-28", "act_date": "2002-05-24"},
- "sources": [{"label": "STC 68/2007", "url": "https://hj.tribunalconstitucional.es/es/Resolucion/Show/6017"}]}
+ "sources": [{"label": "STC 68/2007", "url": "https://www.boe.es/buscar/doc.php?id=BOE-T-2007-8660"}]}
 ```
-(Comprueba tú este ejemplo antes de usarlo en una ficha: el número de resolución del TC es un ejemplo de formato.)
+(Ejemplo comprobado en el BOE: STC 68/2007, BOE-T-2007-8660.)
 
 ## Validación y cierre
 Al terminar ejecuta `python3 scripts/validate_democracy_safeguards.py --only {IDS}` y corrige hasta que pase.

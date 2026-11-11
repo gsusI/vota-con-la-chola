@@ -452,6 +452,15 @@ def load_safeguards(seed: dict) -> list[dict]:
     return docs
 
 
+def load_context() -> dict:
+    path = SEED_DIR / "context.json"
+    if not path.exists():
+        return {}
+    doc = json.loads(path.read_text())
+    doc.pop("_hints", None)
+    return doc
+
+
 REPRODUCIBLE_KEYS = ("decree_laws", "budgets", "freezer", "vdem", "mandates", "tc_delays")
 
 
@@ -474,7 +483,7 @@ def build_payload(seed: dict) -> dict:
         "vdem": vdem_series(),
         "mandates": mandate_series(safeguards, seed["snapshot_date"]),
         "tc_delays": tc_delay_series(safeguards),
-        "context": seed.get("context", {}),
+        "context": load_context(),
     }
 
 
@@ -528,6 +537,118 @@ def cmd_build(args: argparse.Namespace) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------------------------- kit (for drafting agents)
+
+KIT_CACHE = Path("/tmp/vclc-democracy-cache")
+PEER_LINKS = {
+    "DEU": [("Grundgesetz, un articulo por pagina (art_63, art_81, art_111, art_115a...)", "https://www.gesetze-im-internet.de/gg/art_63.html"),
+            ("BVerfGG (§4 mandato, §7a eleccion supletoria de jueces)", "https://www.gesetze-im-internet.de/bverfgg/__7a.html")],
+    "FRA": [("Constitution de 1958 en Legifrance (403 a curl: leer con WebFetch, citar igual)", "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356")],
+    "ITA": [("Costituzione, PDF de la Corte costituzionale (kit grep funciona)", "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf")],
+    "PRT": [("Constituicao, Assembleia da Republica", "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"),
+            ("Constituicao consolidada, Diario da Republica (alternativa)", "https://diariodarepublica.pt/dr/legislacao-consolidada/decreto-aprovacao-constituicao/1976-34520775")],
+    "EU": [("Informes sobre el Estado de Derecho (429 a scripts a veces: reintentar o WebFetch)", "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/upholding-rule-law/rule-law/rule-law-mechanism_en"),
+           ("Comision de Venecia (502 intermitente)", "https://www.venice.coe.int/webforms/documents/by_country.aspx")],
+}
+KNOWN_BLOCKED = ["congreso.es (403 a scripts: usar BOE / BOCG en boe.es o el PDF del Diario de Sesiones)",
+                 "lamoncloa.gob.es (TLS)", "legifrance.gouv.fr (403)", "conseil-constitutionnel.fr (403)",
+                 "venice.coe.int (502 intermitente: reintentar o citar la pagina de la opinion)"]
+
+
+def _cached_get(url: str) -> bytes:
+    KIT_CACHE.mkdir(parents=True, exist_ok=True)
+    path = KIT_CACHE / sha256_bytes(url.encode())
+    if path.exists():
+        return path.read_bytes()
+    body = http_get(url, tries=2)
+    path.write_bytes(body)
+    return body
+
+
+def _text_of(body: bytes, url: str) -> str:
+    if body[:5] == b"%PDF-":
+        tmp = KIT_CACHE / (sha256_bytes(url.encode()) + ".pdf")
+        tmp.write_bytes(body)
+        import subprocess
+        return subprocess.run(["pdftotext", "-layout", str(tmp), "-"], capture_output=True, text=True).stdout
+    import html as htmlmod
+    text = body.decode("utf-8", "replace")
+    text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", text)
+    return re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", text)))
+
+
+def kit_boe_search(args: argparse.Namespace) -> int:
+    """Search BOE titles (all sections, incl. TC rulings in section T). Prints ref, date, title (<=300 chars)."""
+    import html as htmlmod
+    params = {"campo[1]": "TITULOS", "dato[1]": args.text, "operador[1]": "and", "accion": "Buscar", "page_hits": str(args.limit)}
+    if args.section:
+        params.update({"campo[0]": "ORIS", f"dato[0][{args.section}]": args.section, "operador[0]": "and"})
+    if args.year_from or args.year_to:
+        params.update({"campo[6]": "FPU", "dato[6][0]": f"{args.year_from or 1978}-01-01", "dato[6][1]": f"{args.year_to or 2026}-12-31", "operador[6]": "and"})
+    url = "https://www.boe.es/buscar/boe.php?" + urllib.parse.urlencode(params)
+    body = _cached_get(url).decode("utf-8", "replace")
+    items = re.findall(r'<li class="resultado-busqueda">(.*?)</ul>', body, re.S)
+    if not items:
+        print("sin resultados")
+    for it in items[: args.limit]:
+        ref = re.search(r"id=(BOE-[A-Z]-\d+-\d+)", it)
+        pub = re.search(r'linea-pub">\s*BOE (\d+) de (\d\d/\d\d/\d{4})', it)
+        title = re.findall(r"<p>(.*?)</p>", it, re.S)
+        title = re.sub(r"\s+", " ", htmlmod.unescape(re.sub("<[^>]+>", "", title[-1]))).strip() if title else ""
+        print(f"{ref.group(1) if ref else '?'} | BOE {pub.group(2) if pub else '?'} | https://www.boe.es/buscar/doc.php?id={ref.group(1) if ref else ''} | {title[:args.chars]}")
+    return 0
+
+
+def kit_boe_doc(args: argparse.Namespace) -> int:
+    """Title, publication date and (optionally) a grep of the text of BOE documents by reference."""
+    for ref in args.refs:
+        url = f"https://www.boe.es/buscar/doc.php?id={ref}"
+        import html as htmlmod
+        body = htmlmod.unescape(_cached_get(url).decode("utf-8", "replace"))
+        m = re.search(r'<h3 class="documento-tit">(.*?)</h3>', body, re.S)
+        pub = re.search(r"BOE\W+n[uú]m\.\s+\d+, de ([^,]+?),", re.sub(r"<[^>]+>", " ", body))
+        title = re.sub(r"\s+", " ", re.sub("<[^>]+>", "", m.group(1))).strip() if m else "?"
+        print(f"{ref} | {pub.group(1) if pub else '?'} | {title[:300]}")
+        if args.grep:
+            text = _text_of(body.encode(), url)
+            text = text[text.find(title[:40]) + len(title):] if title[:40] in text else text
+            for hit in list(re.finditer(args.grep, text, re.I))[: args.max]:
+                print("   …" + text[max(0, hit.start() - args.context): hit.end() + args.context] + "…")
+    return 0
+
+
+def kit_grep(args: argparse.Namespace) -> int:
+    """Fetch a page or PDF (cached), strip tags, print bounded context around each regex hit."""
+    try:
+        text = _text_of(_cached_get(args.url), args.url)
+    except Exception as exc:  # noqa: BLE001
+        print(f"ERROR {exc}")
+        return 1
+    hits = list(re.finditer(args.pattern, text, re.I))
+    print(f"{len(text)} chars, {len(hits)} hits")
+    for hit in hits[: args.max]:
+        print("…" + text[max(0, hit.start() - args.context): hit.end() + args.context].replace("\n", " ") + "…")
+    return 0
+
+
+def kit_peers(args: argparse.Namespace) -> int:
+    for code, links in PEER_LINKS.items():
+        for label, url in links:
+            print(f"{code} | {label} | {url}")
+    print("Bloqueados conocidos: " + "; ".join(KNOWN_BLOCKED))
+    return 0
+
+
+def kit_govs(args: argparse.Namespace) -> int:
+    seed = load_seed()
+    for g in seed["governments"]:
+        print(f"{g['id']:13} {g['president']:30} {g['party']:5} {g['start']} -> {g['end'] or 'hoy'}")
+    for leg in seed["legislatures"]:
+        print(f"leg {leg['id']:5} {leg['start']} -> {leg['end'] or 'hoy'} gobiernos: {','.join(leg['governments'])}")
+    print("Cortes disueltas el 2026-10-05 (RD 806/2026), elecciones el 2026-11-29: desde entonces Gobierno de Sanchez con Cortes disueltas.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -540,6 +661,29 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("fetch-peers").set_defaults(func=cmd_fetch_peers)
     sub.add_parser("build").set_defaults(func=cmd_build)
     sub.add_parser("series").set_defaults(func=cmd_series)
+    kit = sub.add_parser("kit", help="helpers for drafting agents").add_subparsers(dest="kit", required=True)
+    k = kit.add_parser("boe-search", help='e.g. kit boe-search "Sentencia 68/2007"  |  kit boe-search "decreto-ley extraordinaria y urgente necesidad nulidad" --year-from 2015')
+    k.add_argument("text")
+    k.add_argument("--year-from", type=int)
+    k.add_argument("--year-to", type=int)
+    k.add_argument("--section", choices=["1", "2", "3", "4", "5", "T"], help="T = Tribunal Constitucional, 1 = disposiciones generales, 2 = autoridades y personal (nombramientos), 3 = otras disposiciones")
+    k.add_argument("--limit", type=int, default=15)
+    k.add_argument("--chars", type=int, default=300)
+    k.set_defaults(func=kit_boe_search)
+    k = kit.add_parser("boe-doc", help='e.g. kit boe-doc BOE-A-2026-20742 BOE-T-2007-8660 --grep "fallo|declarar"')
+    k.add_argument("refs", nargs="+")
+    k.add_argument("--grep")
+    k.add_argument("--context", type=int, default=160)
+    k.add_argument("--max", type=int, default=3)
+    k.set_defaults(func=kit_boe_doc)
+    k = kit.add_parser("grep", help='e.g. kit grep https://www.gesetze-im-internet.de/gg/art_63.html "Bundestag"')
+    k.add_argument("url")
+    k.add_argument("pattern")
+    k.add_argument("--context", type=int, default=200)
+    k.add_argument("--max", type=int, default=5)
+    k.set_defaults(func=kit_grep)
+    kit.add_parser("peers", help="pre-checked official links for DE/FR/IT/PT/EU and known blocked hosts").set_defaults(func=kit_peers)
+    kit.add_parser("govs", help="governments and legislatures with dates").set_defaults(func=kit_govs)
     p = sub.add_parser("fetch-congreso-plazos")
     p.add_argument("--db", default=str(DEFAULT_DB))
     p.set_defaults(func=cmd_fetch_congreso_plazos)

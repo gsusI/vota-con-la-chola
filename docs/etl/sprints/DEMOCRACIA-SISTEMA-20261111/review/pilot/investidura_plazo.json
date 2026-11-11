@@ -1,0 +1,35 @@
+{
+ "id": "investidura_plazo",
+ "verdict": "verified",
+ "checked": 38,
+ "unverifiable": [
+  "peers.FRA: legifrance.gouv.fr devuelve 403 al acceso por script (arts. 8 y 49 no contrastados)",
+  "episodes[0]: la segunda votación interrumpida del 23-02-1981 no tiene fuente propia citada (el DS de 20-2 solo la convoca para el lunes 23)"
+ ],
+ "errors": [
+  {
+   "field": "episodes[6].summary",
+   "category": "figure",
+   "found": "Feijóo perdió las votaciones del 27-09-2023 y del 29-09-2023 (172 a 178)",
+   "source_says": "29-09-2023: votos emitidos, 350; a favor, 172; en contra, 177; voto nulo, 1 (el 27-09 sí fue 172 a 178)",
+   "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-6.PDF",
+   "severity": "minor"
+  },
+  {
+   "field": "episodes[3].summary",
+   "category": "link",
+   "found": "Rajoy perdió ... la del 27-10-2016",
+   "source_says": "Ninguna fuente citada cubre la votación del 27-10-2016 (el DS citado, DSCD-12-PL-14, es la sesión del 29-10-2016); el hecho no queda respaldado por los enlaces de la ficha",
+   "url": "https://www.congreso.es/public_oficiales/L12/CONG/DS/PL/DSCD-12-PL-14.PDF",
+   "severity": "minor"
+  },
+  {
+   "field": "remedy_delay.days",
+   "category": "figure",
+   "found": "63",
+   "source_says": "La base da 62 (2016) y 63 (2019); la cifra única 63 no se explica (ni media ni mediana, que serían 62,5)",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-4280",
+   "severity": "minor"
+  }
+ ]
+}

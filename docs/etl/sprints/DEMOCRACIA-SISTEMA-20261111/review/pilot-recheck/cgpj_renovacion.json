@@ -1,0 +1,16 @@
+{
+ "id": "cgpj_renovacion",
+ "verdict": "verified",
+ "checked": 14,
+ "unverifiable": [],
+ "errors": [
+  {
+   "field": "episodes[prorroga-1990].summary",
+   "category": "date",
+   "found": "El segundo Consejo, constituido el 16-10-1985",
+   "source_says": "El 16-10-1985 es la fecha del RD 1881/1985 de nombramiento de vocales, no de la sesión constitutiva (limits dice que se usan las fechas de nombramiento); debería decir 'nombrado'",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1985-21400",
+   "severity": "minor"
+  }
+ ]
+}

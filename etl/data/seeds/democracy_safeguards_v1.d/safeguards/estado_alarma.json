@@ -1,0 +1,192 @@
+{
+  "id": "estado_alarma",
+  "name": "Estados de alarma: límites de la LO 4/1981 y control parlamentario de la prórroga (art. 116)",
+  "group": "excepcion",
+  "rule": {
+    "text": "El Gobierno declara el estado de alarma por decreto por un máximo de quince días y solo puede prorrogarlo con autorización del Congreso; sus medidas están limitadas por la LO 4/1981.",
+    "articles": [
+      "CE art. 116.1",
+      "CE art. 116.2",
+      "LO 4/1981"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a116",
+    "deadline": "15 días; cada prórroga requiere autorización previa del Congreso"
+  },
+  "obligated": "Gobierno (declaración y medidas) y Congreso (autorización de las prórrogas)",
+  "enforcer": {
+    "who": "Tribunal Constitucional, único competente para controlar los decretos de alarma y sus prórrogas (STC 83/2016); el Congreso autoriza o no cada prórroga",
+    "power": "anula",
+    "short": "Tribunal Constitucional; el Congreso autoriza prórrogas"
+  },
+  "sanction": "Nulidad de los preceptos por el TC; en los casos de 2020, cuando el estado de alarma ya había terminado.",
+  "remedy_delay": {
+    "days": 427,
+    "basis": "Mediana de días entre la declaración y la sentencia del TC en los dos estados de alarma de 2020 (487 y 367 días).",
+    "sources": [
+      {
+        "label": "STC 148/2021",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13032"
+      },
+      {
+        "label": "STC 183/2021",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-19512"
+      }
+    ]
+  },
+  "classification": "tercero_tarde",
+  "classification_reason": "Los límites de la LO 4/1981 solo los hace cumplir el TC, que resolvió entre 367 y 487 días después, con la alarma ya terminada. El control del Congreso sobre las prórrogas es previo y a tiempo, pero en 2020 fue el propio Congreso el que autorizó la prórroga de seis meses que el TC anuló.",
+  "episodes": [
+    {
+      "id": "alarma-2010",
+      "start": "2010-12-04",
+      "end": "2011-01-15",
+      "kind": "aval",
+      "summary": "El Gobierno declaró el estado de alarma por el cierre del espacio aéreo (controladores) el 4-12-2010 y, con autorización del Congreso, lo prorrogó hasta el 15-01-2011. En amparo, el TC (STC 83/2016, 28-04-2016) rechazó la demanda y estableció que la declaración y la prórroga solo las controla el TC, no los tribunales ordinarios.",
+      "power_holder": {
+        "government": "zapatero",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 83/2016",
+        "date": "2016-04-28",
+        "act_date": "2010-12-04"
+      },
+      "sources": [
+        {
+          "label": "Real Decreto 1673/2010",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-18683"
+        },
+        {
+          "label": "Real Decreto 1717/2010 (prórroga)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2010-19462"
+        },
+        {
+          "label": "STC 83/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-5195"
+        }
+      ]
+    },
+    {
+      "id": "alarma-marzo-2020",
+      "start": "2020-03-14",
+      "end": "2020-06-21",
+      "kind": "incumplimiento_declarado",
+      "summary": "El Real Decreto 463/2020 declaró el estado de alarma por la COVID-19; el Congreso autorizó seis prórrogas hasta el 21-06-2020. Más de un año después (STC 148/2021, 14-07-2021) el TC anuló en parte los preceptos que restringían la libertad de circulación y habilitaban al ministro de Sanidad a variar las medidas, cuando la alarma había terminado hacía 388 días.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 148/2021",
+        "date": "2021-07-14",
+        "act_date": "2020-03-14"
+      },
+      "sources": [
+        {
+          "label": "Real Decreto 463/2020",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-3692"
+        },
+        {
+          "label": "Real Decreto 555/2020 (última prórroga, hasta el 21-06-2020)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-5767"
+        },
+        {
+          "label": "STC 148/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-13032"
+        }
+      ]
+    },
+    {
+      "id": "alarma-octubre-2020",
+      "start": "2020-10-25",
+      "end": "2021-05-09",
+      "kind": "incumplimiento_declarado",
+      "summary": "Tras el estado de alarma de quince días en nueve municipios de Madrid (RD 900/2020, 9-10-2020), el Real Decreto 926/2020 declaró uno general; el Congreso autorizó el 29-10-2020 una única prórroga de seis meses, hasta el 9-05-2021. La STC 183/2021 (27-10-2021) anuló la delegación en autoridades autonómicas, la duración de la prórroga y su régimen de rendición de cuentas, 171 días después de que acabara.",
+      "power_holder": {
+        "government": "sanchez",
+        "body": "Gobierno",
+        "indispensable_parties": null,
+        "note": "La prórroga de seis meses la autorizó el Congreso."
+      },
+      "remedy": {
+        "by": "Tribunal Constitucional",
+        "ruling": "STC 183/2021",
+        "date": "2021-10-27",
+        "act_date": "2020-10-25"
+      },
+      "sources": [
+        {
+          "label": "Real Decreto 900/2020",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-12109"
+        },
+        {
+          "label": "Real Decreto 926/2020",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-12898"
+        },
+        {
+          "label": "Resolución del Congreso de 29-10-2020: autorización de la prórroga",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-13492"
+        },
+        {
+          "label": "Real Decreto 956/2020 (prórroga hasta el 9-05-2021)",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-13494"
+        },
+        {
+          "label": "STC 183/2021",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2021-19512"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "La Ley Fundamental no tiene un estado de alarma que declare el Gobierno; el estado de defensa lo declara el Bundestag por dos tercios con el acuerdo del Bundesrat (art. 115a GG).",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "GG art. 115a",
+          "url": "https://www.gesetze-im-internet.de/gg/art_115a.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "El estado de sitio lo decreta el Consejo de Ministros y solo el Parlamento puede prorrogarlo más de doce días (art. 36); en los poderes excepcionales del art. 16, el Consejo Constitucional puede ser llamado a los 30 días y revisa de oficio a los 60.",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "Constitución de 1958, arts. 16 y 36 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"
+        }
+      ]
+    },
+    "ITA": {
+      "mechanism": "La Constitución no prevé un estado de excepción salvo el de guerra, que deliberan las Cámaras (art. 78); las medidas urgentes del Gobierno van por decreto-ley, que decae si no se convierte en 60 días (art. 77).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "Costituzione, arts. 77 y 78 (Corte costituzionale)",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
+    },
+    "PRT": {
+      "mechanism": "El estado de emergencia lo declara el Presidente oído el Gobierno y con autorización previa de la Asamblea, por un máximo de quince días renovables con los mismos límites, y debe especificar los derechos suspendidos (arts. 19 y 138).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "Constituição, arts. 19 y 138 (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "La ficha no valora la necesidad sanitaria de las medidas ni recoge las sentencias de otros tribunales sobre sanciones; solo las del TC sobre los decretos de alarma.",
+  "_hints": "Episodios: 2010 (controladores aéreos), los estados de alarma de 2020 (RD 463/2020 y RD 926/2020 con su prórroga de seis meses) y las sentencias del TC que los juzgaron (fecha del acto y de la sentencia, qué anularon, cuándo había terminado ya el estado de alarma), y cualquier otro uso. remedy_delay: días entre el acto y la sentencia.",
+  "sanction_short": "Nulidad de preceptos, cuando la alarma ya terminó"
+}

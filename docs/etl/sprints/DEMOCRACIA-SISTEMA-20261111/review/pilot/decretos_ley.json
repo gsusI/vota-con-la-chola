@@ -1,0 +1,28 @@
+{
+ "id": "decretos_ley",
+ "verdict": "verified",
+ "checked": 136,
+ "unverifiable": [
+  "peers.FRA: legifrance.gouv.fr devuelve 403 al acceso por script (art. 38 no contrastado)",
+  "Exhaustividad de los 19 episodios de derogación/nulidad: la búsqueda del BOE no responde a consultas por script, así que no se pudo comprobar que no falte ninguna resolución de derogación ni STC; sí se verificaron fecha, título y fallo de las 42 fuentes citadas (una por episodio) y las fechas de los decretos-leyes en los títulos",
+  "episodes[1] y [2]: fuentes en hj.tribunalconstitucional.es (accesibles); fallo y fechas verificados allí, sin publicación BOE citada"
+ ],
+ "errors": [
+  {
+   "field": "episodes[5].summary",
+   "category": "legal_text",
+   "found": "Nulidad del art. 43 y de un párrafo de la disposición final segunda del Real Decreto-ley 6/2000",
+   "source_says": "El fallo de la STC 31/2011 solo declara inconstitucional y nulo el art. 43; el párrafo octavo de la disposición final segunda era objeto del recurso pero no se anula en el fallo",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2011-6546",
+   "severity": "minor"
+  },
+  {
+   "field": "episodes[0].summary / remedy.by",
+   "category": "legal_text",
+   "found": "El Congreso no convalidó y derogó el Real Decreto-ley 1/1979 (remedy.by: Congreso de los Diputados)",
+   "source_says": "Con las Cortes disueltas, la derogación la acordó la Diputación Permanente del Congreso, no el Pleno",
+   "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1979-5619",
+   "severity": "minor"
+  }
+ ]
+}

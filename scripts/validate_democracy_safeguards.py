@@ -87,6 +87,10 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
         urls.append(rule["url"])
     enforcer = doc.get("enforcer") or {}
     text_ok(rep, f"{sid}.enforcer.who", enforcer.get("who"))
+    text_ok(rep, f"{sid}.enforcer.short", enforcer.get("short"))
+    text_ok(rep, f"{sid}.sanction_short", doc.get("sanction_short"))
+    if len(enforcer.get("short") or "") > 60 or len(doc.get("sanction_short") or "") > 70:
+        rep.err(sid, "enforcer.short > 60 or sanction_short > 70 characters")
     if enforcer.get("power") not in POWERS:
         rep.err(sid, f"enforcer.power {enforcer.get('power')!r} not in {sorted(POWERS)}")
     if doc.get("classification") not in CLASSES:
@@ -156,6 +160,34 @@ def validate_safeguard(rep: Report, doc: dict, gov_ids: set[str]) -> list[str]:
     return urls
 
 
+def validate_context(rep: Report, ids: set[str]) -> list[str]:
+    path = exp.SEED_DIR / "context.json"
+    if not path.exists():
+        return []
+    ctx = json.loads(path.read_text())
+    urls: list[str] = []
+    for key in ("title", "intro", "conclusion"):
+        text_ok(rep, f"context.{key}", ctx.get(key))
+    if not ctx.get("erosion"):
+        rep.err("context", "erosion rows missing")
+    for row in ctx.get("erosion") or []:
+        where = f"context.erosion.{row.get('id')}"
+        text_ok(rep, where + ".what", row.get("what"))
+        for code in ("POL", "HUN"):
+            text_ok(rep, f"{where}.{code}.text", (row.get(code) or {}).get("text"))
+            urls += check_sources(rep, f"{where}.{code}", (row.get(code) or {}).get("sources"))
+        esp = row.get("ESP") or {}
+        text_ok(rep, where + ".ESP.text", esp.get("text"))
+        if esp.get("safeguard") and esp["safeguard"] not in ids:
+            rep.err(where, f"ESP.safeguard {esp['safeguard']!r} has no file")
+    for i, rec in enumerate(ctx.get("recommendations_spain") or []):
+        if not URL.match(str(rec.get("url", ""))) or not rec.get("text") or not isinstance(rec.get("year"), int):
+            rep.err(f"context.recommendations_spain[{i}]", "needs year, text and url")
+        else:
+            urls.append(rec["url"])
+    return urls
+
+
 def check_links(urls: list[str]) -> list[str]:
     bad = []
     for url in sorted(set(urls)):
@@ -199,6 +231,8 @@ def main(argv: list[str] | None = None) -> int:
         if doc.get("id") != path.stem:
             rep.err(path.name, "id must equal file name")
         urls += validate_safeguard(rep, doc, gov_ids)
+    if not only or "context" in only:
+        urls += validate_context(rep, {p.stem for p in files})
     for name, entry in exp.load_manifest().items():
         try:
             exp.read_raw(name)

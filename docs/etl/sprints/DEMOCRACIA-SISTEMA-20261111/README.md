@@ -84,8 +84,54 @@ deja España a la buena voluntad. Sin previsiones.
 - **Validador mecánico** (`scripts/validate_democracy_safeguards.py`): esquema, enlaces presentes, fechas ordenadas,
   clase en los tres valores, series reproducibles desde el payload crudo con sha256.
 
+## 1. Piloto (2026-11-11)
+
+### Serie completa: decretos-leyes frente a leyes (BOE ELI)
+- Inventario de `/eli/es/{rdl,l,lo}/AAAA/MM/DD/N` de 1979 a 2026 (751 decretos-leyes, 1.566 leyes, 397 leyes orgánicas),
+  payload crudo `raw/boe_eli_inventory.json.gz` con sha256 de cada página de listado. **Control superado**: en todos los
+  años el recuento coincide con el número oficial más alto (numeración correlativa, sin huecos).
+- Por gobierno (decretos-leyes al mes / leyes al mes): Suárez 1,59 / 5,61 · Calvo-Sotelo 1,75 / 5,86 · González
+  0,80 / 3,81 · Aznar 1,33 / 4,32 · Zapatero 1,17 / 3,34 · Rajoy 1,38 / 2,40 · Sánchez 1,99 / 1,72. El peso de los
+  decretos-leyes sube sobre todo porque bajan las leyes al mes: se publican las dos tasas, no solo el porcentaje.
+- Publicada en `etl/data/seeds/democracy_safeguards_v1.d/decree_laws_series.json` (commit `0557315fa1`) para la sesión
+  hermana `democracia-partidos`.
+
+### Cinco salvaguardas de clases distintas
+`decretos_ley` (tarde), `cgpj_renovacion` (buena voluntad), `presupuesto_presentacion` (buena voluntad), `estado_alarma`
+(tarde), `investidura_plazo` (a tiempo). Redactadas por un agente con fuentes primarias (BOE, BOCG, Diario de Sesiones, TC).
+Coste: 133 turnos y 23,6 M tokens de entrada (≈ 4,7 M por ficha), demasiado para escalar sin cambios.
+
+### Revisión independiente (regla fijada antes: ≥ 4/5 verificadas y ningún error de atribución)
+| Ficha | Veredicto | Error más grave |
+|---|---|---|
+| decretos_ley | verificada (42 episodios, mediana 1.610 días recalculada) | menor: STC 31/2011 anuló solo el art. 43 del RDL 6/2000 |
+| cgpj_renovacion | **errores (4 mayores)** | **atribución**: «PSOE y PP indispensables» no se sostiene escaño a escaño (en 2001 y 2013 el PP con otros grupos llegaba a 3/5 sin el PSOE); LO 8/2022 atribuida al Gobierno cuando fue proposición del Grupo Socialista |
+| presupuesto_presentacion | verificada | menor: redacción de `limits` |
+| estado_alarma | verificada, sin errores | — |
+| investidura_plazo | verificada | menor: 29-09-2023 fue 172-177 con un voto nulo |
+
+**Resultado: el piloto NO supera la regla** (4/5 verificadas, pero hay errores de atribución). Según el método, no se
+escala; se corrige y se informa.
+
+### Correcciones aplicadas
+- `cgpj_renovacion`: los plazos vencidos ya no atribuyen el bloqueo a ningún partido (nota: hace falta un recuento de
+  escaños por cámara y legislatura con fuente); LO 8/2022 atribuida a las Cortes como la LO 4/2021; añadido el episodio
+  de 1990 (21 días). Resto de errores menores corregidos. Revisión de lo corregido (`review/pilot-recheck/`): las 5 fichas quedan verificadas, sin errores mayores; los dos menores que señaló se corrigieron.
+- Lección para escalar: **atribuir un bloqueo de 3/5 exige una tabla de escaños por cámara y legislatura con fuente**
+  (resultados oficiales de la JEC en el BOE y composición del Senado). Sin ella, la regla es no atribuir a partidos.
+
+### Ajustes antes de escalar (si se aprueba)
+- Kit compartido en el exportador: `kit boe-search` (títulos del BOE, sección T = TC, sección 2 = nombramientos),
+  `kit boe-doc`, `kit grep` (páginas y PDF), `kit peers` (enlaces oficiales de DE/FR/IT/PT ya comprobados y hosts que
+  bloquean scripts), `kit govs`.
+- Brief con presupuesto (≤ 60 llamadas, ≤ 3.000 caracteres por salida, ≤ 15 episodios) y campos cortos para el mapa.
+- 20 fichas más preparadas (esqueletos con pistas) y un contexto Polonia/Hungría, en 5 agentes por afinidad de fuentes.
+
 ## 1. Estado
 
-- **Dónde estamos.** Método fijado (§0).
-- **A dónde vamos.** Página con el mapa de salvaguardas y el panel de pares.
-- **Qué sigue.** Serie de decretos-leyes y piloto de 5 salvaguardas.
+- **Dónde estamos.** Método fijado; series de decretos-leyes, presupuestos, V-Dem y ampliaciones de plazos reproducibles;
+  piloto de 5 fichas corregido tras no superar la regla de revisión (error de atribución en el CGPJ). Página en borrador
+  local, sin publicar.
+- **A dónde vamos.** 25 fichas revisadas, mapa de salvaguardas con panel de pares, contexto Polonia/Hungría.
+- **Qué sigue.** Decisión del coordinador: escalar con los ajustes (tabla de escaños para mayorías reforzadas incluida)
+  o parar aquí.

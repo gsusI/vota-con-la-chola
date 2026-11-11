@@ -1,0 +1,20 @@
+{
+ "id": "presupuesto_presentacion",
+ "verdict": "verified",
+ "checked": 52,
+ "unverifiable": [
+  "peers.FRA: legifrance.gouv.fr devuelve 403 al acceso por script (art. 47 no contrastado)",
+  "conflicto-senado-2025: 'No consta sentencia en el BOE a 2026-11-11' no se pudo confirmar por script (la búsqueda del BOE no devolvió resultados legibles); la admisión del 24-02-2026 sí está verificada",
+  "budget_presentation[*].outcome: las leyes de aprobación (Ley 2/2012, 3/2017, 6/2018, 11/2020, 22/2021, 31/2022) no llevan URL propia en la ficha"
+ ],
+ "errors": [
+  {
+   "field": "budget_presentation / limits",
+   "category": "figure",
+   "found": "limits dice que la ficha 'cubre fila a fila desde 2012', pero budget_presentation salta de 2012 a 2017",
+   "source_says": "Faltan las filas 2013-2016 (presentados en plazo según la ficha, sin fecha de calificación de la Mesa ni fuente); con el criterio de la propia ficha (fecha de calificación de la Mesa) no se puede comprobar si esos años cumplieron",
+   "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a134",
+   "severity": "minor"
+  }
+ ]
+}

@@ -1,0 +1,297 @@
+{
+  "id": "investidura_plazo",
+  "name": "Disolución automática si nadie es investido en dos meses (art. 99.5)",
+  "group": "control",
+  "rule": {
+    "text": "Si dos meses después de la primera votación de investidura ningún candidato ha obtenido la confianza del Congreso, el Rey disuelve ambas Cámaras y convoca elecciones.",
+    "articles": [
+      "CE art. 99.5"
+    ],
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1978-31229#a99",
+    "deadline": "Dos meses desde la primera votación de investidura"
+  },
+  "obligated": "Congreso de los Diputados (otorgar la confianza a un candidato)",
+  "enforcer": {
+    "who": "La propia Constitución: la disolución es automática al vencer el plazo, por real decreto",
+    "power": "automatica",
+    "short": "La propia Constitución (automática)"
+  },
+  "sanction": "Disolución de las Cortes y nuevas elecciones.",
+  "remedy_delay": {
+    "days": 62,
+    "basis": "Días entre la primera votación fallida y el real decreto de disolución: 62 en 2016 y 63 en 2019 (se muestra el menor; la disolución es automática al cumplirse dos meses).",
+    "sources": [
+      {
+        "label": "Real Decreto 184/2016",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-4280"
+      },
+      {
+        "label": "Real Decreto 551/2019",
+        "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-13558"
+      }
+    ]
+  },
+  "classification": "tercero_a_tiempo",
+  "classification_reason": "La norma fija una consecuencia automática que no depende de la voluntad del Congreso ni del Gobierno en funciones, y llega al vencer el plazo: se aplicó en 2016 y 2019.",
+  "episodes": [
+    {
+      "id": "calvo-sotelo-1981",
+      "start": "1981-02-20",
+      "end": "1981-02-25",
+      "kind": "tension",
+      "summary": "Leopoldo Calvo-Sotelo no obtuvo la mayoría absoluta el 20-02-1981 (169 a favor, 158 en contra, 17 abstenciones); la segunda votación, del 23-02, se interrumpió por el intento de golpe de Estado y fue investido el 25-02-1981 (186 a 158). El plazo corrió 5 días.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 20-2-1981",
+          "url": "https://www.congreso.es/public_oficiales/L1/CONG/DS/PL/PL_145.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 25-2-1981",
+          "url": "https://www.congreso.es/public_oficiales/L1/CONG/DS/PL/PL_147.PDF"
+        },
+        {
+          "label": "RD 250/1981: nombramiento de Calvo-Sotelo",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-1981-4590"
+        }
+      ]
+    },
+    {
+      "id": "zapatero-2008",
+      "start": "2008-04-09",
+      "end": "2008-04-11",
+      "kind": "tension",
+      "summary": "José Luis Rodríguez Zapatero no logró la mayoría absoluta el 9-04-2008 (168 sí, 158 no, 23 abstenciones) y fue investido por mayoría simple el 11-04-2008 (169 sí). El plazo corrió 2 días.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 9-4-2008",
+          "url": "https://www.congreso.es/public_oficiales/L9/CONG/DS/PL/PL_003.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 11-4-2008",
+          "url": "https://www.congreso.es/public_oficiales/L9/CONG/DS/PL/PL_004.PDF"
+        },
+        {
+          "label": "RD 431/2008: nombramiento de Zapatero",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2008-6470"
+        }
+      ]
+    },
+    {
+      "id": "disolucion-2016",
+      "start": "2016-03-02",
+      "end": "2016-05-03",
+      "kind": "remedio",
+      "summary": "Pedro Sánchez perdió las votaciones del 2-03-2016 (130 a 219) y del 4-03-2016 (131 a 219). Nadie fue investido en dos meses y el 3-05-2016 se disolvieron las Cortes por el art. 99.5, con elecciones el 26-06-2016: primera aplicación de la disolución automática.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Constitución (art. 99.5): disolución automática",
+        "ruling": "Real Decreto 184/2016",
+        "date": "2016-05-03",
+        "act_date": "2016-03-02"
+      },
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 2-3-2016",
+          "url": "https://www.congreso.es/public_oficiales/L11/CONG/DS/PL/DSCD-11-PL-3.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 4-3-2016",
+          "url": "https://www.congreso.es/public_oficiales/L11/CONG/DS/PL/DSCD-11-PL-4.PDF"
+        },
+        {
+          "label": "Real Decreto 184/2016",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-4280"
+        }
+      ]
+    },
+    {
+      "id": "rajoy-2016",
+      "start": "2016-08-31",
+      "end": "2016-10-29",
+      "kind": "tension",
+      "summary": "Mariano Rajoy perdió las votaciones del 31-08-2016 y del 2-09-2016 (170 a 180); fue investido el 29-10-2016 por mayoría simple (170 sí, 111 no, 68 abstenciones), dos días antes de que se cumplieran los dos meses.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 31-8-2016",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/DS/PL/DSCD-12-PL-4.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 2-9-2016",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/DS/PL/DSCD-12-PL-5.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 29-10-2016",
+          "url": "https://www.congreso.es/public_oficiales/L12/CONG/DS/PL/DSCD-12-PL-14.PDF"
+        },
+        {
+          "label": "RD 414/2016: nombramiento de Rajoy",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2016-9962"
+        }
+      ]
+    },
+    {
+      "id": "disolucion-2019",
+      "start": "2019-07-23",
+      "end": "2019-09-24",
+      "kind": "remedio",
+      "summary": "Pedro Sánchez perdió las votaciones del 23-07-2019 (124 sí, 170 no, 52 abstenciones) y del 25-07-2019 (124 sí, 155 no, 67 abstenciones). Nadie fue investido en dos meses y el 24-09-2019 se disolvieron las Cortes por el art. 99.5, con elecciones el 10-11-2019.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": {
+        "by": "Constitución (art. 99.5): disolución automática",
+        "ruling": "Real Decreto 551/2019",
+        "date": "2019-09-24",
+        "act_date": "2019-07-23"
+      },
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 23-7-2019",
+          "url": "https://www.congreso.es/public_oficiales/L13/CONG/DS/PL/DSCD-13-PL-3.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 25-7-2019",
+          "url": "https://www.congreso.es/public_oficiales/L13/CONG/DS/PL/DSCD-13-PL-5.PDF"
+        },
+        {
+          "label": "Real Decreto 551/2019",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-13558"
+        }
+      ]
+    },
+    {
+      "id": "sanchez-2020",
+      "start": "2020-01-05",
+      "end": "2020-01-07",
+      "kind": "tension",
+      "summary": "Pedro Sánchez no obtuvo la mayoría absoluta el 5-01-2020 (166 a favor, 165 en contra, 18 abstenciones) y fue investido por mayoría simple el 7-01-2020 (167 a 165).",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 5-1-2020",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/DS/PL/DSCD-14-PL-3.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 7-1-2020",
+          "url": "https://www.congreso.es/public_oficiales/L14/CONG/DS/PL/DSCD-14-PL-4.PDF"
+        },
+        {
+          "label": "RD 1/2020: nombramiento de Sánchez",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2020-231"
+        }
+      ]
+    },
+    {
+      "id": "feijoo-sanchez-2023",
+      "start": "2023-09-27",
+      "end": "2023-11-16",
+      "kind": "tension",
+      "summary": "Alberto Núñez Feijóo perdió las votaciones del 27-09-2023 (172 a 178) y del 29-09-2023 (172 a 177, con un voto nulo). Pedro Sánchez fue investido el 16-11-2023 por mayoría absoluta (179 a 171), once días antes de que se cumplieran los dos meses.",
+      "power_holder": {
+        "government": null,
+        "body": "Congreso de los Diputados",
+        "indispensable_parties": null,
+        "note": null
+      },
+      "remedy": null,
+      "sources": [
+        {
+          "label": "Diario de Sesiones, 27-9-2023",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-5.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 29-9-2023",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-6.PDF"
+        },
+        {
+          "label": "Diario de Sesiones, 16-11-2023",
+          "url": "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-8.PDF"
+        },
+        {
+          "label": "RD 828/2023: nombramiento de Sánchez",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2023-23302"
+        }
+      ]
+    }
+  ],
+  "peers": {
+    "DEU": {
+      "mechanism": "Si el candidato no logra la mayoría absoluta, el Bundestag tiene 14 días para elegir a otro; después, una votación final por mayoría simple, y el Presidente federal nombra al elegido o disuelve el Bundestag en siete días (art. 63 GG).",
+      "classification": "tercero_a_tiempo",
+      "sources": [
+        {
+          "label": "GG art. 63",
+          "url": "https://www.gesetze-im-internet.de/gg/art_63.html"
+        }
+      ]
+    },
+    "FRA": {
+      "mechanism": "El Presidente de la República nombra al Primer Ministro sin voto de investidura (art. 8); el Gobierno responde ante la Asamblea (art. 49).",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Constitución de 1958, arts. 8 y 49 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000571356"
+        }
+      ]
+    },
+    "ITA": {
+      "mechanism": "El Presidente nombra al Gobierno, que debe pedir la confianza de ambas Cámaras en diez días (art. 94); no hay plazo para formar Gobierno ni disolución automática: el Presidente puede disolver las Cámaras oídos sus presidentes (art. 88).",
+      "classification": "buena_voluntad",
+      "sources": [
+        {
+          "label": "Costituzione, arts. 88 y 94 (Corte costituzionale)",
+          "url": "https://www.cortecostituzionale.it/documenti/pubblicazioni/testo-Costituzione.pdf"
+        }
+      ]
+    },
+    "PRT": {
+      "mechanism": "El Presidente nombra al Primer Ministro según los resultados electorales; su programa decae solo si lo rechaza la mayoría absoluta de los diputados (arts. 187, 192 y 195), así que no hace falta una investidura positiva.",
+      "classification": "no_aplica",
+      "sources": [
+        {
+          "label": "Constituição, arts. 187, 192 y 195 (Assembleia da República)",
+          "url": "https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+        }
+      ]
+    }
+  },
+  "limits": "La ficha cuenta solo las investiduras en que corrió el plazo de dos meses; no recoge las negociaciones previas a la primera votación, que no activan el plazo.",
+  "_hints": "Episodios: cada vez que corrió el plazo de dos meses (2016, 2019, 2023) y qué pasó; kind remedio cuando la consecuencia automática se aplicó. Pares: cómo se evita el bloqueo de la investidura (DE art. 63 GG; FR nombramiento presidencial; IT; PT).",
+  "sanction_short": "Disolución de las Cortes y nuevas elecciones"
+}
