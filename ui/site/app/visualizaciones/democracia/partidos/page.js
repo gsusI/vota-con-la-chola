@@ -256,6 +256,24 @@ export default function DemocraciaPartidosPage() {
   const priorMin = Math.min(...prior.map((g) => g.rdl_share_pct));
   const priorMax = Math.max(...prior.map((g) => g.rdl_share_pct));
   const lawsPerYear = (g) => ((g.laws + g.organic_laws) / g.months) * 12;
+  const agg = (list) => {
+    const months = list.reduce((t, g) => t + g.months, 0);
+    const rdl = list.reduce((t, g) => t + g.rdl, 0);
+    const laws = list.reduce((t, g) => t + g.laws + g.organic_laws, 0);
+    return { months, rdlPm: rdl / months, lawsPm: laws / months, share: (100 * rdl) / (rdl + laws) };
+  };
+  const sanchezGovs = govs.filter((g) => g.id.startsWith("sanchez"));
+  const sAgg = sanchezGovs.length ? agg(sanchezGovs) : null;
+  const pAgg = prior.length ? agg(prior) : null;
+  const pm = (g, k) => (k === "rdl" ? g.rdl / g.months : (g.laws + g.organic_laws) / g.months);
+  const priorRdlMin = Math.min(...prior.map((g) => pm(g, "rdl")));
+  const priorRdlMax = Math.max(...prior.map((g) => pm(g, "rdl")));
+  const priorLawMin = Math.min(...prior.map((g) => pm(g, "laws")));
+  const priorLawMax = Math.max(...prior.map((g) => pm(g, "laws")));
+  // Counterfactual split of the share: only decree-laws at today's pace (laws as before), or only laws at today's pace.
+  const shareOnlyRdl = sAgg && pAgg ? (100 * sAgg.rdlPm) / (sAgg.rdlPm + pAgg.lawsPm) : null;
+  const shareOnlyLaws = sAgg && pAgg ? (100 * pAgg.rdlPm) / (pAgg.rdlPm + sAgg.lawsPm) : null;
+  const lawsMovedMore = shareOnlyLaws != null && shareOnlyLaws > shareOnlyRdl;
   const vpRows = data.parties
     .filter((p) => p.vparty?.antiplural != null)
     .map((p) => ({ label: p.label, value: p.vparty.antiplural, low: p.vparty.antiplural_low, high: p.vparty.antiplural_high }))
@@ -320,12 +338,15 @@ export default function DemocraciaPartidosPage() {
             {sens.publish_composite ? "el orden resiste las siete ponderaciones" : `${sens.reversal_count} inversiones de orden entre ${weightIds.length} ponderaciones`}
           </span>
         </div>
-        {lastGov && rajoy ? (
+        {lastGov && rajoy && sAgg ? (
           <div className="card vizStat">
-            <span className="vizStat__label">Decretos-leyes sobre todas las normas con rango de ley</span>
-            <span className="vizStat__value">{num(lastGov.rdl_share_pct, 0)} %</span>
+            <span className="vizStat__label">Decretos-leyes y leyes al mes, Gobiernos de Sánchez (desde 2018)</span>
+            <span className="vizStat__value">
+              {num(sAgg.rdlPm, 2)} y {num(sAgg.lawsPm, 2)}
+            </span>
             <span className="vizStat__note">
-              {lastGov.party}, desde {lastGov.start.slice(0, 4)}; entre {num(priorMin, 0)} % y {num(priorMax, 0)} % con los Gobiernos de 1979 a 2018 (BOE)
+              de 1979 a 2018: entre {num(priorRdlMin, 2)} y {num(priorRdlMax, 2)} decretos-leyes y entre {num(priorLawMin, 2)} y {num(priorLawMax, 2)} leyes al mes. El peso
+              de los decretos ({num(sAgg.share, 0)} %) sube {lawsMovedMore ? "más por las leyes que faltan que por los decretos de más" : "más por los decretos de más que por las leyes que faltan"} (BOE)
             </span>
           </div>
         ) : null}
@@ -475,7 +496,7 @@ export default function DemocraciaPartidosPage() {
       {dec.available ? (
         <Figure
           id="decretos"
-          title={`Decretos-leyes: el ${num(lastGov.rdl_share_pct, 0)} % de las normas con rango de ley con ${lastGov.party}, frente a entre el ${num(priorMin, 0)} % y el ${num(priorMax, 0)} % de 1979 a 2018`}
+          title={`Decretos-leyes: ${num(sAgg.rdlPm, 2)} al mes desde 2018, frente a ${num(priorRdlMin, 2)}–${num(priorRdlMax, 2)} antes; leyes: ${num(sAgg.lawsPm, 2)} al mes, frente a ${num(priorLawMin, 2)}–${num(priorLawMax, 2)}`}
           dek="Reales decretos-leyes publicados en el BOE cada año desde 1979, coloreados por el partido que gobernaba a mitad de año. Un decreto ley entra en vigor sin pasar antes por el Congreso, que solo puede convalidarlo o derogarlo en bloque. Volumen no es abuso: la señal de abuso son las anulaciones del Tribunal Constitucional del registro."
           legend={[
             { id: "psoe", label: "PSOE", color: "var(--viz-s2)" },
@@ -486,7 +507,7 @@ export default function DemocraciaPartidosPage() {
           sources={[{ href: dec.source.url, label: `BOE, listados ELI de decretos-leyes, leyes y leyes orgánicas (consulta ${dec.source.retrieved})` }]}
           notes={[
             "El año en curso aparece más claro: está incompleto. La tabla da el ritmo por Gobierno (por 12 meses en el cargo) y el peso de los decretos sobre toda la legislación con rango de ley.",
-            `El peso sube por las dos partes de la división: más decretos al año (${num(lastGov.rdl_per_12_months, 1)} con ${lastGov.party}, ${num(rajoy.rdl_per_12_months, 1)} con Rajoy, ${num(prior.find((g) => g.id === "gonzalez")?.rdl_per_12_months, 1)} con González) y menos leyes aprobadas (${num(lawsPerYear(lastGov), 1)} leyes y leyes orgánicas al año con ${lastGov.party}, ${num(lawsPerYear(rajoy), 1)} con Rajoy). Los datos no dicen por qué.`,
+            `Qué se movió: el peso de los decretos sobre toda la legislación con rango de ley pasó del ${num(pAgg.share, 0)} % (1979-2018) al ${num(sAgg.share, 0)} % (desde 2018). Si solo hubieran subido los decretos-leyes, al ritmo actual y con las leyes al ritmo de antes, el peso sería del ${num(shareOnlyRdl, 0)} %; si solo hubieran bajado las leyes, del ${num(shareOnlyLaws, 0)} %. ${lawsMovedMore ? "Pesa más la caída de las leyes que la subida de los decretos" : "Pesa más la subida de los decretos que la caída de las leyes"}: el porcentaje se multiplicó por ${num(sAgg.share / pAgg.share, 1)}, pero los decretos-leyes al mes, por ${num(sAgg.rdlPm / pAgg.rdlPm, 1)}, y las leyes al mes cayeron un ${num(100 * (1 - sAgg.lawsPm / pAgg.lawsPm), 0)} %. Los datos no dicen por qué.`,
           ]}
           table={
             <details className="vizTable" open>
@@ -498,8 +519,9 @@ export default function DemocraciaPartidosPage() {
                       <th scope="col">Gobierno</th>
                       <th scope="col">Desde</th>
                       <th scope="col">Decretos-leyes</th>
-                      <th scope="col">Por 12 meses</th>
+                      <th scope="col">Decretos-leyes al mes</th>
                       <th scope="col">Leyes y leyes orgánicas</th>
+                      <th scope="col">Leyes al mes</th>
                       <th scope="col">% decretos sobre el total</th>
                     </tr>
                   </thead>
@@ -511,8 +533,9 @@ export default function DemocraciaPartidosPage() {
                         </td>
                         <td>{g.start}</td>
                         <td>{g.rdl}</td>
-                        <td>{num(g.rdl_per_12_months, 1)}</td>
+                        <td>{num(g.rdl / g.months, 2)}</td>
                         <td>{g.laws + g.organic_laws}</td>
+                        <td>{num((g.laws + g.organic_laws) / g.months, 2)}</td>
                         <td>{num(g.rdl_share_pct, 0)} %</td>
                       </tr>
                     ))}
