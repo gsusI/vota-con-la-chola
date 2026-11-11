@@ -190,7 +190,7 @@ function simulatorStory() {
   return {
     href: "/visualizaciones/sistema/",
     topic: "Simulador",
-    anchor: "simulador de pensiones, impuestos y vivienda",
+    anchor: "simulador de pensiones, impuestos, vivienda, empleo e inmigración",
     title: `Subir las pensiones un punto sobre el IPC suma ${num(run.debt_dev_pp[end], 0)} puntos de deuda en 2050 si se paga con deuda`,
     dek: `Gasto en pensiones con la ley actual (Ageing Report 2024) y con una revalorización de un punto más que el IPC desde ${model.policy_start}. En la página: el mismo cambio pagado con cotizaciones o con IVA, y qué les pasa a dos casos tipo.`,
     chart: {
