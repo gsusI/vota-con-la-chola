@@ -1,0 +1,77 @@
+{
+ "measure_id": "jornada-37-5-horas",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name/boe_id/boe_url",
+   "claim": "Proyecto de ley de reducción de jornada; BOCG-15-A-58-1",
+   "status": "verified",
+   "note": "BOCG Congreso serie A núm. 58-1, 16-5-2025, expediente 121/000058"
+  },
+  {
+   "field": "legal_status",
+   "claim": "devuelto al Gobierno por enmiendas a la totalidad el 10-09-2025; nunca entró en vigor",
+   "status": "verified",
+   "note": "prensa del 10/11-9-2025 (178 a favor, 170 en contra); no hay fuente oficial citada en el archivo"
+  },
+  {
+   "field": "what_changes",
+   "claim": "De 40 a 37,5 horas semanales de promedio anual sin reducir salario; convenios hasta 31-12-2025; registro digital; desconexión y sanciones",
+   "status": "verified",
+   "note": "exposición de motivos, DA 3.ª, DT 1.ª, art. 34 bis ET y LISOS"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "«la reducción de la jornada laboral promueve un mejor equilibrio entre la vida profesional y personal y mejora el bienestar de las personas»",
+   "status": "verified",
+   "note": "literal (sigue «a todos los niveles»)"
+  },
+  {
+   "field": "ex_ante[0]",
+   "claim": "12,5 millones de asalariados del sector privado (6,8 M hombres, 5,7 M mujeres), EPA 2023 y convenios",
+   "status": "verified",
+   "note": "MAIN abril 2025, apdo. VI.1.1, p. 30 del PDF; cita literal"
+  },
+  {
+   "field": "ex_ante[1]",
+   "claim": "+6,67 % máximo, +2,21 % jornada media, sin aumento para más de 1,88 M",
+   "status": "verified",
+   "note": "p. 32 del PDF; cita literal («más de 1.880.000»)"
+  },
+  {
+   "field": "evidence_against[0]",
+   "claim": "Chemin y Wasmer (2009) JOLE 27(4) 487-524; DiD y triples diferencias; sin diferencia significativa de empleo",
+   "status": "verified",
+   "note": "handle RePEc y resumen; cita literal; B (causal, medida similar en el extranjero), neutro"
+  },
+  {
+   "field": "evidence_against[1]",
+   "claim": "Crépon y Kramarz (2002) JPE 110(6) 1355-1389; pérdidas de empleo del 2 % al 4 %",
+   "status": "verified",
+   "note": "handle RePEc y resumen; cita literal; subida del SMI del 5 % en 1981 confirmada; B, negativo"
+  },
+  {
+   "field": "indicators",
+   "claim": "vacío",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "later_route",
+   "claim": "null",
+   "status": "verified",
+   "note": "a octubre de 2026 el RD de registro horario seguía sin publicarse en el BOE y la reducción no se ha aprobado por otra vía (búsqueda web)"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "contrafactual; Raposo y van Ours (IZA DP 3723, 2008) verificado: sin más pérdida de empleo en Portugal 1996"
+  }
+ ],
+ "corrections": [],
+ "remarks": [
+  "legal_status: citar una fuente oficial (Diario de Sesiones del Pleno de 10-9-2025) en lugar de depender de la prensa"
+ ],
+ "reviewed": "2026-11-11"
+}

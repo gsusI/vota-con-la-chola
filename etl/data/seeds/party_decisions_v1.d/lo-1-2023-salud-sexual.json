@@ -1,0 +1,43 @@
+{
+ "measure_id": "lo-1-2023-salud-sexual",
+ "candidate_key": "ley orgánica por la que se modifica la ley orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de",
+ "name": "Reforma de la ley del aborto (LO 1/2023)",
+ "boe_id": "BOE-A-2023-5364",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-5364",
+ "legal_status": "en vigor (el TC desestimó el recurso 3630/2023 en la STC 92/2024)",
+ "what_changes": "Desde el 2-3-2023: aborto desde los 16 años sin permiso de los padres, fin de los 3 días de reflexión y de la información obligatoria, IVE en centro público o privado acreditado con registro de objetores y anticoncepción financiada. La baja por menstruación incapacitante, desde el 1-6-2023.",
+ "stated_goal": "Garantizar los derechos sexuales y reproductivos y que el aborto pueda hacerse en la sanidad pública en todo el territorio, superando las dificultades de acceso y el desequilibrio territorial.",
+ "stated_goal_quote": "«el objetivo de superar las dificultades que encuentran muchas mujeres a la hora de ejercer su derecho al aborto y evitar el desequilibrio territorial»",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-5364",
+ "ex_ante": [],
+ "ex_post": [],
+ "evidence_against": [],
+ "verdict": "no_evaluado",
+ "verdict_reason": "No hay evaluación de la reforma. La estadística IVE de Sanidad (indicador abajo) muestra más abortos en centros públicos tras la ley (17,0 % en 2022, 21,3 % en 2024), pero ya subían antes y el informe no atribuye el cambio a la ley.",
+ "indicators": [
+  {
+   "label": "Abortos voluntarios realizados en centros públicos (% del total)",
+   "before": {
+    "period": "2022",
+    "value": 17.02
+   },
+   "after": {
+    "period": "2024",
+    "value": 21.25
+   },
+   "unit": "%",
+   "source": "Ministerio de Sanidad, Informe IVE 2024 (Tabla EV.4)",
+   "url": "https://www.sanidad.gob.es/areas/promocionPrevencion/embarazo/docs/IVE_2024.pdf",
+   "quote": "«I.V.E. Distribución porcentual según tipo de centro, semanas de gestación, motivo de la interrupción»"
+  }
+ ],
+ "later_route": null,
+ "notes": "Indicador calculado sumando las filas «Público» hospitalario y extrahospitalario de la Tabla EV.4: 2022 = 7,37 + 9,65; 2024 = 10,24 + 11,01; 2020 = 6,28 + 9,21. El preámbulo de la ley cita el 78,04 % de 2020, que en la tabla corresponde a centros extrahospitalarios privados (75,28 % en 2022, 70,9 % en 2024). Sin ex ante: memoria de impacto no accesible. No se buscó evidencia sobre la baja por menstruación ni sobre el aborto a los 16-17 años (presupuesto de búsquedas). No se encontró evidencia en contra porque no hay evaluación. Revisión 2026-11-11: la baja por menstruación entra en vigor a los tres meses (disp. final decimoséptima); la estadística IVE pasa de ex_post a indicador porque no evalúa la reforma.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "corrected",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot/lo-1-2023-salud-sexual.json",
+  "corrections": 2
+ }
+}

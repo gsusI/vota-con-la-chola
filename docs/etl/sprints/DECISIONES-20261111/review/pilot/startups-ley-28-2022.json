@@ -1,0 +1,143 @@
+{
+ "measure_id": "startups-ley-28-2022",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Ley de startups (Ley 28/2022)",
+   "status": "verified",
+   "note": "Ley 28/2022, de 21 de diciembre, de fomento del ecosistema de las empresas emergentes"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2022-21739",
+   "status": "verified",
+   "note": "BOE núm. 306, 22/12/2022"
+  },
+  {
+   "field": "legal_status",
+   "claim": "en vigor",
+   "status": "verified",
+   "note": "consolidado, sin modificaciones (última actualización 22/12/2022)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Certificación de empresa emergente por ENISA",
+   "status": "verified",
+   "note": "art. 6.1"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Hasta 5 años, 7 en sectores estratégicos",
+   "status": "verified",
+   "note": "art. 3.1.a (biotecnología, energía, industriales y otros estratégicos)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Ventas ≤ 10 M€",
+   "status": "verified",
+   "note": "art. 5.d: pierde la condición si el volumen de negocio supera 10 M€"
+  },
+  {
+   "field": "what_changes",
+   "claim": "IS al 15 % hasta 4 años",
+   "status": "verified",
+   "note": "art. 7: primer periodo con base positiva y los tres siguientes"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Exención de 50.000 € en stock options",
+   "status": "verified",
+   "note": "disp. final (art. 42.3.f LIRPF): 50.000 € anuales"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Aplazamiento de deudas y menos trámites",
+   "status": "verified",
+   "note": "art. 8 (aplazamiento IS/IRNR sin garantías, 12 y 6 meses)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "En vigor desde el 23-12-2022",
+   "status": "verified",
+   "note": "disp. final decimotercera + cabecera BOE"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "«Fomentar la creación, el crecimiento y la relocalización de empresas emergentes en España»",
+   "status": "verified",
+   "note": "literal, art. 1.a"
+  },
+  {
+   "field": "ex_post[0].url",
+   "claim": "Nota de prensa MTDFP 24-06-2026",
+   "status": "verified",
+   "note": "PDF 3 págs., accesible"
+  },
+  {
+   "field": "ex_post[0].finding",
+   "claim": "2.100 certificadas 2023-marzo 2026; 3.600 (2024) a cerca de 5.000 (2025); se duplican empresas con tipo reducido IS 2023-2024",
+   "status": "verified",
+   "note": "pp. 1-2"
+  },
+  {
+   "field": "ex_post[0].quote",
+   "claim": "«el número de empresas que aplican el tipo reducido en el Impuesto sobre Sociedades se duplicó entre 2023 y 2024»",
+   "status": "verified",
+   "note": "literal"
+  },
+  {
+   "field": "ex_post[0].locator",
+   "claim": "p. 2",
+   "status": "verified",
+   "note": "la frase del tipo reducido está en la p. 2"
+  },
+  {
+   "field": "ex_post[0].method",
+   "claim": "evaluación continua descriptiva, sin grupo de control; nota de prensa",
+   "status": "verified",
+   "note": "la nota la llama «primera evaluación continua de la Ley de Startups»"
+  },
+  {
+   "field": "ex_post[0].grade",
+   "claim": "B",
+   "status": "verified",
+   "note": "evaluación descriptiva ex post de esta ley (Foro Nacional de Empresas Emergentes)"
+  },
+  {
+   "field": "ex_post[0].direction",
+   "claim": "positivo",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "indicators[0].before",
+   "claim": "2024-04: 1.000",
+   "status": "verified",
+   "note": "nota Mintur 24-04-2024: «ha certificado 1.000 startups en menos de un año»; la url del indicador solo cubre el dato posterior (la de 2024 está en notes)"
+  },
+  {
+   "field": "indicators[0].after",
+   "claim": "2026-03: 2.100",
+   "status": "verified",
+   "note": "«Entre 2023 y marzo de 2026 se han certificado 2.100 empresas emergentes», literal, p. 1"
+  },
+  {
+   "field": "later_route",
+   "claim": "null",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "la propia fuente B es autoevaluación del Gobierno sin contrafactual; el recuento de startups (≈5.000) supera a las certificadas (2.100), luego incluye no certificadas"
+  }
+ ],
+ "corrections": [],
+ "remarks": [
+  "indicators[0]: conviene que el dato 2024 lleve su propia url (Mintur) en vez de solo en notes"
+ ],
+ "reviewed": "2026-11-11"
+}

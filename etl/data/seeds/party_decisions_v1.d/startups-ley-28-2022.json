@@ -1,0 +1,55 @@
+{
+ "measure_id": "startups-ley-28-2022",
+ "candidate_key": "ley de fomento del ecosistema de las empresas emergentes",
+ "name": "Ley de startups (Ley 28/2022)",
+ "boe_id": "BOE-A-2022-21739",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21739",
+ "legal_status": "en vigor",
+ "what_changes": "Crea la certificación de empresa emergente (ENISA; hasta 5 años, 7 en sectores estratégicos; ventas ≤ 10 M€) con Impuesto sobre Sociedades al 15 % hasta 4 años, exención de 50.000 € en stock options, aplazamiento de deudas y menos trámites. En vigor desde el 23-12-2022.",
+ "stated_goal": "Fomentar la creación, el crecimiento y la relocalización de empresas emergentes en España y atraer talento y capital internacional.",
+ "stated_goal_quote": "«Fomentar la creación, el crecimiento y la relocalización de empresas emergentes en España»",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-21739",
+ "ex_ante": [],
+ "ex_post": [
+  {
+   "source": "Ministerio para la Transformación Digital y de la Función Pública (Foro Nacional de Empresas Emergentes)",
+   "authors_year": "Foro Nacional de Empresas Emergentes (2026)",
+   "url": "https://digital.gob.es/content/dam/portal-mtdfp/comunicacion/comunicacion_sedia/2026/2026-06-24/260624NPForoEmpresasEmergentes.pdf",
+   "method": "evaluación continua descriptiva (datos de seguimiento antes/después, sin grupo de control); se consultó la nota de prensa, no el informe completo",
+   "finding": "2.100 empresas certificadas entre 2023 y marzo de 2026; startups de 3.600 (2024) a cerca de 5.000 (2025); se duplican las empresas con el tipo reducido del Impuesto sobre Sociedades (2023-2024).",
+   "quote": "«el número de empresas que aplican el tipo reducido en el Impuesto sobre Sociedades se duplicó entre 2023 y 2024»",
+   "locator": "nota de prensa de 24-06-2026, p. 2",
+   "grade": "B",
+   "direction": "positivo"
+  }
+ ],
+ "evidence_against": [],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Solo hay seguimiento descriptivo del propio Gobierno (Foro Nacional de Empresas Emergentes, 2026): sin contrafactual, el recuento de startups incluye empresas no certificadas y la atribución a la ley es una declaración política.",
+ "indicators": [
+  {
+   "label": "Empresas emergentes certificadas por ENISA (acumulado)",
+   "before": {
+    "period": "2024-04",
+    "value": 1000,
+    "url": "https://www.mintur.gob.es/es-es/gabineteprensa/notasprensa/2024/documents/20240424%20np%201000%20certificaciones%20startups.pdf"
+   },
+   "after": {
+    "period": "2026-03",
+    "value": 2100
+   },
+   "unit": "empresas",
+   "source": "ENISA vía Ministerio de Industria y Turismo (24-04-2024) y Foro Nacional de Empresas Emergentes (24-06-2026)",
+   "url": "https://digital.gob.es/content/dam/portal-mtdfp/comunicacion/comunicacion_sedia/2026/2026-06-24/260624NPForoEmpresasEmergentes.pdf",
+   "quote": "«Entre 2023 y marzo de 2026 se han certificado 2.100 empresas emergentes»"
+  }
+ ],
+ "later_route": null,
+ "notes": "Dato 2024 del indicador: https://www.mintur.gob.es/es-es/gabineteprensa/notasprensa/2024/documents/20240424%20np%201000%20certificaciones%20startups.pdf («ha certificado 1.000 startups en menos de un año»). Balance ENISA 2025 (29-01-2026): 1.929 certificadas. La certificación no existía antes de la ley (Orden PCM/825/2023), así que el indicador mide uso de la ley, no su efecto. Sin ex ante: memoria de impacto no accesible. No verificado: una crítica metodológica de Informa D&B citada por un blog (ecosistemastartup.com), por eso no figura como evidencia en contra. No se encontró evaluación causal.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "pass",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot/startups-ley-28-2022.json"
+ }
+}

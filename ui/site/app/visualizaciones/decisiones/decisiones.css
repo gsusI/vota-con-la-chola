@@ -1,0 +1,239 @@
+/* /visualizaciones/decisiones/: party decision ledger. Only page-specific pieces; layout comes from visualizaciones.css. */
+
+.viz .decSr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.viz .decMuted {
+  color: var(--viz-muted);
+}
+
+.viz .decLegendNote {
+  font-size: 0.9rem;
+}
+
+.viz .decDomain {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.viz .decDomain h3 {
+  font-size: 1.05rem;
+  margin: 0 auto;
+}
+
+.viz .decPanel {
+  width: 100%;
+  min-width: 0;
+}
+
+.viz .decPanel svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Matrix: measures × parties. Scrolls inside its own box on a phone; the measure column stays visible. */
+.viz .decMatrix {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.viz .decMatrix table {
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  width: 100%;
+}
+
+.viz .decMatrix th,
+.viz .decMatrix td {
+  padding: 4px 3px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--viz-grid);
+}
+
+.viz .decMatrix thead th {
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--viz-ink-2);
+  white-space: nowrap;
+}
+
+.viz .decMatrix .decMatrix__measure {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--viz-surface);
+  text-align: left;
+  min-width: 9.5rem;
+  max-width: 22rem;
+  font-weight: 400;
+  padding-right: 10px;
+}
+
+.viz .decMatrix__measure a {
+  color: var(--viz-ink);
+  text-decoration: none;
+}
+
+.viz .decMatrix__measure a:hover {
+  text-decoration: underline;
+}
+
+.viz .decMatrix__meta {
+  display: block;
+  color: var(--viz-muted);
+  font-size: 0.76rem;
+}
+
+.viz .decMatrix__cf .decMatrix__measure a {
+  font-style: italic;
+}
+
+.viz .decMatrix__n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 999px;
+  border: 1.5px solid var(--viz-ink);
+  font-size: 0.78em;
+  font-weight: 700;
+  font-style: normal;
+  margin-right: 2px;
+}
+
+.viz .decMatrix__verdict {
+  white-space: nowrap;
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .decCell {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.viz .decCell--abstained,
+.viz .decCell--split {
+  color: var(--viz-ink);
+}
+
+.viz .decCell--absent {
+  border: 1px dashed var(--viz-axis);
+}
+
+.viz .decCell--decisive {
+  box-shadow: 0 0 0 2px var(--viz-surface), 0 0 0 4px var(--viz-ink);
+}
+
+/* Party ledger and positions tables. */
+.viz .decLedger table {
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  width: 100%;
+}
+
+.viz .decLedger th,
+.viz .decLedger td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--viz-grid);
+}
+
+.viz .decLedger thead th {
+  white-space: nowrap;
+}
+
+.viz .decVoteLine {
+  display: block;
+}
+
+.viz .decDot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+
+/* Measure files: one reading column each. */
+.viz .decMeasures {
+  display: grid;
+  gap: 28px;
+}
+
+.viz .decMeasures > h2 {
+  font-size: 1.3rem;
+  margin: 0 auto;
+}
+
+.viz .decMeasure {
+  display: grid;
+  gap: 6px;
+}
+
+.viz .decMeasure h3 {
+  font-size: 1.08rem;
+  margin: 0 auto;
+}
+
+.viz .decMeasure p,
+.viz .decMeasure ul {
+  margin-block: 0;
+}
+
+.viz main.vizArticle .decMeasure :is(ul) {
+  width: min(100%, var(--viz-measure));
+  padding-left: 1.1rem;
+}
+
+.viz .decLabel {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--viz-ink-2);
+}
+
+.viz .decSources li,
+.viz .decMoves li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.viz .decGrade {
+  display: inline-grid;
+  place-items: center;
+  width: 1.35em;
+  height: 1.35em;
+  border-radius: 3px;
+  background: var(--viz-band);
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.viz .decLinks {
+  font-size: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .viz .decMatrix .decMatrix__measure {
+    min-width: 14rem;
+  }
+}

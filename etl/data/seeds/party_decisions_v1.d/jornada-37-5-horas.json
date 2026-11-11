@@ -1,0 +1,64 @@
+{
+ "measure_id": "jornada-37-5-horas",
+ "candidate_key": "ley para la reducción de la duración máxima de la jornada ordinaria de trabajo y la garantía del registro de j",
+ "name": "Reducción de la jornada a 37,5 horas (proyecto devuelto)",
+ "boe_id": "BOCG-15-A-58-1",
+ "boe_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-58-1.PDF",
+ "legal_status": "rechazado en el Congreso (devuelto al Gobierno por enmiendas a la totalidad, 10-09-2025); nunca entró en vigor",
+ "what_changes": "Proponía bajar la jornada ordinaria máxima de 40 a 37,5 horas semanales de promedio anual sin reducir salario (convenios adaptados hasta el 31-12-2025), un registro horario digital obligatorio y más derecho a la desconexión y sanciones. No entró en vigor.",
+ "stated_goal": "Reducir el tiempo de trabajo sin rebaja salarial para mejorar la conciliación, la salud y el bienestar de las personas trabajadoras.",
+ "stated_goal_quote": "«la reducción de la jornada laboral promueve un mejor equilibrio entre la vida profesional y personal y mejora el bienestar de las personas»",
+ "stated_goal_url": "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/A/BOCG-15-A-58-1.PDF",
+ "ex_ante": [
+  {
+   "source": "Ministerio de Trabajo y Economía Social, memoria del análisis de impacto normativo (abril de 2025)",
+   "url": "https://www.congreso.es/webpublica/documentacion/docs_trabajo/leg15/121_000058/121_000058_doc_acompana.pdf",
+   "finding": "Estima que la reducción alcanzaría a 12,5 millones de asalariados del sector privado (6,8 millones de hombres y 5,7 millones de mujeres), con datos de la EPA 2023 y convenios colectivos.",
+   "quote": "«se estima que la reducción de la jornada beneficiará a un total de 12,5 millones de personas trabajadoras del sector privado»",
+   "locator": "apdo. VI.1.1 «Impacto sobre la economía en general», p. 30 del PDF del expediente 121/000058"
+  },
+  {
+   "source": "Ministerio de Trabajo y Economía Social, memoria del análisis de impacto normativo (abril de 2025)",
+   "url": "https://www.congreso.es/webpublica/documentacion/docs_trabajo/leg15/121_000058/121_000058_doc_acompana.pdf",
+   "finding": "Coste salarial por hora: +6,67 % como máximo (quien trabajaba 40 h) y +2,21 % para la jornada media del sector privado, sin aumento para más de 1,88 millones de trabajadores.",
+   "quote": "«previsto para la jornada media de los casi 14,5 millones de personas trabajadoras del sector privado sería del 2,21%»",
+   "locator": "apdo. VI.1.1, p. 32 del PDF del expediente 121/000058"
+  }
+ ],
+ "ex_post": [],
+ "evidence_against": [
+  {
+   "source": "Journal of Labor Economics 27(4), 487-524",
+   "authors_year": "Chemin y Wasmer (2009)",
+   "url": "https://ideas.repec.org/a/ucp/jlabec/v27y2009i4p487-524.html",
+   "method": "diferencias en diferencias y triples diferencias (Alsace-Moselle frente al resto de Francia), semana de 35 horas de 1998; otro país",
+   "finding": "Francia, 35 horas: donde la norma se aplicó con menos rigor (Alsace-Moselle) el empleo no evolucionó de forma distinta al resto del país.",
+   "quote": "«Yet it shows no significant difference in employment with the rest of France, which casts doubt on the effectiveness of this regulation.»",
+   "locator": "resumen",
+   "grade": "B",
+   "direction": "neutro"
+  },
+  {
+   "source": "Journal of Political Economy 110(6), 1355-1389",
+   "authors_year": "Crépon y Kramarz (2002)",
+   "url": "https://ideas.repec.org/a/ucp/jpolec/v110y2002i6p1355-1389.html",
+   "method": "comparación de trabajadores con 40 h o más frente a 36-39 h antes de la reducción de 40 a 39 horas en Francia (1982); otro país",
+   "finding": "Francia, de 40 a 39 horas (con subida del salario mínimo): quienes trabajaban 40 h o más tuvieron más probabilidad de perder el empleo; pérdidas estimadas del 2 % al 4 %.",
+   "quote": "«Our estimates of the impact of this one-hour reduction on employment losses vary between 2 percent and 4 percent.»",
+   "locator": "resumen",
+   "grade": "B",
+   "direction": "negativo"
+  }
+ ],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Contrafactual: el proyecto nunca se aplicó. La memoria del Ministerio (2025) solo da estimaciones previas; la evidencia causal es de otros países y dividida (Portugal 1996 y Francia 1998 sin pérdida de empleo; Francia 1982 con pérdidas del 2-4 %).",
+ "indicators": [],
+ "later_route": null,
+ "notes": "Contrafactual: no hay ex post en España; el validador no admite ex_post en un contrafactual sin later_route, así que la evidencia extranjera va en evidence_against (sin efecto o negativa) y aquí la favorable: Raposo y van Ours (2008), IZA DP 3723 (https://ideas.repec.org/p/iza/izadps/dp3723.html), Portugal 1996, de 44 a 40 horas, grado B: «We also find that the working hours reduction did not lead to an increased job loss of workers directly affected» (resumen). La evidencia extranjera mide efectos sobre empleo y salarios, no el objetivo declarado (conciliación, salud, bienestar), y viene de reducciones distintas (1 h en Francia 1982 con subida del salario mínimo; 4 h en Portugal; 35 h en Francia). Las cifras de la memoria difieren: 12,5 millones de beneficiarios frente a casi 14,5 millones de asalariados del sector privado usados para el coste medio. Ruta posterior: el Gobierno tramita por real decreto solo el registro horario digital (vía urgente aprobada el 30-9-2025, dictamen del Consejo de Estado en 2026); no se confirmó su publicación en el BOE, por eso later_route es null. La reducción de jornada no se ha aprobado por otra vía según lo localizado. Fecha del IZA DP 3723 (2008) tomada de la serie; no verificada en la página.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "pass",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot/jornada-37-5-horas.json"
+ }
+}

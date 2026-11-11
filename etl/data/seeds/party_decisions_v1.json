@@ -1,0 +1,27 @@
+{
+ "schema_version": "party_decisions_v1",
+ "method": "docs/etl/sprints/DECISIONES-20261111/README.md",
+ "context": {
+  "health_spending_by_sector": {
+   "year": 2024,
+   "provisional": true,
+   "unit": "% del gasto sanitario público consolidado",
+   "shares": {
+    "Comunidades Autónomas": 93.61,
+    "Mutualidades de Funcionarios": 2.42,
+    "Sistema de Seguridad Social (INGESA)": 1.97,
+    "Administración Central": 1.12,
+    "Corporaciones Locales": 0.87
+   },
+   "amount_total_thousand_eur": 101738916,
+   "source": "Ministerio de Sanidad, Estadística de Gasto Sanitario Público (EGSP), serie 2002-2024",
+   "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/gastoSanitario2005/tablasEstEGSP/egspGastoReal.pdf",
+   "raw_path": "etl/data/raw/health/egsp/egspGastoReal.pdf",
+   "sha256": "a53acc61e2f3f6354b187cfa56960b88f9c919404c63be447b16578b8a958280",
+   "retrieved_at": "2026-10-19",
+   "locator": "«Gasto sanitario público total consolidado. Clasificación sectorial. Sector de gasto, 2002-2024», Estructura porcentual, columna 2024(*)",
+   "extracted_with": "pdftotext -layout"
+  }
+ },
+ "measures": []
+}

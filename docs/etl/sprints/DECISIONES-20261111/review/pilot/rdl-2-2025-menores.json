@@ -1,0 +1,103 @@
+{
+ "measure_id": "rdl-2-2025-menores",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Reparto de menores migrantes no acompañados (RDL 2/2025)",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2025-5404",
+   "status": "verified",
+   "note": "RDL 2/2025, de 18 de marzo; BOE núm. 67, 19/03/2025"
+  },
+  {
+   "field": "legal_status",
+   "claim": "convalidado (10-04-2025); en vigor; integrado en art. 35 bis y DA 11.ª LO 4/2000",
+   "status": "verified",
+   "note": "BOE: «SE PUBLICA Acuerdo de convalidación, por Resolución de 10 de abril de 2025»; añade arts. 35 bis a quinquies y DA 11.ª y 12.ª, modifica art. 52. Hay 11 recursos de inconstitucionalidad admitidos (2437/2025 a 4527/2025) sin sentencia localizada"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Contingencia si una comunidad supera tres veces su capacidad ordinaria; reubicación; fondo estatal que compensa costes",
+   "status": "verified",
+   "note": "art. 35 bis.2; DA 12.ª.4 (fondo para compensar íntegramente)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "En vigor desde el 20-3-2025",
+   "status": "verified",
+   "note": "disp. final tercera; análisis BOE"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "«resulta preciso posibilitar una redistribución ... de los territorios más saturados hacia otras comunidades y ciudades autónomas»",
+   "status": "verified",
+   "note": "literal, preámbulo"
+  },
+  {
+   "field": "ex_post[0].finding",
+   "claim": "877 reubicados desde Canarias, Ceuta y Melilla a 23-1-2026",
+   "status": "verified",
+   "note": "nota MPTMD 23-01-2026"
+  },
+  {
+   "field": "ex_post[0].quote",
+   "claim": "«Ya son 877 los niños, niñas y adolescentes que se encontraban en Canarias, Ceuta y Melilla que han sido reubicados en otras comunidades autónomas»",
+   "status": "verified",
+   "note": "literal, p. 1"
+  },
+  {
+   "field": "ex_post[0].method",
+   "claim": "balance administrativo de reubicaciones",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "ex_post[0].grade",
+   "claim": "B",
+   "status": "verified",
+   "note": "recuento descriptivo de la ejecución de la propia medida"
+  },
+  {
+   "field": "ex_post[0].direction",
+   "claim": "positivo",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "indicators[0].after",
+   "claim": "2026-01: 877",
+   "status": "verified",
+   "note": "«Ya son 877 niños, niñas y adolescentes los que han sido reubicados en otras comunidades autónomas», literal, p. 2"
+  },
+  {
+   "field": "indicators[0].label/before",
+   "claim": "Reubicados desde Canarias, Ceuta y Melilla (acumulado); 2022-2024: 574",
+   "status": "wrong",
+   "note": "el preámbulo del RDL dice 574 traslados «procedentes de Canarias y Ceuta» (no Melilla), por acuerdos voluntarios de la Conferencia Sectorial; las 877 son reubicaciones por contingencia desde el 29-8-2025 que no incluyen las 574. No es la misma serie acumulada: antes/después sugiere un salto de 574 a 877 que no existe"
+  },
+  {
+   "field": "later_route",
+   "claim": "null",
+   "status": "verified",
+   "note": "RD 658/2025 solo desarrolla el procedimiento"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "el único B es el recuento de la ejecución; no mide ocupación ni interés superior"
+  }
+ ],
+ "corrections": [
+  "indicators[0]: quitar el indicador o reetiquetarlo como dos series distintas (574 traslados por acuerdo voluntario desde Canarias y Ceuta en 2022-2024 frente a 877 reubicaciones por contingencia del 29-8-2025 al 23-1-2026); no llamarlo «acumulado» ni incluir Melilla en el dato previo"
+ ],
+ "remarks": [
+  "legal_status: considerar añadir que hay 11 recursos de inconstitucionalidad admitidos y pendientes"
+ ],
+ "reviewed": "2026-11-11"
+}

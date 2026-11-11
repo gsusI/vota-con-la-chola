@@ -1,0 +1,125 @@
+{
+ "measure_id": "lo-1-2023-salud-sexual",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Reforma de la ley del aborto (LO 1/2023)",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2023-5364",
+   "status": "verified",
+   "note": "BOE núm. 51, 01/03/2023"
+  },
+  {
+   "field": "legal_status",
+   "claim": "en vigor; el TC desestimó el recurso 3630/2023 en la STC 92/2024",
+   "status": "verified",
+   "note": "BOE-A-2024-15427: STC 92/2024, de 18-6-2024, fallo: desestimar"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Aborto desde los 16 años sin permiso de los padres",
+   "status": "verified",
+   "note": "art. 13 bis LO 2/2010"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Fin de los 3 días de reflexión y de la información obligatoria",
+   "status": "verified",
+   "note": "preámbulo y art. 14"
+  },
+  {
+   "field": "what_changes",
+   "claim": "IVE en centro público o privado acreditado con registro de objetores",
+   "status": "verified",
+   "note": "art. 13.b y arts. 19 bis-19 ter"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Anticoncepción financiada (desde 2-3-2023)",
+   "status": "verified",
+   "note": "disp. adic. tercera LO 2/2010, en el artículo único"
+  },
+  {
+   "field": "what_changes",
+   "claim": "Baja por menstruación incapacitante desde el 2-3-2023",
+   "status": "wrong",
+   "note": "la baja va en la disp. final tercera (LGSS), que según la disp. final decimoséptima entra en vigor a los tres meses de la publicación: 1-6-2023, no 2-3-2023"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "«el objetivo de superar las dificultades que encuentran muchas mujeres a la hora de ejercer su derecho al aborto y evitar el desequilibrio territorial»",
+   "status": "verified",
+   "note": "literal en el preámbulo (sigue «existente»)"
+  },
+  {
+   "field": "ex_post[0].url",
+   "claim": "IVE 2024 datos definitivos",
+   "status": "verified",
+   "note": "PDF accesible, Sanidad 2025"
+  },
+  {
+   "field": "ex_post[0].finding",
+   "claim": "Público 17,0 % (2022) a 21,3 % (2024); 15,5 % en 2020",
+   "status": "verified",
+   "note": "Tabla EV.4: 7,37+9,65=17,02; 10,24+11,01=21,25; 6,28+9,21=15,49"
+  },
+  {
+   "field": "ex_post[0].quote",
+   "claim": "título de la Tabla EV.4",
+   "status": "verified",
+   "note": "literal"
+  },
+  {
+   "field": "ex_post[0].locator",
+   "claim": "Tabla EV.4, p. 21 del PDF",
+   "status": "verified",
+   "note": "p. 21 del PDF (19 impresa)"
+  },
+  {
+   "field": "ex_post[0].method",
+   "claim": "estadística oficial, sin contrafactual ni atribución",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "ex_post[0].grade",
+   "claim": "B",
+   "status": "wrong",
+   "note": "el informe IVE es la estadística anual de abortos; cita la LO 1/2023 solo como marco legal y no evalúa la reforma. B exige una evaluación de esta medida: no es B; dejarlo solo como indicador (ya lo está) y quitarlo de ex_post, o mantenerlo marcado como estadística de seguimiento sin grado B"
+  },
+  {
+   "field": "ex_post[0].direction",
+   "claim": "positivo",
+   "status": "verified",
+   "note": "la cuota pública sube en el sentido del objetivo (sin atribución)"
+  },
+  {
+   "field": "indicators[0]",
+   "claim": "2022: 17,02 %; 2024: 21,25 %",
+   "status": "verified",
+   "note": "Tabla EV.4"
+  },
+  {
+   "field": "later_route",
+   "claim": "null",
+   "status": "verified",
+   "note": ""
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no hay fuente A/B que atribuya el cambio a la ley"
+  }
+ ],
+ "corrections": [
+  "what_changes: separar la baja por menstruación incapacitante: en vigor desde el 1-6-2023 (disp. final tercera, entrada en vigor a los tres meses según la disp. final decimoséptima), no desde el 2-3-2023",
+  "ex_post[0].grade: no es B (estadística anual, no evaluación de la LO 1/2023); quitarlo de ex_post y dejarlo en indicators, o reetiquetarlo sin grado B"
+ ],
+ "reviewed": "2026-11-11"
+}

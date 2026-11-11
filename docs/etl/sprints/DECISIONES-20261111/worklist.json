@@ -1,0 +1,1261 @@
+{
+ "generated_at": "2026-11-11",
+ "rule": "docs/etl/sprints/DECISIONES-20261111/README.md §1-3",
+ "counts": {
+  "autonomos": 2,
+  "empleo": 12,
+  "sanidad": 4,
+  "inmigracion": 4
+ },
+ "measures": [
+  {
+   "candidate_key": "ley de fomento del ecosistema de las empresas emergentes",
+   "unit": "ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "v-cfabfa0808",
+   "vote_ids": [
+    "v-cfabfa0808"
+   ],
+   "date": "2022-11-03",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Votación del dictamen del Proyecto de Ley de fomento del ecosistema de las empresas emergentes, con la incorporación de la corrección técnica distribuida.",
+   "summary_yes": "Aprobar la ley de empresas emergentes, con incentivos fiscales y menos trámites para startups",
+   "totals": [
+    177,
+    88,
+    75
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion154/VOT_20230302173940.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "erc": "A",
+    "junts": "A",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "-",
+    "vox": "A",
+    "mixto": "S",
+    "plural": "S",
+    "cs": "S"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "erc": "abstained",
+    "junts": "abstained",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "absent",
+    "vox": "abstained",
+    "mixto": "backed",
+    "plural": "backed",
+    "cs": "backed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2023 sección 19",
+   "unit": "presupuesto",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-da522d603a",
+   "vote_ids": [
+    "v-da522d603a"
+   ],
+   "date": "2022-11-24",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 19 (Ministerio de Trabajo y Economía Social) Votación del Dictamen de la Sección 19 (Ministerio de Trabajo y Economía Social).",
+   "summary_yes": "Aprobar la sección del Ministerio de Trabajo y Economía Social de los Presupuestos de 2023",
+   "totals": [
+    187,
+    156,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion409/VOT_20230302165354.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "erc": "S",
+    "junts": "N",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "N",
+    "plural": "S",
+    "cs": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "cs": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2023 sección 26",
+   "unit": "presupuesto",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "v-e87029e589",
+   "vote_ids": [
+    "v-e87029e589"
+   ],
+   "date": "2022-11-24",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 26 (Ministerio de Sanidad) Votación del Dictamen de la Sección 26 (Ministerio de Sanidad).",
+   "summary_yes": "Aprobar la sección del Ministerio de Sanidad de los Presupuestos de 2023",
+   "totals": [
+    187,
+    155,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion407/VOT_20230302165350.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "erc": "S",
+    "junts": "N",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "N",
+    "plural": "S",
+    "cs": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "cs": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2023 sección 32",
+   "unit": "presupuesto",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "v-cc28d6a2af",
+   "vote_ids": [
+    "v-cc28d6a2af"
+   ],
+   "date": "2022-11-24",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones) Votación del Dictamen de la Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones).",
+   "summary_yes": "Aprobar la sección del Ministerio de Inclusión, Seguridad Social y Migraciones de los Presupuestos de 2023",
+   "totals": [
+    187,
+    156,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion217/20221124/Votacion421/VOT_20230302165420.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "erc": "S",
+    "junts": "N",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "N",
+    "plural": "S",
+    "cs": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "cs": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley de empleo",
+   "unit": "ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-1c58e4c6fd",
+   "vote_ids": [
+    "v-1c58e4c6fd"
+   ],
+   "date": "2022-12-22",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Votación del dictamen del Proyecto de Ley de Empleo.",
+   "summary_yes": "Aprobar la ley de empleo que reorganiza los servicios públicos de empleo y las políticas activas",
+   "totals": [
+    187,
+    58,
+    101
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion370/VOT_20230302133945.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "N",
+    "erc": "S",
+    "junts": "A",
+    "pnv": "S",
+    "up": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "S",
+    "plural": "S",
+    "cs": "A"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "opposed",
+    "erc": "backed",
+    "junts": "abstained",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "backed",
+    "plural": "backed",
+    "cs": "abstained"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley orgánica del sistema universitario",
+   "unit": "ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-8734f0bd3c",
+   "vote_ids": [
+    "v-e18eb9976a",
+    "v-8734f0bd3c"
+   ],
+   "date": "2022-12-22",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Proyecto de Ley Orgánica del Sistema Universitario.",
+   "summary_yes": "Aprobar la ley orgánica del sistema universitario",
+   "totals": [
+    176,
+    156,
+    11
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion369/VOT_20230302133944.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "N",
+    "erc": "S",
+    "junts": "A",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "N",
+    "plural": "S",
+    "cs": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "opposed",
+    "erc": "backed",
+    "junts": "abstained",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "cs": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley orgánica por la que se modifica la ley orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de",
+   "unit": "ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "v-2a6cc3987b",
+   "vote_ids": [
+    "v-8ce185a248",
+    "v-7ee533dc6b",
+    "v-2a6cc3987b"
+   ],
+   "date": "2023-02-16",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Votación de conjunto del Proyecto de Ley Orgánica por la que se modifica la Ley Orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de la interrupción voluntaria del embarazo, por tener la misma carácter orgánico.",
+   "summary_yes": "Aprobar en votación final la reforma de la ley del aborto y de salud sexual y reproductiva",
+   "totals": [
+    185,
+    154,
+    3
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion013/VOT_20230302125439.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "up": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "vox": "N",
+    "mixto": "S",
+    "plural": "dividido",
+    "cs": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "up": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "vox": "opposed",
+    "mixto": "backed",
+    "plural": "split",
+    "cs": "opposed"
+   },
+   "decisive_if_absent": [
+    "erc",
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 7/2023",
+   "unit": "contrafactual",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-ac650a6948",
+   "vote_ids": [
+    "v-ac650a6948"
+   ],
+   "date": "2024-01-10",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 7/2023, de 19 de diciembre, por el que se adoptan medidas urgentes, para completar la transposición de la Directiva (UE) 2019/1158, del Parlamento Europeo y del Consejo, de 20 de junio de 2019, relativa a la conciliación de la vida familiar y la vida profesional de los progenitores y los cuidadores, y por la que se deroga la Directiva 2010/18/UE del Consejo, y para la simplificación y mejora del nivel asistencial de la protección por desempleo.",
+   "summary_yes": "Convalidar la reforma que amplía el subsidio de desempleo y mejora permisos de conciliación",
+   "totals": [
+    167,
+    176,
+    0
+   ],
+   "approved_in_our_data": false,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion015/20240110/Votacion003/VOT_20240111114814.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "-",
+    "pnv": "S",
+    "podemos": "N",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "N",
+    "vox": "N",
+    "mixto": "S"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "absent",
+    "pnv": "backed",
+    "podemos": "opposed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "opposed",
+    "vox": "opposed",
+    "mixto": "backed"
+   },
+   "decisive_if_absent": [
+    "pp",
+    "vox"
+   ],
+   "passed_recount": false
+  },
+  {
+   "candidate_key": "rdl 7/2024",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-e0ff9086a7",
+   "vote_ids": [
+    "v-e0ff9086a7"
+   ],
+   "date": "2024-12-12",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 7/2024, de 11 de noviembre, por el que se adoptan medidas urgentes para el impulso del Plan de respuesta inmediata, reconstrucción y relanzamiento frente a los daños causados por la Depresión Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+   "summary_yes": "Aprobar el decreto de reconstrucción tras la DANA: ayudas a damnificados, sin cortes de suministro, ERTE y prohibición de despedir",
+   "totals": [
+    312,
+    33,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion085/20241212/Votacion010/VOT_20241212130554.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 8/2024",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-4154016ec4",
+   "vote_ids": [
+    "v-4154016ec4"
+   ],
+   "date": "2024-12-19",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 8/2024, de 28 de noviembre, por el que se adoptan medidas urgentes complementarias en el marco del Plan de respuesta inmediata, reconstrucción y relanzamiento frente a los daños causados por la Depresión Aislada en Niveles Altos (DANA) en diferentes municipios entre el 28 de octubre y el 4 de noviembre de 2024.",
+   "summary_yes": "Aprobar el decreto complementario de la DANA: ayudas a vehículos y empresas, permiso laboral por catástrofe y freno a subidas de precios",
+   "totals": [
+    316,
+    33,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion088/20241219/Votacion086/VOT_20241219162839.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 11/2024",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-8f3bb2ccfc",
+   "vote_ids": [
+    "v-8f3bb2ccfc"
+   ],
+   "date": "2025-01-22",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 11/2024, de 23 de diciembre, para la mejora de la compatibilidad de la pensión de jubilación con el trabajo.",
+   "summary_yes": "Aprobar el decreto que permite cobrar más pensión mientras se trabaja y amplía la jubilación parcial y flexible",
+   "totals": [
+    298,
+    51,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion089/20250122/Votacion003/VOT_20250122154429.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "N",
+    "cc": "S",
+    "erc": "S",
+    "junts": "N",
+    "pnv": "S",
+    "podemos": "N",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "opposed",
+    "bng": "opposed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "podemos": "opposed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley por la que se crea la agencia estatal de salud pública y se modifica la ley 33/2011, de 4 de octubre, gene",
+   "unit": "contrafactual",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "v-2e6c5f7b71",
+   "vote_ids": [
+    "v-2e6c5f7b71"
+   ],
+   "date": "2025-03-20",
+   "legislature": "15",
+   "kind": "final",
+   "title": "Votación del dictamen del Proyecto de Ley por la que se crea la Agencia Estatal de Salud Pública y se modifica la Ley 33/2011, de 4 de octubre, General de Salud Pública.",
+   "summary_yes": "Aprobar la ley que crea la Agencia Estatal de Salud Pública",
+   "totals": [
+    167,
+    176,
+    2
+   ],
+   "approved_in_our_data": false,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion019/VOT_20250320125720.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cc": "S",
+    "erc": "S",
+    "junts": "N",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "A",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "abstained",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [
+    "pp",
+    "vox"
+   ],
+   "passed_recount": false
+  },
+  {
+   "candidate_key": "rdl 2/2025",
+   "unit": "decreto_ley",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "v-404742bfaf",
+   "vote_ids": [
+    "v-404742bfaf"
+   ],
+   "date": "2025-04-10",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 2/2025, de 18 de marzo, por el que se aprueban medidas urgentes para la garantía del interés superior de la infancia y adolescencia ante situaciones de contingencias migratorias extraordinarias.",
+   "summary_yes": "Aprobar el decreto que obliga a repartir entre comunidades a los menores migrantes no acompañados en situaciones de saturación",
+   "totals": [
+    179,
+    170,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "A",
+    "vox": "N",
+    "mixto": "S"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "abstained",
+    "vox": "opposed",
+    "mixto": "backed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "sumar"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley para la reducción de la duración máxima de la jornada ordinaria de trabajo y la garantía del registro de j",
+   "unit": "contrafactual",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-c3058b5bee",
+   "vote_ids": [
+    "v-c3058b5bee"
+   ],
+   "date": "2025-09-10",
+   "legislature": "15",
+   "kind": "totalidad",
+   "title": "Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de Ley para la reducción de la duración máxima de la jornada ordinaria de trabajo y la garantía del registro de jornada y el derecho a la desconexión, presentadas por los Grupos Parlamentarios Junts per Catalunya, VOX y Popular en el Congreso.",
+   "summary_yes": "Devolver al Gobierno la ley que reduce la jornada a 37,5 horas y refuerza el registro horario",
+   "totals": [
+    178,
+    170,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "N",
+    "cc": "N",
+    "erc": "N",
+    "junts": "S",
+    "pnv": "N",
+    "podemos": "N",
+    "pp": "S",
+    "psoe": "N",
+    "sumar": "N",
+    "upn": "S",
+    "vox": "S",
+    "mixto": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "opposed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "opposed",
+    "vox": "opposed",
+    "mixto": "backed"
+   },
+   "decisive_if_absent": [
+    "pp",
+    "vox"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 14/2025",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-741ab2f347",
+   "vote_ids": [
+    "v-741ab2f347"
+   ],
+   "date": "2025-12-11",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 14/2025, de 2 de diciembre, por el que se aprueban medidas urgentes en materia de retribuciones en el ámbito del sector público.",
+   "summary_yes": "Aprobar subidas salariales del 2,5 % en 2025 y del 1,5 % (más 0,5 %) en 2026 para el sector público",
+   "totals": [
+    309,
+    32,
+    7
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion012/VOT_20251211175055.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "A",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "abstained",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 15/2025",
+   "unit": "decreto_ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "v-1cf406a3aa",
+   "vote_ids": [
+    "v-1cf406a3aa"
+   ],
+   "date": "2025-12-11",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 15/2025, de 2 de diciembre, por el que se adoptan medidas urgentes para favorecer la actividad inversora de las entidades locales y de las comunidades autónomas, y por el que se modifica el Real Decreto 1007/2023, de 5 de diciembre, por el que se aprueba el Reglamento que establece los requisitos que deben adoptar los sistemas y programas informáticos o electrónicos que soporten los procesos de facturación de empresarios y profesionales, y la estandarización de formatos de los registros de facturación.",
+   "summary_yes": "Dejar a ayuntamientos y comunidades invertir su superávit, aplazar la facturación obligatoria (Verifactu) y traspasar a Cataluña los habilitados locales",
+   "totals": [
+    179,
+    168,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion154/20251211/Votacion014/VOT_20251211175058.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "A",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "abstained",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "sumar"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 5/2026",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-57e8c7e8e0",
+   "vote_ids": [
+    "v-57e8c7e8e0"
+   ],
+   "date": "2026-03-18",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 5/2026, de 17 de febrero, por el que se adoptan medidas urgentes en respuesta a los daños causados por diversos fenómenos meteorológicos adversos, de especial afectación en las comunidades autónomas de Andalucía y Extremadura.",
+   "summary_yes": "Aprobar ayudas por los temporales en Andalucía y Extremadura y una deducción de IRPF para salarios bajos",
+   "totals": [
+    316,
+    32,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion166/20260318/Votacion005/VOT_20260318175331.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley orgánica en materia de multirreincidencia, por la que se modifica la ley orgánica 10/1995, de 23 de noviem",
+   "unit": "ley",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "v-3116cd6448",
+   "vote_ids": [
+    "v-3116cd6448"
+   ],
+   "date": "2026-03-26",
+   "legislature": "15",
+   "kind": "final",
+   "title": "Votación de conjunto de la Proposición de Ley Orgánica en materia de multirreincidencia, por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, la Ley de Enjuiciamiento Criminal, aprobada por Real Decreto de 14 de septiembre de 1882 y la Ley Orgánica 4/2000, de 11 de enero, sobre derechos y libertades de los extranjeros en España y su integración social (antes denominada Proposición de Ley Orgánica en materia de multirreincidencia, por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal y la Ley de Enjuiciamiento Criminal, aprobada por Real Decreto de 14 de septiembre de 1882), por tener la misma carácter orgánico.",
+   "summary_yes": "Aprobar la ley orgánica que endurece las penas por hurto y estafa a multirreincidentes",
+   "totals": [
+    272,
+    71,
+    7
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion169/20260326/Votacion056/VOT_20260326165143.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "N",
+    "cc": "S",
+    "erc": "A",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "N",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "N",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "N"
+   },
+   "party_stance": {
+    "bildu": "opposed",
+    "bng": "opposed",
+    "cc": "backed",
+    "erc": "abstained",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "opposed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "opposed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "opposed"
+   },
+   "decisive_if_absent": [
+    "pp",
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 11/2026",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "v-f918377f72",
+   "vote_ids": [
+    "v-f918377f72"
+   ],
+   "date": "2026-05-28",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 11/2026, de 12 de mayo, por el que se modifica la aportación de los usuarios y sus beneficiarios en la prestación farmacéutica ambulatoria.",
+   "summary_yes": "Aprobar el decreto que rebaja el copago farmacéutico para rentas medias y pensionistas y amplía exenciones",
+   "totals": [
+    164,
+    33,
+    149
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion183/20260528/Votacion012/VOT_20260528125351.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "A",
+    "junts": "A",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "abstained",
+    "junts": "abstained",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 19/2026",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-8479dd52cd",
+   "vote_ids": [
+    "v-8479dd52cd"
+   ],
+   "date": "2026-07-23",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 19/2026, de 29 de junio, de medidas urgentes en materia de jubilación parcial anticipada del personal laboral de las Administraciones Públicas y de complemento de insularidad en Illes Balears.",
+   "summary_yes": "Convalidar las reglas de jubilación parcial con relevista fijo en las Administraciones y el complemento de insularidad en Baleares",
+   "totals": [
+    167,
+    37,
+    144
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion193/20260723/Votacion008/VOT_20260723211941.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "S",
+    "erc": "S",
+    "junts": "A",
+    "pnv": "S",
+    "podemos": "N",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "A",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "abstained",
+    "pnv": "backed",
+    "podemos": "opposed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "abstained",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 20/2026",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "v-042ed01be1",
+   "vote_ids": [
+    "v-042ed01be1"
+   ],
+   "date": "2026-09-09",
+   "legislature": "15",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 20/2026, de 29 de julio, por el que se establecen medidas urgentes de protección laboral y social frente a los incendios forestales.",
+   "summary_yes": "Convalidar prestaciones extraordinarias, ERTE y permisos para trabajadores y autónomos afectados por incendios",
+   "totals": [
+    312,
+    30,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion195/20260909/Votacion001/VOT_20260909195430.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "-",
+    "cc": "S",
+    "erc": "S",
+    "junts": "S",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "S",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "absent",
+    "cc": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "backed",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley sobre concesión de nacionalidad española a las y los saharauis nacidos bajo la administración española",
+   "unit": "ley",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "v-57ce2e9ee5",
+   "vote_ids": [
+    "v-57ce2e9ee5"
+   ],
+   "date": "2026-09-10",
+   "legislature": "15",
+   "kind": "final",
+   "title": "Votación del dictamen de la Proposición de Ley sobre concesión de nacionalidad española a las y los saharauis nacidos bajo la administración española.",
+   "summary_yes": "Aprobar la ley que concede la nacionalidad española a los saharauis nacidos bajo administración española",
+   "totals": [
+    168,
+    31,
+    145
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion196/20260910/Votacion003/VOT_20260910180631.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cc": "-",
+    "erc": "S",
+    "junts": "A",
+    "pnv": "S",
+    "podemos": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "upn": "A",
+    "vox": "N",
+    "mixto": "dividido"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cc": "absent",
+    "erc": "backed",
+    "junts": "abstained",
+    "pnv": "backed",
+    "podemos": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "upn": "abstained",
+    "vox": "opposed",
+    "mixto": "split"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  }
+ ]
+}

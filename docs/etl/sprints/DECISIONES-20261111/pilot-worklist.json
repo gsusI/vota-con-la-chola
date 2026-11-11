@@ -1,0 +1,194 @@
+[
+ {
+  "candidate_key": "ley de empleo",
+  "unit": "ley",
+  "domains": [
+   "empleo"
+  ],
+  "date": "2022-12-22",
+  "legislature": "14",
+  "kind": "final",
+  "title": "Votación del dictamen del Proyecto de Ley de Empleo.",
+  "summary_yes": "Aprobar la ley de empleo que reorganiza los servicios públicos de empleo y las políticas activas",
+  "totals": [
+   187,
+   58,
+   101
+  ],
+  "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion229/20221222/Votacion370/VOT_20230302133945.json",
+  "party_stance": {
+   "bildu": "backed",
+   "bng": "opposed",
+   "erc": "backed",
+   "junts": "abstained",
+   "pnv": "backed",
+   "up": "backed",
+   "pp": "abstained",
+   "psoe": "backed",
+   "sumar": "backed",
+   "vox": "opposed",
+   "mixto": "backed",
+   "plural": "backed",
+   "cs": "abstained"
+  },
+  "decisive_if_absent": [],
+  "measure_id": "empleo-ley-3-2023",
+  "file": "etl/data/seeds/party_decisions_v1.d/empleo-ley-3-2023.json"
+ },
+ {
+  "candidate_key": "ley de fomento del ecosistema de las empresas emergentes",
+  "unit": "ley",
+  "domains": [
+   "autonomos"
+  ],
+  "date": "2022-11-03",
+  "legislature": "14",
+  "kind": "final",
+  "title": "Votación del dictamen del Proyecto de Ley de fomento del ecosistema de las empresas emergentes, con la incorporación de la corrección técnica distribuida.",
+  "summary_yes": "Aprobar la ley de empresas emergentes, con incentivos fiscales y menos trámites para startups",
+  "totals": [
+   177,
+   88,
+   75
+  ],
+  "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion213/20221103/Votacion154/VOT_20230302173940.json",
+  "party_stance": {
+   "bildu": "abstained",
+   "bng": "abstained",
+   "erc": "abstained",
+   "junts": "abstained",
+   "pnv": "backed",
+   "up": "backed",
+   "pp": "opposed",
+   "psoe": "backed",
+   "sumar": "absent",
+   "vox": "abstained",
+   "mixto": "backed",
+   "plural": "backed",
+   "cs": "backed"
+  },
+  "decisive_if_absent": [
+   "psoe"
+  ],
+  "measure_id": "startups-ley-28-2022",
+  "file": "etl/data/seeds/party_decisions_v1.d/startups-ley-28-2022.json"
+ },
+ {
+  "candidate_key": "ley orgánica por la que se modifica la ley orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de",
+  "unit": "ley",
+  "domains": [
+   "sanidad"
+  ],
+  "date": "2023-02-16",
+  "legislature": "14",
+  "kind": "final",
+  "title": "Votación de conjunto del Proyecto de Ley Orgánica por la que se modifica la Ley Orgánica 2/2010, de 3 de marzo, de salud sexual y reproductiva y de la interrupción voluntaria del embarazo, por tener la misma carácter orgánico.",
+  "summary_yes": "Aprobar en votación final la reforma de la ley del aborto y de salud sexual y reproductiva",
+  "totals": [
+   185,
+   154,
+   3
+  ],
+  "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion236/20230216/Votacion013/VOT_20230302125439.json",
+  "party_stance": {
+   "bildu": "backed",
+   "bng": "backed",
+   "erc": "backed",
+   "junts": "backed",
+   "pnv": "backed",
+   "up": "backed",
+   "pp": "opposed",
+   "psoe": "backed",
+   "sumar": "backed",
+   "vox": "opposed",
+   "mixto": "backed",
+   "plural": "split",
+   "cs": "opposed"
+  },
+  "decisive_if_absent": [
+   "erc",
+   "psoe",
+   "up"
+  ],
+  "measure_id": "lo-1-2023-salud-sexual",
+  "file": "etl/data/seeds/party_decisions_v1.d/lo-1-2023-salud-sexual.json"
+ },
+ {
+  "candidate_key": "rdl 2/2025",
+  "unit": "decreto_ley",
+  "domains": [
+   "inmigracion"
+  ],
+  "date": "2025-04-10",
+  "legislature": "15",
+  "kind": "rdl",
+  "title": "Real Decreto-ley 2/2025, de 18 de marzo, por el que se aprueban medidas urgentes para la garantía del interés superior de la infancia y adolescencia ante situaciones de contingencias migratorias extraordinarias.",
+  "summary_yes": "Aprobar el decreto que obliga a repartir entre comunidades a los menores migrantes no acompañados en situaciones de saturación",
+  "totals": [
+   179,
+   170,
+   1
+  ],
+  "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion106/20250410/Votacion015/VOT_20250410155154.json",
+  "party_stance": {
+   "bildu": "backed",
+   "bng": "backed",
+   "cc": "backed",
+   "erc": "backed",
+   "junts": "backed",
+   "pnv": "backed",
+   "podemos": "backed",
+   "pp": "opposed",
+   "psoe": "backed",
+   "sumar": "backed",
+   "upn": "abstained",
+   "vox": "opposed",
+   "mixto": "backed"
+  },
+  "decisive_if_absent": [
+   "psoe",
+   "sumar"
+  ],
+  "measure_id": "rdl-2-2025-menores",
+  "file": "etl/data/seeds/party_decisions_v1.d/rdl-2-2025-menores.json"
+ },
+ {
+  "candidate_key": "ley para la reducción de la duración máxima de la jornada ordinaria de trabajo y la garantía del registro de j",
+  "unit": "contrafactual",
+  "domains": [
+   "empleo"
+  ],
+  "date": "2025-09-10",
+  "legislature": "15",
+  "kind": "totalidad",
+  "title": "Votación conjunta de las enmiendas a la totalidad de devolución al Proyecto de Ley para la reducción de la duración máxima de la jornada ordinaria de trabajo y la garantía del registro de jornada y el derecho a la desconexión, presentadas por los Grupos Parlamentarios Junts per Catalunya, VOX y Popular en el Congreso.",
+  "summary_yes": "Devolver al Gobierno la ley que reduce la jornada a 37,5 horas y refuerza el registro horario",
+  "totals": [
+   178,
+   170,
+   0
+  ],
+  "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion130/20250910/Votacion010/VOT_20250910213544.json",
+  "party_stance": {
+   "bildu": "backed",
+   "bng": "backed",
+   "cc": "backed",
+   "erc": "backed",
+   "junts": "opposed",
+   "pnv": "backed",
+   "podemos": "backed",
+   "pp": "opposed",
+   "psoe": "backed",
+   "sumar": "backed",
+   "upn": "opposed",
+   "vox": "opposed",
+   "mixto": "backed"
+  },
+  "decisive_if_absent": [
+   "pp",
+   "vox"
+  ],
+  "measure_id": "jornada-37-5-horas",
+  "file": "etl/data/seeds/party_decisions_v1.d/jornada-37-5-horas.json"
+ }
+]
