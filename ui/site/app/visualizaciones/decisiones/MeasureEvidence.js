@@ -63,6 +63,12 @@ export default function MeasureEvidence({ m, n, labels }) {
           <p>
             <strong>Qué cambia.</strong> {m.what_changes}
           </p>
+          {m.in_force?.length ? (
+            <p>
+              <strong>En vigor.</strong>{" "}
+              {m.in_force.map((f) => `${f.what}: ${dateEs(f.date)} (${f.provision})`).join("; ")}.
+            </p>
+          ) : null}
           <p>
             <strong>Objetivo que declara.</strong> {m.stated_goal}
             {m.stated_goal_url ? (

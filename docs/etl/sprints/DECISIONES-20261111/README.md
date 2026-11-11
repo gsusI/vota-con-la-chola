@@ -21,7 +21,9 @@ afterwards, worded as "moved with", never "because of". "Not evaluated" is a val
 | `sanidad` | `sanidad_publica` | `sanidad`, `sanitari`, `salud`, `medicament`, `farmac`, `hospital` |
 | `inmigracion` | `inmigracion` | `extranjer`, `migra`, `asilo`, `no acompañad`, `nacionalidad`, `regularizaci`, `protección internacional` |
 
-A measure can sit in two domains. Keywords are regular expressions in `DOMAIN_RULES` of the exporter (case-insensitive).
+Amendment 2026-11-11 (phase 2, before any phase-2 measure was documented): `cuenta propia` added to `autonomos`, because
+the legal term for the self-employed («trabajadores por cuenta propia o autónomos») was not matched; it changes no
+phase-1 measure. A measure can sit in two domains. Keywords are regular expressions in `DOMAIN_RULES` of the exporter (case-insensitive).
 Axis membership uses the classification only to find the vote, never its direction or confidence: binding laws mix
 several measures and are often classified with confidence `baja`; dropping them would drop most laws.
 

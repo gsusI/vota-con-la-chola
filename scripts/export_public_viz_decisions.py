@@ -53,7 +53,7 @@ DOMAIN_RULES = {
     "autonomos": {
         "axes": {"autonomos_empresa"},
         "axes_with_keywords": set(),
-        "keywords": r"trabajo autónomo|trabajador(?:es|as)? autónom|emprend|\bpymes?\b|empresas emergentes|morosidad",
+        "keywords": r"trabajo autónomo|trabajador(?:es|as)? autónom|cuenta propia|emprend|\bpymes?\b|empresas emergentes|morosidad",
         "budget_sections": set(),
     },
     "sanidad": {
@@ -345,11 +345,10 @@ def build_candidates(votes: Votes) -> list[dict]:
         else:
             unit = "ley" if kind == "final" else "decreto_ley"
         key = f"pge{budget_year(v['date'])} sección {section}" if section else law_key(title)
-        g = groups.setdefault(key, {"key": key, "unit": unit, "domains": set(), "votes": []})
+        g = groups.setdefault(key, {"key": key, "domains": set(), "votes": [], "units": {}})
         g["domains"].update(domains)
         g["votes"].append(v)
-        if unit == "contrafactual":
-            g["unit"] = unit
+        g["units"][v["id"]] = unit
     out = []
     for key, g in groups.items():
         vs = sorted(g["votes"], key=lambda v: v["date"])
@@ -358,7 +357,7 @@ def build_candidates(votes: Votes) -> list[dict]:
         title = votes.title(main)
         out.append({
             "candidate_key": key,
-            "unit": g["unit"],
+            "unit": g["units"][main["id"]],  # the unit of the vote that decided it, not of the group's first vote
             "domains": [d for d in DOMAINS if d in g["domains"]],
             "main_vote_id": main["id"],
             "vote_ids": [v["id"] for v in vs],
@@ -696,7 +695,7 @@ def build_government(votes: "Votes") -> dict:
         row = dict(c) | {"requires_power": True, "documented": d is not None, "verdict": (d or {}).get("verdict", "pendiente")}
         if d:
             for k in ("name", "what_changes", "stated_goal", "stated_goal_url", "ex_ante", "ex_post", "evidence_against",
-                      "verdict_reason", "indicators", "notes", "retrieved", "review", "legal_status"):
+                      "verdict_reason", "indicators", "notes", "retrieved", "review", "legal_status", "in_force"):
                 if k in d:
                     row[k] = d[k]
         rows.append(row)
@@ -772,7 +771,7 @@ def build(votes: Votes, seed: dict, worklist: list[dict], empleo: dict, sanidad:
         }
         if m:
             for k in ("name", "what_changes", "stated_goal", "boe_url", "boe_id", "legal_status", "ex_ante", "ex_post",
-                      "evidence_against", "verdict", "verdict_reason", "indicators", "indicator_note", "later_route",
+                      "evidence_against", "verdict", "verdict_reason", "indicators", "indicator_note", "later_route", "in_force",
                       "notes", "retrieved", "review"):
                 if k in m:
                     row[k] = m[k]
@@ -794,9 +793,12 @@ def build(votes: Votes, seed: dict, worklist: list[dict], empleo: dict, sanidad:
         "schema_version": "decisiones_v1",
         "method": "docs/etl/sprints/DECISIONES-20261111/README.md",
         "window": {"first": min(c["date"] for c in worklist) if worklist else None,
-                   "last": votes.atlas["meta"]["votes_last_date"], "data_from": "2022-10-04",
-                   "gap": "Las votaciones de la XIV anteriores al 4 de octubre de 2022 (entre ellas la reforma laboral, "
-                          "RDL 32/2021, y la reforma de cotización de autónomos, RDL 13/2022) no están en nuestros datos."},
+                   "last": votes.atlas["meta"]["votes_last_date"],
+                   "data_from": min((v["date"] for v in votes.backfill), default="2022-10-04"),
+                   "gap": ("Los votos empiezan en el primer Pleno de la XIV con votaciones nominales publicadas "
+                           f"({min((v['date'] for v in votes.backfill), default='2022-10-04')}); las legislaturas anteriores "
+                           "no están en estos datos.") if votes.backfill else
+                          ("Las votaciones de la XIV anteriores al 4 de octubre de 2022 no están en nuestros datos.")},
         "domains": [{"id": d, "label": DOMAIN_LABELS[d], "axes": sorted(DOMAIN_RULES[d]["axes"]),
                      "measures": sum(1 for m in measures if d in m["domains"])} for d in DOMAINS],
         "parties": [{**p, "governing": GOVERNING.get(p["party_id"])} for p in parties],
@@ -943,6 +945,29 @@ def boe_vigor(boe_id: str) -> list[str]:
     return grep_cached(url, VIGOR_RE, context=2, limit=30) if url else ["no PDF url in BOE metadata"]
 
 
+def boe_article(boe_id: str, heading: str, chars: int = 4000) -> str:
+    """One whole provision of a BOE text (e.g. «Disposición final octava», «Artículo 3»), up to the next heading."""
+    url = boe_pdf_url(boe_id)
+    meta = fetch_cached(url) if url else {}
+    if "text_path" not in meta:
+        return "no cached text"
+    pages = (REPO_ROOT / meta["text_path"]).read_text(encoding="utf-8", errors="replace").split("\f")
+    text = ""
+    for n, page in enumerate(pages, start=1):
+        text += f"\n[p. {n}]\n" + page
+    flat = re.sub(r"[ \t]+", " ", text)
+    head = re.compile(r"^\s*" + re.escape(heading) + r"\b", re.I | re.M)
+    starts = [m.start() for m in head.finditer(flat)]
+    if not starts:
+        return f"heading not found: {heading}"
+    start = starts[-1]  # the provision itself, not a mention in the preamble or index
+    nxt = re.compile(r"^\s*(Artículo \d+|Disposición (adicional|transitoria|derogatoria|final)\b)", re.I | re.M)
+    m = nxt.search(flat, start + len(heading) + 1)
+    page_marks = re.findall(r"\[p\. (\d+)\]", flat[:start])
+    page = page_marks[-1] if page_marks else "?"
+    return f"[from p. {page}] " + flat[start:(m.start() if m else start + chars)][:chars].strip()
+
+
 def enrich_worklist(worklist: list[dict], only: set[str] | None = None) -> list[dict]:
     out = []
     for c in worklist:
@@ -963,6 +988,7 @@ def enrich_worklist(worklist: list[dict], only: set[str] | None = None) -> list[
 # ----------------------------------------------------------------------------------------- shared fetch cache (kit)
 
 CACHE = REPO_ROOT / "etl/data/cache/decisiones"
+KIT_UA = "vota-con-la-chola-research/1.0 (+https://votaconlachola.org; public-data research)"
 
 
 def cache_paths(url: str) -> tuple[Path, Path, Path]:
@@ -983,7 +1009,10 @@ def fetch_cached(url: str, timeout: int = 60) -> dict:
     CACHE.mkdir(parents=True, exist_ok=True)
     meta = {"url": url, "retrieved_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat()}
     try:
-        with urllib.request.urlopen(urllib.request.Request(url), timeout=timeout) as resp:
+        import urllib.parse
+        safe_url = urllib.parse.quote(url, safe=":/?&=%#+,;@~!$'()*")
+        req = urllib.request.Request(safe_url, headers={"User-Agent": KIT_UA, "Accept": "*/*"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
             body = resp.read()
             meta |= {"status": resp.status, "content_type": resp.headers.get("Content-Type", "")}
     except Exception as exc:  # noqa: BLE001 - record the failure so nobody retries blindly
@@ -1033,7 +1062,7 @@ def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40) -> li
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "backfill", "government", "validate", "export", "boe-search", "boe-text", "boe-vigor", "enrich", "fetch", "grep"])
+    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "backfill", "classify-worklist", "government", "validate", "export", "boe-search", "boe-text", "boe-vigor", "boe-article", "enrich", "fetch", "grep"])
     ap.add_argument("args", nargs="*", help="boe-search: title words; boe-text: BOE id; enrich: output path")
     ap.add_argument("--out-json", type=Path, default=OUT_JSON)
     ap.add_argument("--out-csv", type=Path, default=OUT_CSV)
@@ -1051,6 +1080,9 @@ def main(argv: list[str] | None = None) -> int:
         for line in grep_cached(args.args[0], args.args[1]):
             print(line)
         return 0
+    if args.command == "boe-article":
+        print(boe_article(args.args[0], " ".join(args.args[1:])))
+        return 0
     if args.command == "boe-vigor":
         for line in boe_vigor(args.args[0]):
             print(line)
@@ -1066,6 +1098,24 @@ def main(argv: list[str] | None = None) -> int:
         BACKFILL_VOTES.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"backfill: {len(data['votes'])} binding XIV votes -> {BACKFILL_VOTES.relative_to(REPO_ROOT)} "
               f"({dict(Counter(v['kind'] for v in data['votes']))})")
+        return 0
+    if args.command == "classify-worklist":
+        rows = []
+        for v in votes.backfill:  # contested binding XIV votes before the atlas window
+            if v.get("classified"):
+                continue
+            row = {"id": v["id"], "date": v["date"], "kind": v["kind"], "title": v["title"], "subgroup": v.get("subgroup", "")}
+            hit = boe_find_rdl(v["title"]) if v["kind"] == "rdl" else None
+            if hit:
+                try:
+                    row["preamble"] = boe_preamble(hit["boe_id"], 1200)
+                    row["boe_id"] = hit["boe_id"]
+                except Exception:  # noqa: BLE001
+                    pass
+            rows.append(row)
+        out = SPRINT / "classify-xiv-worklist.json"
+        out.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"classify-worklist: {len(rows)} votes ({sum(1 for r in rows if r.get('preamble'))} with BOE preamble) -> {out.relative_to(REPO_ROOT)}")
         return 0
     if args.command == "government":
         rows = build_government_candidates()

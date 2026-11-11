@@ -1,0 +1,77 @@
+{
+ "measure_id": "rdl-13-2022",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Cotización de los autónomos por ingresos reales",
+   "status": "verified",
+   "note": "RDL 13/2022: nuevo sistema de cotización por rendimientos"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2022-12482",
+   "status": "verified",
+   "note": "BOE núm. 179, 27/07/2022"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Vigente; convalidado 2022; modificado por RDL 14/2022, 2/2023, 9/2024 y 1/2025",
+   "status": "verified",
+   "note": "consolidado: convalidado por Resolución 25-8-2022 (BOE-A-2022-14220); notas de modificación por RDL 14/2022, 2/2023, 9/2024 (derogado) y 1/2025; última actualización 29/01/2025"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "2023-01-01, DF 5.ª",
+   "status": "verified",
+   "note": "DF 5.ª: 'entrará en vigor el día 1 de enero de 2023'; sin otros preceptos diferidos"
+  },
+  {
+   "field": "what_changes",
+   "claim": "base según previsión de rendimientos netos en tramos, regularización con Hacienda, tarifa de 80 euros 2023-2025",
+   "status": "verified",
+   "note": "preámbulo y art. 308 LGSS (tabla general y reducida, regularización); 80 euros mensuales entre 2023 y 2025"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "aproximar las bases ... a sus ingresos reales",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "ex_post[0].source/authors_year",
+   "claim": "El Independiente sobre informe AIReF 2026; 2026",
+   "status": "verified",
+   "note": "artículo de Alba Menéndez, 16-7-2026"
+  },
+  {
+   "field": "ex_post[0].finding/quote",
+   "claim": "regularización de 2024 aportó unos 250 M euros adicionales",
+   "status": "verified",
+   "note": "literal: 'ha generado unos ingresos adicionales cercanos a 250 millones de euros'"
+  },
+  {
+   "field": "ex_post[0].grade/direction/attributes",
+   "claim": "D / positive / true",
+   "status": "verified",
+   "note": "cifra de prensa sin método"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no hay fuente A/B"
+  },
+  {
+   "field": "indicators/later_route",
+   "claim": "[] / null",
+   "status": "verified",
+   "note": "vacíos"
+  }
+ ],
+ "corrections": [],
+ "advisory": [
+  "authors_year podría nombrar a la autora: 'Menéndez (El Independiente), 2026'."
+ ],
+ "reviewed": "2026-11-11"
+}

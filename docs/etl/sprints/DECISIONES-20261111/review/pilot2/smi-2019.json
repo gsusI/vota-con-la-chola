@@ -1,0 +1,150 @@
+{
+ "measure_id": "smi-2019",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "SMI 900 euros/mes en 2019 (+22,3 %)",
+   "status": "verified",
+   "note": "RD 1462/2018 preámbulo: incremento del 22,3 por ciento; art. 1: 30 euros/día o 900 euros/mes"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2018-17773",
+   "status": "verified",
+   "note": "BOE núm. 312, 27/12/2018"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Agotado (efectos 1-1 a 31-12-2019); prorrogado por RDL 18/2019 hasta el SMI 2020",
+   "status": "verified",
+   "note": "DF 2.ª; nota del consolidado: prórroga por DA 5.ª RDL 18/2019 (BOE-A-2019-18611); SMI 2020 por RD 231/2020"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "Entrada en vigor 2018-12-28, DF 2.ª",
+   "status": "verified",
+   "note": "DF 2.ª: día siguiente a la publicación (BOE 27-12-2018)"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "Efectos 2019-01-01 a 2019-12-31, DF 2.ª",
+   "status": "verified",
+   "note": "DF 2.ª literal, p. 4 (boe-vigor)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "900 euros, +22,3 %, fijos, eventuales, temporeros y empleados de hogar, efectos 2019",
+   "status": "verified",
+   "note": "arts. 1 y 4 y preámbulo"
+  },
+  {
+   "field": "stated_goal",
+   "claim": "prevenir pobreza en el trabajo, crecimiento salarial, acercar al 60 % del salario medio",
+   "status": "verified",
+   "note": "preámbulo: objetivo literal + umbral del 60 % del salario medio (Comité Europeo de Derechos Sociales)"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "tiene como objetivo prevenir la pobreza en el trabajo y fomentar un crecimiento salarial general más dinámico",
+   "status": "verified",
+   "note": "literal en el preámbulo"
+  },
+  {
+   "field": "ex_post[0].source/authors_year",
+   "claim": "GLO DP 1533; Christl, Cubells Enguídanos y otros, 2024",
+   "status": "verified",
+   "note": "EconPapers: Michael Christl, Andrea Cubells Enguídanos y Filippo di Pietro; Date: 2024"
+  },
+  {
+   "field": "ex_post[0].method",
+   "claim": "Control sintético",
+   "status": "verified",
+   "note": "abstract: synthetic control method (SCM)"
+  },
+  {
+   "field": "ex_post[0].quote/finding",
+   "claim": "We find no significant impact ... low-skilled individuals",
+   "status": "verified",
+   "note": "literal en el abstract; el paper también halla subida de precios (hasta 3 pp en 2021), no citado pero no contradice el finding"
+  },
+  {
+   "field": "ex_post[0].grade/direction/attributes",
+   "claim": "A / null / true",
+   "status": "verified",
+   "note": "evaluación causal de la subida española de 2019"
+  },
+  {
+   "field": "ex_post[1].source/authors_year",
+   "claim": "arXiv 2603.20809; Lacasa-Cazcarra, 2026",
+   "status": "verified",
+   "note": "portada: Marcos Lacasa-Cazcarra (UNIR), arXiv v1 21 Mar 2026"
+  },
+  {
+   "field": "ex_post[1].method",
+   "claim": "DiD con intensidad por sector y edad (Modelo 190), event study, HonestDiD",
+   "status": "verified",
+   "note": "abstract y p. 5-6"
+  },
+  {
+   "field": "ex_post[1].finding/quote",
+   "claim": "sin efectos netos negativos sobre el empleo joven (<30)",
+   "status": "verified",
+   "note": "abstract p. 1 literal; Young (< 30) en p. 6"
+  },
+  {
+   "field": "ex_post[1].grade/direction/attributes",
+   "claim": "A / null / true",
+   "status": "verified",
+   "note": "diseño causal sobre la medida; preprint indicado en source"
+  },
+  {
+   "field": "evidence_against[0].source/authors_year",
+   "claim": "SERIEs 15:1–55; Gorjón et al., 2024",
+   "status": "verified",
+   "note": "portada: Lucía Gorjón, David Martinez de Lafuente, Gonzalo Romero; SERIEs (2024) 15:1–55 (online 29-11-2023)"
+  },
+  {
+   "field": "evidence_against[0].method",
+   "claim": "CEM en la MCVL, afectados frente a quienes ya cobraban más",
+   "status": "verified",
+   "note": "p. 1 abstract (control: earning more) y p. 3/14 (coarsened exact matching)"
+  },
+  {
+   "field": "evidence_against[0].quote/finding",
+   "claim": "+1,7 pp paro, +0,9 pp reducción de jornada al año; elasticidad -0,08",
+   "status": "verified",
+   "note": "abstract p. 1 literal; elasticidad -0,08 en p. 19 (y p. 3)"
+  },
+  {
+   "field": "evidence_against[0].grade/direction/attributes",
+   "claim": "A / negative / true",
+   "status": "verified",
+   "note": "evaluación causal de la reforma de 2019"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "ninguna fuente evalúa pobreza en el trabajo ni crecimiento salarial; las tres A miden empleo (efecto secundario)"
+  },
+  {
+   "field": "verdict_reason",
+   "claim": "Gorjón (A) pérdidas individuales; Christl y Lacasa-Cazcarra (A) sin efecto agregado",
+   "status": "verified",
+   "note": "coincide con las fuentes"
+  },
+  {
+   "field": "indicators",
+   "claim": "[]",
+   "status": "verified",
+   "note": "sin indicadores"
+  }
+ ],
+ "corrections": [],
+ "advisory": [
+  "El archivo usa la clave 'decision_id' en vez de 'measure_id' (los demás usan 'measure_id').",
+  "notes: los autores de SERIEs ya están comprobados en la portada; se puede borrar la frase 'identificados por la cita ... no por la portada'."
+ ],
+ "reviewed": "2026-11-11"
+}

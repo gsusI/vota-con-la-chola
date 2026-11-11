@@ -1,0 +1,165 @@
+{
+ "measure_id": "rdl-32-2021",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Reforma laboral de 2021",
+   "status": "verified",
+   "note": "RDL 32/2021, de medidas urgentes para la reforma laboral"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2021-21788",
+   "status": "verified",
+   "note": "BOE núm. 313, 30/12/2021"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Vigente; convalidado 2022; STC 40/2026 anuló DA 2.ª y DF 5.ª",
+   "status": "verified",
+   "note": "consolidado: convalidado por Resolución de 3-2-2022 (BOE-A-2022-1982); DA 2.ª (Estatuto del Becario) y DF 5.ª declaradas inconstitucionales y nulas por STC 40/2026, de 26 de mayo (BOE-A-2026-13752)"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "2021-12-31, DF 8.ª.1",
+   "status": "verified",
+   "note": "DF 8.ª.1: día siguiente a la publicación (30-12-2021)"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "2022-03-30, DF 8.ª.2 (tres meses)",
+   "status": "verified",
+   "note": "DF 8.ª.2: 'Entrarán en vigor a los tres meses de su publicación' -> 30-3-2022"
+  },
+  {
+   "field": "what_changes",
+   "claim": "limita temporales, suprime obra y servicio, penaliza encadenamiento, amplía fijo discontinuo, endurece sanciones",
+   "status": "verified",
+   "note": "BOE y resumen de Fedea FPP2023-05 p. 4"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "acabar con ... el desempleo y la temporalidad",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "ex_post[0].source/authors_year",
+   "claim": "BBVA Research (Expansión); Arellano, Doménech y García, 2023",
+   "status": "verified",
+   "note": "portada: Alfonso Arellano, Rafael Doménech, Juan Ramón García; artículo de prensa de 5-6-2023"
+  },
+  {
+   "field": "ex_post[0].method",
+   "claim": "EPA desestacionalizada, privado vs público, 1T2019-1T2023",
+   "status": "verified",
+   "note": "p. 1"
+  },
+  {
+   "field": "ex_post[0].finding/quote",
+   "claim": "13,7 % privado 1T2023, casi la mitad que 1T2019; público >31 %; 'han reducido la temporalidad en el sector privado'",
+   "status": "verified",
+   "note": "p. 1 literal"
+  },
+  {
+   "field": "ex_post[0].grade/direction/attributes",
+   "claim": "B / positive / true",
+   "status": "verified",
+   "note": "descriptivo ex post que atribuye la caída a la reforma"
+  },
+  {
+   "field": "evidence_against[0].source/authors_year",
+   "claim": "Funcas PEE 188; Hernanz e Izquierdo, 2026",
+   "status": "verified",
+   "note": "portada: Virginia Hernanz (Univ. de Alcalá) y Mario Izquierdo (Banco de España); URL 2026/06"
+  },
+  {
+   "field": "evidence_against[0].method",
+   "claim": "Regresión con MCVL 2014-2023, antes/después, por sexo",
+   "status": "verified",
+   "note": "resumen p. 1"
+  },
+  {
+   "field": "evidence_against[0].finding/quote",
+   "claim": "CFD de 2,3 % a 8,0 % del empleo; intensidad -48 %, peor para mujeres",
+   "status": "verified",
+   "note": "resumen p. 1 literal"
+  },
+  {
+   "field": "evidence_against[0].grade/direction/attributes",
+   "claim": "B / negative / true",
+   "status": "verified",
+   "note": "ex post descriptivo-regresión sobre la reforma"
+  },
+  {
+   "field": "evidence_against[1].authors_year",
+   "claim": "Fedea, 2023",
+   "status": "wrong",
+   "note": "portada p. 1-2: José Ignacio Conde-Ruiz y Jesús Lahera Forteza, Fedea Policy Paper 2023/05, septiembre 2023"
+  },
+  {
+   "field": "evidence_against[1].quote/finding",
+   "claim": "temporalidad bajó casi a la media europea; alta rotación y menor duración de indefinidos",
+   "status": "verified",
+   "note": "p. 6 literal"
+  },
+  {
+   "field": "evidence_against[1].grade/direction",
+   "claim": "D / mixed",
+   "status": "verified",
+   "note": "valoración sin método cuantitativo"
+  },
+  {
+   "field": "evidence_against[1].attributes_to_measure",
+   "claim": "false",
+   "status": "wrong",
+   "note": "p. 5: 'no hay duda de que, en términos de la tasa de temporalidad contractual, esta reforma está siendo la más efectiva de todas' -> la fuente sí atribuye la caída a la reforma: true"
+  },
+  {
+   "field": "evidence_against[2].source/quote/finding",
+   "claim": "Fundación Civismo CASME 2026; 'temporalidad encubierta ... reducir artificialmente la tasa'",
+   "status": "verified",
+   "note": "p. 4 literal; sin autor individual en portada (CASME dirigido por F. Cabrillo)"
+  },
+  {
+   "field": "evidence_against[2].grade/direction",
+   "claim": "D / negative",
+   "status": "verified",
+   "note": "análisis descriptivo sin diseño de evaluación"
+  },
+  {
+   "field": "evidence_against[2].attributes_to_measure",
+   "claim": "false",
+   "status": "wrong",
+   "note": "p. 8: 'Este diseño ha permitido una rápida caída estadística de la temporalidad' (diseño de la reforma) -> la fuente atribuye la caída medida a la reforma: true"
+  },
+  {
+   "field": "verdict",
+   "claim": "mixto",
+   "status": "verified",
+   "note": "B positiva que atribuye (BBVA) y B negativa que atribuye (Hernanz e Izquierdo)"
+  },
+  {
+   "field": "verdict_reason",
+   "claim": "BBVA (B) atribuye; Hernanz e Izquierdo (B) 48 % menos intensidad; sin A",
+   "status": "verified",
+   "note": "coincide con las fuentes"
+  },
+  {
+   "field": "indicators/later_route",
+   "claim": "[] / null",
+   "status": "verified",
+   "note": "vacíos"
+  }
+ ],
+ "corrections": [
+  "evidence_against[1].authors_year: 'Conde-Ruiz y Lahera Forteza, 2023' (no 'Fedea, 2023')",
+  "evidence_against[1].attributes_to_measure: true (p. 5 atribuye la caída de la temporalidad a la reforma)",
+  "evidence_against[2].attributes_to_measure: true (p. 8: 'Este diseño ha permitido una rápida caída estadística de la temporalidad')"
+ ],
+ "advisory": [
+  "BBVA p. 1 también dice que la tasa de paro apenas bajó (13,5 % 4T2021 a 12,6 % 1T2023): el objetivo declarado incluye el desempleo; podría añadirse al finding."
+ ],
+ "reviewed": "2026-11-11"
+}

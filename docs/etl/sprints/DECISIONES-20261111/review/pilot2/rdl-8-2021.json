@@ -1,0 +1,65 @@
+{
+ "measure_id": "rdl-8-2021",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "Medidas sanitarias, sociales y judiciales tras el estado de alarma",
+   "status": "verified",
+   "note": "título del RDL 8/2021"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2021-7351",
+   "status": "verified",
+   "note": "BOE núm. 107, 05/05/2021"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Vigente con prórrogas del art. 4 hasta 31-12-2025; STC 166/2023 desestimó el recurso contra art. 15 y DF 1.6",
+   "status": "verified",
+   "note": "art. 4 (garantía de suministro) ampliado hasta 31-12-2025 por art. 83 RDL 1/2025; STC 166/2023, de 22-11-2023 (BOE-A-2023-25987, p. 17): 'desestimar el recurso' 5305-2021 contra art. 15 y punto 6 de la DF 1.ª"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "2021-05-09, DF 2.ª",
+   "status": "verified",
+   "note": "DF 2.ª: 'entrará en vigor el día 9 de mayo de 2021'"
+  },
+  {
+   "field": "what_changes",
+   "claim": "autorización/ratificación judicial, casación ante el Supremo de autos de TSJ y AN, control de pasajeros internacionales",
+   "status": "verified",
+   "note": "preámbulo; art. 15 añade art. 87 ter LJCA (casación con plazos de días: 'urgente' es fiel)"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "regulaciones puntuales que afectan, por una parte al régimen de autorización o ratificación judicial de las medidas",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "ex_post/evidence_against",
+   "claim": "[]",
+   "status": "verified",
+   "note": "vacíos"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "sin fuentes de evaluación"
+  },
+  {
+   "field": "indicators/later_route",
+   "claim": "[] / null",
+   "status": "verified",
+   "note": "vacíos"
+  }
+ ],
+ "corrections": [],
+ "advisory": [
+  "notes: la casación de autos de TSJ y AN está en el nuevo art. 87 ter LJCA; el art. 122 quater regula la autorización/ratificación. Además, la STC 166/2023 ya está en caché (BOE-A-2023-25987.pdf): se puede quitar 'el grep ... no devolvió líneas'."
+ ],
+ "reviewed": "2026-11-11"
+}

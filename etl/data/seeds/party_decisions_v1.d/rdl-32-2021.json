@@ -1,0 +1,94 @@
+{
+ "measure_id": "rdl-32-2021",
+ "candidate_key": "rdl 32/2021",
+ "method_version": 2,
+ "name": "Reforma laboral de 2021: límites al contrato temporal y más fijo discontinuo",
+ "boe_id": "BOE-A-2021-21788",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-21788",
+ "legal_status": "Vigente (convalidado en 2022; STC 40/2026 anuló las disposiciones adicional 2.ª y final 5.ª)",
+ "in_force": [
+  {
+   "what": "Entrada en vigor general del real decreto-ley",
+   "date": "2021-12-31",
+   "provision": "disposición final octava, apartado 1 (día siguiente a su publicación en el BOE de 30-12-2021)"
+  },
+  {
+   "what": "Preceptos con vacatio legis de tres meses enumerados en la disposición final octava.2",
+   "date": "2022-03-30",
+   "provision": "disposición final octava, apartado 2 (a los tres meses de su publicación)"
+  }
+ ],
+ "what_changes": "Restringe los contratos de duración determinada, suprime el contrato de obra y servicio, penaliza el encadenamiento de contratos, amplía el fijo discontinuo y endurece las sanciones por fraude. Entró en vigor el 31-12-2021 y parte de sus preceptos el 30-3-2022.",
+ "stated_goal": "Reducir el desempleo y, sobre todo, la temporalidad del mercado de trabajo español.",
+ "stated_goal_quote": "acabar con los graves problemas de nuestro mercado de trabajo: el desempleo y la temporalidad",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-21788",
+ "ex_ante": [],
+ "ex_post": [
+  {
+   "source": "BBVA Research (artículo en Expansión)",
+   "authors_year": "Arellano, Doménech y García, 2023",
+   "url": "https://www.bbvaresearch.com/wp-content/uploads/2023/06/AlfonsoArellano_RafaelDomenech_JuanRamon_Garcia_La-reforma-laboral_en_perspectiva_Expansion_WB.pdf",
+   "method": "Descriptivo con EPA desestacionalizada, sector privado frente a público, 1T2019-1T2023",
+   "finding": "Atribuye a la reforma la bajada de la temporalidad privada: 13,7 % de ocupados con contrato temporal en el 1T2023, casi la mitad que en el 1T2019; sin efecto en el sector público (más del 31 %).",
+   "quote": "han reducido la temporalidad en el sector privado",
+   "locator": "p. 1",
+   "grade": "B",
+   "direction": "positive",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "evidence_against": [
+  {
+   "source": "Funcas, Papeles de Economía Española 188",
+   "authors_year": "Hernanz e Izquierdo, 2026",
+   "url": "https://www.funcas.es/wp-content/uploads/2026/06/03_Hernanz_Izquierdo_PEE188.pdf",
+   "method": "Regresión con la Muestra Continua de Vidas Laborales 2014-2023, antes y después de la reforma, por sexo",
+   "finding": "El fijo discontinuo pasa del 2,3 % al 8,0 % del empleo, pero la intensidad laboral bajo ese contrato cae un 48 % tras la reforma, con peor efecto para las mujeres.",
+   "quote": "Results show CFD expansion from 2.3% to 8.0% of employment",
+   "locator": "p. 1 (resumen; caída del 48 % en el mismo resumen)",
+   "grade": "B",
+   "direction": "negative",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  },
+  {
+   "source": "Fedea, FPP2023-05",
+   "authors_year": "Conde-Ruiz y Lahera Forteza (2023)",
+   "url": "https://documentos.fedea.net/pubs/fpp/2023/09/FPP2023-05.pdf",
+   "method": "Valoración jurídica y descriptiva sin método cuantitativo",
+   "finding": "Reconoce que la temporalidad contractual bajó casi a la media europea, pero advierte de alta rotación diaria y menor duración de los indefinidos.",
+   "quote": "a pesar de que la tasa de temporalidad contractual ha bajado prácticamente a la media europea",
+   "locator": "p. 6",
+   "grade": "D",
+   "direction": "mixed",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  },
+  {
+   "source": "Fundación Civismo (CASME), Fijos discontinuos",
+   "authors_year": "Fundación Civismo, 2026",
+   "url": "https://civismo.org/wp-content/uploads/2026/02/2026.02.CASME-Fijos-discontinuos-FCivismo.pdf",
+   "method": "Análisis descriptivo y estadístico del tratamiento de los fijos discontinuos inactivos",
+   "finding": "Plantea el riesgo de que el fijo discontinuo reduzca la temporalidad medida sin cambiar la intermitencia real del empleo.",
+   "quote": "como un mecanismo de temporalidad encubierta, permitiendo reducir artificialmente la tasa de temporalidad",
+   "locator": "p. 4",
+   "grade": "D",
+   "direction": "negative",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "verdict": "mixto",
+ "verdict_reason": "BBVA Research 2023 (B) atribuye a la reforma la caída de la temporalidad privada; Hernanz e Izquierdo 2026 (B) ven que el fijo discontinuo creció pero con un 48 % menos de intensidad laboral. Sin evaluación causal (A).",
+ "indicators": [],
+ "notes": "No abiertas (no en caché): EsadeEcPol 2022 (primera evaluación), Banco de España Informe Anual 2021 cap. 2 y presentación Gavilán 2024. Funcas CIE 287 (Doménech 2022) es previa a la aplicación y no evalúa la reforma: se omite. La lista exacta de preceptos diferidos de la disposición final octava.2 no se pudo extraer con grep; la fecha (tres meses desde el 30-12-2021) sí. Sin WebSearch.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "corrected",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot2/rdl-32-2021.json",
+  "corrections": 3
+ },
+ "later_route": null
+}

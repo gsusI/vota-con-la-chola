@@ -14,6 +14,8 @@ its quality gate (3/5) for three reasons that the validator now blocks; read rul
   - `python3 scripts/export_public_viz_decisions.py fetch "<url>"`: cache a new URL (only if a cached document cites it).
   - `python3 scripts/export_public_viz_decisions.py boe-vigor BOE-A-...`: every entry-into-force clause.
   - `python3 scripts/export_public_viz_decisions.py boe-text BOE-A-...`: first 6,000 characters of the text.
+  - `python3 scripts/export_public_viz_decisions.py boe-article BOE-A-... "Disposición final octava"`: one whole
+    provision with its page (use it to see which articles a deferred entry into force covers).
 - Do NOT read seeds, exporters, the UI, other agents' files or docs. Do NOT use the Read tool on cache files; use grep.
 - WebSearch: at most 2 for the whole task, only if no cached source covers an obvious gap (say so in `notes`).
 

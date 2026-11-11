@@ -1,0 +1,48 @@
+{
+ "measure_id": "rdl-13-2022",
+ "candidate_key": "rdl 13/2022",
+ "method_version": 2,
+ "name": "Cotización de los autónomos por ingresos reales",
+ "boe_id": "BOE-A-2022-12482",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+ "legal_status": "Vigente (convalidado en 2022; modificado después, entre otros, por los RDL 14/2022, 2/2023, 9/2024 y 1/2025)",
+ "in_force": [
+  {
+   "what": "Entrada en vigor de todo el real decreto-ley (nuevo sistema de cotización por rendimientos netos)",
+   "date": "2023-01-01",
+   "provision": "disposición final quinta"
+  }
+ ],
+ "what_changes": "Desde el 1-1-2023 los autónomos eligen su base de cotización según su previsión de rendimientos netos anuales, en tramos, y la Seguridad Social regulariza las cuotas al cruzar los datos con Hacienda; la tarifa reducida de inicio queda en 80 euros entre 2023 y 2025.",
+ "stated_goal": "Aproximar las bases de cotización de los autónomos a sus ingresos reales, mejorar su protección social y reforzar la sostenibilidad del sistema.",
+ "stated_goal_quote": "medidas para aproximar las bases de cotización de las personas trabajadoras por cuenta propia o autónomas a sus ingresos reales",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+ "ex_ante": [],
+ "ex_post": [
+  {
+   "source": "El Independiente, sobre el Informe de ejecución presupuestaria 2026 de la AIReF (prensa)",
+   "authors_year": "El Independiente, 2026",
+   "url": "https://www.elindependiente.com/economia/2026/07/16/seguridad-social-recauda-250-millones-adicionales-regularizacion-cuotas-autonomos/",
+   "method": "Cifra de recaudación citada por la prensa; sin método publicado en la fuente en caché",
+   "finding": "Según la AIReF citada por la prensa, la regularización de las cuotas de 2024 aportó unos 250 millones de euros adicionales; no evalúa la protección social ni el ajuste de bases a ingresos.",
+   "quote": "ha generado unos ingresos adicionales cercanos a 250 millones de euros",
+   "locator": "p. 1",
+   "grade": "D",
+   "direction": "positive",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "evidence_against": [],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Ninguna fuente en caché con grado A o B evalúa si las bases se acercaron a los ingresos reales o si mejoró la protección social. Solo hay una cifra de recaudación de la AIReF citada por El Independiente (D).",
+ "indicators": [],
+ "notes": "No abiertas (no en caché): BOCG A-119-1, AIReF DT 2/23 sobre las reformas de pensiones 2021 y 2023, Boletín de Hacienda 2025, DSCD-15-CO-384. El documento de Funcas sobre economía sumergida (descargar/213993) no trata esta medida y el artículo de El Español (2026) solo recoge opiniones de un asesor: se omiten. El informe de la AIReF de 2026 no está en caché; la cifra se toma de la prensa. Sin WebSearch.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "pass",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot2/rdl-13-2022.json"
+ },
+ "later_route": null
+}

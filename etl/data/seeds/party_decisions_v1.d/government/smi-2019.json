@@ -1,0 +1,78 @@
+{
+ "decision_id": "smi-2019",
+ "method_version": 2,
+ "name": "Subida del salario mínimo a 900 euros al mes en 2019 (+22,3 %)",
+ "boe_id": "BOE-A-2018-17773",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-17773",
+ "legal_status": "Agotado: surtió efectos del 1-1-2019 al 31-12-2019; prorrogado por el Real Decreto-ley 18/2019 hasta el SMI de 2020",
+ "in_force": [
+  {
+   "what": "Entrada en vigor del real decreto",
+   "date": "2018-12-28",
+   "provision": "disposición final segunda (día siguiente a su publicación en el BOE de 27-12-2018)"
+  },
+  {
+   "what": "Efectos de las nuevas cuantías del SMI (900 euros/mes)",
+   "date": "2019-01-01",
+   "provision": "disposición final segunda: efectos del 1 de enero al 31 de diciembre de 2019"
+  }
+ ],
+ "what_changes": "Fija el salario mínimo interprofesional para 2019 en 900 euros al mes, un 22,3 % más que en 2018, para fijos, eventuales, temporeros y empleados de hogar, con efectos del 1 de enero al 31 de diciembre de 2019.",
+ "stated_goal": "Prevenir la pobreza en el trabajo y fomentar un crecimiento salarial más dinámico, acercando el SMI al 60 % del salario medio.",
+ "stated_goal_quote": "tiene como objetivo prevenir la pobreza en el trabajo y fomentar un crecimiento salarial general más dinámico",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-17773",
+ "ex_ante": [],
+ "ex_post": [
+  {
+   "source": "GLO Discussion Paper 1533",
+   "authors_year": "Christl, Cubells Enguídanos y otros, 2024",
+   "url": "https://econpapers.repec.org/RePEc:zbw:glodps:1533",
+   "method": "Control sintético a nivel país (España frente a otros países)",
+   "finding": "No encuentra efecto significativo de la subida de 2019 sobre el mercado laboral de los trabajadores poco cualificados; no mide pobreza en el trabajo.",
+   "quote": "We find no significant impact of the minimum wage increase on labour market outcomes for low-skilled individuals",
+   "locator": "p. 1 (resumen)",
+   "grade": "A",
+   "direction": "null",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  },
+  {
+   "source": "arXiv 2603.20809 (preprint, sin revisión por pares)",
+   "authors_year": "Lacasa-Cazcarra, 2026",
+   "url": "https://arxiv.org/pdf/2603.20809",
+   "method": "Diferencias en diferencias con intensidad de tratamiento por sector y edad (Modelo 190), event study y HonestDiD",
+   "finding": "No halla efectos netos negativos sobre el empleo joven (menores de 30) en datos agregados; no mide pobreza en el trabajo.",
+   "quote": "the reform did not generate net disemployment effects for young",
+   "locator": "p. 1 (resumen)",
+   "grade": "A",
+   "direction": "null",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "evidence_against": [
+  {
+   "source": "SERIEs 15:1–55",
+   "authors_year": "Gorjón et al., 2024",
+   "url": "https://link.springer.com/content/pdf/10.1007/s13209-023-00291-1.pdf",
+   "method": "Emparejamiento exacto (CEM) en la Muestra Continua de Vidas Laborales: afectados por la subida frente a trabajadores que ya cobraban más",
+   "finding": "Entre los trabajadores afectados, la probabilidad de pasar al paro sube 1,7 puntos y la de reducir jornada 0,9 puntos al cabo de un año (elasticidad del empleo -0,08).",
+   "quote": "significantly increased the probability of experiencing unemployment (1.7 percentage points) and a reduction in work intensity (0.9 percentage points)",
+   "locator": "p. 1 (resumen); p. 19 (elasticidad -0,08)",
+   "grade": "A",
+   "direction": "negative",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Ninguna fuente en caché evalúa el objetivo declarado (pobreza en el trabajo, crecimiento salarial). Sobre el empleo, efecto secundario: Gorjón et al. 2024 (A) halla pérdidas individuales; Christl et al. 2024 y Lacasa-Cazcarra 2026 (A) no hallan efecto agregado.",
+ "indicators": [],
+ "notes": "No abiertas (no en caché): Banco de España DO 2113 (Barceló et al. 2021, HTTP 400), Universidad de Alcalá 2026 (HTTP 403), revisión sistemática en Preprints.org (HTTP 403). Banco de España DO 1902 trata la subida de 2017, no la de 2019: se omite. La nota de Vozpópuli (25-10-2019) recoge que la AIReF pedía una evaluación rigurosa y no veía evidencia de impacto agregado en el empleo, pero es prensa sobre una opinión sin método publicado: se omite. Autores de SERIEs identificados por la cita de Lacasa-Cazcarra 2026 (p. 2-3), no por la portada. Sin WebSearch.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "pass",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/pilot2/smi-2019.json"
+ }
+}

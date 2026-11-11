@@ -24,7 +24,7 @@ export function generateMetadata() {
 
 const C = { es: "#2a78d6", eu: "#52514e" };
 const PANEL = {
-  empleo: { indicator: "temporalidad", suffix: " %", notes: [{ from: 2021.95, to: 2022.25, label: "Reforma laboral (RDL 32/2021): fuera de nuestros datos de voto", short: "Reforma laboral (fuera)" }] },
+  empleo: { indicator: "temporalidad", suffix: " %", notes: [{ from: 2020.2, to: 2021.3, label: "Covid", short: "Covid" }] },
   sanidad: { indicator: "espera_quirurgica", suffix: "", notes: [{ from: 2020, to: 2021, label: "Covid", short: "Covid" }] },
 };
 
@@ -144,7 +144,9 @@ export default function DecisionesPage() {
         <div className="card vizStat">
           <span className="vizStat__label">Medidas con efecto legal (o que lo buscaban)</span>
           <span className="vizStat__value">{h.measures}</span>
-          <span className="vizStat__note">XIV desde oct. 2022 y XV completa hasta {dateEs(data.window.last)}</span>
+          <span className="vizStat__note">
+            De {dateEs(data.window.data_from)} a {dateEs(data.window.last)} (XIV y XV)
+          </span>
         </div>
         <div className="card vizStat">
           <span className="vizStat__label">Documentadas y revisadas contra la fuente</span>
@@ -218,8 +220,8 @@ export default function DecisionesPage() {
             (SISLE-SNS), corte de diciembre. Evaluaciones: enlazadas en cada medida. Los partidos de la XIV se agrupan por su grupo parlamentario.
           </span>
           <span>
-            La temporalidad cae sobre todo en 2022, con la reforma laboral aprobada en diciembre de 2021, que queda fuera de nuestros datos de voto
-            (empiezan el 4 de octubre de 2022).
+            La temporalidad cae sobre todo en 2022, el primer año de la reforma laboral convalidada en febrero de 2022 por un voto de diferencia;
+            que se moviera con ella no prueba por sí solo cuánto se debe a la reforma: mira su ficha.
           </span>
         </figcaption>
       </figure>

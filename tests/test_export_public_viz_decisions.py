@@ -90,5 +90,37 @@ class ValidatorTest(unittest.TestCase):
         self.assertTrue(any("not in worklist" in e for e in errors))
 
 
+class ValidatorV2Test(unittest.TestCase):
+    def test_monitoring_statistic_cannot_be_graded_b(self):
+        m = {"ex_post": [{"grade": "B", "attributes_to_measure": False}], "in_force": [{"what": "x", "date": "2022-01-01", "provision": "df 8"}]}
+        self.assertTrue(any("move it to indicators" in e for e in dec.validate_v2(m, "m")))
+
+    def test_two_documents_need_same_series(self):
+        m = {"indicators": [{"series": "s", "before": {"url": "https://a"}, "after": {"url": "https://b"}}],
+             "in_force": [{"what": "x", "date": "2022-01-01", "provision": "df 8"}]}
+        self.assertTrue(any("different documents" in e for e in dec.validate_v2(m, "m")))
+        m["indicators"][0] |= {"same_series": True, "series_note": "misma serie INE"}
+        self.assertEqual(dec.validate_v2(m, "m"), [])
+
+    def test_in_force_required_when_it_applied(self):
+        self.assertTrue(any("in_force missing" in e for e in dec.validate_v2({}, "m")))
+        self.assertEqual(dec.validate_v2({}, "m", took_effect=False), [])
+
+    def test_foreign_evidence_never_grade_a(self):
+        m = {"evidence_against": [{"grade": "A", "about_other_country": True}], "in_force": [{"what": "x", "date": "2022-01-01", "provision": "p"}]}
+        self.assertTrue(any("another country" in e for e in dec.validate_v2(m, "m")))
+
+
+class GovernmentTest(unittest.TestCase):
+    def test_attribution_by_date(self):
+        self.assertEqual(dec.government_at("2018-12-21")["parties"], ["psoe"])
+        self.assertEqual(dec.government_at("2022-02-22")["parties"], ["psoe", "up"])
+        self.assertEqual(dec.government_at("2025-02-11")["parties"], ["psoe", "sumar"])
+
+    def test_budget_year(self):
+        self.assertEqual(dec.budget_year("2022-11-24"), 2023)
+        self.assertEqual(dec.budget_year("2018-06-27"), 2018)
+
+
 if __name__ == "__main__":
     unittest.main()

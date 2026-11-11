@@ -2,12 +2,1609 @@
  "generated_at": "2026-11-11",
  "rule": "docs/etl/sprints/DECISIONES-20261111/README.md §1-3",
  "counts": {
-  "autonomos": 2,
-  "empleo": 12,
-  "sanidad": 4,
-  "inmigracion": 4
+  "autonomos": 10,
+  "empleo": 27,
+  "sanidad": 11,
+  "inmigracion": 6
  },
  "measures": [
+  {
+   "candidate_key": "rdl 18/2019",
+   "unit": "decreto_ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "b-21cf157516",
+   "vote_ids": [
+    "b-21cf157516"
+   ],
+   "date": "2020-02-04",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 18/2019, de 27 de diciembre, por el que se adoptan determinadas medidas en materia tributaria, catastral y de seguridad social.",
+   "summary_yes": "Convalidar el decreto que prorroga los límites del régimen de módulos y actualiza valores catastrales",
+   "totals": [
+    189,
+    83,
+    72
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion005/20200204/Votacion006/VOT_20201204110013.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "A",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "A"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "abstained",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "abstained"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 8/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo",
+    "autonomos"
+   ],
+   "main_vote_id": "b-dc82a0e087",
+   "vote_ids": [
+    "b-dc82a0e087"
+   ],
+   "date": "2020-03-25",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 8/2020, de 17 de marzo, de medidas urgentes extraordinarias para hacer frente al impacto económico y social del COVID-19.",
+   "summary_yes": "Convalidar el primer paquete COVID: ERTE, prestación por cese de autónomos, moratorias y avales",
+   "totals": [
+    290,
+    54,
+    6
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion015/20200325/Votacion009/VOT_20201204105658.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 10/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-f9386cf519",
+   "vote_ids": [
+    "b-f9386cf519"
+   ],
+   "date": "2020-04-09",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 10/2020, de 29 de marzo, por el que se regula un permiso retribuido recuperable para las personas trabajadoras por cuenta ajena que no presten servicios esenciales con el fin de reducir la movilidad de la población en el contexto de la lucha contra el COVID-19.",
+   "summary_yes": "Convalidar el permiso retribuido recuperable para trabajadores de servicios no esenciales",
+   "totals": [
+    194,
+    139,
+    14
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion016/20200409/Votacion012/VOT_20201204105614.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "A",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "abstained",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 9/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-70252935db",
+   "vote_ids": [
+    "b-70252935db"
+   ],
+   "date": "2020-04-09",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 9/2020, de 27 de marzo, por el que se adoptan medidas complementarias, en el ámbito laboral, para paliar los efectos derivados del COVID-19.",
+   "summary_yes": "Convalidar el decreto que impide despedir por causas COVID y protege a trabajadores en ERTE",
+   "totals": [
+    188,
+    138,
+    21
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion016/20200409/Votacion010/VOT_20201204105611.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "A",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "A",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "abstained",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "abstained",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 15/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo",
+    "autonomos"
+   ],
+   "main_vote_id": "b-e23a88aee3",
+   "vote_ids": [
+    "b-e23a88aee3"
+   ],
+   "date": "2020-05-13",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 15/2020, de 21 de abril, de medidas urgentes complementarias para apoyar la economía y el empleo.",
+   "summary_yes": "Convalidar apoyos COVID a autónomos y pymes: moratoria de alquiler de locales, aplazamientos y ERTE",
+   "totals": [
+    201,
+    52,
+    96
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion021/20200513/Votacion001/VOT_20201204104305.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 4/2020",
+   "unit": "ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-a8139ef25f",
+   "vote_ids": [
+    "b-596bd46bc2",
+    "b-a8139ef25f"
+   ],
+   "date": "2020-06-17",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Votación de conjunto del Proyecto de Ley por la que se deroga el despido objetivo por faltas de asistencia al trabajo establecido en el artículo 52.d) del texto refundido de la Ley del Estatuto de los Trabajadores, aprobado por el Real Decreto Legislativo 2/2015, de 23 de octubre (procedente del Real Decreto-ley 4/2020, de 18 de febrero), por tramitarse en lectura única, teniendo en cuenta las correcciones técnicas distribuidas.",
+   "summary_yes": "Aprobar la ley que suprime el despido objetivo por faltas de asistencia al trabajo",
+   "totals": [
+    203,
+    55,
+    91
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion029/20200617/Votacion014/VOT_20201120111921.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 21/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-03ad2d940f",
+   "vote_ids": [
+    "b-03ad2d940f"
+   ],
+   "date": "2020-06-25",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 21/2020, de 9 de junio, de medidas urgentes de prevención, contención y coordinación para hacer frente a la crisis sanitaria ocasionada por el COVID-19.",
+   "summary_yes": "Convalidar las medidas sanitarias de la nueva normalidad tras el estado de alarma",
+   "totals": [
+    265,
+    77,
+    5
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion032/20200625/Votacion015/VOT_20201120111831.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "A",
+    "cs": "S",
+    "erc": "N",
+    "junts": "N",
+    "mixto": "S",
+    "plural": "N",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "opposed",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "opposed",
+    "junts": "opposed",
+    "mixto": "backed",
+    "plural": "opposed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 29/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-b5d76c96c0",
+   "vote_ids": [
+    "b-b5d76c96c0"
+   ],
+   "date": "2020-10-15",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 29/2020, de 29 de septiembre, de medidas urgentes en materia de teletrabajo en las Administraciones Públicas y de recursos humanos en el Sistema Nacional de Salud para hacer frente a la crisis sanitaria ocasionada por la COVID-19.",
+   "summary_yes": "Convalidar el teletrabajo en las Administraciones y la contratación excepcional de sanitarios",
+   "totals": [
+    196,
+    141,
+    10
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion050/20201015/Votacion008/VOT_20201120105239.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "A",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "abstained",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2021 sección 19",
+   "unit": "presupuesto",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-d82e1102c2",
+   "vote_ids": [
+    "b-d82e1102c2"
+   ],
+   "date": "2020-12-03",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 19 (Ministerio de Trabajo y Economía Social).  Votación del Dictamen de la Sección 19 (Ministerio de Trabajo y Economía Social).",
+   "summary_yes": null,
+   "totals": [
+    188,
+    150,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion065/20201203/Votacion020/VOT_20201211162353.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "N",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "opposed",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2021 sección 26",
+   "unit": "presupuesto",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-68db869a8f",
+   "vote_ids": [
+    "b-68db869a8f"
+   ],
+   "date": "2020-12-03",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 26 (Ministerio de Sanidad).  Votación del Dictamen de la Sección 26 (Ministerio de Sanidad).",
+   "summary_yes": null,
+   "totals": [
+    187,
+    150,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion065/20201203/Votacion030/VOT_20201211162408.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "N",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "opposed",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2021 sección 32",
+   "unit": "presupuesto",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "b-b4a15d6067",
+   "vote_ids": [
+    "b-b4a15d6067"
+   ],
+   "date": "2020-12-03",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones).  Votación del Dictamen de la Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones).",
+   "summary_yes": null,
+   "totals": [
+    187,
+    150,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion065/20201203/Votacion036/VOT_20201211162416.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "N",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "opposed",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 34/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "b-64dee88e12",
+   "vote_ids": [
+    "b-64dee88e12"
+   ],
+   "date": "2020-12-17",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 34/2020, de 17 de noviembre, de medidas urgentes de apoyo a la solvencia empresarial y al sector energético, y en materia tributaria.",
+   "summary_yes": "Convalidar apoyos a la solvencia de empresas y autónomos, al sector energético y medidas fiscales",
+   "totals": [
+    199,
+    53,
+    94
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion068/20201217/Votacion006/VOT_20201217143609.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "S",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "backed",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 35/2020",
+   "unit": "decreto_ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "b-36ec22d016",
+   "vote_ids": [
+    "b-36ec22d016"
+   ],
+   "date": "2021-01-28",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 35/2020, de 22 de diciembre, de medidas urgentes de apoyo al sector turístico, la hostelería y el comercio y en materia tributaria.",
+   "summary_yes": "Convalidar apoyos a turismo, hostelería y comercio: rebajas de alquiler de locales y fiscales",
+   "totals": [
+    288,
+    5,
+    54
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion070/20210128/Votacion005/VOT_20210128190131.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cs": "S",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "A"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "abstained"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 2/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo",
+    "autonomos"
+   ],
+   "main_vote_id": "b-e8940ef6cc",
+   "vote_ids": [
+    "b-e8940ef6cc"
+   ],
+   "date": "2021-02-18",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 2/2021, de 26 de enero, de refuerzo y consolidación de medidas sociales en defensa del empleo.",
+   "summary_yes": "Convalidar la prórroga de ERTE, limitación de despidos y ayudas por cese de autónomos",
+   "totals": [
+    295,
+    52,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion076/20210218/Votacion012/VOT_20210218165930.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "S",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley orgánica de derogación del artículo 315 apartado 3 del código penal",
+   "unit": "ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-b9d8298670",
+   "vote_ids": [
+    "b-3d33f38c2d",
+    "b-b9d8298670"
+   ],
+   "date": "2021-03-11",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Proposición de Ley Orgánica de derogación del artículo 315 apartado 3 del Código Penal.",
+   "summary_yes": "Derogar el delito de coacciones de piquetes en huelga (art. 315.3 CP)",
+   "totals": [
+    189,
+    151,
+    8
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion082/20210311/Votacion018/VOT_20210311174939.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "S",
+    "cs": "N",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "A",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "backed",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "abstained",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 5/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "autonomos"
+   ],
+   "main_vote_id": "b-8cb2d17cc8",
+   "vote_ids": [
+    "b-8cb2d17cc8"
+   ],
+   "date": "2021-03-25",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 5/2021, de 12 de marzo, de medidas extraordinarias de apoyo a la solvencia empresarial en respuesta a la pandemia de la COVID-19.",
+   "summary_yes": "Convalidar 11.000 millones de ayudas directas a la solvencia de empresas y autónomos",
+   "totals": [
+    177,
+    59,
+    113
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion088/20210325/Votacion008/VOT_20210325142922.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "A",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "S",
+    "plural": "dividido",
+    "pnv": "A",
+    "pp": "A",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "abstained",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "backed",
+    "plural": "split",
+    "pnv": "abstained",
+    "pp": "abstained",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 7/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-f172bb798b",
+   "vote_ids": [
+    "b-f172bb798b"
+   ],
+   "date": "2021-05-13",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 7/2021, de 27 de abril, de transposición de directivas de la Unión Europea en las materias de competencia, prevención del blanqueo de capitales, entidades de crédito, telecomunicaciones, medidas tributarias, prevención y reparación de daños medioambientales, desplazamiento de trabajadores en la prestación de servicios transnacionales, y defensa de los consumidores.",
+   "summary_yes": "Convalidar la transposición de directivas de competencia, blanqueo, banca, telecom y consumo",
+   "totals": [
+    320,
+    13,
+    12
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion097/20210513/Votacion010/VOT_20210513163107.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "S",
+    "erc": "N",
+    "junts": "A",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "S"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "opposed",
+    "junts": "abstained",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "backed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 8/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-39e6dcedd2",
+   "vote_ids": [
+    "b-39e6dcedd2"
+   ],
+   "date": "2021-05-20",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 8/2021, de 4 de mayo, por el que se adoptan medidas urgentes en el orden sanitario, social y jurisdiccional, a aplicar tras la finalización de la vigencia del estado de alarma declarado por el Real Decreto 926/2020, de 25 de octubre, por el que se declara el estado de alarma para contener la propagación de infecciones causadas por el SARS-CoV-2.",
+   "summary_yes": "Convalidar medidas sanitarias, sociales y judiciales tras el fin del estado de alarma",
+   "totals": [
+    189,
+    100,
+    60
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion100/20210520/Votacion027/VOT_20210520175846.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "N",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "A",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "A"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "abstained",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "abstained"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 9/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-5c95aa2611",
+   "vote_ids": [
+    "b-5c95aa2611"
+   ],
+   "date": "2021-06-10",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 9/2021, de 11 de mayo, por el que se modifica el texto refundido de la Ley del Estatuto de los Trabajadores, aprobado por el Real Decreto Legislativo 2/2015, de 23 de octubre, para garantizar los derechos laborales de las personas dedicadas al reparto en el ámbito de plataformas digitales.",
+   "summary_yes": "Convalidar la ley rider: los repartidores de plataformas digitales son asalariados",
+   "totals": [
+    195,
+    151,
+    2
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion106/20210610/Votacion012/VOT_20210610164100.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "N",
+    "erc": "S",
+    "junts": "S",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "backed",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 13/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-4189d7458d",
+   "vote_ids": [
+    "b-4189d7458d"
+   ],
+   "date": "2021-07-21",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 13/2021, de 24 de junio, por el que se modifican la Ley 2/2021, de 29 de marzo, de medidas urgentes de prevención, contención y coordinación para hacer frente a la crisis sanitaria ocasionada por el COVID-19, y el Real Decreto-ley 26/2020, de 7 de julio, de medidas de reactivación económica para hacer frente al impacto del COVID-19 en los ámbitos de transportes y vivienda.",
+   "summary_yes": "Convalidar el fin de la mascarilla obligatoria al aire libre",
+   "totals": [
+    180,
+    90,
+    78
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion113/20210721/Votacion003/VOT_20210721165616.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "S",
+    "erc": "A",
+    "junts": "A",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "A",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "A"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "backed",
+    "erc": "abstained",
+    "junts": "abstained",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "abstained",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "abstained"
+   },
+   "decisive_if_absent": [
+    "psoe"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 14/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-b4e97127f1",
+   "vote_ids": [
+    "b-a03f562de8",
+    "b-b4e97127f1"
+   ],
+   "date": "2021-07-21",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 14/2021, de 6 de julio, de medidas urgentes para la reducción de la temporalidad en el empleo público.",
+   "summary_yes": "Convalidar medidas para reducir la temporalidad en el empleo público",
+   "totals": [
+    170,
+    169,
+    8
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion113/20210721/Votacion006/VOT_20210721165621.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "N",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "N",
+    "pnv": "A",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "A",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "opposed",
+    "bng": "opposed",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "opposed",
+    "pnv": "abstained",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "abstained",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "erc",
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2022 sección 19",
+   "unit": "presupuesto",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-1610af4e2a",
+   "vote_ids": [
+    "b-1610af4e2a"
+   ],
+   "date": "2021-11-25",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 19 (Ministerio de Trabajo y Economía Social)  Votación del Dictamen de la Sección 19 (Ministerio de Trabajo y Economía Social).",
+   "summary_yes": null,
+   "totals": [
+    188,
+    159,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion135/20211125/Votacion024/VOT_20230303115554.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2022 sección 26",
+   "unit": "presupuesto",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-3cce83cc24",
+   "vote_ids": [
+    "b-3cce83cc24"
+   ],
+   "date": "2021-11-25",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 26 (Ministerio de Sanidad)  Votación del Dictamen de la Sección 26 (Ministerio de Sanidad).",
+   "summary_yes": null,
+   "totals": [
+    188,
+    159,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion135/20211125/Votacion031/VOT_20230303115610.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "pge2022 sección 32",
+   "unit": "presupuesto",
+   "domains": [
+    "inmigracion"
+   ],
+   "main_vote_id": "b-7ee455be9d",
+   "vote_ids": [
+    "b-7ee455be9d"
+   ],
+   "date": "2021-11-25",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones)  Votación del Dictamen de la Sección 32 (Ministerio de Inclusión, Seguridad Social y Migraciones).",
+   "summary_yes": null,
+   "totals": [
+    188,
+    159,
+    1
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion135/20211125/Votacion036/VOT_20230303115622.json",
+   "party_votes": {
+    "bildu": "S",
+    "bng": "A",
+    "cs": "N",
+    "erc": "S",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "backed",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "backed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 30/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "sanidad"
+   ],
+   "main_vote_id": "b-dd230eccb4",
+   "vote_ids": [
+    "b-dd230eccb4"
+   ],
+   "date": "2022-02-01",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 30/2021, de 23 de diciembre, por el que se adoptan medidas urgentes de prevención y contención para hacer frente a la crisis sanitaria ocasionada por la COVID-19.",
+   "summary_yes": "Convalidar la mascarilla obligatoria en exteriores y otras medidas COVID",
+   "totals": [
+    162,
+    153,
+    28
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion147/20220201/Votacion003/VOT_20230303100845.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "S",
+    "cs": "N",
+    "erc": "A",
+    "junts": "A",
+    "mixto": "S",
+    "plural": "A",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "A",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "backed",
+    "cs": "opposed",
+    "erc": "abstained",
+    "junts": "abstained",
+    "mixto": "backed",
+    "plural": "abstained",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "abstained",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 32/2021",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-6ccd338f1c",
+   "vote_ids": [
+    "b-6ccd338f1c"
+   ],
+   "date": "2022-02-03",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 32/2021, de 28 de diciembre, de medidas urgentes para la reforma laboral, la garantía de la estabilidad en el empleo y la transformación del mercado de trabajo.",
+   "summary_yes": "Convalidar la reforma laboral: menos contratos temporales y más peso de los convenios",
+   "totals": [
+    175,
+    174,
+    0
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion149/20220203/Votacion020/VOT_20230303100559.json",
+   "party_votes": {
+    "bildu": "N",
+    "bng": "N",
+    "cs": "S",
+    "erc": "N",
+    "junts": "N",
+    "mixto": "dividido",
+    "plural": "S",
+    "pnv": "N",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "opposed",
+    "bng": "opposed",
+    "cs": "backed",
+    "erc": "opposed",
+    "junts": "opposed",
+    "mixto": "split",
+    "plural": "backed",
+    "pnv": "opposed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "cs",
+    "plural",
+    "psoe",
+    "sumar",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "ley de regulación para el impulso de los planes de pensiones de empleo, por el que se modifica el texto refund",
+   "unit": "ley",
+   "domains": [
+    "empleo"
+   ],
+   "main_vote_id": "b-1b8ba2bd35",
+   "vote_ids": [
+    "b-1b8ba2bd35"
+   ],
+   "date": "2022-06-09",
+   "legislature": "14",
+   "kind": "final",
+   "title": "Votación del dictamen del Proyecto de Ley de regulación para el impulso de los planes de pensiones de empleo, por el que se modifica el texto refundido de la Ley de Regulación de los Planes y Fondos de Pensiones, aprobado por Real Decreto Legislativo 1/2002, de 29 de noviembre.",
+   "summary_yes": "Aprobar la ley que impulsa los planes de pensiones de empleo",
+   "totals": [
+    172,
+    164,
+    6
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion186/20220609/Votacion069/VOT_20230302184602.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "N",
+    "cs": "S",
+    "erc": "N",
+    "junts": "N",
+    "mixto": "N",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "N",
+    "psoe": "S",
+    "sumar": "N",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "opposed",
+    "cs": "backed",
+    "erc": "opposed",
+    "junts": "opposed",
+    "mixto": "opposed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "opposed",
+    "psoe": "backed",
+    "sumar": "opposed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [
+    "cs",
+    "psoe",
+    "up"
+   ],
+   "passed_recount": true
+  },
+  {
+   "candidate_key": "rdl 13/2022",
+   "unit": "decreto_ley",
+   "domains": [
+    "empleo",
+    "autonomos"
+   ],
+   "main_vote_id": "b-7c0826a9c8",
+   "vote_ids": [
+    "b-7c0826a9c8"
+   ],
+   "date": "2022-08-25",
+   "legislature": "14",
+   "kind": "rdl",
+   "title": "Real Decreto-ley 13/2022, de 26 de julio, por el que se establece un nuevo sistema de cotización para los trabajadores por cuenta propia o autónomos y se mejora la protección por cese de actividad.",
+   "summary_yes": "Convalidar la cotización de autónomos por ingresos reales y mejorar su prestación por cese",
+   "totals": [
+    260,
+    64,
+    25
+   ],
+   "approved_in_our_data": true,
+   "official_vote_url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg14/Sesion196/20220825/Votacion002/VOT_20230302181458.json",
+   "party_votes": {
+    "bildu": "A",
+    "bng": "A",
+    "cs": "N",
+    "erc": "A",
+    "junts": "A",
+    "mixto": "S",
+    "plural": "S",
+    "pnv": "S",
+    "pp": "S",
+    "psoe": "S",
+    "sumar": "S",
+    "up": "S",
+    "vox": "N"
+   },
+   "party_stance": {
+    "bildu": "abstained",
+    "bng": "abstained",
+    "cs": "opposed",
+    "erc": "abstained",
+    "junts": "abstained",
+    "mixto": "backed",
+    "plural": "backed",
+    "pnv": "backed",
+    "pp": "backed",
+    "psoe": "backed",
+    "sumar": "backed",
+    "up": "backed",
+    "vox": "opposed"
+   },
+   "decisive_if_absent": [],
+   "passed_recount": true
+  },
   {
    "candidate_key": "ley de fomento del ecosistema de las empresas emergentes",
    "unit": "ley",
