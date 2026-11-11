@@ -19,6 +19,10 @@ import {
 import "./partidos.css";
 
 const DATA_PATH = "visualizaciones/data/democracia-partidos.json";
+// Existing correction route of the site: the repository's «Data correction» issue form (.github/ISSUE_TEMPLATE/data_correction.yml).
+const CORRECTION_FORM = "https://github.com/gsusI/vota-con-la-chola/issues/new?template=data_correction.yml";
+const correctionHref = (route, label) =>
+  `${CORRECTION_FORM}&title=${encodeURIComponent(`[Correction] ${label}`)}&public_route=${encodeURIComponent(`https://votaconlachola.org${route}`)}`;
 const PATH = "/visualizaciones/democracia/partidos/";
 
 function load() {
@@ -55,6 +59,7 @@ function EventItem({ event, pid, data }) {
         {a.power_only ? " · acto que solo puede hacer quien gobierna" : ""}
         {a.lineage === "predecessor" ? " · partido predecesor, no se cuenta" : ""}
         {others.length ? ` · también atribuido a ${others.join(", ")}` : ""}
+        {event.review?.status === "verified" ? " · comprobada contra la fuente por un segundo agente de IA" : " · sin comprobar todavía"}
       </span>
       {a.note ? <span className="dpxEvent__meta">{a.note}</span> : null}
       <span>
@@ -63,6 +68,10 @@ function EventItem({ event, pid, data }) {
         <a href={event.source.url} rel="noopener noreferrer" target="_blank">
           {event.body}
           {event.source.locator ? `, ${event.source.locator}` : ""}
+        </a>
+        {" · "}
+        <a href={correctionHref(`/visualizaciones/democracia/partidos/#ev-${event.event_id}-${pid}`, `democracia/partidos ${event.event_id}`)} rel="noopener noreferrer" target="_blank">
+          ¿error?
         </a>
         {(event.extra_sources || []).map((s, i) => (
           <span key={`${i}-${s.url}`}>
@@ -316,6 +325,19 @@ export default function DemocraciaPartidosPage() {
         ]}
       />
 
+      <section className="vizProse" aria-label="Aviso sobre la revisión">
+        <p role="note">
+          <strong>Versión en revisión.</strong> Este registro lo recopilaron y codificaron agentes de IA a partir de los documentos oficiales enlazados en
+          cada elemento. Un segundo agente de IA comprobó cada uno contra su fuente (fecha, atribución, codificación, cita y firmeza):{" "}
+          {data.meta.review.verified} de {data.meta.review.items} verificados. Ninguna persona lo ha revisado todavía: úsalo para ir a las fuentes, no como
+          veredicto. Si ves un error, puedes{" "}
+          <a href={correctionHref(PATH, "democracia/partidos")} rel="noopener noreferrer" target="_blank">
+            enviar una corrección
+          </a>{" "}
+          con el enlace a la fuente oficial; cada elemento tiene también su enlace «¿error?».
+        </p>
+      </section>
+
       <section className="vizStats" aria-label="Cifras clave">
         <div className="card vizStat">
           <span className="vizStat__label">Resoluciones de censos completos</span>
@@ -396,6 +418,10 @@ export default function DemocraciaPartidosPage() {
                   <q lang={x.source.quote_lang || "es"}>{x.source.quote}</q>{" "}
                   <a href={x.source.url} rel="noopener noreferrer" target="_blank">
                     fuente
+                  </a>
+                  {" · "}
+                  <a href={correctionHref(`/visualizaciones/democracia/partidos/#pendiente`, `democracia/partidos ${x.pending_id}`)} rel="noopener noreferrer" target="_blank">
+                    ¿error?
                   </a>
                 </span>
               </li>

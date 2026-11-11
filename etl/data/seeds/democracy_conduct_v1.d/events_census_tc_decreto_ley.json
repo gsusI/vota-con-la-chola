@@ -636,10 +636,10 @@
     "ref": "STC 156/2021",
     "date": "2021-09-16",
     "subject": "Real Decreto-ley 1/2017",
-    "outcome": "anula preceptos",
-    "in_scope": true,
-    "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
-    "event_id": "stc-156-2021-decreto-ley-1-2017"
+    "outcome": "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilita",
+    "in_scope": false,
+    "reason": "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilita",
+    "event_id": null
    },
    {
     "ref": "STC 9/2023",
@@ -832,7 +832,7 @@
    }
   ],
   "n_listed": 91,
-  "n_in_scope": 23
+  "n_in_scope": 22
  },
  "events": [
   {
@@ -1117,14 +1117,14 @@
   },
   {
    "event_id": "stc-125-2016-decreto-ley-13-2005",
-   "title": "STC 125/2016: anula preceptos del Real Decreto-ley 13/2005 por los límites del decreto ley",
+   "title": "STC 125/2016: anula el Real Decreto-ley 13/2005 por los límites del decreto ley",
    "body": "Tribunal Constitucional",
    "finding_type": "court_annulment_full",
    "indicator": "contrapesos",
    "severity": 3,
    "date": "2016-07-07",
    "act_date": "2005-10-28",
-   "act": "Real Decreto-ley 13/2005, de 28 de octubre (preceptos anulados según el fallo)",
+   "act": "Real Decreto-ley 13/2005, de 28 de octubre",
    "status": "firme",
    "attributions": [
     {
@@ -1257,14 +1257,14 @@
   },
   {
    "event_id": "stc-78-2020-decreto-ley-2-2016",
-   "title": "STC 78/2020: anula preceptos del Real Decreto-ley 2/2016 por los límites del decreto ley",
+   "title": "STC 78/2020: anula el Real Decreto-ley 2/2016 por los límites del decreto ley",
    "body": "Tribunal Constitucional",
    "finding_type": "court_annulment_full",
    "indicator": "contrapesos",
    "severity": 3,
    "date": "2020-07-01",
    "act_date": "2016-09-30",
-   "act": "Real Decreto-ley 2/2016, de 30 de septiembre (preceptos anulados según el fallo)",
+   "act": "Real Decreto-ley 2/2016, de 30 de septiembre",
    "status": "firme",
    "attributions": [
     {
@@ -1324,41 +1324,6 @@
     "title": "Pleno. Sentencia 111/2021, de 13 de mayo de 2021. Recurso de inconstitucionalidad 2295-2020. Interpuesto por más de cincuenta senadores del Grupo Parlamentario Popular en relación con diversas disposi",
     "retrieved": "2026-11-11",
     "quote": "declarar inconstitucionales y nulas las disposiciones adicionales sexta y séptima, la disposición transitoria segunda y",
-    "quote_lang": "es",
-    "locator": "fallo"
-   },
-   "extra_sources": [],
-   "coverage": {
-    "type": "census",
-    "family": "tc_decreto_ley"
-   }
-  },
-  {
-   "event_id": "stc-156-2021-decreto-ley-1-2017",
-   "title": "STC 156/2021: anula preceptos del Real Decreto-ley 1/2017 por los límites del decreto ley",
-   "body": "Tribunal Constitucional",
-   "finding_type": "court_annulment_partial",
-   "indicator": "contrapesos",
-   "severity": 2,
-   "date": "2021-09-16",
-   "act_date": "2017-01-20",
-   "act": "Real Decreto-ley 1/2017, de 20 de enero (preceptos anulados según el fallo)",
-   "status": "firme",
-   "attributions": [
-    {
-     "party_id": "pp",
-     "role": "national_government",
-     "attribution": "government_act",
-     "lineage": "same",
-     "power_only": true,
-     "note": "Gobierno Rajoy (PP)"
-    }
-   ],
-   "source": {
-    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-17105",
-    "title": "Pleno. Sentencia 156/2021, de 16 de septiembre de 2021. Recurso de inconstitucionalidad 1960-2017. Interpuesto por más de cincuenta diputados del Grupo Parlamentario Confederal de Unidos Podemos-En Co",
-    "retrieved": "2026-11-11",
-    "quote": "Declarar inconstitucional y nulo el inciso «persona física» del art. 2.2 del Real Decreto-ley 1/2017",
     "quote_lang": "es",
     "locator": "fallo"
    },

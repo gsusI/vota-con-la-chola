@@ -506,6 +506,35 @@ def vparty_layer(seed: dict) -> tuple[dict, list[dict]]:
     return by_party, [meta | {"series": series}]
 
 
+REVIEW_ROUNDS = [  # oldest first; a later round overrides an earlier one for the same item
+    ("pilot", "evidence/review-pilot"), ("scale", "evidence/review-scale"), ("targeted", "evidence/review-scale/targeted"),
+    ("census", "evidence/review-census"), ("full", "evidence/review-full"), ("fix", "evidence/review-fix"),
+]
+# Items edited after an earlier review: only a verdict from a later round counts for them.
+CHANGED_AFTER = {"sts-507-2020-gurtel": "pilot", "sts-459-2019-proces": "pilot", "greco-4-ronda-psoe": "scale",
+                 "greco-4-ronda-psoe-sumar-2024": "scale", "greco-4-ronda-pp": "full", "stc-73-2017-amnistia-fiscal": "pilot",
+                 "jec-2020-12-sanchez-exhumacion-entrevista": "full"}
+
+
+def review_verdicts() -> dict[str, dict]:
+    order = [r for r, _ in REVIEW_ROUNDS]
+    out: dict[str, dict] = {}
+    for rnd, rel in REVIEW_ROUNDS:
+        for path in sorted((SPRINT / rel).glob("*.json")):
+            if path.name.startswith("worklist"):
+                continue
+            v = json.loads(path.read_text(encoding="utf-8"))
+            iid = v.get("event_id") or v.get("pending_id")
+            if not iid:
+                continue
+            stale_until = CHANGED_AFTER.get(iid)
+            if stale_until and order.index(rnd) <= order.index(stale_until):
+                continue
+            out[iid] = {"status": v.get("verdict"), "round": rnd, "attribution_error": bool(v.get("attribution_error")),
+                        "file": str(path.relative_to(REPO_ROOT)), "notes": v.get("notes", "")}
+    return out
+
+
 def census_summary(seed: dict, events: list[dict], decrees: dict) -> dict:
     by_id = {e["event_id"]: e for e in events}
     fams = []
@@ -536,7 +565,9 @@ def census_summary(seed: dict, events: list[dict], decrees: dict) -> dict:
 def export() -> int:
     seed = json.loads(SEED.read_text(encoding="utf-8"))
     today = seed.get("snapshot_date") or date.today().isoformat()
-    events = seed["events"]
+    verdicts = review_verdicts()
+    events = [e | {"review": verdicts.get(e["event_id"], {"status": "unreviewed"})} for e in seed["events"]]
+    seed["pending"] = [x | {"review": verdicts.get(x["pending_id"], {"status": "unreviewed"})} for x in seed.get("pending") or []]
     gov_years = years_in_national_government(seed, today)
     votes = vote_layer(seed)
     vp_party, vp_meta = vparty_layer(seed)
@@ -548,6 +579,13 @@ def export() -> int:
             "window": seed["window"], "method": seed["method"],
             "seed_sha256": hashlib.sha256(SEED.read_bytes()).hexdigest(),
             "events": len(events), "events_attributed": sum(1 for e in events if any(counted(a) for a in e["attributions"])),
+            "review": {
+                "items": len(events) + len(seed["pending"]),
+                "verified": sum(1 for x in events + seed["pending"] if x["review"]["status"] == "verified"),
+                "failed": sum(1 for x in events + seed["pending"] if x["review"]["status"] == "failed"),
+                "unreviewed": sum(1 for x in events + seed["pending"] if x["review"]["status"] == "unreviewed"),
+                "method": "Cada elemento comprobado contra su fuente por un segundo agente de IA (fecha, atribución, codificación, cita y firmeza); ninguna persona lo ha revisado todavía.",
+            },
         },
         "codebook": seed["codebook"], "parties": profiles(seed, events, votes, gov_years, vp_party),
         "national_governments": seed["national_governments"], "national_governments_source": seed["national_governments_source"],
@@ -559,12 +597,12 @@ def export() -> int:
     OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator="\n")
-    w.writerow(["event_id", "coverage", "coverage_family", "date", "act_date", "party_id", "role", "attribution", "lineage", "power_only", "indicator",
+    w.writerow(["event_id", "review", "coverage", "coverage_family", "date", "act_date", "party_id", "role", "attribution", "lineage", "power_only", "indicator",
                 "severity", "finding_type", "body", "title", "act", "status", "source_url", "source_retrieved", "quote"])
     for ev in events:
         for a in ev["attributions"]:
             s = ev["source"]
-            w.writerow([ev["event_id"], "censo" if ev["coverage"]["type"] == "census" else "selección, no censo", ev["coverage"]["family"], ev["date"], ev.get("act_date", ""), a["party_id"], a["role"], a["attribution"], a["lineage"],
+            w.writerow([ev["event_id"], ev["review"]["status"], "censo" if ev["coverage"]["type"] == "census" else "selección, no censo", ev["coverage"]["family"], ev["date"], ev.get("act_date", ""), a["party_id"], a["role"], a["attribution"], a["lineage"],
                         a["power_only"], ev["indicator"], ev["severity"], ev["finding_type"], ev["body"], ev["title"], ev["act"],
                         ev.get("status", ""), s["url"], s["retrieved"], s["quote"]])
     OUT_CSV.write_text(buf.getvalue(), encoding="utf-8")

@@ -1,0 +1,65 @@
+[
+ {
+  "kind": "event",
+  "event_id": "greco-4-ronda-pp",
+  "title": "GRECO, cuarta ronda (España): cumplimiento «globalmente insatisfactorio» bajo el Gobierno Rajoy",
+  "body": "GRECO (Consejo de Europa)",
+  "date": "2017-12-08",
+  "act_date": "2017-12-08",
+  "act": "Falta de aplicación de las 11 recomendaciones de la cuarta ronda de GRECO (diputados, jueces y fiscales), incluida la recomendación v sobre el marco legal del CGPJ",
+  "status": "firme; en 2019 GRECO concluyó que el cumplimiento ya no era «globalmente insatisfactorio» (GrecoRC4(2019)12)",
+  "indicator": "contrapesos",
+  "indicator_definition": "El Tribunal Constitucional anula un acto por exceder los límites del decreto ley, de los poderes de excepción o del procedimiento parlamentario, o por vulnerar derechos de los parlamentarios; la Comisión de Venecia o el Informe sobre el Estado de Derecho concluyen que la tramitación de un acto concreto eludió consulta o control; GRECO constata que el Gobierno de turno no aplicó sus recomendaciones.",
+  "finding_type": "nonbinding_finding",
+  "severity": 1,
+  "attributions": [
+   {
+    "party_id": "pp",
+    "role": "national_government",
+    "attribution": "government_act",
+    "lineage": "same",
+    "note": "Gobierno Rajoy II (PP); GRECO concluyó que el nivel de cumplimiento seguía siendo «globalmente insatisfactorio» y que la recomendación v (CGPJ) estaba parcialmente aplicada (§38, §76)"
+   }
+  ],
+  "source": {
+   "url": "https://rm.coe.int/fourth-evaluation-round-corruption-prevention-in-respect-of-members-of/1680779c4d",
+   "quote": "the current level of compliance with the recommendations remains “globally unsatisfactory”",
+   "locator": "§79, p. 12"
+  },
+  "extra_sources": []
+ },
+ {
+  "kind": "event",
+  "event_id": "jec-2020-12-sanchez-exhumacion-entrevista",
+  "title": "JEC 12/2020: multa a Pedro Sánchez por una entrevista en La Moncloa durante la campaña de noviembre de 2019",
+  "body": "Junta Electoral Central",
+  "date": "2020-01-23",
+  "act_date": "2019-10-25",
+  "act": "Realización y difusión de una entrevista al presidente del Gobierno en funciones en La Moncloa (25-10-2019)",
+  "status": "firme; el Tribunal Supremo desestimó el recurso del sancionado (nota del CGPJ de 31-05-2021)",
+  "indicator": "reglas",
+  "indicator_definition": "Resolución vinculante (tribunal, Tribunal Constitucional, Junta Electoral) de que el partido, su grupo o sus cargos adoptaron o ejecutaron un acto fuera del procedimiento constitucional para obtener o ejercer el poder, o desobedecieron una orden de un tribunal o de la administración electoral.",
+  "finding_type": "sanction_jec",
+  "severity": 2,
+  "attributions": [
+   {
+    "party_id": "psoe",
+    "role": "national_government",
+    "attribution": "office_holder",
+    "lineage": "same",
+    "note": "Pedro Sánchez, presidente del Gobierno en funciones (Gobierno Sánchez I, PSOE)"
+   }
+  ],
+  "source": {
+   "url": "https://www.juntaelectoralcentral.es/cs/jec/doctrina/acuerdos?anyosesion=2020&idacuerdoinstruccion=72044&idsesion=&template=Doctrina/JEC_Detalle",
+   "quote": "atendiendo a su escaso grado de culpabilidad, una sanción de multa de 500 €",
+   "locator": "Resolución, punto 2"
+  },
+  "extra_sources": [
+   {
+    "url": "https://www.poderjudicial.es/cgpj/en/Judiciary/Supreme-Court/Pressroom/Press-Archive/El-Tribunal-Supremo-confirma-la-multa-de-la-Junta-Electoral-a-Pedro-Sanchez-por-una-entrevista-televisiva-en-Moncloa-durante-el-periodo-electoral-publicada-en-la-web-de-Presidencia-de-Gobierno",
+    "quote": "ha desestimado el recurso presentado por el presidente del Gobierno, Pedro Sánchez"
+   }
+  ]
+ }
+]

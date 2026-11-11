@@ -2,7 +2,7 @@
  "search_url": "https://www.boe.es/buscar/boe.php?campo%5B0%5D=ORIS&dato%5B0%5D%5BT%5D=T&operador%5B0%5D=and&campo%5B1%5D=TITULOS&dato%5B1%5D=Real+Decreto-ley&operador%5B1%5D=and&campo%5B2%5D=DEM&dato%5B2%5D=&operador%5B2%5D=and&campo%5B3%5D=DOC&dato%5B3%5D=&operador%5B3%5D=and&campo%5B4%5D=NBOS&dato%5B4%5D=&operador%5B4%5D=and&campo%5B5%5D=NOF&dato%5B5%5D=&operador%5B5%5D=and&campo%5B6%5D=FPU&dato%5B6%5D%5B0%5D=2012-01-01&dato%5B6%5D%5B1%5D=2026-11-11&operador%5B6%5D=and&page_hits=2000&sort_field%5B0%5D=FPU&sort_order%5B0%5D=asc&accion=Buscar",
  "boe_results": 267,
  "candidates": 91,
- "in_census": 23,
+ "in_census": 22,
  "rows": [
   {
    "number": "1/2012",
@@ -637,8 +637,8 @@
    "ruled": "2021-09-16",
    "rdl": "1/2017",
    "rdl_date": "2017-01-20",
-   "in_census": true,
-   "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley"
+   "in_census": false,
+   "reason": "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilitante (revisión completa)"
   },
   {
    "number": "9/2023",

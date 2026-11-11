@@ -744,14 +744,14 @@
   },
   {
    "event_id": "stc-125-2016-decreto-ley-13-2005",
-   "title": "STC 125/2016: anula preceptos del Real Decreto-ley 13/2005 por los límites del decreto ley",
+   "title": "STC 125/2016: anula el Real Decreto-ley 13/2005 por los límites del decreto ley",
    "body": "Tribunal Constitucional",
    "finding_type": "court_annulment_full",
    "indicator": "contrapesos",
    "severity": 3,
    "date": "2016-07-07",
    "act_date": "2005-10-28",
-   "act": "Real Decreto-ley 13/2005, de 28 de octubre (preceptos anulados según el fallo)",
+   "act": "Real Decreto-ley 13/2005, de 28 de octubre",
    "status": "firme",
    "attributions": [
     {
@@ -887,51 +887,6 @@
    "part": "events_census_jec_sancion"
   },
   {
-   "event_id": "venice-2017-ley-tc",
-   "title": "Comisión de Venecia CDL-AD(2017)003: no recomienda dar al TC los poderes de ejecución de la LO 15/2015",
-   "body": "Comisión de Venecia (Consejo de Europa)",
-   "finding_type": "nonbinding_finding",
-   "indicator": "justicia",
-   "severity": 1,
-   "date": "2017-03-11",
-   "act_date": "2015-10-16",
-   "act": "Ley Orgánica 15/2015, de 16 de octubre, de reforma de la Ley Orgánica 2/1979 del Tribunal Constitucional (ejecución de resoluciones, multas coercitivas y suspensión de autoridades)",
-   "status": "firme",
-   "attributions": [
-    {
-     "party_id": "pp",
-     "role": "national_government",
-     "attribution": "group_initiative",
-     "lineage": "same",
-     "power_only": true,
-     "note": "Proposición de ley orgánica 122/000213 presentada por el Grupo Parlamentario Popular en el Congreso (BOCG-10-B-237-1), con mayoría absoluta del PP (X legislatura). La Comisión señala además dudas sobre las multas coercitivas y la suspensión de cargos (§73-76)."
-    }
-   ],
-   "source": {
-    "url": "https://www.venice.coe.int/webforms/documents/default.aspx?pdffile=CDL-AD(2017)003-e",
-    "title": "CDL-AD(2017)003, Spain - Opinion on the Law of 16 October 2015 amending the Organic Law No. 2/1979 on the Constitutional Court (110th Plenary Session, 10-11 March 2017)",
-    "retrieved": "2026-11-11",
-    "quote": "The Venice Commission does not recommend that these powers be attributed to the Constitutional Court",
-    "quote_lang": "en",
-    "locator": "§78 (Conclusions), p. 15"
-   },
-   "extra_sources": [
-    {
-     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/B/BOCG-10-B-237-1.PDF",
-     "title": "BOCG Congreso, X legislatura, Serie B, núm. 237-1, 4 de septiembre de 2015: Proposición de Ley Orgánica de reforma de la LO 2/1979 del Tribunal Constitucional (122/000213)",
-     "retrieved": "2026-11-11",
-     "quote": "Presentada por el Grupo Parlamentario Popular en el Congreso",
-     "quote_lang": "es",
-     "locator": "pág. 1"
-    }
-   ],
-   "part": "events_tc_national",
-   "coverage": {
-    "type": "census",
-    "family": "venecia"
-   }
-  },
-  {
    "event_id": "stc-73-2017-amnistia-fiscal",
    "title": "STC 73/2017: anula la amnistía fiscal de la disposición adicional primera del Real Decreto-ley 12/2012",
    "body": "Tribunal Constitucional",
@@ -1064,7 +1019,7 @@
    "severity": 1,
    "date": "2017-12-08",
    "act_date": "2017-12-08",
-   "act": "Falta de aplicación de las 11 recomendaciones de la cuarta ronda de GRECO (diputados, jueces y fiscales), incluida la recomendación v sobre el marco legal del CGPJ",
+   "act": "Falta de aplicación satisfactoria de las 11 recomendaciones de la cuarta ronda de GRECO (diputados, jueces y fiscales), incluida la recomendación v sobre el marco legal del CGPJ",
    "status": "firme; en 2019 GRECO concluyó que el cumplimiento ya no era «globalmente insatisfactorio» (GrecoRC4(2019)12)",
    "attributions": [
     {
@@ -1073,7 +1028,7 @@
      "attribution": "government_act",
      "lineage": "same",
      "power_only": true,
-     "note": "Gobierno Rajoy II (PP); GRECO concluyó además que la recomendación v (CGPJ) no se había aplicado (§35)"
+     "note": "Gobierno Rajoy II (PP); GRECO concluyó que el nivel de cumplimiento seguía siendo «globalmente insatisfactorio» y que la recomendación v (CGPJ) estaba parcialmente aplicada (§38, §76)"
     }
    ],
    "source": {
@@ -1468,7 +1423,7 @@
    "date": "2019-07-22",
    "act_date": "2019-04-23",
    "act": "Correo electrónico del president de la Generalitat a los funcionarios con referencias al «nefasto 155» (art. 50.2 LOREG)",
-   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (STS 856/2021, según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "junts",
@@ -1504,7 +1459,7 @@
    "date": "2019-07-22",
    "act_date": "2019-04-23",
    "act": "Comunicación institucional del president de la Generalitat el día de Sant Jordi en periodo electoral (art. 50.2 LOREG)",
-   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (STS 854/2021, según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "junts",
@@ -1677,14 +1632,14 @@
   },
   {
    "event_id": "jec-2020-12-sanchez-exhumacion-entrevista",
-   "title": "JEC 12/2020: multa de 500 € al presidente del Gobierno en funciones por una declaración y una entrevista en Moncloa",
+   "title": "JEC 12/2020: multa a Pedro Sánchez por una entrevista en La Moncloa durante el periodo electoral de noviembre de 2019",
    "body": "Junta Electoral Central",
    "finding_type": "sanction_jec",
    "indicator": "reglas",
    "severity": 2,
    "date": "2020-01-23",
-   "act_date": "2019-10-24",
-   "act": "Declaración institucional sobre la exhumación de Francisco Franco (24-10-2019) y entrevista en Moncloa difundida en su web (25-10-2019)",
+   "act_date": "2019-10-25",
+   "act": "Realización y difusión de una entrevista al presidente del Gobierno en funciones en La Moncloa (25-10-2019)",
    "status": "firme; el Tribunal Supremo desestimó el recurso del sancionado (nota del CGPJ de 31-05-2021)",
    "attributions": [
     {
@@ -1856,14 +1811,14 @@
   },
   {
    "event_id": "stc-78-2020-decreto-ley-2-2016",
-   "title": "STC 78/2020: anula preceptos del Real Decreto-ley 2/2016 por los límites del decreto ley",
+   "title": "STC 78/2020: anula el Real Decreto-ley 2/2016 por los límites del decreto ley",
    "body": "Tribunal Constitucional",
    "finding_type": "court_annulment_full",
    "indicator": "contrapesos",
    "severity": 3,
    "date": "2020-07-01",
    "act_date": "2016-09-30",
-   "act": "Real Decreto-ley 2/2016, de 30 de septiembre (preceptos anulados según el fallo)",
+   "act": "Real Decreto-ley 2/2016, de 30 de septiembre",
    "status": "firme",
    "attributions": [
     {
@@ -2344,87 +2299,6 @@
    }
   },
   {
-   "event_id": "rolr-2021-ley-seguridad-ciudadana",
-   "title": "Informe sobre el Estado de Derecho 2021 (España): pide que la reforma de la Ley de Seguridad Ciudadana siga a la Comisión de Venecia",
-   "body": "Comisión Europea",
-   "finding_type": "nonbinding_finding",
-   "indicator": "medios",
-   "severity": 1,
-   "date": "2021-07-20",
-   "act_date": "2015-03-30",
-   "act": "Ley Orgánica 4/2015, de 30 de marzo, de protección de la seguridad ciudadana",
-   "status": "firme; los capítulos 2022-2026 siguen registrando la reforma pendiente (proposición de octubre de 2024 en tramitación en 2026)",
-   "attributions": [
-    {
-     "party_id": "pp",
-     "role": "national_government",
-     "attribution": "government_act",
-     "lineage": "same",
-     "power_only": true,
-     "note": "Gobierno Rajoy I (PP): proyecto de ley orgánica 121/000105. El capítulo 2021 dice también que persisten las preocupaciones por su impacto en periodistas (p. 16)"
-    }
-   ],
-   "source": {
-    "url": "https://www.parlament.gv.at/dokument/XXVII/EU/69977/imfname_11084936.pdf",
-    "title": "Comisión Europea, SWD(2021) 710 final, 2021 Rule of Law Report - Country Chapter Spain (copia del Parlamento de Austria)",
-    "retrieved": "2026-11-11",
-    "quote": "it is important that this opinion is taken into account",
-    "quote_lang": "en",
-    "locator": "PDF p. 20, sección IV"
-   },
-   "extra_sources": [
-    {
-     "url": "https://www.congreso.es/public_oficiales/L10/CONG/BOCG/A/BOCG-10-A-105-1.PDF",
-     "title": "BOCG Congreso, X Legislatura, Serie A, núm. 105-1, 25 de julio de 2014: Proyecto de Ley Orgánica de protección de la seguridad ciudadana",
-     "retrieved": "2026-11-11",
-     "quote": "121/000105 Proyecto de Ley Orgánica de protección de la seguridad ciudadana.",
-     "quote_lang": "es",
-     "locator": "p. 1"
-    }
-   ],
-   "part": "events_census_rolr",
-   "coverage": {
-    "type": "census",
-    "family": "rolr"
-   }
-  },
-  {
-   "event_id": "stc-156-2021-decreto-ley-1-2017",
-   "title": "STC 156/2021: anula preceptos del Real Decreto-ley 1/2017 por los límites del decreto ley",
-   "body": "Tribunal Constitucional",
-   "finding_type": "court_annulment_partial",
-   "indicator": "contrapesos",
-   "severity": 2,
-   "date": "2021-09-16",
-   "act_date": "2017-01-20",
-   "act": "Real Decreto-ley 1/2017, de 20 de enero (preceptos anulados según el fallo)",
-   "status": "firme",
-   "attributions": [
-    {
-     "party_id": "pp",
-     "role": "national_government",
-     "attribution": "government_act",
-     "lineage": "same",
-     "power_only": true,
-     "note": "Gobierno Rajoy (PP)"
-    }
-   ],
-   "source": {
-    "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-17105",
-    "title": "Pleno. Sentencia 156/2021, de 16 de septiembre de 2021. Recurso de inconstitucionalidad 1960-2017. Interpuesto por más de cincuenta diputados del Grupo Parlamentario Confederal de Unidos Podemos-En Co",
-    "retrieved": "2026-11-11",
-    "quote": "Declarar inconstitucional y nulo el inciso «persona física» del art. 2.2 del Real Decreto-ley 1/2017",
-    "quote_lang": "es",
-    "locator": "fallo"
-   },
-   "extra_sources": [],
-   "coverage": {
-    "type": "census",
-    "family": "tc_decreto_ley"
-   },
-   "part": "events_census_tc_decreto_ley"
-  },
-  {
    "event_id": "greco-5-ronda-cr-2021",
    "title": "GRECO: España no cumple ninguna de las 19 recomendaciones sobre Gobierno y policías (2021)",
    "body": "GRECO (Grupo de Estados contra la Corrupción, Consejo de Europa)",
@@ -2558,7 +2432,7 @@
    "date": "2021-12-09",
    "act_date": "2021-04-12",
    "act": "Manifestaciones de la presidenta de la Comunidad de Madrid en los actos institucionales de 12 y 16 de abril de 2021 (avión de Iberia; obras del puente Valdebebas-T4), en periodo electoral de las autonómicas de 4 de mayo de 2021",
-   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "pp",
@@ -2594,7 +2468,7 @@
    "date": "2021-12-09",
    "act_date": "2021-04-08",
    "act": "Manifestaciones de la presidenta en el acto de homenaje celebrado en la plaza de Las Ventas el 8 de abril de 2021 (art. 50.2 LOREG)",
-   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "pp",
@@ -3155,7 +3029,7 @@
    "date": "2023-10-05",
    "act_date": "2023-07-13",
    "act": "Acto «Presentación de las mejoras de movilidad del Maresme» y declaraciones del presidente de la Generalitat el 13 de julio de 2023 (elecciones generales de 23 de julio de 2023)",
-   "status": "firme en vía administrativa-electoral; recurrible ante la Sala Tercera del Tribunal Supremo (desenlace de un eventual recurso no verificado)",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (STS 1812/2024, según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "erc",
@@ -3387,42 +3261,6 @@
    }
   },
   {
-   "event_id": "tcu-2024-pnv-deber-colaboracion",
-   "title": "El Tribunal de Cuentas sanciona al PNV con 5.000 euros por faltar al deber de colaboración en la fiscalización de sus cuentas",
-   "body": "Tribunal de Cuentas",
-   "finding_type": "sanction_tcu",
-   "indicator": "corrupcion",
-   "severity": 2,
-   "date": "2024-04-25",
-   "act_date": "",
-   "act": "Falta al deber de colaboración del artículo 19 de la Ley Orgánica 8/2007 en la fiscalización de la contabilidad anual 2018-2019 del Partido Nacionalista Vasco",
-   "status": "firme; el Tribunal Supremo desestimó el recurso (22/05/2025)",
-   "attributions": [
-    {
-     "party_id": "pnv",
-     "role": "party_organization",
-     "attribution": "party",
-     "lineage": "same",
-     "power_only": false,
-     "note": "Infracción del artículo 17.Cuatro a) LOFPP en relación con el artículo 19."
-    }
-   ],
-   "source": {
-    "url": "https://www.tcu.es/export/sites/portal/.galleries/Documentos-oficiales/Partidos-politicos/Procedimientos-sancionadores-contabilidad-ordinaria.pdf",
-    "title": "Tribunal de Cuentas, Procedimientos sancionadores contabilidad ordinaria (registro de resoluciones del Pleno, junio de 2026)",
-    "retrieved": "2026-11-11",
-    "quote": "G48103956 25/04/2024 relación con el art. 19 de la 5.000,00",
-    "quote_lang": "es",
-    "locator": "tabla, p. 9"
-   },
-   "extra_sources": [],
-   "part": "events_electoral_audit",
-   "coverage": {
-    "type": "census",
-    "family": "tcu_sancion"
-   }
-  },
-  {
    "event_id": "greco-4-ronda-psoe-sumar-2024",
    "title": "GRECO, cuarta ronda (España): bloqueo del CGPJ, «preocupación crítica» bajo el Gobierno Sánchez III",
    "body": "GRECO (Consejo de Europa)",
@@ -3446,7 +3284,7 @@
      "party_id": "sumar",
      "role": "national_government",
      "attribution": "government_act",
-     "lineage": "list",
+     "lineage": "same",
      "power_only": true,
      "note": "Sumar, socio del Gobierno Sánchez III (PSOE-Sumar) a la fecha de adopción"
     }
@@ -3485,7 +3323,7 @@
    "date": "2024-06-27",
    "act_date": "2024-04-10",
    "act": "Visitas a centros sanitarios del 10 al 22 de abril de 2024 y su difusión en la cuenta institucional del Departament (art. 50.2 y 50.3 LOREG)",
-   "status": "firme en vía administrativa-electoral; no consta en fuente oficial consultada recurso pendiente ante el Tribunal Supremo",
+   "status": "firme: el Tribunal Supremo desestimó el recurso (STS 90/2025, según la ficha del acuerdo en la JEC)",
    "attributions": [
     {
      "party_id": "erc",
@@ -5490,7 +5328,7 @@
     "retrieved": "2026-11-11"
    },
    "n_listed": 12,
-   "n_in_scope": 3,
+   "n_in_scope": 2,
    "chapters_read": "7 de 7",
    "chapters": [
     {
@@ -5587,9 +5425,9 @@
      "ref": "rolr-2021-ley-seguridad-ciudadana",
      "year": 2021,
      "act": "LO 4/2015 de seguridad ciudadana",
-     "in_scope": true,
-     "reason": "La Comisión pide que la reforma tenga en cuenta la opinión de la Comisión de Venecia",
-     "event_id": "rolr-2021-ley-seguridad-ciudadana"
+     "in_scope": false,
+     "reason": "la preocupación se recoge en la sección de sociedad civil; no encaja en el indicador «medios»",
+     "event_id": null
     },
     {
      "ref": "rolr-2022-ley-comunicacion-audiovisual-recursos",
@@ -6300,10 +6138,10 @@
      "ref": "STC 156/2021",
      "date": "2021-09-16",
      "subject": "Real Decreto-ley 1/2017",
-     "outcome": "anula preceptos",
-     "in_scope": true,
-     "reason": "resumen de doctrina del BOE: nulidad por los límites del decreto ley",
-     "event_id": "stc-156-2021-decreto-ley-1-2017"
+     "outcome": "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilita",
+     "in_scope": false,
+     "reason": "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilita",
+     "event_id": null
     },
     {
      "ref": "STC 9/2023",
@@ -6496,7 +6334,7 @@
     }
    ],
    "n_listed": 91,
-   "n_in_scope": 23,
+   "n_in_scope": 22,
    "part": "events_census_tc_decreto_ley"
   },
   {
@@ -7267,8 +7105,8 @@
      "subject": "PARTIDO NACIONALISTA VASCO (PNV) · contabilidad ordinaria",
      "outcome": "Sanción: 5.000,00 €; recurso desestimado",
      "in_scope": true,
-     "reason": "sanción firme de una unidad del Congreso",
-     "event_id": "tcu-2024-pnv-deber-colaboracion"
+     "reason": "sanción por falta de colaboración: fuera del codebook (no es financiación irregular)",
+     "event_id": null
     },
     {
      "ref": "ord#81 G86867108",
@@ -12753,8 +12591,8 @@
      "subject": "Grupo Parlamentario Popular (proposición de LO 15/2015)",
      "outcome": "Opinión sobre la reforma de la LOTC de 2015: recomendaciones sobre la ejecución de sentencias",
      "in_scope": true,
-     "reason": "Opinión sobre una ley concreta, atribuible al grupo que la propuso",
-     "event_id": "venice-2017-ley-tc"
+     "reason": "desaconseja los poderes pero no constata que la ley debilite la independencia del TC (§78)",
+     "event_id": null
     },
     {
      "ref": "CDL-AD(2021)004",
@@ -12833,52 +12671,6 @@
    "membership_source": {
     "url": "https://www.congreso.es/webpublica/opendata/diputados/odsDiputados08__20261111050416.csv",
     "quote": "Presidente Provincial del PP (1990-1993). Presidente Regional (desde 1993)."
-   },
-   "part": "pending_findings"
-  },
-  {
-   "pending_id": "pp-granados-punica-pieza-7-2026",
-   "party_id": "pp",
-   "role": "regional_government",
-   "person": "Francisco Granados, consejero de Presidencia de la Comunidad de Madrid y exalcalde de Valdemoro (PP)",
-   "body": "Audiencia Nacional, Sala de lo Penal, Sección Primera",
-   "date": "2026-07-02",
-   "finding": "2 años y 6 meses de prisión por fraude continuado y prevaricación (Púnica, pieza 7, contratos a Waiter Music 2007-2014)",
-   "indicator": "corrupcion",
-   "appeal": "Sentencia de la Sala de lo Penal de la AN, recurrible ante su Sala de Apelación; la nota del CGPJ no indica recurso ni firmeza y no se ha hallado resolución posterior a 2026-11-11. Fecha = nota del CGPJ.",
-   "source": {
-    "url": "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/La-Audiencia-Nacional-condena-a-dos-anos-y-seis-meses-de-carcel-al-exconsejero-de-la-Presidencia-de-la-Comunidad-de-Madrid-Francisco-Granados-por-delitos-de-fraude-continuado-y-prevaricacion",
-    "title": "La Audiencia Nacional condena a dos años y seis meses de cárcel al exconsejero de la Presidencia de la Comunidad de Madrid Francisco Granados (CGPJ, 02/07/2026)",
-    "retrieved": "2026-11-11",
-    "quote": "a 2 años y 6 meses de cárcel por delitos de fraude continuado y prevaricación",
-    "quote_lang": "es"
-   },
-   "membership_source": {
-    "url": "https://ctyp.asambleamadrid.es/static/doc/opendata/OAD.OPENDATA_DIPUTADOS_VIEW.csv",
-    "quote": "GRANADOS LERENA,Grupo Parlamentario Popular de la Asamblea de Madrid."
-   },
-   "part": "pending_findings"
-  },
-  {
-   "pending_id": "psoe-gallardo-diputacion-badajoz-2026",
-   "party_id": "psoe",
-   "role": "local_government",
-   "person": "Miguel Ángel Gallardo, presidente de la Diputación de Badajoz (PSOE)",
-   "body": "Audiencia Provincial de Badajoz, Sección Primera",
-   "date": "2026-07-14",
-   "finding": "Dos delitos de prevaricación administrativa, 9 años de inhabilitación por cada uno (plaza de David Sánchez); absuelto del resto",
-   "indicator": "corrupcion",
-   "appeal": "Primera instancia de la AP (PA 51/2025), recurrible en apelación ante la Sala Civil y Penal del TSJ de Extremadura; la nota del CGPJ no indica recurso ni firmeza y no se ha hallado resolución posterior a 2026-11-11. Fecha = nota del CGPJ.",
-   "source": {
-    "url": "https://www.poderjudicial.es/portal/site/cgpj/menuitem.65d2c4456b6ddb628e635fc1dc432ea0/?vgnextoid=915d8c66e106f910VgnVCM1000004648ac0aRCRD",
-    "title": "La Audiencia de Badajoz condena a penas de inhabilitación a los acusados en la causa por la plaza de coordinador de los conservatorios en la Diputación pacense (CGPJ, 14/07/2026)",
-    "retrieved": "2026-11-11",
-    "quote": "como autor de dos delitos de prevaricación administrativa",
-    "quote_lang": "es"
-   },
-   "membership_source": {
-    "url": "https://www.dip-badajoz.es/cultura/archivo/historico_diputados/consulta_ficha.php?id=1013",
-    "quote": "Partido Político: Partido Socialista Obrero Español Cargos de Gobierno: Presidente"
    },
    "part": "pending_findings"
   },

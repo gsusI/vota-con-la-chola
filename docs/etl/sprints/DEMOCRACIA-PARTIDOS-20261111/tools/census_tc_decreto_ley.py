@@ -41,6 +41,7 @@ SEARCH_PARAMS = [
 SEARCH_URL = "https://www.boe.es/buscar/boe.php?" + urllib.parse.urlencode(SEARCH_PARAMS)
 # Ground coding (read from the BOE doctrine summary and, where it lists several doctrines, the reasoning's conclusion).
 GROUND = {
+    "156/2021": ("out", "nulidad por igualdad (art. 14) y tutela judicial (art. 24); el FJ 5 confirma el presupuesto habilitante (revisión completa)"),
     "1/2012": ("out", "nulidad por distribución de competencias en medio ambiente (Real Decreto-ley 9/2000), no por el art. 86"),
     "63/2017": ("out", "nulidad por competencias (funciones ejecutivas de la Organización Nacional de Trasplantes), no por el art. 86"),
     "182/2013": ("out", "nulidad por distribución de competencias (informe autonómico), no por el art. 86"),
@@ -126,10 +127,10 @@ def main() -> int:
         n, y = c["number"].split("/")
         events.append({
             "event_id": f"stc-{n}-{y}-decreto-ley-{rdl.group(1).replace('/', '-')}",
-            "title": f"STC {c['number']}: anula preceptos del Real Decreto-ley {rdl.group(1)} por los límites del decreto ley",
+            "title": f"STC {c['number']}: anula {'el' if full else 'preceptos del'} Real Decreto-ley {rdl.group(1)} por los límites del decreto ley",
             "body": "Tribunal Constitucional", "finding_type": "court_annulment_full" if full else "court_annulment_partial",
             "indicator": "contrapesos", "severity": 3 if full else 2, "date": c["ruled"], "act_date": rdl_date,
-            "act": f"Real Decreto-ley {rdl.group(1)}, de {rdl.group(3)} (preceptos anulados según el fallo)",
+            "act": f"Real Decreto-ley {rdl.group(1)}, de {rdl.group(3)}" + ("" if full else " (preceptos anulados según el fallo)"),
             "status": "firme",
             "attributions": [{"party_id": p, "role": "national_government", "attribution": "government_act", "lineage": lin, "power_only": True, "note": note}
                              for p, lin, note in gov(rdl_date)],

@@ -131,7 +131,7 @@ class OutputTest(unittest.TestCase):
 
     def test_csv_carries_coverage(self):
         head = (REPO / "ui/site/public/visualizaciones/data/democracia-partidos.csv").read_text(encoding="utf-8").splitlines()[0]
-        self.assertTrue(head.startswith("event_id,coverage,coverage_family"))
+        self.assertTrue(head.startswith("event_id,review,coverage,coverage_family"))
 
     def test_composite_only_when_no_reversal(self):
         s = self.data["sensitivity"]
@@ -154,6 +154,12 @@ class OutputTest(unittest.TestCase):
         self.assertEqual(years, list(range(1979, years[-1] + 1)))
         self.assertTrue(all(s["rdl"] >= 0 for s in d["series"]))
         self.assertEqual(sum(s["rdl"] for s in d["series"]), sum(g["rdl"] for g in d["by_government"]))
+
+    def test_every_published_item_verified(self):
+        items = self.data["events"] + self.data["pending"]
+        bad = [x.get("event_id") or x.get("pending_id") for x in items if x["review"]["status"] != "verified"]
+        self.assertEqual(bad, [], "items without an independent verified review")
+        self.assertEqual(self.data["meta"]["review"]["verified"], len(items))
 
     def test_size_budget(self):
         self.assertLess(OUT.stat().st_size, 1_500_000)

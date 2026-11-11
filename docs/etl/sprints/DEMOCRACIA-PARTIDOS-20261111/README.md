@@ -219,7 +219,7 @@ weightings (ties allowed). Otherwise the page publishes profiles without a compo
 | Decree-law annulled under art. 86 CE (PP vs PSOE) | `stc-61-2018-rdl-5-2013` (contrapesos, 2) | `stc-14-2020-rdl-7-2019` (contrapesos, 2) | same |
 | Decree-law on the RTVE board (PP vs PSOE) | `stc-150-2017-rtve-rdl-15-2012` (contrapesos, 2) | `stc-134-2021-rtve-rdl-4-2018` (contrapesos, 2) | same |
 | GRECO, recommendations not implemented (PP vs PSOE) | `greco-4-ronda-pp` (contrapesos, 1) | `greco-4-ronda-psoe` (contrapesos, 1) | same (after recoding) |
-| Venice Commission on a bill of the governing group (PP vs PSOE) | `venice-2017-ley-tc` (justicia, 1) | `venice-2024-amnistia` (contrapesos, 1) | same severity; indicator differs by subject (powers of the Constitutional Court vs legislative procedure), as the definitions require |
+| Venice Commission on a bill of the governing group (PP vs PSOE) | `venice-2017-ley-tc` (removed in the full review: no finding that the law weakened the Constitutional Court) | `venice-2024-amnistia` (contrapesos, 1) | pair no longer comparable; the PP side has `venice-2021-ley-seguridad-ciudadana` (libertades, 1) |
 | Electoral-board sanction of a head of government (PSOE vs PP) | `jec-2023-575-sanchez-rueda-prensa-consejo-europeo` (reglas, 2) | `jec-2021-390-ayuso-campana-logros` (reglas, 2) | same |
 | Electoral-board sanction of a regional president (ERC vs Junts) | `jec-2023-576-aragones-movilidad-maresme` (reglas, 2) | `jec-2019-500-torra-lazos-amarillos` (reglas, 2) | same |
 | Firm prison conviction of an office holder for corruption (PP vs PSOE) | `sts-507-2020-gurtel` (corrupcion, 3) | `sts-erea-749-2022` (corrupcion, 3) | same |
@@ -239,13 +239,13 @@ CSV carries `coverage` and `coverage_family`.
 
 | Family | What | Listed | In scope | Events | Attributed (counted lineages) |
 |---|---|---|---|---|---|
-| `greco` | Informes de cumplimiento de GRECO sobre España | 11 | 9 | 9 | psoe 7 · sumar 3 · podemos 3 · pp 2 |
+| `greco` | Informes de cumplimiento de GRECO sobre España | 11 | 9 | 9 | psoe 7 · podemos 3 · sumar 3 · pp 2 |
 | `jec_sancion` | Sanciones de la Junta Electoral Central a partidos y miembros de Gobiernos | 92 | 28 | 28 | psoe 13 · pp 7 · erc 3 · junts 3 · bildu 1 · vox 1 |
-| `rolr` | Capítulos de España del Informe sobre el Estado de Derecho | 12 | 3 | 3 | psoe 2 · podemos 2 · pp 1 |
-| `tc_decreto_ley` | Decretos-leyes anulados por el Tribunal Constitucional (art. 86) | 91 | 23 | 23 | pp 15 · psoe 8 · podemos 3 |
+| `rolr` | Capítulos de España del Informe sobre el Estado de Derecho | 12 | 2 | 2 | psoe 2 · podemos 2 |
+| `tc_decreto_ley` | Decretos-leyes anulados por el Tribunal Constitucional (art. 86) | 91 | 22 | 22 | pp 14 · psoe 8 · podemos 3 |
 | `tc_estado_alarma` | Estados de alarma ante el Tribunal Constitucional | 3 | 3 | 2 | psoe 2 · podemos 2 |
-| `tcu_sancion` | Sanciones del Tribunal de Cuentas a partidos | 687 | 541 | 5 | bildu 1 · pnv 1 · psoe 1 |
-| `venecia` | Dictámenes de la Comisión de Venecia sobre España | 4 | 3 | 3 | pp 2 · psoe 1 |
+| `tcu_sancion` | Sanciones del Tribunal de Cuentas a partidos | 687 | 541 | 4 | bildu 1 · psoe 1 |
+| `venecia` | Dictámenes de la Comisión de Venecia sobre España | 4 | 3 | 2 | psoe 1 · pp 1 |
 
 | Family | What | Type | Items |
 |---|---|---|---|
@@ -255,7 +255,7 @@ CSV carries `coverage` and `coverage_family`.
 
 How each list was built (deterministic listing first, agents only to code):
 - `tc_decreto_ley`: `tools/census_tc_decreto_ley.py` (BOE search, TC section, titles with «Real Decreto-ley», 2012-2026:
-  267 documents → 91 rulings citing decree-law limits → fallo read → 23 annul on art. 86 grounds; the 7 annulments on
+  267 documents → 91 rulings citing decree-law limits → fallo read → 22 annul on art. 86 grounds; the 8 annulments on
   competence or other grounds are out, each with its reason in `evidence/census-tc-decreto-ley.json`). Attribution by
   the decree-law's date. Rulings before 2012 are outside the window, so the Zapatero governments are only partly covered;
   recent decree-laws may still be pending (lag), stated on the page with annulments per decree-laws issued.
@@ -293,6 +293,27 @@ borderline); one act_date is the date the act stopped.
 Decree-law framing (coordinator point 5): tile and section now give decree-laws and laws per month by government
 (1.99 and 1.72 a month since 2018; 0.80-1.79 and 2.40-5.85 before) and a counterfactual split: with only decree-laws at
 today's pace the share would be 34 %, with only laws at today's pace 40 %; the fall in laws moves it more.
+
+## 6. Full review coverage (coordinator, 2026-11-11, before deploy)
+
+Every published event and pending item has been checked by an independent reviewer agent given only the item and its
+URLs (date, attribution, coding, quote, firmeness). Items edited after an earlier review were checked again; only the
+latest verdict counts (`REVIEW_ROUNDS` and `CHANGED_AFTER` in the exporter). Each item carries `review` in the JSON
+(status, round, verdict file) and the CSV has a `review` column. Rounds: pilot, scale, targeted, census sample, full
+(9 batches of about 8, `evidence/review-full/`), fix (`evidence/review-fix/`).
+
+Full round, 69 items: 61 verified, 8 failed, 0 attribution errors. What was done with each failure:
+- removed: `stc-156-2021-decreto-ley-1-2017` (annulled on equality and judicial-protection grounds, art. 86 met: out of
+  the decree-law census, now 22), `venice-2017-ley-tc` (no finding that the law weakened the Constitutional Court),
+  `rolr-2021-ley-seguridad-ciudadana` (concern on journalists, not a `medios` finding), `tcu-2024-pnv-deber-colaboracion`
+  (fine for not cooperating with the audit, not irregular financing); pending `pp-granados-punica-pieza-7-2026` and
+  `psoe-gallardo-diputacion-badajoz-2026` (no official record that they are not firm);
+- corrected and re-checked: `greco-4-ronda-pp` (recommendation v «partly implemented», not «not implemented»),
+  `jec-2020-12-sanchez-exhumacion-entrevista` (the fine covers only the 25-10-2019 interview);
+- corrected without changing the checked facts: statuses of six electoral-board sanctions now record the Supreme
+  Court's dismissals; STC 125/2016 title says the whole decree-law was annulled; Sumar lineage `same` everywhere.
+
+Result: **reviewed 94 of 94** published items (91 events, 3 pending), 0 unreviewed, 0 failed, 0 attribution errors in the final state; enforced by `test_every_published_item_verified`. Sensitivity test on 69 census items: 85 reversals, no composite.
 
 ## 4. Status
 
