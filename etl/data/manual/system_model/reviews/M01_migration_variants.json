@@ -1,0 +1,12 @@
+{
+ "id": "M01_migration_variants",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "Eurostat proj_23nanmig ES total 2025: BSL 324.473, HMIGR 486.047, LMIGR 168.887 (match). Sum 2026-2050: BSL 5.588.205, HMIGR 8.187.972 (+46,52 %), LMIGR 3.006.642 (-46,20 %). Ageing Report fiche p.36 '33% less/more non-EU immigration' verbatim. proj_23np 2050 HMIGR-BSL = +3.574.445 (3,6 M ok); by age 0-15 0,64 M, 16-29 0,64, 30-44 0,94, 45-64 1,00, 65+ 0,36: 16-44 is 44 %, not 'sobre todo'; 16-64 is 72 %.",
+ "corrections": {
+  "note_es": "Según Eurostat (EUROPOP2023), la variante alta oficial (un tercio más de inmigración de fuera de la UE, la del Ageing Report 2024) sube la inmigración neta un 46 % hasta 2050 y añade unos 3,6 millones de residentes en 2050, el 72 % de 16 a 64 años (un 44 % de 16 a 44). El simulador escala esa diferencia en línea recta."
+ }
+}

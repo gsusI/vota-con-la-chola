@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export /visualizaciones/sistema/ (slices 0-2: pensions, public finances, taxes, housing) to sistema.json.
+"""Export /visualizaciones/sistema/ (slices 0-3: pensions, public finances, taxes, housing, employment, immigration and healthcare capacity) to sistema.json.
 
 Inputs, all with sha256 in the output:
 - European Commission, 2024 Ageing Report, statistical annex (country fiches xlsx, raw cache): the official baseline
@@ -13,6 +13,10 @@ Inputs, all with sha256 in the output:
 - Housing (slice 2, scripts/system_model_housing.py): the housing page JSON (vivienda.json: completions, census stock,
   tourist dwellings, ECV cells, SERPAVI rents of the typical cases), INE household projection (table 54562, raw
   cache) and Eurostat population 25-34 (raw cache).
+- Employment, immigration and healthcare capacity (slice 3, scripts/system_model_labour.py): EUROPOP2023 population by
+  age and its migration variants, net migration by variant, LFS employment rates by citizenship, national-accounts
+  employees, the Ageing Report annex sheet ESc (health, long-term care, education), the health page JSON (doctors,
+  SISLE waiting list) and the Funcas age profile of health spending.
 
 The engine (ui/site/app/visualizaciones/sistema/engine.mjs) works in deviations from this baseline. When an input is
 missing (CI checkouts) the committed artifact is kept.
@@ -37,6 +41,7 @@ from export_public_viz_fiscal import Store, interp  # noqa: E402
 from ingest_employment_es import xlsx_rows, xlsx_sheet  # noqa: E402
 import system_model_incidence as incidence  # noqa: E402
 import system_model_housing as housing  # noqa: E402
+import system_model_labour as labour  # noqa: E402
 from housing_ecv_microdata import MICRO_PAGE, MICRO_URL  # noqa: E402
 
 DEFAULT_DB = REPO_ROOT / "etl/data/staging/public-finance-es.db"
@@ -59,6 +64,7 @@ VIVIENDA_JSON = DATA_DIR / "vivienda.json"
 INE_PROH = REPO_ROOT / "etl/data/raw/system_model/ine_proh_54562.json"
 INE_PROH_URL = "https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/54562?nult=30"
 EUROSTAT_PJAN = REPO_ROOT / "etl/data/raw/housing/apis/eurostat_demo_pjangroup.json"
+SANIDAD_JSON = DATA_DIR / "sanidad.json"
 OUT_JSON = DATA_DIR / "sistema.json"
 OUT_CSV = DATA_DIR / "sistema.csv"
 
@@ -82,11 +88,18 @@ PARAMS = [
     "cuota_financiacion_publica", "desplazamiento_obra_privada", "absorcion_suelo", "respuesta_alquiler_parque",
     "elasticidad_emancipacion", "personas_por_hogar_nuevo", "hogares_por_inmigrante", "perdida_credito_restringido",
     "elasticidad_precio_credito", "elasticidad_credito_precio", "cuota_credito_nuevo", "sustitucion_alquiler",
+    # slice 3, employment and immigration; slice 4 (capacity), healthcare
+    "cuota_afectados_smi", "cuota_masa_afectados_smi", "elasticidad_empleo_smi", "cuota_afectados_jornada",
+    "elasticidad_empleo_jornada", "compensacion_productividad_jornada", "autonomos_k", "cuota_media_autonomos",
+    "elasticidad_autonomos_cuota", "salario_relativo_inmigrante", "ajuste_empleo_inmigrante", "uso_sanitario_relativo_inmigrante",
+    "cuota_gasto_congestionable", "tipo_implicito_consumo", "propension_consumo", "pension_relativa_inmigrante",
+    "retardo_formacion_medico", "permanencia_sns_medicos", "coste_residente_anual", "capacidad_por_gasto",
+    "elasticidad_demanda_espera", "anios_ajuste_capital",
 ]
 # Model constants from cards (central value, no uncertainty in the engine) or from the law.
 CARD_CONSTANTS = {"new_pension_relative": "new_pension_relative", "labour_output_elasticity": "elasticidad_producto_empleo"}
 BENCHMARKS = ["B01_revaluation_2023_cost", "B02_irp_savings", "B03_dsm_spain", "B04_irpf_concentration",
-              "B05_catalonia_2020", "B06_boom_credit", "B07_tourist_rents"]
+              "B05_catalonia_2020", "B06_boom_credit", "B07_tourist_rents", "B08_smi_2019"]
 
 # Votes in the voting-aid snapshot that touch each lever (matched on the plain-language summary).
 LEVER_VOTES = {
@@ -103,6 +116,16 @@ LEVER_VOTES = {
     "credito": r"(avales públicos|hipotecad|hipotecas? )",
 }
 MAX_VOTES = 12
+VOTE_ATLAS = REPO_ROOT / "ui/site/public/citizen/data/vote_atlas_v1.json"
+CONGRESO_VOTES = "https://www.congreso.es/webpublica/opendata/votaciones/"
+# Slice 3 levers -> vote atlas axis (direction of a Sí, classified on the text voted) and the votes about that very lever.
+ATLAS_LEVERS = {
+    "smi": ("empleo_derechos", r"salario m[ií]nimo|\bSMI\b"),
+    "jornada": ("empleo_derechos", r"jornada|37,5|35 horas|registro horario"),
+    "autonomos": ("autonomos_empresa", r"aut[oó]nom|cuota|tarifa plana"),
+    "inmigracion": ("inmigracion", r"regulariz|inmigra|migra|asilo|menores"),
+    "sanidad": ("sanidad_publica", r"sanidad|sanitari|m[eé]dic|\bMIR\b|listas? de espera|atenci[oó]n primaria|hospital"),
+}
 
 
 def sha256(path: Path) -> str:
@@ -175,6 +198,33 @@ def related_votes(lever: str) -> list[dict]:
     return {"party_labels": labels, "party_order": parties, "votes": rows}
 
 
+def atlas_votes(lever: str) -> dict:
+    """Votes of the Congress vote atlas for a slice-3 lever: those about the lever itself first (summary matches),
+    then the rest of its axis; each with the direction a Sí pushes on the axis, and each party's mean direction."""
+    atlas = json.loads(VOTE_ATLAS.read_text(encoding="utf-8"))
+    axis, rx = ATLAS_LEVERS[lever]
+    parties = [p["party_id"] for p in atlas["parties"]]
+    ax = next(a for a in atlas["axes"] if a["axis_id"] == axis)
+    rows = []
+    for v in atlas["votes"]:
+        on_axis = next((a for a in v.get("axes") or [] if a[0] == axis), None)
+        about = bool(re.search(rx, v.get("summary_yes") or "", re.I))
+        if (v.get("leg") or "15") != "15" or (not on_axis and not (lever == "sanidad" and about)):
+            continue  # XV legislature only, the period of the party scores and of the page's wording
+        rows.append({"id": v["id"], "date": v["date"], "summary": v.get("summary_yes") or "", "kind": v.get("kind"),
+                     "approved": v.get("approved"), "url": CONGRESO_VOTES + v["path"], "leg": v.get("leg") or "15",
+                     "pushes": on_axis[1] if on_axis else None, "about": about,
+                     "parties": {parties[j]: c for j, c in enumerate(v.get("parties") or "") if j < len(parties) and c != "?"}})
+    rows.sort(key=lambda x: (not x["about"], x["date"]), reverse=False)
+    about = sorted([x for x in rows if x["about"]], key=lambda x: x["date"], reverse=True)
+    rest = sorted([x for x in rows if not x["about"]], key=lambda x: x["date"], reverse=True)
+    return {"party_labels": {p["party_id"]: p["label"] for p in atlas["parties"]}, "party_order": parties,
+            "axis": {"id": axis, "label": ax["label"], "pos": ax.get("pos_short"), "neg": ax.get("neg_short"),
+                     "n_votes": sum(1 for x in rows if x["pushes"]),
+                     "party_scores": {p: atlas["party_axes"].get(p, {}).get(axis) for p in parties}},
+            "votes": (about + rest)[:MAX_VOTES], "n_about": len(about)}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -182,7 +232,7 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=OUT_JSON)
     args = parser.parse_args()
     missing = [p for p in (args.db, AR_XLSX, CATALOG, FISCAL_JSON, VOTING_AID, ECV_ZIP, HBS_STR, HBS_EXP, VIVIENDA_JSON,
-                           INE_PROH, EUROSTAT_PJAN) if not p.exists()]
+                           INE_PROH, EUROSTAT_PJAN, SANIDAD_JSON, *labour.INPUTS) if not p.exists()]
     if missing:
         print(f"inputs missing ({', '.join(str(p.relative_to(REPO_ROOT)) for p in missing)}); keeping committed artifact")
         return 0
@@ -199,7 +249,7 @@ def main() -> int:
     int_meur = store.annual("eurostat_sdmx", "D41PAY.S13", "MIO_EUR", "ES")
     main_ = {code: store.annual("eurostat_sdmx", f"{code}.S13", "PC_GDP", "ES") for code in ("TR", "TE", "B9", "D41PAY")}
     pe = {code: store.annual("eurostat_sdmx", code, "THS_PER", "ES") for code in ("EMP_DC", "POP_NC")}
-    cofog_pct = {code: store.annual("eurostat_sdmx", f"{code}.TE.S13", "PC_GDP", "ES") for code in ("GF1002", "GF1003")}
+    cofog_pct = {code: store.annual("eurostat_sdmx", f"{code}.TE.S13", "PC_GDP", "ES") for code in ("GF1002", "GF1003", "GF07", "GF09", "GF0107")}
 
     def tw(measure: str, level: str, unit: str) -> dict[int, float]:
         suffix = "" if measure == "AV_TW" else "._Z"
@@ -357,6 +407,25 @@ def main() -> int:
     if not all(g["ok"] for g in housing_gates):
         raise SystemExit(f"input gate failed: {[g for g in housing_gates if not g['ok']]}")
 
+    # ---- employment, immigration and healthcare capacity (slice 3): baseline inputs from the raw cache
+    sanidad = json.loads(SANIDAD_JSON.read_text(encoding="utf-8"))
+    cofog_year = max(y for y in cofog_pct["GF07"] if y in main_["TE"])
+    cofog = {**{k: v[cofog_year] for k, v in cofog_pct.items()}, "TE": main_["TE"][cofog_year]}
+    labour_inputs, labour_gates = labour.labour_block(years, payload, a["Population (million)"], sanidad, gdp_meur, cofog)
+    labour_inputs["other_spending_year"] = cofog_year
+    labour_inputs["const"] = {
+        "aw_gross": r(aw, 0), "aw_year": cy,
+        # Personal average tax rate (IRPF + worker contributions - cash benefits) at multiples of the average wage.
+        "personal_tax_curve": [[m, r(tw("NPATR", lvl, "PT_WG_EARN_G")[cy] / 100, 4)] for m, lvl in ((0.67, "AW67"), (1.0, "AW100"), (1.67, "AW167"))],
+        "smi_tax_rate": 0.3647,
+        # Revenue other than personal income tax, social contributions and taxes on goods and services (corporate and
+        # property taxes, other levies, non-tax revenue), % of GDP: grows with the output extra workers add.
+        "other_revenue_pct": r(main_["TR"][BASE_YEAR] - sum(fiscal["composition_pct_gdp"][c][-1]["value"] for c in ("T_1100", "T_2100", "T_2200", "T_2300", "T_5000")), 2),
+    }
+    gates.extend(labour_gates)
+    if not all(g["ok"] for g in labour_gates):
+        raise SystemExit(f"input gate failed: {[g for g in labour_gates if not g['ok']]}")
+
     hicp_idx = {int(p["period"]): p["value"] for p in store.series("eurostat_sdmx", "CP00", "INX_A_AVG").get("ES", [])}
     backtest_inputs = {
         "ecv_top20_base_share": ecv["top20_base_share"],
@@ -367,7 +436,7 @@ def main() -> int:
     }
     model = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "slice": "0-2: pensiones, cuentas públicas, impuestos y vivienda",
+        "slice": "0-3: pensiones, cuentas públicas, impuestos, vivienda, empleo, inmigración y capacidad sanitaria",
         "years": years,
         "policy_start": POLICY_START,
         "start": {
@@ -414,6 +483,10 @@ def main() -> int:
             "emancipation_adjust_per_year": "Supuesto: los hogares latentes (jóvenes que se emancipan cuando baja el alquiler) recorren cada año la mitad de la distancia hasta su nuevo nivel.",
             "new_pension_relative": "Pensión media de las altas de jubilación frente a la media de todas (ficha del catálogo).",
             "labour_output_elasticity": "Elasticidad del PIB potencial al empleo en la función de producción de la Comisión (ficha del catálogo).",
+            "smi_tax_rate": "Ingresos por euro de salario en el SMI: cotización empresarial (30,4 %: contingencias comunes, desempleo, FOGASA, FP y MEI) más la del trabajador (6,47 %); el SMI está exento de IRPF.",
+            "aw_gross": "Salario bruto medio de la OCDE (Taxing Wages) del año de los casos tipo: base de los ingresos por trabajador inmigrante, multiplicado por su salario relativo.",
+            "other_revenue_pct": "Ingresos públicos distintos del IRPF, las cotizaciones y los impuestos sobre bienes y servicios (Sociedades, patrimonio, otras tasas e ingresos no tributarios), en % del PIB: ingresos de Eurostat menos las figuras de la OCDE de la página de carga fiscal. Crecen con el PIB que añaden los trabajadores nuevos.",
+            "personal_tax_curve": "Tipo medio personal (IRPF y cotización del trabajador, menos prestaciones) al 67 %, 100 % y 167 % del salario medio, de la OCDE (Taxing Wages); se interpola al salario relativo.",
         },
         "mei_2029": mei["spec"]["central"] if mei else None,
         "cpi_rule": rate_card["card"]["note_es"] if rate_card else None,
@@ -428,10 +501,11 @@ def main() -> int:
         },
         "incidence": incidence_block,
         "housing": housing_inputs,
+        "labour": labour_inputs,
         "edges": cat["cards"],
         "benchmarks": benchmarks,
         "backtest_inputs": backtest_inputs,
-        "votes": {lever: related_votes(lever) for lever in LEVER_VOTES},
+        "votes": {**{lever: related_votes(lever) for lever in LEVER_VOTES}, **{lever: atlas_votes(lever) for lever in ATLAS_LEVERS}},
         "gates": gates,
         "sources": {
             "ageing_report": {"label": "Comisión Europea · Ageing Report 2024, anexo estadístico (fichas por país)",
@@ -465,6 +539,19 @@ def main() -> int:
             "eurostat_pop": {"label": "Eurostat · población por grupo de edad (demo_pjangroup), 25-34 años",
                              "page": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjangroup/default/table",
                              "sha256": sha256(EUROSTAT_PJAN)},
+            "europop": {"label": "Eurostat · proyecciones de población EUROPOP2023 (proj_23np) y migración neta supuesta (proj_23nanmig): base y variantes de inmigración",
+                        "page": "https://ec.europa.eu/eurostat/databrowser/view/proj_23np/default/table", "url": labour.URLS["proj_23np"],
+                        "sha256": sha256(labour.PROJ) + " / " + sha256(labour.NMIG), "retrieved_at": "2026-11-11"},
+            "eurostat_lfs": {"label": "Eurostat · EPA: tasas de empleo por nacionalidad y edad (lfsa_ergan), población y ocupados extranjeros (lfsa_pganws), asalariados y autónomos (nama_10_pe)",
+                             "page": "https://ec.europa.eu/eurostat/databrowser/view/lfsa_ergan/default/table", "url": labour.URLS["lfsa_ergan"],
+                             "sha256": " / ".join(sha256(x) for x in (labour.ERGAN, labour.PGANWS, labour.NAMA_PE)), "retrieved_at": "2026-11-11"},
+            "funcas_perfil": {"label": "Funcas · gasto sanitario público por edad (DT 673, tabla 15, 2008)",
+                              "page": "https://www.funcas.es/documentos_trabajo/distribucion-del-gasto-sanitario-publico-por-edad-y-sexo-en-espana-analisis-de-la-decada-1998-2008/",
+                              "sha256": json.loads(labour.PROFILE.read_text(encoding="utf-8"))["source"]["sha256"]},
+            "sanidad": {"label": "Visualizaciones · Sanidad (médicos en ejercicio, lista de espera quirúrgica del SISLE)", "page": "/visualizaciones/sanidad/",
+                        "file": "/visualizaciones/data/sanidad.json", "sha256": sha256(SANIDAD_JSON), "generated_at": sanidad.get("generated_at")},
+            "vote_atlas": {"label": "Atlas de votaciones del Congreso (ejes por tema; dirección del voto clasificada sobre el texto votado)",
+                           "page": "/citizen/vota/mapa/", "file": "/citizen/data/vote_atlas_v1.json", "sha256": sha256(VOTE_ATLAS)},
             "voting_aid": {"label": "Test de voto v2 (votaciones del Congreso)", "page": "/citizen/vota/",
                            "file": "/citizen/data/voting_aid_generales_v2.json", "sha256": sha256(VOTING_AID)},
         },

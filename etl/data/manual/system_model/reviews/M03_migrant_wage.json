@@ -1,0 +1,10 @@
+{
+ "id": "M03_migrant_wage",
+ "verdict": "pass",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "INE API DATOS_TABLA/28190, Ambos sexos 2024: Total 29.540,26; Española 30.181,14; Otros países 20.568,14; UE28 sin España and Europa menos UE28 empty (match). EES 2022 pdf p.30 quote verbatim, 9,1 % muestra extranjera. s=0,091 -> 23.139 EUR, 0,783; s=0,08 -> 0,75; s=0,10 -> 0,80. Coverage CNAE B-S (no agriculture A, no households T) confirmed in the pdf. Grade A accepted: official data plus a small stated assumption on s.",
+ "corrections": {}
+}

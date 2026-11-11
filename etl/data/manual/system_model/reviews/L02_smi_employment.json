@@ -1,0 +1,19 @@
+{
+ "id": "L02_smi_employment",
+ "verdict": "fix",
+ "source_ok": false,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "BdE DO 2113 pág. 26: 6-11 pp y elasticidad -0,3 a -0,5 (cota superior) ok. Cengiz pág. 4 y 16: +2,8 % (e.e. 2,9), subida media 10,1 % ok. El Español (texto completo leído): NO contiene '0,28 y 0,45 pp (40.000-65.000)', ni 3,5 %/7,4 % ni 0,34-0,53 pp; para 2019 da 45.000-54.000 empleos, 2023 (+8 %) 50.000-61.000 y 2024 (+5 %) 78.000-90.000, y dice que crece el número que cobra el SMI. Elasticidad AIReF recalculada: -0,14 a -0,20, central -0,17.",
+ "corrections": {
+  "sources.1.quote": "El análisis también recoge el impacto de la subida de 2019, que fue del 22,3%. Aquel movimiento costó entre 45.000 y 54.000 empleos.",
+  "sources.1.locator": "cuerpo de la noticia (párrafo sobre la subida de 2019)",
+  "sources.1.period": "2019",
+  "sources.1.value_in_source": "45.000 a 54.000 empleos menos en 2019",
+  "contrary_evidence.2.finding": "La misma crónica atribuye a las subidas de 2023 (+8 %) y 2024 (+5 %) pérdidas de 50.000-61.000 y 78.000-90.000 empleos, mayores que en 2019 con subidas menores, porque cada vez más trabajadores cobran el SMI: la elasticidad no es constante y crece con la cobertura.",
+  "debate.schools.1.central": -0.17,
+  "derivation": "Unidad: % de cambio del empleo de los afectados / % de subida del SMI. (a) BdE: lo da ya en esa unidad, -0,3 a -0,5 (6-11 pp / 22 %); punto medio -0,4; el texto lo presenta como cota superior. (b) AIReF 2026 (vía El Español): 45.000-54.000 empleos en 2019; con 1,2-1,4 millones de contratos afectados (BdE, pág. 22, MCVL 2018): 45/1.400 = -3,2 % a 54/1.200 = -4,5 % del empleo afectado; /22,3 % = -0,14 a -0,20; central 49,5/1.300 = -3,8 % / 22,3 % = -0,17. La normalización por afectados es nuestra y aproximada. (c) Cengiz et al.: +2,8 % / 10,1 % = +0,28 (e.e. 0,29, no significativo); se representa como 0 (sin efecto), que es su conclusión. Central -0,15 (juicio): cerca de AIReF, porque el BdE es cota superior y el efecto nulo es de EE. UU.; bajo -0,5 (BdE), alto 0.",
+  "note_es": "Según el Banco de España, la subida del 22 % del SMI en 2019 redujo el empleo de los afectados entre 6 y 11 puntos (elasticidad -0,3 a -0,5, como máximo); la AIReF estima un efecto menor (unos -0,17) y estudios de EE. UU. no ven efecto. Usamos -0,15 (rango -0,5 a 0). Es un parámetro discutido y crece con el número de asalariados que cobran el SMI."
+ }
+}

@@ -2,6 +2,7 @@
 
 import { LINKS, NODES, nodeValues } from "../CausalMap";
 import { HOUSING_LINKS, HOUSING_NODES, housingValues } from "../HousingMap";
+import { LABOUR_LINKS, LABOUR_NODES, labourValues } from "../LabourMap";
 import { Icon, PAL } from "./art";
 
 // «Why»: the active causal links as a readable chain of steps, each with its icons, the values at both ends and the
@@ -15,9 +16,14 @@ const NODE_ICON = {
   turistica: "suitcase", oferta_alquiler: "key", credito: "mortgage", parque: "building", hogares: "people", alquiler: "key",
   precio: "mortgage", emancipacion: "people", alq_cubierto: "key", alq_libre: "key", p2: "people",
 };
+const LABOUR_ICON = {
+  smi: "coin", hours: "clock", quota: "briefcase", migration: "people", mir: "doctor", hspend: "hospital", low_wages: "payroll",
+  hour_cost: "clock", jobs: "people", self: "briefcase", residents: "people", workers: "factory", revenue: "irpf", services: "hospital",
+  demand: "hospital", doctors: "doctor", capacity: "hospital", list: "clock", budget: "debt",
+};
 // Housing nodes that share an id with the pensions map but mean something else.
 const HOUSING_ICON = { gasto: "building", deuda: "debt", p1: "key", p2: "mortgage", migration: "people" };
-const iconOf = (l, id) => (l.set.prefix === "h" && HOUSING_ICON[id]) || NODE_ICON[id] || "rate";
+const iconOf = (l, id) => (l.set.prefix === "l" && LABOUR_ICON[id]) || (l.set.prefix === "h" && HOUSING_ICON[id]) || NODE_ICON[id] || "rate";
 const GRADE = {
   A: { label: "Evidencia fuerte", note: "contabilidad, ley o datos de España", color: PAL.green },
   B: { label: "Evidencia media", note: "estudios de otros países o meta-análisis", color: PAL.blue },
@@ -26,6 +32,7 @@ const GRADE = {
 };
 const LABEL = Object.fromEntries(NODES.map((n) => [n.id, n.label]));
 const HLABEL = Object.fromEntries(HOUSING_NODES.map((n) => [n.id, n.label]));
+const LLABEL = Object.fromEntries(LABOUR_NODES.map((n) => [n.id, n.label]));
 
 function valueText([v, unit, digits, suffix, text]) {
   if (text) return text;
@@ -42,6 +49,7 @@ export default function Chain({ run, t, levers, edges, selected, onSelect }) {
   const sets = [
     { links: LINKS, values: nodeValues(run, t, levers), label: LABEL, prefix: "m" },
     { links: HOUSING_LINKS, values: housingValues(run, t, levers), label: HLABEL, prefix: "h" },
+    { links: LABOUR_LINKS, values: labourValues(run, t, levers), label: LLABEL, prefix: "l" },
   ];
   const active = sets.flatMap((set) =>
     set.links

@@ -1,0 +1,14 @@
+{
+ "id": "S06_health_age_profile",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": true,
+ "evidence": "Funcas pág. 68 Tabla 15: '80 y más 1900 2193 2610' verbatim; total 982. Reweighted with EUROPOP2023 2025 (proj_23np BSL): mean 1.081 €, 80+ 2,414, 65-79 1,857, 16-29 0,458 (match). AR xlsx hoja ESc: health baseline 2025 5,9168, 2050 7,0325; demographic scenario diff -0,0247 (2025), -0,1453 (2050); -0,1409 is 2049, -0,0596 is 2034. Demographic-scenario growth 2025-2050 = 16,9 %, not 16,8 %.",
+ "corrections": {
+  "derivation": "Pesos por etapa = gasto por persona de cada tramo de 5 años de Funcas (2008) ponderado por la población de 2025 de EUROPOP2023, dividido por la media de toda la población. Con ese perfil y la población base, el gasto sanitario en % del PIB crecería un 15,5 % de 2025 a 2050 solo por edad, frente al 16,9 % del escenario demográfico del Ageing Report ((7,0325 − 0,1453)/(5,9168 − 0,0247) − 1; puerta con tolerancia de 5 puntos). Los rangos son ±8 % por la antigüedad del perfil (supuesto).",
+  "note_es": "Según Funcas (perfil de 2008), una persona de 80 o más años usa unas 2,4 veces el gasto sanitario público medio y una de 16 a 29, menos de la mitad. Con ese perfil, el envejecimiento sube el gasto sanitario un 15,5 % en % del PIB hasta 2050; el Ageing Report da un 16,9 %.",
+  "sources.1.value_in_source": "gasto sanitario 5,92 % del PIB en 2025 y 7,03 % en 2050 (base); escenario demográfico −0,0247 puntos frente a la base en 2025 y −0,1453 en 2050 (−0,1409 en 2049): 5,89 % → 6,89 %, +16,9 %"
+ }
+}

@@ -390,6 +390,137 @@
    "part_file": "part_housing_demand.json"
   },
   {
+   "id": "B08_smi_2019",
+   "from": "smi",
+   "to": "empleo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "empleo_perdido_smi_2019",
+    "unit": "miles de empleos menos (o no creados) por la subida del SMI de 2019 (+22,3 %), según cada estimación publicada",
+    "low": 0,
+    "central": 38,
+    "high": 143
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva / Banco de España (2021)",
+     "country": "España",
+     "period": "2018-2019",
+     "method": "diferencias en el crecimiento del empleo de afectados y no afectados (MCVL), cota superior",
+     "locator": "págs. 26-27",
+     "quote": "el incremento del 22 % del SMI habría reducido el empleo neto de los afectados entre 6 pp y 11 pp a final de año.",
+     "value_in_source": "-6 a -11 pp del empleo de los afectados; 0,6 a 1,1 pp del empleo total (cota superior)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113) (revisión de estimaciones previas)",
+     "authors_year": "AIReF (2020), citada por Banco de España (2021)",
+     "country": "España",
+     "period": "2019",
+     "method": "celdas de empleo agregado con incidencia de la MCVL-2019",
+     "locator": "pág. 10",
+     "quote": "Este ejercicio cifraba el impacto en el empleo del régimen general (esto es, sin incorporar los sistemas especiales agrario y de empleados del hogar) en una pérdida de entre 0,13 puntos porcentuales (pp) y 0,23 pp",
+     "value_in_source": "0,13 a 0,23 pp de empleo en 2019 (entre 19.000 y 33.000 afiliados)"
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "Las subidas del salario mínimo causaron destrucción de empleos, según la AIReF (El Español, 30-5-2026)",
+     "authors_year": "AIReF (2026), vía prensa",
+     "country": "España",
+     "period": "2019",
+     "method": "evaluación ex post de AIReF (informe no leído directamente: airef.es falla TLS)",
+     "locator": "cuerpo de la noticia",
+     "quote": "El análisis también recoge el impacto de la subida de 2019, que fue del 22,3%. Aquel movimiento costó entre 45.000 y 54.000 empleos.",
+     "value_in_source": "45.000 a 54.000 empleos (2019)"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "The Effect of Minimum Wages on Low-Wage Jobs: Evidence from the United States Using a Bunching Estimator (NBER WP 25434)",
+     "authors_year": "Cengiz, Dube, Lindner y Zipperer (2019)",
+     "country": "Estados Unidos",
+     "period": "1979-2016",
+     "method": "estimador de bunching sobre 138 subidas estatales",
+     "locator": "abstract",
+     "quote": "We find that the overall number of low-wage jobs remained essentially unchanged over five years following the increase.",
+     "value_in_source": "efecto nulo sobre el número de empleos de salario bajo"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva / Banco de España (2021)",
+     "country": "España",
+     "period": "2016-2018",
+     "method": "recuento de contratos en la MCVL",
+     "locator": "pág. 22 (y pág. 16: 10 % de las relaciones laborales)",
+     "quote": "de alrededor de 1,6 millones de contratos en enero de 2016 a entre 1,2 millones y 1,4 millones en 2018.",
+     "value_in_source": "1,2 a 1,4 millones de contratos afectados en 2018"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "Cengiz et al. (2019)",
+     "finding": "En EE. UU., tras 138 subidas estatales del salario mínimo el número de empleos de salario bajo apenas cambió en cinco años."
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Gabinete Económico de CC. OO. (2019), resumido por Banco de España DO 2113, pág. 10",
+     "finding": "Con flujos de la EPA del primer trimestre de 2019, la probabilidad de seguir ocupado de los asalariados con pocos estudios no empeoró tras la subida: no se observó destrucción de empleo hasta ese trimestre."
+    }
+   ],
+   "debate": {
+    "id": "empleo_perdido_smi_2019",
+    "schools": [
+     {
+      "label": "Sin efecto apreciable (método de Cengiz et al.; CC. OO. 2019 con la EPA)",
+      "central": 0,
+      "source_index": 3
+     },
+     {
+      "label": "AIReF 2020, ex post régimen general (19-33 mil)",
+      "central": 26,
+      "source_index": 1
+     },
+     {
+      "label": "AIReF 2026, reevaluación (45-54 mil)",
+      "central": 49.5,
+      "source_index": 2
+     },
+     {
+      "label": "Banco de España 2021, cota superior (6-11 pp de los afectados)",
+      "central": 110,
+      "source_index": 0
+     }
+    ]
+   },
+   "extra_parameters": [
+    {
+     "name": "afectados_smi_2019",
+     "unit": "miles de contratos por cuenta ajena con base de cotización igual o inferior al nuevo SMI de 2019 (MCVL, 2018)",
+     "low": 1200,
+     "central": 1300,
+     "high": 1400,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Estimaciones en miles de empleos: CC. OO./Cengiz 0; AIReF 2020 19-33 (punto medio 26); AIReF 2026 45-54 (49,5); Banco de España DO 2113 cota superior: 6-11 pp del empleo de los afectados x ~1.300 mil afectados (pág. 22) = 78-143 mil (equivale a sus 0,6-1,1 pp del empleo total si los afectados son el 10 %). Ex ante (no ex post, no entran en la mediana): AIReF 2018 ~24 mil; Lacuesta et al. 2019 hasta 0,8 % del empleo a tiempo completo (~128 mil usando la base implícita de AIReF, 24 mil = 0,15 %); BBVA Research 75-195 mil en 2019-2020. Central = mediana de las cuatro estimaciones ex post (0; 26; 49,5; 110) = 37,75, redondeado a 38. Bajo 0, alto 143 (extremo de la cota superior del BdE). La conversión del BdE a miles es nuestra. El informe de AIReF 2026 se cita vía prensa (no leído). Grado B y no A: todas usan datos españoles pero discrepan por método.",
+   "note_es": "Según las estimaciones publicadas sobre la subida del SMI de 2019 (+22,3 %), el empleo perdido o no creado va de ningún efecto visible (CC. OO., EPA solo hasta el primer trimestre) a 19.000-33.000 (AIReF 2020), 45.000-54.000 (AIReF 2026, vía prensa) y hasta 78.000-143.000 como cota superior del Banco de España. La mediana es unos 38.000. Afectaba a 1,2-1,4 millones de contratos.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BdE DO 2113: pág. 26 '6 pp y 11 pp' (cota superior), pág. 27 0,6-1,1 pp del empleo total, pág. 10 AIReF 0,13-0,23 pp (19.000-33.000) y CC. OO. sin impacto 'hasta el primer trimestre de 2019', pág. 22 1,2-1,4 millones, pág. 16 10 %. El Español: 2019 +22,3 %, 45.000-54.000 empleos. Cengiz pág. 2 ok. Mediana 37,75 ok. Defectos: título real del DO es otro y el sexto autor es Villanueva, no Soler; la nota da 'cero' de CC. OO. sin decir que solo cubre el 1T 2019."
+   },
+   "part_file": "part_labour_w3.json"
+  },
+  {
    "id": "E01_pension_turnover",
    "from": "revalorizacion_real",
    "to": "pension_media",
@@ -1489,6 +1620,1667 @@
    "derivation": "El simulador usa la serie anual de la sensibilidad oficial (anexo estadístico, hoja ESb) y le resta su valor de 2025, porque el escenario oficial arranca en 2023.",
    "note_es": "Según el Ageing Report 2024, con un tercio menos de inmigración el gasto en pensiones sería 1,4 puntos de PIB mayor en 2050; con un tercio más, 1,1 puntos menor: más ocupados y más PIB.",
    "part_file": "part_core.json"
+  },
+  {
+   "id": "L01_smi_affected",
+   "from": "smi",
+   "to": "salarios_bajos",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_smi",
+    "unit": "parte de los asalariados cuyo salario sube directamente al subir el SMI (en el SMI de 2025 o cerca)",
+    "low": 0.1,
+    "central": 0.127,
+    "high": 0.15
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3759",
+     "title": "El Gobierno aprueba subir el SMI 2025 a 1.184 euros mensuales en 14 pagas (nota de prensa)",
+     "authors_year": "Ministerio de Trabajo y Economía Social (2025)",
+     "country": "España",
+     "period": "2025",
+     "method": "estimación oficial de perceptores directos (método no detallado en la nota)",
+     "locator": "pág. 1, subtítulos",
+     "quote": "La medida beneficiará de forma directa a unos 2,4 millones de personas trabajadoras",
+     "value_in_source": "2,4 millones de perceptores directos del SMI 2025 (1.184 €/mes x 14 = 16.576 €/año)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documento Ocasional 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Roldán, Banco de España (2021)",
+     "country": "España",
+     "period": "dic. 2018 (SMI 2019)",
+     "method": "registros MCVL con base de cotización igual o inferior al nuevo SMI",
+     "locator": "pág. 16",
+     "quote": "En concreto, en diciembre de 2018, un 10 % de las relaciones laborales presentaban bases de cotización igual o por debajo de la referencia del SMI-19",
+     "value_in_source": "10 % de las relaciones laborales (SMI 2019, 900 €/mes x 14); 4 % con el SMI 2018"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65132",
+     "title": "EPA. Ocupados por sexo, situación profesional y tipo de jornada (tabla 65132)",
+     "authors_year": "INE (2025)",
+     "country": "España",
+     "period": "2025T1-2025T4",
+     "method": "encuesta (EPA), miles de personas",
+     "locator": "serie Total asalariados, Ambos sexos, Total",
+     "quote": "Total Nacional. Ocupados. Ambos sexos. Total asalariados. Total. Valor absoluto.",
+     "value_in_source": "18.499,2; 18.978,6; 19.107,8; 19.159,1 miles (media 2025: 18.936,2)"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28186",
+     "title": "Encuesta Anual de Estructura Salarial. Salario medio bruto por ocupación (tabla 28186)",
+     "authors_year": "INE (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "encuesta (EES), euros/año por trabajador",
+     "locator": "Todas las ocupaciones, Ambos sexos, 2024",
+     "quote": "Todas las ocupaciones. Ambos sexos. Salario medio bruto. Total Nacional. Dato base.",
+     "value_in_source": "29.540,26 € anuales (2024); 28.049,94 € (2023)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Banco de España DO 2113 (pág. 16)",
+     "finding": "La cuota depende mucho del nivel y del tamaño de la subida: con el SMI de 2018 solo el 4 % de las relaciones laborales estaba en el SMI o por debajo, frente al 10 % tras la subida del 22 % de 2019; mide relaciones laborales (MCVL), no personas."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "cuota_masa_afectados_smi",
+     "unit": "parte de la masa salarial total que ganan los afectados por el SMI",
+     "low": 0.04,
+     "central": 0.06,
+     "high": 0.085,
+     "grade": "C"
+    }
+   ],
+   "derivation": "Cuota: 2,4 millones de perceptores directos (nota del Ministerio, SMI 2025) / 18,936 millones de asalariados (media EPA 2025T1-T4, tabla INE 65132) = 0,127. El Ministerio no explica en la nota su método ni su denominador (AIReF e inclusion.gob.es no accesibles desde aquí; el informe de la Comisión asesora no se ha leído). Contraste: Banco de España DO 2113 halla un 10 % de relaciones laborales (MCVL) en o bajo el SMI 2019, nivel relativo algo menor. Rango: 0,10 (BdE 2019) a 0,15 (si el Ministerio usa un denominador menor, p. ej. afiliados del régimen general o asalariados del sector privado). Extra cuota_masa: no publicada; aproximación = cuota x SMI anual / salario medio EES 2024 = 0,127 x 16.576 / 29.540,26 = 0,071, cota superior porque muchos afectados trabajan a tiempo parcial o parte del año y ganan menos que el SMI anual completo; central 0,06 suponiendo que ganan de media el 85 % del SMI anual (supuesto); bajo 0,10 x 0,56 x 0,7 = 0,04; alto 0,15 x 0,561 = 0,085.",
+   "note_es": "Según el Ministerio de Trabajo, la subida del SMI de 2025 (1.184 € x 14) llega de forma directa a unos 2,4 millones de personas, alrededor del 12,7 % de los asalariados de la EPA de 2025; el Banco de España halló un 10 % con el SMI de 2019. El método del Ministerio no está publicado en la nota y la parte de la masa salarial (≈6 %) es una aproximación.",
+   "part_file": "part_labour_w1.json"
+  },
+  {
+   "id": "L02_smi_employment",
+   "from": "smi",
+   "to": "empleo_afectados_smi",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_smi",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de subida real del SMI",
+    "low": -0.5,
+    "central": -0.15,
+    "high": 0
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva, Banco de España (2021)",
+     "country": "España",
+     "period": "2018-2019 (subida del SMI de 2019, +22,3 %)",
+     "method": "diferencias en diferencias con MCVL y afiliación (afectados frente a salarios algo superiores)",
+     "locator": "pág. 26, sección 5 (ejercicios de robustez, gráfico 6)",
+     "quote": "habría reducido el empleo neto de los afectados entre 6 pp y 11 pp a final de año. Este impacto equivaldría a una elasticidad del empleo de los afectados de entre –0,3 y –0,5",
+     "value_in_source": "-6 a -11 pp de empleo de los afectados; elasticidad -0,3 a -0,5 (cota superior del impacto)"
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "Las subidas del salario mínimo causaron la destrucción de miles de empleos, según la AIReF (crónica del informe de la AIReF sobre la regla de gasto de las pensiones)",
+     "authors_year": "El Español, sobre AIReF (30-5-2026)",
+     "country": "España",
+     "period": "2019",
+     "method": "estimación ex post de la AIReF (afiliación); fuente secundaria de prensa, el PDF de airef.es no se pudo abrir (TLS)",
+     "locator": "cuerpo de la noticia (párrafo sobre la subida de 2019)",
+     "quote": "El análisis también recoge el impacto de la subida de 2019, que fue del 22,3%. Aquel movimiento costó entre 45.000 y 54.000 empleos.",
+     "value_in_source": "45.000 a 54.000 empleos menos en 2019"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "The Effect of Minimum Wages on Low-Wage Jobs: Evidence from the United States Using a Bunching Estimator (NBER WP 25434; QJE 2019)",
+     "authors_year": "Cengiz, Dube, Lindner y Zipperer (2019)",
+     "country": "Estados Unidos",
+     "period": "1979-2016 (138 subidas estatales)",
+     "method": "estimador de bunching sobre la distribución de salarios (empleos que faltan bajo el nuevo mínimo frente a empleos en exceso justo encima)",
+     "locator": "pág. 4 (introducción) y pág. 16 (resultado principal)",
+     "quote": "the employment for affected workers rose by a statistically insignificant 2.8% (s.e. 2.9%)",
+     "value_in_source": "+2,8 % de empleo afectado (e.e. 2,9 %) ante una subida media del mínimo del 10,1 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/papers/w28388",
+     "title": "Myth or Measurement: What Does the New Minimum Wage Research Say about Minimum Wages and Job Loss in the United States? (Neumark y Shirley, 2021/2022)",
+     "finding": "Revisión de la literatura de EE. UU.: la mayoría de estudios encuentra efectos negativos; elasticidad media -0,14 según la cita del Banco de España (do2113, nota 26); no leído directamente aquí. Contradice la escuela del efecto nulo."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "Cengiz et al. (2019), misma fuente",
+     "finding": "Los propios autores del efecto nulo hallan «some evidence of reduced employment in tradable sectors»: en sectores expuestos a competencia sí hay pérdida de empleo."
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "AIReF (2026) según El Español",
+     "finding": "La misma crónica atribuye a las subidas de 2023 (+8 %) y 2024 (+5 %) pérdidas de 50.000-61.000 y 78.000-90.000 empleos, mayores que en 2019 con subidas menores, porque cada vez más trabajadores cobran el SMI: la elasticidad no es constante y crece con la cobertura."
+    }
+   ],
+   "debate": {
+    "id": "elasticidad_empleo_smi",
+    "schools": [
+     {
+      "label": "Banco de España: efecto negativo grande (cota superior)",
+      "central": -0.4,
+      "source_index": 0
+     },
+     {
+      "label": "AIReF: efecto negativo moderado",
+      "central": -0.17,
+      "source_index": 1
+     },
+     {
+      "label": "Efecto nulo (bunching, Cengiz et al.)",
+      "central": 0,
+      "source_index": 2
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Unidad: % de cambio del empleo de los afectados / % de subida del SMI. (a) BdE: lo da ya en esa unidad, -0,3 a -0,5 (6-11 pp / 22 %); punto medio -0,4; el texto lo presenta como cota superior. (b) AIReF 2026 (vía El Español): 45.000-54.000 empleos en 2019; con 1,2-1,4 millones de contratos afectados (BdE, pág. 22, MCVL 2018): 45/1.400 = -3,2 % a 54/1.200 = -4,5 % del empleo afectado; /22,3 % = -0,14 a -0,20; central 49,5/1.300 = -3,8 % / 22,3 % = -0,17. La normalización por afectados es nuestra y aproximada. (c) Cengiz et al.: +2,8 % / 10,1 % = +0,28 (e.e. 0,29, no significativo); se representa como 0 (sin efecto), que es su conclusión. Central -0,15 (juicio): cerca de AIReF, porque el BdE es cota superior y el efecto nulo es de EE. UU.; bajo -0,5 (BdE), alto 0.",
+   "note_es": "Según el Banco de España, la subida del 22 % del SMI en 2019 redujo el empleo de los afectados entre 6 y 11 puntos (elasticidad -0,3 a -0,5, como máximo); la AIReF estima un efecto menor (unos -0,17) y estudios de EE. UU. no ven efecto. Usamos -0,15 (rango -0,5 a 0). Es un parámetro discutido y crece con el número de asalariados que cobran el SMI.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BdE DO 2113 pág. 26: 6-11 pp y elasticidad -0,3 a -0,5 (cota superior) ok. Cengiz pág. 4 y 16: +2,8 % (e.e. 2,9), subida media 10,1 % ok. El Español (texto completo leído): NO contiene '0,28 y 0,45 pp (40.000-65.000)', ni 3,5 %/7,4 % ni 0,34-0,53 pp; para 2019 da 45.000-54.000 empleos, 2023 (+8 %) 50.000-61.000 y 2024 (+5 %) 78.000-90.000, y dice que crece el número que cobra el SMI. Elasticidad AIReF recalculada: -0,14 a -0,20, central -0,17."
+   },
+   "part_file": "part_labour_pilot.json"
+  },
+  {
+   "id": "L04_hours_affected",
+   "from": "jornada_maxima",
+   "to": "coste_laboral_hora",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_jornada",
+    "unit": "parte de los asalariados cuya jornada pactada supera 37,5 horas semanales",
+    "low": 0.5,
+    "central": 0.585,
+    "high": 0.7
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3784",
+     "title": "Reducción de la jornada laboral. De 40 a 37,5 horas a la semana (dossier)",
+     "authors_year": "Ministerio de Trabajo y Economía Social (2025)",
+     "country": "España",
+     "period": "2023 (EPA y Estadística de convenios colectivos)",
+     "method": "explotación de la EPA 2023 y de la Estadística de convenios colectivos",
+     "locator": "pág. 2 (beneficiarios) y pág. 9 (reducción media)",
+     "quote": "La reducción de la jornada beneficiará a un total de 12,5 millones de trabajadores del sector privado, 10,5 millones de trabajadores a tiempo completo y 2 millones de trabajadores a tiempo parcial",
+     "value_in_source": "12,5 millones del sector privado: 10.510.000 a tiempo completo y 2.050.000 a tiempo parcial (EPA 2023)"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65132",
+     "title": "EPA. Ocupados por sexo, situación profesional y tipo de jornada (tabla 65132)",
+     "authors_year": "INE (2024)",
+     "country": "España",
+     "period": "2023T1-2023T4",
+     "method": "encuesta (EPA), miles de personas",
+     "locator": "serie Total asalariados (Total y Jornada a tiempo completo), Ambos sexos",
+     "quote": "Total Nacional. Ocupados. Ambos sexos. Total asalariados. Total. Valor absoluto.",
+     "value_in_source": "total: 17.469,6; 17.998,8; 18.249,7; 18.133,7 miles (media 17.963,0); tiempo completo: media 15.433,6 miles"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3784",
+     "title": "Mismo dossier del Ministerio, págs. 8-9 (jornada media pactada por sector, 2023)",
+     "finding": "Según la Estadística de convenios, la reducción media de los afectados es solo del 2,1 % (48 minutos semanales), no del 6,25 % de pasar de 40 a 37,5 h: muchos ya tienen pactadas entre 37,5 y 40 h y algunos sectores (financiero, agua y residuos) ya están por debajo."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "reduccion_media_jornada_afectados",
+     "unit": "reducción media de la jornada de los afectados al bajar el máximo a 37,5 h (fracción)",
+     "low": 0.015,
+     "central": 0.021,
+     "high": 0.0625,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Central: 10,51 millones de asalariados del sector privado a tiempo completo beneficiarios (dossier del Ministerio, EPA 2023) / 17,963 millones de asalariados (media EPA 2023, tabla INE 65132, incluye sector público) = 0,585. Alto: incluyendo los 2,05 millones a tiempo parcial (su salario por hora sube en proporción) 12,56 / 17,963 = 0,699 ≈ 0,70. Bajo 0,50 (juicio): el Ministerio no detalla si usa horas habituales de la EPA o la jornada pactada en convenio; con horas habituales puede contar a quien hace más de 37,5 h sin tenerlas pactadas. Extra: reducción media 2,1 % (pág. 9); alto 6,25 % = (40-37,5)/40 si todos estuvieran a 40 h; bajo 1,5 % juicio. Proyecto de ley rechazado por el Congreso en el debate de totalidad del 10-9-2025 (dato facilitado en el encargo, no releído aquí).",
+   "note_es": "Según el Ministerio de Trabajo (EPA 2023), bajar la jornada máxima a 37,5 h afectaría a 10,5 millones de asalariados privados a tiempo completo (≈58 % de todos los asalariados; 70 % con los 2 millones a tiempo parcial), con un recorte medio del 2,1 % según los convenios. No se sabe si cuenta jornada pactada u horas habituales.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Dossier MITES pág. 2: 12,5 millones (10.510.000 tiempo completo, 2.050.000 parcial, EPA 2023); pág. 8 jornada pactada ≤37,5 h en educación, AAPP, financiero, agua; pág. 9 reducción media 2,1 % (48 min). INE 65132 (API) asalariados 2023: 17.469,6/17.998,8/18.249,7/18.133,7 (media 17.963,0); tiempo completo 15.433,6. 10,51/17,963 = 0,585 y 12,56/17,963 = 0,699 ok. Defecto: la nota afirma la devolución del proyecto el 10-9-2025, que ninguna fuente citada respalda."
+   },
+   "part_file": "part_labour_w1.json"
+  },
+  {
+   "id": "L05_hours_employment",
+   "from": "jornada_maxima",
+   "to": "empleo_afectados_jornada",
+   "sign": "+/-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_jornada",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de reducción de la jornada máxima (con el sueldo mensual mantenido)",
+    "low": -1.6,
+    "central": -0.2,
+    "high": 0.8
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://econpapers.repec.org/article/ucpjpolec/v_3a110_3ay_3a2002_3ai_3a6_3ap_3a1355-1389.htm",
+     "title": "Employed 40 Hours or Not Employed 39: Lessons from the 1982 Mandatory Reduction of the Workweek (Journal of Political Economy 110(6))",
+     "authors_year": "Crépon y Kramarz (2002)",
+     "country": "Francia",
+     "period": "1981-1982",
+     "method": "datos individuales (Enquête Emploi), diferencias entre trabajadores a 40 h y a 36-39 h",
+     "locator": "resumen (EconPapers; artículo completo no leído)",
+     "quote": "Our estimates of the impact of this one-hour reduction on employment losses vary between 2 percent and 4 percent.",
+     "value_in_source": "pérdida de empleo de los afectados +2 a +4 % por una hora menos (de 40 a 39 h)"
+    },
+    {
+     "url": "https://econpapers.repec.org/article/ucpjlabec/v_3a27_3ay_3a2009_3ai_3a4_3ap_3a487-524.htm",
+     "title": "Using Alsace-Moselle Local Laws to Build a Difference-in-Differences Estimation Strategy of the Employment Effects of the 35-Hour Workweek Regulation in France (Journal of Labor Economics 27(4))",
+     "authors_year": "Chemin y Wasmer (2009)",
+     "country": "Francia",
+     "period": "1998-2002",
+     "method": "diferencias en diferencias (Alsacia-Mosela frente al resto de Francia)",
+     "locator": "resumen (EconPapers; artículo completo no leído)",
+     "quote": "Yet it shows no significant difference in employment with the rest of France, which casts doubt on the effectiveness of this regulation.",
+     "value_in_source": "sin diferencia significativa de empleo (efecto ≈ 0)"
+    },
+    {
+     "url": "https://docs.iza.org/dp3723.pdf",
+     "title": "How Working Time Reduction Affects Employment and Earnings (IZA DP 3723; Economics Letters 2010)",
+     "authors_year": "Raposo y van Ours (2008)",
+     "country": "Portugal",
+     "period": "1996-1998",
+     "method": "diferencias en diferencias con datos empleado-empresa (Quadros de Pessoal)",
+     "locator": "resumen y tabla 5 (pág. 16)",
+     "quote": "We also find that the working hours reduction did not lead to an increased job loss of workers directly affected.",
+     "value_in_source": "tabla 5, corto plazo: >42 h, jornada -4,7 h y pérdida de empleo -0,2/-0,7 pp; 40-42 h, jornada -2,5 h y pérdida de empleo -4,5/-5,3 pp"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Has Work-Sharing Worked in Germany? (NBER WP 5724; QJE 1999)",
+     "authors_year": "Hunt (1996)",
+     "country": "Alemania",
+     "period": "1984-1994",
+     "method": "datos de industria e individuales (GSOEP), variación de la jornada estándar pactada",
+     "locator": "pág. 3 (resumen de resultados)",
+     "quote": "employment increased by 0.3-0.7% for hourly workers (Arbeiter) and by 0.2-0.3% for salaried workers (Angestellten) in response to a one hour fall in standard hours.",
+     "value_in_source": "+0,3 a +0,7 % de empleo (obreros) y +0,2 a +0,3 % (empleados) por cada hora menos de jornada estándar (1984-89)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Hunt (1996), pág. 10: revisión de estudios agregados",
+     "finding": "Franz y König (1986), con series agregadas de la industria alemana 1964-84, hallan que un 1 % menos de jornada estándar sube el empleo un 1,09 % (escuela del reparto del trabajo); otros estudios agregados (Países Bajos, Reino Unido, Italia) hallan subidas menores, de 0,4-0,5 % por 1 % menos de jornada, con caída de las horas totales trabajadas."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Hunt (1996), resumen",
+     "finding": "Los resultados de 1990-94 son más pesimistas que los de 1984-89 y el total de horas trabajadas cayó con fuerza: el pequeño aumento de empleo no compensa las horas perdidas."
+    },
+    {
+     "url": "https://docs.iza.org/dp3723.pdf",
+     "title": "Raposo y van Ours (2008), conclusiones",
+     "finding": "Efectos indirectos negativos sobre el empleo de los trabajadores no afectados (menos de 40 h) en empresas con muchos trabajadores por encima de 40 h."
+    }
+   ],
+   "debate": {
+    "id": "elasticidad_empleo_jornada",
+    "schools": [
+     {
+      "label": "Destruye empleo de los afectados (Francia 1982, Crépon y Kramarz)",
+      "central": -1.2,
+      "source_index": 0
+     },
+     {
+      "label": "Sin efecto (Francia 35 h, Chemin y Wasmer)",
+      "central": 0.0,
+      "source_index": 1
+     },
+     {
+      "label": "Sin efecto o leve protección del empleo (Portugal 1996, Raposo y van Ours)",
+      "central": 0.0,
+      "source_index": 2
+     },
+     {
+      "label": "Reparto del trabajo modesto (Alemania 1984-89, Hunt)",
+      "central": 0.2,
+      "source_index": 3
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Unidad: % de empleo de los afectados por 1 % menos de jornada máxima (positivo = más empleo). Crépon-Kramarz: 1 h de 40 = 2,5 %; pérdida de empleo +2 a +4 % -> -0,8 a -1,6 por 1 % (central -1,2); el choque coincidió con una subida del SMI del 5 % con sueldo mensual mantenido para quienes cobraban el mínimo. Chemin-Wasmer: sin diferencia significativa -> 0. Raposo-van Ours (tabla 5, corto plazo): >42 h, -4,7 h sobre 44 (-10,7 %) con pérdida de empleo -0,2/-0,7 pp -> +0,02 a +0,07; 40-42 h, -2,5 h (≈-6 %) con -4,5/-5,3 pp -> ≈+0,8; largo plazo >42 h con 25 % de afectados en la empresa +2,5 pp en -2,4 h (≈-0,45); escuela ≈ 0 (los autores concluyen que no aumentó la pérdida de empleo). Hunt (jornada estándar de convenio, no máxima legal): 1 h ≈ 2,5-2,6 % de 39-40 h; +0,3 a +0,7 % -> +0,12 a +0,28 (central +0,2). Franz-König (+1,09) y De Regt, Wadhwani y otros (+0,4 a +0,5 de empleo por 1 % menos de jornada, series agregadas) se dejan como evidencia contraria, no como escuela. Central España -0,2 (juicio): la mayoría de estudios micro no hallan creación de empleo y el único con aumento de coste por hora similar sin ayudas (Francia 1982) halla pérdidas; bajo -1,6 y alto +0,8 = extremos de los estudios micro (Crépon-Kramarz; Raposo-van Ours, tramo 40-42 h). Notas de BdE/AIReF sobre el proyecto español no consultadas. Crépon-Kramarz y Chemin-Wasmer solo leídos en su resumen.",
+   "note_es": "Según estudios de Francia, Portugal y Alemania, reducir la jornada (por ley o, en Alemania, por convenio) sin bajar el sueldo mensual no creó empleo apreciable en conjunto: en Francia 1982 los afectados perdieron más empleo (2-4 % por una hora), con las 35 h francesas y en Portugal 1996 no se vio efecto neto y en Alemania 1984-89 subió poco. No hay estudio para España; el central es un juicio.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "EconPapers: Crépon-Kramarz '2 percent and 4 percent', SMI +5 %; Chemin-Wasmer 'no significant difference'. IZA DP 3723 pág. 3 y tabla 5 (pdf pág. 18) ok; largo plazo +2,5 es la columna '25 % afectados', no 'sin efectos de empresa'. Hunt pág. 3 ok; pág. 10: De Regt -0,41 y Wadhwani -0,5 llevan el signo de Franz-König (Brunello -0,34 'implica más horas-trabajador'): son AUMENTOS de empleo, no pérdidas. Alto +0,3 contradice la regla 'extremos micro': Raposo 40-42 h da ≈+0,8."
+   },
+   "part_file": "part_labour_w1.json"
+  },
+  {
+   "id": "L06_hours_productivity",
+   "from": "jornada_maxima",
+   "to": "productividad_hora",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "compensacion_productividad_jornada",
+    "unit": "parte de la subida del coste por hora que compensa la mayor productividad por hora al trabajar menos horas",
+    "low": 0.0,
+    "central": 0.1,
+    "high": 0.4
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://docs.iza.org/dp10722.pdf",
+     "title": "Working Hours and Productivity (IZA DP 10722; Labour Economics 2017)",
+     "authors_year": "Collewet y Sauermann (2017)",
+     "country": "Países Bajos",
+     "period": "2008-2010 (centro de llamadas)",
+     "method": "panel diario con efectos fijos individuales y variación por turnos asignados",
+     "locator": "pág. 5 (introducción) y pág. 19",
+     "quote": "we find that an increase in working hours by 1 percent leads to an increase in output by only 0.9 percent, measured as the number of calls answered.",
+     "value_in_source": "elasticidad de la producción a las horas 0,9"
+    },
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "The Productivity of Working Hours (IZA DP 8129; Economic Journal 2015)",
+     "authors_year": "Pencavel (2014)",
+     "country": "Reino Unido",
+     "period": "1914-1918 (trabajadoras de municiones)",
+     "method": "regresión por tramos (spline) de producción sobre horas",
+     "locator": "pág. 18",
+     "quote": "below 49 weekly hours, variations in output are proportional to variations in hours",
+     "value_in_source": "producción proporcional a las horas por debajo de 49 h semanales (elasticidad 1)"
+    },
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "The Productivity of Working Hours (IZA DP 8129), cita a Denison (1962)",
+     "authors_year": "Pencavel (2014), citando a Denison (1962)",
+     "country": "Estados Unidos",
+     "period": "1957",
+     "method": "conjetura de contabilidad del crecimiento",
+     "locator": "pág. 4",
+     "quote": "Denison conjectured that a ten percent reduction in hours would result in a six percent reduction in output.",
+     "value_in_source": "-10 % de horas -> -6 % de producción (con jornadas de 40 h)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "Denison (1962), citado en Pencavel (2014), pág. 4",
+     "finding": "A jornadas de 40 h, conjeturó que un 10 % menos de horas solo baja la producción un 6 %: compensación de alrededor del 40 % de la subida del coste por hora, muy por encima de lo que hallan los estudios micro."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Recorte de 40 a 37,5 h: horas -6,25 %, coste por hora +6,67 % (2,5/37,5) con sueldo mensual mantenido. Collewet-Sauermann (elasticidad 0,9): producción -5,625 %, producción por hora 0,94375/0,9375 = +0,67 % -> compensa 0,67/6,67 = 0,10 (central). Pencavel: por debajo de 49 h la producción es proporcional a las horas -> 0 (bajo). Denison: -10 % horas, -6 % producción -> producción por hora 0,94/0,90 = +4,4 % frente a coste +11,1 % -> 0,40 (alto). La fracción es casi igual para recortes menores (p. ej. el 2,1 % medio). Validez externa limitada (centro de llamadas a tiempo parcial; fábricas de 1914-18). Evaluaciones de la productividad con las 35 h francesas o Portugal 1996 y notas de BdE/AIReF sobre el proyecto español no consultadas.",
+   "note_es": "Según estudios con datos individuales (centro de llamadas en Países Bajos; fábricas británicas de 1914-18), por debajo de unas 48 h la producción baja casi en proporción a las horas, así que la mayor productividad por hora compensaría solo en torno al 10 % de la subida del coste por hora (0-40 % según la fuente). No hay estimación para España.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "IZA DP 10722 pág. 5: 'increase in output by only 0.9 percent' (agentes mayoritariamente a tiempo parcial, pág. 17). IZA DP 8129 pág. 18: 'below 49 weekly hours, variations in output are proportional'; pág. 4 Denison: -10 % horas -> -6 % producción a 40 h. Aritmética: 0,94375/0,9375 = +0,67 % / 6,67 % = 0,10; Denison 0,94/0,90 = +4,4 % / 11,1 % = 0,40; Pencavel 0. Grado B y nota con incertidumbre adecuados."
+   },
+   "part_file": "part_labour_w1.json"
+  },
+  {
+   "id": "L07_self_employed_base",
+   "from": "cuota_autonomos",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "autonomos_k",
+    "unit": "miles de afiliados al Régimen Especial de Trabajadores Autónomos (RETA), media de 2025",
+    "low": 3387,
+    "central": 3410,
+    "high": 3426
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://revista.seg-social.es/-/la-seguridad-social-suma-en-2025-medio-millon-de-afiliados-por-cuarto-a%C3%B1o-consecutivo-y-se-acerca-a-los-21-9-millones-de-ocupados",
+     "title": "La Seguridad Social suma en 2025 medio millón de afiliados por cuarto año consecutivo y se acerca a los 21,9 millones de ocupados",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones, Revista Seguridad Social (enero de 2026)",
+     "country": "España",
+     "period": "diciembre de 2025 (afiliación media del mes)",
+     "method": "registro de afiliación",
+     "locator": "apartado «Autónomos»",
+     "quote": "por encima de los 3,4 millones (RETA y SETA), con 3.425.767 trabajadores por cuenta propia, 39.002 más que hace un año",
+     "value_in_source": "3.425.767 afiliados RETA+SETA en diciembre de 2025; 3.386.765 en diciembre de 2024"
+    },
+    {
+     "url": "https://revista.seg-social.es/-/afiliacion-octubre-2026",
+     "title": "Afiliación octubre 2026",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones, Revista Seguridad Social (noviembre de 2026)",
+     "country": "España",
+     "period": "octubre de 2026 frente a octubre de 2025",
+     "method": "registro de afiliación",
+     "locator": "apartado «Más de 3,5 millones de autónomos»",
+     "quote": "el número de trabajadores autónomos asciende a 3.501.598, que son 79.163 más que hace un año",
+     "value_in_source": "3.501.598 en octubre de 2026; 3.422.435 en octubre de 2025 (por diferencia)"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "Real Decreto-ley 13/2022, nuevo sistema de cotización para los trabajadores autónomos",
+     "authors_year": "BOE (2022)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "norma (tabla de tramos de rendimientos y bases)",
+     "locator": "disposición transitoria primera, apartado 2, tabla de 2025",
+     "quote": "Tabla reducida. Tramo 1. <=670 653,59 718,94",
+     "value_in_source": "base mínima 2025: 653,59 €/mes (tramo 1 reducido) a 1.928,10 €/mes (tramo 12 general)"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-3780",
+     "title": "Orden PJC/178/2025, normas de cotización a la Seguridad Social para 2025",
+     "authors_year": "BOE (2025)",
+     "country": "España",
+     "period": "2025",
+     "method": "norma (tipos de cotización)",
+     "locator": "art. 18.4 (tipos de los trabajadores por cuenta propia)",
+     "quote": "Desde el 1 de enero de 2025, los tipos de cotización de las personas trabajadoras por cuenta propia serán los siguientes: a) Para las contingencias comunes, el 28,30 por ciento.",
+     "value_in_source": "28,30 % comunes + 1,30 % profesionales + 0,80 % MEI (más cese y formación)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "RDL 13/2022, disposición transitoria quinta (cuota reducida)",
+     "finding": "Los nuevos autónomos pagan una cuota reducida de 80 euros al mes en 2023-2025: la cuota media real queda por debajo de la del tramo más barato para ese grupo, y los ingresos no crecen igual que los afiliados."
+    },
+    {
+     "url": "https://revista.seg-social.es/-/la-seguridad-social-suma-en-2025-medio-millon-de-afiliados-por-cuarto-a%C3%B1o-consecutivo-y-se-acerca-a-los-21-9-millones-de-ocupados",
+     "title": "Nota de afiliación de diciembre de 2025",
+     "finding": "La cifra incluye el SETA (autónomos agrarios) y, dentro del RETA, autónomos societarios y familiares colaboradores, con bases y cuotas distintas; no es solo el autónomo persona física sin empresa."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "cuota_media_autonomos",
+     "unit": "euros al mes, cuota media mensual de un afiliado al RETA en 2025",
+     "low": 205,
+     "central": 330,
+     "high": 605,
+     "grade": "D"
+    }
+   ],
+   "derivation": "Afiliados: no se encontró publicada la media anual de 2025; se aproxima con la media de los meses conocidos: dic-2024 3.386.765 (3.425.767 - 39.002), oct-2025 3.422.435 (3.501.598 - 79.163), dic-2025 3.425.767; central 3.410 miles, bajo 3.387 (dic-2024), alto 3.426 (dic-2025). Incluye SETA. Cuota: tipo 2025 = 28,30 + 1,30 + 0,80 (MEI) leídos en la Orden PJC/178/2025, más 0,9 cese y 0,1 formación (no verificados en este extracto) = 31,4 %. Bajo: 653,59 × 31,4 % = 205 €; alto: base mínima del tramo 12 general, 1.928,10 × 31,4 % = 605 €. Central 330 €: hipótesis de base media de unos 1.050 € (la mayoría cotiza cerca de la base mínima de los primeros tramos); no se encontró la recaudación del RETA para dividir, de ahí la nota D.",
+   "note_es": "Según la Seguridad Social, en diciembre de 2025 había 3.425.767 autónomos afiliados (RETA y SETA), 39.002 más que un año antes; usamos 3,41 millones de media en 2025. La cuota de 2025 iba de unos 205 a 605 euros al mes según el tramo de ingresos; la cuota media de 330 euros es una estimación nuestra, no un dato publicado.",
+   "part_file": "part_labour_pilot.json"
+  },
+  {
+   "id": "L08_self_employed_elasticity",
+   "from": "cuota_autonomos",
+   "to": "autonomos",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_autonomos_cuota",
+    "unit": "% de cambio del número de autónomos por cada 1 % de cambio de su cuota mensual",
+    "low": -0.3,
+    "central": -0.1,
+    "high": -0.02
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "Real Decreto-ley 13/2022, nuevo sistema de cotización para trabajadores por cuenta propia o autónomos",
+     "authors_year": "BOE (2022)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "norma (cuantía de la cuota reducida y tramos de bases)",
+     "locator": "preámbulo, disposición transitoria quinta; tabla de tramos de rendimientos netos",
+     "quote": "la cuantía de la cuota reducida regulada en el artículo 38 ter de la Ley 20/2007, de 11 de julio , del Estatuto del trabajo autónomo, será de 80 euros mensuales",
+     "value_in_source": "cuota reducida 80 EUR/mes (2023-2025); base mínima tabla general tramo 1 (2023) 950,98 EUR/mes"
+    },
+    {
+     "url": "https://ideas.repec.org/a/eee/jbvent/v28y2013i1p151-175.html",
+     "title": "Start-up incentives: Entrepreneurship policy or active labour market programme?",
+     "authors_year": "Román, Congregado y Millán (2013), Journal of Business Venturing 28(1)",
+     "country": "UE (incluye España)",
+     "period": "1994-2001 (ECHP)",
+     "method": "modelo de transición de paro a autoempleo con microdatos de panel europeo",
+     "locator": "resumen (IDEAS/RePEc)",
+     "quote": "This study suggests that the contribution of these incentives is dubious, if aimed to combat economic and jobs crises as part of the entrepreneurship policy",
+     "value_in_source": "sin elasticidad numérica; efecto de los incentivos a la creación calificado de dudoso"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sciencedirect.com/science/article/pii/S1056819023011211",
+     "title": "Evaluation of self-employment support policies using survival analysis. The discounted flat rate in Andalusia (Spain)",
+     "finding": "La supervivencia de los autónomos con tarifa plana supera a la del grupo sin ella, pero el efecto positivo desaparece a largo plazo (resumen visto en el buscador; el artículo devuelve 403 desde aquí)."
+    },
+    {
+     "url": "https://e-spacio.uned.es/entities/publication/a7776845-0aa1-455c-bcb0-d5410488a10e",
+     "title": "Evaluación de impacto de la tarifa plana en España: retos y expectativas del trabajo autónomo (UNED)",
+     "finding": "Con control sintético sobre datos de Eurostat, la tarifa plana aumentó las altas, pero pocas se mantienen al terminar la ayuda (resumen visto en el buscador; la página exige un reto anti-bots)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "No se ha encontrado ninguna elasticidad publicada y legible desde aquí: la Spending Review de la AIReF (fase II) falla por TLS, la página de la UNED exige reto anti-bots y ScienceDirect da 403; Cueto, Mayor y Suárez no se localizó. Supuesto: la tarifa plana baja la cuota de unos 205-605 EUR/mes (tramos del RDL 13/2022) a 80 EUR, un recorte del 60-87 % para quien entra. Las dos evaluaciones españolas (resúmenes) coinciden en que suben las altas y la supervivencia a corto plazo, pero el efecto se diluye cuando acaba la ayuda, y Román et al. califican de dudoso el efecto de estos incentivos. Para el stock de autónomos (3,41 millones en 2025) se asume por eso una elasticidad pequeña: -0,1 (un recorte del 10 % de la cuota media elevaría el número de autónomos un 1 %), con rango -0,3 a -0,02. Sin estimación directa: grado D.",
+   "note_es": "La tarifa plana del RDL 13/2022 fija en 80 euros al mes la cuota de quien empieza (2023-2025). Según los resúmenes de dos evaluaciones españolas (Andalucía y UNED), se asocia a más altas, pero el efecto se diluye al acabar la ayuda. No hay una elasticidad española publicada que hayamos podido leer: el -0,1 (un 1 % más de autónomos por un 10 % menos de cuota) es un supuesto, rango -0,3 a -0,02.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BOE RDL 13/2022: preámbulo and DT 5ª say verbatim 'será de 80 euros mensuales' (2023-2025); tabla general tramo 1 base mínima 950,98. 205-605 EUR = 2025 bases 653,59 (tramo 1 reducida) and 1.928,10 (tramo 12) x ~31,4 % (rate not in this BOE text). RePEc abstract has the 'dubious' quote verbatim. D, stated as assumption. Note also credited the 'más altas' link to the RDL, which does not say it; the two evaluations are search abstracts only (unverifiable here)."
+   },
+   "part_file": "part_labour_w2.json"
+  },
+  {
+   "id": "M01_migration_variants",
+   "from": "inmigracion_neta",
+   "to": "poblacion_por_etapa",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "variante_migracion_neta_pct",
+    "unit": "% de cambio de la inmigración neta acumulada 2026-2050 en la variante oficial alta (en valor absoluto, la baja es simétrica)",
+    "low": 46.2,
+    "central": 46.4,
+    "high": 46.5
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/proj_23nanmig?geo=ES&sex=T&unit=PER&projection=BSL&projection=HMIGR&projection=LMIGR",
+     "title": "Assumptions for net migration by age, sex and type of projection (proj_23nanmig), EUROPOP2023",
+     "authors_year": "Eurostat (2023)",
+     "country": "España",
+     "period": "2025-2050",
+     "method": "proyección de población (supuestos de migración neta por variante)",
+     "locator": "geo=ES, age=TOTAL, projection=BSL/HMIGR/LMIGR",
+     "quote": "Spain, total, 2025: BSL 324 473; HMIGR 486 047; LMIGR 168 887",
+     "value_in_source": "suma 2026-2050: HMIGR +46,5 % y LMIGR −46,2 % frente a BSL (cálculo propio)"
+    },
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/392994f2-c025-4066-bea8-f65cf4bcd411_en?filename=2024-ageing-report-country-fiche-Spain.pdf",
+     "title": "2024 Ageing Report. Country fiche for Spain",
+     "authors_year": "Comisión Europea y Gobierno de España (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial (escenarios de sensibilidad)",
+     "locator": "pág. 36, escenarios demográficos",
+     "quote": "33% less/more non-EU immigration over the entire projection period",
+     "value_in_source": "±33 % de inmigración de fuera de la UE"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176953&menu=ultiDatos&idp=1254735572981",
+     "title": "INE, Proyecciones de Población 2024-2074",
+     "finding": "El INE proyecta para España una inmigración neta mayor que la base de Eurostat en los primeros años; la base oficial que usa el simulador puede quedarse corta."
+    }
+   ],
+   "debate": null,
+   "derivation": "La población por edad sale de proj_23np (base BSL y variantes HMIGR y LMIGR) y la migración neta de proj_23nanmig. La variante alta es la del Ageing Report («un tercio más de inmigración de fuera de la UE»): sube la inmigración neta acumulada 2026-2050 un 46,5 % (la baja la baja un 46,2 %). El simulador escala linealmente la diferencia de población por etapa entre variante y base (multiplicador de la palanca), un supuesto que la página dice.",
+   "note_es": "Según Eurostat (EUROPOP2023), la variante alta oficial (un tercio más de inmigración de fuera de la UE, la del Ageing Report 2024) sube la inmigración neta un 46 % hasta 2050 y añade unos 3,6 millones de residentes en 2050, el 72 % de 16 a 64 años (un 44 % de 16 a 44). El simulador escala esa diferencia en línea recta.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Eurostat proj_23nanmig ES total 2025: BSL 324.473, HMIGR 486.047, LMIGR 168.887 (match). Sum 2026-2050: BSL 5.588.205, HMIGR 8.187.972 (+46,52 %), LMIGR 3.006.642 (-46,20 %). Ageing Report fiche p.36 '33% less/more non-EU immigration' verbatim. proj_23np 2050 HMIGR-BSL = +3.574.445 (3,6 M ok); by age 0-15 0,64 M, 16-29 0,64, 30-44 0,94, 45-64 1,00, 65+ 0,36: 16-44 is 44 %, not 'sobre todo'; 16-64 is 72 %."
+   },
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "M02_migrant_employment",
+   "from": "poblacion_inmigrante",
+   "to": "ocupados",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "ajuste_empleo_inmigrante",
+    "unit": "tasa de empleo de los residentes nuevos frente a la de los extranjeros de su misma edad en la EPA (1 = igual)",
+    "low": 0.85,
+    "central": 1.0,
+    "high": 1.1
+   },
+   "extra_parameters": [
+    {
+     "name": "tasa_empleo_extranjeros_15_64",
+     "unit": "tasa de empleo de los extranjeros de 15 a 64 años, 2025",
+     "low": 0.629,
+     "central": 0.629,
+     "high": 0.629,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_ergan?geo=ES&sex=T&unit=PC",
+     "title": "Employment rates by sex, age and citizenship (lfsa_ergan)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2025",
+     "method": "Encuesta de Población Activa (EPA)",
+     "locator": "geo=ES, citizen=FOR, age=Y15-64 y tramos de 5 años, 2025",
+     "quote": "Spain, foreign country citizens, 15-64, 2025: 62,9",
+     "value_in_source": "62,9 %; por etapa (ponderada por la edad de los inmigrantes adicionales): 16-29 47,8 %, 30-44 70,9 %, 45-64 66,0 %, 65-79 15,5 %"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_pganws?geo=ES&sex=T&age=Y15-64&citizen=FOR&wstatus=EMP&wstatus=POP",
+     "title": "Population by sex, age, citizenship and labour status (lfsa_pganws)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2019-2025",
+     "method": "EPA",
+     "locator": "geo=ES, citizen=FOR, age=Y15-64, wstatus=POP/EMP",
+     "quote": "Spain, foreign citizens 15-64: population 3 920,4 (2019) and 5 460,8 (2025); employed 2 378,8 and 3 434,5 thousand",
+     "value_in_source": "68,5 ocupados nuevos por cada 100 residentes extranjeros nuevos de 15-64 (2019-2025)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Migrant_integration_statistics_-_labour_market_indicators",
+     "title": "Eurostat, Migrant integration statistics: labour market indicators",
+     "finding": "La tasa de empleo de los inmigrantes recién llegados es menor que la de los que llevan más años; a corto plazo el ajuste puede ser menor que 1."
+    }
+   ],
+   "debate": null,
+   "derivation": "El modelo pone a trabajar a los residentes adicionales con la tasa de empleo de los extranjeros de su edad en la EPA 2025 (cada etapa pondera sus tramos de 5 años por la edad de los inmigrantes adicionales de EUROPOP2023). Entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de 15-64 (frente al 62,9 % de tasa), de ahí el alto 1,1 (68,5/62,9 ≈ 1,09). El bajo 0,85 es un supuesto para los primeros años de residencia. Las nacionalizaciones sacan del grupo a extranjeros ya empleados y sesgan la comparación.",
+   "note_es": "Según la EPA (Eurostat), el 62,9 % de los extranjeros de 15 a 64 años trabaja; entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de esa edad. El modelo usa la tasa por edad, con un margen del 85 % al 110 %.",
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "M03_migrant_wage",
+   "from": "poblacion_inmigrante",
+   "to": "recaudacion",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salario_relativo_inmigrante",
+    "unit": "ganancia media anual de los asalariados de nacionalidad extranjera frente a la del total de asalariados (1 = igual)",
+    "low": 0.7,
+    "central": 0.78,
+    "high": 0.92
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28190",
+     "title": "Encuesta Anual de Estructura Salarial. Ganancia media anual por trabajador por sexo y nacionalidad (tabla 28190)",
+     "authors_year": "INE (2026, datos definitivos 2024 publicados el 28-5-2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "encuesta a centros de cotización (salario bruto anual por trabajador)",
+     "locator": "tabla 28190, Ambos sexos: Total, Española, Otros países; año 2024",
+     "quote": "Ambos sexos. Otros países. Dato base. Total Nacional. Salario medio bruto.",
+     "value_in_source": "2024: Total 29.540,26 EUR; Española 30.181,14 EUR; Otros países 20.568,14 EUR (UE28 sin España y Europa menos UE28 sin dato en la API)"
+    },
+    {
+     "url": "https://www.ine.es/metodologia/t22/ees_prinre22.pdf",
+     "title": "Encuesta de Estructura Salarial 2022. Principales resultados",
+     "authors_year": "INE (2024)",
+     "country": "España",
+     "period": "2022",
+     "method": "encuesta cuatrienal de estructura salarial",
+     "locator": "pág. 30, apartado 10 «Los salarios y la nacionalidad»",
+     "quote": "El resto de trabajadores de la Unión Europea tuvo un salario inferior en un 7,7 % a la media, mientras que el resto de nacionalidades tuvieron un salario inferior a la media en más del 30%.",
+     "value_in_source": "UE sin España: -7,7 % frente a la media; resto: más de -30 %; 9,1 % de la muestra de nacionalidad extranjera"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.ine.es/metodologia/t22/ees_prinre22.pdf",
+     "title": "Encuesta de Estructura Salarial 2022. Principales resultados (pág. 30)",
+     "finding": "Solo el 9,1 % de la muestra tiene nacionalidad extranjera y el INE pide tomar estos resultados con precaución; además la encuesta clasifica por nacionalidad (los nacionalizados cuentan como españoles) y no corrige por horas ni jornada parcial."
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28190",
+     "title": "EAES, tabla 28190 (cobertura)",
+     "finding": "La encuesta excluye la agricultura y el servicio doméstico, ramas con mucho empleo extranjero y salarios bajos, por lo que el cociente probablemente sobrestima la ganancia relativa del conjunto de asalariados extranjeros."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "INE no publica en la tabla 28190 la media del total extranjero. Se despeja de Total = (1-s)·Española + s·Extranjera con s = peso de los extranjeros: s ≈ 0,091 (proporción de la muestra EES 2022, aproximación no verificada al peso ponderado). Extranjera = (29.540,26 - 0,909·30.181,14)/0,091 ≈ 23.140 EUR → 23.140/29.540,26 ≈ 0,78. Con s = 0,08 sale 0,75 y con s = 0,10, 0,80. low = Otros países/Total 2024 = 20.568,14/29.540,26 = 0,696 ≈ 0,70; high = UE sin España en 2022 = 1 - 0,077 = 0,923 ≈ 0,92 (no hay dato UE para 2024 en la API). Aproximado: el peso s y la falta del dato UE 2024.",
+   "note_es": "Según la Encuesta Anual de Estructura Salarial del INE (2024), los asalariados de nacionalidad no europea ganaron de media 20.568 euros, el 70 % de la media (29.540); los de otros países de la UE, un 7,7 % menos que la media en 2022. La media del conjunto extranjero (unos 0,78) es una estimación propia; la encuesta no cubre agricultura ni servicio doméstico ni corrige por horas.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "INE API DATOS_TABLA/28190, Ambos sexos 2024: Total 29.540,26; Española 30.181,14; Otros países 20.568,14; UE28 sin España and Europa menos UE28 empty (match). EES 2022 pdf p.30 quote verbatim, 9,1 % muestra extranjera. s=0,091 -> 23.139 EUR, 0,783; s=0,08 -> 0,75; s=0,10 -> 0,80. Coverage CNAE B-S (no agriculture A, no households T) confirmed in the pdf. Grade A accepted: official data plus a small stated assumption on s."
+   },
+   "part_file": "part_labour_w2.json"
+  },
+  {
+   "id": "M04_migrant_health_use",
+   "from": "poblacion_inmigrante",
+   "to": "demanda_sanitaria",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "uso_sanitario_relativo_inmigrante",
+    "unit": "uso o gasto sanitario público por persona de la población inmigrante frente a la nacida en España de su misma edad y sexo (1 = igual)",
+    "low": 0.55,
+    "central": 0.72,
+    "high": 0.95
+   },
+   "lag_years": 0,
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Global healthcare use by immigrants in Spain according to morbidity burden, area of origin, and length of stay (BMC Public Health 16:450)",
+     "authors_year": "Gimeno-Feliu LA, Calderón-Larrañaga A, Díaz E, Poblador-Plou B, Macipe-Costa R, Prados-Torres A (2016)",
+     "country": "España (Aragón)",
+     "period": "2011",
+     "method": "cohorte poblacional EpiChron (1.251.540 personas, 11,9 % inmigrantes); regresión binomial negativa (o inflada en ceros), IRR ajustadas por edad y sexo (a) y además por morbilidad (b)",
+     "locator": "Tabla 2, filas «Adults – Immigrants», columnas IRR a, estancia <5 y ≥5 años",
+     "quote": "Annual prescription drug costs were also lower for immigrants (€47 vs €318). These differences were only partially attenuated after adjusting for age, sex and morbidity burden.",
+     "value_in_source": "IRR a (edad y sexo), adultos ≥5 años: primaria 0,88; especializada 0,71; ingresos 0,78; urgencias 1,07; farmacia 0,53. <5 años: 0,68; 0,60; 0,78; 0,87; 0,37"
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7816492/",
+     "title": "Overuse or underuse? Use of healthcare services among irregular migrants in a north-eastern Spanish region (Int J Equity Health 20:41)",
+     "authors_year": "Gimeno-Feliu LA, Pastor-Sanz M, Poblador-Plou B, Calderón-Larrañaga A, Díaz E, Prados-Torres A (2021)",
+     "country": "España (Aragón)",
+     "period": "2011",
+     "method": "población adulta de Aragón (930.131 nacionales, 123.432 migrantes documentados, 17.152 irregulares); binomial negativa ajustada por edad, sexo y morbilidad",
+     "locator": "Resultados (texto junto a la Fig. 2) y resumen",
+     "quote": "The age-adjusted models revealed lower use of healthcare services for irregular immigrants at all levels of care (IRR between 0.1–0.2 for both men and women).",
+     "value_in_source": "IRR 0,1-0,2 (irregulares, ajuste por edad); gasto farmacéutico 9 € irregulares, 77 € documentados, 367 € nacionales"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Gimeno-Feliu et al. (2016), Tabla 2",
+     "finding": "En urgencias, los adultos inmigrantes con 5 años o más en España usan más que los nacionales de su edad y sexo (IRR 1,07; 1,16 con morbilidad); niños recién llegados: más ingresos hospitalarios ajustados por morbilidad (IRR 1,30)."
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Gimeno-Feliu et al. (2016), Tabla 2 (efecto de la estancia)",
+     "finding": "El menor uso se reduce con los años de residencia (atención primaria 0,68 con <5 años frente a 0,88 con ≥5 años; farmacia 0,37 frente a 0,53): el efecto del inmigrante sano se va diluyendo."
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7816492/",
+     "title": "Gimeno-Feliu et al. (2021)",
+     "finding": "Sin ajustar, los migrantes documentados hacen tantas visitas a urgencias como los nacionales (2,8 por 10 personas) pese a ser mucho más jóvenes (edad media 38 frente a 52)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "uso_urgencias_relativo_inmigrante",
+     "unit": "visitas a urgencias por persona de la población inmigrante adulta frente a la nacional de su misma edad y sexo (1 = igual)",
+     "low": 0.87,
+     "central": 1.07,
+     "high": 1.07,
+     "grade": "B"
+    },
+    {
+     "name": "gasto_farmacia_relativo_inmigrante",
+     "unit": "gasto farmacéutico por persona de la población inmigrante adulta frente a la nacional de su misma edad y sexo (1 = igual)",
+     "low": 0.37,
+     "central": 0.5,
+     "high": 0.53,
+     "grade": "B"
+    }
+   ],
+   "derivation": "IRR ajustadas por edad y sexo (columna a de la Tabla 2 de 2016, adultos). Agregado ponderado por peso aproximado de cada servicio en el gasto sanitario público (hipótesis redonda, no verificada en esta ficha: hospital y especializada 62 %, primaria 15 %, farmacia 17 %, urgencias 6 %); hospital+especializada = media de ambas IRR. ≥5 años: 0,745×0,62+0,88×0,15+0,53×0,17+1,07×0,06 = 0,75. <5 años: 0,69×0,62+0,68×0,15+0,37×0,17+0,87×0,06 = 0,645. Mezcla con 69 % de estancia ≥5 años (Tabla 1 de 2021: 68,6 %) = 0,72. Bajo 0,55: llegadas recientes con parte irregular (IRR 0,1-0,2). Alto 0,95: convergencia con la estancia y ajuste por morbilidad. Datos de una región y de 2011.",
+   "note_es": "Según dos estudios con toda la población de Aragón (2011), los inmigrantes usan menos la sanidad pública que los españoles de su misma edad y sexo: menos visitas al médico, menos especialista y la mitad de gasto en farmacia, aunque igual o algo más de urgencias. Estimamos 0,72 (rango 0,55-0,95). Es una sola región y un año, y la diferencia se reduce con los años de residencia.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "PMC4882823 abstract quote verbatim; Table 2 adults IRR a: >=5y primary 0,88, spec 0,71, hospital 0,78, ER 1,07 (b 1,16), pharmacy 0,53; <5y 0,68/0,60/0,78/0,87/0,37; children <5y hospital b 1,30 (all match). Weighted 0,748 and 0,645, mix 69/31 = 0,716. PMC7816492: IRR 0,1-0,2 quote verbatim; EUR 9/77/367; ER 2,8 vs 2,8; Table 1 stay >=5y 68,61 %. Service weights are a stated unverified assumption."
+   },
+   "part_file": "part_labour_pilot.json"
+  },
+  {
+   "id": "M05_congestible_spending",
+   "from": "poblacion",
+   "to": "gasto_otros_servicios",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_gasto_congestionable",
+    "unit": "parte del gasto público por persona en servicios distintos de pensiones, sanidad y educación (sin intereses) que crece con cada residente más",
+    "low": 0.3,
+    "central": 0.5,
+    "high": 1.0
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "C",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.cream-migration.org/publ_uploads/CDP_22_13.pdf",
+     "title": "The Fiscal Effects of Immigration to the UK (CReAM DP 22/13)",
+     "authors_year": "Dustmann y Frattini (2013; Economic Journal 2014)",
+     "country": "Reino Unido",
+     "period": "1995-2011",
+     "method": "contabilidad fiscal por grupos con reparto del gasto por funciones COFOG",
+     "locator": "pág. 9 (sección 2.1.2); tabla A1 (pág. 44) y tabla A3 (págs. 46-47)",
+     "quote": "“Pure” public goods are public goods that are not rival in consumption, and where the marginal cost of providing these goods and services to immigrants is likely to be zero.",
+     "value_in_source": "bienes públicos puros 23,3 % del gasto total (incluye intereses de la deuda, defensa, servicios generales y asuntos económicos); congestionables 7,5 %; policía 2,8 %; justicia y prisiones 1,9 %"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table",
+     "title": "General government expenditure by function (COFOG), gov_10a_exp",
+     "authors_year": "Eurostat (actualizado 21-10-2026)",
+     "country": "España",
+     "period": "2023-2024",
+     "method": "cuentas de las AAPP por función (S13, gasto total, millones EUR)",
+     "locator": "geo=ES, sector=S13, na_item=TE, unit=MIO_EUR, GF01, GF0107, GF02, GF03, GF04, GF05, GF06, GF08; 2024",
+     "quote": "Public order and safety | 2024 = 28628.0",
+     "value_in_source": "2024 (M EUR): GF01 92.551; GF0107 39.644; GF02 14.233; GF03 28.628; GF04 80.908; GF05 15.539; GF06 7.613; GF08 19.193"
+    },
+    {
+     "url": "https://www.esri.ie/system/files/publications/SUSTAT141.pdf",
+     "title": "Literature review on the fiscal impacts of immigration (ESRI Survey and Statistical Report Series 141)",
+     "authors_year": "ESRI (2026)",
+     "country": "Irlanda (revisión internacional)",
+     "period": "literatura hasta 2026",
+     "method": "revisión de la literatura",
+     "locator": "pág. 9 (pág. 19 del PDF)",
+     "quote": "In the average cost approach, all expenditure, including pure public goods, is split between migrants and natives according to their respective proportion in the relevant population",
+     "value_in_source": "enfoque de coste medio: cada residente adicional cuesta la media (cuota 1,0); coste marginal: cero para bienes públicos puros"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.esri.ie/system/files/publications/SUSTAT141.pdf",
+     "title": "ESRI (2026), revisión de la literatura, pág. 9",
+     "finding": "El coste medio y el coste marginal se usan como cotas inferior y superior del saldo fiscal de los inmigrantes: la literatura no fija un valor intermedio, solo los extremos."
+    },
+    {
+     "url": "https://www.cream-migration.org/publ_uploads/CDP_22_13.pdf",
+     "title": "Dustmann y Frattini, pág. 9",
+     "finding": "Los propios autores advierten que el coste marginal de los bienes congestionables es desconocido y probablemente menor que la media, de modo que imputarles el coste medio sobrestima el gasto que añade cada residente."
+    }
+   ],
+   "debate": {
+    "id": "cuota_gasto_congestionable",
+    "schools": [
+     {
+      "label": "Coste medio: cada residente más cuesta la media de todos los servicios",
+      "central": 1.0,
+      "source_index": 2
+     },
+     {
+      "label": "Coste marginal (clasificación de Dustmann y Frattini aplicada al COFOG español 2024): solo crecen orden público, medio ambiente, vivienda y cultura",
+      "central": 0.32,
+      "source_index": 1
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Escuela marginal: se aplica la clasificación de Dustmann y Frattini (tabla A3) al COFOG español de 2024 (Eurostat). Puros: servicios generales sin intereses (92.551 - 39.644 = 52.907) + defensa 14.233 + asuntos económicos 80.908 = 148.048 M EUR. Congestionables (crecen con la población): orden público 28.628 + medio ambiente 15.539 + vivienda 7.613 + cultura 19.193 = 70.973 M EUR. Cuota = 70.973/219.021 = 0,324 (0,334 en 2023). Simplificación: la clasificación es por funciones enteras (D&F la hacen por subfunciones) y deja fuera la protección social no contributiva. Escuela de coste medio: 1,0. Central 0,5 = juicio propio: parte de asuntos económicos (transporte) y de la administración general también crece con la población a medio plazo; con la mitad de asuntos económicos como congestionable la cuota sería (70.973 + 40.454)/219.021 = 0,51. El capítulo 4 de la OCDE (IMO 2021) usa la misma separación puros/congestionables, pero su web devuelve 403 desde aquí y no se ha podido citar.",
+   "note_es": "Según Dustmann y Frattini y las cuentas COFOG de Eurostat (2024), si solo crecen con la población el orden público, el medio ambiente, la vivienda y la cultura, cada residente más eleva un 32 % del gasto medio por persona en estos servicios; si cuesta la media, un 100 %. Usamos 0,5 como juicio propio: nadie mide bien cuánto crecen el transporte o la administración general.",
+   "part_file": "part_labour_w2.json"
+  },
+  {
+   "id": "M06_migrant_pensions",
+   "from": "poblacion_inmigrante_65",
+   "to": "gasto_pensiones",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "pension_relativa_inmigrante",
+    "unit": "gasto en pensión por residente adicional de 65 o más años frente al gasto medio por pensionista (cobertura × cuantía)",
+    "low": 0.4,
+    "central": 0.6,
+    "high": 0.85
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/392994f2-c025-4066-bea8-f65cf4bcd411_en?filename=2024-ageing-report-country-fiche-Spain.pdf",
+     "title": "2024 Ageing Report. Country fiche for Spain",
+     "authors_year": "Comisión Europea y Gobierno de España (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "parámetros del sistema de pensiones",
+     "locator": "tabla de condiciones de acceso (cotización mínima y periodo de cotización completo)",
+     "quote": "Minimum contributory period - men 15",
+     "value_in_source": "15 años mínimos; 38,5 años para la pensión completa"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESb, sensibilidad de migración)",
+     "finding": "La sensibilidad oficial de pensiones a más inmigración se expresa en % del PIB (−1,1 puntos en 2050), con el PIB que también crece; no da euros por persona, así que no contrasta este supuesto directamente."
+    }
+   ],
+   "debate": null,
+   "derivation": "Supuesto. Quien llega entre los 20 y los 45 años cotiza en España una parte de su vida laboral: la pensión exige 15 años y la completa 38,5 (ficha del Ageing Report). Una cobertura del 75 % por una cuantía del 80 % de la media da 0,6; el bajo 0,4 y el alto 0,85 cubren carreras más cortas o casi completas. No se encontró la pensión media de los pensionistas extranjeros por edad.",
+   "note_es": "Supuesto: cada residente adicional de 65 o más años cuesta en pensión el 60 % de lo que cuesta un pensionista medio (40-85 %), porque suele haber cotizado menos años en España (15 años dan derecho a pensión; 38,5, a la completa). No hay una cifra oficial por origen.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Ageing Report fiche: p.10 table 'Minimum contributory period - men 15' verbatim; p.9 'at least 15 years'; p.11 accrual 50 % at 15 years rising to 100 % at 38 years and 6 months (38,5 is in the text, not the table). 0,75 x 0,8 = 0,6 is a stated assumption; graded D and the note says 'Supuesto'. Locator could add pages 9-11."
+   },
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "M07_consumption_tax",
+   "from": "renta_disponible",
+   "to": "impuestos_consumo",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "tipo_implicito_consumo",
+    "unit": "impuestos sobre el consumo por euro de gasto de consumo de los hogares (tipo implícito)",
+    "low": 0.135,
+    "central": 0.136,
+    "high": 0.146
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://taxation-customs.ec.europa.eu/document/download/aff28bc9-f9dc-4665-8510-72224c9e1ea9_en?filename=Annex_A_FINAL.pdf&prefLang=sl",
+     "title": "Data on Taxation Trends, Annex A (tablas estadísticas)",
+     "authors_year": "Comisión Europea, DG TAXUD (datos extraídos en marzo de 2026)",
+     "country": "España y UE-27",
+     "period": "2012-2024",
+     "method": "tipo implícito: impuestos sobre el consumo / gasto en consumo final de los hogares en el territorio (cuentas nacionales SEC 2010)",
+     "locator": "Table 81: Implicit Tax rate on consumption, % (pág. 83), fila Spain",
+     "quote": "Spain 11.6 12.9 13.3 13.8 13.8 13.7 13.9 13.8 14.0 14.6 14.1 13.5 13.6 0.3 27",
+     "value_in_source": "España 2024: 13,6 %; 2020-2024: 14,0 / 14,6 / 14,1 / 13,5 / 13,6 %; UE-27 2024: 16,5 %; puesto 27 de 27"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nasa_10_nf_tr/default/table",
+     "title": "Non-financial transactions - annual data (nasa_10_nf_tr)",
+     "authors_year": "Eurostat (actualizado 29-10-2026)",
+     "country": "España",
+     "period": "2019-2025",
+     "method": "cuentas de sectores (hogares e ISFLSH, S14_S15, precios corrientes)",
+     "locator": "geo=ES, sector=S14_S15, na_item=B6G y P3, unit=CP_MEUR",
+     "quote": "Paid | Final consumption expenditure | 2025 = 932945",
+     "value_in_source": "2025: B6G 1.058.751 M EUR; P3 932.945 M EUR"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://taxation-customs.ec.europa.eu/document/download/aff28bc9-f9dc-4665-8510-72224c9e1ea9_en?filename=Annex_A_FINAL.pdf&prefLang=sl",
+     "title": "Data on Taxation Trends, Table 81 (comparación UE)",
+     "finding": "España tiene el tipo implícito más bajo de la UE-27 (13,6 % frente a 16,5 % en 2024, puesto 27 de 27). La tabla no da la causa; por eso un cambio de tipos legales no tiene por qué trasladarse uno a uno al tipo implícito (supuesto)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "propension_consumo",
+     "unit": "gasto en consumo final de los hogares e ISFLSH por euro de renta disponible bruta",
+     "low": 0.855,
+     "central": 0.881,
+     "high": 0.908,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Tipo implícito 2024 (último año) = 13,6 % → 0,136; low/high = mínimo y máximo 2020-2024 (13,5 % en 2023; 14,6 % en 2021). El numerador incluye IVA, impuestos especiales y otros impuestos sobre productos; el denominador es el consumo de los hogares en el territorio, no la renta. propension_consumo = P3/B6G de S14_S15 (Eurostat): 2025 932.945/1.058.751 = 0,881; low/high = mínimo y máximo 2021-2025 (2021 0,855; 2022 0,908; 2023 0,885; 2024 0,873); se excluye 2020 (pandemia, 0,820) y 2019 fue 0,911. Incluye ISFLSH; en euros corrientes.",
+   "note_es": "Según la Comisión Europea (Data on Taxation Trends), en 2024 los impuestos sobre el consumo supusieron en España 13,6 céntimos por euro de consumo de los hogares, el tipo implícito más bajo de la UE (16,5 % de media); entre 2020 y 2024 osciló entre 13,5 % y 14,6 %. Según Eurostat, en 2025 los hogares gastaron en consumo el 88 % de su renta disponible bruta.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Annex A pág. 83, Table 81: Spain 2012-2024 = 11.6 ... 14.0 14.6 14.1 13.5 13.6, ranking 27; EU-27 2024 16.5. Eurostat API nasa_10_nf_tr ES S14_S15 CP_MEUR: P3/B6G 2019 0,911; 2020 0,820; 2021 0,855; 2022 0,908; 2023 0,885; 2024 0,873; 2025 932.945/1.058.751=0,881. Range 0,855-0,908 is 2021-2025 only (unstated). The table gives no cause: the contrary finding's 'la Comisión lo vincula a una brecha del IVA y a tipos reducidos' is not in the cited source."
+   },
+   "part_file": "part_labour_w2.json"
+  },
+  {
+   "id": "M08_capital_rule",
+   "from": "ocupados_nuevos",
+   "to": "pib",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "anios_ajuste_capital",
+    "unit": "años hasta que el capital crece al ritmo del empleo nuevo (la elasticidad del PIB al empleo pasa de 0,65 a 1)",
+    "low": 5,
+    "central": 10,
+    "high": 15
+   },
+   "extra_parameters": [],
+   "lag_years": [
+    5,
+    15
+   ],
+   "grade": "C",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/economy_finance/publications/economic_paper/2014/pdf/ecp535_en.pdf",
+     "title": "The production function methodology for calculating potential growth rates & output gaps (European Economy, Economic Papers 535)",
+     "authors_year": "Havik, Mc Morrow, Orlandi et al. (2014)",
+     "country": "UE",
+     "period": "metodología vigente",
+     "method": "función de producción Cobb-Douglas de la Comisión y del Ageing Working Group",
+     "locator": "pág. 77",
+     "quote": "the AWG imposed a \"capital rule\" which ensured that the K-stock adjusted to the steady state growth path – essentially capital deepening (K-stock per hour worked) grows at the same pace as labour augmenting technical progress",
+     "value_in_source": "el capital se ajusta a su senda estable en el horizonte T+10"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://ec.europa.eu/economy_finance/publications/economic_paper/2014/pdf/ecp535_en.pdf",
+     "title": "Havik et al. (2014), misma fuente",
+     "finding": "A corto plazo, con el capital dado, el PIB solo sube un 0,65 % por cada 1 % de empleo; si la inversión no acompaña (como en la crisis de 2008-2013), el ajuste puede tardar más."
+    }
+   ],
+   "debate": null,
+   "derivation": "La regla de capital del Ageing Working Group hace que el capital por hora crezca con el progreso técnico, así que a largo plazo el capital crece con las horas y el PIB, con el empleo (elasticidad 1). La Comisión interpola hasta T+10: central 10 años, rango 5-15 (supuesto). El simulador la aplica solo al empleo de los residentes nuevos (un cambio de población que dura décadas); las palancas de política mantienen la elasticidad de corto plazo 0,65. Se añadió tras ver que, sin ella, la puerta de gasto ligado a la edad fallaba (README §14.4).",
+   "note_es": "Según la metodología de la Comisión Europea, a largo plazo el capital crece con las horas trabajadas, así que un 1 % más de ocupados acaba dando un 1 % más de PIB (a corto plazo, un 0,65 %). El simulador supone que ese ajuste tarda unos 10 años (5-15) para los trabajadores que llegan con la inmigración.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "ECP 535 pág. 77: quote verbatim (AWG 'capital rule', capital deepening per hour grows with labour-augmenting technical progress; linear interpolation to AWG T+10). pág. 43/78: EU15 get a 10-year transition to the capital rule (from T+6); a 5-year transition was tried and dropped. pág. 13: labour share 0.65 imposed for all countries. Central 10 years follows; 5-15 range stated as assumption; grade C fine."
+   },
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "S01_training_lag",
+   "from": "plazas_formacion_medicos",
+   "to": "medicos_especialistas",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_formacion_medico",
+    "unit": "años desde que se crean más plazas de formación hasta que hay más médicos especialistas en ejercicio",
+    "low": 4,
+    "central": 9,
+    "high": 11
+   },
+   "lag_years": [
+    4,
+    11
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estimación de la oferta y necesidad de médicos especialistas en España 2021-2035",
+     "authors_year": "Barber Pérez P y González López-Valcárcel B, para el Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021-2035",
+     "method": "modelo de oferta y necesidad de especialistas con registros oficiales",
+     "locator": "pág. 4 (introducción); pág. 17-18 (apartado 4.1, egresados y plazas MIR, figura 1)",
+     "quote": "Un joven médico que inicie su formación a mediados de 2023 la completará a mediados de 2027 o de 2028 (según sea una especialidad de 4 o de 5 años).",
+     "value_in_source": "residencia de 4 o 5 años; plazas de grado en Medicina en torno a 7.000-7.500 al año (figura 1)"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2008-2674",
+     "title": "Orden ECI/332/2008, requisitos para la verificación de los títulos que habiliten para la profesión de Médico",
+     "authors_year": "BOE (2008)",
+     "country": "España",
+     "period": "desde 2008",
+     "method": "norma",
+     "locator": "Anexo, apartado 5 (Planificación de las enseñanzas)",
+     "quote": "sus planes de estudios tendrán una duración de 360 créditos europeos",
+     "value_in_source": "360 ECTS (6 cursos de 60 ECTS)"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/fr/gabinete/notasPrensa.do?id=6723",
+     "title": "La oferta de plazas de Formación Sanitaria Especializada para 2026 bate un nuevo récord",
+     "authors_year": "Ministerio de Sanidad (17-7-2025)",
+     "country": "España",
+     "period": "convocatoria 2025-2026",
+     "method": "oferta oficial de plazas FSE",
+     "locator": "distribución de plazas por titulación",
+     "quote": "El mayor número, 9.276 plazas, se ofertan para la titulación de Medicina (MIR)",
+     "value_in_source": "9.276 plazas MIR (12.366 FSE en total)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio de oferta y necesidad 2021-2035, pág. 17-18",
+     "finding": "El déficit de egresados frente a plazas MIR se ha cubierto con graduados de universidades extranjeras y con la bolsa de egresados que no obtuvo plaza en años anteriores: parte de las nuevas plazas se llena sin esperar a nuevas promociones (retardo cercano a 4-5 años)."
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2008-3176",
+     "title": "Real Decreto 183/2008 (especialidades y formación sanitaria especializada)",
+     "finding": "Hay especialidades de menos de 4 años y la recirculación (reespecialización) de médicos ya especialistas no añade especialistas en ejercicio: el efecto neto de una plaza puede ser menor o más tardío."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "plazas_mir_medicina",
+     "unit": "plazas de Medicina en la convocatoria de Formación Sanitaria Especializada 2025-2026 (número)",
+     "low": 9275,
+     "central": 9276,
+     "high": 9276,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Residencia: 4 años (Medicina Familiar y Comunitaria) o 5 (muchas hospitalarias), Sanidad 2022 pág. 4. Grado: 360 ECTS = 6 cursos (Orden ECI/332/2008). Bajo 4: la plaza se cubre con un graduado que ya existe y termina en 4 años. Alto 11: hace falta un graduado nuevo (6 años de grado + 5 de residencia). La oferta MIR 2026 (9.276 plazas; 9.275 en la nota de adjudicación de abril de 2026) supera las plazas de nuevo ingreso del grado (unas 7.000-7.500 al año según la figura 1 del estudio de 2022, con datos anteriores), así que las plazas adicionales dependen de nuevos graduados o de médicos extranjeros: central 9 años (juicio), más cerca de 11 que de 4. Los graduados anuales recientes no se verificaron directamente.",
+   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. Como la oferta de 2026 (9.276 plazas) ya supera a los estudiantes que entran cada año en Medicina, usamos 9 años (rango 4-11).",
+   "part_file": "part_labour_pilot.json"
+  },
+  {
+   "id": "S02_doctor_retention",
+   "from": "medicos_formados",
+   "to": "medicos_sns",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "permanencia_sns_medicos",
+    "unit": "parte de los especialistas formados en España que acaban trabajando en la sanidad pública española",
+    "low": 0.58,
+    "central": 0.68,
+    "high": 0.78
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021",
+     "method": "estimación del empleo total de especialistas (registros SNS de CCAA + colegiación OMC + fuentes privadas)",
+     "locator": "apartado 5.3, pág. 69",
+     "quote": "se estima que el número total de médicos activos en España asciende a 192.484. Esto supone una ratio de 406,13 médicos especialistas por 100.000 habitantes en 2021. El empleo privado estaría en torno al 30% del total",
+     "value_in_source": "192.484 especialistas activos; empleo privado en torno al 30 % (público ~70 %)"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2020",
+     "method": "certificados de idoneidad del CGCOM y flujos migratorios OCDE",
+     "locator": "apartado 4.2, págs. 23-24 (figura 6)",
+     "quote": "Los 3.559 certificados emitidos en 2020 fueron solicitados por 2.189 médicos (2.101 en situación de alta colegial en España)",
+     "value_in_source": "2.189 médicos pidieron certificado en 2020; en torno al 70 % para trabajar; flujos OCDE sustancialmente menores"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021",
+     "method": "definición del recuento",
+     "locator": "apartado 3, pág. 14",
+     "quote": "los que compatibilizan ambos ejercicios, público y privado, figuran en la pública",
+     "value_in_source": "médicos mixtos contados en la red pública"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035 (apartado 5.3, pág. 69)",
+     "finding": "El empleo privado de especialistas creció un 7 % desde 2018 mientras el público cayó un 1,7 %: la parte que acaba en la red pública puede ser menor en las promociones recientes que en el stock."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Stock 2021: ~70 % de los 192.484 especialistas activos trabaja en la red pública (los mixtos cuentan como públicos, pág. 14), 30 % solo en la privada (pág. 69). Ese 70 % incluye médicos formados fuera (4.293 títulos homologados en 2021, pág. 23), así que no es exactamente la permanencia de los formados en España. Emigración: 2.189 solicitantes de certificado en 2020 (~1,1 % del stock; ~70 % para trabajar; los flujos OCDE de llegada son menores), resto 2-4 pp de pérdida acumulada (supuesto). Central 0,70 x (1-0,03) = 0,68. Bajo 0,58: promociones recientes más hacia la privada (privado +7 %, público -1,7 % desde 2018). Alto 0,78: si los formados fuera pesan más en la privada. No hay un seguimiento de cohortes MIR: todo es derivación del stock.",
+   "note_es": "Según el estudio del Ministerio de Sanidad (2022), en torno al 70 % de los especialistas activos trabaja en la red pública (incluidos los que también ejercen en la privada) y el 30 % solo en la privada; la emigración es pequeña (unos 2.200 médicos pidieron certificado para salir en 2020). Suponemos que 2 de cada 3 formados acaban en el SNS; no hay seguimiento por promoción MIR.",
+   "part_file": "part_labour_w3.json"
+  },
+  {
+   "id": "S03_doctor_cost",
+   "from": "medicos_sns",
+   "to": "gasto_sanitario",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_medico_anual",
+    "unit": "miles de euros al año por médico especialista del SNS (sueldo bruto más cotización empresarial)",
+    "low": 91,
+    "central": 107,
+    "high": 125
+   },
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022) con datos OCDE",
+     "country": "España",
+     "period": "2020",
+     "method": "retribución bruta media de especialistas asalariados (OECD Health Statistics)",
+     "locator": "apartado 4.3, pág. 29",
+     "quote": "El salario medio bruto en el sector público en 2020 fue de 76.477 euros para un médico especialista y 69.880 euros en el caso de médico general.",
+     "value_in_source": "76.477 euros brutos al año, especialista del sector público, 2020"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-17498",
+     "title": "Real Decreto 1146/2006, relación laboral especial de residencia (texto consolidado, última actualización 06/11/2026)",
+     "authors_year": "BOE (2006, mod. RD 951/2026)",
+     "country": "España",
+     "period": "2026",
+     "method": "norma",
+     "locator": "art. 7.1.a-b y 7.2",
+     "quote": "Su cuantía será porcentual respecto al sueldo. Los porcentajes serán, al menos, los siguientes, sin perjuicio de que los servicios de salud puedan acordar un porcentaje superior",
+     "value_in_source": "complemento de grado R1 18 %, R2 28 %, R3 38 %, R4 48 %, R5 58 % del sueldo; dos pagas extra de sueldo + complemento"
+    },
+    {
+     "url": "https://www.sepg.pap.hacienda.gob.es/sitios/sepg/es-ES/CostesPersonal/EstadisticasInformes/Documents/A%c3%91O%202026/Retribuciones%20del%20personal%20funcionario%202026.%20Real%20Decreto-ley%2014%202025%2c%20de%202%20de%20diciembre..pdf",
+     "title": "Retribuciones del personal funcionario 2026 (Real Decreto-ley 14/2025)",
+     "authors_year": "Ministerio de Hacienda, DG Costes de Personal (2026)",
+     "country": "España",
+     "period": "2026",
+     "method": "tabla retributiva oficial",
+     "locator": "pág. 1, columna A1, fila MENSUAL",
+     "quote": "Real Decreto-ley 14/2025, de 2 de diciembre, por el que se aprueban medidas urgentes en materia de retribuciones en el ámbito del sector público.",
+     "value_in_source": "sueldo A1: 1.387,24 euros al mes; 16.646,88 euros en 12 meses"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "coste_residente_anual",
+     "unit": "miles de euros al año por residente MIR (sueldo, complemento de grado, guardias y cotización empresarial), media R1-R5",
+     "low": 30,
+     "central": 49,
+     "high": 64,
+     "grade": "C"
+    }
+   ],
+   "derivation": "Especialista: 76.477 euros brutos de 2020 (OCDE vía Ministerio, pág. 29) actualizados con las subidas generales del sector público 2021-2026 (0,9; 3,5; 3,5; 2,5; 2,5; 1,5 %, acumulado x1,153; cifras de las leyes de presupuestos no releídas aquí, sin deriva por trienios o carrera) = 88,1 mil. Cotización empresarial ~31,6 % (contingencias comunes 23,6 + MEI + desempleo 5,5 + FOGASA + FP + AT ~1; aproximado) sobre la base máxima (~59-60 mil al año) = ~19 mil, más ~0,3 mil de cotización de solidaridad: ~107 mil. Bajo 91 = nivel 2020 (76,5 + 48,8 x 0,306). Alto 125: especialistas con más guardias o antigüedad (la cifra OCDE es una media). Residente: 14 pagas x 1.387,24 x (1 + 38 % de media R1-R5) = 26,8 mil + guardias supuestas ~10,5 mil (4 guardias de 17 h al mes, 11 meses, ~14 euros/h: NO verificado, varía por CCAA) = 37,3 mil x 1,3165 = 49 mil; bajo R1 sin guardias 22,9 x 1,3165 = 30; alto R5 con 6 guardias/mes a 16 euros/h = 64. Contraria: solo leí la cifra OCDE del Ministerio; no encontré otra fuente española de coste por médico que la contradiga.",
+   "note_es": "Según la OCDE (citada por el Ministerio de Sanidad), un especialista de la sanidad pública cobraba 76.477 euros brutos en 2020; con las subidas salariales públicas hasta 2026 y la cotización empresarial, cuesta unos 107.000 euros al año. Un residente MIR cuesta unos 49.000 (sueldo A1, complemento por año de residencia y guardias, estas estimadas). Guardias y antigüedad cambian mucho la cifra.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Sanidad study pág. 29 (apdo 4.3): quote verbatim, 76.477 € specialist public sector 2020. BOE RD 1146/2006 art. 7.1.b: grado 18/28/38/48/58 %, 7.2 two extra pays of sueldo+grado; updated 06/11/2026 (RD 951/2026). Hacienda 2026 pág. 1: A1 sueldo 1.387,24/month, 16.646,88/yr. Checked: 76.477x1,1526=88,2k; +~19k cotización = ~107k; low 76,5+48,8x0,306=91,4; resident 14x1.387,24x1,38=26,8k+10,5k=37,3k x1,3165=49; R1 30,2; R5 64,0. Pay rises and guardias flagged as unverified assumptions."
+   },
+   "part_file": "part_labour_w3.json"
+  },
+  {
+   "id": "S04_capacity_money",
+   "from": "gasto_sanitario",
+   "to": "capacidad_asistencial",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "capacidad_por_gasto",
+    "unit": "parte de la capacidad que el dinero puede comprar a corto plazo sin más médicos formados (horas extra, derivación a centros concertados, otro personal), por cada 1 % de gasto extra",
+    "low": 0.1,
+    "central": 0.4,
+    "high": 0.8
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://econsalut.blogspot.com/2020/06/why-are-we-waiting-5.html",
+     "title": "OECD (2020), Waiting Times for Health Services: Next in Line (resumen oficial reproducido en el blog Econsalut)",
+     "authors_year": "OCDE (2020)",
+     "country": "OCDE",
+     "period": "2010-2019",
+     "method": "revisión comparada de políticas de listas de espera",
+     "locator": "resumen del informe (doi 10.1787/242e3c8c-en), reproducido en la entrada del 13-6-2020",
+     "quote": "Governments in many countries have taken various measures to reduce waiting times, often supported by additional funding, with mixed success.",
+     "value_in_source": "financiación adicional: éxito desigual (sin cifra)"
+    },
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics)",
+     "country": "Italia",
+     "period": "2010-2014",
+     "method": "panel regional por procedimiento, primeras diferencias y variables instrumentales",
+     "locator": "resumen, pág. 2",
+     "quote": "We find that demand is inelastic to waiting times while supply is more elastic.",
+     "value_in_source": "oferta más elástica que la demanda (demanda -0,15 a -0,24)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://votaconlachola.org/visualizaciones/sanidad/",
+     "title": "Vota con la Chola, Sanidad: gasto y listas de espera por comunidad",
+     "finding": "Entre las 17 comunidades, el gasto sanitario público por habitante y los días de espera quirúrgica apenas se correlacionan (Spearman 0,10; 0,31 ajustado por edad): más gasto no va de la mano de menos espera."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual y, según su resumen, efectos que no duran sin aumento permanente de oferta; Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, como sugiere la nula correlación entre comunidades); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
+   "note_es": "Según la OCDE (2020), dar más dinero para reducir esperas ha tenido éxito desigual; en Italia la oferta quirúrgica responde algo a la espera. Suponemos que, sin más médicos, cada 1 % de gasto extra compra un 0,4 % de capacidad (entre 0,1 y 0,8): es un juicio, no un dato medido. En España el gasto por habitante de cada comunidad apenas se relaciona con sus días de espera.",
+   "part_file": "part_labour_w3.json"
+  },
+  {
+   "id": "S05_waiting_demand",
+   "from": "tiempo_espera",
+   "to": "entradas_lista",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_demanda_espera",
+    "unit": "% de cambio de las entradas en lista de espera quirúrgica por cada 1 % de cambio del tiempo de espera",
+    "low": -0.5,
+    "central": -0.2,
+    "high": -0.1
+   },
+   "lag_years": 0,
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics)",
+     "country": "Italia",
+     "period": "2010-2014",
+     "method": "panel regional por procedimiento quirúrgico, primeras diferencias y variables instrumentales",
+     "locator": "resumen, pág. 2; tabla 2, pág. 16",
+     "quote": "We find that demand is inelastic to waiting times while supply is more elastic. Estimates of demand elasticity are between -0.15 to -0.24.",
+     "value_in_source": "elasticidad de la demanda entre -0,15 y -0,24 (MCO -0,1)"
+    },
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy (revisión de la literatura)",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics) resumiendo Martin y Smith (1999), Gravelle et al. (2002, 2003), Martin et al. (2007)",
+     "country": "Reino Unido",
+     "period": "1990-2000s",
+     "method": "revisión de estudios con datos del NHS",
+     "locator": "introducción, pág. 4",
+     "quote": "In most studies, demand elasticity is below -0.2.",
+     "value_in_source": "elasticidad de la demanda generalmente baja, por debajo de -0,2 en valor absoluto en la mayoría de estudios"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "Stavrunova y Yerokhin (2011), Nueva Gales del Sur, citado en Riganti et al. (2017), págs. 5 y 20",
+     "finding": "En Australia, con más de la mitad de la población con seguro privado, la demanda de cirugía pública responde mucho más a la espera: elasticidad -1,7."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Central -0,2: punto medio del rango italiano con variables instrumentales (-0,15 a -0,24) y del resumen británico (la mayoría por debajo de -0,2 en valor absoluto). Alto -0,1: estimación MCO italiana. Bajo -0,5: España tiene un sector privado y seguros privados más extendidos que Reino Unido o Italia, por lo que la salida hacia la privada al alargarse la espera puede ser mayor; sin llegar al -1,7 australiano. Los artículos británicos originales (Martin y Smith 1999, etc.) no se han leído directamente: se citan vía la revisión de Riganti et al. No hay estimación española.",
+   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan en torno a un 0,2 % (entre 0,1 y 0,5): la demanda responde poco. En Australia, con mucho seguro privado, responde bastante más. No hay estimación para España, donde el peso del seguro privado podría hacerla algo mayor.",
+   "part_file": "part_labour_w3.json"
+  },
+  {
+   "id": "S06_health_age_profile",
+   "from": "poblacion_por_edad",
+   "to": "demanda_sanitaria",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "peso_sanitario_80",
+    "unit": "gasto sanitario público por persona de 80 o más años frente a la media de la población (1 = media)",
+    "low": 2.2,
+    "central": 2.41,
+    "high": 2.6
+   },
+   "extra_parameters": [
+    {
+     "name": "peso_sanitario_65_79",
+     "unit": "65-79 años frente a la media",
+     "low": 1.7,
+     "central": 1.86,
+     "high": 2.0,
+     "grade": "A"
+    },
+    {
+     "name": "peso_sanitario_16_29",
+     "unit": "16-29 años frente a la media",
+     "low": 0.42,
+     "central": 0.46,
+     "high": 0.5,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.funcas.es/wp-content/uploads/Migracion/Publicaciones/PDF/1791.pdf",
+     "title": "Distribución del gasto sanitario público por edad y sexo en España: análisis de la década 1998-2008 (Documento de trabajo 673)",
+     "authors_year": "Blanco Moreno, Urbanos Garrido y Thuissard Vasallo (2012)",
+     "country": "España",
+     "period": "1998-2008",
+     "method": "reparto del gasto sanitario público por edad con datos de utilización",
+     "locator": "pág. 68, tabla 15, fila «80 y más»",
+     "quote": "80 y más  1900  2193  2610",
+     "value_in_source": "2.610 € de 1998 por persona de 80 o más años en 2008"
+    },
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESc)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial",
+     "locator": "hoja ESc, gasto sanitario, «Demographic scenario»",
+     "quote": "Demographic scenario  -0.0596  -0.1409",
+     "value_in_source": "gasto sanitario 5,92 % del PIB en 2025 y 7,03 % en 2050 (base); escenario demográfico −0,0247 puntos frente a la base en 2025 y −0,1453 en 2050 (−0,1409 en 2049): 5,89 % → 6,89 %, +16,9 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/publications/2024-ageing-report-economic-and-budgetary-projections-eu-member-states-2022-2070_en",
+     "title": "2024 Ageing Report (envejecimiento saludable)",
+     "finding": "Si los años de vida ganados son en buena salud, el gasto por edad baja con el tiempo; el perfil fijo de 2008 puede exagerar la demanda de los mayores."
+    }
+   ],
+   "debate": null,
+   "derivation": "Pesos por etapa = gasto por persona de cada tramo de 5 años de Funcas (2008) ponderado por la población de 2025 de EUROPOP2023, dividido por la media de toda la población. Con ese perfil y la población base, el gasto sanitario en % del PIB crecería un 15,5 % de 2025 a 2050 solo por edad, frente al 16,9 % del escenario demográfico del Ageing Report ((7,0325 − 0,1453)/(5,9168 − 0,0247) − 1; puerta con tolerancia de 5 puntos). Los rangos son ±8 % por la antigüedad del perfil (supuesto).",
+   "note_es": "Según Funcas (perfil de 2008), una persona de 80 o más años usa unas 2,4 veces el gasto sanitario público medio y una de 16 a 29, menos de la mitad. Con ese perfil, el envejecimiento sube el gasto sanitario un 15,5 % en % del PIB hasta 2050; el Ageing Report da un 16,9 %.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Funcas pág. 68 Tabla 15: '80 y más 1900 2193 2610' verbatim; total 982. Reweighted with EUROPOP2023 2025 (proj_23np BSL): mean 1.081 €, 80+ 2,414, 65-79 1,857, 16-29 0,458 (match). AR xlsx hoja ESc: health baseline 2025 5,9168, 2050 7,0325; demographic scenario diff -0,0247 (2025), -0,1453 (2050); -0,1409 is 2049, -0,0596 is 2034. Demographic-scenario growth 2025-2050 = 16,9 %, not 16,8 %."
+   },
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "S07_waiting_list_flow",
+   "from": "capacidad_asistencial",
+   "to": "lista_espera_quirurgica",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "salidas_lista_k",
+    "unit": "miles de pacientes que salen al año de la lista de espera quirúrgica (operados o dados de baja), estimado con la ley de Little",
+    "low": 2300,
+    "central": 2554,
+    "high": 2800
+   },
+   "extra_parameters": [
+    {
+     "name": "lista_espera_k",
+     "unit": "miles de pacientes en lista de espera quirúrgica, 31-12-2025",
+     "low": 853.7,
+     "central": 853.7,
+     "high": 853.7,
+     "grade": "A"
+    },
+    {
+     "name": "espera_media_dias",
+     "unit": "días de espera media, 31-12-2025",
+     "low": 122,
+     "central": 122,
+     "high": 122,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+     "title": "Sistema de Información sobre Listas de Espera en el SNS (SISLE-SNS), situación a 31 de diciembre de 2025 (rectificado)",
+     "authors_year": "Ministerio de Sanidad (2026)",
+     "country": "España",
+     "period": "31-12-2025",
+     "method": "registro administrativo de las comunidades",
+     "locator": "pág. 3, fila TOTAL",
+     "quote": "TOTAL  853.740  7.157  21.012  17,70  21,6  122  -4",
+     "value_in_source": "853.740 pacientes; 122 días de espera media"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
+     "title": "Ministerio de Sanidad, listas de espera (metodología del SISLE)",
+     "finding": "La espera media del SISLE es la de quienes están en lista el día del corte, no la de quienes salen; la ley de Little solo da el flujo de salida en un estado estable, así que es una aproximación."
+    }
+   ],
+   "debate": null,
+   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). Con el corte de 2018 (668.288 pacientes, 129 días) saldría 1,89 millones: la lista y su flujo crecieron. El rango ±10 % recoge que la espera media del corte no es la de las salidas. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
+   "note_es": "Según el Ministerio de Sanidad, a 31 de diciembre de 2025 había 853.740 personas esperando una operación, con 122 días de media. Si la lista estuviera estable, eso supone unos 2,55 millones de salidas al año (ley de Little, una aproximación).",
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "S08_doctors_stock",
+   "from": "medicos_formados",
+   "to": "capacidad_asistencial",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "medicos_ejercicio_k",
+    "unit": "miles de médicos en ejercicio en España (464 por 100.000 habitantes, 2024, por la población de 2025)",
+    "low": 220,
+    "central": 225.6,
+    "high": 230
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&unit=P_HTHAB&geo=ES",
+     "title": "Health personnel (excluding nursing and caring professionals) - practising physicians (hlth_rs_prs2)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "registros de colegiados y empleo (estimación de Eurostat)",
+     "locator": "geo=ES, med_spec=PHYS, unit=P_HTHAB, 2024",
+     "quote": "Spain, practising physicians per hundred thousand inhabitants, 2024: 464 (e)",
+     "value_in_source": "464 por 100.000 habitantes (estimado)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Ministerio de Sanidad, Estudio oferta-necesidad de especialistas médicos 2021-2035",
+     "finding": "No todos los médicos en ejercicio trabajan en el sistema público; el déficit se concentra en especialidades y territorios (atención primaria, zonas rurales), que un total nacional no ve."
+    }
+   ],
+   "debate": null,
+   "derivation": "464 médicos en ejercicio por 100.000 habitantes (Eurostat 2024, estimado) × 48,6 millones de habitantes en 2025 (EUROPOP2023) ≈ 225.600. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
+   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 225.600. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR.",
+   "part_file": "part_labour_own.json"
+  },
+  {
+   "id": "S09_school_cost",
+   "from": "poblacion_5_24",
+   "to": "gasto_educacion",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "gasto_por_alumno_eur",
+    "unit": "euros de gasto educativo público por alumno, 2025 (gasto del Ageing Report entre alumnos)",
+    "low": 7500,
+    "central": 7851,
+    "high": 8200
+   },
+   "extra_parameters": [
+    {
+     "name": "escolarizacion_5_24",
+     "unit": "alumnos por persona de 5 a 24 años",
+     "low": 0.867,
+     "central": 0.867,
+     "high": 0.867,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESc, educación)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial",
+     "locator": "hoja ESc, «Education spending as % of GDP», Baseline y «Number of students»",
+     "quote": "Baseline 4.1025 4.0025 ... Total 8573.89 8597.55",
+     "value_in_source": "4,0 % del PIB y 8,6 millones de alumnos en 2025; 86,7 % de la población de 5 a 24 años"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/estadisticas/economicas/gasto.html",
+     "title": "Ministerio de Educación, Estadística del gasto público en educación",
+     "finding": "El gasto por alumno varía mucho por etapa (infantil, primaria, universidad) y el alumno nuevo puede costar menos que el medio si hay plazas libres (natalidad a la baja)."
+    }
+   ],
+   "debate": null,
+   "derivation": "4,0025 % del PIB de 2025 (1.686.420 millones) / 8.597.555 alumnos ≈ 7.851 € por alumno. Los alumnos adicionales = residentes adicionales de 5 a 24 años × 0,867 (escolarización del Ageing Report). El rango ±4,5 % es un supuesto.",
+   "note_es": "Según el Ageing Report 2024, el gasto educativo público es el 4,0 % del PIB para 8,6 millones de alumnos en 2025: unos 7.850 € por alumno. El simulador cobra eso por cada alumno adicional; con aulas que se vacían por la natalidad, el coste real de un alumno más puede ser menor.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "AR xlsx hoja ESc: Education % GDP baseline 2022 4,1025, 2025 4,0025; students (thousands) 2022 8.573,89, 2025 8.597,55; 'as % of population 5-24' 2025 86,7152. 0,040025x1.686.420/8.597.555 = 7.851. GDP 1.686.420 M is uncited; Eurostat nama_10_gdp now gives 1.690.012 M for 2025 (-> 7.868 €, +0,2 %, inside the range). Ministry contrary page loads."
+   },
+   "part_file": "part_labour_own.json"
   },
   {
    "id": "T01_irpf_yield_all",

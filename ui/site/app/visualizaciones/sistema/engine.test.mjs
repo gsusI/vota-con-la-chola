@@ -3,14 +3,15 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_LEVERS, HOUSING_KEYS, LAYERS, applyLayer, centralParams, decodeState, encodeState, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
+import { DEFAULT_LEVERS, HOUSING_KEYS, LABOUR_KEYS, LAYERS, STAGE_GROUPS, applyLayer, centralParams, decodeState, encodeState, quintileImpact, runEnsemble, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
 
 const here = fileURLToPath(new URL(".", import.meta.url));
 // SISTEMA_JSON: a development export (scripts/export_public_viz_system.py --out); the default is the published file.
 const model = JSON.parse(fs.readFileSync(process.env.SISTEMA_JSON || `${here}../../../public/visualizaciones/data/sistema.json`, "utf8"));
 const END = model.years.length - 1;
-const DEVS = ["debt_dev_pp", "pension_gross_pp", "employment_k", "p1_month", "p4_month", "gdp_dev", "price_level_dev", ...HOUSING_KEYS];
+const DEVS = ["debt_dev_pp", "pension_gross_pp", "employment_k", "p1_month", "p4_month", "gdp_dev", "price_level_dev", ...HOUSING_KEYS,
+  ...LABOUR_KEYS.filter((k) => k !== "hl_wait_days")];
 
 test("current law: every deviation is zero and the baseline is returned unchanged", () => {
   const run = simulate(model, DEFAULT_LEVERS);
@@ -182,5 +183,79 @@ test("illustrative extremes stay finite and a tax cut never returns more than a 
   const noIrpf = simulate(model, { ...DEFAULT_LEVERS, irpfAll: -35 });
   for (const id of ["p1", "p2", "p4", "p5"]) {
     assert.ok(noIrpf[`${id}_month`][t] * 12 <= model.personas[id].irpf_paid + 1, id);
+  }
+});
+
+// ---- slice 3: employment, immigration, healthcare capacity
+const T50 = END;
+const T_35 = model.years.indexOf(2035);
+
+test("immigration: the stages add up, legacy switch = one official variant, both sides of the accounts are counted", () => {
+  const legacy = simulate(model, { ...DEFAULT_LEVERS, migration: "high" });
+  const scaled = simulate(model, { ...DEFAULT_LEVERS, migScale: 1 });
+  assert.deepEqual(legacy.mig_net_pp, scaled.mig_net_pp);
+  for (let t = 0; t < model.years.length; t += 1) {
+    const sum = Object.keys(STAGE_GROUPS).reduce((a, g) => a + scaled[`mig_pop_${g}`][t], 0);
+    assert.ok(Math.abs(sum - scaled.mig_pop_k[t]) < 1e-9);
+    const rev = Object.keys(STAGE_GROUPS).reduce((a, g) => a + scaled[`mig_rev_${g}`][t], 0);
+    const use = Object.keys(STAGE_GROUPS).reduce((a, g) => a + scaled[`mig_use_${g}`][t], 0);
+    assert.ok(Math.abs(rev - scaled.mig_revenue_pp[t]) < 1e-9 && Math.abs(use - scaled.mig_spend_pp[t]) < 1e-9, String(model.years[t]));
+  }
+  assert.ok(scaled.mig_pop_k[T50] > 0 && scaled.mig_emp_k[T50] > 0 && scaled.mig_revenue_pp[T50] > 0 && scaled.mig_spend_pp[T50] > 0);
+  const low = simulate(model, { ...DEFAULT_LEVERS, migScale: -1 });
+  assert.ok(low.mig_pop_k[T50] < 0 && low.hs_migration_hh_k[T50] < 0);
+});
+
+test("services that do not grow with population: no extra spending, longer waits than when they follow", () => {
+  const follow = simulate(model, { ...DEFAULT_LEVERS, migScale: 1 });
+  const fixed = simulate(model, { ...DEFAULT_LEVERS, migScale: 1, svcFunding: "fixed" });
+  assert.equal(fixed.mig_health_pp[T_35], 0);
+  assert.equal(fixed.mig_edu_pp[T_35], 0);
+  assert.ok(fixed.hl_wait_days[T_35] > follow.hl_wait_days[T_35]);
+  assert.ok(fixed.svc_per_person_pct[T_35] < 0);
+});
+
+test("waiting list: stock identity, never negative, and converges in every draw", () => {
+  const e = runEnsemble(model, { ...DEFAULT_LEVERS, migScale: 2, svcFunding: "fixed" }, { draws: 60 });
+  const H = model.labour.health;
+  for (const run of e.runs) {
+    for (let t = 0; t < model.years.length; t += 1) {
+      assert.ok(run.hl_list_k[t] >= -H.list_k - 1e-9);
+      assert.ok(Number.isFinite(run.hl_wait_days[t]) && run.hl_wait_days[t] < 5 * 365);
+    }
+  }
+  const mir = runEnsemble(model, { ...DEFAULT_LEVERS, mir: 12000, healthSpend: 40 }, { draws: 60 });
+  for (const run of mir.runs) assert.ok(run.hl_list_k.every((v) => v >= -H.list_k - 1e-9 && Number.isFinite(v)));
+});
+
+test("more training places: no doctors before the training lag, then shorter waits; the cost reaches the budget", () => {
+  const run = simulate(model, { ...DEFAULT_LEVERS, mir: 2000 });
+  const P = centralParams(model);
+  const first = model.years.findIndex((y) => y - model.policy_start + 1 > P.retardo_formacion_medico);
+  assert.equal(run.hl_doctors_k[first - 1], 0);
+  assert.ok(run.hl_doctors_k[T50] > 0 && run.hl_wait_days[T50] < run.hl_wait_days[first - 1]);
+  assert.ok(run.hl_cost_pp[1] > 0 && run.net_cost_pp[1] > 0);
+});
+
+test("employment levers: a higher SMI raises the wage bill and contributions; the employment effect has the sign of its elasticity", () => {
+  const P = centralParams(model);
+  const smi = simulate(model, { ...DEFAULT_LEVERS, smi: 10 });
+  assert.ok(smi.lb_wage_bill_pct[T_35] > 0 && smi.lb_revenue_pp[T_35] > 0);
+  assert.equal(Math.sign(smi.lb_smi_k[T_35]), Math.sign(P.elasticidad_empleo_smi));
+  const acc = simulate(model, { ...DEFAULT_LEVERS, smi: 10 }, applyLayer(model, P, "contable"));
+  assert.equal(acc.lb_smi_k[T_35], 0);
+  const hours = simulate(model, { ...DEFAULT_LEVERS, hours: 2.5 });
+  assert.ok(hours.lb_hour_cost_pct[T_35] > 0 && hours.lb_hour_cost_pct[T_35] <= (2.5 / 37.5) * 100 + 1e-9);
+  const quota = simulate(model, { ...DEFAULT_LEVERS, selfQuota: 50 });
+  assert.ok(quota.lb_revenue_pp[T_35] > 0 && quota.lb_self_k[T_35] <= 0);
+});
+
+test("slice 3 extremes stay finite", () => {
+  for (const lv of [{ smi: 60 }, { smi: -20 }, { hours: 10 }, { selfQuota: -300 }, { selfQuota: 500 }, { migScale: -2 }, { migScale: 2, closure: "iva" },
+    { mir: 12000, healthSpend: 40, closure: "irpf" }]) {
+    const run = simulate(model, { ...DEFAULT_LEVERS, ...lv });
+    for (const [key, values] of Object.entries(run)) {
+      if (Array.isArray(values)) assert.ok(values.every((v) => typeof v !== "number" || Number.isFinite(v)), `${JSON.stringify(lv)} ${key}`);
+    }
   }
 });

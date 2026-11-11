@@ -184,13 +184,18 @@ export default function Scene({ model, run, t, composition }) {
   const year = model.years[t];
 
   const services = model.start.spending_pct - B.pension_pct[0] - model.start.interest_pct;
+  const at = (key) => run[key]?.[t] ?? 0;
+  // Slice 3: health (capacity block), schooling, long-term care and other services of the extra residents.
+  const svcExtra = at("hl_cost_pp") + at("mig_edu_pp") + at("mig_ltc_pp") + at("mig_other_pp");
+  const waitBase = model.labour ? (model.labour.health.list_k / model.labour.health.exits_k) * 365 : 0;
+  const wait = at("hl_wait_days");
   const flows = {
     vat: [composition.vat + run.vat_revenue_pp[t] + run.vat_red_revenue_pp[t], run.vat_revenue_pp[t] + run.vat_red_revenue_pp[t]],
     irpf: [composition.irpf + run.irpf_revenue_pp[t] + run.irpf_back_pp[t], run.irpf_revenue_pp[t] + run.irpf_back_pp[t]],
     contrib: [composition.contrib + run.contrib_revenue_pp[t] + run.labour_revenue_pp[t], run.contrib_revenue_pp[t] + run.labour_revenue_pp[t]],
     corp: [composition.corp + run.corp_revenue_pp[t], run.corp_revenue_pp[t]],
     pensions: [run.pension_pct[t], run.pension_pct[t] - B.pension_pct[t]],
-    services: [services, 0],
+    services: [services + svcExtra, svcExtra],
     loans: [Math.max(0, run.deficit_pct[t]), run.deficit_pct[t] - B.deficit_pct[t]],
     interest: [B.interest_pct[t] + run.interest_dev_pp[t], run.interest_dev_pp[t]],
     housing: [Math.max(0, run.hs_cost_pp?.[t] ?? 0), run.hs_cost_pp?.[t] ?? 0],
@@ -204,7 +209,7 @@ export default function Scene({ model, run, t, composition }) {
     Math.abs(hs("hs_stock_k")) >= 0.5 ? `Viviendas ${k(hs("hs_stock_k"))}` : null,
     Math.abs(hs("hs_emancipated_k")) >= 0.5 ? `Jóvenes que se independizan ${k(hs("hs_emancipated_k"))}` : null,
   ].filter(Boolean);
-  const workers = Math.max(0, (B.employment_k[t] + run.employment_k[t]) / 1000);
+  const workers = Math.max(0, (B.employment_k[t] + run.employment_k[t] + at("mig_emp_k")) / 1000);
   const workersBase = B.employment_k[t] / 1000;
   const pensioners = Math.max(0, (B.pensioners_k[t] * (1 + run.pensioners_dev[t])) / 1000);
   const pensionersBase = B.pensioners_k[t] / 1000;
@@ -227,7 +232,7 @@ export default function Scene({ model, run, t, composition }) {
         <text x={L.factory[0]} y={L.factory[1] + 26 * sc} textAnchor="middle" className="art__label">Empresas</text>
         <Crowd x={L.workers.x} y={L.workers.y} cols={L.workers.cols} count={Math.min(40, Math.round(workers))} delta={Math.round(workers) - Math.round(workersBase)}
           label="Trabajan" scale={sc}
-          sub={`${n1(workers)} millones${Math.abs(run.employment_k[t]) >= 1 ? ` (${run.employment_k[t] > 0 ? "+" : "−"}${thousands(Math.abs(run.employment_k[t]) / 1000)})` : ""}`} />
+          sub={`${n1(workers)} millones${Math.abs(run.employment_k[t] + at("mig_emp_k")) >= 1 ? ` (${run.employment_k[t] + at("mig_emp_k") > 0 ? "+" : "−"}${thousands(Math.abs(run.employment_k[t] + at("mig_emp_k")) / 1000)})` : ""}`} />
         <PiggyBank x={L.piggy[0]} y={L.piggy[1]} s={L.piggy[2]} label="Caja pública"
           sub={run.deficit_pct[t] > 0 ? `déficit del ${n1(run.deficit_pct[t])} % del PIB` : `superávit del ${n1(-run.deficit_pct[t])} % del PIB`} />
         <Crowd x={L.pensioners.x} y={L.pensioners.y} cols={L.pensioners.cols} count={Math.min(30, Math.round(pensioners))} delta={Math.round(pensioners) - Math.round(pensionersBase)}
@@ -235,6 +240,11 @@ export default function Scene({ model, run, t, composition }) {
           sub={`${n1(pensioners)} millones${Math.abs(pensioners - pensionersBase) >= 0.001 ? ` (${pensioners > pensionersBase ? "+" : "−"}${thousands(Math.abs(pensioners - pensionersBase))})` : ""}`} />
         <Services x={L.services[0]} y={L.services[1]} s={sc} />
         <text x={L.services[0]} y={L.services[1] + 26 * sc} textAnchor="middle" className="art__label">Servicios públicos</text>
+        {waitBase && Math.abs(wait - waitBase) >= 0.5 ? (
+          <text x={L.services[0]} y={L.services[1] + 44 * sc} textAnchor="middle" className="art__sub">
+            {`espera quirúrgica ${Math.round(wait)} días (${wait > waitBase ? "+" : "−"}${Math.round(Math.abs(wait - waitBase))})`}
+          </text>
+        ) : null}
         <CoinStack x={L.stack[0]} y={L.stack[1]} value={debt} base={debtBase} label="Deuda pública"
           sub={`${n1(debt, 0)} % del PIB${Math.abs(debt - debtBase) >= 0.5 ? ` (${sgn(debt - debtBase, 0)})` : ""}`} />
         <Housing x={L.housing[0]} y={L.housing[1]} s={sc} />

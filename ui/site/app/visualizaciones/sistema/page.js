@@ -2,6 +2,7 @@ import { readPublicJson } from "../../static-snapshot.mjs";
 import { StaticRouteHero } from "../../static-route-components";
 import Lab, { WhoPays } from "./scene/Lab";
 import HousingCompare from "./scene/HousingCompare";
+import { DoctorsTable, EmploymentFigure, MigrationFigure, labourFindings } from "./LabourFigures";
 import { housingRows } from "./housingScenarios.mjs";
 import { CLOSURES, DEFAULT_LEVERS, centralParams, quintileImpact, simulate } from "./engine.mjs";
 import { computeBacktests } from "./backtests.mjs";
@@ -20,8 +21,9 @@ export function generateMetadata() {
     path: SIM_PATH,
     title: SIM_TITLE,
     description: simDescription(loadModel()),
-    image: { path: "/visualizaciones/sistema/og/inicio.png", alt: "Simulador de pensiones, impuestos y vivienda: ¿quién lo paga?" },
-    keywords: ["simulador pensiones", "simulador impuestos", "subir pensiones", "subir IVA", "bajar IRPF", "tope alquiler", "vivienda pública", "deuda pública"],
+    image: { path: "/visualizaciones/sistema/og/inicio.png", alt: "Simulador de pensiones, impuestos, vivienda, empleo e inmigración: ¿quién lo paga?" },
+    keywords: ["simulador pensiones", "simulador impuestos", "subir pensiones", "subir IVA", "bajar IRPF", "tope alquiler", "vivienda pública", "deuda pública",
+      "inmigración y servicios públicos", "subir SMI", "jornada 37,5 horas", "cuota autónomos", "listas de espera", "plazas MIR"],
   });
 }
 
@@ -103,12 +105,19 @@ export default function SistemaPage() {
   const r2 = creditRun.hs_price[t35h] / creditNoLoop.hs_price[t35h];
   const baseGap = H.net_households_next_k - (H.completions_free_k + H.completions_protected_k);
 
+  // Slice 3 (employment, immigration, healthcare capacity): the numbers of its figures, FAQ and method.
+  const LF = labourFindings(model);
+  const L35 = LF.years[2035];
+  const L50 = LF.years[2050];
+  const smiRow = LF.employment[0];
+  const Lb = model.labour;
+
   // Visible FAQ (and its FAQPage JSON-LD): answers use only the engine numbers computed above.
   const costMeur35 = mainFindings(model).costMeur35;
   const faqs = [
     {
       q: "¿Cómo funciona el simulador?",
-      a: `Mueves una palanca (pensiones, edad de jubilación, cotizaciones, IRPF, IVA, Sociedades, vivienda pública, suelo, tope del alquiler, pisos turísticos o hipotecas) y eliges cómo se paga: con deuda, cotizaciones, IVA o IRPF. El modelo calcula año a año, de ${model.policy_start} a 2050, la diferencia frente a la ley actual en deuda, empleo, precios, alquiler, por nivel de renta y en cuatro casos tipo, con 200 simulaciones que sortean cada parámetro dentro de su rango.`,
+      a: `Mueves una palanca (pensiones, edad de jubilación, cotizaciones, IRPF, IVA, Sociedades, vivienda pública, suelo, tope del alquiler, pisos turísticos, hipotecas, salario mínimo, jornada, cuota de autónomos, plazas MIR, gasto sanitario o inmigración) y eliges cómo se paga: con deuda, cotizaciones, IVA o IRPF. El modelo calcula año a año, de ${model.policy_start} a 2050, la diferencia frente a la ley actual en deuda, empleo, precios, alquiler, por nivel de renta y en cuatro casos tipo, con 200 simulaciones que sortean cada parámetro dentro de su rango.`,
     },
     {
       q: "¿Es una predicción?",
@@ -125,6 +134,14 @@ export default function SistemaPage() {
     {
       q: "¿Quién paga una subida del IVA?",
       a: `Un punto más de IVA general recauda unos ${num(vatRow.behaviour / 1000, 1)} mil millones el primer año tras la reacción y pesa un ${num(-vatRow.q[0].pctDisposable, 2)} % de la renta disponible en el 20 % con menos renta y un ${num(-vatRow.q[4].pctDisposable, 2)} % en el 20 % con más: en proporción a la renta, pesa más abajo. Un punto de IRPF en todos los tramos pesa ${num(ratio(irpfRow), 1)} veces más en el quinto más rico que en el más pobre.`,
+    },
+    {
+      q: "¿La inmigración paga los servicios que usa?",
+      a: `Con la variante alta oficial (un tercio más de inmigración de fuera de la UE), en 2035 viven en España ${num(L35.pop / 1000, 1)} millones de personas más; pagan unos ${num(L35.rev.v / 1000, 1)} mil millones al año y usan unos ${num(L35.use.v / 1000, 1)} mil millones en sanidad, escuela, dependencia, pensiones y otros servicios si estos crecen con la población (saldo de ${num(L35.net.lo / 1000, 1)} a ${num(L35.net.hi / 1000, 1)} mil millones). El dinero no forma médicos: la espera quirúrgica pasa de ${num(LF.waitBase, 0)} a ${num(L35.wait.v, 0)} días en 2035, y a ${num(L35.waitFixed.v, 0)} si el gasto no crece. Después de 2050 cobrarán sus pensiones, fuera del horizonte del modelo.`,
+    },
+    {
+      q: "¿Cuánto empleo cuesta subir el salario mínimo?",
+      a: `Depende del estudio. Con el valor central, subir el SMI un 10 % real va con ${num(-smiRow.jobs.v, 0)} mil empleos menos en 2035 (de ${num(-smiRow.jobs.hi, 0)} a ${num(-smiRow.jobs.lo, 0)} mil); con la escuela del Banco de España, ${num(-smiRow.schools[0].jobs, 0)} mil, y con la de efecto nulo, ninguno. La subida afecta a uno de cada ocho asalariados y deja ${num(smiRow.net.v, 0)} millones al año más en las cuentas públicas por las cotizaciones de los sueldos más altos.`,
     },
     {
       q: "¿Baja el alquiler con un tope?",
@@ -148,11 +165,13 @@ export default function SistemaPage() {
       <JsonLd data={[breadcrumbLd(crumbs), appLd, faqLd(faqs)]} />
       <StaticRouteHero
         eyebrow="Visualizaciones · simulador"
-        title="Si se suben las pensiones o los impuestos, o se interviene la vivienda, ¿quién lo paga?"
-        summary="Un modelo pequeño de las pensiones, los impuestos, la vivienda y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, por nivel de renta y en casos concretos, según se pague con deuda, cotizaciones, IVA o IRPF. Es un escenario con supuestos a la vista, no una predicción."
+        title="Si se suben las pensiones o los impuestos, se interviene la vivienda o el trabajo, o llega más gente, ¿quién lo paga?"
+        summary="Un modelo pequeño de las pensiones, los impuestos, la vivienda, el empleo, la inmigración, la sanidad y las cuentas públicas de España: mueve las palancas y mira cómo se propaga el cambio, cuánto cuesta y a quién, por nivel de renta, por edad y en casos concretos, según se pague con deuda, cotizaciones, IVA o IRPF. Es un escenario con supuestos a la vista, no una predicción."
         actions={[
           { href: "#simulador", label: "Ir al simulador" },
           { href: "#vivienda", label: "Vivienda" },
+          { href: "#inmigracion", label: "Inmigración y servicios" },
+          { href: "#empleo", label: "Empleo" },
           { href: SCENARIOS_PATH, label: "Escenarios" },
           { href: "/visualizaciones/data/sistema.json", label: "Modelo y datos (JSON)" },
           { href: "/visualizaciones/data/sistema.csv", label: "Línea base (CSV)" },
@@ -335,6 +354,20 @@ export default function SistemaPage() {
       </div>
 
 
+      <MigrationFigure model={model} src={src} />
+
+      <section className="vizProse" aria-label="Médicos y lista de espera">
+        <p>
+          <strong>Cuántos médicos hacen falta.</strong> Con la misma variante alta y el gasto creciendo con la población, la espera quirúrgica media según las
+          plazas de especialista que se añadan cada año desde {model.policy_start}. Un médico tarda unos {num(LF.docLag, 0)} años en estar listo (MIR y, si faltan
+          graduados, la carrera), y solo una parte se queda en la sanidad pública; mientras tanto, el dinero compra solo una parte de la capacidad. Cuando la
+          espera baja, entran en lista pacientes que antes no se apuntaban, así que la lista no se vacía.
+        </p>
+      </section>
+      <DoctorsTable model={model} />
+
+      <EmploymentFigure model={model} />
+
       <section className="vizProse" id="escenarios" aria-labelledby="escenarios-title">
         <h2 id="escenarios-title">Escenarios: las preguntas más buscadas, con su respuesta</h2>
         <p>
@@ -392,6 +425,29 @@ export default function SistemaPage() {
           y sube los no cubiertos; quien ya tiene contrato se acerca al mercado al renovarlo. La vivienda pública se paga en los dos años antes de terminarse y
           recupera su alquiler social; ese coste entra en «¿Cómo se paga?».
         </p>
+        <p>
+          <strong>Empleo.</strong> El salario mínimo sube los sueldos de quienes lo cobran o están cerca ({num(P.cuota_afectados_smi * 100, 1)} % de los
+          asalariados), con una elasticidad del empleo de los afectados en disputa (Banco de España, AIReF, sin efecto). La jornada máxima, con el sueldo mensual
+          mantenido, sube el coste por hora de quien trabaja más de 37,5 horas ({num(P.cuota_afectados_jornada * 100, 0)} % de los asalariados); parte se
+          compensa con productividad y el empleo responde según el estudio (Francia, Portugal, Alemania). La cuota de autónomos cambia lo que pagan{" "}
+          {num(P.autonomos_k / 1000, 2)} millones de afiliados y, con una elasticidad supuesta, cuántos siguen.
+        </p>
+        <p>
+          <strong>Inmigración.</strong> La población por edad sale de las proyecciones de Eurostat (EUROPOP2023): la base y la variante con un tercio más o menos de
+          inmigración de fuera de la UE, que mueve la inmigración neta un {num(Lb.variant_pct.hi, 1)} % hasta 2050 y es la misma del Ageing Report; la palanca la escala en
+          línea recta. Quien llega trabaja con la tasa de empleo de los extranjeros de su edad en la EPA ({num(Lb.emp_rate.FOR_15_64 * 100, 0)} % de 15 a 64 años en{" "}
+          {Lb.emp_rate_year}), gana un {num(P.salario_relativo_inmigrante * 100, 0)} % del salario medio y paga IRPF, cotizaciones e impuestos al consumo con
+          el baremo de la OCDE; los demás impuestos crecen con el PIB que añade, y el capital acompaña al empleo en unos {num(P.anios_ajuste_capital, 0)}{" "}
+          años, como en las proyecciones de la Comisión. Usa la sanidad según su edad (perfil de Funcas) y su origen (un {num(P.uso_sanitario_relativo_inmigrante * 100, 0)} %
+          de lo que usa un nacido aquí de su edad, estudio de Aragón), la escuela, la dependencia, las pensiones si llega a jubilarse antes de 2050 y una parte del
+          resto de servicios (en disputa).
+        </p>
+        <p>
+          <strong>Sanidad.</strong> La línea base es el gasto sanitario del Ageing Report y una lista de espera quirúrgica estable ({num(Lb.health.list_k, 0)} mil
+          personas y {num(Lb.health.list_days, 0)} días a {Lb.health.list_date}). La demanda extra viene de la población; la capacidad, de los médicos (que tardan
+          unos {num(P.retardo_formacion_medico, 0)} años en formarse) y del dinero, que sin médicos compra solo un {num(P.capacidad_por_gasto * 100, 0)} %
+          (supuesto). La lista es un stock: entran pacientes según la demanda, menos cuando la espera es larga, y salen tantos como la capacidad permite.
+        </p>
         <h2>Simplificaciones</h2>
         <ul>
           <li>Economía pequeña y abierta: tipos del BCE, crecimiento europeo y productividad son contexto, no resultados.</li>
@@ -424,7 +480,9 @@ export default function SistemaPage() {
             a todo el gasto en vivienda de cada celda.
           </li>
           <li>
-            Las sensibilidades de inmigración son las oficiales, que empiezan en 2023: aquí se les resta su valor de {model.start.year}.
+            Inmigración: la población por edad de las variantes oficiales se escala en línea recta y se le resta su diferencia de {model.start.year} (las
+            variantes empiezan antes). Las pensiones de quien llega se calculan aparte (quien tiene 65 o más años, con una pensión menor que la media, supuesto);
+            la sensibilidad oficial del Ageing Report queda como prueba. Los servicios crecen con la población solo si así lo eliges.
           </li>
         </ul>
         <h2>Lo que el simulador no puede decir</h2>
@@ -453,7 +511,17 @@ export default function SistemaPage() {
             Qué pasa en un barrio concreto: el modelo es nacional. En los barrios con muchos pisos turísticos o mucha demanda el efecto de cada política puede ser
             varias veces mayor.
           </li>
-          <li>Los efectos en sanidad, dependencia, empleo o educación: llegarán en los siguientes módulos.</li>
+          <li>
+            Quién llega en concreto: el modelo usa la tasa de empleo y el salario medio de los extranjeros, no su formación ni su origen; ni cuánto tardan en
+            encontrar trabajo los recién llegados, ni la inmigración irregular que las proyecciones no cuentan.
+          </li>
+          <li>Si la inmigración cambia los salarios o el empleo de quienes ya viven aquí: el modelo supone que no.</li>
+          <li>
+            El saldo fiscal de una vida entera: las pensiones que generan las cotizaciones de hoy se cobran sobre todo después de 2050. Tampoco la presión en un
+            barrio o una comunidad concreta, donde los servicios y la vivienda pueden tensarse mucho más que en la media.
+          </li>
+          <li>Cuánto se reparte el coste de una jornada más corta entre beneficios, precios y salarios futuros, ni qué pasa en cada convenio.</li>
+          <li>La educación (más allá del coste por alumno), la atención primaria y la dependencia como capacidad: siguen pendientes.</li>
         </ul>
       </section>
 
@@ -560,8 +628,8 @@ export default function SistemaPage() {
           ))}
         </ul>
         <p className="sim__muted">
-          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: empleo e inmigración (salario mínimo, jornada, cuota de
-          autónomos e inmigración como contexto), que une las cotizaciones con los hogares.
+          Modelo generado el {String(model.generated_at).slice(0, 10)}. Siguiente módulo: educación y atención primaria como capacidad (plazas, ratios,
+          médicos de familia), y escenarios desde lo votado.
         </p>
       </section>
     </main>

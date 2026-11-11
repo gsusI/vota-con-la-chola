@@ -52,17 +52,73 @@ export function computeBacktests(model) {
     });
   }
 
-  // 4. Migration: the context lever reproduces the official sensitivity it is built from.
+  // 4a. Immigration and age-related spending (tolerance fixed 2026-11-11, README §14.2): with the official high variant and
+  // services that grow with demand, the change of health + long-term care + education spending in % of GDP against the
+  // Ageing Report's (total cost of ageing minus pensions). Pensions are reported beside it, without a tolerance.
+  const Lb = model.labour;
   const t2050 = model.years.length - 1;
-  const low = simulate(model, { ...DEFAULT_LEVERS, migration: "low" });
-  const diff = low.pension_pct[t2050] - model.baseline.pension_pct[t2050];
-  out.push({
-    id: "migracion",
-    ok: Math.abs(diff - model.baseline.migration_low_pp[t2050]) < 0.01,
-    tolerance: "exacto",
-    label: "Un tercio menos de inmigración.",
-    text: `El gasto en pensiones sube ${n(diff, 2)} puntos de PIB en 2050 frente a la línea base: la sensibilidad oficial del Ageing Report (${n(model.baseline.migration_low_pp[t2050], 2)} puntos desde ${model.years[0]}).`,
-  });
+  if (Lb) {
+    const hi = simulate(model, { ...DEFAULT_LEVERS, migScale: 1 });
+    const denom = 1 + hi.gdp_dev[t2050] / 100;
+    const baseSvc = Lb.health.spend_pct[t2050] + Lb.health.ltc_pct[t2050] + Lb.education.spend_pct[t2050];
+    const ours = (baseSvc + hi.mig_health_pp[t2050] + hi.mig_ltc_pp[t2050] + hi.mig_edu_pp[t2050]) / denom - baseSvc;
+    const ar = Lb.age_related_mig_pp.hi[t2050] - model.baseline.migration_high_pp[t2050];
+    const ratio = ours / ar;
+    const pens = (model.baseline.pension_pct[t2050] + hi.mig_pension_pp[t2050]) / denom - model.baseline.pension_pct[t2050];
+    out.push({
+      id: "migracion_gasto_edad",
+      ok: Math.sign(ours) === Math.sign(ar) && ratio >= 1 / 3 && ratio <= 3,
+      tolerance: "mismo signo y dentro de ×3",
+      label: "Inmigración y gasto ligado a la edad.",
+      text: `Con la variante alta oficial y los servicios creciendo con la población, sanidad, dependencia y educación pasan a pesar ${n(ours, 2)} puntos de PIB en 2050 (más gente que atender, pero más PIB); el Ageing Report da ${n(ar, 2)} (su coste total del envejecimiento menos pensiones). En pensiones, el modelo da ${n(pens, 2)} puntos y el Ageing Report ${n(model.baseline.migration_high_pp[t2050], 2)}: el modelo cuenta solo a quien llega con 65 o más años antes de 2050 y deja fuera las pensiones que generan sus cotizaciones después.`,
+    });
+
+    // 4b. Health demand from age alone against the Ageing Report demographic scenario (gate of the exporter, ±5 points).
+    const mix = Lb.health.mix_growth_2050 * 100;
+    const arDemo = Lb.health.ar_demo_growth_2050 * 100;
+    out.push({
+      id: "sanidad_demografia",
+      ok: Math.abs(mix - arDemo) <= 5,
+      tolerance: "±5 puntos",
+      label: "Envejecimiento y gasto sanitario.",
+      text: `Con el perfil de gasto por edad de Funcas y la población de EUROPOP2023, el gasto sanitario en % del PIB crece un ${n(mix)} % de 2025 a 2050 solo por la edad; el escenario demográfico del Ageing Report da un ${n(arDemo)} %.`,
+    });
+
+    // 4c. Immigration and jobs 2019-2025: new employed foreign citizens per new foreign resident aged 15-64 (LFS) against
+    // the employment rate the model gives a new resident of working age (±10 points).
+    const bt = Lb.backtest_foreign;
+    const prof = Lb.mig_profile;
+    const work = ["16_29", "30_44", "45_64"];
+    const P = centralParams(model);
+    const rate = (work.reduce((a, s) => a + prof[s] * Lb.emp_rate.FOR[s], 0) / work.reduce((a, s) => a + prof[s], 0)) * P.ajuste_empleo_inmigrante;
+    out.push({
+      id: "inmigracion_empleo",
+      ok: Math.abs(rate - bt.observed_rate) * 100 <= 10,
+      tolerance: "±10 puntos",
+      label: `Inmigración y empleo, ${bt.from}–${bt.to}.`,
+      text: `Según la EPA, los extranjeros de 15 a 64 años pasaron de ${n(bt.for_pop_k[0] / 1000, 2)} a ${n(bt.for_pop_k[1] / 1000, 2)} millones y sus ocupados de ${n(bt.for_emp_k[0] / 1000, 2)} a ${n(bt.for_emp_k[1] / 1000, 2)} millones: ${n(bt.observed_rate * 100, 0)} ocupados nuevos por cada 100 residentes nuevos. El modelo pone a trabajar a ${n(rate * 100, 0)} de cada 100 residentes nuevos de 16 a 64 años. Las nacionalizaciones sacan del grupo a extranjeros ya empleados, así que la comparación es aproximada.`,
+    });
+  }
+
+  // 4d. SMI +22.3 % in 2019 (tolerance fixed 2026-11-11): jobs lost in the model, long run, with the 2019 affected workers,
+  // against the published range (same sign, within [min/2, max×2]).
+  const smi = bm.B08_smi_2019;
+  if (smi) {
+    const P = centralParams(model);
+    const affected = smi.extra.find((x) => x.name === "afectados_smi_2019")?.central;
+    if (affected) {
+      const lost = -P.elasticidad_empleo_smi * 22.3 * affected / 100;
+      const lo = Math.min(smi.low, smi.high);
+      const hiV = Math.max(smi.low, smi.high);
+      out.push({
+        id: "smi_2019",
+        ok: lost >= Math.max(0, lo / 2) && lost <= hiV * 2,
+        tolerance: "dentro de la mitad del mínimo y el doble del máximo publicados",
+        label: "Subida del SMI del 22,3 % en 2019.",
+        text: `Con ${n(affected / 1000, 1)} millones de trabajadores afectados y la elasticidad central (${n(P.elasticidad_empleo_smi, 2)}), el modelo da unos ${n(lost, 0)} mil empleos menos a largo plazo; las estimaciones publicadas van de ${n(lo, 0)} mil a ${n(hiV, 0)} mil (mediana ${n(smi.value, 0)} mil).`,
+      });
+    }
+  }
   // 5. IRPF concentration: the survey microsimulation against the tax returns.
   if (bm.B04_irpf_concentration && bi.ecv_top20_base_share != null) {
     const official = bm.B04_irpf_concentration.value;

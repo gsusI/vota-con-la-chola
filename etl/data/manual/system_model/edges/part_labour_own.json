@@ -1,0 +1,440 @@
+{
+ "edges": [
+  {
+   "id": "M01_migration_variants",
+   "from": "inmigracion_neta",
+   "to": "poblacion_por_etapa",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "variante_migracion_neta_pct",
+    "unit": "% de cambio de la inmigración neta acumulada 2026-2050 en la variante oficial alta (en valor absoluto, la baja es simétrica)",
+    "low": 46.2,
+    "central": 46.4,
+    "high": 46.5
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/proj_23nanmig?geo=ES&sex=T&unit=PER&projection=BSL&projection=HMIGR&projection=LMIGR",
+     "title": "Assumptions for net migration by age, sex and type of projection (proj_23nanmig), EUROPOP2023",
+     "authors_year": "Eurostat (2023)",
+     "country": "España",
+     "period": "2025-2050",
+     "method": "proyección de población (supuestos de migración neta por variante)",
+     "locator": "geo=ES, age=TOTAL, projection=BSL/HMIGR/LMIGR",
+     "quote": "Spain, total, 2025: BSL 324 473; HMIGR 486 047; LMIGR 168 887",
+     "value_in_source": "suma 2026-2050: HMIGR +46,5 % y LMIGR −46,2 % frente a BSL (cálculo propio)"
+    },
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/392994f2-c025-4066-bea8-f65cf4bcd411_en?filename=2024-ageing-report-country-fiche-Spain.pdf",
+     "title": "2024 Ageing Report. Country fiche for Spain",
+     "authors_year": "Comisión Europea y Gobierno de España (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial (escenarios de sensibilidad)",
+     "locator": "pág. 36, escenarios demográficos",
+     "quote": "33% less/more non-EU immigration over the entire projection period",
+     "value_in_source": "±33 % de inmigración de fuera de la UE"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736176953&menu=ultiDatos&idp=1254735572981",
+     "title": "INE, Proyecciones de Población 2024-2074",
+     "finding": "El INE proyecta para España una inmigración neta mayor que la base de Eurostat en los primeros años; la base oficial que usa el simulador puede quedarse corta."
+    }
+   ],
+   "debate": null,
+   "derivation": "La población por edad sale de proj_23np (base BSL y variantes HMIGR y LMIGR) y la migración neta de proj_23nanmig. La variante alta es la del Ageing Report («un tercio más de inmigración de fuera de la UE»): sube la inmigración neta acumulada 2026-2050 un 46,5 % (la baja la baja un 46,2 %). El simulador escala linealmente la diferencia de población por etapa entre variante y base (multiplicador de la palanca), un supuesto que la página dice.",
+   "note_es": "Según Eurostat (EUROPOP2023), la variante alta oficial (un tercio más de inmigración de fuera de la UE, la del Ageing Report 2024) sube la inmigración neta un 46 % hasta 2050 y añade unos 3,6 millones de residentes en 2050, el 72 % de 16 a 64 años (un 44 % de 16 a 44). El simulador escala esa diferencia en línea recta.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Eurostat proj_23nanmig ES total 2025: BSL 324.473, HMIGR 486.047, LMIGR 168.887 (match). Sum 2026-2050: BSL 5.588.205, HMIGR 8.187.972 (+46,52 %), LMIGR 3.006.642 (-46,20 %). Ageing Report fiche p.36 '33% less/more non-EU immigration' verbatim. proj_23np 2050 HMIGR-BSL = +3.574.445 (3,6 M ok); by age 0-15 0,64 M, 16-29 0,64, 30-44 0,94, 45-64 1,00, 65+ 0,36: 16-44 is 44 %, not 'sobre todo'; 16-64 is 72 %."
+   }
+  },
+  {
+   "id": "M02_migrant_employment",
+   "from": "poblacion_inmigrante",
+   "to": "ocupados",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "ajuste_empleo_inmigrante",
+    "unit": "tasa de empleo de los residentes nuevos frente a la de los extranjeros de su misma edad en la EPA (1 = igual)",
+    "low": 0.85,
+    "central": 1.0,
+    "high": 1.1
+   },
+   "extra_parameters": [
+    {
+     "name": "tasa_empleo_extranjeros_15_64",
+     "unit": "tasa de empleo de los extranjeros de 15 a 64 años, 2025",
+     "low": 0.629,
+     "central": 0.629,
+     "high": 0.629,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_ergan?geo=ES&sex=T&unit=PC",
+     "title": "Employment rates by sex, age and citizenship (lfsa_ergan)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2025",
+     "method": "Encuesta de Población Activa (EPA)",
+     "locator": "geo=ES, citizen=FOR, age=Y15-64 y tramos de 5 años, 2025",
+     "quote": "Spain, foreign country citizens, 15-64, 2025: 62,9",
+     "value_in_source": "62,9 %; por etapa (ponderada por la edad de los inmigrantes adicionales): 16-29 47,8 %, 30-44 70,9 %, 45-64 66,0 %, 65-79 15,5 %"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_pganws?geo=ES&sex=T&age=Y15-64&citizen=FOR&wstatus=EMP&wstatus=POP",
+     "title": "Population by sex, age, citizenship and labour status (lfsa_pganws)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2019-2025",
+     "method": "EPA",
+     "locator": "geo=ES, citizen=FOR, age=Y15-64, wstatus=POP/EMP",
+     "quote": "Spain, foreign citizens 15-64: population 3 920,4 (2019) and 5 460,8 (2025); employed 2 378,8 and 3 434,5 thousand",
+     "value_in_source": "68,5 ocupados nuevos por cada 100 residentes extranjeros nuevos de 15-64 (2019-2025)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Migrant_integration_statistics_-_labour_market_indicators",
+     "title": "Eurostat, Migrant integration statistics: labour market indicators",
+     "finding": "La tasa de empleo de los inmigrantes recién llegados es menor que la de los que llevan más años; a corto plazo el ajuste puede ser menor que 1."
+    }
+   ],
+   "debate": null,
+   "derivation": "El modelo pone a trabajar a los residentes adicionales con la tasa de empleo de los extranjeros de su edad en la EPA 2025 (cada etapa pondera sus tramos de 5 años por la edad de los inmigrantes adicionales de EUROPOP2023). Entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de 15-64 (frente al 62,9 % de tasa), de ahí el alto 1,1 (68,5/62,9 ≈ 1,09). El bajo 0,85 es un supuesto para los primeros años de residencia. Las nacionalizaciones sacan del grupo a extranjeros ya empleados y sesgan la comparación.",
+   "note_es": "Según la EPA (Eurostat), el 62,9 % de los extranjeros de 15 a 64 años trabaja; entre 2019 y 2025 hubo 68,5 ocupados extranjeros nuevos por cada 100 residentes extranjeros nuevos de esa edad. El modelo usa la tasa por edad, con un margen del 85 % al 110 %."
+  },
+  {
+   "id": "M06_migrant_pensions",
+   "from": "poblacion_inmigrante_65",
+   "to": "gasto_pensiones",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "pension_relativa_inmigrante",
+    "unit": "gasto en pensión por residente adicional de 65 o más años frente al gasto medio por pensionista (cobertura × cuantía)",
+    "low": 0.4,
+    "central": 0.6,
+    "high": 0.85
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/392994f2-c025-4066-bea8-f65cf4bcd411_en?filename=2024-ageing-report-country-fiche-Spain.pdf",
+     "title": "2024 Ageing Report. Country fiche for Spain",
+     "authors_year": "Comisión Europea y Gobierno de España (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "parámetros del sistema de pensiones",
+     "locator": "tabla de condiciones de acceso (cotización mínima y periodo de cotización completo)",
+     "quote": "Minimum contributory period - men 15",
+     "value_in_source": "15 años mínimos; 38,5 años para la pensión completa"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESb, sensibilidad de migración)",
+     "finding": "La sensibilidad oficial de pensiones a más inmigración se expresa en % del PIB (−1,1 puntos en 2050), con el PIB que también crece; no da euros por persona, así que no contrasta este supuesto directamente."
+    }
+   ],
+   "debate": null,
+   "derivation": "Supuesto. Quien llega entre los 20 y los 45 años cotiza en España una parte de su vida laboral: la pensión exige 15 años y la completa 38,5 (ficha del Ageing Report). Una cobertura del 75 % por una cuantía del 80 % de la media da 0,6; el bajo 0,4 y el alto 0,85 cubren carreras más cortas o casi completas. No se encontró la pensión media de los pensionistas extranjeros por edad.",
+   "note_es": "Supuesto: cada residente adicional de 65 o más años cuesta en pensión el 60 % de lo que cuesta un pensionista medio (40-85 %), porque suele haber cotizado menos años en España (15 años dan derecho a pensión; 38,5, a la completa). No hay una cifra oficial por origen.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Ageing Report fiche: p.10 table 'Minimum contributory period - men 15' verbatim; p.9 'at least 15 years'; p.11 accrual 50 % at 15 years rising to 100 % at 38 years and 6 months (38,5 is in the text, not the table). 0,75 x 0,8 = 0,6 is a stated assumption; graded D and the note says 'Supuesto'. Locator could add pages 9-11."
+   }
+  },
+  {
+   "id": "S06_health_age_profile",
+   "from": "poblacion_por_edad",
+   "to": "demanda_sanitaria",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "peso_sanitario_80",
+    "unit": "gasto sanitario público por persona de 80 o más años frente a la media de la población (1 = media)",
+    "low": 2.2,
+    "central": 2.41,
+    "high": 2.6
+   },
+   "extra_parameters": [
+    {
+     "name": "peso_sanitario_65_79",
+     "unit": "65-79 años frente a la media",
+     "low": 1.7,
+     "central": 1.86,
+     "high": 2.0,
+     "grade": "A"
+    },
+    {
+     "name": "peso_sanitario_16_29",
+     "unit": "16-29 años frente a la media",
+     "low": 0.42,
+     "central": 0.46,
+     "high": 0.5,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.funcas.es/wp-content/uploads/Migracion/Publicaciones/PDF/1791.pdf",
+     "title": "Distribución del gasto sanitario público por edad y sexo en España: análisis de la década 1998-2008 (Documento de trabajo 673)",
+     "authors_year": "Blanco Moreno, Urbanos Garrido y Thuissard Vasallo (2012)",
+     "country": "España",
+     "period": "1998-2008",
+     "method": "reparto del gasto sanitario público por edad con datos de utilización",
+     "locator": "pág. 68, tabla 15, fila «80 y más»",
+     "quote": "80 y más  1900  2193  2610",
+     "value_in_source": "2.610 € de 1998 por persona de 80 o más años en 2008"
+    },
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESc)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial",
+     "locator": "hoja ESc, gasto sanitario, «Demographic scenario»",
+     "quote": "Demographic scenario  -0.0596  -0.1409",
+     "value_in_source": "gasto sanitario 5,92 % del PIB en 2025 y 7,03 % en 2050 (base); escenario demográfico −0,0247 puntos frente a la base en 2025 y −0,1453 en 2050 (−0,1409 en 2049): 5,89 % → 6,89 %, +16,9 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/publications/2024-ageing-report-economic-and-budgetary-projections-eu-member-states-2022-2070_en",
+     "title": "2024 Ageing Report (envejecimiento saludable)",
+     "finding": "Si los años de vida ganados son en buena salud, el gasto por edad baja con el tiempo; el perfil fijo de 2008 puede exagerar la demanda de los mayores."
+    }
+   ],
+   "debate": null,
+   "derivation": "Pesos por etapa = gasto por persona de cada tramo de 5 años de Funcas (2008) ponderado por la población de 2025 de EUROPOP2023, dividido por la media de toda la población. Con ese perfil y la población base, el gasto sanitario en % del PIB crecería un 15,5 % de 2025 a 2050 solo por edad, frente al 16,9 % del escenario demográfico del Ageing Report ((7,0325 − 0,1453)/(5,9168 − 0,0247) − 1; puerta con tolerancia de 5 puntos). Los rangos son ±8 % por la antigüedad del perfil (supuesto).",
+   "note_es": "Según Funcas (perfil de 2008), una persona de 80 o más años usa unas 2,4 veces el gasto sanitario público medio y una de 16 a 29, menos de la mitad. Con ese perfil, el envejecimiento sube el gasto sanitario un 15,5 % en % del PIB hasta 2050; el Ageing Report da un 16,9 %.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Funcas pág. 68 Tabla 15: '80 y más 1900 2193 2610' verbatim; total 982. Reweighted with EUROPOP2023 2025 (proj_23np BSL): mean 1.081 €, 80+ 2,414, 65-79 1,857, 16-29 0,458 (match). AR xlsx hoja ESc: health baseline 2025 5,9168, 2050 7,0325; demographic scenario diff -0,0247 (2025), -0,1453 (2050); -0,1409 is 2049, -0,0596 is 2034. Demographic-scenario growth 2025-2050 = 16,9 %, not 16,8 %."
+   }
+  },
+  {
+   "id": "S07_waiting_list_flow",
+   "from": "capacidad_asistencial",
+   "to": "lista_espera_quirurgica",
+   "sign": "-",
+   "layer": "contable",
+   "parameter": {
+    "name": "salidas_lista_k",
+    "unit": "miles de pacientes que salen al año de la lista de espera quirúrgica (operados o dados de baja), estimado con la ley de Little",
+    "low": 2300,
+    "central": 2554,
+    "high": 2800
+   },
+   "extra_parameters": [
+    {
+     "name": "lista_espera_k",
+     "unit": "miles de pacientes en lista de espera quirúrgica, 31-12-2025",
+     "low": 853.7,
+     "central": 853.7,
+     "high": 853.7,
+     "grade": "A"
+    },
+    {
+     "name": "espera_media_dias",
+     "unit": "días de espera media, 31-12-2025",
+     "low": 122,
+     "central": 122,
+     "high": 122,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/docs/LISTAS_PUBLICACION_Dic_2025_rectificado.pdf",
+     "title": "Sistema de Información sobre Listas de Espera en el SNS (SISLE-SNS), situación a 31 de diciembre de 2025 (rectificado)",
+     "authors_year": "Ministerio de Sanidad (2026)",
+     "country": "España",
+     "period": "31-12-2025",
+     "method": "registro administrativo de las comunidades",
+     "locator": "pág. 3, fila TOTAL",
+     "quote": "TOTAL  853.740  7.157  21.012  17,70  21,6  122  -4",
+     "value_in_source": "853.740 pacientes; 122 días de espera media"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/estadEstudios/estadisticas/inforRecopilaciones/listaEspera.htm",
+     "title": "Ministerio de Sanidad, listas de espera (metodología del SISLE)",
+     "finding": "La espera media del SISLE es la de quienes están en lista el día del corte, no la de quienes salen; la ley de Little solo da el flujo de salida en un estado estable, así que es una aproximación."
+    }
+   ],
+   "debate": null,
+   "derivation": "Flujo anual de salida ≈ stock × 365 / espera media = 853.740 × 365 / 122 ≈ 2.554.000 (ley de Little, que exige un estado estable). Con el corte de 2018 (668.288 pacientes, 129 días) saldría 1,89 millones: la lista y su flujo crecieron. El rango ±10 % recoge que la espera media del corte no es la de las salidas. La línea base supone una lista estable; el simulador solo calcula desviaciones.",
+   "note_es": "Según el Ministerio de Sanidad, a 31 de diciembre de 2025 había 853.740 personas esperando una operación, con 122 días de media. Si la lista estuviera estable, eso supone unos 2,55 millones de salidas al año (ley de Little, una aproximación)."
+  },
+  {
+   "id": "S08_doctors_stock",
+   "from": "medicos_formados",
+   "to": "capacidad_asistencial",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "medicos_ejercicio_k",
+    "unit": "miles de médicos en ejercicio en España (464 por 100.000 habitantes, 2024, por la población de 2025)",
+    "low": 220,
+    "central": 225.6,
+    "high": 230
+   },
+   "extra_parameters": [],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_rs_prs2?med_spec=PHYS&unit=P_HTHAB&geo=ES",
+     "title": "Health personnel (excluding nursing and caring professionals) - practising physicians (hlth_rs_prs2)",
+     "authors_year": "Eurostat (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "registros de colegiados y empleo (estimación de Eurostat)",
+     "locator": "geo=ES, med_spec=PHYS, unit=P_HTHAB, 2024",
+     "quote": "Spain, practising physicians per hundred thousand inhabitants, 2024: 464 (e)",
+     "value_in_source": "464 por 100.000 habitantes (estimado)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Ministerio de Sanidad, Estudio oferta-necesidad de especialistas médicos 2021-2035",
+     "finding": "No todos los médicos en ejercicio trabajan en el sistema público; el déficit se concentra en especialidades y territorios (atención primaria, zonas rurales), que un total nacional no ve."
+    }
+   ],
+   "debate": null,
+   "derivation": "464 médicos en ejercicio por 100.000 habitantes (Eurostat 2024, estimado) × 48,6 millones de habitantes en 2025 (EUROPOP2023) ≈ 225.600. La línea base supone que el número de médicos crece con la demanda por edad (la plantilla acompaña al Ageing Report); el simulador añade los formados por la palanca MIR.",
+   "note_es": "Según Eurostat, en España ejercen 464 médicos por cada 100.000 habitantes (2024), unos 225.600. El simulador supone que la plantilla base crece con el envejecimiento y solo añade los médicos que forme la palanca de plazas MIR."
+  },
+  {
+   "id": "S09_school_cost",
+   "from": "poblacion_5_24",
+   "to": "gasto_educacion",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "gasto_por_alumno_eur",
+    "unit": "euros de gasto educativo público por alumno, 2025 (gasto del Ageing Report entre alumnos)",
+    "low": 7500,
+    "central": 7851,
+    "high": 8200
+   },
+   "extra_parameters": [
+    {
+     "name": "escolarizacion_5_24",
+     "unit": "alumnos por persona de 5 a 24 años",
+     "low": 0.867,
+     "central": 0.867,
+     "high": 0.867,
+     "grade": "A"
+    }
+   ],
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://economy-finance.ec.europa.eu/document/download/e248db46-f876-4e72-8821-efae678e81ea_en?filename=2024_Ageing_Report-Statistical_annex_all_countryfiches.xlsx",
+     "title": "2024 Ageing Report, anexo estadístico (hoja ESc, educación)",
+     "authors_year": "Comisión Europea (2024)",
+     "country": "España",
+     "period": "2022-2070",
+     "method": "proyección oficial",
+     "locator": "hoja ESc, «Education spending as % of GDP», Baseline y «Number of students»",
+     "quote": "Baseline 4.1025 4.0025 ... Total 8573.89 8597.55",
+     "value_in_source": "4,0 % del PIB y 8,6 millones de alumnos en 2025; 86,7 % de la población de 5 a 24 años"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.educacionfpydeportes.gob.es/servicios-al-ciudadano/estadisticas/economicas/gasto.html",
+     "title": "Ministerio de Educación, Estadística del gasto público en educación",
+     "finding": "El gasto por alumno varía mucho por etapa (infantil, primaria, universidad) y el alumno nuevo puede costar menos que el medio si hay plazas libres (natalidad a la baja)."
+    }
+   ],
+   "debate": null,
+   "derivation": "4,0025 % del PIB de 2025 (1.686.420 millones) / 8.597.555 alumnos ≈ 7.851 € por alumno. Los alumnos adicionales = residentes adicionales de 5 a 24 años × 0,867 (escolarización del Ageing Report). El rango ±4,5 % es un supuesto.",
+   "note_es": "Según el Ageing Report 2024, el gasto educativo público es el 4,0 % del PIB para 8,6 millones de alumnos en 2025: unos 7.850 € por alumno. El simulador cobra eso por cada alumno adicional; con aulas que se vacían por la natalidad, el coste real de un alumno más puede ser menor.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "AR xlsx hoja ESc: Education % GDP baseline 2022 4,1025, 2025 4,0025; students (thousands) 2022 8.573,89, 2025 8.597,55; 'as % of population 5-24' 2025 86,7152. 0,040025x1.686.420/8.597.555 = 7.851. GDP 1.686.420 M is uncited; Eurostat nama_10_gdp now gives 1.690.012 M for 2025 (-> 7.868 €, +0,2 %, inside the range). Ministry contrary page loads."
+   }
+  },
+  {
+   "id": "M08_capital_rule",
+   "from": "ocupados_nuevos",
+   "to": "pib",
+   "sign": "+",
+   "layer": "segunda_ronda",
+   "parameter": {
+    "name": "anios_ajuste_capital",
+    "unit": "años hasta que el capital crece al ritmo del empleo nuevo (la elasticidad del PIB al empleo pasa de 0,65 a 1)",
+    "low": 5,
+    "central": 10,
+    "high": 15
+   },
+   "extra_parameters": [],
+   "lag_years": [
+    5,
+    15
+   ],
+   "grade": "C",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://ec.europa.eu/economy_finance/publications/economic_paper/2014/pdf/ecp535_en.pdf",
+     "title": "The production function methodology for calculating potential growth rates & output gaps (European Economy, Economic Papers 535)",
+     "authors_year": "Havik, Mc Morrow, Orlandi et al. (2014)",
+     "country": "UE",
+     "period": "metodología vigente",
+     "method": "función de producción Cobb-Douglas de la Comisión y del Ageing Working Group",
+     "locator": "pág. 77",
+     "quote": "the AWG imposed a \"capital rule\" which ensured that the K-stock adjusted to the steady state growth path – essentially capital deepening (K-stock per hour worked) grows at the same pace as labour augmenting technical progress",
+     "value_in_source": "el capital se ajusta a su senda estable en el horizonte T+10"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://ec.europa.eu/economy_finance/publications/economic_paper/2014/pdf/ecp535_en.pdf",
+     "title": "Havik et al. (2014), misma fuente",
+     "finding": "A corto plazo, con el capital dado, el PIB solo sube un 0,65 % por cada 1 % de empleo; si la inversión no acompaña (como en la crisis de 2008-2013), el ajuste puede tardar más."
+    }
+   ],
+   "debate": null,
+   "derivation": "La regla de capital del Ageing Working Group hace que el capital por hora crezca con el progreso técnico, así que a largo plazo el capital crece con las horas y el PIB, con el empleo (elasticidad 1). La Comisión interpola hasta T+10: central 10 años, rango 5-15 (supuesto). El simulador la aplica solo al empleo de los residentes nuevos (un cambio de población que dura décadas); las palancas de política mantienen la elasticidad de corto plazo 0,65. Se añadió tras ver que, sin ella, la puerta de gasto ligado a la edad fallaba (README §14.4).",
+   "note_es": "Según la metodología de la Comisión Europea, a largo plazo el capital crece con las horas trabajadas, así que un 1 % más de ocupados acaba dando un 1 % más de PIB (a corto plazo, un 0,65 %). El simulador supone que ese ajuste tarda unos 10 años (5-15) para los trabajadores que llegan con la inmigración.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "ECP 535 pág. 77: quote verbatim (AWG 'capital rule', capital deepening per hour grows with labour-augmenting technical progress; linear interpolation to AWG T+10). pág. 43/78: EU15 get a 10-year transition to the capital rule (from T+6); a 5-year transition was tried and dropped. pág. 13: labour share 0.65 imposed for all countries. Central 10 years follows; 5-15 range stated as assumption; grade C fine."
+   }
+  }
+ ]
+}

@@ -1025,3 +1025,51 @@
   display: flex;
   gap: 8px;
 }
+
+/* ---- slice 3: employment, immigration and the waiting list in the live simulator */
+.viz .svc {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+.viz .svc__block .vizPanelTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.viz .svc__list {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+.viz .svc__total th,
+.viz .svc__total td {
+  font-weight: 700;
+}
+.viz .svc__wait {
+  display: grid;
+  gap: 6px;
+}
+.viz .svc__bar {
+  position: relative;
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: #0000000f;
+  overflow: hidden;
+}
+.viz .svc__barFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--fill) * 100%);
+  border-radius: 6px;
+}
+.viz .svc__barBase {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: calc(var(--base) * 100%);
+  width: 2px;
+  background: currentColor;
+}

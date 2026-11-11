@@ -15,7 +15,18 @@ export const POLICIES = [
   { key: "vatStd", group: "Impuestos", icon: "cart", title: "IVA general", unit: "pp (hoy 21 %)", min: -3, max: 3, step: 0.5, tone: PAL.orange },
   { key: "vatRed", group: "Impuestos", icon: "bread", title: "IVA reducido", unit: "pp (hoy 10 %)", min: -3, max: 3, step: 0.5, tone: PAL.orange,
     hint: "Alimentos elaborados, restaurantes, transporte, agua." },
-  { key: "contrib", group: "Pensiones", icon: "payroll", title: "Cotizaciones", unit: "pp de la base", min: -1, max: 2, step: 0.25, tone: PAL.yellow },
+  { key: "contrib", group: "Empleo", icon: "payroll", title: "Cotizaciones", unit: "pp de la base", min: -1, max: 2, step: 0.25, tone: PAL.yellow,
+    hint: "Tipo de cotización social sobre los salarios (como el MEI: cinco sextos a cargo de la empresa)." },
+  { key: "smi", group: "Empleo", icon: "coin", title: "Salario mínimo (SMI)", unit: "% de subida real", min: -5, max: 20, step: 2.5, tone: PAL.green,
+    hint: "Subida del SMI por encima de lo que suba con la ley actual, desde 2026." },
+  { key: "hours", group: "Empleo", icon: "clock", title: "Jornada máxima", unit: "horas menos (hoy 40)", values: [0, 1, 2.5, 5], labels: { 2.5: "37,5 h", 5: "35 h" }, tone: PAL.blue,
+    hint: "Horas semanales máximas, manteniendo el sueldo mensual." },
+  { key: "selfQuota", group: "Empleo", icon: "briefcase", title: "Cuota de autónomos", unit: "€ al mes", min: -100, max: 100, step: 25, tone: PAL.orange,
+    hint: "Cambio de la cuota mensual de todos los autónomos." },
+  { key: "mir", group: "Sanidad", icon: "doctor", title: "Más médicos (plazas MIR)", unit: "plazas más al año", values: [0, 500, 1000, 2000, 3000], tone: PAL.green,
+    hint: "Plazas de formación de especialistas más cada año desde 2026, con el presupuesto para contratarlos al acabar." },
+  { key: "healthSpend", group: "Sanidad", icon: "hospital", title: "Gasto sanitario", unit: "% más de gasto real", values: [0, 2, 5, 10], tone: PAL.blue,
+    hint: "Más gasto sanitario público cada año sobre la línea base." },
   { key: "corp", group: "Impuestos", icon: "factory", title: "Sociedades", unit: "pp (hoy 25 %)", min: -5, max: 5, step: 1, tone: PAL.purple },
   { key: "pubHomes", icon: "building", title: "Vivienda pública", unit: "mil más al año", values: [0, 10, 20, 40, 60], tone: PAL.blue, group: "Vivienda",
     hint: "Alquiler público que se empieza a construir desde 2026; tarda unos años en estar listo." },
@@ -44,6 +55,11 @@ export const EXTREMES = {
   capCut: { values: [30, 50] },
   ltvCap: { values: [50, 30] },
   ltiCap: { values: [3, 2] },
+  smi: { min: -20, max: 60, step: 10 },
+  hours: { values: [8, 10] },
+  selfQuota: { min: -300, max: 500, step: 50, shortcuts: [[-300, "Cuota casi cero"]] },
+  mir: { values: [6000, 12000] },
+  healthSpend: { values: [20, 40] },
 };
 
 /** Lever values outside the reliable range (for the banner and to unlock a shared link). */
@@ -69,7 +85,12 @@ export const PRESETS = [
   { label: "Jubilarse 2 años más tarde", levers: { age: 2 } },
   { label: "Bajar 2 puntos el IVA general", levers: { vatStd: -2 } },
   { label: "Subir 3 puntos el IRPF alto", levers: { irpfTop: 3 } },
-  { label: "Un tercio menos de inmigración", levers: { migration: "low" } },
+  { label: "Subir el SMI un 10 % real", levers: { smi: 10 } },
+  { label: "Jornada de 37,5 horas", levers: { hours: 2.5 } },
+  { label: "Más inmigración (variante alta oficial)", levers: { migScale: 1 } },
+  { label: "…sin que crezcan los servicios", levers: { migScale: 1, svcFunding: "fixed" } },
+  { label: "…con 2.000 plazas MIR más al año", levers: { migScale: 1, mir: 2000 } },
+  { label: "Menos inmigración (variante baja oficial)", levers: { migScale: -1 } },
   { label: "20.000 viviendas públicas más al año", levers: { pubHomes: 20 } },
   { label: "Tope del alquiler: −10 % en la mitad del mercado", levers: { capCov: 50, capCut: 10 } },
   { label: "Retirar la mitad de los pisos turísticos", levers: { tourCut: 50 } },
@@ -107,7 +128,7 @@ function PolicyCard({ p, value, onChange, compact, unlocked, askUnlock, abolish 
   };
   const atMin = list ? idx <= 0 : value <= lo + 1e-9 && (unlocked || !x);
   const atMax = list ? idx >= list.length - 1 && (unlocked || !x?.values) : value >= hi - 1e-9 && (unlocked || !x);
-  const prefix = { capCut: "−", pubHomes: "+", land: "+" }[p.key] ?? "";
+  const prefix = { capCut: "−", pubHomes: "+", land: "+", mir: "+", healthSpend: "+", hours: "−" }[p.key] ?? "";
   const shortcut = x?.shortcuts?.find(([v]) => Math.abs(resolve(v) - value) < 1e-6);
   const shown = shortcut
     ? shortcut[1]
@@ -178,9 +199,16 @@ const GROUPS = [
   { id: "Pensiones", icon: "pension" },
   { id: "Impuestos", icon: "irpf" },
   { id: "Vivienda", icon: "building" },
+  { id: "Empleo", icon: "briefcase" },
+  { id: "Sanidad", icon: "doctor" },
 ];
 
-export default function Controls({ levers, setLever, setLevers, needsClosure, compact, unlocked, setUnlocked, abolish }) {
+// Immigration in multiples of the official variant (a third more or less non-EU immigration: about ±46 % net).
+export const MIGRATION_CHOICES = [-1, -0.5, 0, 0.5, 1];
+export const MIGRATION_EXTREMES = [-2, 2];
+export const migrationLabel = (s, pct) => (s ? `${s > 0 ? "+" : "−"}${(Math.round(Math.abs(s) * pct * 10) / 10).toLocaleString("es-ES")} %` : "Base");
+
+export default function Controls({ levers, setLever, setLevers, needsClosure, compact, unlocked, setUnlocked, abolish, migPct = 46 }) {
   const [pending, setPending] = useState(null);
   const askUnlock = (apply) => setPending(() => apply);
   const activeIn = (g) => POLICIES.filter((p) => p.group === g && levers[p.key]).length;
@@ -250,15 +278,26 @@ export default function Controls({ levers, setLever, setLevers, needsClosure, co
         </div>
       </fieldset>
       <div className="ctrl__context">
+        <span className="ctrl__kicker" title="La variante oficial (Eurostat y Ageing Report) supone un tercio más o menos de inmigración de fuera de la UE, que mueve la inmigración neta un 46,5 % hasta 2050.">
+          <Icon name="people" size={18} /> Inmigración neta
+        </span>
+        {[...MIGRATION_CHOICES, ...(unlocked ? MIGRATION_EXTREMES : [])].map((sc) => {
+          const cur = levers.migScale || (levers.migration === "low" ? -1 : levers.migration === "high" ? 1 : 0);
+          return (
+            <button key={sc} type="button" className={`chip${cur === sc ? " is-on" : ""}`}
+              onClick={() => { setLever("migration", "base"); setLever("migScale", sc); }}>
+              {migrationLabel(sc, migPct)}
+            </button>
+          );
+        })}
         <span className="ctrl__kicker">
-          <Icon name="people" size={18} /> Inmigración (escenarios oficiales)
+          <Icon name="hospital" size={18} /> ¿Crecen los servicios con la población?
         </span>
         {[
-          ["low", "−33 %"],
-          ["base", "Base"],
-          ["high", "+33 %"],
+          ["follow", "Sí, como supone la Comisión"],
+          ["fixed", "No, el mismo dinero"],
         ].map(([id, label]) => (
-          <button key={id} type="button" className={`chip${levers.migration === id ? " is-on" : ""}`} onClick={() => setLever("migration", id)}>
+          <button key={id} type="button" className={`chip${levers.svcFunding === id ? " is-on" : ""}`} onClick={() => setLever("svcFunding", id)}>
             {label}
           </button>
         ))}

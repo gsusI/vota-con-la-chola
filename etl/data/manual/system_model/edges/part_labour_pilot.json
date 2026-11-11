@@ -1,0 +1,354 @@
+{
+ "edges": [
+  {
+   "id": "L02_smi_employment",
+   "from": "smi",
+   "to": "empleo_afectados_smi",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_smi",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de subida real del SMI",
+    "low": -0.5,
+    "central": -0.15,
+    "high": 0
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva, Banco de España (2021)",
+     "country": "España",
+     "period": "2018-2019 (subida del SMI de 2019, +22,3 %)",
+     "method": "diferencias en diferencias con MCVL y afiliación (afectados frente a salarios algo superiores)",
+     "locator": "pág. 26, sección 5 (ejercicios de robustez, gráfico 6)",
+     "quote": "habría reducido el empleo neto de los afectados entre 6 pp y 11 pp a final de año. Este impacto equivaldría a una elasticidad del empleo de los afectados de entre –0,3 y –0,5",
+     "value_in_source": "-6 a -11 pp de empleo de los afectados; elasticidad -0,3 a -0,5 (cota superior del impacto)"
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "Las subidas del salario mínimo causaron la destrucción de miles de empleos, según la AIReF (crónica del informe de la AIReF sobre la regla de gasto de las pensiones)",
+     "authors_year": "El Español, sobre AIReF (30-5-2026)",
+     "country": "España",
+     "period": "2019",
+     "method": "estimación ex post de la AIReF (afiliación); fuente secundaria de prensa, el PDF de airef.es no se pudo abrir (TLS)",
+     "locator": "cuerpo de la noticia (párrafo sobre la subida de 2019)",
+     "quote": "El análisis también recoge el impacto de la subida de 2019, que fue del 22,3%. Aquel movimiento costó entre 45.000 y 54.000 empleos.",
+     "value_in_source": "45.000 a 54.000 empleos menos en 2019"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "The Effect of Minimum Wages on Low-Wage Jobs: Evidence from the United States Using a Bunching Estimator (NBER WP 25434; QJE 2019)",
+     "authors_year": "Cengiz, Dube, Lindner y Zipperer (2019)",
+     "country": "Estados Unidos",
+     "period": "1979-2016 (138 subidas estatales)",
+     "method": "estimador de bunching sobre la distribución de salarios (empleos que faltan bajo el nuevo mínimo frente a empleos en exceso justo encima)",
+     "locator": "pág. 4 (introducción) y pág. 16 (resultado principal)",
+     "quote": "the employment for affected workers rose by a statistically insignificant 2.8% (s.e. 2.9%)",
+     "value_in_source": "+2,8 % de empleo afectado (e.e. 2,9 %) ante una subida media del mínimo del 10,1 %"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/papers/w28388",
+     "title": "Myth or Measurement: What Does the New Minimum Wage Research Say about Minimum Wages and Job Loss in the United States? (Neumark y Shirley, 2021/2022)",
+     "finding": "Revisión de la literatura de EE. UU.: la mayoría de estudios encuentra efectos negativos; elasticidad media -0,14 según la cita del Banco de España (do2113, nota 26); no leído directamente aquí. Contradice la escuela del efecto nulo."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "Cengiz et al. (2019), misma fuente",
+     "finding": "Los propios autores del efecto nulo hallan «some evidence of reduced employment in tradable sectors»: en sectores expuestos a competencia sí hay pérdida de empleo."
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "AIReF (2026) según El Español",
+     "finding": "La misma crónica atribuye a las subidas de 2023 (+8 %) y 2024 (+5 %) pérdidas de 50.000-61.000 y 78.000-90.000 empleos, mayores que en 2019 con subidas menores, porque cada vez más trabajadores cobran el SMI: la elasticidad no es constante y crece con la cobertura."
+    }
+   ],
+   "debate": {
+    "id": "elasticidad_empleo_smi",
+    "schools": [
+     {
+      "label": "Banco de España: efecto negativo grande (cota superior)",
+      "central": -0.4,
+      "source_index": 0
+     },
+     {
+      "label": "AIReF: efecto negativo moderado",
+      "central": -0.17,
+      "source_index": 1
+     },
+     {
+      "label": "Efecto nulo (bunching, Cengiz et al.)",
+      "central": 0,
+      "source_index": 2
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Unidad: % de cambio del empleo de los afectados / % de subida del SMI. (a) BdE: lo da ya en esa unidad, -0,3 a -0,5 (6-11 pp / 22 %); punto medio -0,4; el texto lo presenta como cota superior. (b) AIReF 2026 (vía El Español): 45.000-54.000 empleos en 2019; con 1,2-1,4 millones de contratos afectados (BdE, pág. 22, MCVL 2018): 45/1.400 = -3,2 % a 54/1.200 = -4,5 % del empleo afectado; /22,3 % = -0,14 a -0,20; central 49,5/1.300 = -3,8 % / 22,3 % = -0,17. La normalización por afectados es nuestra y aproximada. (c) Cengiz et al.: +2,8 % / 10,1 % = +0,28 (e.e. 0,29, no significativo); se representa como 0 (sin efecto), que es su conclusión. Central -0,15 (juicio): cerca de AIReF, porque el BdE es cota superior y el efecto nulo es de EE. UU.; bajo -0,5 (BdE), alto 0.",
+   "note_es": "Según el Banco de España, la subida del 22 % del SMI en 2019 redujo el empleo de los afectados entre 6 y 11 puntos (elasticidad -0,3 a -0,5, como máximo); la AIReF estima un efecto menor (unos -0,17) y estudios de EE. UU. no ven efecto. Usamos -0,15 (rango -0,5 a 0). Es un parámetro discutido y crece con el número de asalariados que cobran el SMI.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BdE DO 2113 pág. 26: 6-11 pp y elasticidad -0,3 a -0,5 (cota superior) ok. Cengiz pág. 4 y 16: +2,8 % (e.e. 2,9), subida media 10,1 % ok. El Español (texto completo leído): NO contiene '0,28 y 0,45 pp (40.000-65.000)', ni 3,5 %/7,4 % ni 0,34-0,53 pp; para 2019 da 45.000-54.000 empleos, 2023 (+8 %) 50.000-61.000 y 2024 (+5 %) 78.000-90.000, y dice que crece el número que cobra el SMI. Elasticidad AIReF recalculada: -0,14 a -0,20, central -0,17."
+   }
+  },
+  {
+   "id": "M04_migrant_health_use",
+   "from": "poblacion_inmigrante",
+   "to": "demanda_sanitaria",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "uso_sanitario_relativo_inmigrante",
+    "unit": "uso o gasto sanitario público por persona de la población inmigrante frente a la nacida en España de su misma edad y sexo (1 = igual)",
+    "low": 0.55,
+    "central": 0.72,
+    "high": 0.95
+   },
+   "lag_years": 0,
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Global healthcare use by immigrants in Spain according to morbidity burden, area of origin, and length of stay (BMC Public Health 16:450)",
+     "authors_year": "Gimeno-Feliu LA, Calderón-Larrañaga A, Díaz E, Poblador-Plou B, Macipe-Costa R, Prados-Torres A (2016)",
+     "country": "España (Aragón)",
+     "period": "2011",
+     "method": "cohorte poblacional EpiChron (1.251.540 personas, 11,9 % inmigrantes); regresión binomial negativa (o inflada en ceros), IRR ajustadas por edad y sexo (a) y además por morbilidad (b)",
+     "locator": "Tabla 2, filas «Adults – Immigrants», columnas IRR a, estancia <5 y ≥5 años",
+     "quote": "Annual prescription drug costs were also lower for immigrants (€47 vs €318). These differences were only partially attenuated after adjusting for age, sex and morbidity burden.",
+     "value_in_source": "IRR a (edad y sexo), adultos ≥5 años: primaria 0,88; especializada 0,71; ingresos 0,78; urgencias 1,07; farmacia 0,53. <5 años: 0,68; 0,60; 0,78; 0,87; 0,37"
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7816492/",
+     "title": "Overuse or underuse? Use of healthcare services among irregular migrants in a north-eastern Spanish region (Int J Equity Health 20:41)",
+     "authors_year": "Gimeno-Feliu LA, Pastor-Sanz M, Poblador-Plou B, Calderón-Larrañaga A, Díaz E, Prados-Torres A (2021)",
+     "country": "España (Aragón)",
+     "period": "2011",
+     "method": "población adulta de Aragón (930.131 nacionales, 123.432 migrantes documentados, 17.152 irregulares); binomial negativa ajustada por edad, sexo y morbilidad",
+     "locator": "Resultados (texto junto a la Fig. 2) y resumen",
+     "quote": "The age-adjusted models revealed lower use of healthcare services for irregular immigrants at all levels of care (IRR between 0.1–0.2 for both men and women).",
+     "value_in_source": "IRR 0,1-0,2 (irregulares, ajuste por edad); gasto farmacéutico 9 € irregulares, 77 € documentados, 367 € nacionales"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Gimeno-Feliu et al. (2016), Tabla 2",
+     "finding": "En urgencias, los adultos inmigrantes con 5 años o más en España usan más que los nacionales de su edad y sexo (IRR 1,07; 1,16 con morbilidad); niños recién llegados: más ingresos hospitalarios ajustados por morbilidad (IRR 1,30)."
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4882823/",
+     "title": "Gimeno-Feliu et al. (2016), Tabla 2 (efecto de la estancia)",
+     "finding": "El menor uso se reduce con los años de residencia (atención primaria 0,68 con <5 años frente a 0,88 con ≥5 años; farmacia 0,37 frente a 0,53): el efecto del inmigrante sano se va diluyendo."
+    },
+    {
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7816492/",
+     "title": "Gimeno-Feliu et al. (2021)",
+     "finding": "Sin ajustar, los migrantes documentados hacen tantas visitas a urgencias como los nacionales (2,8 por 10 personas) pese a ser mucho más jóvenes (edad media 38 frente a 52)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "uso_urgencias_relativo_inmigrante",
+     "unit": "visitas a urgencias por persona de la población inmigrante adulta frente a la nacional de su misma edad y sexo (1 = igual)",
+     "low": 0.87,
+     "central": 1.07,
+     "high": 1.07,
+     "grade": "B"
+    },
+    {
+     "name": "gasto_farmacia_relativo_inmigrante",
+     "unit": "gasto farmacéutico por persona de la población inmigrante adulta frente a la nacional de su misma edad y sexo (1 = igual)",
+     "low": 0.37,
+     "central": 0.5,
+     "high": 0.53,
+     "grade": "B"
+    }
+   ],
+   "derivation": "IRR ajustadas por edad y sexo (columna a de la Tabla 2 de 2016, adultos). Agregado ponderado por peso aproximado de cada servicio en el gasto sanitario público (hipótesis redonda, no verificada en esta ficha: hospital y especializada 62 %, primaria 15 %, farmacia 17 %, urgencias 6 %); hospital+especializada = media de ambas IRR. ≥5 años: 0,745×0,62+0,88×0,15+0,53×0,17+1,07×0,06 = 0,75. <5 años: 0,69×0,62+0,68×0,15+0,37×0,17+0,87×0,06 = 0,645. Mezcla con 69 % de estancia ≥5 años (Tabla 1 de 2021: 68,6 %) = 0,72. Bajo 0,55: llegadas recientes con parte irregular (IRR 0,1-0,2). Alto 0,95: convergencia con la estancia y ajuste por morbilidad. Datos de una región y de 2011.",
+   "note_es": "Según dos estudios con toda la población de Aragón (2011), los inmigrantes usan menos la sanidad pública que los españoles de su misma edad y sexo: menos visitas al médico, menos especialista y la mitad de gasto en farmacia, aunque igual o algo más de urgencias. Estimamos 0,72 (rango 0,55-0,95). Es una sola región y un año, y la diferencia se reduce con los años de residencia.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "PMC4882823 abstract quote verbatim; Table 2 adults IRR a: >=5y primary 0,88, spec 0,71, hospital 0,78, ER 1,07 (b 1,16), pharmacy 0,53; <5y 0,68/0,60/0,78/0,87/0,37; children <5y hospital b 1,30 (all match). Weighted 0,748 and 0,645, mix 69/31 = 0,716. PMC7816492: IRR 0,1-0,2 quote verbatim; EUR 9/77/367; ER 2,8 vs 2,8; Table 1 stay >=5y 68,61 %. Service weights are a stated unverified assumption."
+   }
+  },
+  {
+   "id": "S01_training_lag",
+   "from": "plazas_formacion_medicos",
+   "to": "medicos_especialistas",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_formacion_medico",
+    "unit": "años desde que se crean más plazas de formación hasta que hay más médicos especialistas en ejercicio",
+    "low": 4,
+    "central": 9,
+    "high": 11
+   },
+   "lag_years": [
+    4,
+    11
+   ],
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estimación de la oferta y necesidad de médicos especialistas en España 2021-2035",
+     "authors_year": "Barber Pérez P y González López-Valcárcel B, para el Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021-2035",
+     "method": "modelo de oferta y necesidad de especialistas con registros oficiales",
+     "locator": "pág. 4 (introducción); pág. 17-18 (apartado 4.1, egresados y plazas MIR, figura 1)",
+     "quote": "Un joven médico que inicie su formación a mediados de 2023 la completará a mediados de 2027 o de 2028 (según sea una especialidad de 4 o de 5 años).",
+     "value_in_source": "residencia de 4 o 5 años; plazas de grado en Medicina en torno a 7.000-7.500 al año (figura 1)"
+    },
+    {
+     "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2008-2674",
+     "title": "Orden ECI/332/2008, requisitos para la verificación de los títulos que habiliten para la profesión de Médico",
+     "authors_year": "BOE (2008)",
+     "country": "España",
+     "period": "desde 2008",
+     "method": "norma",
+     "locator": "Anexo, apartado 5 (Planificación de las enseñanzas)",
+     "quote": "sus planes de estudios tendrán una duración de 360 créditos europeos",
+     "value_in_source": "360 ECTS (6 cursos de 60 ECTS)"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/fr/gabinete/notasPrensa.do?id=6723",
+     "title": "La oferta de plazas de Formación Sanitaria Especializada para 2026 bate un nuevo récord",
+     "authors_year": "Ministerio de Sanidad (17-7-2025)",
+     "country": "España",
+     "period": "convocatoria 2025-2026",
+     "method": "oferta oficial de plazas FSE",
+     "locator": "distribución de plazas por titulación",
+     "quote": "El mayor número, 9.276 plazas, se ofertan para la titulación de Medicina (MIR)",
+     "value_in_source": "9.276 plazas MIR (12.366 FSE en total)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio de oferta y necesidad 2021-2035, pág. 17-18",
+     "finding": "El déficit de egresados frente a plazas MIR se ha cubierto con graduados de universidades extranjeras y con la bolsa de egresados que no obtuvo plaza en años anteriores: parte de las nuevas plazas se llena sin esperar a nuevas promociones (retardo cercano a 4-5 años)."
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2008-3176",
+     "title": "Real Decreto 183/2008 (especialidades y formación sanitaria especializada)",
+     "finding": "Hay especialidades de menos de 4 años y la recirculación (reespecialización) de médicos ya especialistas no añade especialistas en ejercicio: el efecto neto de una plaza puede ser menor o más tardío."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "plazas_mir_medicina",
+     "unit": "plazas de Medicina en la convocatoria de Formación Sanitaria Especializada 2025-2026 (número)",
+     "low": 9275,
+     "central": 9276,
+     "high": 9276,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Residencia: 4 años (Medicina Familiar y Comunitaria) o 5 (muchas hospitalarias), Sanidad 2022 pág. 4. Grado: 360 ECTS = 6 cursos (Orden ECI/332/2008). Bajo 4: la plaza se cubre con un graduado que ya existe y termina en 4 años. Alto 11: hace falta un graduado nuevo (6 años de grado + 5 de residencia). La oferta MIR 2026 (9.276 plazas; 9.275 en la nota de adjudicación de abril de 2026) supera las plazas de nuevo ingreso del grado (unas 7.000-7.500 al año según la figura 1 del estudio de 2022, con datos anteriores), así que las plazas adicionales dependen de nuevos graduados o de médicos extranjeros: central 9 años (juicio), más cerca de 11 que de 4. Los graduados anuales recientes no se verificaron directamente.",
+   "note_es": "Según la normativa, el grado de Medicina dura 6 años y la residencia MIR 4 o 5. Si las nuevas plazas las ocupan graduados que ya existen, hay más especialistas en 4-5 años; si hacen falta más graduados, en unos 11. Como la oferta de 2026 (9.276 plazas) ya supera a los estudiantes que entran cada año en Medicina, usamos 9 años (rango 4-11)."
+  },
+  {
+   "id": "L07_self_employed_base",
+   "from": "cuota_autonomos",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "autonomos_k",
+    "unit": "miles de afiliados al Régimen Especial de Trabajadores Autónomos (RETA), media de 2025",
+    "low": 3387,
+    "central": 3410,
+    "high": 3426
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://revista.seg-social.es/-/la-seguridad-social-suma-en-2025-medio-millon-de-afiliados-por-cuarto-a%C3%B1o-consecutivo-y-se-acerca-a-los-21-9-millones-de-ocupados",
+     "title": "La Seguridad Social suma en 2025 medio millón de afiliados por cuarto año consecutivo y se acerca a los 21,9 millones de ocupados",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones, Revista Seguridad Social (enero de 2026)",
+     "country": "España",
+     "period": "diciembre de 2025 (afiliación media del mes)",
+     "method": "registro de afiliación",
+     "locator": "apartado «Autónomos»",
+     "quote": "por encima de los 3,4 millones (RETA y SETA), con 3.425.767 trabajadores por cuenta propia, 39.002 más que hace un año",
+     "value_in_source": "3.425.767 afiliados RETA+SETA en diciembre de 2025; 3.386.765 en diciembre de 2024"
+    },
+    {
+     "url": "https://revista.seg-social.es/-/afiliacion-octubre-2026",
+     "title": "Afiliación octubre 2026",
+     "authors_year": "Ministerio de Inclusión, Seguridad Social y Migraciones, Revista Seguridad Social (noviembre de 2026)",
+     "country": "España",
+     "period": "octubre de 2026 frente a octubre de 2025",
+     "method": "registro de afiliación",
+     "locator": "apartado «Más de 3,5 millones de autónomos»",
+     "quote": "el número de trabajadores autónomos asciende a 3.501.598, que son 79.163 más que hace un año",
+     "value_in_source": "3.501.598 en octubre de 2026; 3.422.435 en octubre de 2025 (por diferencia)"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "Real Decreto-ley 13/2022, nuevo sistema de cotización para los trabajadores autónomos",
+     "authors_year": "BOE (2022)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "norma (tabla de tramos de rendimientos y bases)",
+     "locator": "disposición transitoria primera, apartado 2, tabla de 2025",
+     "quote": "Tabla reducida. Tramo 1. <=670 653,59 718,94",
+     "value_in_source": "base mínima 2025: 653,59 €/mes (tramo 1 reducido) a 1.928,10 €/mes (tramo 12 general)"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2025-3780",
+     "title": "Orden PJC/178/2025, normas de cotización a la Seguridad Social para 2025",
+     "authors_year": "BOE (2025)",
+     "country": "España",
+     "period": "2025",
+     "method": "norma (tipos de cotización)",
+     "locator": "art. 18.4 (tipos de los trabajadores por cuenta propia)",
+     "quote": "Desde el 1 de enero de 2025, los tipos de cotización de las personas trabajadoras por cuenta propia serán los siguientes: a) Para las contingencias comunes, el 28,30 por ciento.",
+     "value_in_source": "28,30 % comunes + 1,30 % profesionales + 0,80 % MEI (más cese y formación)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "RDL 13/2022, disposición transitoria quinta (cuota reducida)",
+     "finding": "Los nuevos autónomos pagan una cuota reducida de 80 euros al mes en 2023-2025: la cuota media real queda por debajo de la del tramo más barato para ese grupo, y los ingresos no crecen igual que los afiliados."
+    },
+    {
+     "url": "https://revista.seg-social.es/-/la-seguridad-social-suma-en-2025-medio-millon-de-afiliados-por-cuarto-a%C3%B1o-consecutivo-y-se-acerca-a-los-21-9-millones-de-ocupados",
+     "title": "Nota de afiliación de diciembre de 2025",
+     "finding": "La cifra incluye el SETA (autónomos agrarios) y, dentro del RETA, autónomos societarios y familiares colaboradores, con bases y cuotas distintas; no es solo el autónomo persona física sin empresa."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "cuota_media_autonomos",
+     "unit": "euros al mes, cuota media mensual de un afiliado al RETA en 2025",
+     "low": 205,
+     "central": 330,
+     "high": 605,
+     "grade": "D"
+    }
+   ],
+   "derivation": "Afiliados: no se encontró publicada la media anual de 2025; se aproxima con la media de los meses conocidos: dic-2024 3.386.765 (3.425.767 - 39.002), oct-2025 3.422.435 (3.501.598 - 79.163), dic-2025 3.425.767; central 3.410 miles, bajo 3.387 (dic-2024), alto 3.426 (dic-2025). Incluye SETA. Cuota: tipo 2025 = 28,30 + 1,30 + 0,80 (MEI) leídos en la Orden PJC/178/2025, más 0,9 cese y 0,1 formación (no verificados en este extracto) = 31,4 %. Bajo: 653,59 × 31,4 % = 205 €; alto: base mínima del tramo 12 general, 1.928,10 × 31,4 % = 605 €. Central 330 €: hipótesis de base media de unos 1.050 € (la mayoría cotiza cerca de la base mínima de los primeros tramos); no se encontró la recaudación del RETA para dividir, de ahí la nota D.",
+   "note_es": "Según la Seguridad Social, en diciembre de 2025 había 3.425.767 autónomos afiliados (RETA y SETA), 39.002 más que un año antes; usamos 3,41 millones de media en 2025. La cuota de 2025 iba de unos 205 a 605 euros al mes según el tramo de ingresos; la cuota media de 330 euros es una estimación nuestra, no un dato publicado."
+  }
+ ]
+}

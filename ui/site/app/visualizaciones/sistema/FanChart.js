@@ -13,6 +13,7 @@ export const fmt = (v, unit, digits = 1) => {
   if (unit === "eur") return `${Math.round(n).toLocaleString("es-ES", { useGrouping: "always" })} €`;
   if (unit === "k") return `${Math.round(n).toLocaleString("es-ES", { useGrouping: "always" })} mil`;
   if (unit === "pp") return `${s(digits)} pp`;
+  if (unit === "días") return `${Math.round(n).toLocaleString("es-ES", { useGrouping: "always" })} días`;
   return `${s(digits)} %`;
 };
 

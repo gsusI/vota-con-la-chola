@@ -1,6 +1,7 @@
 # Simulador del sistema: pensiones, impuestos, vivienda, empleo, sanidad y educación como un solo sistema
 
-Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12) publicados; **corte 2** (vivienda, §13) en `main`.
+Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12) publicados; **corte 2** (vivienda, §13) en `main`;
+**corte 3** (empleo e inmigración, con la capacidad sanitaria del corte 4, §14) en `main` el 2026-11-11, sin desplegar.
 
 - **Dónde estamos.** Cinco verticales en `/visualizaciones/` (carga fiscal, empleo, educación, sanidad, vivienda), cada una
   con su exporter, sus fuentes con sha256 y cinco casos tipo compartidos ([VIZ-SEGMENTOS](../VIZ-SEGMENTOS-20261019/README.md)).
@@ -10,9 +11,10 @@ Fecha: 2026-10-19. Diseño (§1–§10), **corte 0** (§11) y **corte 1** (§12)
   pensiones», «limitar el alquiler», «copago sanitario») y ve, en tiempo real, cómo se propaga el cambio por un mapa causal,
   cuánto cuesta, quién lo paga, qué les pasa a los cinco casos tipo y con qué incertidumbre. Cada palanca enlaza a cómo
   votó cada partido.
-- **Qué sigue.** Cortes 0, 1 y 2 hechos (§11–§13): pensiones, cuentas públicas, impuestos con reparto por quintil y
-  vivienda (obra, suelo, tope, turísticos, crédito; bucles B2 y R2) en `/visualizaciones/sistema/`. Siguiente: corte 3,
-  empleo e inmigración (§9).
+- **Qué sigue.** Cortes 0–3 hechos (§11–§14): pensiones, cuentas públicas, impuestos con reparto por quintil, vivienda
+  (obra, suelo, tope, turísticos, crédito; bucles B2 y R2), empleo (SMI, jornada, cuota de autónomos), inmigración como
+  palanca y contexto, y la sanidad como servicio que no escala (médicos con retardo, lista de espera como stock).
+  Siguiente (§14.6): educación y atención primaria como capacidad, y escenarios por partido desde lo votado (corte 5).
 
 ## 1. Qué tipo de modelo, y por qué
 
@@ -398,3 +400,131 @@ ejecutados con Node sobre el mismo código del navegador; JSON con fuentes y sha
   plegados en «Los números».
 - **Dos composiciones** de la escena (ancha y estrecha) para que en el móvil se lea sin encoger; respeta `prefers-reduced-motion`.
 - El mapa de cajas (`CausalMap.js`, `HousingMap.js`) queda solo como fuente de los nodos y relaciones de la cadena.
+
+## 14. Corte 3: empleo e inmigración, y capacidad sanitaria (hecho, 2026-11-11)
+
+Pregunta del mantenedor: qué hicieron los votos de cada partido por el empleo, los autónomos, la sanidad y los servicios
+que no escalan cuando crece la población. Este corte da la parte del simulador; las otras porciones del programa (riesgo
+democrático) van en otras sesiones.
+
+### 14.1 Diseño (fijado antes de calcular)
+
+- **Palancas de empleo**: SMI (subida real, %), jornada máxima (horas menos sobre 40, con el sueldo mensual mantenido),
+  cuota de autónomos (euros al mes) y las cotizaciones que ya había. Cada una mueve el empleo del grupo afectado con una
+  elasticidad con rango (el SMI y la jornada, con escuelas) y las cuentas públicas por salarios, cotizaciones e IRPF.
+- **Inmigración como palanca y como contexto**: inmigración neta en múltiplos de la variante oficial (Eurostat EUROPOP2023
+  `HMIGR`/`LMIGR`, la misma que usa el Ageing Report; escalado lineal, que es un supuesto). Da población por etapa
+  (0–15 / 16–29 / 30–44 / 45–64 / 65+), ocupados con la tasa de empleo de los extranjeros de cada edad (EPA de Eurostat),
+  cotizantes, hogares (módulo de vivienda) y demanda de servicios.
+- **Sanidad que no escala**: demanda = población × perfil de gasto por edad (Funcas, DT 673) × uso relativo por origen
+  (estudio español; si no hay, se dice); oferta = médicos (retardo de formación con rango) y dinero (lo que el dinero compra
+  sin médicos, supuesto D); lista de espera quirúrgica como stock (entradas − salidas, salidas topadas por la capacidad;
+  flujo anual por la ley de Little con los datos del SISLE). Línea base: el gasto del Ageing Report y una lista estable.
+- **Figura consolidada**: lo que suma la inmigración (por etapa, 2035 y 2050, con rangos) en ingresos (cotizaciones,
+  IRPF, impuestos al consumo) frente a lo que añade en demanda (sanidad, escuela, pensiones, otros servicios, hogares)
+  y en capacidad (médicos y lista de espera si el gasto sigue o no a la población).
+
+### 14.2 Puertas y pruebas, con la tolerancia fijada antes de rellenar las fichas
+
+| Puerta | Qué se compara | Tolerancia |
+|---|---|---|
+| Población base | EUROPOP2023 `BSL` frente a la población del Ageing Report, 2025–2050 | ≤ 0,5 % cada año |
+| Identidad de población | las etapas suman el total en cada año, base y variantes | exacta (redondeo) |
+| Identidad de la lista | `S_t = S_{t−1} + entradas − salidas`, `S ≥ 0`, en cada sorteo | exacta |
+| Demografía de la demanda sanitaria | crecimiento del gasto en % del PIB 2025–2050 solo por edad (perfil × población) frente al «escenario demográfico» del Ageing Report | ± 5 puntos de crecimiento |
+| Inmigración y gasto ligado a la edad | cambio en % del PIB de sanidad + educación con la variante alta frente al del Ageing Report (gasto total ligado a la edad menos pensiones) | mismo signo y dentro de ×3 |
+| Vuelta atrás SMI 2019 | empleo perdido con +22,3 % en el modelo frente al rango publicado (AIReF, Banco de España, estudios sin efecto) | mismo signo y dentro de [mín/2, máx×2] del rango publicado |
+| Vuelta atrás inmigración 2019–2024 | ocupados extranjeros nuevos por cada residente extranjero nuevo de 15–64 (EPA) frente a la tasa de empleo que usa el modelo | ± 10 puntos |
+
+### 14.3 Regla de la revisión de calidad (fijada antes de sortear)
+
+15 fichas nuevas de este corte sorteadas con la semilla 20261111 (propias y de agentes). El revisor recibe solo la ficha
+y sus URL. Veredicto por ficha: bien, corregida (con la corrección exacta) o sin respaldo. Publicable si al menos 12 son
+bien o corregidas con corrección exacta. Las corregidas se aplican; las sin respaldo se corrigen a mano, bajan a D
+(supuesto, mostrado como tal) o se quitan. El resultado se publica tal cual en este README.
+
+### 14.4 Lo que se hizo y lo que salió
+
+- **Datos** (`scripts/system_model_labour.py`, reglas en su cabecera, caché sin red con sha256 en el JSON): EUROPOP2023
+  (`proj_23np`, `proj_23nanmig`), EPA de Eurostat (`lfsa_ergan`, `lfsa_pganws`), asalariados y autónomos (`nama_10_pe`),
+  hoja ESc del anexo del Ageing Report (sanidad, dependencia, educación, alumnos, sensibilidades del gasto total), perfil de
+  gasto sanitario por edad de Funcas (DT 673) y médicos y lista de espera del SISLE a través de `sanidad.json`.
+  `sistema.json` pasa de 281 KB a 447 KB.
+- **La variante oficial**: el «+33 %» del Ageing Report es un tercio más de inmigración de **fuera de la UE**; sube la
+  inmigración neta un 46,5 % acumulado 2026–2050 (la baja, −46,2 %). La palanca escala esa variante (multiplicador −2…+2).
+  Corrección de paso: el corte 2 movía los hogares con un tercio de la inmigración neta; ahora usa la diferencia real de
+  la variante (el efecto en el alquiler de «más inmigración» es mayor que el publicado en el corte 2).
+- **Motor** (`engine.mjs`; salidas `lb_*`, `mig_*`, `hl_*`): empleo de los afectados con elasticidad y ajuste a mitad de
+  camino por año; ingresos de quien llega con el baremo de la OCDE a su salario relativo, impuestos al consumo y el resto
+  de ingresos en proporción al PIB que añade; usos por etapa (sanidad por perfil y origen, escuela por alumno, dependencia,
+  pensiones de quien llega a los 65 antes de 2050 y una parte del resto de servicios, en disputa); interruptor «¿crecen los
+  servicios con la población?»; capacidad sanitaria = ω·dinero + (1−ω)·min(dinero, médicos), lista de espera como stock
+  con entradas que bajan cuando la espera sube. La pensión de la inmigración deja de ser la sensibilidad del Ageing Report
+  (un cociente sobre el PIB) y pasa a euros por persona; la sensibilidad oficial queda como prueba.
+- **Catálogo**: 25 fichas nuevas (79 en total): 16 de agentes (piloto 4, segunda ola 3 × 4–5) y 9 propias. Debates nuevos:
+  efecto del SMI sobre el empleo (Banco de España −0,40, AIReF −0,17 tras la revisión, sin efecto 0), de la jornada
+  (Crépon-Kramarz −1,2, Chemin-Wasmer 0, Raposo-van Ours 0, Hunt +0,2) y coste del resto de servicios por residente
+  (coste medio 1,0, coste marginal 0,32). Grado D a la vista: elasticidad de los autónomos a la cuota, cuota media, pensión
+  relativa de quien llega, capacidad que compra el dinero sin médicos.
+- **Puertas** (tolerancias de §14.2): población EUROPOP frente al Ageing Report, desfase máximo 0,21 % (≤ 0,5);
+  identidades de etapas y de la lista exactas en todos los sorteos; demografía de la demanda sanitaria +15,5 % frente a
+  +16,9 % del Ageing Report (±5 puntos); SMI 2019, 43 mil empleos en el modelo frente a 0–143 mil publicados (mediana 38);
+  inmigración y empleo 2019–2025, 59 ocupados por cada 100 residentes nuevos de 16–64 en el modelo frente a 69 en la EPA
+  (±10); inmigración y gasto ligado a la edad, −0,22 puntos de PIB en 2050 frente a −0,21 del Ageing Report (mismo signo,
+  ×3). **Esta última falló en la primera pasada** (+0,07 frente a −0,21): el modelo subía el PIB con la elasticidad de corto
+  plazo (0,65, capital fijo) mientras el Ageing Report deja crecer el capital con el empleo («capital rule» del Ageing
+  Working Group, Havik et al. 2014, pág. 77). Se añadió esa regla como ficha (M08, grado C, 10 años, 5–15) solo para el
+  empleo de quien llega; la revisión confirmó la cita. En pensiones el modelo da −0,86 puntos frente a −1,02 oficiales
+  (sin tolerancia: el modelo no cuenta las pensiones que se generan después de 2050). 29 pruebas de Node pasan
+  (6 nuevas del motor, entre las de motor y escenarios).
+- **Revisión de calidad** (§14.3; 15 de 25 sorteadas con la semilla 20261111, lista en `review_sample_corte3.json`,
+  revisores con solo la ficha y sus URL, una ficha por archivo en `reviews/`): **7 bien, 8 corregidas con corrección
+  exacta, 0 sin respaldo**: publicable. Correcciones con efecto: una cita de AIReF atribuida a un artículo de prensa no
+  estaba en él (la ficha L02 pasa a 45.000–54.000 empleos y la escuela de AIReF de −0,16 a −0,17); el alto de la
+  elasticidad de la jornada pasa de +0,3 a +0,8 (Hunt leído al revés); título y autores de DO 2113 corregidos; la
+  ficha propia M01 decía «sobre todo de 16 a 44» (es el 72 % de 16 a 64); el escenario demográfico del Ageing Report era
+  el de 2049. Las demás fueron de redacción o de rango.
+- **Página**: pestañas Empleo y Sanidad, inmigración en múltiplos de la variante oficial y el interruptor de servicios;
+  panel en vivo «Empleo, inmigración y servicios» (por etapa: residentes, pagan, usan; espera y pacientes que dejan de
+  apuntarse); cadena de causas con 20 relaciones nuevas; votaciones por palanca desde el atlas (ejes `empleo_derechos`,
+  `autonomos_empresa`, `inmigracion`, `sanidad_publica`, XV legislatura) con la dirección media de cada partido; figura
+  consolidada `#inmigracion`, tabla de médicos y espera, figura `#empleo` con escuelas; 4 escenarios nuevos o rehechos
+  (`subir-salario-minimo`, `jornada-37-5-horas`, `mas-inmigracion`, `menos-inmigracion`), 20 en total.
+- **Resultado principal** (variante alta, valor central y 5–95 %): en 2035 viven 1,33 millones de personas más, 637 mil
+  trabajan; pagan 15,6 mil millones al año (13,8–17,2) y usan 10,0 (9,0–13,6) si los servicios crecen con ellas; saldo
+  +5,6 mil millones (+1,1 a +7,3), un 2 % del gasto en pensiones de ese año; en 2050, +15,0 (+2,1 a +20,4). Según la escuela
+  del resto de servicios, el saldo de 2035 va de +0,7 (coste medio) a +7,4 mil millones (coste marginal). La espera
+  quirúrgica pasa de 122 a 126 días en 2035 (134 en 2050) con servicios que crecen y a 130 (143) con el mismo dinero, con
+  28 mil (78 mil) pacientes al año que dejan de apuntarse; el gasto en servicios por persona baja un 2,6 % (5,9 %). El
+  alquiler de un contrato nuevo sube un 3,3 % (2,6–4,4). Empleo: SMI +10 % real, −37 mil empleos en 2035 (−97 a −15),
+  +624 millones netos al año; 37,5 horas, de −855 mil a +142 mil según la escuela, coste por hora de los afectados +6,0 %,
+  PIB −2,2 %; cuota de autónomos +50 € al mes, −52 mil autónomos y +914 millones.
+- **Límites que la página dice**: quién llega en concreto (formación, origen, inmigración irregular), efectos sobre
+  salarios y empleo de quien ya vive aquí (supuestos nulos), saldo de una vida entera (pensiones después de 2050), presión
+  local (barrios, comunidades), reparto del coste de la jornada entre beneficios, precios y salarios. Ninguno de los casos
+  tipo cobra el SMI.
+- **Coste de los agentes** (`scripts/subagent_usage_report.py`): piloto de 4 fichas, 95 turnos y 11,4 M de tokens de
+  entrada (2,8 M por ficha, casi todo buscando enlaces de la Seguridad Social y probando hosts caídos); segunda ola con
+  URL comprobadas, hosts bloqueados (airef.es, inclusion.gob.es) y tope de 35–40 llamadas: 50–62 turnos y 4,8–6,1 M por
+  agente (1,1–1,5 M por ficha); revisores, 3,4–4,8 M por 5 fichas. Total 40,2 M. Lo que más turnos ahorraría: hosts
+  bloqueados también oecd.org, sciencedirect y e-spacio de la UNED; un `kit boe` que resuelva el id de una orden; que
+  `fetch -g` dé la página de cada coincidencia; un lector de xlsx desde la caché; una ayuda que devuelva el resumen de
+  RePEc de un artículo por título.
+
+### 14.5 Dónde estamos y a dónde vamos
+
+- **Dónde estamos**: el simulador responde ahora a «qué añade la inmigración en ingresos y en demanda de servicios, por
+  edad, hasta 2050» con rangos, y separa el dinero (que llega) de la capacidad (que tarda): la sanidad no escala porque
+  los médicos tardan unos 9 años. Las palancas de empleo muestran sus debates. Cada palanca enlaza las votaciones del
+  Congreso del eje que le corresponde con la dirección media de cada partido.
+- **A dónde vamos**: que la porción 1 del programa responda por partido qué hicieron sus votos por el empleo, los
+  autónomos, la sanidad y los servicios bajo presión migratoria, con los escenarios del simulador construidos solo desde
+  lo votado (corte 5).
+
+### 14.6 Qué sigue
+
+1. Educación y atención primaria como capacidad (plazas, ratios, médicos de familia por zona), con la misma lógica de
+   stock y retardo; la escuela hoy solo cuesta por alumno medio.
+2. Escenarios por partido desde lo votado (corte 5): traducir las votaciones con magnitud (SMI, jornada, cuota) a
+   palancas, sin programas sin voto detrás.
+

@@ -790,3 +790,46 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* party direction on a vote-atlas axis (slice 3 levers) */
+.viz .sim__axisList {
+  list-style: none;
+  margin: 6px 0 12px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  max-width: 42rem;
+}
+.viz .sim__axisList li {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr 3.2rem 4.5rem;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+.viz .sim__axisBar {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #d9734322, #00000010 50%, #3a7d4422);
+}
+.viz .sim__axisBar span {
+  position: absolute;
+  top: -3px;
+  left: calc(var(--x) * 100% - 7px);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.viz .sim__axisList small {
+  color: var(--muted, #6b6a63);
+}
+@media (max-width: 480px) {
+  .viz .sim__axisList li {
+    grid-template-columns: 6rem 1fr 2.8rem;
+  }
+  .viz .sim__axisList small {
+    display: none;
+  }
+}

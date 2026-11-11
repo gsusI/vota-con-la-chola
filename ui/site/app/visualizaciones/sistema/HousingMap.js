@@ -77,14 +77,15 @@ function closureValue(run, t, closure) {
 /** Deviation shown in each node at year index t: [value, unit, digits, suffix, text]. */
 export function housingValues(run, t, levers) {
   const caps = [levers.ltvCap ? `LTP ${lt(levers.ltvCap)} %` : "", levers.ltiCap ? `LTI ${lt(levers.ltiCap)}` : ""].filter(Boolean).join(" · ");
-  const mig = levers.migration === "low" ? "−33 %" : levers.migration === "high" ? "+33 %" : "base oficial";
+  const sMig = levers.migScale || (levers.migration === "low" ? -1 : levers.migration === "high" ? 1 : 0);
+  const mig = sMig ? `${sMig > 0 ? "+" : "−"}${lt(Math.abs(sMig))} × variante oficial` : "base oficial";
   return {
     pub: [levers.pubHomes, "k", 0, "al año"],
     land: [levers.land, "k", 0, "viviendas al año"],
     tour: [levers.tourCut, "pct", 0, "retiradas"],
     cap: [levers.capCov && levers.capCut ? levers.capCut : 0, "pct", 0, "", levers.capCov && levers.capCut ? `−${lt(levers.capCut)} % en el ${lt(levers.capCov)} %` : null],
     caps: [caps ? 1 : 0, "pct", 0, "", caps || null],
-    migration: [levers.migration === "base" ? 0 : 1, "pct", 0, "", levers.migration === "base" ? null : mig],
+    migration: [sMig ? 1 : 0, "pct", 0, "", sMig ? mig : null],
     obra_publica: [run.hs_public_k[t], "k", 0, "terminadas"],
     obra_privada: [run.hs_private_k[t], "k", 0, "acumuladas"],
     turistica: [run.hs_tourist_k[t], "k", 0, ""],

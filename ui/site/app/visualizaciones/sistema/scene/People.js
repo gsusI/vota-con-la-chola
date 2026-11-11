@@ -14,7 +14,7 @@ export const NEIGHBOURS = [
 
 /** Four typical cases with a face that follows the change in their monthly income. */
 export function Neighbours({ model, run, bands, t, levers = {} }) {
-  const housing = ["pubHomes", "land", "capCov", "capCut", "tourCut", "ltvCap", "ltiCap"].some((key) => levers[key]) || levers.migration !== "base";
+  const housing = ["pubHomes", "land", "capCov", "capCut", "tourCut", "ltvCap", "ltiCap"].some((key) => levers[key]) || levers.migration !== "base" || Boolean(levers.migScale);
   // Rent of a new flat for the two renters: with and without the cap when there is one. Rent up = worse.
   const rentOf = (id) => {
     const key = id === "p1" ? "p1" : id === "p2" ? "p2r" : null;

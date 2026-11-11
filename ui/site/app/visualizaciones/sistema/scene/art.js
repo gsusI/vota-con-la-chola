@@ -286,6 +286,36 @@ export function CoinStack({ x = 0, y = 0, value, base, unit = 10, label, sub }) 
 
 // ---------------------------------------------------------------- icons for the controls (24 x 24 grid)
 const ICONS = {
+  clock: (
+    <g>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7 L12 12 L15.5 14" />
+    </g>
+  ),
+  coin: (
+    <g>
+      <ellipse cx="12" cy="7" rx="7" ry="3" />
+      <path d="M5 7 L5 12 Q12 16 19 12 L19 7 M5 12 L5 17 Q12 21 19 17 L19 12" />
+    </g>
+  ),
+  briefcase: (
+    <g>
+      <rect x="3.5" y="8" width="17" height="11" rx="1.5" />
+      <path d="M9 8 L9 5.5 L15 5.5 L15 8 M3.5 13 L20.5 13" />
+    </g>
+  ),
+  doctor: (
+    <g>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M12 8 L12 16 M8 12 L16 12" />
+    </g>
+  ),
+  hospital: (
+    <g>
+      <path d="M4 20 L4 8 L20 8 L20 20 Z M9 20 L9 15 L15 15 L15 20" />
+      <path d="M12 3 L12 7 M10 5 L14 5" />
+    </g>
+  ),
   pension: (
     <g>
       <circle cx="10" cy="5" r="3" />

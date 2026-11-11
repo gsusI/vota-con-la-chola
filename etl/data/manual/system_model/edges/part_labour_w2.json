@@ -1,0 +1,279 @@
+{
+ "edges": [
+  {
+   "id": "L08_self_employed_elasticity",
+   "from": "cuota_autonomos",
+   "to": "autonomos",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_autonomos_cuota",
+    "unit": "% de cambio del número de autónomos por cada 1 % de cambio de su cuota mensual",
+    "low": -0.3,
+    "central": -0.1,
+    "high": -0.02
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-12482",
+     "title": "Real Decreto-ley 13/2022, nuevo sistema de cotización para trabajadores por cuenta propia o autónomos",
+     "authors_year": "BOE (2022)",
+     "country": "España",
+     "period": "2023-2025",
+     "method": "norma (cuantía de la cuota reducida y tramos de bases)",
+     "locator": "preámbulo, disposición transitoria quinta; tabla de tramos de rendimientos netos",
+     "quote": "la cuantía de la cuota reducida regulada en el artículo 38 ter de la Ley 20/2007, de 11 de julio , del Estatuto del trabajo autónomo, será de 80 euros mensuales",
+     "value_in_source": "cuota reducida 80 EUR/mes (2023-2025); base mínima tabla general tramo 1 (2023) 950,98 EUR/mes"
+    },
+    {
+     "url": "https://ideas.repec.org/a/eee/jbvent/v28y2013i1p151-175.html",
+     "title": "Start-up incentives: Entrepreneurship policy or active labour market programme?",
+     "authors_year": "Román, Congregado y Millán (2013), Journal of Business Venturing 28(1)",
+     "country": "UE (incluye España)",
+     "period": "1994-2001 (ECHP)",
+     "method": "modelo de transición de paro a autoempleo con microdatos de panel europeo",
+     "locator": "resumen (IDEAS/RePEc)",
+     "quote": "This study suggests that the contribution of these incentives is dubious, if aimed to combat economic and jobs crises as part of the entrepreneurship policy",
+     "value_in_source": "sin elasticidad numérica; efecto de los incentivos a la creación calificado de dudoso"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sciencedirect.com/science/article/pii/S1056819023011211",
+     "title": "Evaluation of self-employment support policies using survival analysis. The discounted flat rate in Andalusia (Spain)",
+     "finding": "La supervivencia de los autónomos con tarifa plana supera a la del grupo sin ella, pero el efecto positivo desaparece a largo plazo (resumen visto en el buscador; el artículo devuelve 403 desde aquí)."
+    },
+    {
+     "url": "https://e-spacio.uned.es/entities/publication/a7776845-0aa1-455c-bcb0-d5410488a10e",
+     "title": "Evaluación de impacto de la tarifa plana en España: retos y expectativas del trabajo autónomo (UNED)",
+     "finding": "Con control sintético sobre datos de Eurostat, la tarifa plana aumentó las altas, pero pocas se mantienen al terminar la ayuda (resumen visto en el buscador; la página exige un reto anti-bots)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "No se ha encontrado ninguna elasticidad publicada y legible desde aquí: la Spending Review de la AIReF (fase II) falla por TLS, la página de la UNED exige reto anti-bots y ScienceDirect da 403; Cueto, Mayor y Suárez no se localizó. Supuesto: la tarifa plana baja la cuota de unos 205-605 EUR/mes (tramos del RDL 13/2022) a 80 EUR, un recorte del 60-87 % para quien entra. Las dos evaluaciones españolas (resúmenes) coinciden en que suben las altas y la supervivencia a corto plazo, pero el efecto se diluye cuando acaba la ayuda, y Román et al. califican de dudoso el efecto de estos incentivos. Para el stock de autónomos (3,41 millones en 2025) se asume por eso una elasticidad pequeña: -0,1 (un recorte del 10 % de la cuota media elevaría el número de autónomos un 1 %), con rango -0,3 a -0,02. Sin estimación directa: grado D.",
+   "note_es": "La tarifa plana del RDL 13/2022 fija en 80 euros al mes la cuota de quien empieza (2023-2025). Según los resúmenes de dos evaluaciones españolas (Andalucía y UNED), se asocia a más altas, pero el efecto se diluye al acabar la ayuda. No hay una elasticidad española publicada que hayamos podido leer: el -0,1 (un 1 % más de autónomos por un 10 % menos de cuota) es un supuesto, rango -0,3 a -0,02.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BOE RDL 13/2022: preámbulo and DT 5ª say verbatim 'será de 80 euros mensuales' (2023-2025); tabla general tramo 1 base mínima 950,98. 205-605 EUR = 2025 bases 653,59 (tramo 1 reducida) and 1.928,10 (tramo 12) x ~31,4 % (rate not in this BOE text). RePEc abstract has the 'dubious' quote verbatim. D, stated as assumption. Note also credited the 'más altas' link to the RDL, which does not say it; the two evaluations are search abstracts only (unverifiable here)."
+   }
+  },
+  {
+   "id": "M03_migrant_wage",
+   "from": "poblacion_inmigrante",
+   "to": "recaudacion",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salario_relativo_inmigrante",
+    "unit": "ganancia media anual de los asalariados de nacionalidad extranjera frente a la del total de asalariados (1 = igual)",
+    "low": 0.7,
+    "central": 0.78,
+    "high": 0.92
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28190",
+     "title": "Encuesta Anual de Estructura Salarial. Ganancia media anual por trabajador por sexo y nacionalidad (tabla 28190)",
+     "authors_year": "INE (2026, datos definitivos 2024 publicados el 28-5-2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "encuesta a centros de cotización (salario bruto anual por trabajador)",
+     "locator": "tabla 28190, Ambos sexos: Total, Española, Otros países; año 2024",
+     "quote": "Ambos sexos. Otros países. Dato base. Total Nacional. Salario medio bruto.",
+     "value_in_source": "2024: Total 29.540,26 EUR; Española 30.181,14 EUR; Otros países 20.568,14 EUR (UE28 sin España y Europa menos UE28 sin dato en la API)"
+    },
+    {
+     "url": "https://www.ine.es/metodologia/t22/ees_prinre22.pdf",
+     "title": "Encuesta de Estructura Salarial 2022. Principales resultados",
+     "authors_year": "INE (2024)",
+     "country": "España",
+     "period": "2022",
+     "method": "encuesta cuatrienal de estructura salarial",
+     "locator": "pág. 30, apartado 10 «Los salarios y la nacionalidad»",
+     "quote": "El resto de trabajadores de la Unión Europea tuvo un salario inferior en un 7,7 % a la media, mientras que el resto de nacionalidades tuvieron un salario inferior a la media en más del 30%.",
+     "value_in_source": "UE sin España: -7,7 % frente a la media; resto: más de -30 %; 9,1 % de la muestra de nacionalidad extranjera"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.ine.es/metodologia/t22/ees_prinre22.pdf",
+     "title": "Encuesta de Estructura Salarial 2022. Principales resultados (pág. 30)",
+     "finding": "Solo el 9,1 % de la muestra tiene nacionalidad extranjera y el INE pide tomar estos resultados con precaución; además la encuesta clasifica por nacionalidad (los nacionalizados cuentan como españoles) y no corrige por horas ni jornada parcial."
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28190",
+     "title": "EAES, tabla 28190 (cobertura)",
+     "finding": "La encuesta excluye la agricultura y el servicio doméstico, ramas con mucho empleo extranjero y salarios bajos, por lo que el cociente probablemente sobrestima la ganancia relativa del conjunto de asalariados extranjeros."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "INE no publica en la tabla 28190 la media del total extranjero. Se despeja de Total = (1-s)·Española + s·Extranjera con s = peso de los extranjeros: s ≈ 0,091 (proporción de la muestra EES 2022, aproximación no verificada al peso ponderado). Extranjera = (29.540,26 - 0,909·30.181,14)/0,091 ≈ 23.140 EUR → 23.140/29.540,26 ≈ 0,78. Con s = 0,08 sale 0,75 y con s = 0,10, 0,80. low = Otros países/Total 2024 = 20.568,14/29.540,26 = 0,696 ≈ 0,70; high = UE sin España en 2022 = 1 - 0,077 = 0,923 ≈ 0,92 (no hay dato UE para 2024 en la API). Aproximado: el peso s y la falta del dato UE 2024.",
+   "note_es": "Según la Encuesta Anual de Estructura Salarial del INE (2024), los asalariados de nacionalidad no europea ganaron de media 20.568 euros, el 70 % de la media (29.540); los de otros países de la UE, un 7,7 % menos que la media en 2022. La media del conjunto extranjero (unos 0,78) es una estimación propia; la encuesta no cubre agricultura ni servicio doméstico ni corrige por horas.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "INE API DATOS_TABLA/28190, Ambos sexos 2024: Total 29.540,26; Española 30.181,14; Otros países 20.568,14; UE28 sin España and Europa menos UE28 empty (match). EES 2022 pdf p.30 quote verbatim, 9,1 % muestra extranjera. s=0,091 -> 23.139 EUR, 0,783; s=0,08 -> 0,75; s=0,10 -> 0,80. Coverage CNAE B-S (no agriculture A, no households T) confirmed in the pdf. Grade A accepted: official data plus a small stated assumption on s."
+   }
+  },
+  {
+   "id": "M05_congestible_spending",
+   "from": "poblacion",
+   "to": "gasto_otros_servicios",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_gasto_congestionable",
+    "unit": "parte del gasto público por persona en servicios distintos de pensiones, sanidad y educación (sin intereses) que crece con cada residente más",
+    "low": 0.3,
+    "central": 0.5,
+    "high": 1.0
+   },
+   "lag_years": [
+    1,
+    3
+   ],
+   "grade": "C",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://www.cream-migration.org/publ_uploads/CDP_22_13.pdf",
+     "title": "The Fiscal Effects of Immigration to the UK (CReAM DP 22/13)",
+     "authors_year": "Dustmann y Frattini (2013; Economic Journal 2014)",
+     "country": "Reino Unido",
+     "period": "1995-2011",
+     "method": "contabilidad fiscal por grupos con reparto del gasto por funciones COFOG",
+     "locator": "pág. 9 (sección 2.1.2); tabla A1 (pág. 44) y tabla A3 (págs. 46-47)",
+     "quote": "“Pure” public goods are public goods that are not rival in consumption, and where the marginal cost of providing these goods and services to immigrants is likely to be zero.",
+     "value_in_source": "bienes públicos puros 23,3 % del gasto total (incluye intereses de la deuda, defensa, servicios generales y asuntos económicos); congestionables 7,5 %; policía 2,8 %; justicia y prisiones 1,9 %"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table",
+     "title": "General government expenditure by function (COFOG), gov_10a_exp",
+     "authors_year": "Eurostat (actualizado 21-10-2026)",
+     "country": "España",
+     "period": "2023-2024",
+     "method": "cuentas de las AAPP por función (S13, gasto total, millones EUR)",
+     "locator": "geo=ES, sector=S13, na_item=TE, unit=MIO_EUR, GF01, GF0107, GF02, GF03, GF04, GF05, GF06, GF08; 2024",
+     "quote": "Public order and safety | 2024 = 28628.0",
+     "value_in_source": "2024 (M EUR): GF01 92.551; GF0107 39.644; GF02 14.233; GF03 28.628; GF04 80.908; GF05 15.539; GF06 7.613; GF08 19.193"
+    },
+    {
+     "url": "https://www.esri.ie/system/files/publications/SUSTAT141.pdf",
+     "title": "Literature review on the fiscal impacts of immigration (ESRI Survey and Statistical Report Series 141)",
+     "authors_year": "ESRI (2026)",
+     "country": "Irlanda (revisión internacional)",
+     "period": "literatura hasta 2026",
+     "method": "revisión de la literatura",
+     "locator": "pág. 9 (pág. 19 del PDF)",
+     "quote": "In the average cost approach, all expenditure, including pure public goods, is split between migrants and natives according to their respective proportion in the relevant population",
+     "value_in_source": "enfoque de coste medio: cada residente adicional cuesta la media (cuota 1,0); coste marginal: cero para bienes públicos puros"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.esri.ie/system/files/publications/SUSTAT141.pdf",
+     "title": "ESRI (2026), revisión de la literatura, pág. 9",
+     "finding": "El coste medio y el coste marginal se usan como cotas inferior y superior del saldo fiscal de los inmigrantes: la literatura no fija un valor intermedio, solo los extremos."
+    },
+    {
+     "url": "https://www.cream-migration.org/publ_uploads/CDP_22_13.pdf",
+     "title": "Dustmann y Frattini, pág. 9",
+     "finding": "Los propios autores advierten que el coste marginal de los bienes congestionables es desconocido y probablemente menor que la media, de modo que imputarles el coste medio sobrestima el gasto que añade cada residente."
+    }
+   ],
+   "debate": {
+    "id": "cuota_gasto_congestionable",
+    "schools": [
+     {
+      "label": "Coste medio: cada residente más cuesta la media de todos los servicios",
+      "central": 1.0,
+      "source_index": 2
+     },
+     {
+      "label": "Coste marginal (clasificación de Dustmann y Frattini aplicada al COFOG español 2024): solo crecen orden público, medio ambiente, vivienda y cultura",
+      "central": 0.32,
+      "source_index": 1
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Escuela marginal: se aplica la clasificación de Dustmann y Frattini (tabla A3) al COFOG español de 2024 (Eurostat). Puros: servicios generales sin intereses (92.551 - 39.644 = 52.907) + defensa 14.233 + asuntos económicos 80.908 = 148.048 M EUR. Congestionables (crecen con la población): orden público 28.628 + medio ambiente 15.539 + vivienda 7.613 + cultura 19.193 = 70.973 M EUR. Cuota = 70.973/219.021 = 0,324 (0,334 en 2023). Simplificación: la clasificación es por funciones enteras (D&F la hacen por subfunciones) y deja fuera la protección social no contributiva. Escuela de coste medio: 1,0. Central 0,5 = juicio propio: parte de asuntos económicos (transporte) y de la administración general también crece con la población a medio plazo; con la mitad de asuntos económicos como congestionable la cuota sería (70.973 + 40.454)/219.021 = 0,51. El capítulo 4 de la OCDE (IMO 2021) usa la misma separación puros/congestionables, pero su web devuelve 403 desde aquí y no se ha podido citar.",
+   "note_es": "Según Dustmann y Frattini y las cuentas COFOG de Eurostat (2024), si solo crecen con la población el orden público, el medio ambiente, la vivienda y la cultura, cada residente más eleva un 32 % del gasto medio por persona en estos servicios; si cuesta la media, un 100 %. Usamos 0,5 como juicio propio: nadie mide bien cuánto crecen el transporte o la administración general."
+  },
+  {
+   "id": "M07_consumption_tax",
+   "from": "renta_disponible",
+   "to": "impuestos_consumo",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "tipo_implicito_consumo",
+    "unit": "impuestos sobre el consumo por euro de gasto de consumo de los hogares (tipo implícito)",
+    "low": 0.135,
+    "central": 0.136,
+    "high": 0.146
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://taxation-customs.ec.europa.eu/document/download/aff28bc9-f9dc-4665-8510-72224c9e1ea9_en?filename=Annex_A_FINAL.pdf&prefLang=sl",
+     "title": "Data on Taxation Trends, Annex A (tablas estadísticas)",
+     "authors_year": "Comisión Europea, DG TAXUD (datos extraídos en marzo de 2026)",
+     "country": "España y UE-27",
+     "period": "2012-2024",
+     "method": "tipo implícito: impuestos sobre el consumo / gasto en consumo final de los hogares en el territorio (cuentas nacionales SEC 2010)",
+     "locator": "Table 81: Implicit Tax rate on consumption, % (pág. 83), fila Spain",
+     "quote": "Spain 11.6 12.9 13.3 13.8 13.8 13.7 13.9 13.8 14.0 14.6 14.1 13.5 13.6 0.3 27",
+     "value_in_source": "España 2024: 13,6 %; 2020-2024: 14,0 / 14,6 / 14,1 / 13,5 / 13,6 %; UE-27 2024: 16,5 %; puesto 27 de 27"
+    },
+    {
+     "url": "https://ec.europa.eu/eurostat/databrowser/view/nasa_10_nf_tr/default/table",
+     "title": "Non-financial transactions - annual data (nasa_10_nf_tr)",
+     "authors_year": "Eurostat (actualizado 29-10-2026)",
+     "country": "España",
+     "period": "2019-2025",
+     "method": "cuentas de sectores (hogares e ISFLSH, S14_S15, precios corrientes)",
+     "locator": "geo=ES, sector=S14_S15, na_item=B6G y P3, unit=CP_MEUR",
+     "quote": "Paid | Final consumption expenditure | 2025 = 932945",
+     "value_in_source": "2025: B6G 1.058.751 M EUR; P3 932.945 M EUR"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://taxation-customs.ec.europa.eu/document/download/aff28bc9-f9dc-4665-8510-72224c9e1ea9_en?filename=Annex_A_FINAL.pdf&prefLang=sl",
+     "title": "Data on Taxation Trends, Table 81 (comparación UE)",
+     "finding": "España tiene el tipo implícito más bajo de la UE-27 (13,6 % frente a 16,5 % en 2024, puesto 27 de 27). La tabla no da la causa; por eso un cambio de tipos legales no tiene por qué trasladarse uno a uno al tipo implícito (supuesto)."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "propension_consumo",
+     "unit": "gasto en consumo final de los hogares e ISFLSH por euro de renta disponible bruta",
+     "low": 0.855,
+     "central": 0.881,
+     "high": 0.908,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Tipo implícito 2024 (último año) = 13,6 % → 0,136; low/high = mínimo y máximo 2020-2024 (13,5 % en 2023; 14,6 % en 2021). El numerador incluye IVA, impuestos especiales y otros impuestos sobre productos; el denominador es el consumo de los hogares en el territorio, no la renta. propension_consumo = P3/B6G de S14_S15 (Eurostat): 2025 932.945/1.058.751 = 0,881; low/high = mínimo y máximo 2021-2025 (2021 0,855; 2022 0,908; 2023 0,885; 2024 0,873); se excluye 2020 (pandemia, 0,820) y 2019 fue 0,911. Incluye ISFLSH; en euros corrientes.",
+   "note_es": "Según la Comisión Europea (Data on Taxation Trends), en 2024 los impuestos sobre el consumo supusieron en España 13,6 céntimos por euro de consumo de los hogares, el tipo implícito más bajo de la UE (16,5 % de media); entre 2020 y 2024 osciló entre 13,5 % y 14,6 %. Según Eurostat, en 2025 los hogares gastaron en consumo el 88 % de su renta disponible bruta.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Annex A pág. 83, Table 81: Spain 2012-2024 = 11.6 ... 14.0 14.6 14.1 13.5 13.6, ranking 27; EU-27 2024 16.5. Eurostat API nasa_10_nf_tr ES S14_S15 CP_MEUR: P3/B6G 2019 0,911; 2020 0,820; 2021 0,855; 2022 0,908; 2023 0,885; 2024 0,873; 2025 932.945/1.058.751=0,881. Range 0,855-0,908 is 2021-2025 only (unstated). The table gives no cause: the contrary finding's 'la Comisión lo vincula a una brecha del IVA y a tipos reducidos' is not in the cited source."
+   }
+  }
+ ]
+}

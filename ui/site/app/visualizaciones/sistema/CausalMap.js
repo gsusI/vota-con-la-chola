@@ -40,7 +40,7 @@ export const LINKS = [
   { from: "age", to: "empleo", edge: "E03_delay_employment", sign: "+" },
   { from: "pension_media", to: "gasto", sign: "+" },
   { from: "pensionistas", to: "gasto", sign: "+" },
-  { from: "migration", to: "gasto", edge: "E21_migration_pensions", sign: "−" },
+  { from: "migration", to: "gasto", edge: "M06_migrant_pensions", sign: "+" },
   { from: "gasto", to: "recaudacion", edge: "E04_pension_irpf", sign: "+" },
   { from: "gasto", to: "saldo", sign: "+" },
   { from: "gasto", to: "pib", edge: "E06_transfer_multiplier", sign: "+" },
@@ -79,7 +79,10 @@ export function nodeValues(run, t, levers) {
     age: [levers.age, "años", 1],
     contrib: [levers.contrib, "pp", 1, "de la base"],
     closure: [null, levers.closure],
-    migration: [null, levers.migration === "low" ? "−33 %" : levers.migration === "high" ? "+33 %" : "base oficial"],
+    migration: [null, (() => {
+      const sMig = levers.migScale || (levers.migration === "low" ? -1 : levers.migration === "high" ? 1 : 0);
+      return sMig ? `${sMig > 0 ? "+" : "−"}${Math.abs(sMig).toLocaleString("es-ES")} × variante oficial` : "base oficial";
+    })()],
     rate: [levers.rateShock, "pp", 1],
     pension_media: [run.pension_dev[t] * 100, "pct", 1],
     pensionistas: [run.pensioners_dev[t] * 100, "pct", 1],

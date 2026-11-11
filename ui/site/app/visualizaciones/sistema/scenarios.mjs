@@ -24,7 +24,12 @@ export const LEVER_LIST = [
   "Tope del alquiler en zonas tensionadas",
   "Retirada de viviendas turísticas",
   "Límites a las hipotecas (precio y renta)",
-  "Inmigración y tipos de interés como contexto",
+  "Salario mínimo (SMI)",
+  "Jornada laboral máxima",
+  "Cuota de autónomos",
+  "Plazas de formación de médicos (MIR) y gasto sanitario",
+  "Inmigración neta (variantes oficiales) y si los servicios crecen con la población",
+  "Tipos de interés como contexto",
   "Cómo se paga: deuda, cotizaciones, IVA o IRPF",
 ];
 
@@ -59,6 +64,12 @@ export const METRICS = {
   young: { key: "hs_emancipated_k", unit: "k", label: "Jóvenes que se emancipan, miles", good: 1 },
   migHouseholds: { key: "hs_migration_hh_k", unit: "k", label: "Hogares más por la inmigración, miles", good: 0 },
   hsCost: { key: "hs_cost_pp", unit: "meur", label: "Coste público neto de la vivienda, al año", good: -1 },
+  migNet: { key: "mig_net_pp", unit: "meur", label: "Coste neto de quienes llegan de más, al año (negativo: pagan más de lo que usan)", good: -1 },
+  migPop: { key: "mig_pop_k", unit: "k", label: "Residentes, miles más que en la base", good: 0 },
+  wait: { key: "hl_wait_dev", unit: "días", label: "Espera quirúrgica media, días más que con la ley actual", good: -1 },
+  wageBill: { key: "lb_wage_bill_pct", unit: "pct", label: "Masa salarial", digits: 2, good: 1 },
+  hourCost: { key: "lb_hour_cost_pct", unit: "pct", label: "Coste por hora de quien trabaja más de 37,5 horas", good: 0 },
+  gdp: { key: "gdp_dev", unit: "pct", label: "PIB frente a la ley actual", digits: 2, good: 1 },
 };
 
 // Typical cases: euros a month (base-year prices) vs current law.
@@ -374,39 +385,78 @@ export const SCENARIOS = [
   },
   {
     slug: "mas-inmigracion",
-    signs: {}, // directions the lead states in words (scenarios.test.mjs)
-    caveat: "La inmigración es contexto, no una palanca: las pensiones siguen la variante oficial del Ageing Report 2024 y los hogares nuevos suben el alquiler; el resto de ingresos y gastos públicos de quien llega (impuestos, sanidad, educación) no entra en el modelo.",
+    signs: { "migNet.2035": -1, "wait.2035": 1 }, // directions the lead states in words (scenarios.test.mjs)
+    caveat: "Variante alta oficial (Eurostat y Ageing Report): un tercio más de inmigración de fuera de la UE, un 46,5 % más de inmigración neta. Los servicios crecen con la población; con el mismo dinero, la espera sube más (en el simulador). Las pensiones que generan sus cotizaciones se cobran sobre todo después de 2050.",
     group: "Población",
-    short: "Un tercio más de inmigración",
-    question: "¿Qué pasa con las pensiones y el alquiler si llega un tercio más de inmigrantes?",
-    title: "Más inmigración: pensiones, deuda y alquiler",
-    keywords: ["inmigración pensiones", "inmigración alquiler", "inmigración deuda", "Ageing Report"],
-    levers: { migration: "high" },
-    metrics: ["migPension", "debt", "migHouseholds", "rent"],
+    short: "Más inmigración",
+    question: "¿Qué pasa con las cuentas, la sanidad y el alquiler si llega más inmigración?",
+    title: "Más inmigración: impuestos, sanidad y alquiler",
+    keywords: ["inmigración y servicios públicos", "inmigración pensiones", "inmigración sanidad", "listas de espera inmigración", "inmigración alquiler"],
+    levers: { migScale: 1 },
+    metrics: ["migNet", "wait", "migHouseholds", "rent"],
     cases: ["p1Rent"],
-    edges: ["E21_migration_pensions", "V14_new_household_size", "V12_rent_stock_elasticity"],
-    votes: [],
+    edges: ["M01_migration_variants", "M02_migrant_employment", "M03_migrant_wage", "M04_migrant_health_use", "M05_congestible_spending", "S07_waiting_list_flow", "V14_new_household_size"],
+    votes: ["inmigracion"],
+    debate: { param: "cuota_gasto_congestionable", metric: "migNet", year: 2035 },
     lead: (r, f) =>
-      `Con un tercio más de inmigración (Ageing Report) el gasto en pensiones ${f.ppVerb(r.migPension[2050].v, 2)} puntos de PIB en 2050 y el alquiler nuevo ${f.verb(r.rent[2035].v)} en 2035.`,
-    badge: (r, f) => `Deuda ${f.pp(r.debt[2050].v, 0)} pp en 2050`,
+      `Con más inmigración (variante alta), en 2035 quienes llegan pagan ${f.meurAbs(r.migNet[2035].v)} más de lo que usan; la espera quirúrgica sube ${f.num(r.wait[2035].v, 0)} días.`,
+    badge: (r, f) => `${r.migNet[2035].v < 0 ? "Aportan" : "Las cuentas pierden"} ${f.meurAbs(r.migNet[2035].v)} netos en 2035`,
   },
   {
     slug: "menos-inmigracion",
-    signs: {}, // directions the lead states in words (scenarios.test.mjs)
-    caveat: "La inmigración es contexto, no una palanca: las pensiones siguen la variante oficial del Ageing Report 2024 y los hogares que no se forman bajan el alquiler; el resto de ingresos y gastos públicos (impuestos, sanidad, educación) no entra en el modelo.",
+    signs: { "migNet.2035": 1, "rent.2035": -1 }, // directions the lead states in words (scenarios.test.mjs)
+    caveat: "Variante baja oficial (Eurostat y Ageing Report): un tercio menos de inmigración de fuera de la UE, un 46,2 % menos de inmigración neta.",
     group: "Población",
-    short: "Un tercio menos de inmigración",
-    question: "¿Qué pasa con las pensiones y el alquiler si llega un tercio menos de inmigrantes?",
-    title: "Menos inmigración: pensiones, deuda y alquiler",
-    keywords: ["inmigración pensiones", "menos inmigración", "inmigración alquiler", "Ageing Report"],
-    levers: { migration: "low" },
-    metrics: ["migPension", "debt", "migHouseholds", "rent"],
+    short: "Menos inmigración",
+    question: "¿Qué pasa con las cuentas y el alquiler si llega menos inmigración?",
+    title: "Menos inmigración: impuestos, servicios y alquiler",
+    keywords: ["menos inmigración", "inmigración pensiones", "inmigración alquiler", "inmigración y servicios públicos"],
+    levers: { migScale: -1 },
+    metrics: ["migNet", "migPop", "migHouseholds", "rent"],
     cases: ["p1Rent"],
-    edges: ["E21_migration_pensions", "V14_new_household_size", "V12_rent_stock_elasticity"],
-    votes: [],
+    edges: ["M01_migration_variants", "M02_migrant_employment", "M03_migrant_wage", "M05_congestible_spending", "V14_new_household_size", "V12_rent_stock_elasticity"],
+    votes: ["inmigracion"],
     lead: (r, f) =>
-      `Con un tercio menos de inmigración (Ageing Report) el gasto en pensiones ${f.ppVerb(r.migPension[2050].v, 2)} puntos de PIB en 2050 y el alquiler nuevo ${f.verb(r.rent[2035].v)} en 2035.`,
-    badge: (r, f) => `Deuda ${f.pp(r.debt[2050].v, 0)} pp en 2050`,
+      `Con menos inmigración (variante baja), en 2035 las cuentas públicas pierden ${f.meurAbs(r.migNet[2035].v)} netos al año y el alquiler nuevo ${f.verb(r.rent[2035].v)}.`,
+    badge: (r, f) => `${r.migNet[2035].v < 0 ? "Aportan" : "Las cuentas pierden"} ${f.meurAbs(r.migNet[2035].v)} netos en 2035`,
+  },
+  {
+    slug: "subir-salario-minimo",
+    signs: { "jobs.2035": -1, "cost.2035": -1 }, // directions the lead states in words (scenarios.test.mjs)
+    caveat: "Cuánto empleo se pierde está en disputa: los estudios de la subida de 2019 van de ningún efecto a uno negativo (abajo, según cada escuela). Ninguno de los casos tipo cobra el SMI.",
+    group: "Empleo",
+    short: "SMI: +10 % real",
+    question: "¿Qué pasa con el empleo si se sube el salario mínimo un 10 %?",
+    title: "Subir el salario mínimo un 10 %: empleo y cuentas",
+    keywords: ["subir salario mínimo", "SMI empleo", "subida SMI", "salario mínimo 2026", "SMI destruye empleo"],
+    levers: { smi: 10 },
+    metrics: ["jobs", "wageBill", "cost"],
+    cases: [],
+    edges: ["L01_smi_affected", "L02_smi_employment", "B08_smi_2019", "E11_revenue_per_job"],
+    votes: ["smi"],
+    debate: { param: "elasticidad_empleo_smi", metric: "jobs", year: 2035 },
+    lead: (r, f) =>
+      `Subir el SMI un 10 % real cambia el empleo en ${f.k(r.jobs[2035].v)} personas en 2035 (${f.kRange(r.jobs[2035])}) y deja ${f.meurAbs(r.cost[2035].v)} netos al año.`,
+    badge: (r, f) => `Empleo ${f.k(r.jobs[2035].v)} en 2035`,
+  },
+  {
+    slug: "jornada-37-5-horas",
+    signs: { "hourCost.2035": 1, "gdp.2035": -1 }, // directions the lead states in words (scenarios.test.mjs)
+    caveat: "El efecto sobre el empleo depende del estudio (Francia, Portugal, Alemania): abajo, según cada escuela. El Congreso devolvió al Gobierno la ley de 37,5 horas el 10 de septiembre de 2025.",
+    group: "Empleo",
+    short: "Jornada de 37,5 horas",
+    question: "¿Qué pasa si se baja la jornada máxima a 37,5 horas sin bajar el sueldo?",
+    title: "Jornada de 37,5 horas: empleo, coste y PIB",
+    keywords: ["jornada 37,5 horas", "reducción de jornada", "jornada laboral", "37,5 horas empleo"],
+    levers: { hours: 2.5 },
+    metrics: ["jobs", "hourCost", "gdp", "cost"],
+    cases: [],
+    edges: ["L04_hours_affected", "L05_hours_employment", "L06_hours_productivity", "E20_labour_output"],
+    votes: ["jornada"],
+    debate: { param: "elasticidad_empleo_jornada", metric: "jobs", year: 2035 },
+    lead: (r, f) =>
+      `Con 37,5 horas y el mismo sueldo, el coste por hora de los afectados sube un ${f.num(r.hourCost[2035].v, 1)} % y el PIB de 2035 cambia ${f.pct(r.gdp[2035].v, 2)}; el empleo, según el estudio.`,
+    badge: (r, f) => `Coste por hora ${f.pct(r.hourCost[2035].v)}`,
   },
 ];
 
@@ -456,12 +506,13 @@ export function metricText(id, value, d) {
   if (m.unit === "pp") return `${signed(value, digits)} pp`;
   if (m.unit === "pct") return `${signed(value, digits)} %`;
   if (m.unit === "k") return `${signed(value, 0)} mil`;
+  if (m.unit === "días") return `${signed(value, 0)} días`;
   return `${signed(value, 0)} €`;
 }
 
 // ---- Computation at build time (memoised per model and slug: page, metadata and share card share one run).
 const cache = new WeakMap();
-const isCostLever = (levers) => ["reval", "age", "contrib", "irpfAll", "irpfTop", "vatStd", "vatRed", "corp", "pubHomes"].some((k) => levers[k]);
+const isCostLever = (levers) => ["reval", "age", "contrib", "irpfAll", "irpfTop", "vatStd", "vatRed", "corp", "pubHomes", "smi", "hours", "selfQuota", "mir", "healthSpend"].some((k) => levers[k]);
 
 export function scenarioResult(model, sc) {
   let memo = cache.get(model);
@@ -543,7 +594,7 @@ export function scenarioClosures(model, sc) {
 }
 
 // Title shaped for the searches; the description carries the consolidated figure's finding with engine numbers.
-export const SIM_TITLE = "Simulador de pensiones, impuestos y vivienda: quién paga";
+export const SIM_TITLE = "Simulador de pensiones, impuestos, vivienda e inmigración";
 export function simDescription(model) {
   const m = mainFindings(model);
   return `Subir las pensiones 1 punto sobre el IPC suma ${fmt.ppAbs(m.debt50, 0)} puntos de deuda en 2050 o le cuesta a una joven de ${fmt.num(m.p1Min, 0)} a ${fmt.num(m.p1Max, 0)} € al mes en 2035. Prueba IVA, IRPF y alquiler.`;

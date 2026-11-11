@@ -1,0 +1,243 @@
+{
+ "about": "Edges of slice 3 (employment and immigration) and of the capacity part of slice 4 (healthcare) of /visualizaciones/sistema/. Model: annual steps 2026-2050 in deviations from an official baseline (Ageing Report 2024 + EUROPOP2023). Employment levers: minimum wage (SMI, % real rise), maximum weekly hours (cut from 40 h with monthly pay kept), self-employed quota (EUR a month), social contributions. Each moves employment of the affected group with an elasticity and the public accounts through wages, contributions and taxes. Immigration: net migration as a % of the baseline, population by age from the Eurostat variants; extra residents work at the employment rate of foreign citizens of their age, pay taxes and contributions at their relative wage, and use health care, schooling, pensions and other public services. Healthcare capacity: demand grows with population, age and origin; supply grows with doctors (training lag) and money; the surgical waiting list is a stock (entries minus exits, exits capped by capacity).",
+ "items": [
+  {
+   "id": "L02_smi_employment",
+   "agent": "pilot",
+   "from": "smi",
+   "to": "empleo_afectados_smi",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_smi",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de subida real del SMI"
+   },
+   "need": "CONTESTED -> debate with >= 3 schools, each with its own source and central value in this SAME unit (employment change of the AFFECTED workers, %, divided by the SMI rise, %). Normalise each study and say how. Schools: (a) Banco de España on the 2019 rise of 22.3 %: Barceló, Izquierdo, Lacuesta, Puente, Regil, Roldán (2021) 'Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España', Documentos Ocasionales 2113 (employment probability of affected workers 6-11 pp lower? check exact numbers); (b) AIReF (2020) 'Evaluación del impacto del SMI de 2019' or its later notes (19,000-33,000 fewer jobs; normalise by the number of affected workers it reports); (c) a no-effect school: Cengiz, Dube, Lindner, Zipperer (2019, QJE, bunching estimator, US) and/or a Spanish study that finds no effect (e.g. the Ministerio de Trabajo commissioned evaluation, or Universitat/ Fedea studies). Central = your judgement for Spain; low/high = span of the schools. Contrary evidence: Neumark & Shirley (2022, Industrial Relations, 'Myth or measurement') if not a school.",
+   "hints": "BdE documents: https://www.bde.es/f/webbe/SES/Secciones/Publicaciones/PublicacionesSeriadas/DocumentosOcasionales/21/Fich/do2113.pdf (try), repositorio.bde.es; AIReF: www.airef.es (search 'salario mínimo'); NBER w25434 (Cengiz et al.)."
+  },
+  {
+   "id": "M04_migrant_health_use",
+   "agent": "pilot",
+   "from": "poblacion_inmigrante",
+   "to": "demanda_sanitaria",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "uso_sanitario_relativo_inmigrante",
+    "unit": "uso o gasto sanitario público por persona de la población inmigrante frente a la nacida en España de su misma edad y sexo (1 = igual)"
+   },
+   "need": "Age- and sex-adjusted public health care use or cost of immigrants vs natives in SPAIN. Candidates: Gimeno-Feliu LA et al. (Aragón, e.g. 'Healthcare utilisation and costs of the immigrant vs native population', several papers 2013-2019 with expenditure ratios); Antón JI & Muñoz de Bustillo R (2010, Eur J Health Econ 11:487-498, 'Health care utilisation and immigration in Spain', ENSE 2006); Jiménez-Rubio D & Hernández-Quevedo C (2010/2011). Central = adjusted ratio for all services (or total cost), low/high = span across services/studies. Say what the ratio covers (primary care, specialists, hospital, emergency, pharmacy). Contrary evidence: services where immigrants use MORE (e.g. emergency departments, maternity) and the 'healthy migrant effect' fading with years of residence.",
+   "hints": "PubMed Central full texts are easiest (www.ncbi.nlm.nih.gov/pmc/articles/PMC...). Search PubMed for 'Gimeno-Feliu immigrants expenditure Aragon'."
+  },
+  {
+   "id": "S01_training_lag",
+   "agent": "pilot",
+   "from": "plazas_formacion_medicos",
+   "to": "medicos_especialistas",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "retardo_formacion_medico",
+    "unit": "años desde que se crean más plazas de formación hasta que hay más médicos especialistas en ejercicio"
+   },
+   "need": "Training lag of a doctor in Spain. Grade A from the law: residency (MIR) lasts 4 years for Medicina Familiar y Comunitaria and 4-5 years for hospital specialties (programmes in BOE, Real Decreto 183/2008 framework); the medical degree lasts 6 years (360 ECTS, Orden ECI/332/2008). low = 4 (more MIR places filled by graduates who already exist), high = 11 (6-year degree + 5-year residency when new graduates are needed). Central: judge from the latest MIR offer (Ministerio de Sanidad, convocatoria 2025 or 2026: number of medicine places) vs the number of applicants and of Spanish medical graduates a year (Ministerio de Universidades / CRUE / Conferencia de Decanos): if places already exceed graduates, more places need more graduates (central nearer 11), and say so. Also put in extra_parameters 'plazas_mir_medicina' (places of the latest offer, number) with grade A.",
+   "hints": "BOE: www.boe.es/buscar/act.php?id=BOE-A-2008-3176 (RD 183/2008), Orden SCO/1198/2005 (MFyC, 4 years), BOE-A-2008-3581 (Orden ECI/332/2008). MIR offers: www.sanidad.gob.es (press releases 'oferta de plazas de Formación Sanitaria Especializada')."
+  },
+  {
+   "id": "L07_self_employed_base",
+   "agent": "pilot",
+   "from": "cuota_autonomos",
+   "to": "recaudacion_cotizaciones",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "autonomos_k",
+    "unit": "miles de afiliados al Régimen Especial de Trabajadores Autónomos (RETA), media de 2025"
+   },
+   "need": "Grade A accounting. Number of RETA affiliates (Seguridad Social, monthly average 2025 or latest month; say which). extra_parameters: 'cuota_media_autonomos' (EUR a month, average monthly contribution of a RETA affiliate in 2025: either published, or RETA contribution revenue / affiliates / 12; say which) with low/high = cheapest and most expensive bracket of the 2025 table of Real Decreto-ley 13/2022 (cotización por ingresos reales). Contrary evidence: share of self-employed on the minimum base; 'autónomos societarios' and collaborators included or not.",
+   "hints": "Seguridad Social statistics: www.seg-social.es (Estadísticas > Afiliados), Ministerio de Inclusión press notes on afiliación; RDL 13/2022: www.boe.es/buscar/act.php?id=BOE-A-2022-12482 (tabla de tramos 2023-2025)."
+  },
+  {
+   "id": "L01_smi_affected",
+   "agent": "w1",
+   "from": "smi",
+   "to": "salarios_bajos",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_smi",
+    "unit": "parte de los asalariados cuyo salario sube directamente al subir el SMI (en el SMI de 2025 o cerca)"
+   },
+   "need": "Share of employees directly affected by a rise of the SMI at its 2025 level (1,184 EUR x 14). Candidates: Ministerio de Trabajo / Comisión asesora para el análisis del SMI (informes 2023, 2024, 2025: number of beneficiaries of each rise); Banco de España (DO 2113 or Informe Anual); AIReF; INE Encuesta de Estructura Salarial (deciles). Normalise to a share of employees (EPA asalariados of the same year: say the denominator). extra_parameters: 'cuota_masa_afectados_smi' = share of the total wage bill those workers earn (if not published: affected share x SMI / average wage, say so, grade C).",
+   "hints": "www.mites.gob.es (search 'comisión asesora salario mínimo informe'); INE EES: www.ine.es (Encuesta Anual de Estructura Salarial, deciles)."
+  },
+  {
+   "id": "L04_hours_affected",
+   "agent": "w1",
+   "from": "jornada_maxima",
+   "to": "coste_laboral_hora",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_jornada",
+    "unit": "parte de los asalariados cuya jornada pactada supera 37,5 horas semanales"
+   },
+   "need": "Share of employees whose agreed weekly hours exceed 37.5 (those a cut of the legal maximum from 40 to 37.5 h affects). Candidates: the impact report (memoria de análisis de impacto normativo) or press notes of the 2025 bill reducing the working week (Ministerio de Trabajo: '12,5 millones de asalariados'); EPA (INE) usual hours of employees; Estadística de Convenios Colectivos (jornada media pactada). Normalise to all employees (say the denominator). Also say in note_es that the Congress rejected the bill in 2025 if you find it (with date).",
+   "hints": "www.mites.gob.es press notes; www.congreso.es; INE EPA tables of usual hours (tempus)."
+  },
+  {
+   "id": "L05_hours_employment",
+   "agent": "w1",
+   "from": "jornada_maxima",
+   "to": "empleo_afectados_jornada",
+   "sign": "+/-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_jornada",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de reducción de la jornada máxima (con el sueldo mensual mantenido)"
+   },
+   "need": "CONTESTED -> debate with >= 3 schools in this SAME unit (employment change of affected workers, %, per 1 % cut of standard hours). (a) France 35 hours: Crépon & Kramarz (2002, JPE, 'Employed 40 hours or not employed 39') and/or Chemin & Wasmer (2009, JOLE, Alsace-Moselle: no employment effect); (b) Portugal 1996: Raposo & van Ours (2010, Economics Letters / Labour Economics); (c) Germany: Hunt (1999, QJE, 'Has work-sharing worked in Germany?'); (d) a work-sharing school if any estimate finds employment gains. Normalise and say how; central = your judgement for Spain; low/high = span.",
+   "hints": "IZA DP versions (docs.iza.org), NBER (Hunt w5724), HAL archive for French papers."
+  },
+  {
+   "id": "L06_hours_productivity",
+   "agent": "w1",
+   "from": "jornada_maxima",
+   "to": "productividad_hora",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "compensacion_productividad_jornada",
+    "unit": "parte de la subida del coste por hora que compensa la mayor productividad por hora al trabajar menos horas"
+   },
+   "need": "When weekly hours fall with monthly pay kept, hourly labour cost rises by cut/(40-cut). How much is offset by higher hourly productivity? Candidates: Pencavel (2015, Economic Journal, 'The productivity of working hours'); Collewet & Sauermann (2017, Labour Economics); evaluations of the French 35 h or Portuguese 1996 reform on productivity; Banco de España / AIReF notes on the 2025 Spanish bill. Fraction 0-1; low/high = span. Grade B if from studies abroad, D if mainly judgement.",
+   "hints": "IZA DP 8129 (Pencavel), IZA DP 10722 (Collewet & Sauermann)."
+  },
+  {
+   "id": "L08_self_employed_elasticity",
+   "agent": "w2",
+   "from": "cuota_autonomos",
+   "to": "autonomos",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_autonomos_cuota",
+    "unit": "% de cambio del número de autónomos por cada 1 % de cambio de su cuota mensual"
+   },
+   "need": "Response of self-employment (entry and survival) to its social contribution. Spanish evidence: evaluations of the 'tarifa plana' (flat rate of 50-80 EUR for new self-employed): AIReF Spending Review fase II (2019), 'Incentivos a la contratación y al trabajo autónomo'; Cueto, Mayor & Suárez (2017?, survival of subsidised self-employed); Román, Congregado & Millán (2013, J. Business Venturing, 'Start-up incentives: entrepreneurship policy or active labour market programme?'). Normalise to an elasticity and say how (e.g. a 70 % cut of the quota raising entries by X %). Negative sign. Grade B/C.",
+   "hints": "www.airef.es/es/spending-review/ (fase II: 'Incentivos a la contratación'), repositorio de Uniovi for Cueto."
+  },
+  {
+   "id": "M03_migrant_wage",
+   "agent": "w2",
+   "from": "poblacion_inmigrante",
+   "to": "recaudacion",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "salario_relativo_inmigrante",
+    "unit": "ganancia media anual de los asalariados de nacionalidad extranjera frente a la del total de asalariados (1 = igual)"
+   },
+   "need": "Grade A. INE Encuesta Anual de Estructura Salarial (latest year) or Encuesta de Estructura Salarial cuatrienal: ganancia media anual por trabajador según nacionalidad (española, resto de la UE, resto del mundo / extranjera). Ratio foreign / total. low/high = non-EU / EU nationals ratio (or a span you justify). Contrary evidence: earnings by country of birth vs nationality (naturalised migrants count as Spanish); part-time and hours differences.",
+   "hints": "INE tempus tables of the EAES / EES by nationality (python3 -m scripts.voting_aid_impacts_kit ine TABLE -g REGEX); www.ine.es/jaxiT3/ ."
+  },
+  {
+   "id": "M05_congestible_spending",
+   "agent": "w2",
+   "from": "poblacion",
+   "to": "gasto_otros_servicios",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "cuota_gasto_congestionable",
+    "unit": "parte del gasto público por persona en servicios distintos de pensiones, sanidad y educación (sin intereses) que crece con cada residente más"
+   },
+   "need": "CONTESTED -> debate with >= 2 schools. When population grows, how much of the per-capita spending on other public services (security, justice, transport, social services, general administration) rises with it? (a) average-cost approach (every resident costs the average: 1.0); (b) marginal-cost approach that excludes pure public goods (defence, general public services, debt) - OECD International Migration Outlook 2021, chapter 4 'The fiscal impact of immigration in OECD countries since the mid-2000s' (Damas de Matos), and/or Dustmann & Frattini (2014, Economic Journal, 'The fiscal effects of immigration to the UK'): give the share of non-age spending they treat as congestible; (c) any study for Spain if available (e.g. Banco de España, Fedea, BBVA Research, AIReF on the fiscal impact of immigration). Central = your judgement; low/high = span.",
+   "hints": "OECD iLibrary chapter: www.oecd.org/en/publications/international-migration-outlook-2021_5a47d6e2-en.html ; Dustmann & Frattini CReAM DP 22/13 (www.cream-migration.org)."
+  },
+  {
+   "id": "M07_consumption_tax",
+   "agent": "w2",
+   "from": "renta_disponible",
+   "to": "impuestos_consumo",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "tipo_implicito_consumo",
+    "unit": "impuestos sobre el consumo por euro de gasto de consumo de los hogares (tipo implícito)"
+   },
+   "need": "Grade A. Implicit tax rate on consumption for Spain, latest year (European Commission DG TAXUD 'Data on Taxation Trends' / Eurostat). Fraction (e.g. 0.14). low/high = range of the last 5 years. Add extra_parameters 'propension_consumo' = household final consumption / gross disposable income of households (Eurostat or INE sector accounts, latest year), grade A.",
+   "hints": "taxation-customs.ec.europa.eu 'Data on Taxation Trends' xlsx; Eurostat nasa_10_nf_tr (S14_S15 B6G and P3)."
+  },
+  {
+   "id": "S02_doctor_retention",
+   "agent": "w3",
+   "from": "medicos_formados",
+   "to": "medicos_sns",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "permanencia_sns_medicos",
+    "unit": "parte de los especialistas formados en España que acaban trabajando en la sanidad pública española"
+   },
+   "need": "Share of doctors trained in Spain (MIR) who end up working in the Spanish public system (not abroad, not only private). Candidates: Ministerio de Sanidad 'Informe oferta-necesidad de especialistas médicos 2021-2035' (Barber & González López-Valcárcel, 2022); Consejo General de Colegios Oficiales de Médicos (CGCOM): certificados de idoneidad for working abroad a year, 'Estudio sobre demografía médica'; Eurostat/OECD on doctors working in hospitals of the public sector. Derive low/central/high and say how. Grade C.",
+   "hints": "www.sanidad.gob.es (search 'oferta-necesidad de especialistas médicos'); www.cgcom.es (certificados de idoneidad)."
+  },
+  {
+   "id": "S03_doctor_cost",
+   "agent": "w3",
+   "from": "medicos_sns",
+   "to": "gasto_sanitario",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_medico_anual",
+    "unit": "miles de euros al año por médico especialista del SNS (sueldo bruto más cotización empresarial)"
+   },
+   "need": "Annual employer cost of an SNS specialist doctor (gross pay + employer social contributions), latest year. Candidates: Ministerio de Sanidad, 'Informe de retribuciones de los profesionales del SNS' or Estadística de Gasto Sanitario Público (remuneración de personal / number of doctors, say so); OECD remuneration of salaried specialists (Spain, USD PPP) converted. extra_parameters: 'coste_residente_anual' = annual employer cost of a MIR resident (Real Decreto 1146/2006 pay: sueldo base del grupo A1 plus complemento de grado; average over R1-R5 with guard duty if you can), grade A or C.",
+   "hints": "www.sanidad.gob.es (Informe retribuciones profesionales SNS); BOE RD 1146/2006 www.boe.es/buscar/act.php?id=BOE-A-2006-17498 ; OECD Health Statistics remuneration."
+  },
+  {
+   "id": "S04_capacity_money",
+   "agent": "w3",
+   "from": "gasto_sanitario",
+   "to": "capacidad_asistencial",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "capacidad_por_gasto",
+    "unit": "parte de la capacidad que el dinero puede comprar a corto plazo sin más médicos formados (horas extra, derivación a centros concertados, otro personal), por cada 1 % de gasto extra"
+   },
+   "need": "How much activity (procedures, consultations) extra money buys in the short run when the number of doctors cannot grow (overtime, outsourcing to private providers, other staff, equipment). Evidence: OECD (2020) 'Waiting Times for Health Services: Next in Line' and Siciliani, Borowitz & Moran (2013) 'Waiting time policies in the health sector: what works?' (supply-side funding cuts waits but often temporarily); Spanish waiting-list shock plans (planes de choque) if evaluated. Within Spain, regional health spending per person and surgical waiting days barely correlate (Spearman 0.10 across 17 regions; 0.31 adjusted by age, our sanidad page): put it in contrary_evidence with url https://votaconlachola.org/visualizaciones/sanidad/. Fraction 0-1; this is likely grade D (judgement), say so.",
+   "hints": "OECD iLibrary 'Waiting Times for Health Services: Next in Line' (2020), 'Waiting Time Policies in the Health Sector' (2013)."
+  },
+  {
+   "id": "B08_smi_2019",
+   "agent": "w3",
+   "from": "smi",
+   "to": "empleo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "empleo_perdido_smi_2019",
+    "unit": "miles de empleos menos (o no creados) por la subida del SMI de 2019 (+22,3 %), según cada estimación publicada"
+   },
+   "need": "BENCHMARK card for a backtest (not used by the engine). Published estimates of the employment effect of the 2019 SMI rise in Spain, in thousands of jobs: AIReF (19,000-33,000), Banco de España (Lacuesta, Izquierdo & Puente 2019 and/or DO 2113 2021: translate their pp estimates to thousands if they do, otherwise give their number and unit), Ministerio de Trabajo or academic no-effect estimates (0). low/central/high = span; central = median of the estimates. extra_parameters: 'afectados_smi_2019' = number of workers affected by the 2019 rise per the same sources (thousands).",
+   "hints": "Same documents as L02 (share the cache: python3 -m scripts.voting_aid_impacts_kit fetch URL -g REGEX)."
+  },
+  {
+   "id": "S05_waiting_demand",
+   "agent": "w3",
+   "from": "tiempo_espera",
+   "to": "entradas_lista",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_demanda_espera",
+    "unit": "% de cambio de las entradas en lista de espera quirúrgica por cada 1 % de cambio del tiempo de espera"
+   },
+   "need": "Elasticity of demand (additions to the waiting list, or referrals) with respect to waiting time. Classic estimates: Martin & Smith (1999, J. Public Economics, 'Rationing by waiting lists: an empirical investigation', England, demand elasticity about -0.2); Gravelle, Smith & Xavier (2003, Applied Economics, 'Performance signals in the public sector: the case of health care', or their waiting-time demand/supply estimates); Martin, Jacobs, Rice & Smith (2007, Health Economics, 'Allocating resources to healthcare: waiting times'); Siciliani & Iversen / OECD (2013) summary of demand elasticities to waiting times (-0.1 to -0.3 typical). Negative number; low = most negative of the span (e.g. -0.4), high = least negative. No Spanish estimate expected: say so (spain_evidence no, grade B).",
+   "hints": "York CHE discussion papers (www.york.ac.uk/che/publications) have free versions; OECD 2013 'Waiting Time Policies in the Health Sector: What Works?' chapter 1 summarises elasticities."
+  }
+ ]
+}

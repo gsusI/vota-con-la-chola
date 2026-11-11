@@ -1,0 +1,337 @@
+{
+ "edges": [
+  {
+   "id": "L01_smi_affected",
+   "from": "smi",
+   "to": "salarios_bajos",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_smi",
+    "unit": "parte de los asalariados cuyo salario sube directamente al subir el SMI (en el SMI de 2025 o cerca)",
+    "low": 0.1,
+    "central": 0.127,
+    "high": 0.15
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3759",
+     "title": "El Gobierno aprueba subir el SMI 2025 a 1.184 euros mensuales en 14 pagas (nota de prensa)",
+     "authors_year": "Ministerio de Trabajo y Economía Social (2025)",
+     "country": "España",
+     "period": "2025",
+     "method": "estimación oficial de perceptores directos (método no detallado en la nota)",
+     "locator": "pág. 1, subtítulos",
+     "quote": "La medida beneficiará de forma directa a unos 2,4 millones de personas trabajadoras",
+     "value_in_source": "2,4 millones de perceptores directos del SMI 2025 (1.184 €/mes x 14 = 16.576 €/año)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documento Ocasional 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Roldán, Banco de España (2021)",
+     "country": "España",
+     "period": "dic. 2018 (SMI 2019)",
+     "method": "registros MCVL con base de cotización igual o inferior al nuevo SMI",
+     "locator": "pág. 16",
+     "quote": "En concreto, en diciembre de 2018, un 10 % de las relaciones laborales presentaban bases de cotización igual o por debajo de la referencia del SMI-19",
+     "value_in_source": "10 % de las relaciones laborales (SMI 2019, 900 €/mes x 14); 4 % con el SMI 2018"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65132",
+     "title": "EPA. Ocupados por sexo, situación profesional y tipo de jornada (tabla 65132)",
+     "authors_year": "INE (2025)",
+     "country": "España",
+     "period": "2025T1-2025T4",
+     "method": "encuesta (EPA), miles de personas",
+     "locator": "serie Total asalariados, Ambos sexos, Total",
+     "quote": "Total Nacional. Ocupados. Ambos sexos. Total asalariados. Total. Valor absoluto.",
+     "value_in_source": "18.499,2; 18.978,6; 19.107,8; 19.159,1 miles (media 2025: 18.936,2)"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=28186",
+     "title": "Encuesta Anual de Estructura Salarial. Salario medio bruto por ocupación (tabla 28186)",
+     "authors_year": "INE (2026)",
+     "country": "España",
+     "period": "2024",
+     "method": "encuesta (EES), euros/año por trabajador",
+     "locator": "Todas las ocupaciones, Ambos sexos, 2024",
+     "quote": "Todas las ocupaciones. Ambos sexos. Salario medio bruto. Total Nacional. Dato base.",
+     "value_in_source": "29.540,26 € anuales (2024); 28.049,94 € (2023)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Banco de España DO 2113 (pág. 16)",
+     "finding": "La cuota depende mucho del nivel y del tamaño de la subida: con el SMI de 2018 solo el 4 % de las relaciones laborales estaba en el SMI o por debajo, frente al 10 % tras la subida del 22 % de 2019; mide relaciones laborales (MCVL), no personas."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "cuota_masa_afectados_smi",
+     "unit": "parte de la masa salarial total que ganan los afectados por el SMI",
+     "low": 0.04,
+     "central": 0.06,
+     "high": 0.085,
+     "grade": "C"
+    }
+   ],
+   "derivation": "Cuota: 2,4 millones de perceptores directos (nota del Ministerio, SMI 2025) / 18,936 millones de asalariados (media EPA 2025T1-T4, tabla INE 65132) = 0,127. El Ministerio no explica en la nota su método ni su denominador (AIReF e inclusion.gob.es no accesibles desde aquí; el informe de la Comisión asesora no se ha leído). Contraste: Banco de España DO 2113 halla un 10 % de relaciones laborales (MCVL) en o bajo el SMI 2019, nivel relativo algo menor. Rango: 0,10 (BdE 2019) a 0,15 (si el Ministerio usa un denominador menor, p. ej. afiliados del régimen general o asalariados del sector privado). Extra cuota_masa: no publicada; aproximación = cuota x SMI anual / salario medio EES 2024 = 0,127 x 16.576 / 29.540,26 = 0,071, cota superior porque muchos afectados trabajan a tiempo parcial o parte del año y ganan menos que el SMI anual completo; central 0,06 suponiendo que ganan de media el 85 % del SMI anual (supuesto); bajo 0,10 x 0,56 x 0,7 = 0,04; alto 0,15 x 0,561 = 0,085.",
+   "note_es": "Según el Ministerio de Trabajo, la subida del SMI de 2025 (1.184 € x 14) llega de forma directa a unos 2,4 millones de personas, alrededor del 12,7 % de los asalariados de la EPA de 2025; el Banco de España halló un 10 % con el SMI de 2019. El método del Ministerio no está publicado en la nota y la parte de la masa salarial (≈6 %) es una aproximación."
+  },
+  {
+   "id": "L04_hours_affected",
+   "from": "jornada_maxima",
+   "to": "coste_laboral_hora",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "cuota_afectados_jornada",
+    "unit": "parte de los asalariados cuya jornada pactada supera 37,5 horas semanales",
+    "low": 0.5,
+    "central": 0.585,
+    "high": 0.7
+   },
+   "lag_years": 0,
+   "grade": "A",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3784",
+     "title": "Reducción de la jornada laboral. De 40 a 37,5 horas a la semana (dossier)",
+     "authors_year": "Ministerio de Trabajo y Economía Social (2025)",
+     "country": "España",
+     "period": "2023 (EPA y Estadística de convenios colectivos)",
+     "method": "explotación de la EPA 2023 y de la Estadística de convenios colectivos",
+     "locator": "pág. 2 (beneficiarios) y pág. 9 (reducción media)",
+     "quote": "La reducción de la jornada beneficiará a un total de 12,5 millones de trabajadores del sector privado, 10,5 millones de trabajadores a tiempo completo y 2 millones de trabajadores a tiempo parcial",
+     "value_in_source": "12,5 millones del sector privado: 10.510.000 a tiempo completo y 2.050.000 a tiempo parcial (EPA 2023)"
+    },
+    {
+     "url": "https://www.ine.es/jaxiT3/Tabla.htm?t=65132",
+     "title": "EPA. Ocupados por sexo, situación profesional y tipo de jornada (tabla 65132)",
+     "authors_year": "INE (2024)",
+     "country": "España",
+     "period": "2023T1-2023T4",
+     "method": "encuesta (EPA), miles de personas",
+     "locator": "serie Total asalariados (Total y Jornada a tiempo completo), Ambos sexos",
+     "quote": "Total Nacional. Ocupados. Ambos sexos. Total asalariados. Total. Valor absoluto.",
+     "value_in_source": "total: 17.469,6; 17.998,8; 18.249,7; 18.133,7 miles (media 17.963,0); tiempo completo: media 15.433,6 miles"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://prensa.mites.gob.es/webPrensa/api/file/adjunto/3784",
+     "title": "Mismo dossier del Ministerio, págs. 8-9 (jornada media pactada por sector, 2023)",
+     "finding": "Según la Estadística de convenios, la reducción media de los afectados es solo del 2,1 % (48 minutos semanales), no del 6,25 % de pasar de 40 a 37,5 h: muchos ya tienen pactadas entre 37,5 y 40 h y algunos sectores (financiero, agua y residuos) ya están por debajo."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "reduccion_media_jornada_afectados",
+     "unit": "reducción media de la jornada de los afectados al bajar el máximo a 37,5 h (fracción)",
+     "low": 0.015,
+     "central": 0.021,
+     "high": 0.0625,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Central: 10,51 millones de asalariados del sector privado a tiempo completo beneficiarios (dossier del Ministerio, EPA 2023) / 17,963 millones de asalariados (media EPA 2023, tabla INE 65132, incluye sector público) = 0,585. Alto: incluyendo los 2,05 millones a tiempo parcial (su salario por hora sube en proporción) 12,56 / 17,963 = 0,699 ≈ 0,70. Bajo 0,50 (juicio): el Ministerio no detalla si usa horas habituales de la EPA o la jornada pactada en convenio; con horas habituales puede contar a quien hace más de 37,5 h sin tenerlas pactadas. Extra: reducción media 2,1 % (pág. 9); alto 6,25 % = (40-37,5)/40 si todos estuvieran a 40 h; bajo 1,5 % juicio. Proyecto de ley rechazado por el Congreso en el debate de totalidad del 10-9-2025 (dato facilitado en el encargo, no releído aquí).",
+   "note_es": "Según el Ministerio de Trabajo (EPA 2023), bajar la jornada máxima a 37,5 h afectaría a 10,5 millones de asalariados privados a tiempo completo (≈58 % de todos los asalariados; 70 % con los 2 millones a tiempo parcial), con un recorte medio del 2,1 % según los convenios. No se sabe si cuenta jornada pactada u horas habituales.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "Dossier MITES pág. 2: 12,5 millones (10.510.000 tiempo completo, 2.050.000 parcial, EPA 2023); pág. 8 jornada pactada ≤37,5 h en educación, AAPP, financiero, agua; pág. 9 reducción media 2,1 % (48 min). INE 65132 (API) asalariados 2023: 17.469,6/17.998,8/18.249,7/18.133,7 (media 17.963,0); tiempo completo 15.433,6. 10,51/17,963 = 0,585 y 12,56/17,963 = 0,699 ok. Defecto: la nota afirma la devolución del proyecto el 10-9-2025, que ninguna fuente citada respalda."
+   }
+  },
+  {
+   "id": "L05_hours_employment",
+   "from": "jornada_maxima",
+   "to": "empleo_afectados_jornada",
+   "sign": "+/-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_empleo_jornada",
+    "unit": "% de cambio del empleo de los asalariados afectados por cada 1 % de reducción de la jornada máxima (con el sueldo mensual mantenido)",
+    "low": -1.6,
+    "central": -0.2,
+    "high": 0.8
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://econpapers.repec.org/article/ucpjpolec/v_3a110_3ay_3a2002_3ai_3a6_3ap_3a1355-1389.htm",
+     "title": "Employed 40 Hours or Not Employed 39: Lessons from the 1982 Mandatory Reduction of the Workweek (Journal of Political Economy 110(6))",
+     "authors_year": "Crépon y Kramarz (2002)",
+     "country": "Francia",
+     "period": "1981-1982",
+     "method": "datos individuales (Enquête Emploi), diferencias entre trabajadores a 40 h y a 36-39 h",
+     "locator": "resumen (EconPapers; artículo completo no leído)",
+     "quote": "Our estimates of the impact of this one-hour reduction on employment losses vary between 2 percent and 4 percent.",
+     "value_in_source": "pérdida de empleo de los afectados +2 a +4 % por una hora menos (de 40 a 39 h)"
+    },
+    {
+     "url": "https://econpapers.repec.org/article/ucpjlabec/v_3a27_3ay_3a2009_3ai_3a4_3ap_3a487-524.htm",
+     "title": "Using Alsace-Moselle Local Laws to Build a Difference-in-Differences Estimation Strategy of the Employment Effects of the 35-Hour Workweek Regulation in France (Journal of Labor Economics 27(4))",
+     "authors_year": "Chemin y Wasmer (2009)",
+     "country": "Francia",
+     "period": "1998-2002",
+     "method": "diferencias en diferencias (Alsacia-Mosela frente al resto de Francia)",
+     "locator": "resumen (EconPapers; artículo completo no leído)",
+     "quote": "Yet it shows no significant difference in employment with the rest of France, which casts doubt on the effectiveness of this regulation.",
+     "value_in_source": "sin diferencia significativa de empleo (efecto ≈ 0)"
+    },
+    {
+     "url": "https://docs.iza.org/dp3723.pdf",
+     "title": "How Working Time Reduction Affects Employment and Earnings (IZA DP 3723; Economics Letters 2010)",
+     "authors_year": "Raposo y van Ours (2008)",
+     "country": "Portugal",
+     "period": "1996-1998",
+     "method": "diferencias en diferencias con datos empleado-empresa (Quadros de Pessoal)",
+     "locator": "resumen y tabla 5 (pág. 16)",
+     "quote": "We also find that the working hours reduction did not lead to an increased job loss of workers directly affected.",
+     "value_in_source": "tabla 5, corto plazo: >42 h, jornada -4,7 h y pérdida de empleo -0,2/-0,7 pp; 40-42 h, jornada -2,5 h y pérdida de empleo -4,5/-5,3 pp"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Has Work-Sharing Worked in Germany? (NBER WP 5724; QJE 1999)",
+     "authors_year": "Hunt (1996)",
+     "country": "Alemania",
+     "period": "1984-1994",
+     "method": "datos de industria e individuales (GSOEP), variación de la jornada estándar pactada",
+     "locator": "pág. 3 (resumen de resultados)",
+     "quote": "employment increased by 0.3-0.7% for hourly workers (Arbeiter) and by 0.2-0.3% for salaried workers (Angestellten) in response to a one hour fall in standard hours.",
+     "value_in_source": "+0,3 a +0,7 % de empleo (obreros) y +0,2 a +0,3 % (empleados) por cada hora menos de jornada estándar (1984-89)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Hunt (1996), pág. 10: revisión de estudios agregados",
+     "finding": "Franz y König (1986), con series agregadas de la industria alemana 1964-84, hallan que un 1 % menos de jornada estándar sube el empleo un 1,09 % (escuela del reparto del trabajo); otros estudios agregados (Países Bajos, Reino Unido, Italia) hallan subidas menores, de 0,4-0,5 % por 1 % menos de jornada, con caída de las horas totales trabajadas."
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w5724/w5724.pdf",
+     "title": "Hunt (1996), resumen",
+     "finding": "Los resultados de 1990-94 son más pesimistas que los de 1984-89 y el total de horas trabajadas cayó con fuerza: el pequeño aumento de empleo no compensa las horas perdidas."
+    },
+    {
+     "url": "https://docs.iza.org/dp3723.pdf",
+     "title": "Raposo y van Ours (2008), conclusiones",
+     "finding": "Efectos indirectos negativos sobre el empleo de los trabajadores no afectados (menos de 40 h) en empresas con muchos trabajadores por encima de 40 h."
+    }
+   ],
+   "debate": {
+    "id": "elasticidad_empleo_jornada",
+    "schools": [
+     {
+      "label": "Destruye empleo de los afectados (Francia 1982, Crépon y Kramarz)",
+      "central": -1.2,
+      "source_index": 0
+     },
+     {
+      "label": "Sin efecto (Francia 35 h, Chemin y Wasmer)",
+      "central": 0.0,
+      "source_index": 1
+     },
+     {
+      "label": "Sin efecto o leve protección del empleo (Portugal 1996, Raposo y van Ours)",
+      "central": 0.0,
+      "source_index": 2
+     },
+     {
+      "label": "Reparto del trabajo modesto (Alemania 1984-89, Hunt)",
+      "central": 0.2,
+      "source_index": 3
+     }
+    ]
+   },
+   "extra_parameters": [],
+   "derivation": "Unidad: % de empleo de los afectados por 1 % menos de jornada máxima (positivo = más empleo). Crépon-Kramarz: 1 h de 40 = 2,5 %; pérdida de empleo +2 a +4 % -> -0,8 a -1,6 por 1 % (central -1,2); el choque coincidió con una subida del SMI del 5 % con sueldo mensual mantenido para quienes cobraban el mínimo. Chemin-Wasmer: sin diferencia significativa -> 0. Raposo-van Ours (tabla 5, corto plazo): >42 h, -4,7 h sobre 44 (-10,7 %) con pérdida de empleo -0,2/-0,7 pp -> +0,02 a +0,07; 40-42 h, -2,5 h (≈-6 %) con -4,5/-5,3 pp -> ≈+0,8; largo plazo >42 h con 25 % de afectados en la empresa +2,5 pp en -2,4 h (≈-0,45); escuela ≈ 0 (los autores concluyen que no aumentó la pérdida de empleo). Hunt (jornada estándar de convenio, no máxima legal): 1 h ≈ 2,5-2,6 % de 39-40 h; +0,3 a +0,7 % -> +0,12 a +0,28 (central +0,2). Franz-König (+1,09) y De Regt, Wadhwani y otros (+0,4 a +0,5 de empleo por 1 % menos de jornada, series agregadas) se dejan como evidencia contraria, no como escuela. Central España -0,2 (juicio): la mayoría de estudios micro no hallan creación de empleo y el único con aumento de coste por hora similar sin ayudas (Francia 1982) halla pérdidas; bajo -1,6 y alto +0,8 = extremos de los estudios micro (Crépon-Kramarz; Raposo-van Ours, tramo 40-42 h). Notas de BdE/AIReF sobre el proyecto español no consultadas. Crépon-Kramarz y Chemin-Wasmer solo leídos en su resumen.",
+   "note_es": "Según estudios de Francia, Portugal y Alemania, reducir la jornada (por ley o, en Alemania, por convenio) sin bajar el sueldo mensual no creó empleo apreciable en conjunto: en Francia 1982 los afectados perdieron más empleo (2-4 % por una hora), con las 35 h francesas y en Portugal 1996 no se vio efecto neto y en Alemania 1984-89 subió poco. No hay estudio para España; el central es un juicio.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "EconPapers: Crépon-Kramarz '2 percent and 4 percent', SMI +5 %; Chemin-Wasmer 'no significant difference'. IZA DP 3723 pág. 3 y tabla 5 (pdf pág. 18) ok; largo plazo +2,5 es la columna '25 % afectados', no 'sin efectos de empresa'. Hunt pág. 3 ok; pág. 10: De Regt -0,41 y Wadhwani -0,5 llevan el signo de Franz-König (Brunello -0,34 'implica más horas-trabajador'): son AUMENTOS de empleo, no pérdidas. Alto +0,3 contradice la regla 'extremos micro': Raposo 40-42 h da ≈+0,8."
+   }
+  },
+  {
+   "id": "L06_hours_productivity",
+   "from": "jornada_maxima",
+   "to": "productividad_hora",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "compensacion_productividad_jornada",
+    "unit": "parte de la subida del coste por hora que compensa la mayor productividad por hora al trabajar menos horas",
+    "low": 0.0,
+    "central": 0.1,
+    "high": 0.4
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://docs.iza.org/dp10722.pdf",
+     "title": "Working Hours and Productivity (IZA DP 10722; Labour Economics 2017)",
+     "authors_year": "Collewet y Sauermann (2017)",
+     "country": "Países Bajos",
+     "period": "2008-2010 (centro de llamadas)",
+     "method": "panel diario con efectos fijos individuales y variación por turnos asignados",
+     "locator": "pág. 5 (introducción) y pág. 19",
+     "quote": "we find that an increase in working hours by 1 percent leads to an increase in output by only 0.9 percent, measured as the number of calls answered.",
+     "value_in_source": "elasticidad de la producción a las horas 0,9"
+    },
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "The Productivity of Working Hours (IZA DP 8129; Economic Journal 2015)",
+     "authors_year": "Pencavel (2014)",
+     "country": "Reino Unido",
+     "period": "1914-1918 (trabajadoras de municiones)",
+     "method": "regresión por tramos (spline) de producción sobre horas",
+     "locator": "pág. 18",
+     "quote": "below 49 weekly hours, variations in output are proportional to variations in hours",
+     "value_in_source": "producción proporcional a las horas por debajo de 49 h semanales (elasticidad 1)"
+    },
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "The Productivity of Working Hours (IZA DP 8129), cita a Denison (1962)",
+     "authors_year": "Pencavel (2014), citando a Denison (1962)",
+     "country": "Estados Unidos",
+     "period": "1957",
+     "method": "conjetura de contabilidad del crecimiento",
+     "locator": "pág. 4",
+     "quote": "Denison conjectured that a ten percent reduction in hours would result in a six percent reduction in output.",
+     "value_in_source": "-10 % de horas -> -6 % de producción (con jornadas de 40 h)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://docs.iza.org/dp8129.pdf",
+     "title": "Denison (1962), citado en Pencavel (2014), pág. 4",
+     "finding": "A jornadas de 40 h, conjeturó que un 10 % menos de horas solo baja la producción un 6 %: compensación de alrededor del 40 % de la subida del coste por hora, muy por encima de lo que hallan los estudios micro."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Recorte de 40 a 37,5 h: horas -6,25 %, coste por hora +6,67 % (2,5/37,5) con sueldo mensual mantenido. Collewet-Sauermann (elasticidad 0,9): producción -5,625 %, producción por hora 0,94375/0,9375 = +0,67 % -> compensa 0,67/6,67 = 0,10 (central). Pencavel: por debajo de 49 h la producción es proporcional a las horas -> 0 (bajo). Denison: -10 % horas, -6 % producción -> producción por hora 0,94/0,90 = +4,4 % frente a coste +11,1 % -> 0,40 (alto). La fracción es casi igual para recortes menores (p. ej. el 2,1 % medio). Validez externa limitada (centro de llamadas a tiempo parcial; fábricas de 1914-18). Evaluaciones de la productividad con las 35 h francesas o Portugal 1996 y notas de BdE/AIReF sobre el proyecto español no consultadas.",
+   "note_es": "Según estudios con datos individuales (centro de llamadas en Países Bajos; fábricas británicas de 1914-18), por debajo de unas 48 h la producción baja casi en proporción a las horas, así que la mayor productividad por hora compensaría solo en torno al 10 % de la subida del coste por hora (0-40 % según la fuente). No hay estimación para España.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "IZA DP 10722 pág. 5: 'increase in output by only 0.9 percent' (agentes mayoritariamente a tiempo parcial, pág. 17). IZA DP 8129 pág. 18: 'below 49 weekly hours, variations in output are proportional'; pág. 4 Denison: -10 % horas -> -6 % producción a 40 h. Aritmética: 0,94375/0,9375 = +0,67 % / 6,67 % = 0,10; Denison 0,94/0,90 = +4,4 % / 11,1 % = 0,40; Pencavel 0. Grado B y nota con incertidumbre adecuados."
+   }
+  }
+ ]
+}

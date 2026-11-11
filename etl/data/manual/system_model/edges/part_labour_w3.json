@@ -1,0 +1,377 @@
+{
+ "edges": [
+  {
+   "id": "S02_doctor_retention",
+   "from": "medicos_formados",
+   "to": "medicos_sns",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "permanencia_sns_medicos",
+    "unit": "parte de los especialistas formados en España que acaban trabajando en la sanidad pública española",
+    "low": 0.58,
+    "central": 0.68,
+    "high": 0.78
+   },
+   "lag_years": [
+    0,
+    2
+   ],
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021",
+     "method": "estimación del empleo total de especialistas (registros SNS de CCAA + colegiación OMC + fuentes privadas)",
+     "locator": "apartado 5.3, pág. 69",
+     "quote": "se estima que el número total de médicos activos en España asciende a 192.484. Esto supone una ratio de 406,13 médicos especialistas por 100.000 habitantes en 2021. El empleo privado estaría en torno al 30% del total",
+     "value_in_source": "192.484 especialistas activos; empleo privado en torno al 30 % (público ~70 %)"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2020",
+     "method": "certificados de idoneidad del CGCOM y flujos migratorios OCDE",
+     "locator": "apartado 4.2, págs. 23-24 (figura 6)",
+     "quote": "Los 3.559 certificados emitidos en 2020 fueron solicitados por 2.189 médicos (2.101 en situación de alta colegial en España)",
+     "value_in_source": "2.189 médicos pidieron certificado en 2020; en torno al 70 % para trabajar; flujos OCDE sustancialmente menores"
+    },
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022)",
+     "country": "España",
+     "period": "2021",
+     "method": "definición del recuento",
+     "locator": "apartado 3, pág. 14",
+     "quote": "los que compatibilizan ambos ejercicios, público y privado, figuran en la pública",
+     "value_in_source": "médicos mixtos contados en la red pública"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035 (apartado 5.3, pág. 69)",
+     "finding": "El empleo privado de especialistas creció un 7 % desde 2018 mientras el público cayó un 1,7 %: la parte que acaba en la red pública puede ser menor en las promociones recientes que en el stock."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Stock 2021: ~70 % de los 192.484 especialistas activos trabaja en la red pública (los mixtos cuentan como públicos, pág. 14), 30 % solo en la privada (pág. 69). Ese 70 % incluye médicos formados fuera (4.293 títulos homologados en 2021, pág. 23), así que no es exactamente la permanencia de los formados en España. Emigración: 2.189 solicitantes de certificado en 2020 (~1,1 % del stock; ~70 % para trabajar; los flujos OCDE de llegada son menores), resto 2-4 pp de pérdida acumulada (supuesto). Central 0,70 x (1-0,03) = 0,68. Bajo 0,58: promociones recientes más hacia la privada (privado +7 %, público -1,7 % desde 2018). Alto 0,78: si los formados fuera pesan más en la privada. No hay un seguimiento de cohortes MIR: todo es derivación del stock.",
+   "note_es": "Según el estudio del Ministerio de Sanidad (2022), en torno al 70 % de los especialistas activos trabaja en la red pública (incluidos los que también ejercen en la privada) y el 30 % solo en la privada; la emigración es pequeña (unos 2.200 médicos pidieron certificado para salir en 2020). Suponemos que 2 de cada 3 formados acaban en el SNS; no hay seguimiento por promoción MIR."
+  },
+  {
+   "id": "S03_doctor_cost",
+   "from": "medicos_sns",
+   "to": "gasto_sanitario",
+   "sign": "+",
+   "layer": "contable",
+   "parameter": {
+    "name": "coste_medico_anual",
+    "unit": "miles de euros al año por médico especialista del SNS (sueldo bruto más cotización empresarial)",
+    "low": 91,
+    "central": 107,
+    "high": 125
+   },
+   "lag_years": 0,
+   "grade": "C",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://www.sanidad.gob.es/areas/profesionesSanitarias/profesiones/necesidadEspecialistas/docs/2022Estudio_Oferta_Necesidad_Especialistas_Medicos_2021_2035V3.pdf",
+     "title": "Estudio sobre la oferta y necesidad de especialistas médicos en España 2021-2035",
+     "authors_year": "Barber Pérez y González López-Valcárcel / Ministerio de Sanidad (2022) con datos OCDE",
+     "country": "España",
+     "period": "2020",
+     "method": "retribución bruta media de especialistas asalariados (OECD Health Statistics)",
+     "locator": "apartado 4.3, pág. 29",
+     "quote": "El salario medio bruto en el sector público en 2020 fue de 76.477 euros para un médico especialista y 69.880 euros en el caso de médico general.",
+     "value_in_source": "76.477 euros brutos al año, especialista del sector público, 2020"
+    },
+    {
+     "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2006-17498",
+     "title": "Real Decreto 1146/2006, relación laboral especial de residencia (texto consolidado, última actualización 06/11/2026)",
+     "authors_year": "BOE (2006, mod. RD 951/2026)",
+     "country": "España",
+     "period": "2026",
+     "method": "norma",
+     "locator": "art. 7.1.a-b y 7.2",
+     "quote": "Su cuantía será porcentual respecto al sueldo. Los porcentajes serán, al menos, los siguientes, sin perjuicio de que los servicios de salud puedan acordar un porcentaje superior",
+     "value_in_source": "complemento de grado R1 18 %, R2 28 %, R3 38 %, R4 48 %, R5 58 % del sueldo; dos pagas extra de sueldo + complemento"
+    },
+    {
+     "url": "https://www.sepg.pap.hacienda.gob.es/sitios/sepg/es-ES/CostesPersonal/EstadisticasInformes/Documents/A%c3%91O%202026/Retribuciones%20del%20personal%20funcionario%202026.%20Real%20Decreto-ley%2014%202025%2c%20de%202%20de%20diciembre..pdf",
+     "title": "Retribuciones del personal funcionario 2026 (Real Decreto-ley 14/2025)",
+     "authors_year": "Ministerio de Hacienda, DG Costes de Personal (2026)",
+     "country": "España",
+     "period": "2026",
+     "method": "tabla retributiva oficial",
+     "locator": "pág. 1, columna A1, fila MENSUAL",
+     "quote": "Real Decreto-ley 14/2025, de 2 de diciembre, por el que se aprueban medidas urgentes en materia de retribuciones en el ámbito del sector público.",
+     "value_in_source": "sueldo A1: 1.387,24 euros al mes; 16.646,88 euros en 12 meses"
+    }
+   ],
+   "contrary_evidence": [],
+   "debate": null,
+   "extra_parameters": [
+    {
+     "name": "coste_residente_anual",
+     "unit": "miles de euros al año por residente MIR (sueldo, complemento de grado, guardias y cotización empresarial), media R1-R5",
+     "low": 30,
+     "central": 49,
+     "high": 64,
+     "grade": "C"
+    }
+   ],
+   "derivation": "Especialista: 76.477 euros brutos de 2020 (OCDE vía Ministerio, pág. 29) actualizados con las subidas generales del sector público 2021-2026 (0,9; 3,5; 3,5; 2,5; 2,5; 1,5 %, acumulado x1,153; cifras de las leyes de presupuestos no releídas aquí, sin deriva por trienios o carrera) = 88,1 mil. Cotización empresarial ~31,6 % (contingencias comunes 23,6 + MEI + desempleo 5,5 + FOGASA + FP + AT ~1; aproximado) sobre la base máxima (~59-60 mil al año) = ~19 mil, más ~0,3 mil de cotización de solidaridad: ~107 mil. Bajo 91 = nivel 2020 (76,5 + 48,8 x 0,306). Alto 125: especialistas con más guardias o antigüedad (la cifra OCDE es una media). Residente: 14 pagas x 1.387,24 x (1 + 38 % de media R1-R5) = 26,8 mil + guardias supuestas ~10,5 mil (4 guardias de 17 h al mes, 11 meses, ~14 euros/h: NO verificado, varía por CCAA) = 37,3 mil x 1,3165 = 49 mil; bajo R1 sin guardias 22,9 x 1,3165 = 30; alto R5 con 6 guardias/mes a 16 euros/h = 64. Contraria: solo leí la cifra OCDE del Ministerio; no encontré otra fuente española de coste por médico que la contradiga.",
+   "note_es": "Según la OCDE (citada por el Ministerio de Sanidad), un especialista de la sanidad pública cobraba 76.477 euros brutos en 2020; con las subidas salariales públicas hasta 2026 y la cotización empresarial, cuesta unos 107.000 euros al año. Un residente MIR cuesta unos 49.000 (sueldo A1, complemento por año de residencia y guardias, estas estimadas). Guardias y antigüedad cambian mucho la cifra.",
+   "review": {
+    "verdict": "pass",
+    "evidence": "Sanidad study pág. 29 (apdo 4.3): quote verbatim, 76.477 € specialist public sector 2020. BOE RD 1146/2006 art. 7.1.b: grado 18/28/38/48/58 %, 7.2 two extra pays of sueldo+grado; updated 06/11/2026 (RD 951/2026). Hacienda 2026 pág. 1: A1 sueldo 1.387,24/month, 16.646,88/yr. Checked: 76.477x1,1526=88,2k; +~19k cotización = ~107k; low 76,5+48,8x0,306=91,4; resident 14x1.387,24x1,38=26,8k+10,5k=37,3k x1,3165=49; R1 30,2; R5 64,0. Pay rises and guardias flagged as unverified assumptions."
+   }
+  },
+  {
+   "id": "S04_capacity_money",
+   "from": "gasto_sanitario",
+   "to": "capacidad_asistencial",
+   "sign": "+",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "capacidad_por_gasto",
+    "unit": "parte de la capacidad que el dinero puede comprar a corto plazo sin más médicos formados (horas extra, derivación a centros concertados, otro personal), por cada 1 % de gasto extra",
+    "low": 0.1,
+    "central": 0.4,
+    "high": 0.8
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "D",
+   "spain_evidence": "parcial",
+   "sources": [
+    {
+     "url": "https://econsalut.blogspot.com/2020/06/why-are-we-waiting-5.html",
+     "title": "OECD (2020), Waiting Times for Health Services: Next in Line (resumen oficial reproducido en el blog Econsalut)",
+     "authors_year": "OCDE (2020)",
+     "country": "OCDE",
+     "period": "2010-2019",
+     "method": "revisión comparada de políticas de listas de espera",
+     "locator": "resumen del informe (doi 10.1787/242e3c8c-en), reproducido en la entrada del 13-6-2020",
+     "quote": "Governments in many countries have taken various measures to reduce waiting times, often supported by additional funding, with mixed success.",
+     "value_in_source": "financiación adicional: éxito desigual (sin cifra)"
+    },
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics)",
+     "country": "Italia",
+     "period": "2010-2014",
+     "method": "panel regional por procedimiento, primeras diferencias y variables instrumentales",
+     "locator": "resumen, pág. 2",
+     "quote": "We find that demand is inelastic to waiting times while supply is more elastic.",
+     "value_in_source": "oferta más elástica que la demanda (demanda -0,15 a -0,24)"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://votaconlachola.org/visualizaciones/sanidad/",
+     "title": "Vota con la Chola, Sanidad: gasto y listas de espera por comunidad",
+     "finding": "Entre las 17 comunidades, el gasto sanitario público por habitante y los días de espera quirúrgica apenas se correlacionan (Spearman 0,10; 0,31 ajustado por edad): más gasto no va de la mano de menos espera."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Juicio (grado D), no una estimación publicada. Si los médicos no pueden aumentar, el 1 % de gasto extra compra actividad por horas extra (peonadas), conciertos con centros privados (que compiten por los mismos especialistas), otro personal y equipos, a un coste marginal mayor que el medio y con parte que se va en precio. La OCDE (2020) describe éxito desigual y, según su resumen, efectos que no duran sin aumento permanente de oferta; Riganti et al. (2017) hallan una oferta quirúrgica relativamente elástica en Italia, lo que sugiere que la actividad sí responde a corto plazo. Central 0,4 (cada 1 % de gasto compra ~0,4 % de capacidad); bajo 0,1 (casi todo se va en precio, como sugiere la nula correlación entre comunidades); alto 0,8 (si hay capacidad ociosa en quirófanos y centros concertados). No hay evaluación publicada de los planes de choque españoles que lo cuantifique (no encontrada).",
+   "note_es": "Según la OCDE (2020), dar más dinero para reducir esperas ha tenido éxito desigual; en Italia la oferta quirúrgica responde algo a la espera. Suponemos que, sin más médicos, cada 1 % de gasto extra compra un 0,4 % de capacidad (entre 0,1 y 0,8): es un juicio, no un dato medido. En España el gasto por habitante de cada comunidad apenas se relaciona con sus días de espera."
+  },
+  {
+   "id": "S05_waiting_demand",
+   "from": "tiempo_espera",
+   "to": "entradas_lista",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "elasticidad_demanda_espera",
+    "unit": "% de cambio de las entradas en lista de espera quirúrgica por cada 1 % de cambio del tiempo de espera",
+    "low": -0.5,
+    "central": -0.2,
+    "high": -0.1
+   },
+   "lag_years": 0,
+   "grade": "B",
+   "spain_evidence": "no",
+   "sources": [
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics)",
+     "country": "Italia",
+     "period": "2010-2014",
+     "method": "panel regional por procedimiento quirúrgico, primeras diferencias y variables instrumentales",
+     "locator": "resumen, pág. 2; tabla 2, pág. 16",
+     "quote": "We find that demand is inelastic to waiting times while supply is more elastic. Estimates of demand elasticity are between -0.15 to -0.24.",
+     "value_in_source": "elasticidad de la demanda entre -0,15 y -0,24 (MCO -0,1)"
+    },
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "The Effect of Waiting Times on Demand and Supply for Elective Surgery: Evidence from Italy (revisión de la literatura)",
+     "authors_year": "Riganti, Siciliani y Fiorio (2017, Health Economics) resumiendo Martin y Smith (1999), Gravelle et al. (2002, 2003), Martin et al. (2007)",
+     "country": "Reino Unido",
+     "period": "1990-2000s",
+     "method": "revisión de estudios con datos del NHS",
+     "locator": "introducción, pág. 4",
+     "quote": "In most studies, demand elasticity is below -0.2.",
+     "value_in_source": "elasticidad de la demanda generalmente baja, por debajo de -0,2 en valor absoluto en la mayoría de estudios"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://eprints.whiterose.ac.uk/162859/1/Waiting_Time_Italy.pdf",
+     "title": "Stavrunova y Yerokhin (2011), Nueva Gales del Sur, citado en Riganti et al. (2017), págs. 5 y 20",
+     "finding": "En Australia, con más de la mitad de la población con seguro privado, la demanda de cirugía pública responde mucho más a la espera: elasticidad -1,7."
+    }
+   ],
+   "debate": null,
+   "extra_parameters": [],
+   "derivation": "Central -0,2: punto medio del rango italiano con variables instrumentales (-0,15 a -0,24) y del resumen británico (la mayoría por debajo de -0,2 en valor absoluto). Alto -0,1: estimación MCO italiana. Bajo -0,5: España tiene un sector privado y seguros privados más extendidos que Reino Unido o Italia, por lo que la salida hacia la privada al alargarse la espera puede ser mayor; sin llegar al -1,7 australiano. Los artículos británicos originales (Martin y Smith 1999, etc.) no se han leído directamente: se citan vía la revisión de Riganti et al. No hay estimación española.",
+   "note_es": "Según estudios de Italia y Reino Unido, cuando la espera quirúrgica sube un 1 %, las entradas en lista bajan en torno a un 0,2 % (entre 0,1 y 0,5): la demanda responde poco. En Australia, con mucho seguro privado, responde bastante más. No hay estimación para España, donde el peso del seguro privado podría hacerla algo mayor."
+  },
+  {
+   "id": "B08_smi_2019",
+   "from": "smi",
+   "to": "empleo",
+   "sign": "-",
+   "layer": "comportamiento",
+   "parameter": {
+    "name": "empleo_perdido_smi_2019",
+    "unit": "miles de empleos menos (o no creados) por la subida del SMI de 2019 (+22,3 %), según cada estimación publicada",
+    "low": 0,
+    "central": 38,
+    "high": 143
+   },
+   "lag_years": [
+    0,
+    1
+   ],
+   "grade": "B",
+   "spain_evidence": "si",
+   "sources": [
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva / Banco de España (2021)",
+     "country": "España",
+     "period": "2018-2019",
+     "method": "diferencias en el crecimiento del empleo de afectados y no afectados (MCVL), cota superior",
+     "locator": "págs. 26-27",
+     "quote": "el incremento del 22 % del SMI habría reducido el empleo neto de los afectados entre 6 pp y 11 pp a final de año.",
+     "value_in_source": "-6 a -11 pp del empleo de los afectados; 0,6 a 1,1 pp del empleo total (cota superior)"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113) (revisión de estimaciones previas)",
+     "authors_year": "AIReF (2020), citada por Banco de España (2021)",
+     "country": "España",
+     "period": "2019",
+     "method": "celdas de empleo agregado con incidencia de la MCVL-2019",
+     "locator": "pág. 10",
+     "quote": "Este ejercicio cifraba el impacto en el empleo del régimen general (esto es, sin incorporar los sistemas especiales agrario y de empleados del hogar) en una pérdida de entre 0,13 puntos porcentuales (pp) y 0,23 pp",
+     "value_in_source": "0,13 a 0,23 pp de empleo en 2019 (entre 19.000 y 33.000 afiliados)"
+    },
+    {
+     "url": "https://www.elespanol.com/invertia/economia/empleo/20260530/subidas-salario-minimo-causaron-destruccion-empleos-airef/1003744266056_0.html",
+     "title": "Las subidas del salario mínimo causaron destrucción de empleos, según la AIReF (El Español, 30-5-2026)",
+     "authors_year": "AIReF (2026), vía prensa",
+     "country": "España",
+     "period": "2019",
+     "method": "evaluación ex post de AIReF (informe no leído directamente: airef.es falla TLS)",
+     "locator": "cuerpo de la noticia",
+     "quote": "El análisis también recoge el impacto de la subida de 2019, que fue del 22,3%. Aquel movimiento costó entre 45.000 y 54.000 empleos.",
+     "value_in_source": "45.000 a 54.000 empleos (2019)"
+    },
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "The Effect of Minimum Wages on Low-Wage Jobs: Evidence from the United States Using a Bunching Estimator (NBER WP 25434)",
+     "authors_year": "Cengiz, Dube, Lindner y Zipperer (2019)",
+     "country": "Estados Unidos",
+     "period": "1979-2016",
+     "method": "estimador de bunching sobre 138 subidas estatales",
+     "locator": "abstract",
+     "quote": "We find that the overall number of low-wage jobs remained essentially unchanged over five years following the increase.",
+     "value_in_source": "efecto nulo sobre el número de empleos de salario bajo"
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Los efectos del salario mínimo interprofesional en el empleo: nueva evidencia para España (Documentos Ocasionales 2113)",
+     "authors_year": "Barceló, Izquierdo, Lacuesta, Puente, Regil y Villanueva / Banco de España (2021)",
+     "country": "España",
+     "period": "2016-2018",
+     "method": "recuento de contratos en la MCVL",
+     "locator": "pág. 22 (y pág. 16: 10 % de las relaciones laborales)",
+     "quote": "de alrededor de 1,6 millones de contratos en enero de 2016 a entre 1,2 millones y 1,4 millones en 2018.",
+     "value_in_source": "1,2 a 1,4 millones de contratos afectados en 2018"
+    }
+   ],
+   "contrary_evidence": [
+    {
+     "url": "https://www.nber.org/system/files/working_papers/w25434/w25434.pdf",
+     "title": "Cengiz et al. (2019)",
+     "finding": "En EE. UU., tras 138 subidas estatales del salario mínimo el número de empleos de salario bajo apenas cambió en cinco años."
+    },
+    {
+     "url": "https://repositorio.bde.es/bitstream/123456789/16842/1/do2113.pdf",
+     "title": "Gabinete Económico de CC. OO. (2019), resumido por Banco de España DO 2113, pág. 10",
+     "finding": "Con flujos de la EPA del primer trimestre de 2019, la probabilidad de seguir ocupado de los asalariados con pocos estudios no empeoró tras la subida: no se observó destrucción de empleo hasta ese trimestre."
+    }
+   ],
+   "debate": {
+    "id": "empleo_perdido_smi_2019",
+    "schools": [
+     {
+      "label": "Sin efecto apreciable (método de Cengiz et al.; CC. OO. 2019 con la EPA)",
+      "central": 0,
+      "source_index": 3
+     },
+     {
+      "label": "AIReF 2020, ex post régimen general (19-33 mil)",
+      "central": 26,
+      "source_index": 1
+     },
+     {
+      "label": "AIReF 2026, reevaluación (45-54 mil)",
+      "central": 49.5,
+      "source_index": 2
+     },
+     {
+      "label": "Banco de España 2021, cota superior (6-11 pp de los afectados)",
+      "central": 110,
+      "source_index": 0
+     }
+    ]
+   },
+   "extra_parameters": [
+    {
+     "name": "afectados_smi_2019",
+     "unit": "miles de contratos por cuenta ajena con base de cotización igual o inferior al nuevo SMI de 2019 (MCVL, 2018)",
+     "low": 1200,
+     "central": 1300,
+     "high": 1400,
+     "grade": "A"
+    }
+   ],
+   "derivation": "Estimaciones en miles de empleos: CC. OO./Cengiz 0; AIReF 2020 19-33 (punto medio 26); AIReF 2026 45-54 (49,5); Banco de España DO 2113 cota superior: 6-11 pp del empleo de los afectados x ~1.300 mil afectados (pág. 22) = 78-143 mil (equivale a sus 0,6-1,1 pp del empleo total si los afectados son el 10 %). Ex ante (no ex post, no entran en la mediana): AIReF 2018 ~24 mil; Lacuesta et al. 2019 hasta 0,8 % del empleo a tiempo completo (~128 mil usando la base implícita de AIReF, 24 mil = 0,15 %); BBVA Research 75-195 mil en 2019-2020. Central = mediana de las cuatro estimaciones ex post (0; 26; 49,5; 110) = 37,75, redondeado a 38. Bajo 0, alto 143 (extremo de la cota superior del BdE). La conversión del BdE a miles es nuestra. El informe de AIReF 2026 se cita vía prensa (no leído). Grado B y no A: todas usan datos españoles pero discrepan por método.",
+   "note_es": "Según las estimaciones publicadas sobre la subida del SMI de 2019 (+22,3 %), el empleo perdido o no creado va de ningún efecto visible (CC. OO., EPA solo hasta el primer trimestre) a 19.000-33.000 (AIReF 2020), 45.000-54.000 (AIReF 2026, vía prensa) y hasta 78.000-143.000 como cota superior del Banco de España. La mediana es unos 38.000. Afectaba a 1,2-1,4 millones de contratos.",
+   "review": {
+    "verdict": "fix",
+    "evidence": "BdE DO 2113: pág. 26 '6 pp y 11 pp' (cota superior), pág. 27 0,6-1,1 pp del empleo total, pág. 10 AIReF 0,13-0,23 pp (19.000-33.000) y CC. OO. sin impacto 'hasta el primer trimestre de 2019', pág. 22 1,2-1,4 millones, pág. 16 10 %. El Español: 2019 +22,3 %, 45.000-54.000 empleos. Cengiz pág. 2 ok. Mediana 37,75 ok. Defectos: título real del DO es otro y el sexto autor es Villanueva, no Soler; la nota da 'cero' de CC. OO. sin decir que solo cubre el 1T 2019."
+   }
+  }
+ ]
+}

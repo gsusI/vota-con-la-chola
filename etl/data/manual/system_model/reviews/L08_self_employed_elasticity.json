@@ -1,0 +1,12 @@
+{
+ "id": "L08_self_employed_elasticity",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": true,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "BOE RDL 13/2022: preámbulo and DT 5ª say verbatim 'será de 80 euros mensuales' (2023-2025); tabla general tramo 1 base mínima 950,98. 205-605 EUR = 2025 bases 653,59 (tramo 1 reducida) and 1.928,10 (tramo 12) x ~31,4 % (rate not in this BOE text). RePEc abstract has the 'dubious' quote verbatim. D, stated as assumption. Note also credited the 'más altas' link to the RDL, which does not say it; the two evaluations are search abstracts only (unverifiable here).",
+ "corrections": {
+  "note_es": "La tarifa plana del RDL 13/2022 fija en 80 euros al mes la cuota de quien empieza (2023-2025). Según los resúmenes de dos evaluaciones españolas (Andalucía y UNED), se asocia a más altas, pero el efecto se diluye al acabar la ayuda. No hay una elasticidad española publicada que hayamos podido leer: el -0,1 (un 1 % más de autónomos por un 10 % menos de cuota) es un supuesto, rango -0,3 a -0,02."
+ }
+}

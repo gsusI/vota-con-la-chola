@@ -1,0 +1,15 @@
+{
+ "id": "L05_hours_employment",
+ "verdict": "fix",
+ "source_ok": true,
+ "value_ok": false,
+ "grade_ok": true,
+ "wording_ok": false,
+ "evidence": "EconPapers: Crépon-Kramarz '2 percent and 4 percent', SMI +5 %; Chemin-Wasmer 'no significant difference'. IZA DP 3723 pág. 3 y tabla 5 (pdf pág. 18) ok; largo plazo +2,5 es la columna '25 % afectados', no 'sin efectos de empresa'. Hunt pág. 3 ok; pág. 10: De Regt -0,41 y Wadhwani -0,5 llevan el signo de Franz-König (Brunello -0,34 'implica más horas-trabajador'): son AUMENTOS de empleo, no pérdidas. Alto +0,3 contradice la regla 'extremos micro': Raposo 40-42 h da ≈+0,8.",
+ "corrections": {
+  "parameter.high": 0.8,
+  "derivation": "Unidad: % de empleo de los afectados por 1 % menos de jornada máxima (positivo = más empleo). Crépon-Kramarz: 1 h de 40 = 2,5 %; pérdida de empleo +2 a +4 % -> -0,8 a -1,6 por 1 % (central -1,2); el choque coincidió con una subida del SMI del 5 % con sueldo mensual mantenido para quienes cobraban el mínimo. Chemin-Wasmer: sin diferencia significativa -> 0. Raposo-van Ours (tabla 5, corto plazo): >42 h, -4,7 h sobre 44 (-10,7 %) con pérdida de empleo -0,2/-0,7 pp -> +0,02 a +0,07; 40-42 h, -2,5 h (≈-6 %) con -4,5/-5,3 pp -> ≈+0,8; largo plazo >42 h con 25 % de afectados en la empresa +2,5 pp en -2,4 h (≈-0,45); escuela ≈ 0 (los autores concluyen que no aumentó la pérdida de empleo). Hunt (jornada estándar de convenio, no máxima legal): 1 h ≈ 2,5-2,6 % de 39-40 h; +0,3 a +0,7 % -> +0,12 a +0,28 (central +0,2). Franz-König (+1,09) y De Regt, Wadhwani y otros (+0,4 a +0,5 de empleo por 1 % menos de jornada, series agregadas) se dejan como evidencia contraria, no como escuela. Central España -0,2 (juicio): la mayoría de estudios micro no hallan creación de empleo y el único con aumento de coste por hora similar sin ayudas (Francia 1982) halla pérdidas; bajo -1,6 y alto +0,8 = extremos de los estudios micro (Crépon-Kramarz; Raposo-van Ours, tramo 40-42 h). Notas de BdE/AIReF sobre el proyecto español no consultadas. Crépon-Kramarz y Chemin-Wasmer solo leídos en su resumen.",
+  "contrary_evidence.0.finding": "Franz y König (1986), con series agregadas de la industria alemana 1964-84, hallan que un 1 % menos de jornada estándar sube el empleo un 1,09 % (escuela del reparto del trabajo); otros estudios agregados (Países Bajos, Reino Unido, Italia) hallan subidas menores, de 0,4-0,5 % por 1 % menos de jornada, con caída de las horas totales trabajadas.",
+  "note_es": "Según estudios de Francia, Portugal y Alemania, reducir la jornada (por ley o, en Alemania, por convenio) sin bajar el sueldo mensual no creó empleo apreciable en conjunto: en Francia 1982 los afectados perdieron más empleo (2-4 % por una hora), con las 35 h francesas y en Portugal 1996 no se vio efecto neto y en Alemania 1984-89 subió poco. No hay estudio para España; el central es un juicio."
+ }
+}

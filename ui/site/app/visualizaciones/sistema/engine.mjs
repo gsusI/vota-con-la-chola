@@ -25,8 +25,19 @@ export const DEFAULT_LEVERS = {
   capCov: 0, // rent cap: share of market-rent households in covered (stressed) areas, % (beyond those already covered)
   capCut: 0, // rent cap: average cut the cap imposes on covered rents vs the market, %
   tourCut: 0, // tourist dwellings withdrawn, % of the current stock (licences, bans)
-  migration: "base", // context: Ageing Report migration variant (base | low | high)
+  migration: "base", // legacy context switch (base | low | high): the same as migScale -1 / 0 / +1
   rateShock: 0, // context: market interest rate vs baseline, pp
+  // slice 3: employment
+  smi: 0, // minimum wage (SMI), % real rise over the baseline from 2026
+  hours: 0, // maximum weekly hours cut from 40, hours (monthly pay kept)
+  selfQuota: 0, // self-employed monthly contribution, euros a month vs today
+  // slice 3: immigration (lever and context), in multiples of the official variant (Eurostat EUROPOP2023 HMIGR/LMIGR,
+  // the Ageing Report's «±33 % non-EU immigration», which moves net migration about ±46 % cumulated to 2050)
+  migScale: 0,
+  // slice 4 (capacity): healthcare
+  mir: 0, // extra specialist training places a year (MIR), from 2026
+  healthSpend: 0, // extra real public health spending, % of the baseline
+  svcFunding: "follow", // do public services grow with population? follow (as the Ageing Report assumes) | fixed (same euros)
 };
 
 // Value of each parameter when its layer is switched off (the accounting layer keeps statutory incidence).
@@ -60,6 +71,17 @@ export const NEUTRAL = {
   elasticidad_precio_credito: 0,
   elasticidad_credito_precio: 0,
   sustitucion_alquiler: 0,
+  // employment, immigration and healthcare: the accounting layer keeps the arithmetic (wages, population, money that
+  // becomes care) and nothing else
+  elasticidad_empleo_smi: 0,
+  elasticidad_empleo_jornada: 0,
+  compensacion_productividad_jornada: 0,
+  elasticidad_autonomos_cuota: 0,
+  ajuste_empleo_inmigrante: 1,
+  uso_sanitario_relativo_inmigrante: 1,
+  capacidad_por_gasto: 1,
+  permanencia_sns_medicos: 1,
+  elasticidad_demanda_espera: 0,
 };
 
 export const HOUSING_KEYS = ["hs_stock_k", "hs_completions_k", "hs_public_k", "hs_private_k", "hs_tourist_k", "hs_households_k",
@@ -70,6 +92,17 @@ export const HOUSING_KEYS = ["hs_stock_k", "hs_completions_k", "hs_public_k", "h
 
 // Completed share of a programme decided at k = 1 after `lag` years (0 before, 1 after, linear in between).
 const ramp = (k, lag) => clamp(k - lag, 0, 1);
+
+export const LABOUR_KEYS = ["lb_smi_k", "lb_hours_k", "lb_self_k", "lb_wage_bill_pct", "lb_hour_cost_pct", "lb_revenue_pp",
+  "mig_pop_k", "mig_emp_k", "mig_revenue_pp", "mig_rev_other_pp", "mig_health_pp", "mig_edu_pp", "mig_ltc_pp", "mig_other_pp", "mig_pension_pp",
+  "mig_spend_pp", "mig_net_pp", "mig_students_k", "mig_gdp_pct",
+  ...["0_15", "16_29", "30_44", "45_64", "65p"].flatMap((s) => [`mig_pop_${s}`, `mig_rev_${s}`, `mig_use_${s}`]),
+  "hl_demand_pct", "hl_money_pct", "hl_doctors_k", "hl_capacity_pct", "hl_list_k", "hl_wait_days", "hl_cost_pp", "hl_deterred_k", "hl_wait_dev",
+  "svc_per_person_pct"];
+export const STAGE_GROUPS = { "0_15": ["0_15"], "16_29": ["16_29"], "30_44": ["30_44"], "45_64": ["45_64"], "65p": ["65_79", "80p"] };
+
+/** Multiple of the official migration variant: migScale, or the legacy switch (low = -1, high = +1). */
+export const migrationScale = (L) => L.migScale || (L.migration === "low" ? -1 : L.migration === "high" ? 1 : 0);
 
 /** Share of new mortgage volume above the chosen caps (independent LTV and LTI, a simplification the page states). */
 export function bindingShare(P, ltvCap, ltiCap) {
@@ -115,7 +148,8 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
   const n = model.years.length;
   const start = model.policy_start;
   const es = C.employer_share;
-  const mig = L.migration === "low" ? B.migration_low_pp : L.migration === "high" ? B.migration_high_pp : null;
+  const sMig = migrationScale(L);
+  const Lb = model.labour;
   // Behavioural offsets of the IRPF levers (elasticity of taxable income) and of the corporate tax base.
   const offAll = P.eti_general * (C.irpf_marginal_avg / (1 - C.irpf_marginal_avg));
   const offTop = P.eti_alta * (C.irpf_marginal_top / (1 - C.irpf_marginal_top)) * P.pareto_a_alto;
@@ -128,7 +162,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     "labour_cost_dev", "wage_dev", "implicit_rate_dev", "debt_per_person_eur",
     // statutory (static) burdens of each instrument, % GDP: the quintile split uses them
     "s_irpf_all_pp", "s_irpf_top_pp", "s_vat_std_pp", "s_vat_red_pp", "s_contrib_pp", "s_corp_pp", "s_pension_net_pp",
-    ...PERSONAS.map((p) => `${p}_month`), ...HOUSING_KEYS];
+    ...PERSONAS.map((p) => `${p}_month`), ...HOUSING_KEYS, ...LABOUR_KEYS];
   const out = Object.fromEntries(keys.map((k) => [k, zeros(n)]));
   out.years = model.years;
   out.pension_pct = [...B.pension_pct];
@@ -154,6 +188,12 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
   let dCred = 0;
   let paidCov = 0;
   let paidUnc = 0;
+  // Employment levers (slice 3) and the surgical waiting list (slice 4), as deviations
+  let eSmi = 0;
+  let eHours = 0;
+  let eSelf = 0;
+  let listDev = 0;
+  let exitsPrev = model.labour?.health.exits_k ?? 1;
 
   for (let t = 1; t < n; t += 1) {
     const year = model.years[t];
@@ -175,7 +215,167 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     const grossPp = base * ((1 + x) * (1 + nSpend) - 1);
     const otherPp = base * -nSpend * P.prestacion_alternativa;
     const irpfPp = P.tipo_marginal_irpf_pension * (grossPp + otherPp);
-    const migPp = on && mig ? mig[t] : 0;
+
+    // ---- Immigration (slice 3): population by stage from the official variant, scaled linearly; the extra residents
+    // work at the employment rate of foreign citizens of their age, pay taxes and contributions at their relative wage,
+    // and use health care, schooling, long-term care, pensions and other services. Amounts in % of baseline GDP; per-head
+    // amounts grow with GDP per worker (revenue) or per person (services), as in the Ageing Report.
+    let migPp = 0; // pensions of the extra residents
+    let migCostPp = 0; // services other than health (health goes through the capacity block) minus revenue
+    let migEmpFrac = 0;
+    let migGdp = 0;
+    let healthDem = 0;
+    let lbRevPp = 0;
+    let lbSupply = 0;
+    let hlCostPp = 0;
+    if (Lb) {
+      const Cn = Lb.const;
+      const a = Math.abs(sMig);
+      const src = sMig > 0 ? Lb.mig_hi_k : Lb.mig_lo_k;
+      const dPop = (st) => (on && a ? a * (src[st][t] - src[st][0]) : 0);
+      const realIdx = B.real_index?.[t] ?? 1;
+      const empIdx = B.employment_k[t] / B.employment_k[0];
+      const gdp0 = model.start.gdp_meur;
+      const popT = Lb.stages.reduce((acc, st) => acc + Lb.pop_k[st][t], 0);
+      // Revenue of one extra worker at the relative wage: personal taxes and contributions (OECD schedule), employer
+      // contributions and consumption taxes on what is left; euros of the base year -> % of GDP per thousand workers.
+      const wRel = P.salario_relativo_inmigrante;
+      const gross = Cn.aw_gross * wRel;
+      const curve = Cn.personal_tax_curve;
+      const at = (m) => {
+        const pts = curve.filter(([x]) => x <= m).at(-1) ?? curve[0];
+        const nx = curve.find(([x]) => x > m) ?? curve.at(-1);
+        return nx[0] === pts[0] ? pts[1] : pts[1] + ((nx[1] - pts[1]) * (m - pts[0])) / (nx[0] - pts[0]);
+      };
+      const personal = at(wRel);
+      const revWorker = gross * (personal + C.employer_rate) + gross * (1 - personal) * P.propension_consumo * P.tipo_implicito_consumo;
+      const revPerK = ((revWorker / 1e3) / gdp0 / empIdx) * 100;
+      const D = Lb.stages.reduce((acc, st) => acc + Lb.pop_k[st][t] * Lb.health.weights[st], 0);
+      const follow = L.svcFunding !== "fixed";
+      let dTot = 0;
+      let dEmp = 0;
+      let dDem = 0;
+      const byGroup = {};
+      for (const [g, members] of Object.entries(STAGE_GROUPS)) {
+        let pop = 0;
+        let emp = 0;
+        let dem = 0;
+        for (const st of members) {
+          const d = dPop(st);
+          pop += d;
+          emp += d * (Lb.emp_rate.FOR[st] ?? 0) * P.ajuste_empleo_inmigrante;
+          dem += d * Lb.health.weights[st] * P.uso_sanitario_relativo_inmigrante;
+        }
+        byGroup[g] = { pop, emp, dem };
+        dTot += pop;
+        dEmp += emp;
+        dDem += dem;
+      }
+      healthDem = dDem / D;
+      migEmpFrac = dEmp / B.employment_k[t];
+      // Other revenue (corporate and property taxes, fees, other levies) grows with the output the extra workers add,
+      // as other services grow with the residents: the two sides are treated alike.
+      // Output of the extra workers: the short-run elasticity, rising to 1 as capital follows labour (the Commission's
+      // «capital rule» for its long-run projections, reached over the years of the card).
+      const migElast = C.labour_output_elasticity + (1 - C.labour_output_elasticity) * clamp(k / P.anios_ajuste_capital, 0, 1);
+      migGdp = migElast * migEmpFrac;
+      const otherRev = Cn.other_revenue_pct * migGdp;
+      const revenue = dEmp * revPerK + otherRev;
+      const d65 = dPop("65_79") + dPop("80p");
+      const pop65 = Lb.pop_k["65_79"][t] + Lb.pop_k["80p"][t];
+      // Pensions: extra residents of 65+ with a relative pension (shorter careers in Spain; assumption D), at the
+      // baseline average pension in % of GDP.
+      migPp = (d65 * P.pension_relativa_inmigrante * B.pension_pct[t]) / B.pensioners_k[t];
+      const students = dPop("5_24") * Lb.education.enrol_ratio;
+      const eduPp = follow ? (Lb.education.spend_pct[t] * students) / Lb.education.students_k[t] : 0;
+      const ltcPp = follow && pop65 ? (Lb.health.ltc_pct[t] * d65) / pop65 : 0;
+      const otherPp = follow ? (Lb.other_spending_pct * P.cuota_gasto_congestionable * dTot) / popT : 0;
+      const healthPp = follow ? Lb.health.spend_pct[t] * healthDem : 0;
+      migCostPp = migPp + eduPp + ltcPp + otherPp - revenue;
+      // By age stage: revenue and the use of services (health, school, long-term care, pensions, other)
+      const kids = dPop("0_15");
+      const school015 = Math.max(0, Math.min(dPop("5_24"), (kids * 11) / 16));
+      const eduShare015 = dPop("5_24") ? school015 / dPop("5_24") : 0;
+      for (const [g, v] of Object.entries(byGroup)) {
+        const use = (D ? (follow ? Lb.health.spend_pct[t] * (v.dem / D) : 0) : 0)
+          + (g === "0_15" ? eduPp * eduShare015 : g === "16_29" ? eduPp * (1 - eduShare015) : 0)
+          + (g === "65p" ? ltcPp + migPp : 0)
+          + (dTot ? (otherPp * v.pop) / dTot : 0);
+        out[`mig_pop_${g}`][t] = v.pop;
+        out[`mig_rev_${g}`][t] = v.emp * revPerK + (dEmp ? (otherRev * v.emp) / dEmp : 0);
+        out[`mig_use_${g}`][t] = use;
+      }
+      const set = {
+        mig_pop_k: dTot, mig_emp_k: dEmp, mig_revenue_pp: revenue, mig_rev_other_pp: otherRev, mig_health_pp: healthPp, mig_edu_pp: eduPp, mig_ltc_pp: ltcPp,
+        mig_other_pp: otherPp, mig_pension_pp: migPp, mig_spend_pp: healthPp + eduPp + ltcPp + otherPp + migPp,
+        mig_net_pp: healthPp + eduPp + ltcPp + otherPp + migPp - revenue, mig_students_k: students,
+        svc_per_person_pct: follow ? 0 : (-dTot / (popT + dTot)) * 100,
+      };
+      for (const [key, v] of Object.entries(set)) out[key][t] = v;
+
+      // ---- Employment levers (slice 3): the affected group's jobs move with an elasticity and adjust halfway a year.
+      const empBase = B.employment_k[t];
+      const adj = C.employment_adjust_per_year;
+      const smiPct = lv("smi");
+      const cutH = Math.max(0, lv("hours"));
+      const hoursPct = (cutH / 40) * 100;
+      const affSmi = P.cuota_afectados_smi * Lb.employees_k;
+      const affHours = P.cuota_afectados_jornada * Lb.employees_k;
+      const quotaPct = (lv("selfQuota") / P.cuota_media_autonomos) * 100;
+      if (on) {
+        eSmi += ((P.elasticidad_empleo_smi * smiPct * affSmi) / 100 / empBase - eSmi) * adj;
+        eHours += ((P.elasticidad_empleo_jornada * hoursPct * affHours) / 100 / empBase - eHours) * adj;
+        eSelf += ((P.elasticidad_autonomos_cuota * quotaPct * P.autonomos_k) / 100 / empBase - eSelf) * adj;
+      }
+      // Revenue: contributions on the higher wages at the SMI (exempt from IRPF) and the quota on those who stay.
+      const wageBill = (P.cuota_masa_afectados_smi * smiPct) / 100;
+      const smiRev = wageBill * P.salarios_pib * Cn.smi_tax_rate;
+      const quotaRev = (((lv("selfQuota") * 12 * (P.autonomos_k + eSelf * empBase)) / 1e3) / gdp0 / empIdx) * 100;
+      lbRevPp = smiRev + quotaRev;
+      // Hours: monthly pay is kept, so the hourly cost of the affected rises; part is offset by productivity.
+      const hourCost = cutH ? (cutH / (40 - cutH)) * (1 - P.compensacion_productividad_jornada) : 0;
+      lbSupply = -(hoursPct / 100) * (affHours / empBase) * (1 - P.compensacion_productividad_jornada);
+      out.lb_smi_k[t] = eSmi * empBase;
+      out.lb_hours_k[t] = eHours * empBase;
+      out.lb_self_k[t] = eSelf * empBase;
+      out.lb_wage_bill_pct[t] = wageBill * 100;
+      out.lb_hour_cost_pct[t] = hourCost * 100;
+      out.lb_revenue_pp[t] = lbRevPp;
+
+      // ---- Healthcare capacity (slice 4): demand from the extra residents; money follows it (or not) plus the extra
+      // budget; doctors come from extra training places after the lag, each with the average budget per doctor.
+      // Money alone buys a share of the capacity (overtime, outsourcing, doctors from abroad); the rest needs doctors.
+      const Hl = Lb.health;
+      const lag = P.retardo_formacion_medico;
+      const trainedK = on ? (L.mir * P.permanencia_sns_medicos * Math.max(0, k - lag)) / 1000 : 0;
+      const docBase = Hl.doctors_k * Hl.demo_index[t];
+      const doc = trainedK / docBase;
+      const money = (follow ? healthDem : 0) + (on ? L.healthSpend / 100 : 0) + doc;
+      const w = P.capacidad_por_gasto;
+      const cap = w * money + (1 - w) * Math.min(money, doc);
+      // Waiting list as a stock: entries grow with demand and fall when waits are longer (demand response to the
+      // wait, which keeps the list from emptying or exploding); exits are the capacity while there is a list.
+      const E0 = Hl.exits_k;
+      const S0 = Hl.list_k;
+      const exits = E0 * (1 + cap);
+      const waitRel = Math.max(0.05, (S0 + listDev) / exitsPrev / (S0 / E0));
+      const entries = E0 * (1 + healthDem) * waitRel ** P.elasticidad_demanda_espera;
+      listDev = Math.max(-S0, listDev + entries - exits);
+      exitsPrev = exits;
+      out.hl_deterred_k[t] = E0 * (1 + healthDem) - entries; // patients who no longer enter the list (private care or none)
+      const residents = on ? L.mir * Math.min(k, Math.min(lag, 5)) : 0;
+      const trainPp = ((residents * P.coste_residente_anual) / 1e3 / gdp0 / empIdx) * 100;
+      hlCostPp = Hl.spend_pct[t] * money + trainPp;
+      out.hl_demand_pct[t] = healthDem * 100;
+      out.hl_money_pct[t] = money * 100;
+      out.hl_doctors_k[t] = trainedK;
+      out.hl_capacity_pct[t] = cap * 100;
+      out.hl_list_k[t] = listDev;
+      out.hl_wait_days[t] = ((S0 + listDev) / exits) * 365;
+      out.hl_wait_dev[t] = out.hl_wait_days[t] - (S0 / E0) * 365;
+      out.hl_cost_pp[t] = hlCostPp;
+      out.mig_gdp_pct[t] = migGdp * 100;
+    }
 
     // ---- Housing (slice 2). Stock and households in thousands; rents, prices and credit as log deviations.
     let hsCostPp = 0;
@@ -193,9 +393,10 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
       const freed = on ? (L.tourCut / 100) * Hs.tourist_k * Math.min(1, k / 2) : 0;
       const tourist = P.conversion_turistica * freed;
       const dS = flowCum + tourist;
-      // Migration context: the Ageing Report variants move net migration by a third; each migrant forms households.
-      const migShare = L.migration === "low" ? -1 / 3 : L.migration === "high" ? 1 / 3 : 0;
-      if (on) dHm += migShare * Hs.net_migration_k[t] * P.hogares_por_inmigrante;
+      // Migration: the official variant moves net migration by about ±46 % (a third more or less non-EU immigration);
+      // each extra net migrant forms households.
+      const dNet = Lb ? (sMig > 0 ? Lb.net_migration_k.hi[t] - Lb.net_migration_k.base[t] : Lb.net_migration_k.base[t] - Lb.net_migration_k.lo[t]) : Hs.net_migration_k[t] / 3;
+      if (on) dHm += sMig * dNet * P.hogares_por_inmigrante;
       // Credit: caps remove part of the new lending above them; new lending follows prices (collateral, loop R2).
       const binding = on ? bindingShare(P, L.ltvCap, L.ltiCap) : 0;
       const cut = -P.perdida_credito_restringido * binding;
@@ -283,7 +484,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
       const wageDev = (-theta * dTauEr) / (1 + C.employer_rate) + wageCorp;
       const eTarget = P.elasticidad_empleo_coste * laborCost;
       const eS = on ? eSsc + (eTarget - eSsc) * C.employment_adjust_per_year : 0;
-      const e = eAge + eS;
+      const e = eAge + eS + eSmi + eHours + eSelf;
       // Fewer jobs lose taxes, contributions and pay benefits; a lower gross wage loses the tax rate on wages.
       const labourPp = P.recaudacion_por_1pct_empleo * 100 * e + P.base_cotizacion_pib * 100 * C.wage_tax_rate * wageDev;
       const contribPp = P.base_cotizacion_pib * extraRate;
@@ -294,7 +495,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
       const yNow = P.persistencia_multiplicador * y + (impulse - impulsePrev);
       const cyclePp = P.semielasticidad_saldo * yNow;
       const leverTaxes = P.base_cotizacion_pib * contribLever + P.recaudacion_por_punto_iva * lv("vatStd") + vatRedPp + irpfLeverPp + corpPp;
-      const costBefore = grossPp + otherPp - irpfPp + migPp + hsCostPp - labourPp - leverTaxes - cyclePp;
+      const costBefore = grossPp + otherPp - irpfPp + migCostPp + hlCostPp - lbRevPp + hsCostPp - labourPp - leverTaxes - cyclePp;
       const closureRevenue = unit ? unit * close : 0;
       parts = { e, eS, wageDev, laborCost, labourPp, contribPp, vatPp, irpfRev, impulse, yNow, cyclePp, costBefore, closureRevenue, closeC, closeV, closeI };
       if (!on || L.closure === "deuda") break;
@@ -322,7 +523,7 @@ export function simulate(model, levers = DEFAULT_LEVERS, params = centralParams(
     const interestDev = (i * D + (dImp / 100) * debtPrev) / (1 + g);
     D = D / (1 + g) + primary + interestDev;
 
-    const supply = C.labour_output_elasticity * e * 100; // % GDP
+    const supply = (C.labour_output_elasticity * (e + lbSupply) + migGdp) * 100; // % GDP
     const gdpDev = supply + yNow;
     const denom = 1 + gdpDev / 100;
 

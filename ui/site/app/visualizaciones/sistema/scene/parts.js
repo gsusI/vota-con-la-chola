@@ -58,6 +58,27 @@ export const PARAM_LABELS = {
   elasticidad_credito_precio: "respuesta del crédito al precio (garantía)",
   cuota_credito_nuevo: "crédito nuevo sobre el saldo",
   sustitucion_alquiler: "compradores que pasan a alquilar",
+  cuota_afectados_smi: "asalariados afectados por el SMI",
+  cuota_masa_afectados_smi: "masa salarial de los afectados por el SMI",
+  elasticidad_empleo_smi: "efecto del SMI sobre el empleo de los afectados",
+  cuota_afectados_jornada: "asalariados con jornada de más de 37,5 horas",
+  elasticidad_empleo_jornada: "efecto de reducir la jornada sobre el empleo",
+  compensacion_productividad_jornada: "productividad que compensa la jornada más corta",
+  autonomos_k: "número de autónomos",
+  cuota_media_autonomos: "cuota media de los autónomos",
+  elasticidad_autonomos_cuota: "autónomos que se dan de baja si sube la cuota",
+  salario_relativo_inmigrante: "salario de los trabajadores extranjeros frente a la media",
+  ajuste_empleo_inmigrante: "empleo de quien llega frente a los extranjeros de su edad",
+  uso_sanitario_relativo_inmigrante: "uso de la sanidad de los inmigrantes frente a los nacidos aquí de su edad",
+  cuota_gasto_congestionable: "parte del gasto en otros servicios que crece con cada residente",
+  tipo_implicito_consumo: "impuestos sobre lo que se consume",
+  propension_consumo: "parte de la renta que se consume",
+  pension_relativa_inmigrante: "pensión de quien llegó de adulto frente a la media",
+  retardo_formacion_medico: "años para formar a un médico especialista",
+  permanencia_sns_medicos: "médicos formados que se quedan en la sanidad pública",
+  coste_residente_anual: "coste anual de un residente MIR",
+  capacidad_por_gasto: "capacidad que el dinero compra sin más médicos",
+  elasticidad_demanda_espera: "pacientes que dejan de entrar en lista cuando la espera crece",
 };
 
 
@@ -108,6 +129,30 @@ export function EdgeCard({ edge }) {
 
 const VOTE_LABEL = { S: "Sí", N: "No", A: "Abst.", "?": "—" };
 
+// Mean direction of each party on the vote atlas axis (-1 to +1), from every classified vote of that axis.
+function AxisSummary({ v }) {
+  const ax = v.axis;
+  const rows = v.party_order.map((p) => [p, ax.party_scores[p]]).filter(([, sc]) => sc && sc.votes);
+  return (
+    <div className="sim__axis">
+      <p className="sim__muted">
+        Eje del atlas de votaciones: «{ax.label}», de {ax.neg.toLowerCase()} (−1) a {ax.pos.toLowerCase()} (+1), con {ax.n_votes} votaciones clasificadas por el
+        texto votado. Dirección media de cada partido:
+      </p>
+      <ul className="sim__axisList">
+        {rows.map(([p, sc]) => (
+          <li key={p} style={{ "--x": (sc.score + 1) / 2 }}>
+            <span>{v.party_labels[p]}</span>
+            <span className="sim__axisBar" aria-hidden="true"><span /></span>
+            <b>{sc.score > 0 ? "+" : sc.score < 0 ? "−" : ""}{Math.abs(sc.score).toLocaleString("es-ES", { maximumFractionDigits: 2 })}</b>
+            <small>{sc.votes} votos</small>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function VotesBlock({ model, levers }) {
   const groups = [
     [levers.reval, "reval", "Revalorización de las pensiones"],
@@ -121,6 +166,11 @@ export function VotesBlock({ model, levers }) {
     [levers.capCov && levers.capCut, "tope", "Tope y regulación del alquiler"],
     [levers.tourCut, "turistico", "Viviendas turísticas"],
     [levers.ltvCap || levers.ltiCap, "credito", "Hipotecas y avales"],
+    [levers.smi, "smi", "Salario mínimo y derechos laborales"],
+    [levers.hours, "jornada", "Jornada laboral"],
+    [levers.selfQuota, "autonomos", "Autónomos y pymes"],
+    [levers.migScale || levers.migration !== "base", "inmigracion", "Inmigración"],
+    [levers.mir || levers.healthSpend || levers.svcFunding === "fixed", "sanidad", "Sanidad"],
   ];
   const active = groups.filter(([on, id]) => on && model.votes[id]?.votes.length).map(([, id, title]) => [id, title]);
   const shown = active.length ? active : [["reval", "Revalorización de las pensiones"]];
@@ -136,6 +186,7 @@ export function VotesBlock({ model, levers }) {
         return (
           <div key={lever} className="sim__votes">
             <h3 className="vizPanelTitle">{title}</h3>
+            {v.axis ? <AxisSummary v={v} /> : null}
             <div className="vizTable__scroll">
               <table className="sim__table sim__table--votes">
                 <thead>
@@ -151,7 +202,8 @@ export function VotesBlock({ model, levers }) {
                     <tr key={vote.id}>
                       <th scope="row">
                         <a href={vote.url} target="_blank" rel="noopener noreferrer">{vote.summary}</a>
-                        <span className="sim__muted"> · {vote.date}, {vote.approved ? "aprobada" : "rechazada"}</span>
+                        <span className="sim__muted"> · {vote.date}, {vote.approved ? "aprobada" : "rechazada"}
+                          {vote.pushes && v.axis ? ` · votar Sí: ${(vote.pushes === "+" ? v.axis.pos : v.axis.neg).toLowerCase()}` : ""}</span>
                       </th>
                       {v.party_order.map((p) => (
                         <td key={p} className={`vote vote--${vote.parties[p] || "?"}`}>{VOTE_LABEL[vote.parties[p]] || "—"}</td>

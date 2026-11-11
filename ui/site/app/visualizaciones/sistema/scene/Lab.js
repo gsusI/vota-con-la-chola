@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { SeriesTable } from "../../components/Figure";
 import FanChart, { fmt } from "../FanChart";
-import { DEFAULT_LEVERS, LAYERS, applyLayer, centralParams, decodeState, encodeState, mainDriver, quintileImpact, runEnsemble, simulate } from "../engine.mjs";
+import { DEFAULT_LEVERS, LAYERS, applyLayer, migrationScale, centralParams, decodeState, encodeState, mainDriver, quintileImpact, runEnsemble, simulate } from "../engine.mjs";
 import { Avatar, Icon, PAL } from "./art";
 import Scene from "./Scene";
 import Controls, { CLOSURE_CHOICES, POLICIES, outOfRange } from "./Controls";
 import { Ladder, Neighbours } from "./People";
 import Chain from "./Chain";
+import Services, { hasServices } from "./Services";
 import { EdgeCard, LAYER_LABELS, PARAM_LABELS, VotesBlock } from "./parts";
 import "../sistema.css";
 import "./scene.css";
@@ -19,7 +20,8 @@ const signed = (v, unit, digits = 1) => {
   return (r > 0 ? "+" : r < 0 ? "−" : "") + fmt(Math.abs(r), unit, digits);
 };
 
-const COST_LEVERS = ["reval", "age", "contrib", "irpfAll", "irpfTop", "vatStd", "vatRed", "corp", "rateShock", "pubHomes", "land"];
+const COST_LEVERS = ["reval", "age", "contrib", "irpfAll", "irpfTop", "vatStd", "vatRed", "corp", "rateShock", "pubHomes", "land",
+  "smi", "hours", "selfQuota", "mir", "healthSpend"];
 
 function Timeline({ years, year, setYear, playing, setPlaying }) {
   return (
@@ -165,7 +167,7 @@ export default function Lab({ model, composition }) {
   const layerParams = useMemo(() => applyLayer(model, centralParams(model, debates), layer), [model, debates, layer]);
   const quintiles = quintileImpact(model, run, t, layerParams);
   const edgeById = useMemo(() => Object.fromEntries(model.edges.map((e) => [e.id, e])), [model]);
-  const needsClosure = COST_LEVERS.some((k) => levers[k]);
+  const needsClosure = COST_LEVERS.some((k) => levers[k]) || Boolean(migrationScale(levers));
   const extreme = outOfRange(levers);
   // How far the tax that pays for it would have to go, in the chosen year.
   const closureNote = (() => {
@@ -191,10 +193,12 @@ export default function Lab({ model, composition }) {
     { key: "p1_month", label: `Lucía en ${year}, al mes`, unit: "eur", digits: 0, t },
     { key: "p4_month", label: `Carmen en ${year}, al mes`, unit: "eur", digits: 0, t },
     { key: "employment_k", label: `Empleo en ${year}`, unit: "k", digits: 0, t },
+    { key: "mig_net_pp", label: `Coste neto de la inmigración extra en ${year} (% del PIB)`, unit: "pp", digits: 2, t },
+    { key: "hl_wait_days", label: `Espera quirúrgica media en ${year}, días frente a la ley actual`, unit: "días", digits: 0, t, offset: model.labour ? (model.labour.health.list_k / model.labour.health.exits_k) * 365 : 0 },
     { key: "q1", label: `Hogares del quinto con menos renta en ${year}, al mes`, unit: "eur", digits: 0, t, quintile: 0 },
     { key: "q5", label: `Hogares del quinto con más renta en ${year}, al mes`, unit: "eur", digits: 0, t, quintile: 4 },
   ];
-  const valueOf = (o, r, p) => (o.quintile != null ? quintileImpact(model, r, o.t, p)[o.quintile].total : r[o.key][o.t]);
+  const valueOf = (o, r, p) => (o.quintile != null ? quintileImpact(model, r, o.t, p)[o.quintile].total : r[o.key][o.t] - (o.offset ?? 0));
   const debateParams = Object.entries(model.params).filter(([, p]) => p.debate);
   const asPoints = (values) => model.years.map((y, i) => ({ year: y, value: Math.round(values[i] * 100) / 100 }));
 
@@ -202,7 +206,7 @@ export default function Lab({ model, composition }) {
     <div className="lab">
       <div className="lab__grid">
         <Controls levers={levers} setLever={setLever} setLevers={setLevers} needsClosure={needsClosure} compact
-          unlocked={unlocked} setUnlocked={setUnlocked} abolish={abolish} />
+          unlocked={unlocked} setUnlocked={setUnlocked} abolish={abolish} migPct={model.labour?.variant_pct.hi ?? 46} />
         <div className="lab__stage">
           {extreme.length ? (
             <div className="lab__banner" role="status">
@@ -220,6 +224,17 @@ export default function Lab({ model, composition }) {
             setPlaying={(p) => { if (p && year >= model.years.at(-1)) setYear(model.years[0]); setPlaying(p); }} />
         </div>
       </div>
+
+      {hasServices(levers) ? (
+        <section className="lab__section" aria-labelledby="servicios-title">
+          <h2 id="servicios-title">Empleo, inmigración y servicios en {year}</h2>
+          <p className="lab__dek">
+            Lo que mueven las palancas de empleo, quién llega con la inmigración que elegiste, qué paga y qué usa cada edad, y qué le pasa a la lista de
+            espera quirúrgica. Valor central y rango del 5 % al 95 % de las simulaciones.
+          </p>
+          <Services model={model} run={run} bands={ensemble.bands} t={t} levers={levers} />
+        </section>
+      ) : null}
 
       <section className="lab__section" aria-labelledby="vecinos-title">
         <h2 id="vecinos-title">Qué les pasa a cuatro vecinos en {year}</h2>
