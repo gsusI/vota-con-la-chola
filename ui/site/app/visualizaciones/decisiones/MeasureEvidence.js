@@ -55,7 +55,13 @@ export default function MeasureEvidence({ m, n, labels }) {
         {UNIT[m.unit]} · votada el {dateEs(m.date)} (legislatura {m.legislature === "14" ? "XIV" : "XV"}) · {m.totals.si} sí, {m.totals.no} no,{" "}
         {m.totals.abst} abstenciones{m.absolute_majority_required ? " (necesitaba 176 síes)" : ""} ·{" "}
         {m.yes_backs_measure ? "" : "votar Sí era devolver el proyecto al Gobierno · "}
-        {m.took_effect ? "salió adelante" : m.unit === "contrafactual" ? "" : "no llegó a tener efecto"}
+        {m.lapsed
+          ? "aprobada en el Congreso, pero caducó antes de publicarse: no llegó a tener efecto"
+          : m.took_effect
+            ? "salió adelante"
+            : m.unit === "contrafactual"
+              ? ""
+              : "no llegó a tener efecto"}
         {m.legal_status ? ` · hoy: ${m.legal_status}` : ""}
       </p>
       {m.documented ? (

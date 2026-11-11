@@ -1,0 +1,62 @@
+{
+ "measure_id": "smi-2026",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "1.221 €/mes, +3,1 %",
+   "status": "verified",
+   "note": "art. 1: 40,70 €/día o 1 221 €/mes; preámbulo 3,1 %"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 126/2026, de 18 de febrero, BOE-A-2026-3815",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 19/02/2026"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2026-02-20, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (19/02/2026); BOE: en vigor a partir de 2026-02-20"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2026-01-01 a 2026-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Vigente (efectos hasta 31-12-2026)",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "40,70 €/día, 1.221 €/mes, anual 17.094 €, +3,1 %, contratos de duración determinada <=120 días y hogar",
+   "status": "verified",
+   "note": "arts. 1-4, preámbulo"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "se mantiene el objetivo de que el SMI alcance el 60 por ciento del salario medio",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no A/B ex-post source on the stated goal for 2026; AIReF 2025 DT p. 6 analyses only 2019 and 2023; AIReF Estudio 1/2026 cuadro 4 p. 29 covers 2019, 2023, 2024 only (measure still in force)"
+  },
+  {
+   "field": "notes",
+   "claim": "Comisión Asesora report 12-12-2025; AIReF 1/2026 cuadro 4",
+   "status": "verified",
+   "note": "preámbulo; p. 29"
+  }
+ ],
+ "corrections": [],
+ "reviewed": "2026-11-11"
+}

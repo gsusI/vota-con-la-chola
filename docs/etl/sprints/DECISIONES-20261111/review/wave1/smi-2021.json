@@ -1,0 +1,83 @@
+{
+ "measure_id": "smi-2021",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "965 €/mes desde septiembre, +1,6 %",
+   "status": "verified",
+   "note": "art. 1 and preámbulo (1,579 %)"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 817/2021, de 28 de septiembre, BOE-A-2021-15770",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 29/09/2021"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2021-09-30, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (29/09/2021); BOE: en vigor a partir de 2021-09-30"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2021-09-01 a 2021-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "prorrogado por RDL 32/2021",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "32,17 €/día, 965 €/mes, +1,579 %; enero-agosto SMI 2020 prorrogado por RDL 38/2020",
+   "status": "verified",
+   "note": "art. 1, art. 4, preámbulo, DF 3ª"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "tiene por objeto seguir haciendo efectivo el derecho a una remuneración equitativa y suficiente",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "stated_goal",
+   "claim": "... cerca del 60 % del salario medio, y garantizar la capacidad adquisitiva frente al coste de la vida",
+   "status": "wrong",
+   "note": "capacidad adquisitiva verified; 'cerca del 60 %' not in decree (CEDS threshold of 60 %, no claim that the SMI is near it)"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no A/B ex-post source on the stated goal for 2021; AIReF 2025 DT p. 6 analyses only 2019 and 2023; AIReF Estudio 1/2026 cuadro 4 p. 29 covers 2019, 2023, 2024 only"
+  },
+  {
+   "field": "notes",
+   "claim": "AIReF 2025 p. 6: descensos transitorios del SMI real en 2021 y 2022",
+   "status": "verified",
+   "note": "p. 6 literal"
+  },
+  {
+   "field": "indicators[0].before/after",
+   "claim": "Kaitz 2020 64,3 % -> 2021 62,3 % (arXiv 2603.20809, cuadro 2, p. 13)",
+   "status": "verified",
+   "note": "figures and quote are exactly those of Table 2, p. 13; ratio = Real SMI / Real Mean Wage columns; source labelled as preprint"
+  },
+  {
+   "field": "indicators[0] (series reliability)",
+   "claim": "preprint Table 2 Kaitz series is fit to publish as before/after",
+   "status": "wrong",
+   "note": "Not reliable enough to publish. Table 2 says columns are constant 2019 euros deflated by national CPI, but the SMI column cannot be: 2021 real 14.073 > nominal max 13.510 (965x14) with positive inflation; 2023 real 14.078 vs nominal 15.120 implies deflator 0,93 vs CPI 2019-2023 ~0,87; so the ratio cannot be reproduced and may mix inconsistent deflators. Level (60-64 %) and the 2021->2022 direction (preprint -1,3 pts) differ from the official Eurostat series (minimum wage as % of mean gross monthly earnings, B-S): 2019 45,6, 2020 49,6, 2021 47,5, 2022 47,6, 2023 49,1, 2024 50,0, 2025 51,9."
+  }
+ ],
+ "corrections": [
+  "stated_goal: 'cerca del 60 % del salario medio' is not in the decree; it says the right is 'en línea con lo establecido por el Comité Europeo de Derechos Sociales que ha interpretado que dicho umbral se sitúa en el 60 % del salario medio'. Write: 'en línea con el umbral del 60 % del salario medio que fija el Comité Europeo de Derechos Sociales'",
+  "indicators[0]: replace the preprint Kaitz with Eurostat earn_mw_avgr2 (ES, B-S, MMW_MEAN_ME_PP, % of mean gross monthly earnings): 2020 49,6 -> 2021 47,5; url https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_mw_avgr2?geo=ES; or drop the indicator. Check Eurostat metadata for which SMI month is used before publishing."
+ ],
+ "reviewed": "2026-11-11"
+}

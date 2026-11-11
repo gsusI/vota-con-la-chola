@@ -1,0 +1,38 @@
+{
+ "decision_id": "smi-2021",
+ "method_version": 2,
+ "name": "Salario mínimo a 965 euros al mes desde septiembre de 2021 (+1,6 %)",
+ "boe_id": "BOE-A-2021-15770",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-15770",
+ "legal_status": "Agotado: surtió efectos del 1-9-2021 al 31-12-2021; prorrogado por el Real Decreto-ley 32/2021 hasta el SMI de 2022",
+ "in_force": [
+  {
+   "what": "Entrada en vigor del real decreto",
+   "date": "2021-09-30",
+   "provision": "disposición final tercera (día siguiente a su publicación en el BOE)"
+  },
+  {
+   "what": "Efectos de las nuevas cuantías del SMI",
+   "date": "2021-09-01",
+   "provision": "disposición final tercera: efectos del 1 de septiembre al 31 de diciembre de 2021"
+  }
+ ],
+ "what_changes": "Fija el salario mínimo interprofesional en 965 euros al mes (32,17 euros/día), un 1,579 % más que en 2020, con efectos del 1 de septiembre al 31 de diciembre de 2021; de enero a agosto siguió el de 2020, prorrogado por el Real Decreto-ley 38/2020.",
+ "stated_goal": "Seguir haciendo efectivo el derecho a una remuneración equitativa y suficiente, en línea con el umbral del 60 % del salario medio que fija el Comité Europeo de Derechos Sociales, y garantizar la capacidad adquisitiva frente al coste de la vida.",
+ "stated_goal_quote": "tiene por objeto seguir haciendo efectivo el derecho a una remuneración equitativa y suficiente",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2021-15770",
+ "ex_ante": [],
+ "ex_post": [],
+ "evidence_against": [],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Ninguna fuente en caché ni hallada evalúa la subida de 2021: la literatura disponible estudia la de 2019 y la AIReF (2025) las de 2019 y 2023.",
+ "indicators": [],
+ "notes": "La literatura en caché (Gorjón et al. 2024, Christl et al. 2024, Lacasa-Cazcarra 2026, nota de prensa sobre la AIReF de 2020) evalúa la subida de 2019, no la de 2021: no se reutiliza como evaluación de este real decreto. El documento técnico de la AIReF de 22-9-2025 (en caché; descargado con curl porque su cadena TLS falla en Python) evalúa solo las subidas de 2019 y 2023 (p. 6). Índice de Kaitz del cuadro 2 del preprint: es un cociente coherente con sus columnas, pero las columnas en euros reales no cuadran con el IPC, por eso solo se usa el cociente; mide el salario medio anual de la AEAT (incluye tiempo parcial), no el salario neto medio que usa el Comité Europeo de Derechos Sociales. El indicador es anual: 2021 mezcla ocho meses a 950 euros y cuatro a 965. La AIReF (2025, p. 6) describe descensos transitorios del SMI real en 2021 y 2022, sin cifra por año en el texto (solo gráfico): no se usa como indicador. WebSearch: 2 usadas en la tarea (para 2023), ninguna evaluación de 2021 encontrada. Revisión 2026-11-11: se retira el índice de Kaitz del preprint (sus columnas en euros reales no cuadran con el IPC y su nivel y dirección difieren de Eurostat earn_mw_avgr2).",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "corrected",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/wave1/smi-2021.json",
+  "corrections": 2
+ }
+}

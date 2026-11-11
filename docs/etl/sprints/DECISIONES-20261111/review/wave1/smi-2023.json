@@ -1,0 +1,101 @@
+{
+ "measure_id": "smi-2023",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "1.080 €/mes, +8 %",
+   "status": "verified",
+   "note": "art. 1: 36 €/día o 1080 €/mes; preámbulo 8 %"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 99/2023, de 14 de febrero, BOE-A-2023-3982",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 15/02/2023"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2023-02-16, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (15/02/2023); BOE: en vigor a partir de 2023-02-16"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2023-01-01 a 2023-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "prorrogado por RDL 8/2023",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "36 €/día, 1.080 €/mes, +8 %",
+   "status": "verified",
+   "note": "art. 1, art. 4, preámbulo"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "se culmina el objetivo de que el SMI alcance el 60 por ciento del salario medio en 2023",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "evidence_against[0].finding/quote",
+   "claim": "-0,34 a -0,53 pp afiliación Régimen General, 55.000-85.000 afiliados, elasticidad -0,07 a -0,05, más que en 2019",
+   "status": "verified",
+   "note": "AIReF DT 22-9-2025 p. 24 literal quote; p. 28 conclusions; 2019: 40.000-65.000"
+  },
+  {
+   "field": "evidence_against[0].method/locator",
+   "claim": "celdas CCAA x sector (MCVL 2018-2023), intensidad del tratamiento, controles, robustez",
+   "status": "verified",
+   "note": "pp. 17-18 (~4.600 celdas, intensidad), p. 22, p. 25 placebo, p. 28"
+  },
+  {
+   "field": "evidence_against[0].grade/attributes_to_measure",
+   "claim": "A, attributes true",
+   "status": "verified",
+   "note": "estimate specific to the 2023 rise; placebo tests 'refuerzan la interpretación causal del efecto observado tras la subida del SMI en 2023' (p. 25)"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado (goal not evaluated; employment side effect only)",
+   "status": "verified",
+   "note": "no source evaluates the stated goal"
+  },
+  {
+   "field": "notes / verdict_reason (AIReF 2026 omitted)",
+   "claim": "the 50.000-61.000 figure comes from a 2026 study 'no abierto: se omite'",
+   "status": "wrong",
+   "note": "The study is open and cached: AIReF Estudio 1/2026 (https://www.airef.es/wp-content/uploads/2026/05/Pensiones/Estudio_Regla_Gasto_Pensiones-2026.pdf), cuadro 4 p. 29, re-estimates the 2023 rise with the full affiliation universe (p. 26): between -0,32 and -0,39 pp, 50.000-61.000 afiliados (Régimen General), 95 % CI. It is the latest AIReF estimate and must be shown."
+  },
+  {
+   "field": "notes",
+   "claim": "AIReF 2025 p. 9: 3,5 % (2018) -> 7,4 % (2023) at the minimum base",
+   "status": "verified",
+   "note": "p. 9 literal (cotizan por la base mínima, asimilables al SMI)"
+  },
+  {
+   "field": "indicators[0].before/after",
+   "claim": "Kaitz 2022 61,0 % -> 2023 62,6 % (arXiv 2603.20809, cuadro 2, p. 13)",
+   "status": "verified",
+   "note": "figures and quote are exactly those of Table 2, p. 13; ratio = Real SMI / Real Mean Wage columns; source labelled as preprint"
+  },
+  {
+   "field": "indicators[0] (series reliability)",
+   "claim": "preprint Table 2 Kaitz series is fit to publish as before/after",
+   "status": "wrong",
+   "note": "Not reliable enough to publish. Table 2 says columns are constant 2019 euros deflated by national CPI, but the SMI column cannot be: 2021 real 14.073 > nominal max 13.510 (965x14) with positive inflation; 2023 real 14.078 vs nominal 15.120 implies deflator 0,93 vs CPI 2019-2023 ~0,87; so the ratio cannot be reproduced and may mix inconsistent deflators. Level (60-64 %) and the 2021->2022 direction (preprint -1,3 pts) differ from the official Eurostat series (minimum wage as % of mean gross monthly earnings, B-S): 2019 45,6, 2020 49,6, 2021 47,5, 2022 47,6, 2023 49,1, 2024 50,0, 2025 51,9."
+  }
+ ],
+ "corrections": [
+  "notes/evidence_against/verdict_reason: add AIReF Estudio 1/2026, cuadro 4 p. 29: 2023 rise between -0,32 and -0,39 pp, 50.000-61.000 afiliados menos (re-estimate with full affiliation universe, p. 26), next to or replacing the 2025 range 55.000-85.000; delete 'estudio de 2026 no abierto: se omite'",
+  "indicators[0]: replace the preprint Kaitz with Eurostat earn_mw_avgr2 (ES, B-S, MMW_MEAN_ME_PP, % of mean gross monthly earnings): 2022 47,6 -> 2023 49,1; url https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_mw_avgr2?geo=ES; or drop the indicator. Check Eurostat metadata for which SMI month is used before publishing."
+ ],
+ "reviewed": "2026-11-11"
+}

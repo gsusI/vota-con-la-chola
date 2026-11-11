@@ -1,0 +1,53 @@
+{
+ "measure_id": "ley-12-2022-planes-pensiones-empleo",
+ "candidate_key": "ley de regulación para el impulso de los planes de pensiones de empleo, por el que se modifica el texto refund",
+ "method_version": 2,
+ "name": "Ley 12/2022: impulso de los planes de pensiones de empleo",
+ "boe_id": "BOE-A-2022-10852",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-10852",
+ "legal_status": "vigente (corrección de errores en BOE de 6-10-2022; desarrollo reglamentario por RD 668/2023)",
+ "in_force": [
+  {
+   "what": "Entrada en vigor general: fondos de pensiones de empleo de promoción pública abiertos y planes de pensiones de empleo simplificados",
+   "date": "2022-07-02",
+   "provision": "disposición final octava (p. 34)"
+  },
+  {
+   "what": "Art. 5.3.a) de la Ley de Planes y Fondos de Pensiones y cambios en la LGSS (arts. 71.1 y 147.3, disposiciones adicionales 45.ª y 47.ª: reducción de la cuota empresarial por contribuciones a planes de empleo)",
+   "date": "2023-01-01",
+   "provision": "apartado seis de la modificación de la Ley de Planes y Fondos (p. 22) y apartados uno a cuatro de la modificación de la LGSS (pp. 31-32), «con efectos de 1 de enero de 2023»"
+  }
+ ],
+ "what_changes": "Desde el 2-7-2022 crea fondos de pensiones de empleo de promoción pública abiertos, gestionados por el sector privado, y planes de empleo simplificados para pymes, autónomos y sector público. Desde el 1-1-2023 reduce la cuota empresarial a la Seguridad Social por contribuciones a planes de empleo.",
+ "stated_goal": "Extender los planes de pensiones de empleo a trabajadores sin ellos, con fondos de promoción pública de tamaño suficiente para abaratar la gestión.",
+ "stated_goal_quote": "un objetivo esencial de esta ley sea favorecer la existencia de fondos de pensiones de empleo de promoción pública con dimensión adecuada",
+ "stated_goal_url": "https://www.BOE.es/boe/dias/2022/07/01/pdfs/BOE-A-2022-10852.pdf",
+ "ex_ante": [],
+ "ex_post": [],
+ "evidence_against": [
+  {
+   "source": "Instituto Santalucía, Foro de expertos: informe de situación de la previsión social complementaria",
+   "authors_year": "Foro de expertos del Instituto Santalucía, 2026",
+   "url": "https://institutosantalucia.es/wp-content/uploads/2026/07/foro-de-expertos-informe-situacion-prevision-social-complementaria-ultimos-cambios.pdf",
+   "method": "Informe de expertos descriptivo, sin método de evaluación ni contrafactual",
+   "finding": "Los fondos de promoción pública existen sobre el papel pero no integran planes ni canalizan patrimonio; el foro concluye que el rediseño de incentivos no ha cambiado la escala de la previsión complementaria.",
+   "quote": "pese a que los fondos de pensiones de empleo de promoción pública están formalmente constituidos y registrados, su despliegue real es prácticamente inexistente",
+   "locator": "p. 5",
+   "grade": "D",
+   "direction": "negativo",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  }
+ ],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Solo hay una fuente ex post: el foro del Instituto Santalucía (2026, grado D, sin método), que describe un despliegue casi nulo de los fondos de promoción pública. No hay en caché la evaluación de la AIReF que prevé la ley.",
+ "indicators": [],
+ "notes": "La propia ley encarga a la AIReF evaluar los incentivos (p. 6 del BOE; según el foro Santalucía, unos tres años después de su entrada en vigor); esa evaluación no está en la caché y no se buscó (sin WebSearch). Los objetivos citados por el foro (p. 4: pasar de unos dos millones de trabajadores cubiertos a trece millones en 2030) no figuran en el texto de la ley y no se usan como ex ante oficial. KPMG VII Estudio de pensiones (2023) solo describe la ley. Sin serie antes/después en caché para indicadores.",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "pass",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/wave1/ley-12-2022-planes-pensiones-empleo.json"
+ },
+ "later_route": null
+}

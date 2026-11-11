@@ -10,7 +10,8 @@ its quality gate (3/5) for three reasons that the validator now blocks; read rul
   `title`, `kind` (ley, memoria/MAIN, AIReF, BdE, Fedea, INE, paper, ministerio) and `pages`.
 - One skeleton per measure (path in the worklist). Edit in place, keep every key.
 - Kit (one shell call each, output is short and has page numbers):
-  - `python3 scripts/export_public_viz_decisions.py grep "<url>" "<regex>"`: matching lines in a cached document.
+  - `python3 scripts/export_public_viz_decisions.py grep "<url>" "<regex>" [width]`: matching lines in a cached document (snippets cut at width, default 400).
+  - `python3 scripts/export_public_viz_decisions.py cache-find "<regex>"`: cached documents whose text matches.
   - `python3 scripts/export_public_viz_decisions.py fetch "<url>"`: cache a new URL (only if a cached document cites it).
   - `python3 scripts/export_public_viz_decisions.py boe-vigor BOE-A-...`: every entry-into-force clause.
   - `python3 scripts/export_public_viz_decisions.py boe-text BOE-A-...`: first 6,000 characters of the text.

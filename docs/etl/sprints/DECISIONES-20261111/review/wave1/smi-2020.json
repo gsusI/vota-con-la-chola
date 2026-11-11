@@ -1,0 +1,76 @@
+{
+ "measure_id": "smi-2020",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "950 €/mes, +5,6 %",
+   "status": "verified",
+   "note": "art. 1: 31,66 €/día o 950 €/mes; preámbulo: 5,5555555556 %"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 231/2020, de 4 de febrero, BOE-A-2020-1652",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 05/02/2020"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2020-02-06, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (05/02/2020); BOE: en vigor a partir de 2020-02-06"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2020-01-01 a 2020-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "prorrogado por RDL 38/2020",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "31,66 €/día, 950 €/mes, +5,56 %, fijos/eventuales/temporeros/hogar",
+   "status": "verified",
+   "note": "arts. 1 and 4, preámbulo"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "tiene por objeto hacer efectivo el derecho a una remuneración equitativa y suficiente; 60 % como umbral",
+   "status": "verified",
+   "note": "preámbulo literal; CEDS 60 % threshold, 'nos acerca'"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no A/B ex-post source on the stated goal for 2020; AIReF 2025 DT p. 6 analyses only 2019 and 2023; AIReF Estudio 1/2026 cuadro 4 p. 29 covers 2019, 2023, 2024 only"
+  },
+  {
+   "field": "notes",
+   "claim": "Acuerdo Social 30-1-2020; AIReF 2025 p. 6 only 2019 and 2023",
+   "status": "verified",
+   "note": "preámbulo; AIReF DT p. 6"
+  },
+  {
+   "field": "indicators[0].before/after",
+   "claim": "Kaitz 2019 60,8 % -> 2020 64,3 % (arXiv 2603.20809, cuadro 2, p. 13)",
+   "status": "verified",
+   "note": "figures and quote are exactly those of Table 2, p. 13; ratio = Real SMI / Real Mean Wage columns; source labelled as preprint"
+  },
+  {
+   "field": "indicators[0] (series reliability)",
+   "claim": "preprint Table 2 Kaitz series is fit to publish as before/after",
+   "status": "wrong",
+   "note": "Not reliable enough to publish. Table 2 says columns are constant 2019 euros deflated by national CPI, but the SMI column cannot be: 2021 real 14.073 > nominal max 13.510 (965x14) with positive inflation; 2023 real 14.078 vs nominal 15.120 implies deflator 0,93 vs CPI 2019-2023 ~0,87; so the ratio cannot be reproduced and may mix inconsistent deflators. Level (60-64 %) and the 2021->2022 direction (preprint -1,3 pts) differ from the official Eurostat series (minimum wage as % of mean gross monthly earnings, B-S): 2019 45,6, 2020 49,6, 2021 47,5, 2022 47,6, 2023 49,1, 2024 50,0, 2025 51,9."
+  }
+ ],
+ "corrections": [
+  "indicators[0]: replace the preprint Kaitz with Eurostat earn_mw_avgr2 (ES, B-S, MMW_MEAN_ME_PP, % of mean gross monthly earnings): 2019 45,6 -> 2020 49,6; url https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_mw_avgr2?geo=ES; or drop the indicator. Check Eurostat metadata for which SMI month is used before publishing."
+ ],
+ "reviewed": "2026-11-11"
+}

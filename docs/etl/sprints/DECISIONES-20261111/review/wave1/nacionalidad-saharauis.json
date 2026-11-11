@@ -1,0 +1,60 @@
+{
+ "measure_id": "nacionalidad-saharauis",
+ "pass": false,
+ "claims": [
+  {
+   "field": "boe_url",
+   "claim": "Congress initiative 122/000072 page",
+   "status": "verified",
+   "note": "page reachable"
+  },
+  {
+   "field": "legal_status",
+   "claim": "Aprobada por el Pleno el 10/09/2026 (BOCG-15-B-84-9)",
+   "status": "verified",
+   "note": "BOCG p. 1; Congress page: dictamen vote 10/09/2026 (168 sí, 31 no, 145 abst.)"
+  },
+  {
+   "field": "legal_status",
+   "claim": "en tramitación en el Senado",
+   "status": "wrong",
+   "note": "Congress page: 'Resultado tramitación: Caducado'; Senado stage 10/09/2026-06/10/2026; 'Concluido - (Caducado) desde 06/10/2026'; BOCG Congreso D-610 de 04/11/2026 p. 57 'Caducidad de la iniciativa'. Senate published enmiendas/vetos 28/09, ponencia and dictamen 02/10, votos particulares 05/10/2026; never published in BOE"
+  },
+  {
+   "field": "not_yet_in_force/in_force",
+   "claim": "no está en vigor",
+   "status": "verified",
+   "note": "no BOE publication"
+  },
+  {
+   "field": "what_changes",
+   "claim": "carta de naturaleza a nacidos en el Sáhara Occidental antes del 29/09/1977 aun sin residencia legal; descendientes 5 años para optar; 2 años de residencia legal (art. 22.1 CC)",
+   "status": "verified",
+   "note": "BOCG-15-B-84-9 pp. 3-4"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "'como instrumento para estrechar lazos entre quienes compartimos un pasado común'",
+   "status": "verified",
+   "note": "p. 3, literal"
+  },
+  {
+   "field": "verdict_reason",
+   "claim": "pendiente del Senado",
+   "status": "wrong",
+   "note": "the initiative lapsed (caducada) on 06/10/2026, declared in BOCG D-610 of 04/11/2026"
+  },
+  {
+   "field": "notes",
+   "claim": "Senado 624/000014 title; PP amendments in Comisión de Justicia (Infobae)",
+   "status": "unverifiable",
+   "note": "not checked on senado.es; the Congress page confirms Senate amendments (BOCG Senado 463_3840) but not their content"
+  }
+ ],
+ "corrections": [
+  "legal_status: 'Aprobada por el Pleno del Congreso el 10/09/2026 (BOCG-15-B-84-9); caducada en el Senado el 06/10/2026 sin llegar al BOE (BOCG Congreso D-610, 04/11/2026)'",
+  "verdict_reason: replace 'pendiente del Senado' with 'caducó en el Senado el 06/10/2026; nunca entró en vigor'",
+  "notes: drop the unverified Senate number/Infobae claim or cite the Senate BOCG 463_3840 directly; what_changes 'No está en vigor' -> 'No llegó a entrar en vigor (caducada)'"
+ ],
+ "reviewed": "2026-11-11"
+}

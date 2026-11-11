@@ -1,0 +1,80 @@
+{
+ "measure_id": "smi-2024",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "1.134 €/mes, +5 %",
+   "status": "verified",
+   "note": "art. 1: 37,8 €/día o 1.134 €/mes; preámbulo 'cinco por ciento'"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 145/2024, de 6 de febrero, BOE-A-2024-2251",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 07/02/2024"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2024-02-08, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (07/02/2024); BOE: en vigor a partir de 2024-02-08"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2024-01-01 a 2024-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "prórroga 2025 (art. 87 RDL 9/2024) sin efecto por Resolución de 22-1-2025",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "37,8 €/día, 1.134 €/mes, anual 15.876 €, +5 %",
+   "status": "verified",
+   "note": "arts. 1-3 (cuantía anual no inferior a 15.876 euros), preámbulo"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "se mantiene y consolida el objetivo de que el SMI alcance el 60 por ciento del salario medio en 2023",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "evidence_against[0].finding/locator",
+   "claim": "2024 rise: -0,49 a -0,56 pp, 78.000-90.000 afiliados; 'confirma el impacto negativo, pero moderado'",
+   "status": "verified",
+   "note": "Estudio 1/2026 p. 28 literal quote; cuadro 4 p. 29 (95 % CI, Régimen General)"
+  },
+  {
+   "field": "evidence_against[0].method",
+   "claim": "MCVL-2025 with 2024 data, 95 % CI",
+   "status": "verified",
+   "note": "p. 26 (nueva ola MCVL-2025, añade 2024), p. 29 note"
+  },
+  {
+   "field": "evidence_against[0].grade/attributes_to_measure",
+   "claim": "A, attributes true",
+   "status": "verified",
+   "note": "cuadro 4 row 'Subida SMI 2024 (+5,0%)' is specific to that rise, same exposure-intensity design as the 2025 DT; keep the p. 26 caveat (shocks 'dificultan aislar el efecto causal') visible, as notes do"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no source evaluates the stated goal"
+  },
+  {
+   "field": "notes",
+   "claim": "p. 26 caveat (inflación, guerra, inmigración); p. 28 not cumulative; +0,1 pp PIB cotizaciones all rises",
+   "status": "verified",
+   "note": "p. 26, p. 28, p. 29 literal"
+  }
+ ],
+ "corrections": [],
+ "reviewed": "2026-11-11"
+}

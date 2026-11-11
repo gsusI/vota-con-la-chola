@@ -237,3 +237,10 @@
     min-width: 14rem;
   }
 }
+
+.viz .decNote {
+  background: var(--viz-band);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.98rem;
+}

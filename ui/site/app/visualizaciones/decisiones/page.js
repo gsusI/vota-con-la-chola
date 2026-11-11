@@ -23,6 +23,7 @@ export function generateMetadata() {
 }
 
 const C = { es: "#2a78d6", eu: "#52514e" };
+const REPORT_URL = "https://github.com/gsusI/vota-con-la-chola/issues/new?template=data_correction.yml&title=%5BCorrection%5D%20Decisiones%3A%20";
 const PANEL = {
   empleo: { indicator: "temporalidad", suffix: " %", notes: [{ from: 2020.2, to: 2021.3, label: "Covid", short: "Covid" }] },
   sanidad: { indicator: "espera_quirurgica", suffix: "", notes: [{ from: 2020, to: 2021, label: "Covid", short: "Covid" }] },
@@ -100,7 +101,7 @@ export default function DecisionesPage() {
       />
       <StaticRouteHero
         eyebrow="Visualizaciones · datos públicos"
-        title={`Qué votó cada partido en empleo, autónomos, sanidad e inmigración: ${h.measures} medidas con efecto legal; de las ${h.documented} ya documentadas, ${h.evaluated === 0 ? "ninguna tiene" : `${h.evaluated} tienen`} evaluación posterior`}
+        title={`Qué votó cada partido en empleo, autónomos, sanidad e inmigración: ${h.measures} medidas con efecto legal; de las ${h.documented} ya documentadas, ${h.evaluated === 0 ? "ninguna tiene" : h.evaluated === 1 ? "1 tiene" : `${h.evaluated} tienen`} evaluación posterior`}
         summary={`Leyes, decretos-ley y presupuestos votados en el Congreso entre ${dateEs(h.first)} y ${dateEs(h.last)}: qué cambiaba cada uno, quién lo apoyó, si sus votos decidían el resultado y qué dicen las evaluaciones oficiales y académicas. No es una nota de los partidos ni una cuenta de «empleos creados»: eso no se puede medir.`}
         actions={[
           { href: "/visualizaciones/data/decisiones.csv", label: "Descargar datos (CSV)" },
@@ -109,6 +110,18 @@ export default function DecisionesPage() {
           { href: "#lo-que-no-dicen", label: "Lo que estos datos no dicen" },
         ]}
       />
+
+      <section className="card vizProse" aria-label="Aviso sobre cómo se hizo">
+        <p className="decNote" role="note">
+          <strong>Versión en revisión.</strong> Las fichas de las medidas las documentaron agentes de IA a partir de las fuentes oficiales
+          enlazadas, y cada ficha publicada la comprobó contra sus fuentes un segundo agente de IA; todavía no las ha revisado ninguna persona.
+          Los votos y quién decidía cada resultado salen directamente de los datos abiertos del Congreso, sin IA. Si ves un error,{" "}
+          <a href={REPORT_URL} rel="noopener noreferrer" target="_blank">
+            avisa en el repositorio del proyecto
+          </a>{" "}
+          con el enlace a la medida y a la fuente.
+        </p>
+      </section>
 
       <section className="card vizProse" id="resumen" aria-labelledby="resumen-title">
         <h2 id="resumen-title">Lo esencial</h2>
@@ -121,13 +134,12 @@ export default function DecisionesPage() {
           </li>
           <li>
             <strong>
-              De las {h.documented} medidas ya documentadas y revisadas, {h.evaluated === 0 ? "ninguna tiene" : `${h.evaluated} tienen`} una
+              De las {h.documented} medidas ya documentadas y revisadas, {h.evaluated === 0 ? "ninguna tiene" : h.evaluated === 1 ? "1 tiene" : `${h.evaluated} tienen`} una
               evaluación posterior de calidad
             </strong>{" "}
             (causal, o descriptiva atribuida por la propia fuente) sobre el objetivo que la medida declaraba. «Sin evaluar» no es «sin efecto»: es
-            que nadie lo ha medido de forma que se pueda comprobar. Las otras {h.measures - h.documented} muestran ya sus votos, pero su evidencia
-            está pendiente: el control de calidad de la primera tanda no alcanzó el umbral fijado y la documentación se paró hasta corregir el
-            método.
+            que nadie lo ha medido de forma que se pueda comprobar. Las otras {h.measures - h.documented} muestran ya sus votos; su evidencia
+            se publicará cuando esté documentada y revisada.
           </li>
           <li>
             <strong>{h.narrow} se decidieron por 10 votos o menos.</strong> En esas, el voto de varios partidos fue decisivo: sin sus votos el resultado
@@ -344,8 +356,9 @@ export default function DecisionesPage() {
           Regla de selección fija, publicada antes de documentar ninguna medida. Votos contados diputado a diputado; «decisivo» significa que,
           si los diputados de ese partido no hubieran votado, el resultado habría sido el contrario (las leyes orgánicas necesitan 176 síes). Cada
           ficha documentada fue revisada por un segundo revisor que solo veía la ficha y sus enlaces, con una regla fijada antes: al menos 4 de
-          5 fichas con todas sus afirmaciones verificadas. La primera tanda dio 3 de 5; las dos fallidas se corrigieron con lo que señaló la
-          revisión (una fecha de entrada en vigor y dos cifras que no eran evaluación ni la misma serie) y el resto quedó sin documentar. Datos: <a href="/visualizaciones/data/decisiones.csv">CSV</a> ·{" "}
+          5 fichas con todas sus afirmaciones verificadas. La primera tanda dio 3 de 5 y se paró; tras corregir el método, la segunda dio
+          4 de 5. Solo se publican fichas que superaron la revisión o se corrigieron exactamente como dijo el revisor (cada ficha lo
+          indica). Los decretos del salario mínimo los aprueba el Gobierno sin votación: van en un bloque aparte. Datos: <a href="/visualizaciones/data/decisiones.csv">CSV</a> ·{" "}
           <a href="/visualizaciones/data/decisiones.json">JSON</a>.
         </p>
       </section>

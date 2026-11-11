@@ -1,0 +1,62 @@
+{
+ "measure_id": "pge-2023-seccion-32",
+ "pass": true,
+ "claims": [
+  {
+   "field": "boe_id/legal_status",
+   "claim": "Ley 31/2022, de 23 de diciembre, BOE 24-12-2022; créditos del ejercicio 2023",
+   "status": "verified",
+   "note": "PDF and act.php. Non-blocking: the 2023 budget was later extended (prórroga, art. 134.4 CE); consider saying so if the page shows later years"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "créditos sección 32 en vigor desde 2023-01-01",
+   "status": "verified",
+   "note": "The law has NO entry-into-force clause of its own: full cached text checked, last final provision is DF 39.ª 'Desarrollo reglamentario' (p. 346) before the signature; the only 'entrará en vigor' hits (pp. 335, 338) amend other laws. Date comes from the BOE ficha ('Entrada en vigor: 01/01/2023') and art. 1 ('ejercicio del año 2023'). Suggest provision: 'ficha BOE (entrada en vigor 01/01/2023); art. 1, ejercicio 2023; la ley no tiene cláusula de entrada en vigor'"
+  },
+  {
+   "field": "what_changes",
+   "claim": "sección 32 total 45.983 M€",
+   "status": "verified",
+   "note": "p. 589, column Total of 'Resumen general por servicios y capítulos del presupuesto de gastos', Estado, miles de euros: 45.983.013,88"
+  },
+  {
+   "field": "what_changes",
+   "claim": "32.02 SE Seguridad Social y Pensiones 44.744 M€",
+   "status": "verified",
+   "note": "p. 589 Total 44.743.844,32 (cap. 4 34.726.029,32 p. 587; cap. 8 10.005.606,15 p. 588)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "préstamo hasta 10.004 M€ a la Tesorería, p. 14",
+   "status": "verified",
+   "note": "p. 14: 'hasta 10.003.806,15 miles de euros'"
+  },
+  {
+   "field": "what_changes",
+   "claim": "32.03 SE Migraciones 815 M€",
+   "status": "verified",
+   "note": "p. 589 Total 814.509,10"
+  },
+  {
+   "field": "notes",
+   "claim": "32.01 61.008,57; 32.04 2.751,84; 32.50 360.900,05; art. 12 pensiones mínimas 7.261.170,00, IMV 3.096.926,14, PNC 1.339.001,30; Pacto de Toledo rec. 1.ª",
+   "status": "verified",
+   "note": "pp. 29-30, 589"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "'proporcionar cobertura adecuada a las obligaciones de la Seguridad Social y posibilitar el equilibrio presupuestario de la misma'",
+   "status": "verified",
+   "note": "literal at p. 202 (préstamo provision) and preamble p. 14"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no ex-post sources"
+  }
+ ],
+ "corrections": [],
+ "reviewed": "2026-11-11"
+}

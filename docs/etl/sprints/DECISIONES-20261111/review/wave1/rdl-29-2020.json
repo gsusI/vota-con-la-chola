@@ -1,0 +1,82 @@
+{
+ "measure_id": "rdl-29-2020",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "RDL 29/2020: teletrabajo en las AAPP y refuerzo de personal sanitario",
+   "status": "verified",
+   "note": "Coincide con el título oficial."
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2020-11415",
+   "status": "verified",
+   "note": "BOE de 30/09/2020."
+  },
+  {
+   "field": "legal_status",
+   "claim": "convalidado (Resolución de 15 de octubre de 2020)",
+   "status": "verified",
+   "note": "Ref. BOE-A-2020-12690."
+  },
+  {
+   "field": "legal_status",
+   "claim": "el art. 47 bis del EBEP sigue vigente; arts. 2 y 3 temporales",
+   "status": "verified",
+   "note": "EBEP consolidado (actualización de 03/10/2026): art. 47 bis vigente, añadido por el art. 1 del RDL 29/2020; DF 4.ª.2 hace temporales los arts. 2 y 3."
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "Todo el RDL desde 2020-10-01; arts. 2 y 3 por 12 meses prorrogables por periodos de 3 meses o inferiores; DF 4.ª apdos. 1 y 2, p. 10",
+   "status": "verified",
+   "note": "p. 10: entra en vigor el día siguiente a la publicación; arts. 2 y 3 por un plazo inicial de doce meses prorrogable por periodos de tres meses o inferiores."
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "fin del plazo de seis meses para adaptar la normativa de teletrabajo, 2021-04-01, DF 2.ª p. 10",
+   "status": "verified",
+   "note": "DF 2.ª (p. 10): seis meses desde la entrada en vigor (1-10-2020)."
+  },
+  {
+   "field": "what_changes",
+   "claim": "art. 47 bis EBEP: teletrabajo voluntario, reversible, requiere autorización; seis meses para adaptar la normativa",
+   "status": "verified",
+   "note": "p. 8: modalidad «autorizada», «carácter voluntario y reversible salvo en supuestos excepcionales debidamente justificados»."
+  },
+  {
+   "field": "what_changes",
+   "claim": "Arts. 2 y 3 permiten a las CCAA contratar sanitarios sin especialidad reconocida en España, por 12 meses prorrogables",
+   "status": "wrong",
+   "note": "Solo el art. 2 trata de contratación (CCAA e INGESA; graduados sin título de Especialista reconocido en España y especialistas con título de fuera de la UE con informe-propuesta). El art. 3 («Prestación excepcional de servicios», p. 9) permite destinar a personal médico y de enfermería a unidades de otra especialidad; no es contratación."
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "Las medidas contenidas en esta norma tienen la finalidad de asegurar el normal funcionamiento de las Administraciones Públicas, impulsando nuevas formas de organización y estructuración del trabajo",
+   "status": "verified",
+   "note": "Literal, p. 1 del PDF."
+  },
+  {
+   "field": "stated_goal",
+   "claim": "Asegurar el funcionamiento de las AAPP con teletrabajo y reforzar el SNS ampliando la contratación",
+   "status": "verified",
+   "note": "Coincide con el preámbulo."
+  },
+  {
+   "field": "verdict_reason",
+   "claim": "EGAP (2021) y Revista Democracia y Gobierno Local 51 son análisis jurídicos sin atribución de resultados",
+   "status": "verified",
+   "note": "EGAP p. 2-3 (marco «fragmentario e insuficiente», adaptación al RDL); RDGL51 p. 15 (22 % teletrabajando a 1-10-2020, dato puntual)."
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "Sin fuentes A/B; coherente con la regla."
+  }
+ ],
+ "corrections": [
+  "what_changes: «Arts. 2 y 3, por 12 meses prorrogables: el art. 2 permite a las CCAA y al INGESA contratar a graduados sin título de Especialista reconocido en España y a especialistas con título de fuera de la UE; el art. 3 permite destinar a personal médico y de enfermería a unidades de otra especialidad.»"
+ ],
+ "reviewed": "2026-11-11"
+}

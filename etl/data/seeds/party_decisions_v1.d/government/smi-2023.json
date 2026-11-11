@@ -1,0 +1,64 @@
+{
+ "decision_id": "smi-2023",
+ "method_version": 2,
+ "name": "Subida del salario mínimo a 1.080 euros al mes en 2023 (+8 %)",
+ "boe_id": "BOE-A-2023-3982",
+ "boe_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-3982",
+ "legal_status": "Agotado: surtió efectos del 1-1-2023 al 31-12-2023; prorrogado por el Real Decreto-ley 8/2023 hasta el SMI de 2024",
+ "in_force": [
+  {
+   "what": "Entrada en vigor del real decreto",
+   "date": "2023-02-16",
+   "provision": "disposición final tercera (día siguiente a su publicación en el BOE)"
+  },
+  {
+   "what": "Efectos de las nuevas cuantías del SMI",
+   "date": "2023-01-01",
+   "provision": "disposición final tercera: efectos del 1 de enero al 31 de diciembre de 2023"
+  }
+ ],
+ "what_changes": "Fija el salario mínimo interprofesional para 2023 en 1.080 euros al mes (36 euros/día), un 8 % más que en 2022, para fijos, eventuales, temporeros y empleados de hogar, con efectos del 1 de enero al 31 de diciembre de 2023.",
+ "stated_goal": "Remuneración equitativa y suficiente para un nivel de vida decoroso y culminar el objetivo de que el SMI alcance el 60 % del salario medio en 2023.",
+ "stated_goal_quote": "se culmina el objetivo de que el salario mínimo interprofesional alcance el 60 por ciento del salario medio en 2023",
+ "stated_goal_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-3982",
+ "ex_ante": [],
+ "ex_post": [],
+ "evidence_against": [
+  {
+   "source": "AIReF, documento técnico «Análisis microeconómico del impacto del salario mínimo» (22-9-2025)",
+   "authors_year": "AIReF, 2025",
+   "url": "https://www.airef.es/wp-content/uploads/2025/09/Documentos-tecnicos-macro-opinion-sostenibilidad/250922_DT_SMI.pdf",
+   "method": "Modelo por celdas de la Muestra Continua de Vidas Laborales 2018-2023 con intensidad de tratamiento (porcentaje de afiliados con bases inferiores al nuevo umbral), con controles y pruebas de robustez",
+   "finding": "Estima que la subida de 2023 redujo la afiliación al Régimen General entre 0,34 y 0,53 puntos (55.000 a 85.000 afiliados menos), elasticidad de -0,07 a -0,05, más que en 2019; no mide nivel de vida ni el 60 % del salario medio.",
+   "quote": "En el caso de 2023, el efecto estimado sería algo mayor, entre 0,34 y 0,53 puntos porcentuales, esto es, entre 55.000 y 85.000 afiliados menos",
+   "locator": "p. 24 (resultados; elasticidad -0,07 a -0,05); p. 18 (intensidad del tratamiento); p. 28 (conclusiones)",
+   "grade": "A",
+   "direction": "negative",
+   "attributes_to_measure": true,
+   "about_other_country": false
+  },
+  {
+   "source": "AIReF, Estudio 1/2026 sobre la regla de gasto de pensiones (29-5-2026)",
+   "authors_year": "AIReF, 2026",
+   "url": "https://www.airef.es/wp-content/uploads/2026/05/Pensiones/Estudio_Regla_Gasto_Pensiones-2026.pdf",
+   "method": "Reestimación con el universo completo de afiliados (Muestra Continua de Vidas Laborales), misma estrategia que el documento técnico de 2025",
+   "finding": "Reestima el efecto de la subida de 2023: entre −0,32 y −0,39 puntos de afiliación, entre 50.000 y 61.000 afiliados menos al Régimen General.",
+   "quote": "Entre 50.000 y 61.000",
+   "locator": "p. 29, cuadro 4 (método, p. 26)",
+   "grade": "A",
+   "direction": "negativo",
+   "attributes_to_measure": true
+  }
+ ],
+ "verdict": "no_evaluado",
+ "verdict_reason": "Ninguna fuente evalúa el objetivo declarado (nivel de vida decoroso, 60 % del salario medio). Sobre el empleo, efecto secundario: AIReF 2025 (A) estima entre 55.000 y 85.000 afiliados menos; la AIReF lo reestimó en 2026 entre 50.000 y 61.000 afiliados menos.",
+ "indicators": [],
+ "notes": "La literatura en caché (Gorjón et al. 2024, Christl et al. 2024, Lacasa-Cazcarra 2026, nota de prensa sobre la AIReF de 2020) evalúa la subida de 2019, no la de 2023: no se reutiliza como evaluación de este real decreto. El documento técnico de la AIReF de 22-9-2025 (en caché; descargado con curl porque su cadena TLS falla en Python) evalúa solo las subidas de 2019 y 2023 (p. 6). Índice de Kaitz del cuadro 2 del preprint: es un cociente coherente con sus columnas, pero las columnas en euros reales no cuadran con el IPC, por eso solo se usa el cociente; mide el salario medio anual de la AEAT (incluye tiempo parcial), no el salario neto medio que usa el Comité Europeo de Derechos Sociales. Según la AIReF (2025, p. 9) el porcentaje de la muestra que cobra el SMI pasa del 3,5 % en 2018 al 7,4 % en 2023 (sin dato de 2022 en el texto, no se usa como indicador). La AIReF señala que el resultado de 2023 está dentro del rango de la literatura (p. 24). Prensa (El Español, 30-5-2026) cita otra cifra de la AIReF (50.000-61.WebSearch: 2, para localizar el documento técnico de la AIReF. Revisión 2026-11-11: se retira el índice de Kaitz del preprint (sus columnas en euros reales no cuadran con el IPC y su nivel y dirección difieren de Eurostat earn_mw_avgr2).",
+ "retrieved": "2026-11-11",
+ "review": {
+  "status": "corrected",
+  "date": "2026-11-11",
+  "file": "docs/etl/sprints/DECISIONES-20261111/review/wave1/smi-2023.json",
+  "corrections": 2
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "measure_id": "smi-2025",
+ "pass": true,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "1.184 €/mes, +4,41 %",
+   "status": "verified",
+   "note": "art. 1: 39,47 €/día o 1184 €/mes; preámbulo 'cuatro con cuarenta y uno por ciento'"
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "RD 87/2025, de 11 de febrero, BOE-A-2025-2576",
+   "status": "verified",
+   "note": "BOE act.php header: publicado 12/02/2025"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "entrada en vigor 2025-02-13, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª: día siguiente a la publicación (12/02/2025); BOE: en vigor a partir de 2025-02-13"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "efectos 2025-01-01 a 2025-12-31, DF 3ª",
+   "status": "verified",
+   "note": "DF 3ª literal"
+  },
+  {
+   "field": "legal_status",
+   "claim": "prórroga (RDL 16/2025) sin efecto por Resolución de 27-1-2026",
+   "status": "verified",
+   "note": "BOE consolidated header (prórroga / sin efecto)"
+  },
+  {
+   "field": "what_changes",
+   "claim": "39,47 €/día, 1.184 €/mes, anual 16.576 €, +4,41 %",
+   "status": "verified",
+   "note": "arts. 1-3, preámbulo"
+  },
+  {
+   "field": "stated_goal/stated_goal_quote",
+   "claim": "se mantiene el objetivo de que el SMI alcance el 60 por ciento del salario medio",
+   "status": "verified",
+   "note": "preámbulo literal"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "no A/B ex-post source on the stated goal for 2025; AIReF 2025 DT p. 6 analyses only 2019 and 2023; AIReF Estudio 1/2026 cuadro 4 p. 29 covers 2019, 2023, 2024 only"
+  },
+  {
+   "field": "notes",
+   "claim": "AIReF 1/2026 estimates only 2019, 2023, 2024; Comisión Asesora report 15-1-2025",
+   "status": "verified",
+   "note": "cuadro 4 p. 29; preámbulo"
+  }
+ ],
+ "corrections": [],
+ "reviewed": "2026-11-11"
+}

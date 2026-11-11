@@ -1,0 +1,64 @@
+{
+ "measure_id": "rdl-11-2024",
+ "pass": false,
+ "claims": [
+  {
+   "field": "boe_id",
+   "claim": "BOE-A-2024-26917, RDL 11/2024 published BOE 24-12-2024",
+   "status": "verified",
+   "note": "PDF header and act.php"
+  },
+  {
+   "field": "legal_status",
+   "claim": "vigente; convalidado por Resolución de 22 de enero de 2025",
+   "status": "verified",
+   "note": "act.php: 'Acuerdo de convalidación, por Resolución de 22 de enero de 2025 (Ref. BOE-A-2025-1138)'"
+  },
+  {
+   "field": "in_force[0]",
+   "claim": "general entry 2024-12-25, incl. art.1 apartados ocho (nueva DA 60.ª LGSS) y nueve (jubilación parcial manufacturera hasta 31-12-2029)",
+   "status": "verified",
+   "note": "DF 3.ª p. 21 'día siguiente al de su publicación' (BOE 24-12-2024); p. 15 Ocho = DA sexagésima, Nueve = DT 4.ª ap. 6 'pensiones causadas antes del 1 de enero de 2030'; p. 4 'hasta el 31 de diciembre de 2029'"
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "art. 1 (salvo ocho y nueve), arts. 2 y 3 desde 2025-04-01",
+   "status": "verified",
+   "note": "DF 3.ª p. 21: 'comenzarán su vigencia el día 1 de abril de 2025'"
+  },
+  {
+   "field": "what_changes",
+   "claim": "la jubilación activa deja de exigir requisitos previos",
+   "status": "wrong",
+   "note": "pp. 3, 10: elimina el requisito de haber cotizado lo suficiente para el 100 % de la base reguladora (basta con tener derecho a pensión), pero ahora exige que haya transcurrido al menos un año desde la edad ordinaria de jubilación"
+  },
+  {
+   "field": "what_changes",
+   "claim": "compatible con el complemento por demora; cuantía del 45 % (un año de demora) al 100 % (cinco o más años); reforma jubilación parcial y contrato de relevo; ampliación a 2029 en industria manufacturera desde 25-12-2024",
+   "status": "verified",
+   "note": "pp. 2-4, 10, 18"
+  },
+  {
+   "field": "stated_goal",
+   "claim": "salida del mercado de trabajo más progresiva y flexible; incentivar la permanencia en la actividad",
+   "status": "verified",
+   "note": "p. 2"
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "con la finalidad de acabar con la dicotomía entre trabajador y pensionista",
+   "status": "verified",
+   "note": "p. 2, literal"
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado (no A/B ex-post source attributes results)",
+   "status": "verified",
+   "note": "El Independiente 14-07-2026 gives ministry counts (78.603; 9,8 %; 73.393 verified) with no evaluation; Santalucía piece analyses legislation"
+  }
+ ],
+ "corrections": [
+  "what_changes: replace 'deja de exigir requisitos previos' with 'deja de exigir haber cotizado lo suficiente para el 100 % de la base reguladora (basta con tener derecho a pensión) y exige al menos un año de demora desde la edad ordinaria' (BOE pp. 3 y 10)"
+ ],
+ "reviewed": "2026-11-11"
+}

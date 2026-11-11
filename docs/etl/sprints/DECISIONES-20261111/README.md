@@ -157,3 +157,62 @@ only pass/corrected.
 3. Second pilot of 5 (different measures) with those fixes; scale only if it reaches ≥ 4 of 5.
 4. Data gap: load the XIV votes before 2022-10-04 (labour reform RDL 32/2021, RDL 13/2022 on the self-employed) with
    the ETL's own Congress client; then re-run `candidates`.
+
+## Phase 2 (2026-11-11, coordinator's three changes)
+
+### Where we are
+
+1. **Data gap closed.** Congress XIV votes from 2020-02-04 (first plenary with published roll-call votes) to
+   2022-09-29 loaded with the existing ingest (`scripts/ingestar_parlamentario_es.py ingest --source congreso_votaciones
+   --congreso-legs 14 --since-date 2019-12-03 --until-date 2022-10-03`) into `etl/data/staging/decisiones-xiv.db`
+   (not committed): 4,205 votes, 1,467,401 deputy votes, connector note `network` (no failed files; a first
+   `--strict-network` run aborted after one HTML answer and was rerun without strict mode). No shared code changed.
+   `export_public_viz_decisions.py backfill` commits the 338 binding votes (final, decree-law, totalidad) with
+   per-party counts and the raw payload sha256 (`party_decisions_v1.d/votes/xiv_2019_2022.json`); 193 contested
+   non-budget ones classified with the atlas codebook by one agent (`prompts/clasificar-xiv-vinculantes.md`,
+   `votes/xiv_2019_2022_classes.json`; 126 with an axis; most labels rest on the title because the BOE excerpt was
+   mostly cross-references). Same rule (keyword amendment above): **50 measures** (empleo 27, sanidad 11, autónomos 10,
+   inmigración 6). Empleo exceeds the 15 cap of §3: votes stay published for all 50 (mechanical); the cap governs
+   documentation order and is not applied yet (needs the people-affected figures).
+2. **Government-only block.** `GOV_RULES`: every minimum-wage royal decree from 2019 found by a fixed BOE query (8:
+   2019-2026), attributed to the governing parties by date (`GOVERNMENTS`), flagged «requiere gobernar», never set
+   against the opposition; 10 Congress motions/PNL on the minimum wage shown as positions only.
+3. **Failure causes fixed** (validator v2, `method_version: 2`): monitoring statistics cannot be graded A/B unless the
+   source attributes the change (`attributes_to_measure`); one named series per before/after (`same_series` +
+   `series_note` for two documents); `in_force` rows from the text (`boe-vigor`, `boe-article`). Kit: shared fetch
+   cache with pdftotext and page-aware `grep`, `cache-find`, honest User-Agent, unverified TLS only for airef.es
+   (AGENTS.md rule), BOE helpers. Prompt v2: `prompts/documentar-medidas-v2.md`.
+
+### Gates
+
+- **Pilot 2** (5 new: RDL 32/2021, RDL 13/2022, RDL 8/2021 from the backfill; LO 1/2026; SMI 2019): **4/5 fully
+  verified, gate passed** (`review/pilot2/`). The labour reform failed on two attribution flags and an author line;
+  corrected as the reviewer said.
+- **Wave 1** (8 measures drawn with `random.Random(20261112)` from the pending ones + the other 7 SMI decrees): all 15
+  reviewed (`review/wave1/`): 6 passed first time, 9 corrected exactly as the reviewer said (provision and date rows,
+  a modifier that only extended a decree, art. 2 vs art. 3, a deduction called an exemption, one wording on
+  requirements, a bill that lapsed in the Senate on 2026-10-06, the 60 % goal wording, and a Kaitz series from an
+  unreviewed preprint that contradicts Eurostat, dropped). **Random 10** (`random.Random(20261111)` over the 15:
+  ley-12-2022, nacionalidad-saharauis, pge-2023-s32, rdl-11-2024, rdl-2-2021, rdl-29-2020, rdl-5-2021, smi-2023,
+  smi-2024, smi-2026): **5/10 fully verified first time, 5 corrected**; nothing published without passing or the
+  reviewer's correction. First-pass quality at scale (6/15) is below the pilots (4/5): the reviewer is doing real
+  work, so any further scaling keeps one review per item.
+- Published now: **17 measures + 8 SMI decrees with evidence** (25 items; 1 «mixta» = labour reform, 24 «sin
+  evaluar» for their stated goal). A/B evidence found: labour reform (B both ways); SMI 2019 (three A studies that
+  disagree), SMI 2023 and 2024 (AIReF A: 50,000-85,000 and 78,000-90,000 fewer affiliates, a side effect, not the
+  decrees' stated goal). 33 measures stay «pendiente de documentar» with votes only.
+
+### Cost (input tokens, from `scripts/subagent_usage_report.py`)
+
+Drafting 1.9 M per measure (pilot 1) → 1.1 M (pilot 2) → ~1.2 M (wave 1, 2-4 items per agent); scouting 0.15 M per
+measure (Sonnet, 2 searches each); review ~1.2-1.8 M per measure. **The 0.5 M target was not reached**: every agent
+turn re-reads ~90 k tokens of base context, so 0.5 M means ≤ 5 turns per measure. Next lever: a deterministic
+pre-extraction step that puts the quotes the agent must verify (preamble goal sentence, `in_force` rows, amounts,
+candidate evaluation passages by keyword) into the worklist, so drafting is one edit and review is a diff check.
+
+### What is next
+
+1. Pre-extraction step above, then document the remaining 33 in waves with one review per item; apply the §3 cap for
+   empleo (rank by people affected from the impact report) to order the work.
+2. `congreso-status` helper (lapsed bills are otherwise invisible to the selection rule).
+3. Human review of the classification of the 193 backfilled votes (title-only labels) and of the published fichas.

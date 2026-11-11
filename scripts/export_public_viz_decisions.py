@@ -529,7 +529,7 @@ def validate_v2(m: dict, where: str, took_effect: bool = True) -> list[str]:
         if len(urls) > 1 and not (ind.get("same_series") and ind.get("series_note")):
             errors.append(f"{where}: indicators[{i}] before/after from different documents: set same_series + series_note "
                           "only if it is the same series and scope, otherwise drop it")
-    if took_effect:
+    if took_effect and not m.get("not_yet_in_force"):  # e.g. passed by Congress, still in the Senate
         if not m.get("in_force"):
             errors.append(f"{where}: in_force missing (dates and provisions from boe-vigor)")
         for i, f in enumerate(m.get("in_force") or []):
@@ -769,6 +769,10 @@ def build(votes: Votes, seed: dict, worklist: list[dict], empleo: dict, sanidad:
             "parties": party_rows,
             "documented": m is not None,
         }
+        if m and m.get("lapsed"):
+            # Passed by Congress but lapsed before publication (e.g. in the Senate): it never took effect.
+            row["took_effect"] = False
+            row["lapsed"] = True
         if m:
             for k in ("name", "what_changes", "stated_goal", "boe_url", "boe_id", "legal_status", "ex_ante", "ex_post",
                       "evidence_against", "verdict", "verdict_reason", "indicators", "indicator_note", "later_route", "in_force",
@@ -930,6 +934,19 @@ def boe_preamble(boe_id: str, chars: int = 2500) -> str:
     return text[:chars]
 
 
+def cache_find(pattern: str, limit: int = 20) -> list[str]:
+    """Cached documents whose text matches a regex: URL and number of matching lines."""
+    rx, out = re.compile(pattern, re.I), []
+    for meta_path in sorted(CACHE.glob("*.json")):
+        meta = load(meta_path)
+        if "text_path" not in meta:
+            continue
+        hits = sum(1 for line in (REPO_ROOT / meta["text_path"]).read_text(encoding="utf-8", errors="replace").splitlines() if rx.search(line))
+        if hits:
+            out.append(f"{hits:5d}  {meta['url']}")
+    return sorted(out, reverse=True)[:limit]
+
+
 def boe_pdf_url(boe_id: str) -> str | None:
     xml = http_text(f"https://www.boe.es/diario_boe/xml.php?id={boe_id}")
     m = re.search(r"<url_pdf>([^<]+)</url_pdf>", xml)
@@ -956,7 +973,7 @@ def boe_article(boe_id: str, heading: str, chars: int = 4000) -> str:
     for n, page in enumerate(pages, start=1):
         text += f"\n[p. {n}]\n" + page
     flat = re.sub(r"[ \t]+", " ", text)
-    head = re.compile(r"^\s*" + re.escape(heading) + r"\b", re.I | re.M)
+    head = re.compile(r"^\s*" + re.escape(heading[:1].upper() + heading[1:]) + r"\b", re.M)  # headings are capitalised
     starts = [m.start() for m in head.finditer(flat)]
     if not starts:
         return f"heading not found: {heading}"
@@ -988,6 +1005,8 @@ def enrich_worklist(worklist: list[dict], only: set[str] | None = None) -> list[
 # ----------------------------------------------------------------------------------------- shared fetch cache (kit)
 
 CACHE = REPO_ROOT / "etl/data/cache/decisiones"
+# Hosts with a broken TLS chain from this environment (AGENTS.md: unverified TLS surgically per host, never globally).
+INSECURE_TLS_HOSTS = {"www.airef.es", "airef.es"}
 KIT_UA = "vota-con-la-chola-research/1.0 (+https://votaconlachola.org; public-data research)"
 
 
@@ -1012,7 +1031,12 @@ def fetch_cached(url: str, timeout: int = 60) -> dict:
         import urllib.parse
         safe_url = urllib.parse.quote(url, safe=":/?&=%#+,;@~!$'()*")
         req = urllib.request.Request(safe_url, headers={"User-Agent": KIT_UA, "Accept": "*/*"})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        ctx = None
+        if urllib.parse.urlparse(url).hostname in INSECURE_TLS_HOSTS:
+            import ssl
+            ctx = ssl._create_unverified_context()  # noqa: S323 - host listed in INSECURE_TLS_HOSTS
+            meta["tls_unverified"] = True
+        with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
             body = resp.read()
             meta |= {"status": resp.status, "content_type": resp.headers.get("Content-Type", "")}
     except Exception as exc:  # noqa: BLE001 - record the failure so nobody retries blindly
@@ -1040,7 +1064,7 @@ def fetch_cached(url: str, timeout: int = 60) -> dict:
     return meta
 
 
-def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40) -> list[str]:
+def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40, width: int = 400) -> list[str]:
     """Lines matching a regex in a cached document, prefixed with [p. N] (PDF page) and line number."""
     meta = fetch_cached(url)
     if "text_path" not in meta:
@@ -1053,7 +1077,7 @@ def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40) -> li
             if rx.search(line):
                 lo, hi = max(0, i - context), min(len(lines), i + context + 1)
                 snippet = " / ".join(re.sub(r"\s+", " ", l).strip() for l in lines[lo:hi] if l.strip())
-                out.append(f"[p. {page_no}] {snippet[:400]}")
+                out.append(f"[p. {page_no}] {snippet[:width]}")
                 if len(out) >= limit:
                     return out
     return out
@@ -1062,7 +1086,7 @@ def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40) -> li
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "backfill", "classify-worklist", "government", "validate", "export", "boe-search", "boe-text", "boe-vigor", "boe-article", "enrich", "fetch", "grep"])
+    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "backfill", "classify-worklist", "government", "validate", "export", "boe-search", "boe-text", "boe-vigor", "boe-article", "cache-find", "enrich", "fetch", "grep"])
     ap.add_argument("args", nargs="*", help="boe-search: title words; boe-text: BOE id; enrich: output path")
     ap.add_argument("--out-json", type=Path, default=OUT_JSON)
     ap.add_argument("--out-csv", type=Path, default=OUT_CSV)
@@ -1076,8 +1100,13 @@ def main(argv: list[str] | None = None) -> int:
             meta = fetch_cached(url)
             print(json.dumps({k: meta.get(k) for k in ("url", "status", "error", "sha256", "pages", "chars", "text_path")}, ensure_ascii=False))
         return 0
+    if args.command == "cache-find":
+        for line in cache_find(args.args[0]):
+            print(line)
+        return 0
     if args.command == "grep":
-        for line in grep_cached(args.args[0], args.args[1]):
+        width = int(args.args[2]) if len(args.args) > 2 else 400
+        for line in grep_cached(args.args[0], args.args[1], width=width):
             print(line)
         return 0
     if args.command == "boe-article":

@@ -1,0 +1,90 @@
+{
+ "measure_id": "rdl-5-2026",
+ "pass": false,
+ "claims": [
+  {
+   "field": "name",
+   "claim": "RDL 5/2026: medidas urgentes por temporales en Andalucía y Extremadura",
+   "status": "verified",
+   "note": "Art. 1 (p. 17): daños de inundaciones y otros sucesos en municipios de Andalucía y Extremadura."
+  },
+  {
+   "field": "boe_id/boe_url",
+   "claim": "BOE-A-2026-3810",
+   "status": "verified",
+   "note": "RDL 5/2026, de 17 de febrero; BOE de 19/02/2026."
+  },
+  {
+   "field": "legal_status",
+   "claim": "convalidado (Resolución de 18 de marzo de 2026)",
+   "status": "verified",
+   "note": "Ref. BOE-A-2026-6483."
+  },
+  {
+   "field": "legal_status",
+   "claim": "art. 35 modificado por el RDL 25/2026",
+   "status": "verified",
+   "note": "Consolidado: art. 35.1 modificado por la DF 3.ª del RDL 25/2026, de 29 de septiembre (BOE-A-2026-20265). Además hay una corrección de errores (BOE-A-2026-6005), que no es modificación."
+  },
+  {
+   "field": "in_force[0].what",
+   "claim": "art. 28: deducción en el IRPF ... (nueva DA 61.ª Ley 35/2006)",
+   "status": "wrong",
+   "note": "El art. 28 (p. 45) «modifica» la DA 61.ª, que ya existía (preámbulo p. 8: «se introdujo una nueva disposición adicional sexagésima primera» antes). Fecha 2026-01-01 y p. 45 correctas."
+  },
+  {
+   "field": "in_force[1]",
+   "claim": "medidas tributarias del capítulo IV: cese de actividad con efectos desde 31-12-2025, «capítulo IV, medidas tributarias (BOE p. 42)»",
+   "status": "wrong",
+   "note": "La fecha procede solo del art. 23.2 (reducción del IAE de 2026): el cese definitivo de la actividad por los daños surte efectos desde el 31-12-2025. Las demás medidas tributarias (exención del IBI y reducción del IAE del ejercicio 2026) no tienen esa fecha. Provisión correcta: art. 23.2 (BOE p. 42)."
+  },
+  {
+   "field": "in_force[2]",
+   "claim": "capítulo V (empleo) con efectos desde 2026-02-04, DT 4.ª p. 63",
+   "status": "verified",
+   "note": "p. 63: «Lo dispuesto en el capítulo V producirá efectos desde el día 4 de febrero de 2026»."
+  },
+  {
+   "field": "in_force[3]",
+   "claim": "resto del RDL desde 2026-02-20, DF 5.ª p. 64",
+   "status": "verified",
+   "note": "Entra en vigor el día siguiente a su publicación (19/02/2026)."
+  },
+  {
+   "field": "what_changes",
+   "claim": "ayudas por daños personales, vivienda, comercios y entidades locales, agrarias y pesqueras, empresas; medidas tributarias y de Seguridad Social; ERTE por fuerza mayor desde el 4-2-2026",
+   "status": "verified",
+   "note": "Capítulos II-V y DT 4.ª."
+  },
+  {
+   "field": "what_changes",
+   "claim": "autónomos (5.000 €)",
+   "status": "verified",
+   "note": "p. 40: empresarios o profesionales personas físicas, importe único de 5.000 euros."
+  },
+  {
+   "field": "what_changes",
+   "claim": "Su art. 28 deja exentos del IRPF a los perceptores del SMI desde el 1-1-2026",
+   "status": "wrong",
+   "note": "No es una exención: el art. 28 modifica la deducción por rendimientos del trabajo de la DA 61.ª LIRPF para que los perceptores del SMI no tributen («Eliminación de la tributación», p. 45)."
+  },
+  {
+   "field": "stated_goal_quote",
+   "claim": "tiene por objeto la adopción de medidas urgentes de respuesta y adaptación ante los daños causados por las inundaciones y otros sucesos",
+   "status": "verified",
+   "note": "Literal, art. 1, p. 17."
+  },
+  {
+   "field": "verdict",
+   "claim": "no_evaluado",
+   "status": "verified",
+   "note": "Norma de febrero de 2026 sin fuentes A/B; coherente con la regla."
+  }
+ ],
+ "corrections": [
+  "in_force[0].what: «art. 28: modifica la deducción de la DA 61.ª de la Ley 35/2006 para que los perceptores del SMI no tributen» (no «nueva DA 61.ª»)",
+  "in_force[1]: what «reducción del IAE de 2026: el cese definitivo de actividad por los daños surte efectos desde el 31-12-2025»; provision «art. 23.2 (BOE p. 42)»",
+  "what_changes: «Su art. 28 modifica la deducción del IRPF para que los perceptores del SMI no tributen desde el 1-1-2026» en lugar de «deja exentos del IRPF»"
+ ],
+ "reviewed": "2026-11-11"
+}
