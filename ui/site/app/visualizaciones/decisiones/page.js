@@ -5,6 +5,7 @@ import { Legend } from "../components/Figure";
 import IndicatorPanel from "./IndicatorPanel";
 import VoteMatrix from "./VoteMatrix";
 import MeasureEvidence from "./MeasureEvidence";
+import GovernmentBlock from "./GovernmentBlock";
 import {
   DATA_PATH, PAGE_PATH, STANCE, VERDICT, count, dateEs, headline, ledger, measureName, num, pageDescription, pageTitle,
 } from "./model.mjs";
@@ -250,6 +251,8 @@ export default function DecisionesPage() {
           ))}
         </section>
       ))}
+
+      <GovernmentBlock government={data.government} labels={labels} />
 
       <section className="card vizProse" id="mociones" aria-labelledby="mociones-title">
         <h2 id="mociones-title">Posiciones sin efecto legal</h2>

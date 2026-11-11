@@ -26,6 +26,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 ATLAS = REPO_ROOT / "ui/site/public/citizen/data/vote_atlas_v1.json"
 PEOPLE = REPO_ROOT / "ui/site/public/citizen/data/vote_atlas_people_v1.json"
 EMPLEO = REPO_ROOT / "ui/site/public/visualizaciones/data/empleo.json"
@@ -86,6 +88,7 @@ EXTRA_PARTIES = [
 GOVERNING = {"psoe": "gobierna en toda la XIV y la XV", "sumar": "gobierna en la XV (antes, Unidas Podemos en la XIV)",
              "up": "gobernó en la XIV (coalición con el PSOE)", "podemos": "gobernó en la XIV dentro de Unidas Podemos; en la XV, fuera del Gobierno"}
 
+PUBLISHABLE = {"pass", "corrected"}
 VERDICTS = ["positivo", "negativo", "mixto", "no_evaluado"]
 VERDICT_LABELS = {"positivo": "Evaluada: positiva", "negativo": "Evaluada: negativa", "mixto": "Evaluada: mixta",
                   "no_evaluado": "Sin evaluación"}
@@ -97,6 +100,24 @@ def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+def load_backfill_votes() -> list[dict]:
+    """XIV binding votes from 2019-12 to 2022-10 (committed seed), contested only (same filter as the atlas), with
+    their classification (axes + summary) merged in when it exists."""
+    path = SEED_DIR / "votes" / "xiv_2019_2022.json"
+    if not path.exists():
+        return []
+    classes_path = SEED_DIR / "votes" / "xiv_2019_2022_classes.json"
+    classes = load(classes_path).get("votes", {}) if classes_path.exists() else {}
+    out = []
+    for v in load(path)["votes"]:
+        majorities = {p: majority(c) for p, c in v["party_counts"].items()}
+        if not ("S" in majorities.values() and "N" in majorities.values()):
+            continue
+        c = classes.get(v["id"], {})
+        out.append(v | {"axes": c.get("axes") or [], "summary_yes": c.get("summary_yes"), "classified": bool(c)})
+    return out
+
 # ----------------------------------------------------------------------------------------------- votes and parties
 
 class Votes:
@@ -106,12 +127,21 @@ class Votes:
         self.titles = atlas["titles"]
         self.by_id = {v["id"]: v for v in atlas["votes"]}
         self.index = {row[0]: i for i, row in enumerate(people["votes"])}
+        self.backfill = load_backfill_votes()
+        for v in self.backfill:
+            self.by_id[v["id"]] = v
+
+    def all_votes(self) -> list[dict]:
+        """Backfilled XIV binding votes (before the atlas window) followed by the atlas votes."""
+        return self.backfill + self.atlas["votes"]
 
     def title(self, vote: dict) -> str:
-        return self.titles[vote["t"]] or ""
+        return (self.titles[vote["t"]] if "t" in vote else vote.get("title")) or ""
 
     def party_counts(self, vote_id: str) -> dict[str, dict[str, int]]:
         """Sí/No/Abstención/no vota per ballot party, from each deputy's own vote."""
+        if "party_counts" in self.by_id.get(vote_id, {}):
+            return self.by_id[vote_id]["party_counts"]
         i = self.index[vote_id]
         leg = self.people["votes"][i][6]
         out: dict[str, Counter] = defaultdict(Counter)
@@ -172,6 +202,60 @@ def majority(c: dict) -> str:
     return ranked[0][0]
 
 
+
+# ------------------------------------------------------------------------------- backfill: XIV before the atlas window
+
+BACKFILL_DB = REPO_ROOT / "etl/data/staging/decisiones-xiv.db"
+BACKFILL_DIR = SEED_DIR / "votes"
+BACKFILL_VOTES = BACKFILL_DIR / "xiv_2019_2022.json"
+BACKFILL_CLASSES = BACKFILL_DIR / "xiv_2019_2022_classes.json"
+BACKFILL_FROM, BACKFILL_UNTIL = "2019-12-03", "2022-10-03"
+BACKFILL_KINDS = {"final", "rdl", "totalidad"}  # legal effect, plus totalidad for narrow-failure counterfactuals
+CHOICE = {"Sí": "S", "No": "N", "Abstención": "A", "No vota": "-"}
+
+
+def fold_name(name: str) -> str:
+    import unicodedata
+    t = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode().lower()
+    return " ".join(sorted(re.sub(r"[^a-z ]+", " ", t).split()))
+
+
+def build_backfill(db: Path, people: dict) -> dict:
+    """Binding XIV votes from the staging DB (loaded with scripts/ingestar_parlamentario_es.py), counted per party."""
+    import hashlib
+    import sqlite3
+    from scripts.vote_atlas import load_congreso_events
+    by_name = {fold_name(p["name"]): p.get("party_id") for p in people["people"] if p.get("party_id")}
+    conn = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
+    events = [e for e in load_congreso_events(conn, "14", BACKFILL_FROM)
+              if e["vote_date"] <= BACKFILL_UNTIL and e["kind"] in BACKFILL_KINDS]
+    out = []
+    for e in events:
+        raw = conn.execute("SELECT raw_payload FROM parl_vote_events WHERE vote_event_id = ?", (e["vote_event_id"],)).fetchone()[0]
+        counts: dict[str, Counter] = defaultdict(Counter)
+        for name, group, choice in conn.execute(
+                "SELECT member_name, group_code, vote_choice FROM parl_vote_member_votes WHERE vote_event_id = ?",
+                (e["vote_event_id"],)):
+            party = XIV_GROUP_PARTY.get(group or "", "mixto")
+            if party in {"plural", "mixto"}:
+                party = by_name.get(fold_name(name)) or party
+            counts[party][CHOICE.get(choice, "-")] += 1
+        yes, no = e["yes"] or 0, e["no"] or 0
+        path = (e["source_url"] or "").replace(OFFICIAL_VOTE_PREFIX, "")
+        out.append({
+            "id": "b-" + hashlib.sha1(e["vote_event_id"].encode()).hexdigest()[:10],
+            "path": path, "leg": "14", "date": e["vote_date"], "kind": e["kind"],
+            "title": (e["expediente_text"] or e["title"] or "").strip(), "heading": e["title"],
+            "subgroup": e["subgroup_title"] or "", "totals": [yes, no, e["abstain"] or 0],
+            "approved": yes > no,
+            "party_counts": {p: {"S": c["S"], "N": c["N"], "A": c["A"], "no_vota": c["-"]} for p, c in sorted(counts.items())},
+            "raw_sha256": hashlib.sha256((raw or "").encode("utf-8")).hexdigest(),
+        })
+    return {"schema_version": "party_decisions_votes_v1", "source": "Congreso de los Diputados, datos abiertos de votaciones",
+            "loaded_with": "scripts/ingestar_parlamentario_es.py ingest --source congreso_votaciones --congreso-legs 14 "
+                           f"--since-date {BACKFILL_FROM} --until-date {BACKFILL_UNTIL} --strict-network",
+            "window": [BACKFILL_FROM, BACKFILL_UNTIL], "kinds": sorted(BACKFILL_KINDS), "votes": out}
+
 # ------------------------------------------------------------------------------------------------------ candidates
 
 def law_key(title: str) -> str:
@@ -192,13 +276,19 @@ def auto_name(cand: dict) -> str:
     section = budget_section(title)
     if section:
         m = re.match(r"\s*Sección \d{2} \(([^)]*)\)", title)
-        return f"Presupuestos 2023, sección {section}" + (f" ({m.group(1)})" if m else "")
+        return f"Presupuestos {budget_year(cand['date'])}, sección {section}" + (f" ({m.group(1)})" if m else "")
     t = re.sub(r"^\s*votación\s+(conjunta\s+de\s+las\s+enmiendas\s+a\s+la\s+totalidad\s+de\s+devolución\s+al|del\s+dictamen\s+(del|de\s+la)|de\s+conjunto\s+(del\s+texto\s+)?(del|de\s+la))\s+", "", title, flags=re.I)
     t = re.sub(r"^(Real Decreto-ley \d+/\d{4}), de \d{1,2} de \w+,?", r"\1:", t)
     t = re.sub(r"^(Proyecto|Proposición) de Ley", "Ley", t).strip(" .")
     if len(t) > 110:
         t = t[:110].rsplit(" ", 1)[0].rstrip(",;:") + "…"
     return t
+
+
+def budget_year(date: str) -> int:
+    """State budgets are voted in the autumn before the year they cover."""
+    year = int(date[:4])
+    return year + 1 if int(date[5:7]) >= 9 else year
 
 
 def budget_section(title: str) -> str | None:
@@ -232,7 +322,7 @@ def margin(vote: dict) -> int:
 
 def build_candidates(votes: Votes) -> list[dict]:
     groups: dict[str, dict] = {}
-    for v in votes.atlas["votes"]:
+    for v in votes.all_votes():
         kind = v["kind"]
         title = votes.title(v)
         if kind not in BINDING_KINDS and kind != "totalidad":
@@ -254,7 +344,7 @@ def build_candidates(votes: Votes) -> list[dict]:
             unit = "contrafactual"
         else:
             unit = "ley" if kind == "final" else "decreto_ley"
-        key = f"pge2023 sección {section}" if section else law_key(title)
+        key = f"pge{budget_year(v['date'])} sección {section}" if section else law_key(title)
         g = groups.setdefault(key, {"key": key, "unit": unit, "domains": set(), "votes": []})
         g["domains"].update(domains)
         g["votes"].append(v)
@@ -377,6 +467,77 @@ def validate(seed: dict, votes: Votes, worklist: list[dict]) -> list[str]:
         for ind in m.get("indicators") or []:
             if not ind.get("url") and not ind.get("series"):
                 errors.append(f"{where}: indicator without series or url")
+        if m.get("method_version", 1) >= 2:
+            errors += validate_v2(m, where, took_effect=not (cand and cand["unit"] == "contrafactual"))
+    return errors
+
+
+def validate_government() -> list[str]:
+    """Government-only decisions: same evidence rules (v2), id must come from the fixed BOE rule."""
+    errors = []
+    ids = {d["decision_id"] for d in load(GOV_WORKLIST)["decisions"]} if GOV_WORKLIST.exists() else set()
+    for d in load_government_seed():
+        where = f"government/{d.get('decision_id', '?')}"
+        if d.get("decision_id") not in ids:
+            errors.append(f"{where}: decision_id not produced by GOV_RULES")
+        for k in ("name", "what_changes", "stated_goal", "verdict", "verdict_reason", "retrieved"):
+            if not d.get(k):
+                errors.append(f"{where}: missing {k}")
+        if d.get("verdict") not in VERDICTS:
+            errors.append(f"{where}: verdict {d.get('verdict')} not in {VERDICTS}")
+        grades = []
+        for bucket in ("ex_ante", "ex_post", "evidence_against"):
+            for src in d.get(bucket) or []:
+                for k in SOURCE_KEYS:
+                    if not src.get(k):
+                        errors.append(f"{where}: {bucket} source missing {k}")
+                if bucket != "ex_ante":
+                    if src.get("grade") not in GRADES:
+                        errors.append(f"{where}: {bucket} grade {src.get('grade')} not in A-D")
+                    grades.append(src.get("grade"))
+        if d.get("verdict") in ("positivo", "negativo", "mixto") and not any(g in ("A", "B") for g in grades):
+            errors.append(f"{where}: verdict {d['verdict']} needs at least one A/B ex-post source")
+        for field in ("what_changes", "stated_goal", "verdict_reason"):
+            if CAUSAL_RE.search(str(d.get(field) or "")):
+                errors.append(f"{where}: causal wording in {field}")
+        errors += validate_v2(d, where)
+    return errors
+
+
+def validate_v2(m: dict, where: str, took_effect: bool = True) -> list[str]:
+    """Rules added after the first pilot failed (README «What is next»):
+    1. a monitoring statistic is not an evaluation: every ex-post / against item states whether the source itself
+       attributes the change to the measure (`attributes_to_measure`) or is about another country
+       (`about_other_country`); grade A/B needs one of the two;
+    2. one series per before/after: an indicator has one `series` name and one source, or `same_series: true` with a
+       `series_note` when two documents report the same series;
+    3. entry into force from the text: `in_force` lists every date with the provision that sets it (from
+       `boe-vigor`), so deferred disposiciones finales are not missed."""
+    errors = []
+    for bucket in ("ex_post", "evidence_against"):
+        for i, src in enumerate(m.get(bucket) or []):
+            if "attributes_to_measure" not in src and not src.get("about_other_country"):
+                errors.append(f"{where}: {bucket}[{i}] must say attributes_to_measure (true/false) or about_other_country")
+            if src.get("grade") in ("A", "B") and not (src.get("attributes_to_measure") or src.get("about_other_country")):
+                errors.append(f"{where}: {bucket}[{i}] graded {src.get('grade')} but the source does not attribute the "
+                              "change to the measure: move it to indicators")
+            if src.get("about_other_country") and src.get("grade") == "A":
+                errors.append(f"{where}: {bucket}[{i}] about another country cannot be grade A")
+    for i, ind in enumerate(m.get("indicators") or []):
+        if not ind.get("series"):
+            errors.append(f"{where}: indicators[{i}] needs a single named `series`")
+        urls = {u for u in ((ind.get("before") or {}).get("url"), (ind.get("after") or {}).get("url"), ind.get("url")) if u}
+        if len(urls) > 1 and not (ind.get("same_series") and ind.get("series_note")):
+            errors.append(f"{where}: indicators[{i}] before/after from different documents: set same_series + series_note "
+                          "only if it is the same series and scope, otherwise drop it")
+    if took_effect:
+        if not m.get("in_force"):
+            errors.append(f"{where}: in_force missing (dates and provisions from boe-vigor)")
+        for i, f in enumerate(m.get("in_force") or []):
+            if not (f.get("date") and f.get("provision") and f.get("what")):
+                errors.append(f"{where}: in_force[{i}] needs what, date and provision")
+            if f.get("date") and not re.match(r"^\d{4}-\d{2}-\d{2}$", f["date"]):
+                errors.append(f"{where}: in_force[{i}] date must be YYYY-MM-DD")
     return errors
 
 
@@ -466,6 +627,89 @@ def before_after(series: list[dict], date: str) -> dict | None:
             "change": round(last["value"] - value_at(series, before), 2)}
 
 
+
+# ------------------------------------------------------------------------------- decisions without a Congress vote
+
+# Governments by date (Consejo de Ministros). Parties in each; used only to attribute government-only decisions.
+GOVERNMENTS = [
+    {"from": "2018-06-07", "to": "2020-01-12", "label": "Gobierno Sánchez I (PSOE)", "parties": ["psoe"]},
+    {"from": "2020-01-13", "to": "2023-11-20", "label": "Gobierno Sánchez II (PSOE y Unidas Podemos)", "parties": ["psoe", "up"]},
+    {"from": "2023-11-21", "to": "9999-12-31", "label": "Gobierno Sánchez III (PSOE y Sumar)", "parties": ["psoe", "sumar"]},
+]
+# Fixed rule: every royal decree found by the BOE query whose title matches, from the first year on.
+GOV_RULES = [
+    {"id": "smi", "label": "Salario mínimo interprofesional (real decreto anual)", "domain": "empleo",
+     "query": "salario mínimo interprofesional", "from_year": 2019,
+     "title_re": r"^Real Decreto (\d+/\d{4}), de .*salario mínimo interprofesional para (\d{4})\.?$",
+     "positions_re": r"salario mínimo|\bSMI\b"},
+]
+GOV_DIR = SEED_DIR / "government"
+GOV_WORKLIST = SPRINT / "worklist-government.json"
+
+
+def government_at(date: str) -> dict:
+    return next(g for g in GOVERNMENTS if g["from"] <= date <= g["to"])
+
+
+def build_government_candidates() -> list[dict]:
+    out = []
+    for rule in GOV_RULES:
+        for r in boe_search(rule["query"], limit=40):
+            m = re.match(rule["title_re"], r["title"] or "")
+            if not m or int(m.group(2)) < rule["from_year"]:
+                continue
+            date = f"{r['date'][:4]}-{r['date'][4:6]}-{r['date'][6:]}"
+            gov = government_at(date)
+            out.append({"decision_id": f"{rule['id']}-{m.group(2)}", "rule": rule["id"], "domain": rule["domain"],
+                        "instrument": f"Real Decreto {m.group(1)}", "year": int(m.group(2)), "date": date,
+                        "title": r["title"], "boe_id": r["boe_id"], "boe_url": r["url"],
+                        "government": gov["label"], "governing_parties": gov["parties"]})
+    return sorted(out, key=lambda c: c["date"])
+
+
+def load_government_seed() -> list[dict]:
+    return [load(p) for p in sorted(GOV_DIR.glob("*.json"))] if GOV_DIR.exists() else []
+
+
+def government_positions(votes: "Votes", pattern: str) -> list[dict]:
+    """Congress motions and PNL on the same subject: positions only, no legal effect."""
+    parties = [p["party_id"] for p in votes.atlas["parties"]]
+    out = []
+    for v in votes.atlas["votes"]:
+        if v["kind"] not in POSITION_KINDS:
+            continue
+        text = f"{votes.title(v)} {v.get('summary_yes') or ''}"
+        if not re.search(pattern, text, re.I):
+            continue
+        out.append({"vote_id": v["id"], "date": v["date"], "kind": v["kind"], "summary_yes": v.get("summary_yes"),
+                    "approved": v["approved"], "official_vote_url": OFFICIAL_VOTE_PREFIX + v["path"],
+                    "parties": {p: ch for p, ch in zip(parties, v.get("parties") or "") if ch in "SNA"}})
+    return out
+
+
+def build_government(votes: "Votes") -> dict:
+    worklist = load(GOV_WORKLIST)["decisions"] if GOV_WORKLIST.exists() else []
+    seed = {d["decision_id"]: d for d in load_government_seed() if (d.get("review") or {}).get("status") in PUBLISHABLE}
+    rows = []
+    for c in worklist:
+        d = seed.get(c["decision_id"])
+        row = dict(c) | {"requires_power": True, "documented": d is not None, "verdict": (d or {}).get("verdict", "pendiente")}
+        if d:
+            for k in ("name", "what_changes", "stated_goal", "stated_goal_url", "ex_ante", "ex_post", "evidence_against",
+                      "verdict_reason", "indicators", "notes", "retrieved", "review", "legal_status"):
+                if k in d:
+                    row[k] = d[k]
+        rows.append(row)
+    blocks = []
+    for rule in GOV_RULES:
+        blocks.append({"rule": rule["id"], "label": rule["label"], "domain": rule["domain"],
+                       "decisions": [r for r in rows if r["rule"] == rule["id"]],
+                       "positions": government_positions(votes, rule["positions_re"])})
+    return {"note": "Decisiones que toma el Gobierno sin votación del Congreso: solo puede tomarlas quien gobierna. Se "
+                    "atribuyen a los partidos del Gobierno de cada fecha y no se comparan con la oposición; las mociones "
+                    "del Congreso sobre el mismo asunto se muestran como posición, sin efecto legal.",
+            "governments": GOVERNMENTS, "blocks": blocks}
+
 # ---------------------------------------------------------------------------------------------------------- build
 
 def health_state_share(sanidad: dict) -> dict:
@@ -488,7 +732,8 @@ def build(votes: Votes, seed: dict, worklist: list[dict], empleo: dict, sanidad:
     parties = list(votes.atlas["parties"]) + EXTRA_PARTIES
     labels = {p["party_id"]: p["label"] for p in parties}
     inds = indicators(empleo, sanidad)
-    documented = {m["candidate_key"]: m for m in seed["measures"] if m.get("review", {}).get("status") != "rejected"}
+    # Evidence is published only for measures that passed the independent review (or were corrected as it said).
+    documented = {m["candidate_key"]: m for m in seed["measures"] if (m.get("review") or {}).get("status") in PUBLISHABLE}
     measures = []
     for cand in worklist:
         m = documented.get(cand["candidate_key"])
@@ -560,6 +805,7 @@ def build(votes: Votes, seed: dict, worklist: list[dict], empleo: dict, sanidad:
         "measures": measures,
         "party_summary": summary,
         "positions": position_counts(votes),
+        "government": build_government(votes),
         "indicators": inds,
         "health_state": health_state_share(sanidad) | {"by_sector": (seed.get("context") or {}).get("health_spending_by_sector")},
         "counts": {"measures": len(measures), "documented": sum(1 for m in measures if m["documented"]),
@@ -682,6 +928,21 @@ def boe_preamble(boe_id: str, chars: int = 2500) -> str:
     return text[:chars]
 
 
+def boe_pdf_url(boe_id: str) -> str | None:
+    xml = http_text(f"https://www.boe.es/diario_boe/xml.php?id={boe_id}")
+    m = re.search(r"<url_pdf>([^<]+)</url_pdf>", xml)
+    return m.group(1) if m else None
+
+
+VIGOR_RE = r"entrar[áa] en vigor|surtir[áa] efectos|con efectos (desde|a partir)|será de aplicación (a partir|desde)|producir[áa] efectos"
+
+
+def boe_vigor(boe_id: str) -> list[str]:
+    """Every entry-into-force clause of a BOE text, with page: catches deferred dates in disposiciones finales."""
+    url = boe_pdf_url(boe_id)
+    return grep_cached(url, VIGOR_RE, context=2, limit=30) if url else ["no PDF url in BOE metadata"]
+
+
 def enrich_worklist(worklist: list[dict], only: set[str] | None = None) -> list[dict]:
     out = []
     for c in worklist:
@@ -698,11 +959,81 @@ def enrich_worklist(worklist: list[dict], only: set[str] | None = None) -> list[
         out.append(row)
     return out
 
+
+# ----------------------------------------------------------------------------------------- shared fetch cache (kit)
+
+CACHE = REPO_ROOT / "etl/data/cache/decisiones"
+
+
+def cache_paths(url: str) -> tuple[Path, Path, Path]:
+    import hashlib
+    key = hashlib.sha1(url.encode("utf-8")).hexdigest()[:16]
+    return CACHE / f"{key}.bin", CACHE / f"{key}.txt", CACHE / f"{key}.json"
+
+
+def fetch_cached(url: str, timeout: int = 60) -> dict:
+    """Download once (shared by every agent), keep bytes + sha256, and a text version (pdftotext -layout for PDFs,
+    tags stripped for HTML). Returns the metadata; the text is in meta['text_path'] with pages split by form feeds."""
+    import hashlib
+    import subprocess
+    import urllib.request
+    raw, txt, meta_path = cache_paths(url)
+    if meta_path.exists():
+        return load(meta_path)
+    CACHE.mkdir(parents=True, exist_ok=True)
+    meta = {"url": url, "retrieved_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat()}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url), timeout=timeout) as resp:
+            body = resp.read()
+            meta |= {"status": resp.status, "content_type": resp.headers.get("Content-Type", "")}
+    except Exception as exc:  # noqa: BLE001 - record the failure so nobody retries blindly
+        meta |= {"error": f"{type(exc).__name__}: {str(exc)[:160]}"}
+        meta_path.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+        return meta
+    raw.write_bytes(body)
+    meta["sha256"] = hashlib.sha256(body).hexdigest()
+    meta["bytes"] = len(body)
+    if body[:5] == b"%PDF-":
+        subprocess.run(["pdftotext", "-layout", str(raw), str(txt)], check=False, capture_output=True)
+    else:
+        html = body.decode("utf-8", errors="replace")
+        html = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
+        text = re.sub(r"(?s)<br\s*/?>|</p>|</div>|</li>|</tr>|</h\d>", "\n", html)
+        text = re.sub(r"<[^>]+>", " ", text)
+        import html as htmllib
+        txt.write_text(re.sub(r"[ \t]+", " ", htmllib.unescape(text)), encoding="utf-8")
+    if txt.exists():
+        content = txt.read_text(encoding="utf-8", errors="replace")
+        meta["text_path"] = str(txt.relative_to(REPO_ROOT))
+        meta["pages"] = content.count("\f") + 1
+        meta["chars"] = len(content)
+    meta_path.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+    return meta
+
+
+def grep_cached(url: str, pattern: str, context: int = 1, limit: int = 40) -> list[str]:
+    """Lines matching a regex in a cached document, prefixed with [p. N] (PDF page) and line number."""
+    meta = fetch_cached(url)
+    if "text_path" not in meta:
+        return [f"no text: {meta.get('error') or meta.get('content_type')}"]
+    content = (REPO_ROOT / meta["text_path"]).read_text(encoding="utf-8", errors="replace")
+    out, rx = [], re.compile(pattern, re.I)
+    for page_no, page in enumerate(content.split("\f"), start=1):
+        lines = page.splitlines()
+        for i, line in enumerate(lines):
+            if rx.search(line):
+                lo, hi = max(0, i - context), min(len(lines), i + context + 1)
+                snippet = " / ".join(re.sub(r"\s+", " ", l).strip() for l in lines[lo:hi] if l.strip())
+                out.append(f"[p. {page_no}] {snippet[:400]}")
+                if len(out) >= limit:
+                    return out
+    return out
+
 # ----------------------------------------------------------------------------------------------------------- main
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "validate", "export", "boe-search", "boe-text", "enrich"])
+    ap.add_argument("command", nargs="?", default="export", choices=["candidates", "backfill", "government", "validate", "export", "boe-search", "boe-text", "boe-vigor", "enrich", "fetch", "grep"])
     ap.add_argument("args", nargs="*", help="boe-search: title words; boe-text: BOE id; enrich: output path")
     ap.add_argument("--out-json", type=Path, default=OUT_JSON)
     ap.add_argument("--out-csv", type=Path, default=OUT_CSV)
@@ -711,11 +1042,38 @@ def main(argv: list[str] | None = None) -> int:
         for r in boe_search(" ".join(args.args)):
             print(json.dumps(r, ensure_ascii=False))
         return 0
+    if args.command == "fetch":
+        for url in args.args:
+            meta = fetch_cached(url)
+            print(json.dumps({k: meta.get(k) for k in ("url", "status", "error", "sha256", "pages", "chars", "text_path")}, ensure_ascii=False))
+        return 0
+    if args.command == "grep":
+        for line in grep_cached(args.args[0], args.args[1]):
+            print(line)
+        return 0
+    if args.command == "boe-vigor":
+        for line in boe_vigor(args.args[0]):
+            print(line)
+        return 0
     if args.command == "boe-text":
         print(boe_preamble(args.args[0], 6000))
         return 0
     votes = Votes(load(ATLAS), load(PEOPLE))
     worklist = build_candidates(votes)
+    if args.command == "backfill":
+        data = build_backfill(BACKFILL_DB, load(PEOPLE))
+        BACKFILL_DIR.mkdir(parents=True, exist_ok=True)
+        BACKFILL_VOTES.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"backfill: {len(data['votes'])} binding XIV votes -> {BACKFILL_VOTES.relative_to(REPO_ROOT)} "
+              f"({dict(Counter(v['kind'] for v in data['votes']))})")
+        return 0
+    if args.command == "government":
+        rows = build_government_candidates()
+        GOV_WORKLIST.write_text(json.dumps({"generated_at": datetime.now(timezone.utc).date().isoformat(),
+                                            "rule": "GOV_RULES in scripts/export_public_viz_decisions.py",
+                                            "decisions": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"government: {len(rows)} decisions -> {GOV_WORKLIST.relative_to(REPO_ROOT)}")
+        return 0
     if args.command == "enrich":
         done = {m.get("candidate_key") for m in load_seed()["measures"]}
         rows = enrich_worklist([c for c in worklist if c["candidate_key"] not in done])
@@ -743,7 +1101,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {d}: {n}")
         return 0
     seed = load_seed()
-    errors = validate(seed, votes, worklist)
+    errors = validate(seed, votes, worklist) + validate_government()
     if args.command == "validate":
         for e in errors:
             print("ERROR", e)

@@ -23,7 +23,7 @@ export const VERDICT = {
 export const UNIT = {
   ley: "Ley (votación final)",
   decreto_ley: "Decreto-ley (convalidación)",
-  presupuesto: "Presupuestos 2023 (sección)",
+  presupuesto: "Presupuestos Generales (sección)",
   contrafactual: "Contrafactual: no llegó a tener efecto",
 };
 

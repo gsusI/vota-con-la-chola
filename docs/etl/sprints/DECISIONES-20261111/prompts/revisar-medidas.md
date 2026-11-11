@@ -15,6 +15,12 @@ at the `locator`, is the `method` right, is the `grade` right under the scale be
 `indicators` item (both values and periods), `later_route`, and the `verdict` (does it follow from the A/B sources;
 a verdict other than `no_evaluado` needs an A or B ex-post source that itself attributes the change to the measure).
 
+For files with `method_version: 2`, also check: every `in_force` row against the BOE text (deferred
+disposiciones finales), `attributes_to_measure` (does the source itself attribute the change to the measure?), and
+that each indicator's before/after are the same series and scope. A cached text copy of most documents exists:
+`python3 scripts/export_public_viz_decisions.py grep "<url>" "<regex>"` (lines with page numbers) and
+`python3 scripts/export_public_viz_decisions.py boe-vigor BOE-A-...`; use them before WebFetch.
+
 Grade scale: A causal ex-post evaluation of this Spanish measure; B descriptive ex-post evaluation of this measure, or
 causal evidence for a very similar measure abroad; C ex-ante estimate or textbook; D assumption without method.
 
