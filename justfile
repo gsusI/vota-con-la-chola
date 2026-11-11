@@ -4822,6 +4822,9 @@ site-build-frozen:
   python3 scripts/validate_democracy_conduct.py
   python3 -m unittest tests.test_democracy_safeguards tests.test_democracy_conduct
   node --test ui/site/app/visualizaciones/democracia/model.test.mjs
+  python3 scripts/export_public_viz_decisions.py validate
+  python3 -m unittest tests.test_export_public_viz_decisions
+  node --test ui/site/app/visualizaciones/decisiones/decisiones.test.mjs
   node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
   cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
   node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release
@@ -6902,6 +6905,16 @@ housing-refresh *args:
 education-refresh *args:
   python3 scripts/ingest_education_es.py {{args}}
   python3 scripts/export_public_viz_education.py
+
+# Party decision ledger (/visualizaciones/decisiones/): fixed selection rule over the vote atlas plus the XIV backfill,
+# deputy-level recount, government-only decisions (BOE query), seed validation, export to
+# visualizaciones/data/decisiones.{json,csv}. `backfill` needs the staging DB and `government` the BOE API; both outputs
+# are committed, so this recipe runs offline. Method and gates: docs/etl/sprints/DECISIONES-20261111/README.md
+decisions-refresh:
+  python3 scripts/export_public_viz_decisions.py candidates
+  python3 scripts/export_public_viz_decisions.py validate
+  python3 scripts/export_public_viz_decisions.py export
+  node --test ui/site/app/visualizaciones/decisiones/decisiones.test.mjs
 
 # Separation of powers (/visualizaciones/democracia/): refetch the BOE ELI inventory (decree-laws, laws), budget laws,
 # V-Dem (Our World in Data mirror) and XV-legislature Congress deadlines; rebuild the decree-law series and the page
