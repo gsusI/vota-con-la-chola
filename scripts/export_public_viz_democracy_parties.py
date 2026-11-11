@@ -463,7 +463,7 @@ def export() -> int:
     }
     OUT_JSON.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     buf = io.StringIO()
-    w = csv.writer(buf)
+    w = csv.writer(buf, lineterminator="\n")
     w.writerow(["event_id", "date", "act_date", "party_id", "role", "attribution", "lineage", "power_only", "indicator",
                 "severity", "finding_type", "body", "title", "act", "status", "source_url", "source_retrieved", "quote"])
     for ev in events:
