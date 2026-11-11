@@ -4818,6 +4818,10 @@ site-build-frozen:
   just placsp-launch-verify
   node tests/test_spending_decision_dates.mjs
   node --test ui/site/app/visualizaciones/sistema/engine.test.mjs ui/site/app/visualizaciones/sistema/scenarios.test.mjs ui/site/app/visualizaciones/articleSeo.test.mjs
+  python3 scripts/validate_democracy_safeguards.py --published
+  python3 scripts/validate_democracy_conduct.py
+  python3 -m unittest tests.test_democracy_safeguards tests.test_democracy_conduct
+  node --test ui/site/app/visualizaciones/democracia/model.test.mjs
   node scripts/build_spending_backend.mjs /tmp/vclc-spending-build-validation --plan-only
   cp /tmp/vclc-spending-build-validation/release.json infra/cloudflare/spending-api/src/release.json
   node tests/test_spending_backend.mjs /tmp/vclc-spending-build-validation/verify.db --published-release
@@ -6898,6 +6902,31 @@ housing-refresh *args:
 education-refresh *args:
   python3 scripts/ingest_education_es.py {{args}}
   python3 scripts/export_public_viz_education.py
+
+# Separation of powers (/visualizaciones/democracia/): refetch the BOE ELI inventory (decree-laws, laws), budget laws,
+# V-Dem (Our World in Data mirror) and XV-legislature Congress deadlines; rebuild the decree-law series and the page
+# data; validate only the reviewed (published) safeguards. Method: docs/etl/sprints/DEMOCRACIA-SISTEMA-20261111/README.md
+democracy-refresh:
+  python3 scripts/export_public_viz_democracy.py fetch-boe-eli
+  python3 scripts/export_public_viz_democracy.py fetch-boe-budgets
+  python3 scripts/export_public_viz_democracy.py fetch-peers
+  python3 scripts/export_public_viz_democracy.py fetch-congreso-plazos
+  python3 scripts/export_public_viz_democracy.py series
+  python3 scripts/export_public_viz_democracy.py build
+  python3 scripts/validate_democracy_safeguards.py --published
+  python3 -m unittest tests.test_democracy_safeguards
+  node --test ui/site/app/visualizaciones/democracia/model.test.mjs
+
+# Democratic conduct by party (/visualizaciones/democracia/partidos/): validate the ledger part files
+# (etl/data/seeds/democracy_conduct_v1.d), merge them into the seed, export the page JSON/CSV with the vote layer
+# (vote atlas), the BOE decree-law series and the sensitivity test, then run the tests.
+# `python3 scripts/export_public_viz_democracy_parties.py fetch-boe` refreshes the BOE ELI inventory (network).
+# Method: docs/etl/sprints/DEMOCRACIA-PARTIDOS-20261111/README.md
+democracy-parties-refresh:
+  python3 scripts/validate_democracy_conduct.py
+  python3 scripts/export_public_viz_democracy_parties.py merge
+  python3 scripts/export_public_viz_democracy_parties.py
+  python3 -m unittest tests.test_democracy_conduct
 
 # Policy simulator (/visualizaciones/sistema/), slices 0-2 (pensions + public finances, taxes, housing): validate and
 # merge the edge cards (etl/data/manual/system_model/edges, reviewer corrections applied with
