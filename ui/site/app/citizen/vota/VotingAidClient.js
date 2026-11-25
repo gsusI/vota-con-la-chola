@@ -2511,7 +2511,8 @@ function restoreScroll(y) {
 
 export default function VotingAidClient({ snapshot: pageSnapshot, startStatementId = null, versionId = null }) {
   const version = versionById(versionId);
-  // The page inlines the snapshot without its vote lists (fast first paint); the full file loads with the pool.
+  // The page inlines the snapshot without its vote lists (fast first paint; a hook page only its own statement);
+  // the full file loads with the pool.
   const [fullSnapshot, setFullSnapshot] = useState(pageSnapshot?.slim ? null : pageSnapshot);
   const snapshot = fullSnapshot || pageSnapshot;
   const [staleShare, setStaleShare] = useState(false);
@@ -2570,7 +2571,11 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     [questions, state.excludeOmnibus],
   );
   const questionsById = useMemo(() => Object.fromEntries(questions.map((q) => [q.statement_id, q])), [questions]);
-  const curatedTotal = useMemo(() => questions.filter((q) => q.source === "curated").length, [questions]);
+  // A hook page inlines only its own statement until the full file arrives; it states the version's total for the intro.
+  const curatedTotal = useMemo(
+    () => (fullSnapshot ? null : pageSnapshot?.curated_total) ?? questions.filter((q) => q.source === "curated").length,
+    [questions, fullSnapshot, pageSnapshot],
+  );
   const order = useMemo(() => playOrder(questions, state.seed || 1), [questions, state.seed]);
   const topics = useMemo(() => topicGroups(order, questionsById, state.split), [order, questionsById, state.split]);
   const steps = useMemo(() => stepLists(topics, questionsById), [topics, questionsById]);

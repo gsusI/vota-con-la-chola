@@ -40,6 +40,18 @@ export function loadVotingAidPageSnapshot(versionId = CURRENT_VERSION.id) {
   return { ...snapshot, statements: (snapshot.statements || []).map(({ votes, ...st }) => st), slim: true };
 }
 
+/**
+ * What a shareable hook page inlines: only its own statement (with its party cells for the reveal), the parties and
+ * the meta, plus how many key questions the version has for the intro. Inlining every statement made each of these
+ * pages carry the whole test, so rewording one question re-uploaded all of them; the client fetches the full file
+ * right after load anyway.
+ */
+export function loadVotingAidHookSnapshot(versionId, statementId) {
+  const page = loadVotingAidPageSnapshot(versionId);
+  const own = page.statements.filter((st) => st.statement_id === statementId);
+  return { ...page, statements: own.length ? own : page.statements, curated_total: page.statements.length, hook: true };
+}
+
 /** Version a statement belongs to: the newest version that has it (hook pages of old versions keep working). */
 export function statementVersion(statementId) {
   for (const v of VOTING_AID_VERSIONS) {
