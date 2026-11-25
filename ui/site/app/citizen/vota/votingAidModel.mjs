@@ -77,21 +77,26 @@ export function scoreParties(snapshot, answers = {}, important = {}) {
   return rows;
 }
 
+// A version whose questions keep their ids but change wording sets `shareSalt` (votingAidVersions.mjs): its codes
+// carry the salt, so a link made with the previous version is never read as an answer to the reworded question.
+const legacyPrefix = (salt) => (salt ? `v1-${salt}.` : SHARE_PREFIX);
+
 /** Encode answers as a compact share code aligned to statement order ("-" = skipped, uppercase = important). */
-export function encodeShareCode(statements, answers = {}, important = {}) {
+export function encodeShareCode(statements, answers = {}, important = {}, salt = "") {
   const chars = statements.map((st) => {
     const code = ANSWER_CODES[answers[st.statement_id]];
     if (!code) return "-";
     return important[st.statement_id] ? code.toUpperCase() : code;
   });
-  return SHARE_PREFIX + chars.join("");
+  return legacyPrefix(salt) + chars.join("");
 }
 
 /** Decode a share code; returns null when it does not match this statement set. */
-export function decodeShareCode(statements, code) {
+export function decodeShareCode(statements, code, salt = "") {
   const raw = String(code || "").trim();
-  if (!raw.startsWith(SHARE_PREFIX)) return null;
-  const chars = raw.slice(SHARE_PREFIX.length);
+  const prefix = legacyPrefix(salt);
+  if (!raw.startsWith(prefix)) return null;
+  const chars = raw.slice(prefix.length);
   if (chars.length !== statements.length || !/^[andAND-]*$/u.test(chars)) return null;
   const answers = {};
   const important = {};
@@ -620,16 +625,16 @@ export function milestoneFor(count) {
 
 // Share codes v2: sparse "<index base36><answer>" entries plus a checksum of the question ids,
 // so links survive hundreds of answers and are rejected if the question set changes.
-function idsChecksum(ids) {
+function idsChecksum(ids, salt = "") {
   let h = 0x811c9dc5;
-  for (const ch of ids.join("|")) {
+  for (const ch of (salt ? [`#${salt}`, ...ids] : ids).join("|")) {
     h ^= ch.codePointAt(0);
     h = Math.imul(h, 0x01000193) >>> 0;
   }
   return h.toString(36);
 }
 
-export function encodeShareCodeV2(questions, answers = {}, important = {}) {
+export function encodeShareCodeV2(questions, answers = {}, important = {}, salt = "") {
   const ids = questions.map((q) => q.statement_id);
   const entries = [];
   ids.forEach((id, i) => {
@@ -637,15 +642,15 @@ export function encodeShareCodeV2(questions, answers = {}, important = {}) {
     if (!code) return;
     entries.push(i.toString(36) + (important[id] ? code.toUpperCase() : code));
   });
-  return `v2.${idsChecksum(ids)}.${entries.join("-")}`;
+  return `v2.${idsChecksum(ids, salt)}.${entries.join("-")}`;
 }
 
-export function decodeShareCodeV2(questions, code) {
+export function decodeShareCodeV2(questions, code, salt = "") {
   const raw = String(code || "").trim();
   const m = /^v2\.([0-9a-z]+)\.([0-9a-zA-Z-]*)$/u.exec(raw);
   if (!m) return null;
   const ids = questions.map((q) => q.statement_id);
-  if (m[1] !== idsChecksum(ids)) return null;
+  if (m[1] !== idsChecksum(ids, salt)) return null;
   const answers = {};
   const important = {};
   for (const entry of m[2] ? m[2].split("-") : []) {
@@ -660,12 +665,13 @@ export function decodeShareCodeV2(questions, code) {
 }
 
 /** Decode any supported share code: v2 over all questions, or legacy v1 over curated statements. */
-export function decodeAnyShareCode(questions, code) {
+export function decodeAnyShareCode(questions, code, salt = "") {
   return (
-    decodeShareCodeV2(questions, code) ||
+    decodeShareCodeV2(questions, code, salt) ||
     decodeShareCode(
       questions.filter((q) => q.source === "curated"),
       code,
+      salt,
     )
   );
 }

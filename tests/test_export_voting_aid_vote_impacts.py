@@ -125,7 +125,7 @@ class TestRealSeed(unittest.TestCase):
     def test_pilot_seed_is_publishable(self) -> None:
         seed, errors = vi.merge_parts(json.loads(SEED.read_text(encoding="utf-8")), vi.load_parts(vi.DEFAULT_PARTS))
         self.assertEqual(errors, [])
-        snapshots = [json.loads((DATA / f"voting_aid_generales_{v}.json").read_text(encoding="utf-8")) for v in ("v1", "v2")]
+        snapshots = [json.loads((DATA / f"voting_aid_generales_{v}.json").read_text(encoding="utf-8")) for v in ("v1", "v2", "v3")]
         pool = json.loads((DATA / "voting_aid_pool_v1.json").read_text(encoding="utf-8"))
         votes, statements = vi.known_ids(snapshots, pool)
         self.assertEqual(vi.validate_seed(seed, votes, statements), [])

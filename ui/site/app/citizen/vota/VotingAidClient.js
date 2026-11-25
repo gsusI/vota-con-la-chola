@@ -103,15 +103,17 @@ function readStoredState(key) {
 
 /**
  * First visit to a new version: start from the answers of the version it replaces, but only for questions both
- * share (the endless-mode votes). The old version's own storage is never touched.
+ * share with the same wording (`seedSkip` lists reworded ones). The old version's own storage is never touched.
  */
 function initialState(version, questionIds) {
   const own = readStoredRaw(version.storageKey);
   if (own || !version.seedFrom) return cleanState(own);
   const prev = cleanState(readStoredRaw(versionById(version.seedFrom).storageKey));
   const out = cleanState(null);
+  // Questions reworded in this version are asked again (their old answer was to a different sentence).
+  const skip = new Set(version.seedSkip || []);
   for (const [id, v] of Object.entries(prev.answers)) {
-    if (!questionIds.has(id)) continue;
+    if (!questionIds.has(id) || skip.has(id)) continue;
     out.answers[id] = v;
     if (prev.important[id]) out.important[id] = true;
   }
@@ -2652,7 +2654,7 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
     if (poolStatus === "loading" || !fullSnapshot) return undefined;
     function load(initial) {
       const code = shareCodeFromHash(window.location.hash);
-      const shared = decodeAnyShareCode(questions, code);
+      const shared = decodeAnyShareCode(questions, code, version.shareSalt);
       // A share link made with another version of the test: offer to open it there.
       setStaleShare(Boolean(code && !shared));
       if (shared) {
@@ -2942,11 +2944,12 @@ export default function VotingAidClient({ snapshot: pageSnapshot, startStatement
   async function share() {
     const code =
       poolStatus === "ready"
-        ? encodeShareCodeV2(questions, state.answers, state.important)
+        ? encodeShareCodeV2(questions, state.answers, state.important, version.shareSalt)
         : encodeShareCode(
             questions.filter((q) => q.source === "curated"),
             state.answers,
             state.important,
+            version.shareSalt,
           );
     const url = `${window.location.origin}${window.location.pathname}#r=${code}`;
     try {

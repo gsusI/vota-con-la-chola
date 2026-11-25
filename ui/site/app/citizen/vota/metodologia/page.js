@@ -18,7 +18,7 @@ import {
   REPO_URL,
   SENADO_EVIDENCE,
   STATEMENTS_SEED,
-  STATEMENTS_SEED_V2,
+  STATEMENTS_SEED_CURRENT,
   STATEMENT_REVIEW,
   TEXTS_SEED,
   loadMethodology,
@@ -239,7 +239,7 @@ export default function VotingAidMethodologyPage() {
           </li>
           <li>
             <strong>Quién las redactó:</strong> Claude Opus 5.5, una por eje, a partir de las votaciones clasificadas en él. Borrador sin
-            revisión humana. Definición en <Code rel={STATEMENTS_SEED_V2} />.
+            revisión humana. Definición en <Code rel={STATEMENTS_SEED_CURRENT} />.
           </li>
           <li>
             <strong>Sesgo de aquiescencia:</strong> las frases se redactan en ambos sentidos para que responder siempre «de acuerdo» no
@@ -609,7 +609,8 @@ export default function VotingAidMethodologyPage() {
           Cuando mejoramos el test no borramos el anterior. La versión nueva es la que se abre por defecto; las anteriores siguen en su
           propia dirección, con sus mismas preguntas y datos, y con tus respuestas guardadas aparte en tu navegador. Así puedes volver a
           ver lo que respondiste, revisarlo y comparar tu resultado con el de la versión nueva (la página de resultados lo hace por ti).
-          Al estrenar una versión solo se copian las respuestas a preguntas que ambas comparten (las votaciones del modo infinito).
+          Al estrenar una versión solo se copian las respuestas a preguntas que ambas comparten con el mismo texto; si una pregunta
+          cambia de redacción, se vuelve a preguntar (y un enlace compartido de la versión anterior se abre en esa versión).
         </p>
         <ul className="vaMethod__list">
           {VOTING_AID_VERSIONS.map((v) => (

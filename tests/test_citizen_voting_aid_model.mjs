@@ -135,6 +135,17 @@ test("endless mode: merged questions, balanced order, share v2, milestones, reac
   assert.deepEqual(m.decodeAnyShareCode(questions, code), { answers: some, important: { [order[200]]: true } });
   assert.equal(m.decodeShareCodeV2(questions.slice(1), code), null);
   assert.equal(m.decodeShareCodeV2(questions, code.replace(/\.[^.]*$/u, ".zzzzz")), null);
+  // A version that rewords a question keeps its ids but salts its codes: links of the other version are rejected both ways.
+  const salted = m.encodeShareCodeV2(questions, some, {}, "v3");
+  assert.deepEqual(m.decodeAnyShareCode(questions, salted, "v3").answers, some);
+  assert.equal(m.decodeAnyShareCode(questions, salted), null);
+  assert.equal(m.decodeAnyShareCode(questions, code, "v3"), null);
+  const curated = questions.filter((q) => q.source === "curated");
+  const legacy = m.encodeShareCode(curated, { [curated[0].statement_id]: "agree" }, {}, "v3");
+  assert.ok(legacy.startsWith("v1-v3."));
+  assert.equal(m.decodeAnyShareCode(questions, legacy), null);
+  assert.equal(m.decodeAnyShareCode(questions, m.encodeShareCode(curated, { [curated[0].statement_id]: "agree" }), "v3"), null);
+  assert.equal(m.decodeAnyShareCode(questions, legacy, "v3").answers[curated[0].statement_id], "agree");
 
   // Scores work over the merged list.
   const rows = m.scoreParties({ parties: snap.parties, statements: questions }, some);
@@ -347,7 +358,7 @@ test("«Ramificaciones» attach official figures and both-sided effects, and rea
   const impacts = m.mergeImpacts(index, shardFiles.map((f) => read(`${index.meta.shards.dir}/${f}`)));
   // Every vote sits in the shard the browser will ask for.
   for (const f of shardFiles) for (const vid of Object.keys(read(`${index.meta.shards.dir}/${f}`).by_vote)) assert.equal(`${m.impactShardKey(vid)}.json`, f);
-  for (const version of ["v1", "v2"]) {
+  for (const version of ["v1", "v2", "v3"]) {
     const snap = read(`voting_aid_generales_${version}.json`);
     const questions = m.attachHighlights(m.buildQuestions(snap, pool), highlights, bullets, impacts);
     const withRamif = questions.filter((q) => q.ramifications);
@@ -379,7 +390,7 @@ test("«Ramificaciones» attach official figures and both-sided effects, and rea
 test("topic navigation: one topic list for key questions and votes, next open question inside a topic", async () => {
   const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const read = (name) => JSON.parse(fs.readFileSync(path.join(here, "..", "ui", "site", "public", "citizen", "data", name), "utf-8"));
-  const questions = m.buildQuestions(read("voting_aid_generales_v2.json"), read("voting_aid_pool_v1.json"));
+  const questions = m.buildQuestions(read("voting_aid_generales_v3.json"), read("voting_aid_pool_v1.json"));
   const byId = Object.fromEntries(questions.map((q) => [q.statement_id, q]));
   const order = m.playOrder(questions, 7);
   const groups = m.topicGroups(order, byId);
@@ -525,7 +536,7 @@ test("tie-break: most separating vote first, and the least-answered bloc among n
 test("tie-break on the published data: answering like Sumar leaves a tie that a concrete vote separates", async () => {
   const m = await import("../ui/site/app/citizen/vota/votingAidModel.mjs");
   const dataDir = path.join(here, "..", "ui", "site", "public", "citizen", "data");
-  const snap = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_generales_v2.json"), "utf8"));
+  const snap = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_generales_v3.json"), "utf8"));
   const pool = JSON.parse(fs.readFileSync(path.join(dataDir, "voting_aid_pool_v1.json"), "utf8"));
   const questions = m.buildQuestions(snap, pool);
   const answers = {};

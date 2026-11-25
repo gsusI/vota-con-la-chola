@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { readPublicJson } from "../../../static-snapshot.mjs";
 import { attachHighlights, buildAiPrompt, buildQuestions, mergeImpacts } from "../votingAidModel.mjs";
+import { CURRENT_VERSION } from "../votingAidVersions.mjs";
 
 export const REPO_URL = "https://github.com/gsusI/vota-con-la-chola";
 const REPO_ROOT = path.resolve(process.cwd(), "../..");
@@ -11,7 +12,7 @@ const REPO_ROOT = path.resolve(process.cwd(), "../..");
 export const PROMPTS_DIR = "docs/etl/sprints/VOTING-AID-20261011/prompts";
 export const STATEMENT_REVIEW = "docs/etl/sprints/VOTING-AID-20261011/evidence/voting-aid-statement-review-20261012.json";
 export const STATEMENTS_SEED = "etl/data/seeds/voting_aid_generales_v1.json";
-export const STATEMENTS_SEED_V2 = "etl/data/seeds/voting_aid_generales_v2.json";
+export const STATEMENTS_SEED_CURRENT = "etl/data/seeds/voting_aid_generales_v3.json";
 export const AXES_SEED = "etl/data/seeds/vote_atlas_axes_v1.json";
 export const CLASSIFICATIONS_SEED = "etl/data/seeds/vote_atlas_classifications_v1.json";
 export const TEXTS_SEED = "etl/data/seeds/vote_atlas_texts_v1.json";
@@ -118,7 +119,7 @@ function statementReviewStats(evidence) {
 }
 
 export function loadMethodology() {
-  const snapshot = readPublicJson("citizen/data/voting_aid_generales_v2.json", { meta: {}, parties: [], statements: [] });
+  const snapshot = readPublicJson(CURRENT_VERSION.snapshot, { meta: {}, parties: [], statements: [] });
   const snapshotV1 = readPublicJson("citizen/data/voting_aid_generales_v1.json", { meta: {}, parties: [], statements: [] });
   const atlas = readPublicJson("citizen/data/vote_atlas_v1.json", { meta: {}, axes: [], votes: [] });
   const axesSeed = readRepoJson(AXES_SEED) || { axes: [] };

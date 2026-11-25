@@ -227,7 +227,7 @@ class EarlierLegislatureTest(unittest.TestCase):
 class PublishedTest(unittest.TestCase):
     def test_published_files_are_consistent(self) -> None:
         atlas = json.loads((PUBLISHED / "vote_atlas_v1.json").read_text(encoding="utf-8"))
-        aid = json.loads((PUBLISHED / "voting_aid_generales_v2.json").read_text(encoding="utf-8"))
+        aid = json.loads((PUBLISHED / "voting_aid_generales_v3.json").read_text(encoding="utf-8"))
         axis_ids = {a["axis_id"] for a in atlas["axes"]}
         for v in atlas["votes"]:
             self.assertTrue(all(a[0] in axis_ids for a in v["axes"]))

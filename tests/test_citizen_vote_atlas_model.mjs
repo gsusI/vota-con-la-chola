@@ -110,5 +110,10 @@ test("every voting-aid version stays published with its own path, data and stora
   }
   // The first version keeps the key its users already have answers under.
   assert.equal(VOTING_AID_VERSIONS.find((v) => v.id === "v1").storageKey, "vclc.votingAid.generales.v1");
-  assert.deepEqual(otherVersions("v2").map((v) => v.id), ["v1"]);
+  assert.deepEqual(otherVersions("v3").map((v) => v.id), ["v2", "v1"]);
+  assert.deepEqual(otherVersions("v2").map((v) => v.id), ["v3", "v1"]);
+  // A version that rewords questions re-asks them and salts its share codes.
+  const v3 = VOTING_AID_VERSIONS.find((v) => v.id === "v3");
+  assert.equal(v3.seedFrom, "v2");
+  assert.ok(v3.seedSkip.includes("eje-lenguas") && v3.shareSalt);
 });

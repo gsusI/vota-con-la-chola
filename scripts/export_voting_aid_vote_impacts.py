@@ -39,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_SEED = BASE_DIR / "etl/data/seeds/voting_aid_vote_impacts_v1.json"
 DEFAULT_PARTS = BASE_DIR / "etl/data/seeds/voting_aid_vote_impacts_v1.d"
 DATA_DIR = BASE_DIR / "ui/site/public/citizen/data"
-DEFAULT_SNAPSHOTS = [DATA_DIR / "voting_aid_generales_v1.json", DATA_DIR / "voting_aid_generales_v2.json"]
+DEFAULT_SNAPSHOTS = [DATA_DIR / f"voting_aid_generales_{v}.json" for v in ("v1", "v2", "v3")]
 DEFAULT_POOL = DATA_DIR / "voting_aid_pool_v1.json"
 DEFAULT_OUT = DATA_DIR / "voting_aid_vote_impacts_v1.json"
 SEED_SCHEMA_VERSION = "voting_aid_vote_impacts_seed_v1"
@@ -277,7 +277,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--parts-dir", default=str(DEFAULT_PARTS), help="per-question part files merged into the seed")
     parser.add_argument("--part", help="validate the seed plus only this part file (drafting one question at a time)")
     parser.add_argument("--require-complete", action="store_true", help="fail while any question or vote lacks «A quién afecta»")
-    parser.add_argument("--snapshot", action="append", help="voting-aid snapshot (repeatable; default: v1 and v2)")
+    parser.add_argument("--snapshot", action="append", help="voting-aid snapshot (repeatable; default: v1, v2 and v3)")
     parser.add_argument("--pool", default=str(DEFAULT_POOL))
     parser.add_argument("--out", default=str(DEFAULT_OUT))
     args = parser.parse_args(argv)

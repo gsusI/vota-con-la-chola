@@ -483,7 +483,9 @@ def build(conn: sqlite3.Connection, seed: dict[str, Any], axes_doc: dict[str, An
 
 AID_SCHEMA_VERSION = "voting_aid_snapshot_v2"
 AID_SEED_SCHEMA_VERSION = "voting_aid_statements_v2"
-DEFAULT_AID_SEED = BASE_DIR / "etl/data/seeds/voting_aid_generales_v2.json"
+# The current test version. Earlier versions are frozen: never regenerate their published snapshot.
+DEFAULT_AID_SEED = BASE_DIR / "etl/data/seeds/voting_aid_generales_v3.json"
+AID_OUT = "voting_aid_generales_v3.json"
 AGREE_AT = 0.33
 
 
@@ -677,9 +679,9 @@ def main(argv: list[str] | None = None) -> int:
     out = Path(args.out_dir)
     a = write_json(out / "vote_atlas_v1.json", atlas, args.max_bytes)
     p = write_json(out / "vote_atlas_people_v1.json", people, args.max_bytes)
-    v = write_json(out / "voting_aid_generales_v2.json", aid, args.max_bytes)
+    v = write_json(out / AID_OUT, aid, args.max_bytes)
     q = aid["meta"]["quality"]
-    print(f"OK voting aid v2 ({v}B): statements={q['statements_total']} votes={q['votes_total']} "
+    print(f"OK voting aid {AID_OUT} ({v}B): statements={q['statements_total']} votes={q['votes_total']} "
           f"initiatives={q['initiatives_total']} cells={q['cells_by_position']} balance={q['direction_balance']} skipped={q['statements_skipped']}")
     cov = atlas["meta"]["coverage"]
     print(f"OK vote atlas -> {out} (atlas={a}B people={p}B events={cov['events_total']} scored={cov['scored_votes']} "

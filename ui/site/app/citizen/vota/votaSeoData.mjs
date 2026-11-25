@@ -1,6 +1,6 @@
 // Build-time data for the indexable pages of the voting aid: one page per party, per key question and per topic,
 // plus the crawlable summaries of the client-only pages. Every figure comes from the published snapshots
-// (voting_aid_generales_v2.json for the test, vote_atlas_v1.json for all votes); nothing is typed by hand
+// (the current version's snapshot for the test, vote_atlas_v1.json for all votes); nothing is typed by hand
 // except slugs and short titles. Build-time only (reads public/ from disk).
 import { readPublicJson } from "../../static-snapshot.mjs";
 import { isXvVote, partyVoteCount, sameVoteShares } from "./exploreModel.mjs";

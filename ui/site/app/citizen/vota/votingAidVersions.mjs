@@ -6,9 +6,24 @@
 
 export const VOTING_AID_VERSIONS = [
   {
-    id: "v2",
+    id: "v3",
     current: true,
     path: "/citizen/vota/",
+    snapshot: "citizen/data/voting_aid_generales_v3.json",
+    storageKey: "vclc.votingAid.generales.v3",
+    // Answers carry over from v2 except for questions whose wording changed (`seedSkip`): those are asked again.
+    seedFrom: "v2",
+    seedSkip: ["eje-lenguas"],
+    // Salts the share codes, so a v2 link (same question ids) is not read as a v3 answer to a reworded question.
+    shareSalt: "v3",
+    released: "2026-11-25",
+    label: "Por temas, revisada",
+    summary: "Las mismas 29 preguntas clave; la de lenguas cooficiales incluye ahora la escuela, no solo el Congreso y los juzgados",
+  },
+  {
+    id: "v2",
+    current: false,
+    path: "/citizen/vota/v2/",
     snapshot: "citizen/data/voting_aid_generales_v2.json",
     storageKey: "vclc.votingAid.generales.v2",
     // On first visit, carry over answers to questions both versions share (the endless-mode votes).
